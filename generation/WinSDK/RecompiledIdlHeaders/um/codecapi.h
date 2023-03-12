@@ -393,6 +393,11 @@ Abstract:
     #define STATIC_CODECAPI_AVEncChromaEncodeMode           0x8a47ab5a, 0x4798, 0x4c93, 0xb5, 0xa5, 0x55, 0x4f, 0x9a, 0x3b, 0x9f, 0x50
     #define STATIC_CODECAPI_AVEncProgressiveUpdateTime      0x649faf66, 0xafc6, 0x4828, 0x8f, 0xdc, 0x07, 0x71, 0xcd, 0x9a, 0xb1, 0x7d
     #define STATIC_CODECAPI_AVEncChromaUpdateTime           0x4b4fd998, 0x4274, 0x40bb, 0x8e, 0xe4, 0x07, 0x55, 0x3e, 0x7e, 0x2d, 0x3a
+    #define STATIC_CODECAPI_AVEncAACEnableVBR               0xe836bb98, 0xfca3, 0x44b6, 0x9a, 0x39, 0x24, 0x78, 0x6b, 0xe4, 0x1b, 0xe1
+    #define STATIC_CODECAPI_AVEncVideoConsecutiveFramesForLayer 0x0AF35522, 0xD984, 0x45ae, 0xBB, 0xB8, 0x53, 0x93, 0x3E, 0x0A, 0xB1, 0xB5
+    #define STATIC_CODECAPI_AVEncVideoMaxNumRefFrameForLayer    0x3141C639, 0x6329, 0x40d1, 0xB7, 0xE7, 0x2F, 0x0E, 0x3A, 0xC1, 0x8E, 0x02
+    #define STATIC_CODECAPI_AVEncTileRows                   0xFBC650FC, 0x41AB, 0x4f9b, 0x84, 0xB5, 0x06, 0x5B, 0xE9, 0xCD, 0x99, 0xEE
+    #define STATIC_CODECAPI_AVEncTileColumns                0xB4B31205, 0x01E8, 0x452c, 0xB8, 0x76, 0x8C, 0x65, 0x06, 0x54, 0x59, 0x25
 // end of static definitions }
 
 //
@@ -1259,6 +1264,23 @@ enum eAVEncVP9VProfile
     eAVEncVP9VProfile_420_12   = 3,
 };
 
+enum eAVEncAV1VProfile
+{
+    eAVEncAV1VProfile_unknown   = 0,
+    eAVEncAV1VProfile_Main_420_8,
+    eAVEncAV1VProfile_Main_420_10,
+    eAVEncAV1VProfile_Main_400_8,
+    eAVEncAV1VProfile_Main_400_10,
+    eAVEncAV1VProfile_High_444_8,
+    eAVEncAV1VProfile_High_444_10,
+    eAVEncAV1VProfile_Professional_420_12,
+    eAVEncAV1VProfile_Professional_400_12,
+    eAVEncAV1VProfile_Professional_444_12,
+    eAVEncAV1VProfile_Professional_422_8,
+    eAVEncAV1VProfile_Professional_422_10,
+    eAVEncAV1VProfile_Professional_422_12,
+};
+
 enum eAVEncH263PictureType 
 {
     eAVEncH263PictureType_I = 0,
@@ -1270,6 +1292,13 @@ enum eAVEncH264PictureType {
   eAVEncH264PictureType_IDR = 0,
   eAVEncH264PictureType_P,
   eAVEncH264PictureType_B
+};
+
+enum eAVEncAV1PictureType {
+  eAVEncAV1PictureType_Key = 0,
+  eAVEncAV1PictureType_Intra_Only,
+  eAVEncAV1PictureType_Inter,
+  eAVEncAV1PictureType_Switch
 };
 
 #define AVENC_H263V_LEVELCOUNT 8
@@ -1325,6 +1354,24 @@ enum eAVEncH265VLevel
     eAVEncH265VLevel6       = 180,  
     eAVEncH265VLevel6_1     = 183,  
     eAVEncH265VLevel6_2     = 186  
+};
+
+enum eAVEncAV1VLevel  
+{  
+    eAVEncAV1VLevel2        = 0,  
+    eAVEncAV1VLevel2_1      = 1,  
+    eAVEncAV1VLevel3        = 4,  
+    eAVEncAV1VLevel3_1      = 5,  
+    eAVEncAV1VLevel4        = 8,  
+    eAVEncAV1VLevel4_1      = 9,  
+    eAVEncAV1VLevel5        = 12,  
+    eAVEncAV1VLevel5_1      = 13,  
+    eAVEncAV1VLevel5_2      = 14,  
+    eAVEncAV1VLevel5_3      = 15,  
+    eAVEncAV1VLevel6        = 16,  
+    eAVEncAV1VLevel6_1      = 17,  
+    eAVEncAV1VLevel6_2      = 18,  
+    eAVEncAV1VLevel6_3      = 19,  
 };
 
 // AVEncMPVFrameFieldMode (UINT32)
@@ -2076,6 +2123,29 @@ DEFINE_CODECAPI_GUID( AVEncProgressiveUpdateTime, "649faf66-afc6-4828-8fdc-0771c
 // in the video frame.
 DEFINE_CODECAPI_GUID( AVEncChromaUpdateTime, "4b4fd998-4274-40bb-8ee4-07553e7e2d3a", 0x4b4fd998, 0x4274, 0x40bb, 0x8e, 0xe4, 0x07, 0x55, 0x3e, 0x7e, 0x2d, 0x3a )
 
+// AVEncAACEnableVBR (BOOL)
+// Indicates whether the AAC encoder should use VBR encoding.
+DEFINE_CODECAPI_GUID( AVEncAACEnableVBR, "e836bb98-fca3-44b6-9a39-24786be41be1", 0xe836bb98, 0xfca3, 0x44b6, 0x9a, 0x39, 0x24, 0x78, 0x6b, 0xe4, 0x1b, 0xe1 )
+
+// AVEncVideoConsecutiveFramesForLayer (UINT32)
+// Indicates the number of consecutive frames at a given temporal layer.
+// Set the CODECAPI_AVEncVideoSelectLayer property first to specify the temporal layer.
+DEFINE_CODECAPI_GUID( AVEncVideoConsecutiveFramesForLayer, "0AF35522-D984-45ae-BBB8-53933E0AB1B5", 0x0AF35522, 0xD984, 0x45ae, 0xBB, 0xB8, 0x53, 0x93, 0x3E, 0x0A, 0xB1, 0xB5 )
+
+// AVEncVideoMaxNumRefFrameForLayer (UINT32)
+// Used to limit the number of reference frames for a given temporal layer.
+// Set the CODECAPI_AVEncVideoSelectLayer property first to specify the temporal layer.
+DEFINE_CODECAPI_GUID( AVEncVideoMaxNumRefFrameForLayer, "3141C639-6329-40d1-B7E7-2F0E3AC18E02", 0x3141C639, 0x6329, 0x40d1, 0xB7, 0xE7, 0x2F, 0x0E, 0x3A, 0xC1, 0x8E, 0x02 )
+
+// AVEncTileRows (UINT32)
+// Specifies the number of tile rows to encode.
+DEFINE_CODECAPI_GUID( AVEncTileRows, "FBC650FC-41AB-4f9b-84B5-065BE9CD99EE", 0xFBC650FC, 0x41AB, 0x4f9b, 0x84, 0xB5, 0x06, 0x5B, 0xE9, 0xCD, 0x99, 0xEE )
+
+// AVEncTileColumns (UINT32)
+// Specifies the number of tile columns to encode.
+DEFINE_CODECAPI_GUID( AVEncTileColumns, "B4B31205-01E8-452c-B876-8C6506545925", 0xB4B31205, 0x01E8, 0x452c, 0xB8, 0x76, 0x8C, 0x65, 0x06, 0x54, 0x59, 0x25 )
+
+
 #ifndef UUID_GEN
 // { GUID refs
     #define CODECAPI_AVEncCommonFormatConstraint DEFINE_CODECAPI_GUIDNAMED( AVEncCommonFormatConstraint )
@@ -2408,6 +2478,12 @@ DEFINE_CODECAPI_GUID( AVEncChromaUpdateTime, "4b4fd998-4274-40bb-8ee4-07553e7e2d
     #define CODECAPI_AVEncChromaEncodeMode          DEFINE_CODECAPI_GUIDNAMED( AVEncChromaEncodeMode )
     #define CODECAPI_AVEncProgressiveUpdateTime     DEFINE_CODECAPI_GUIDNAMED( AVEncProgressiveUpdateTime )
     #define CODECAPI_AVEncChromaUpdateTime          DEFINE_CODECAPI_GUIDNAMED( AVEncChromaUpdateTime )
+    #define CODECAPI_AVEncAACEnableVBR              DEFINE_CODECAPI_GUIDNAMED( AVEncAACEnableVBR )
+
+    #define CODECAPI_AVEncVideoConsecutiveFramesPerLayer DEFINE_CODECAPI_GUIDNAMED( AVEncVideoConsecutiveFramesPerLayer )
+    #define CODECAPI_AVEncVideoMaxNumRefFramePerLayer    DEFINE_CODECAPI_GUIDNAMED( AVEncVideoMaxNumRefFramePerLayer )
+    #define CODECAPI_AVEncTileRows                  DEFINE_CODECAPI_GUIDNAMED( AVEncTileRows )
+    #define CODECAPI_AVEncTileColumns               DEFINE_CODECAPI_GUIDNAMED( AVEncTileColumns )
 #endif
 
 

@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -422,36 +422,25 @@ EXTERN_C const IID IID_IUPnPDeviceFinder;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE FindByType( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTypeURI,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevices **pDevices) = 0;
+            /* [in] */ __RPC__in BSTR bstrTypeURI,
+            /* [in] */ DWORD dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevices **pDevices) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateAsyncFind( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTypeURI,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkDeviceFinderCallback,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plFindData) = 0;
+            /* [in] */ __RPC__in BSTR bstrTypeURI,
+            /* [in] */ DWORD dwFlags,
+            /* [in] */ __RPC__in_opt IUnknown *punkDeviceFinderCallback,
+            /* [retval][out] */ __RPC__out LONG *plFindData) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StartAsyncFind( 
-            /* [annotation][in] */ 
-            _In_  LONG lFindData) = 0;
+            /* [in] */ LONG lFindData) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CancelAsyncFind( 
-            /* [annotation][in] */ 
-            _In_  LONG lFindData) = 0;
+            /* [in] */ LONG lFindData) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE FindByUDN( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUDN,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **pDevice) = 0;
+            /* [in] */ __RPC__in BSTR bstrUDN,
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **pDevice) = 0;
         
     };
     
@@ -465,8 +454,7 @@ EXTERN_C const IID IID_IUPnPDeviceFinder;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDeviceFinder * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -481,31 +469,23 @@ EXTERN_C const IID IID_IUPnPDeviceFinder;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IUPnPDeviceFinder * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IUPnPDeviceFinder * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IUPnPDeviceFinder * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -530,44 +510,33 @@ EXTERN_C const IID IID_IUPnPDeviceFinder;
         DECLSPEC_XFGVIRT(IUPnPDeviceFinder, FindByType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FindByType )( 
             __RPC__in IUPnPDeviceFinder * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTypeURI,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevices **pDevices);
+            /* [in] */ __RPC__in BSTR bstrTypeURI,
+            /* [in] */ DWORD dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevices **pDevices);
         
         DECLSPEC_XFGVIRT(IUPnPDeviceFinder, CreateAsyncFind)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAsyncFind )( 
             __RPC__in IUPnPDeviceFinder * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTypeURI,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkDeviceFinderCallback,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plFindData);
+            /* [in] */ __RPC__in BSTR bstrTypeURI,
+            /* [in] */ DWORD dwFlags,
+            /* [in] */ __RPC__in_opt IUnknown *punkDeviceFinderCallback,
+            /* [retval][out] */ __RPC__out LONG *plFindData);
         
         DECLSPEC_XFGVIRT(IUPnPDeviceFinder, StartAsyncFind)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartAsyncFind )( 
             __RPC__in IUPnPDeviceFinder * This,
-            /* [annotation][in] */ 
-            _In_  LONG lFindData);
+            /* [in] */ LONG lFindData);
         
         DECLSPEC_XFGVIRT(IUPnPDeviceFinder, CancelAsyncFind)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CancelAsyncFind )( 
             __RPC__in IUPnPDeviceFinder * This,
-            /* [annotation][in] */ 
-            _In_  LONG lFindData);
+            /* [in] */ LONG lFindData);
         
         DECLSPEC_XFGVIRT(IUPnPDeviceFinder, FindByUDN)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FindByUDN )( 
             __RPC__in IUPnPDeviceFinder * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUDN,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **pDevice);
+            /* [in] */ __RPC__in BSTR bstrUDN,
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **pDevice);
         
         END_INTERFACE
     } IUPnPDeviceFinderVtbl;
@@ -647,12 +616,10 @@ EXTERN_C const IID IID_IUPnPAddressFamilyControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetAddressFamily( 
-            /* [annotation][in] */ 
-            _In_  LONG dwFlags) = 0;
+            /* [in] */ LONG dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAddressFamily( 
-            /* [annotation][out] */ 
-            _Out_  LONG *pdwFlags) = 0;
+            /* [out] */ __RPC__out LONG *pdwFlags) = 0;
         
     };
     
@@ -666,8 +633,7 @@ EXTERN_C const IID IID_IUPnPAddressFamilyControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPAddressFamilyControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -682,14 +648,12 @@ EXTERN_C const IID IID_IUPnPAddressFamilyControl;
         DECLSPEC_XFGVIRT(IUPnPAddressFamilyControl, SetAddressFamily)
         HRESULT ( STDMETHODCALLTYPE *SetAddressFamily )( 
             __RPC__in IUPnPAddressFamilyControl * This,
-            /* [annotation][in] */ 
-            _In_  LONG dwFlags);
+            /* [in] */ LONG dwFlags);
         
         DECLSPEC_XFGVIRT(IUPnPAddressFamilyControl, GetAddressFamily)
         HRESULT ( STDMETHODCALLTYPE *GetAddressFamily )( 
             __RPC__in IUPnPAddressFamilyControl * This,
-            /* [annotation][out] */ 
-            _Out_  LONG *pdwFlags);
+            /* [out] */ __RPC__out LONG *pdwFlags);
         
         END_INTERFACE
     } IUPnPAddressFamilyControlVtbl;
@@ -747,8 +711,7 @@ EXTERN_C const IID IID_IUPnPHttpHeaderControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddRequestHeaders( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHttpHeaders) = 0;
+            /* [in] */ __RPC__in BSTR bstrHttpHeaders) = 0;
         
     };
     
@@ -762,8 +725,7 @@ EXTERN_C const IID IID_IUPnPHttpHeaderControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPHttpHeaderControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -778,8 +740,7 @@ EXTERN_C const IID IID_IUPnPHttpHeaderControl;
         DECLSPEC_XFGVIRT(IUPnPHttpHeaderControl, AddRequestHeaders)
         HRESULT ( STDMETHODCALLTYPE *AddRequestHeaders )( 
             __RPC__in IUPnPHttpHeaderControl * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHttpHeaders);
+            /* [in] */ __RPC__in BSTR bstrHttpHeaders);
         
         END_INTERFACE
     } IUPnPHttpHeaderControlVtbl;
@@ -834,20 +795,15 @@ EXTERN_C const IID IID_IUPnPDeviceFinderCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE DeviceAdded( 
-            /* [annotation][in] */ 
-            _In_  LONG lFindData,
-            /* [annotation][in] */ 
-            _In_  IUPnPDevice *pDevice) = 0;
+            /* [in] */ LONG lFindData,
+            /* [in] */ __RPC__in_opt IUPnPDevice *pDevice) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeviceRemoved( 
-            /* [annotation][in] */ 
-            _In_  LONG lFindData,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUDN) = 0;
+            /* [in] */ LONG lFindData,
+            /* [in] */ __RPC__in BSTR bstrUDN) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SearchComplete( 
-            /* [annotation][in] */ 
-            _In_  LONG lFindData) = 0;
+            /* [in] */ LONG lFindData) = 0;
         
     };
     
@@ -861,8 +817,7 @@ EXTERN_C const IID IID_IUPnPDeviceFinderCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDeviceFinderCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -877,24 +832,19 @@ EXTERN_C const IID IID_IUPnPDeviceFinderCallback;
         DECLSPEC_XFGVIRT(IUPnPDeviceFinderCallback, DeviceAdded)
         HRESULT ( STDMETHODCALLTYPE *DeviceAdded )( 
             __RPC__in IUPnPDeviceFinderCallback * This,
-            /* [annotation][in] */ 
-            _In_  LONG lFindData,
-            /* [annotation][in] */ 
-            _In_  IUPnPDevice *pDevice);
+            /* [in] */ LONG lFindData,
+            /* [in] */ __RPC__in_opt IUPnPDevice *pDevice);
         
         DECLSPEC_XFGVIRT(IUPnPDeviceFinderCallback, DeviceRemoved)
         HRESULT ( STDMETHODCALLTYPE *DeviceRemoved )( 
             __RPC__in IUPnPDeviceFinderCallback * This,
-            /* [annotation][in] */ 
-            _In_  LONG lFindData,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUDN);
+            /* [in] */ LONG lFindData,
+            /* [in] */ __RPC__in BSTR bstrUDN);
         
         DECLSPEC_XFGVIRT(IUPnPDeviceFinderCallback, SearchComplete)
         HRESULT ( STDMETHODCALLTYPE *SearchComplete )( 
             __RPC__in IUPnPDeviceFinderCallback * This,
-            /* [annotation][in] */ 
-            _In_  LONG lFindData);
+            /* [in] */ LONG lFindData);
         
         END_INTERFACE
     } IUPnPDeviceFinderCallbackVtbl;
@@ -955,18 +905,14 @@ EXTERN_C const IID IID_IUPnPServices;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][hidden][restricted][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LPUNKNOWN *ppunk) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppunk) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrServiceId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPService **ppService) = 0;
+            /* [in] */ __RPC__in BSTR bstrServiceId,
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPService **ppService) = 0;
         
     };
     
@@ -980,8 +926,7 @@ EXTERN_C const IID IID_IUPnPServices;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPServices * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -996,31 +941,23 @@ EXTERN_C const IID IID_IUPnPServices;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IUPnPServices * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IUPnPServices * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IUPnPServices * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1045,22 +982,18 @@ EXTERN_C const IID IID_IUPnPServices;
         DECLSPEC_XFGVIRT(IUPnPServices, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IUPnPServices * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(IUPnPServices, get__NewEnum)
         /* [helpstring][hidden][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IUPnPServices * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LPUNKNOWN *ppunk);
+            /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppunk);
         
         DECLSPEC_XFGVIRT(IUPnPServices, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IUPnPServices * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrServiceId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPService **ppService);
+            /* [in] */ __RPC__in BSTR bstrServiceId,
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPService **ppService);
         
         END_INTERFACE
     } IUPnPServicesVtbl;
@@ -1134,36 +1067,26 @@ EXTERN_C const IID IID_IUPnPService;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryStateVariable( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVariableName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [in] */ __RPC__in BSTR bstrVariableName,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InvokeAction( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionName,
-            /* [annotation][in] */ 
-            _In_  VARIANT vInActionArgs,
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *pvOutActionArgs,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvRetVal) = 0;
+            /* [in] */ __RPC__in BSTR bstrActionName,
+            /* [in] */ VARIANT vInActionArgs,
+            /* [out][in] */ __RPC__inout VARIANT *pvOutActionArgs,
+            /* [retval][out] */ __RPC__out VARIANT *pvRetVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ServiceTypeIdentifier( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddCallback( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkCallback) = 0;
+            /* [in] */ __RPC__in_opt IUnknown *pUnkCallback) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrId) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastTransportStatus( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plValue) = 0;
+            /* [retval][out] */ __RPC__out long *plValue) = 0;
         
     };
     
@@ -1177,8 +1100,7 @@ EXTERN_C const IID IID_IUPnPService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1193,31 +1115,23 @@ EXTERN_C const IID IID_IUPnPService;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IUPnPService * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IUPnPService * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IUPnPService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1242,46 +1156,36 @@ EXTERN_C const IID IID_IUPnPService;
         DECLSPEC_XFGVIRT(IUPnPService, QueryStateVariable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryStateVariable )( 
             __RPC__in IUPnPService * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVariableName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [in] */ __RPC__in BSTR bstrVariableName,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IUPnPService, InvokeAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InvokeAction )( 
             __RPC__in IUPnPService * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionName,
-            /* [annotation][in] */ 
-            _In_  VARIANT vInActionArgs,
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *pvOutActionArgs,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvRetVal);
+            /* [in] */ __RPC__in BSTR bstrActionName,
+            /* [in] */ VARIANT vInActionArgs,
+            /* [out][in] */ __RPC__inout VARIANT *pvOutActionArgs,
+            /* [retval][out] */ __RPC__out VARIANT *pvRetVal);
         
         DECLSPEC_XFGVIRT(IUPnPService, get_ServiceTypeIdentifier)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceTypeIdentifier )( 
             __RPC__in IUPnPService * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IUPnPService, AddCallback)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddCallback )( 
             __RPC__in IUPnPService * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkCallback);
+            /* [in] */ __RPC__in_opt IUnknown *pUnkCallback);
         
         DECLSPEC_XFGVIRT(IUPnPService, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IUPnPService * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrId);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId);
         
         DECLSPEC_XFGVIRT(IUPnPService, get_LastTransportStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastTransportStatus )( 
             __RPC__in IUPnPService * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plValue);
+            /* [retval][out] */ __RPC__out long *plValue);
         
         END_INTERFACE
     } IUPnPServiceVtbl;
@@ -1364,8 +1268,7 @@ EXTERN_C const IID IID_IUPnPAsyncResult;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AsyncOperationComplete( 
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID) = 0;
+            /* [in] */ ULONG64 ullRequestID) = 0;
         
     };
     
@@ -1379,8 +1282,7 @@ EXTERN_C const IID IID_IUPnPAsyncResult;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPAsyncResult * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1395,8 +1297,7 @@ EXTERN_C const IID IID_IUPnPAsyncResult;
         DECLSPEC_XFGVIRT(IUPnPAsyncResult, AsyncOperationComplete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AsyncOperationComplete )( 
             __RPC__in IUPnPAsyncResult * This,
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID);
+            /* [in] */ ULONG64 ullRequestID);
         
         END_INTERFACE
     } IUPnPAsyncResultVtbl;
@@ -1451,64 +1352,43 @@ EXTERN_C const IID IID_IUPnPServiceAsync;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE BeginInvokeAction( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionName,
-            /* [annotation][in] */ 
-            _In_  VARIANT vInActionArgs,
-            /* [annotation][in] */ 
-            _In_  IUPnPAsyncResult *pAsyncResult,
-            /* [annotation][out] */ 
-            _Out_  PULONG64 pullRequestID) = 0;
+            /* [in] */ __RPC__in BSTR bstrActionName,
+            /* [in] */ VARIANT vInActionArgs,
+            /* [in] */ __RPC__in_opt IUPnPAsyncResult *pAsyncResult,
+            /* [out] */ __RPC__out PULONG64 pullRequestID) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EndInvokeAction( 
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID,
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *pvOutActionArgs,
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *pvRetVal) = 0;
+            /* [in] */ ULONG64 ullRequestID,
+            /* [out][in] */ __RPC__inout VARIANT *pvOutActionArgs,
+            /* [out][in] */ __RPC__inout VARIANT *pvRetVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE BeginQueryStateVariable( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVariableName,
-            /* [annotation][in] */ 
-            _In_  IUPnPAsyncResult *pAsyncResult,
-            /* [annotation][out] */ 
-            _Out_  PULONG64 pullRequestID) = 0;
+            /* [in] */ __RPC__in BSTR bstrVariableName,
+            /* [in] */ __RPC__in_opt IUPnPAsyncResult *pAsyncResult,
+            /* [out] */ __RPC__out PULONG64 pullRequestID) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EndQueryStateVariable( 
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID,
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *pValue) = 0;
+            /* [in] */ ULONG64 ullRequestID,
+            /* [out][in] */ __RPC__inout VARIANT *pValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE BeginSubscribeToEvents( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkCallback,
-            /* [annotation][in] */ 
-            _In_  IUPnPAsyncResult *pAsyncResult,
-            /* [annotation][out] */ 
-            _Out_  PULONG64 pullRequestID) = 0;
+            /* [in] */ __RPC__in_opt IUnknown *pUnkCallback,
+            /* [in] */ __RPC__in_opt IUPnPAsyncResult *pAsyncResult,
+            /* [out] */ __RPC__out PULONG64 pullRequestID) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EndSubscribeToEvents( 
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID) = 0;
+            /* [in] */ ULONG64 ullRequestID) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE BeginSCPDDownload( 
-            /* [annotation][in] */ 
-            _In_  IUPnPAsyncResult *pAsyncResult,
-            /* [annotation][out] */ 
-            _Out_  PULONG64 pullRequestID) = 0;
+            /* [in] */ __RPC__in_opt IUPnPAsyncResult *pAsyncResult,
+            /* [out] */ __RPC__out PULONG64 pullRequestID) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EndSCPDDownload( 
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrSCPDDoc) = 0;
+            /* [in] */ ULONG64 ullRequestID,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrSCPDDoc) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CancelAsyncOperation( 
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID) = 0;
+            /* [in] */ ULONG64 ullRequestID) = 0;
         
     };
     
@@ -1522,8 +1402,7 @@ EXTERN_C const IID IID_IUPnPServiceAsync;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPServiceAsync * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1538,80 +1417,59 @@ EXTERN_C const IID IID_IUPnPServiceAsync;
         DECLSPEC_XFGVIRT(IUPnPServiceAsync, BeginInvokeAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BeginInvokeAction )( 
             __RPC__in IUPnPServiceAsync * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionName,
-            /* [annotation][in] */ 
-            _In_  VARIANT vInActionArgs,
-            /* [annotation][in] */ 
-            _In_  IUPnPAsyncResult *pAsyncResult,
-            /* [annotation][out] */ 
-            _Out_  PULONG64 pullRequestID);
+            /* [in] */ __RPC__in BSTR bstrActionName,
+            /* [in] */ VARIANT vInActionArgs,
+            /* [in] */ __RPC__in_opt IUPnPAsyncResult *pAsyncResult,
+            /* [out] */ __RPC__out PULONG64 pullRequestID);
         
         DECLSPEC_XFGVIRT(IUPnPServiceAsync, EndInvokeAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EndInvokeAction )( 
             __RPC__in IUPnPServiceAsync * This,
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID,
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *pvOutActionArgs,
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *pvRetVal);
+            /* [in] */ ULONG64 ullRequestID,
+            /* [out][in] */ __RPC__inout VARIANT *pvOutActionArgs,
+            /* [out][in] */ __RPC__inout VARIANT *pvRetVal);
         
         DECLSPEC_XFGVIRT(IUPnPServiceAsync, BeginQueryStateVariable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BeginQueryStateVariable )( 
             __RPC__in IUPnPServiceAsync * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVariableName,
-            /* [annotation][in] */ 
-            _In_  IUPnPAsyncResult *pAsyncResult,
-            /* [annotation][out] */ 
-            _Out_  PULONG64 pullRequestID);
+            /* [in] */ __RPC__in BSTR bstrVariableName,
+            /* [in] */ __RPC__in_opt IUPnPAsyncResult *pAsyncResult,
+            /* [out] */ __RPC__out PULONG64 pullRequestID);
         
         DECLSPEC_XFGVIRT(IUPnPServiceAsync, EndQueryStateVariable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EndQueryStateVariable )( 
             __RPC__in IUPnPServiceAsync * This,
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID,
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *pValue);
+            /* [in] */ ULONG64 ullRequestID,
+            /* [out][in] */ __RPC__inout VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IUPnPServiceAsync, BeginSubscribeToEvents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BeginSubscribeToEvents )( 
             __RPC__in IUPnPServiceAsync * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkCallback,
-            /* [annotation][in] */ 
-            _In_  IUPnPAsyncResult *pAsyncResult,
-            /* [annotation][out] */ 
-            _Out_  PULONG64 pullRequestID);
+            /* [in] */ __RPC__in_opt IUnknown *pUnkCallback,
+            /* [in] */ __RPC__in_opt IUPnPAsyncResult *pAsyncResult,
+            /* [out] */ __RPC__out PULONG64 pullRequestID);
         
         DECLSPEC_XFGVIRT(IUPnPServiceAsync, EndSubscribeToEvents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EndSubscribeToEvents )( 
             __RPC__in IUPnPServiceAsync * This,
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID);
+            /* [in] */ ULONG64 ullRequestID);
         
         DECLSPEC_XFGVIRT(IUPnPServiceAsync, BeginSCPDDownload)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BeginSCPDDownload )( 
             __RPC__in IUPnPServiceAsync * This,
-            /* [annotation][in] */ 
-            _In_  IUPnPAsyncResult *pAsyncResult,
-            /* [annotation][out] */ 
-            _Out_  PULONG64 pullRequestID);
+            /* [in] */ __RPC__in_opt IUPnPAsyncResult *pAsyncResult,
+            /* [out] */ __RPC__out PULONG64 pullRequestID);
         
         DECLSPEC_XFGVIRT(IUPnPServiceAsync, EndSCPDDownload)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EndSCPDDownload )( 
             __RPC__in IUPnPServiceAsync * This,
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrSCPDDoc);
+            /* [in] */ ULONG64 ullRequestID,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrSCPDDoc);
         
         DECLSPEC_XFGVIRT(IUPnPServiceAsync, CancelAsyncOperation)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CancelAsyncOperation )( 
             __RPC__in IUPnPServiceAsync * This,
-            /* [annotation][in] */ 
-            _In_  ULONG64 ullRequestID);
+            /* [in] */ ULONG64 ullRequestID);
         
         END_INTERFACE
     } IUPnPServiceAsyncVtbl;
@@ -1690,16 +1548,12 @@ EXTERN_C const IID IID_IUPnPServiceCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StateVariableChanged( 
-            /* [annotation][in] */ 
-            _In_  IUPnPService *pus,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pcwszStateVarName,
-            /* [annotation][in] */ 
-            _In_  VARIANT vaValue) = 0;
+            /* [in] */ __RPC__in_opt IUPnPService *pus,
+            /* [in] */ __RPC__in LPCWSTR pcwszStateVarName,
+            /* [in] */ VARIANT vaValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ServiceInstanceDied( 
-            /* [annotation][in] */ 
-            _In_  IUPnPService *pus) = 0;
+            /* [in] */ __RPC__in_opt IUPnPService *pus) = 0;
         
     };
     
@@ -1713,8 +1567,7 @@ EXTERN_C const IID IID_IUPnPServiceCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPServiceCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1729,18 +1582,14 @@ EXTERN_C const IID IID_IUPnPServiceCallback;
         DECLSPEC_XFGVIRT(IUPnPServiceCallback, StateVariableChanged)
         HRESULT ( STDMETHODCALLTYPE *StateVariableChanged )( 
             __RPC__in IUPnPServiceCallback * This,
-            /* [annotation][in] */ 
-            _In_  IUPnPService *pus,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pcwszStateVarName,
-            /* [annotation][in] */ 
-            _In_  VARIANT vaValue);
+            /* [in] */ __RPC__in_opt IUPnPService *pus,
+            /* [in] */ __RPC__in LPCWSTR pcwszStateVarName,
+            /* [in] */ VARIANT vaValue);
         
         DECLSPEC_XFGVIRT(IUPnPServiceCallback, ServiceInstanceDied)
         HRESULT ( STDMETHODCALLTYPE *ServiceInstanceDied )( 
             __RPC__in IUPnPServiceCallback * This,
-            /* [annotation][in] */ 
-            _In_  IUPnPService *pus);
+            /* [in] */ __RPC__in_opt IUPnPService *pus);
         
         END_INTERFACE
     } IUPnPServiceCallbackVtbl;
@@ -1798,8 +1647,7 @@ EXTERN_C const IID IID_IUPnPServiceEnumProperty;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetServiceEnumProperty( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwMask) = 0;
+            /* [in] */ DWORD dwMask) = 0;
         
     };
     
@@ -1813,8 +1661,7 @@ EXTERN_C const IID IID_IUPnPServiceEnumProperty;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPServiceEnumProperty * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1829,8 +1676,7 @@ EXTERN_C const IID IID_IUPnPServiceEnumProperty;
         DECLSPEC_XFGVIRT(IUPnPServiceEnumProperty, SetServiceEnumProperty)
         HRESULT ( STDMETHODCALLTYPE *SetServiceEnumProperty )( 
             __RPC__in IUPnPServiceEnumProperty * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMask);
+            /* [in] */ DWORD dwMask);
         
         END_INTERFACE
     } IUPnPServiceEnumPropertyVtbl;
@@ -1885,12 +1731,10 @@ EXTERN_C const IID IID_IUPnPServiceDocumentAccess;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentURL( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDocUrl) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDocUrl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDocument( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDoc) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDoc) = 0;
         
     };
     
@@ -1904,8 +1748,7 @@ EXTERN_C const IID IID_IUPnPServiceDocumentAccess;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPServiceDocumentAccess * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1920,14 +1763,12 @@ EXTERN_C const IID IID_IUPnPServiceDocumentAccess;
         DECLSPEC_XFGVIRT(IUPnPServiceDocumentAccess, GetDocumentURL)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentURL )( 
             __RPC__in IUPnPServiceDocumentAccess * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDocUrl);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDocUrl);
         
         DECLSPEC_XFGVIRT(IUPnPServiceDocumentAccess, GetDocument)
         HRESULT ( STDMETHODCALLTYPE *GetDocument )( 
             __RPC__in IUPnPServiceDocumentAccess * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDoc);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDoc);
         
         END_INTERFACE
     } IUPnPServiceDocumentAccessVtbl;
@@ -1985,18 +1826,14 @@ EXTERN_C const IID IID_IUPnPDevices;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][hidden][restricted][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LPUNKNOWN *ppunk) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppunk) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUDN,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **ppDevice) = 0;
+            /* [in] */ __RPC__in BSTR bstrUDN,
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **ppDevice) = 0;
         
     };
     
@@ -2010,8 +1847,7 @@ EXTERN_C const IID IID_IUPnPDevices;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDevices * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2026,31 +1862,23 @@ EXTERN_C const IID IID_IUPnPDevices;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IUPnPDevices * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IUPnPDevices * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IUPnPDevices * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2075,22 +1903,18 @@ EXTERN_C const IID IID_IUPnPDevices;
         DECLSPEC_XFGVIRT(IUPnPDevices, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IUPnPDevices * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(IUPnPDevices, get__NewEnum)
         /* [helpstring][hidden][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IUPnPDevices * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LPUNKNOWN *ppunk);
+            /* [retval][out] */ __RPC__deref_out_opt LPUNKNOWN *ppunk);
         
         DECLSPEC_XFGVIRT(IUPnPDevices, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IUPnPDevices * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUDN,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **ppDevice);
+            /* [in] */ __RPC__in BSTR bstrUDN,
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **ppDevice);
         
         END_INTERFACE
     } IUPnPDevicesVtbl;
@@ -2164,88 +1988,65 @@ EXTERN_C const IID IID_IUPnPDevice;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IsRootDevice( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvarb) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvarb) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RootDevice( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **ppudRootDevice) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **ppudRootDevice) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ParentDevice( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **ppudDeviceParent) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **ppudDeviceParent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HasChildren( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvarb) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvarb) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Children( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevices **ppudChildren) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevices **ppudChildren) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UniqueDeviceName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PresentationURL( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ManufacturerName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ManufacturerURL( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModelName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModelNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModelURL( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UPC( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SerialNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IconURL( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrEncodingFormat,
-            /* [annotation][in] */ 
-            _In_  LONG lSizeX,
-            /* [annotation][in] */ 
-            _In_  LONG lSizeY,
-            /* [annotation][in] */ 
-            _In_  LONG lBitDepth,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrIconURL) = 0;
+            /* [in] */ __RPC__in BSTR bstrEncodingFormat,
+            /* [in] */ LONG lSizeX,
+            /* [in] */ LONG lSizeY,
+            /* [in] */ LONG lBitDepth,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrIconURL) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Services( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPServices **ppusServices) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPServices **ppusServices) = 0;
         
     };
     
@@ -2259,8 +2060,7 @@ EXTERN_C const IID IID_IUPnPDevice;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2275,31 +2075,23 @@ EXTERN_C const IID IID_IUPnPDevice;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2324,124 +2116,101 @@ EXTERN_C const IID IID_IUPnPDevice;
         DECLSPEC_XFGVIRT(IUPnPDevice, get_IsRootDevice)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsRootDevice )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvarb);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvarb);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_RootDevice)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootDevice )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **ppudRootDevice);
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **ppudRootDevice);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_ParentDevice)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ParentDevice )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **ppudDeviceParent);
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **ppudDeviceParent);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_HasChildren)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HasChildren )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvarb);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvarb);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_Children)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Children )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevices **ppudChildren);
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevices **ppudChildren);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_UniqueDeviceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueDeviceName )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_PresentationURL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PresentationURL )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_ManufacturerName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ManufacturerName )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_ManufacturerURL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ManufacturerURL )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_ModelName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ModelName )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_ModelNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ModelNumber )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_ModelURL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ModelURL )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_UPC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UPC )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_SerialNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SerialNumber )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, IconURL)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IconURL )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrEncodingFormat,
-            /* [annotation][in] */ 
-            _In_  LONG lSizeX,
-            /* [annotation][in] */ 
-            _In_  LONG lSizeY,
-            /* [annotation][in] */ 
-            _In_  LONG lBitDepth,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrIconURL);
+            /* [in] */ __RPC__in BSTR bstrEncodingFormat,
+            /* [in] */ LONG lSizeX,
+            /* [in] */ LONG lSizeY,
+            /* [in] */ LONG lBitDepth,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrIconURL);
         
         DECLSPEC_XFGVIRT(IUPnPDevice, get_Services)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Services )( 
             __RPC__in IUPnPDevice * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPServices **ppusServices);
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPServices **ppusServices);
         
         END_INTERFACE
     } IUPnPDeviceVtbl;
@@ -2563,8 +2332,7 @@ EXTERN_C const IID IID_IUPnPDeviceDocumentAccess;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentURL( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDocument) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocument) = 0;
         
     };
     
@@ -2578,8 +2346,7 @@ EXTERN_C const IID IID_IUPnPDeviceDocumentAccess;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDeviceDocumentAccess * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2594,8 +2361,7 @@ EXTERN_C const IID IID_IUPnPDeviceDocumentAccess;
         DECLSPEC_XFGVIRT(IUPnPDeviceDocumentAccess, GetDocumentURL)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentURL )( 
             __RPC__in IUPnPDeviceDocumentAccess * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDocument);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocument);
         
         END_INTERFACE
     } IUPnPDeviceDocumentAccessVtbl;
@@ -2650,8 +2416,7 @@ EXTERN_C const IID IID_IUPnPDeviceDocumentAccessEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocument( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDocument) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocument) = 0;
         
     };
     
@@ -2665,8 +2430,7 @@ EXTERN_C const IID IID_IUPnPDeviceDocumentAccessEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDeviceDocumentAccessEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2681,8 +2445,7 @@ EXTERN_C const IID IID_IUPnPDeviceDocumentAccessEx;
         DECLSPEC_XFGVIRT(IUPnPDeviceDocumentAccessEx, GetDocument)
         HRESULT ( STDMETHODCALLTYPE *GetDocument )( 
             __RPC__in IUPnPDeviceDocumentAccessEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDocument);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocument);
         
         END_INTERFACE
     } IUPnPDeviceDocumentAccessExVtbl;
@@ -2737,34 +2500,26 @@ EXTERN_C const IID IID_IUPnPDescriptionDocument;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReadyState( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plReadyState) = 0;
+            /* [retval][out] */ __RPC__out LONG *plReadyState) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Load( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl) = 0;
+            /* [in] */ __RPC__in BSTR bstrUrl) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE LoadAsync( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkCallback) = 0;
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [in] */ __RPC__in_opt IUnknown *punkCallback) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LoadResult( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *phrError) = 0;
+            /* [retval][out] */ __RPC__out long *phrError) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Abort( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RootDevice( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **ppudRootDevice) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **ppudRootDevice) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeviceByUDN( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUDN,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **ppudDevice) = 0;
+            /* [in] */ __RPC__in BSTR bstrUDN,
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **ppudDevice) = 0;
         
     };
     
@@ -2778,8 +2533,7 @@ EXTERN_C const IID IID_IUPnPDescriptionDocument;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDescriptionDocument * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2794,31 +2548,23 @@ EXTERN_C const IID IID_IUPnPDescriptionDocument;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IUPnPDescriptionDocument * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IUPnPDescriptionDocument * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IUPnPDescriptionDocument * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2843,28 +2589,23 @@ EXTERN_C const IID IID_IUPnPDescriptionDocument;
         DECLSPEC_XFGVIRT(IUPnPDescriptionDocument, get_ReadyState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReadyState )( 
             __RPC__in IUPnPDescriptionDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plReadyState);
+            /* [retval][out] */ __RPC__out LONG *plReadyState);
         
         DECLSPEC_XFGVIRT(IUPnPDescriptionDocument, Load)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Load )( 
             __RPC__in IUPnPDescriptionDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl);
+            /* [in] */ __RPC__in BSTR bstrUrl);
         
         DECLSPEC_XFGVIRT(IUPnPDescriptionDocument, LoadAsync)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LoadAsync )( 
             __RPC__in IUPnPDescriptionDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkCallback);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [in] */ __RPC__in_opt IUnknown *punkCallback);
         
         DECLSPEC_XFGVIRT(IUPnPDescriptionDocument, get_LoadResult)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LoadResult )( 
             __RPC__in IUPnPDescriptionDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *phrError);
+            /* [retval][out] */ __RPC__out long *phrError);
         
         DECLSPEC_XFGVIRT(IUPnPDescriptionDocument, Abort)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Abort )( 
@@ -2873,16 +2614,13 @@ EXTERN_C const IID IID_IUPnPDescriptionDocument;
         DECLSPEC_XFGVIRT(IUPnPDescriptionDocument, RootDevice)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RootDevice )( 
             __RPC__in IUPnPDescriptionDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **ppudRootDevice);
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **ppudRootDevice);
         
         DECLSPEC_XFGVIRT(IUPnPDescriptionDocument, DeviceByUDN)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeviceByUDN )( 
             __RPC__in IUPnPDescriptionDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUDN,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUPnPDevice **ppudDevice);
+            /* [in] */ __RPC__in BSTR bstrUDN,
+            /* [retval][out] */ __RPC__deref_out_opt IUPnPDevice **ppudDevice);
         
         END_INTERFACE
     } IUPnPDescriptionDocumentVtbl;
@@ -2968,12 +2706,9 @@ EXTERN_C const IID IID_IUPnPDeviceFinderAddCallbackWithInterface;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE DeviceAddedWithInterface( 
-            /* [annotation][in] */ 
-            _In_  LONG lFindData,
-            /* [annotation][in] */ 
-            _In_  IUPnPDevice *pDevice,
-            /* [annotation][in] */ 
-            _In_  GUID *pguidInterface) = 0;
+            /* [in] */ LONG lFindData,
+            /* [in] */ __RPC__in_opt IUPnPDevice *pDevice,
+            /* [in] */ __RPC__in GUID *pguidInterface) = 0;
         
     };
     
@@ -2987,8 +2722,7 @@ EXTERN_C const IID IID_IUPnPDeviceFinderAddCallbackWithInterface;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDeviceFinderAddCallbackWithInterface * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3003,12 +2737,9 @@ EXTERN_C const IID IID_IUPnPDeviceFinderAddCallbackWithInterface;
         DECLSPEC_XFGVIRT(IUPnPDeviceFinderAddCallbackWithInterface, DeviceAddedWithInterface)
         HRESULT ( STDMETHODCALLTYPE *DeviceAddedWithInterface )( 
             __RPC__in IUPnPDeviceFinderAddCallbackWithInterface * This,
-            /* [annotation][in] */ 
-            _In_  LONG lFindData,
-            /* [annotation][in] */ 
-            _In_  IUPnPDevice *pDevice,
-            /* [annotation][in] */ 
-            _In_  GUID *pguidInterface);
+            /* [in] */ LONG lFindData,
+            /* [in] */ __RPC__in_opt IUPnPDevice *pDevice,
+            /* [in] */ __RPC__in GUID *pguidInterface);
         
         END_INTERFACE
     } IUPnPDeviceFinderAddCallbackWithInterfaceVtbl;
@@ -3063,8 +2794,7 @@ EXTERN_C const IID IID_IUPnPDescriptionDocumentCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE LoadComplete( 
-            /* [annotation][in] */ 
-            _In_  HRESULT hrLoadResult) = 0;
+            /* [in] */ HRESULT hrLoadResult) = 0;
         
     };
     
@@ -3078,8 +2808,7 @@ EXTERN_C const IID IID_IUPnPDescriptionDocumentCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUPnPDescriptionDocumentCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3094,8 +2823,7 @@ EXTERN_C const IID IID_IUPnPDescriptionDocumentCallback;
         DECLSPEC_XFGVIRT(IUPnPDescriptionDocumentCallback, LoadComplete)
         HRESULT ( STDMETHODCALLTYPE *LoadComplete )( 
             __RPC__in IUPnPDescriptionDocumentCallback * This,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrLoadResult);
+            /* [in] */ HRESULT hrLoadResult);
         
         END_INTERFACE
     } IUPnPDescriptionDocumentCallbackVtbl;

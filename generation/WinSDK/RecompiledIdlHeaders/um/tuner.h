@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -1236,22 +1236,17 @@ EXTERN_C const IID IID_ITuningSpaces;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count) = 0;
+            /* [retval][out] */ __RPC__out long *Count) = 0;
         
         virtual /* [restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **NewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **NewEnum) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace) = 0;
         
         virtual /* [helpstring][restricted][hidden][propget] */ HRESULT STDMETHODCALLTYPE get_EnumTuningSpaces( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumTuningSpaces **NewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumTuningSpaces **NewEnum) = 0;
         
     };
     
@@ -1265,8 +1260,7 @@ EXTERN_C const IID IID_ITuningSpaces;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITuningSpaces * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1281,31 +1275,23 @@ EXTERN_C const IID IID_ITuningSpaces;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITuningSpaces * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITuningSpaces * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITuningSpaces * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1330,28 +1316,23 @@ EXTERN_C const IID IID_ITuningSpaces;
         DECLSPEC_XFGVIRT(ITuningSpaces, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ITuningSpaces * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count);
+            /* [retval][out] */ __RPC__out long *Count);
         
         DECLSPEC_XFGVIRT(ITuningSpaces, get__NewEnum)
         /* [restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ITuningSpaces * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **NewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **NewEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpaces, get_Item)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ITuningSpaces * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuningSpaces, get_EnumTuningSpaces)
         /* [helpstring][restricted][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumTuningSpaces )( 
             __RPC__in ITuningSpaces * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumTuningSpaces **NewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumTuningSpaces **NewEnum);
         
         END_INTERFACE
     } ITuningSpacesVtbl;
@@ -1428,70 +1409,50 @@ EXTERN_C const IID IID_ITuningSpaceContainer;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count) = 0;
+            /* [retval][out] */ __RPC__out long *Count) = 0;
         
         virtual /* [restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **NewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **NewEnum) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace) = 0;
         
         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE TuningSpacesForCLSID( 
-            /* [annotation][in] */ 
-            _In_  BSTR SpaceCLSID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpaces **NewColl) = 0;
+            /* [in] */ __RPC__in BSTR SpaceCLSID,
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpaces **NewColl) = 0;
         
         virtual /* [helpstring][restricted][hidden] */ HRESULT STDMETHODCALLTYPE _TuningSpacesForCLSID( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID SpaceCLSID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpaces **NewColl) = 0;
+            /* [in] */ __RPC__in REFCLSID SpaceCLSID,
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpaces **NewColl) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE TuningSpacesForName( 
-            /* [annotation][in] */ 
-            _In_  BSTR Name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpaces **NewColl) = 0;
+            /* [in] */ __RPC__in BSTR Name,
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpaces **NewColl) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE FindID( 
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ID) = 0;
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace,
+            /* [retval][out] */ __RPC__out long *ID) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *NewIndex) = 0;
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace,
+            /* [retval][out] */ __RPC__out VARIANT *NewIndex) = 0;
         
         virtual /* [helpstring][restricted][hidden][propget] */ HRESULT STDMETHODCALLTYPE get_EnumTuningSpaces( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumTuningSpaces **ppEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumTuningSpaces **ppEnum) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [annotation][in] */ 
-            _In_  VARIANT Index) = 0;
+            /* [in] */ VARIANT Index) = 0;
         
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_MaxCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxCount) = 0;
+            /* [retval][out] */ __RPC__out long *MaxCount) = 0;
         
         virtual /* [helpstring][restricted][hidden][propput] */ HRESULT STDMETHODCALLTYPE put_MaxCount( 
-            /* [annotation][in] */ 
-            _In_  long MaxCount) = 0;
+            /* [in] */ long MaxCount) = 0;
         
     };
     
@@ -1505,8 +1466,7 @@ EXTERN_C const IID IID_ITuningSpaceContainer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1521,31 +1481,23 @@ EXTERN_C const IID IID_ITuningSpaceContainer;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1570,94 +1522,74 @@ EXTERN_C const IID IID_ITuningSpaceContainer;
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count);
+            /* [retval][out] */ __RPC__out long *Count);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, get__NewEnum)
         /* [restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **NewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **NewEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, get_Item)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, put_Item)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Item )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace);
+            /* [in] */ VARIANT varIndex,
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, TuningSpacesForCLSID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TuningSpacesForCLSID )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  BSTR SpaceCLSID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpaces **NewColl);
+            /* [in] */ __RPC__in BSTR SpaceCLSID,
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpaces **NewColl);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, _TuningSpacesForCLSID)
         /* [helpstring][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *_TuningSpacesForCLSID )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID SpaceCLSID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpaces **NewColl);
+            /* [in] */ __RPC__in REFCLSID SpaceCLSID,
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpaces **NewColl);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, TuningSpacesForName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TuningSpacesForName )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpaces **NewColl);
+            /* [in] */ __RPC__in BSTR Name,
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpaces **NewColl);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, FindID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *FindID )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ID);
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace,
+            /* [retval][out] */ __RPC__out long *ID);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *NewIndex);
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace,
+            /* [retval][out] */ __RPC__out VARIANT *NewIndex);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, get_EnumTuningSpaces)
         /* [helpstring][restricted][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumTuningSpaces )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumTuningSpaces **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumTuningSpaces **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Index);
+            /* [in] */ VARIANT Index);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, get_MaxCount)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxCount )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxCount);
+            /* [retval][out] */ __RPC__out long *MaxCount);
         
         DECLSPEC_XFGVIRT(ITuningSpaceContainer, put_MaxCount)
         /* [helpstring][restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxCount )( 
             __RPC__in ITuningSpaceContainer * This,
-            /* [annotation][in] */ 
-            _In_  long MaxCount);
+            /* [in] */ long MaxCount);
         
         END_INTERFACE
     } ITuningSpaceContainerVtbl;
@@ -1761,79 +1693,61 @@ EXTERN_C const IID IID_ITuningSpace;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UniqueName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_UniqueName( 
-            /* [annotation][in] */ 
-            _In_  BSTR Name) = 0;
+            /* [in] */ __RPC__in BSTR Name) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FriendlyName( 
-            /* [annotation][in] */ 
-            _In_  BSTR Name) = 0;
+            /* [in] */ __RPC__in BSTR Name) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CLSID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetworkType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_NetworkType( 
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid) = 0;
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid) = 0;
         
         virtual /* [restricted][hidden][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NetworkType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid) = 0;
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid) = 0;
         
         virtual /* [restricted][hidden][helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put__NetworkType( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid) = 0;
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTuneRequest( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest) = 0;
         
         virtual /* [restricted][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumCategoryGUIDs( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum) = 0;
         
         virtual /* [restricted][hidden][id] */ HRESULT STDMETHODCALLTYPE EnumDeviceMonikers( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DefaultPreferredComponentTypes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DefaultPreferredComponentTypes( 
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes) = 0;
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_FrequencyMapping( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_FrequencyMapping( 
             __RPC__in BSTR Mapping) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_DefaultLocator( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_DefaultLocator( 
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal) = 0;
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS) = 0;
         
     };
     
@@ -1847,8 +1761,7 @@ EXTERN_C const IID IID_ITuningSpace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1863,31 +1776,23 @@ EXTERN_C const IID IID_ITuningSpace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1912,92 +1817,77 @@ EXTERN_C const IID IID_ITuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -2007,20 +1897,17 @@ EXTERN_C const IID IID_ITuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in ITuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         END_INTERFACE
     } ITuningSpaceVtbl;
@@ -2142,22 +2029,17 @@ EXTERN_C const IID IID_IEnumTuningSpaces;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  ITuningSpace **rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) ITuningSpace **rgelt,
+            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumTuningSpaces **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumTuningSpaces **ppEnum) = 0;
         
     };
     
@@ -2171,8 +2053,7 @@ EXTERN_C const IID IID_IEnumTuningSpaces;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumTuningSpaces * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2187,18 +2068,14 @@ EXTERN_C const IID IID_IEnumTuningSpaces;
         DECLSPEC_XFGVIRT(IEnumTuningSpaces, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumTuningSpaces * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  ITuningSpace **rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) ITuningSpace **rgelt,
+            /* [out] */ __RPC__out ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumTuningSpaces, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumTuningSpaces * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumTuningSpaces, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2207,8 +2084,7 @@ EXTERN_C const IID IID_IEnumTuningSpaces;
         DECLSPEC_XFGVIRT(IEnumTuningSpaces, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumTuningSpaces * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumTuningSpaces **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumTuningSpaces **ppEnum);
         
         END_INTERFACE
     } IEnumTuningSpacesVtbl;
@@ -2272,12 +2148,10 @@ EXTERN_C const IID IID_IDVBTuningSpace;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SystemType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DVBSystemType *SysType) = 0;
+            /* [retval][out] */ __RPC__out DVBSystemType *SysType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SystemType( 
-            /* [annotation][in] */ 
-            _In_  DVBSystemType SysType) = 0;
+            /* [in] */ DVBSystemType SysType) = 0;
         
     };
     
@@ -2291,8 +2165,7 @@ EXTERN_C const IID IID_IDVBTuningSpace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2307,31 +2180,23 @@ EXTERN_C const IID IID_IDVBTuningSpace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2356,92 +2221,77 @@ EXTERN_C const IID IID_IDVBTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -2451,32 +2301,27 @@ EXTERN_C const IID IID_IDVBTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         DECLSPEC_XFGVIRT(IDVBTuningSpace, get_SystemType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SystemType )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DVBSystemType *SysType);
+            /* [retval][out] */ __RPC__out DVBSystemType *SysType);
         
         DECLSPEC_XFGVIRT(IDVBTuningSpace, put_SystemType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SystemType )( 
             __RPC__in IDVBTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  DVBSystemType SysType);
+            /* [in] */ DVBSystemType SysType);
         
         END_INTERFACE
     } IDVBTuningSpaceVtbl;
@@ -2605,12 +2450,10 @@ EXTERN_C const IID IID_IDVBTuningSpace2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetworkID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *NetworkID) = 0;
+            /* [retval][out] */ __RPC__out long *NetworkID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_NetworkID( 
-            /* [annotation][in] */ 
-            _In_  long NetworkID) = 0;
+            /* [in] */ long NetworkID) = 0;
         
     };
     
@@ -2624,8 +2467,7 @@ EXTERN_C const IID IID_IDVBTuningSpace2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2640,31 +2482,23 @@ EXTERN_C const IID IID_IDVBTuningSpace2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2689,92 +2523,77 @@ EXTERN_C const IID IID_IDVBTuningSpace2;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -2784,44 +2603,37 @@ EXTERN_C const IID IID_IDVBTuningSpace2;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         DECLSPEC_XFGVIRT(IDVBTuningSpace, get_SystemType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SystemType )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DVBSystemType *SysType);
+            /* [retval][out] */ __RPC__out DVBSystemType *SysType);
         
         DECLSPEC_XFGVIRT(IDVBTuningSpace, put_SystemType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SystemType )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  DVBSystemType SysType);
+            /* [in] */ DVBSystemType SysType);
         
         DECLSPEC_XFGVIRT(IDVBTuningSpace2, get_NetworkID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkID )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *NetworkID);
+            /* [retval][out] */ __RPC__out long *NetworkID);
         
         DECLSPEC_XFGVIRT(IDVBTuningSpace2, put_NetworkID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkID )( 
             __RPC__in IDVBTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  long NetworkID);
+            /* [in] */ long NetworkID);
         
         END_INTERFACE
     } IDVBTuningSpace2Vtbl;
@@ -2957,44 +2769,34 @@ EXTERN_C const IID IID_IDVBSTuningSpace;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LowOscillator( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LowOscillator) = 0;
+            /* [retval][out] */ __RPC__out long *LowOscillator) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LowOscillator( 
-            /* [annotation][in] */ 
-            _In_  long LowOscillator) = 0;
+            /* [in] */ long LowOscillator) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HighOscillator( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *HighOscillator) = 0;
+            /* [retval][out] */ __RPC__out long *HighOscillator) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_HighOscillator( 
-            /* [annotation][in] */ 
-            _In_  long HighOscillator) = 0;
+            /* [in] */ long HighOscillator) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LNBSwitch( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LNBSwitch) = 0;
+            /* [retval][out] */ __RPC__out long *LNBSwitch) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LNBSwitch( 
-            /* [annotation][in] */ 
-            _In_  long LNBSwitch) = 0;
+            /* [in] */ long LNBSwitch) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InputRange( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *InputRange) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *InputRange) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InputRange( 
-            /* [annotation][in] */ 
-            _In_  BSTR InputRange) = 0;
+            /* [in] */ __RPC__in BSTR InputRange) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SpectralInversion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SpectralInversion *SpectralInversionVal) = 0;
+            /* [retval][out] */ __RPC__out SpectralInversion *SpectralInversionVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SpectralInversion( 
-            /* [annotation][in] */ 
-            _In_  SpectralInversion SpectralInversionVal) = 0;
+            /* [in] */ SpectralInversion SpectralInversionVal) = 0;
         
     };
     
@@ -3008,8 +2810,7 @@ EXTERN_C const IID IID_IDVBSTuningSpace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3024,31 +2825,23 @@ EXTERN_C const IID IID_IDVBSTuningSpace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3073,92 +2866,77 @@ EXTERN_C const IID IID_IDVBSTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -3168,104 +2946,87 @@ EXTERN_C const IID IID_IDVBSTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         DECLSPEC_XFGVIRT(IDVBTuningSpace, get_SystemType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SystemType )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DVBSystemType *SysType);
+            /* [retval][out] */ __RPC__out DVBSystemType *SysType);
         
         DECLSPEC_XFGVIRT(IDVBTuningSpace, put_SystemType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SystemType )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  DVBSystemType SysType);
+            /* [in] */ DVBSystemType SysType);
         
         DECLSPEC_XFGVIRT(IDVBTuningSpace2, get_NetworkID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkID )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *NetworkID);
+            /* [retval][out] */ __RPC__out long *NetworkID);
         
         DECLSPEC_XFGVIRT(IDVBTuningSpace2, put_NetworkID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkID )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NetworkID);
+            /* [in] */ long NetworkID);
         
         DECLSPEC_XFGVIRT(IDVBSTuningSpace, get_LowOscillator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LowOscillator )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LowOscillator);
+            /* [retval][out] */ __RPC__out long *LowOscillator);
         
         DECLSPEC_XFGVIRT(IDVBSTuningSpace, put_LowOscillator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LowOscillator )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long LowOscillator);
+            /* [in] */ long LowOscillator);
         
         DECLSPEC_XFGVIRT(IDVBSTuningSpace, get_HighOscillator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HighOscillator )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *HighOscillator);
+            /* [retval][out] */ __RPC__out long *HighOscillator);
         
         DECLSPEC_XFGVIRT(IDVBSTuningSpace, put_HighOscillator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_HighOscillator )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long HighOscillator);
+            /* [in] */ long HighOscillator);
         
         DECLSPEC_XFGVIRT(IDVBSTuningSpace, get_LNBSwitch)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LNBSwitch )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LNBSwitch);
+            /* [retval][out] */ __RPC__out long *LNBSwitch);
         
         DECLSPEC_XFGVIRT(IDVBSTuningSpace, put_LNBSwitch)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LNBSwitch )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long LNBSwitch);
+            /* [in] */ long LNBSwitch);
         
         DECLSPEC_XFGVIRT(IDVBSTuningSpace, get_InputRange)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InputRange )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *InputRange);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *InputRange);
         
         DECLSPEC_XFGVIRT(IDVBSTuningSpace, put_InputRange)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InputRange )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR InputRange);
+            /* [in] */ __RPC__in BSTR InputRange);
         
         DECLSPEC_XFGVIRT(IDVBSTuningSpace, get_SpectralInversion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SpectralInversion )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SpectralInversion *SpectralInversionVal);
+            /* [retval][out] */ __RPC__out SpectralInversion *SpectralInversionVal);
         
         DECLSPEC_XFGVIRT(IDVBSTuningSpace, put_SpectralInversion)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SpectralInversion )( 
             __RPC__in IDVBSTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  SpectralInversion SpectralInversionVal);
+            /* [in] */ SpectralInversion SpectralInversionVal);
         
         END_INTERFACE
     } IDVBSTuningSpaceVtbl;
@@ -3443,8 +3204,7 @@ EXTERN_C const IID IID_IAuxInTuningSpace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3459,31 +3219,23 @@ EXTERN_C const IID IID_IAuxInTuningSpace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3508,92 +3260,77 @@ EXTERN_C const IID IID_IAuxInTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -3603,20 +3340,17 @@ EXTERN_C const IID IID_IAuxInTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IAuxInTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         END_INTERFACE
     } IAuxInTuningSpaceVtbl;
@@ -3739,12 +3473,10 @@ EXTERN_C const IID IID_IAuxInTuningSpace2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CountryCode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *CountryCodeVal) = 0;
+            /* [retval][out] */ __RPC__out long *CountryCodeVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CountryCode( 
-            /* [annotation][in] */ 
-            _In_  long NewCountryCodeVal) = 0;
+            /* [in] */ long NewCountryCodeVal) = 0;
         
     };
     
@@ -3758,8 +3490,7 @@ EXTERN_C const IID IID_IAuxInTuningSpace2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3774,31 +3505,23 @@ EXTERN_C const IID IID_IAuxInTuningSpace2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3823,92 +3546,77 @@ EXTERN_C const IID IID_IAuxInTuningSpace2;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -3918,32 +3626,27 @@ EXTERN_C const IID IID_IAuxInTuningSpace2;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         DECLSPEC_XFGVIRT(IAuxInTuningSpace2, get_CountryCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryCode )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *CountryCodeVal);
+            /* [retval][out] */ __RPC__out long *CountryCodeVal);
         
         DECLSPEC_XFGVIRT(IAuxInTuningSpace2, put_CountryCode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CountryCode )( 
             __RPC__in IAuxInTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  long NewCountryCodeVal);
+            /* [in] */ long NewCountryCodeVal);
         
         END_INTERFACE
     } IAuxInTuningSpace2Vtbl;
@@ -4073,36 +3776,28 @@ EXTERN_C const IID IID_IAnalogTVTuningSpace;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MinChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinChannelVal) = 0;
+            /* [retval][out] */ __RPC__out long *MinChannelVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MinChannel( 
-            /* [annotation][in] */ 
-            _In_  long NewMinChannelVal) = 0;
+            /* [in] */ long NewMinChannelVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MaxChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxChannelVal) = 0;
+            /* [retval][out] */ __RPC__out long *MaxChannelVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MaxChannel( 
-            /* [annotation][in] */ 
-            _In_  long NewMaxChannelVal) = 0;
+            /* [in] */ long NewMaxChannelVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InputType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TunerInputType *InputTypeVal) = 0;
+            /* [retval][out] */ __RPC__out TunerInputType *InputTypeVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InputType( 
-            /* [annotation][in] */ 
-            _In_  TunerInputType NewInputTypeVal) = 0;
+            /* [in] */ TunerInputType NewInputTypeVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CountryCode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *CountryCodeVal) = 0;
+            /* [retval][out] */ __RPC__out long *CountryCodeVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CountryCode( 
-            /* [annotation][in] */ 
-            _In_  long NewCountryCodeVal) = 0;
+            /* [in] */ long NewCountryCodeVal) = 0;
         
     };
     
@@ -4116,8 +3811,7 @@ EXTERN_C const IID IID_IAnalogTVTuningSpace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4132,31 +3826,23 @@ EXTERN_C const IID IID_IAnalogTVTuningSpace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4181,92 +3867,77 @@ EXTERN_C const IID IID_IAnalogTVTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -4276,68 +3947,57 @@ EXTERN_C const IID IID_IAnalogTVTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_MinChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinChannel )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinChannelVal);
+            /* [retval][out] */ __RPC__out long *MinChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_MinChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinChannel )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinChannelVal);
+            /* [in] */ long NewMinChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_MaxChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxChannel )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxChannelVal);
+            /* [retval][out] */ __RPC__out long *MaxChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_MaxChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxChannel )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxChannelVal);
+            /* [in] */ long NewMaxChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_InputType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InputType )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TunerInputType *InputTypeVal);
+            /* [retval][out] */ __RPC__out TunerInputType *InputTypeVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_InputType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InputType )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  TunerInputType NewInputTypeVal);
+            /* [in] */ TunerInputType NewInputTypeVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_CountryCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryCode )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *CountryCodeVal);
+            /* [retval][out] */ __RPC__out long *CountryCodeVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_CountryCode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CountryCode )( 
             __RPC__in IAnalogTVTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewCountryCodeVal);
+            /* [in] */ long NewCountryCodeVal);
         
         END_INTERFACE
     } IAnalogTVTuningSpaceVtbl;
@@ -4484,36 +4144,28 @@ EXTERN_C const IID IID_IATSCTuningSpace;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MinMinorChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinMinorChannelVal) = 0;
+            /* [retval][out] */ __RPC__out long *MinMinorChannelVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MinMinorChannel( 
-            /* [annotation][in] */ 
-            _In_  long NewMinMinorChannelVal) = 0;
+            /* [in] */ long NewMinMinorChannelVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MaxMinorChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxMinorChannelVal) = 0;
+            /* [retval][out] */ __RPC__out long *MaxMinorChannelVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MaxMinorChannel( 
-            /* [annotation][in] */ 
-            _In_  long NewMaxMinorChannelVal) = 0;
+            /* [in] */ long NewMaxMinorChannelVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MinPhysicalChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinPhysicalChannelVal) = 0;
+            /* [retval][out] */ __RPC__out long *MinPhysicalChannelVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MinPhysicalChannel( 
-            /* [annotation][in] */ 
-            _In_  long NewMinPhysicalChannelVal) = 0;
+            /* [in] */ long NewMinPhysicalChannelVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MaxPhysicalChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxPhysicalChannelVal) = 0;
+            /* [retval][out] */ __RPC__out long *MaxPhysicalChannelVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MaxPhysicalChannel( 
-            /* [annotation][in] */ 
-            _In_  long NewMaxPhysicalChannelVal) = 0;
+            /* [in] */ long NewMaxPhysicalChannelVal) = 0;
         
     };
     
@@ -4527,8 +4179,7 @@ EXTERN_C const IID IID_IATSCTuningSpace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4543,31 +4194,23 @@ EXTERN_C const IID IID_IATSCTuningSpace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4592,92 +4235,77 @@ EXTERN_C const IID IID_IATSCTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -4687,116 +4315,97 @@ EXTERN_C const IID IID_IATSCTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_MinChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinChannelVal);
+            /* [retval][out] */ __RPC__out long *MinChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_MinChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinChannelVal);
+            /* [in] */ long NewMinChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_MaxChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxChannelVal);
+            /* [retval][out] */ __RPC__out long *MaxChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_MaxChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxChannelVal);
+            /* [in] */ long NewMaxChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_InputType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InputType )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TunerInputType *InputTypeVal);
+            /* [retval][out] */ __RPC__out TunerInputType *InputTypeVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_InputType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InputType )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  TunerInputType NewInputTypeVal);
+            /* [in] */ TunerInputType NewInputTypeVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_CountryCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryCode )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *CountryCodeVal);
+            /* [retval][out] */ __RPC__out long *CountryCodeVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_CountryCode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CountryCode )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewCountryCodeVal);
+            /* [in] */ long NewCountryCodeVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, get_MinMinorChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinMinorChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinMinorChannelVal);
+            /* [retval][out] */ __RPC__out long *MinMinorChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, put_MinMinorChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinMinorChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinMinorChannelVal);
+            /* [in] */ long NewMinMinorChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, get_MaxMinorChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxMinorChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxMinorChannelVal);
+            /* [retval][out] */ __RPC__out long *MaxMinorChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, put_MaxMinorChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxMinorChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxMinorChannelVal);
+            /* [in] */ long NewMaxMinorChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, get_MinPhysicalChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinPhysicalChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinPhysicalChannelVal);
+            /* [retval][out] */ __RPC__out long *MinPhysicalChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, put_MinPhysicalChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinPhysicalChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinPhysicalChannelVal);
+            /* [in] */ long NewMinPhysicalChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, get_MaxPhysicalChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxPhysicalChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxPhysicalChannelVal);
+            /* [retval][out] */ __RPC__out long *MaxPhysicalChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, put_MaxPhysicalChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxPhysicalChannel )( 
             __RPC__in IATSCTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxPhysicalChannelVal);
+            /* [in] */ long NewMaxPhysicalChannelVal);
         
         END_INTERFACE
     } IATSCTuningSpaceVtbl;
@@ -4968,36 +4577,28 @@ EXTERN_C const IID IID_IDigitalCableTuningSpace;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MinMajorChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinMajorChannelVal) = 0;
+            /* [retval][out] */ __RPC__out long *MinMajorChannelVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MinMajorChannel( 
-            /* [annotation][in] */ 
-            _In_  long NewMinMajorChannelVal) = 0;
+            /* [in] */ long NewMinMajorChannelVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MaxMajorChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxMajorChannelVal) = 0;
+            /* [retval][out] */ __RPC__out long *MaxMajorChannelVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MaxMajorChannel( 
-            /* [annotation][in] */ 
-            _In_  long NewMaxMajorChannelVal) = 0;
+            /* [in] */ long NewMaxMajorChannelVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MinSourceID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinSourceIDVal) = 0;
+            /* [retval][out] */ __RPC__out long *MinSourceIDVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MinSourceID( 
-            /* [annotation][in] */ 
-            _In_  long NewMinSourceIDVal) = 0;
+            /* [in] */ long NewMinSourceIDVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MaxSourceID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxSourceIDVal) = 0;
+            /* [retval][out] */ __RPC__out long *MaxSourceIDVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MaxSourceID( 
-            /* [annotation][in] */ 
-            _In_  long NewMaxSourceIDVal) = 0;
+            /* [in] */ long NewMaxSourceIDVal) = 0;
         
     };
     
@@ -5011,8 +4612,7 @@ EXTERN_C const IID IID_IDigitalCableTuningSpace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5027,31 +4627,23 @@ EXTERN_C const IID IID_IDigitalCableTuningSpace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5076,92 +4668,77 @@ EXTERN_C const IID IID_IDigitalCableTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -5171,164 +4748,137 @@ EXTERN_C const IID IID_IDigitalCableTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_MinChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinChannelVal);
+            /* [retval][out] */ __RPC__out long *MinChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_MinChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinChannelVal);
+            /* [in] */ long NewMinChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_MaxChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxChannelVal);
+            /* [retval][out] */ __RPC__out long *MaxChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_MaxChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxChannelVal);
+            /* [in] */ long NewMaxChannelVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_InputType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InputType )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TunerInputType *InputTypeVal);
+            /* [retval][out] */ __RPC__out TunerInputType *InputTypeVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_InputType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InputType )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  TunerInputType NewInputTypeVal);
+            /* [in] */ TunerInputType NewInputTypeVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, get_CountryCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryCode )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *CountryCodeVal);
+            /* [retval][out] */ __RPC__out long *CountryCodeVal);
         
         DECLSPEC_XFGVIRT(IAnalogTVTuningSpace, put_CountryCode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CountryCode )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewCountryCodeVal);
+            /* [in] */ long NewCountryCodeVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, get_MinMinorChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinMinorChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinMinorChannelVal);
+            /* [retval][out] */ __RPC__out long *MinMinorChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, put_MinMinorChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinMinorChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinMinorChannelVal);
+            /* [in] */ long NewMinMinorChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, get_MaxMinorChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxMinorChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxMinorChannelVal);
+            /* [retval][out] */ __RPC__out long *MaxMinorChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, put_MaxMinorChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxMinorChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxMinorChannelVal);
+            /* [in] */ long NewMaxMinorChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, get_MinPhysicalChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinPhysicalChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinPhysicalChannelVal);
+            /* [retval][out] */ __RPC__out long *MinPhysicalChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, put_MinPhysicalChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinPhysicalChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinPhysicalChannelVal);
+            /* [in] */ long NewMinPhysicalChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, get_MaxPhysicalChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxPhysicalChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxPhysicalChannelVal);
+            /* [retval][out] */ __RPC__out long *MaxPhysicalChannelVal);
         
         DECLSPEC_XFGVIRT(IATSCTuningSpace, put_MaxPhysicalChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxPhysicalChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxPhysicalChannelVal);
+            /* [in] */ long NewMaxPhysicalChannelVal);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuningSpace, get_MinMajorChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinMajorChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinMajorChannelVal);
+            /* [retval][out] */ __RPC__out long *MinMajorChannelVal);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuningSpace, put_MinMajorChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinMajorChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinMajorChannelVal);
+            /* [in] */ long NewMinMajorChannelVal);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuningSpace, get_MaxMajorChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxMajorChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxMajorChannelVal);
+            /* [retval][out] */ __RPC__out long *MaxMajorChannelVal);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuningSpace, put_MaxMajorChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxMajorChannel )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxMajorChannelVal);
+            /* [in] */ long NewMaxMajorChannelVal);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuningSpace, get_MinSourceID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinSourceID )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinSourceIDVal);
+            /* [retval][out] */ __RPC__out long *MinSourceIDVal);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuningSpace, put_MinSourceID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinSourceID )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinSourceIDVal);
+            /* [in] */ long NewMinSourceIDVal);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuningSpace, get_MaxSourceID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxSourceID )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxSourceIDVal);
+            /* [retval][out] */ __RPC__out long *MaxSourceIDVal);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuningSpace, put_MaxSourceID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxSourceID )( 
             __RPC__in IDigitalCableTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxSourceIDVal);
+            /* [in] */ long NewMaxSourceIDVal);
         
         END_INTERFACE
     } IDigitalCableTuningSpaceVtbl;
@@ -5525,28 +5075,22 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MinFrequency( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinFrequencyVal) = 0;
+            /* [retval][out] */ __RPC__out long *MinFrequencyVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MinFrequency( 
-            /* [annotation][in] */ 
-            _In_  long NewMinFrequencyVal) = 0;
+            /* [in] */ long NewMinFrequencyVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MaxFrequency( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxFrequencyVal) = 0;
+            /* [retval][out] */ __RPC__out long *MaxFrequencyVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MaxFrequency( 
-            /* [annotation][in] */ 
-            _In_  long NewMaxFrequencyVal) = 0;
+            /* [in] */ long NewMaxFrequencyVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Step( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *StepVal) = 0;
+            /* [retval][out] */ __RPC__out long *StepVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Step( 
-            /* [annotation][in] */ 
-            _In_  long NewStepVal) = 0;
+            /* [in] */ long NewStepVal) = 0;
         
     };
     
@@ -5560,8 +5104,7 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5576,31 +5119,23 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5625,92 +5160,77 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -5720,56 +5240,47 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, get_MinFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinFrequency )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinFrequencyVal);
+            /* [retval][out] */ __RPC__out long *MinFrequencyVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, put_MinFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinFrequency )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinFrequencyVal);
+            /* [in] */ long NewMinFrequencyVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, get_MaxFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxFrequency )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxFrequencyVal);
+            /* [retval][out] */ __RPC__out long *MaxFrequencyVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, put_MaxFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxFrequency )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxFrequencyVal);
+            /* [in] */ long NewMaxFrequencyVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, get_Step)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Step )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *StepVal);
+            /* [retval][out] */ __RPC__out long *StepVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, put_Step)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Step )( 
             __RPC__in IAnalogRadioTuningSpace * This,
-            /* [annotation][in] */ 
-            _In_  long NewStepVal);
+            /* [in] */ long NewStepVal);
         
         END_INTERFACE
     } IAnalogRadioTuningSpaceVtbl;
@@ -5910,12 +5421,10 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CountryCode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *CountryCodeVal) = 0;
+            /* [retval][out] */ __RPC__out long *CountryCodeVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CountryCode( 
-            /* [annotation][in] */ 
-            _In_  long NewCountryCodeVal) = 0;
+            /* [in] */ long NewCountryCodeVal) = 0;
         
     };
     
@@ -5929,8 +5438,7 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5945,31 +5453,23 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5994,92 +5494,77 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace2;
         DECLSPEC_XFGVIRT(ITuningSpace, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_UniqueName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UniqueName )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Name);
+            /* [in] */ __RPC__in BSTR Name);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_CLSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CLSID )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *SpaceCLSID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *SpaceCLSID);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_NetworkType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkType )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_NetworkType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkType )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR NetworkTypeGuid);
+            /* [in] */ __RPC__in BSTR NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get__NetworkType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NetworkType )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *NetworkTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put__NetworkType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__NetworkType )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID NetworkTypeGuid);
+            /* [in] */ __RPC__in REFCLSID NetworkTypeGuid);
         
         DECLSPEC_XFGVIRT(ITuningSpace, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumCategoryGUIDs)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumCategoryGUIDs )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGUID **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGUID **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, EnumDeviceMonikers)
         /* [restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *EnumDeviceMonikers )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumMoniker **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumMoniker **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultPreferredComponentTypes)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultPreferredComponentTypes )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultPreferredComponentTypes)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultPreferredComponentTypes )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *NewComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *NewComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuningSpace, get_FrequencyMapping)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pMapping);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pMapping);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_FrequencyMapping)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
@@ -6089,68 +5574,57 @@ EXTERN_C const IID IID_IAnalogRadioTuningSpace2;
         DECLSPEC_XFGVIRT(ITuningSpace, get_DefaultLocator)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultLocator )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **LocatorVal);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, put_DefaultLocator)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DefaultLocator )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *LocatorVal);
+            /* [in] */ __RPC__in_opt ILocator *LocatorVal);
         
         DECLSPEC_XFGVIRT(ITuningSpace, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **NewTS);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **NewTS);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, get_MinFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinFrequency )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinFrequencyVal);
+            /* [retval][out] */ __RPC__out long *MinFrequencyVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, put_MinFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinFrequency )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  long NewMinFrequencyVal);
+            /* [in] */ long NewMinFrequencyVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, get_MaxFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxFrequency )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MaxFrequencyVal);
+            /* [retval][out] */ __RPC__out long *MaxFrequencyVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, put_MaxFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxFrequency )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  long NewMaxFrequencyVal);
+            /* [in] */ long NewMaxFrequencyVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, get_Step)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Step )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *StepVal);
+            /* [retval][out] */ __RPC__out long *StepVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace, put_Step)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Step )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  long NewStepVal);
+            /* [in] */ long NewStepVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace2, get_CountryCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryCode )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *CountryCodeVal);
+            /* [retval][out] */ __RPC__out long *CountryCodeVal);
         
         DECLSPEC_XFGVIRT(IAnalogRadioTuningSpace2, put_CountryCode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CountryCode )( 
             __RPC__in IAnalogRadioTuningSpace2 * This,
-            /* [annotation][in] */ 
-            _In_  long NewCountryCodeVal);
+            /* [in] */ long NewCountryCodeVal);
         
         END_INTERFACE
     } IAnalogRadioTuningSpace2Vtbl;
@@ -6298,24 +5772,19 @@ EXTERN_C const IID IID_ITuneRequest;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TuningSpace( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Components( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **Components) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **Components) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **NewTuneRequest) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **NewTuneRequest) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Locator( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **Locator) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **Locator) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Locator( 
-            /* [annotation][in] */ 
-            _In_  ILocator *Locator) = 0;
+            /* [in] */ __RPC__in_opt ILocator *Locator) = 0;
         
     };
     
@@ -6329,8 +5798,7 @@ EXTERN_C const IID IID_ITuneRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6345,31 +5813,23 @@ EXTERN_C const IID IID_ITuneRequest;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITuneRequest * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6394,32 +5854,27 @@ EXTERN_C const IID IID_ITuneRequest;
         DECLSPEC_XFGVIRT(ITuneRequest, get_TuningSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuningSpace )( 
             __RPC__in ITuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Components)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Components )( 
             __RPC__in ITuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **Components);
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **Components);
         
         DECLSPEC_XFGVIRT(ITuneRequest, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in ITuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **NewTuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **NewTuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Locator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Locator )( 
             __RPC__in ITuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **Locator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **Locator);
         
         DECLSPEC_XFGVIRT(ITuneRequest, put_Locator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Locator )( 
             __RPC__in ITuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *Locator);
+            /* [in] */ __RPC__in_opt ILocator *Locator);
         
         END_INTERFACE
     } ITuneRequestVtbl;
@@ -6499,12 +5954,10 @@ EXTERN_C const IID IID_IChannelIDTuneRequest;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ChannelID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *ChannelID) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *ChannelID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ChannelID( 
-            /* [annotation][in] */ 
-            _In_  BSTR ChannelID) = 0;
+            /* [in] */ __RPC__in BSTR ChannelID) = 0;
         
     };
     
@@ -6518,8 +5971,7 @@ EXTERN_C const IID IID_IChannelIDTuneRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6534,31 +5986,23 @@ EXTERN_C const IID IID_IChannelIDTuneRequest;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6583,44 +6027,37 @@ EXTERN_C const IID IID_IChannelIDTuneRequest;
         DECLSPEC_XFGVIRT(ITuneRequest, get_TuningSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuningSpace )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Components)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Components )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **Components);
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **Components);
         
         DECLSPEC_XFGVIRT(ITuneRequest, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **NewTuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **NewTuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Locator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Locator )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **Locator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **Locator);
         
         DECLSPEC_XFGVIRT(ITuneRequest, put_Locator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Locator )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *Locator);
+            /* [in] */ __RPC__in_opt ILocator *Locator);
         
         DECLSPEC_XFGVIRT(IChannelIDTuneRequest, get_ChannelID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChannelID )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *ChannelID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *ChannelID);
         
         DECLSPEC_XFGVIRT(IChannelIDTuneRequest, put_ChannelID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ChannelID )( 
             __RPC__in IChannelIDTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  BSTR ChannelID);
+            /* [in] */ __RPC__in BSTR ChannelID);
         
         END_INTERFACE
     } IChannelIDTuneRequestVtbl;
@@ -6707,12 +6144,10 @@ EXTERN_C const IID IID_IChannelTuneRequest;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Channel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Channel) = 0;
+            /* [retval][out] */ __RPC__out long *Channel) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Channel( 
-            /* [annotation][in] */ 
-            _In_  long Channel) = 0;
+            /* [in] */ long Channel) = 0;
         
     };
     
@@ -6726,8 +6161,7 @@ EXTERN_C const IID IID_IChannelTuneRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6742,31 +6176,23 @@ EXTERN_C const IID IID_IChannelTuneRequest;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6791,44 +6217,37 @@ EXTERN_C const IID IID_IChannelTuneRequest;
         DECLSPEC_XFGVIRT(ITuneRequest, get_TuningSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuningSpace )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Components)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Components )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **Components);
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **Components);
         
         DECLSPEC_XFGVIRT(ITuneRequest, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **NewTuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **NewTuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Locator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Locator )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **Locator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **Locator);
         
         DECLSPEC_XFGVIRT(ITuneRequest, put_Locator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Locator )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *Locator);
+            /* [in] */ __RPC__in_opt ILocator *Locator);
         
         DECLSPEC_XFGVIRT(IChannelTuneRequest, get_Channel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Channel )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Channel);
+            /* [retval][out] */ __RPC__out long *Channel);
         
         DECLSPEC_XFGVIRT(IChannelTuneRequest, put_Channel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Channel )( 
             __RPC__in IChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long Channel);
+            /* [in] */ long Channel);
         
         END_INTERFACE
     } IChannelTuneRequestVtbl;
@@ -6915,12 +6334,10 @@ EXTERN_C const IID IID_IATSCChannelTuneRequest;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MinorChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinorChannel) = 0;
+            /* [retval][out] */ __RPC__out long *MinorChannel) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MinorChannel( 
-            /* [annotation][in] */ 
-            _In_  long MinorChannel) = 0;
+            /* [in] */ long MinorChannel) = 0;
         
     };
     
@@ -6934,8 +6351,7 @@ EXTERN_C const IID IID_IATSCChannelTuneRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6950,31 +6366,23 @@ EXTERN_C const IID IID_IATSCChannelTuneRequest;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6999,56 +6407,47 @@ EXTERN_C const IID IID_IATSCChannelTuneRequest;
         DECLSPEC_XFGVIRT(ITuneRequest, get_TuningSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuningSpace )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Components)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Components )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **Components);
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **Components);
         
         DECLSPEC_XFGVIRT(ITuneRequest, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **NewTuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **NewTuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Locator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Locator )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **Locator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **Locator);
         
         DECLSPEC_XFGVIRT(ITuneRequest, put_Locator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Locator )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *Locator);
+            /* [in] */ __RPC__in_opt ILocator *Locator);
         
         DECLSPEC_XFGVIRT(IChannelTuneRequest, get_Channel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Channel )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Channel);
+            /* [retval][out] */ __RPC__out long *Channel);
         
         DECLSPEC_XFGVIRT(IChannelTuneRequest, put_Channel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Channel )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long Channel);
+            /* [in] */ long Channel);
         
         DECLSPEC_XFGVIRT(IATSCChannelTuneRequest, get_MinorChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorChannel )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinorChannel);
+            /* [retval][out] */ __RPC__out long *MinorChannel);
         
         DECLSPEC_XFGVIRT(IATSCChannelTuneRequest, put_MinorChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinorChannel )( 
             __RPC__in IATSCChannelTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long MinorChannel);
+            /* [in] */ long MinorChannel);
         
         END_INTERFACE
     } IATSCChannelTuneRequestVtbl;
@@ -7142,20 +6541,16 @@ EXTERN_C const IID IID_IDigitalCableTuneRequest;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MajorChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pMajorChannel) = 0;
+            /* [retval][out] */ __RPC__out long *pMajorChannel) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MajorChannel( 
-            /* [annotation][in] */ 
-            _In_  long MajorChannel) = 0;
+            /* [in] */ long MajorChannel) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SourceID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pSourceID) = 0;
+            /* [retval][out] */ __RPC__out long *pSourceID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SourceID( 
-            /* [annotation][in] */ 
-            _In_  long SourceID) = 0;
+            /* [in] */ long SourceID) = 0;
         
     };
     
@@ -7169,8 +6564,7 @@ EXTERN_C const IID IID_IDigitalCableTuneRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7185,31 +6579,23 @@ EXTERN_C const IID IID_IDigitalCableTuneRequest;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7234,80 +6620,67 @@ EXTERN_C const IID IID_IDigitalCableTuneRequest;
         DECLSPEC_XFGVIRT(ITuneRequest, get_TuningSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuningSpace )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Components)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Components )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **Components);
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **Components);
         
         DECLSPEC_XFGVIRT(ITuneRequest, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **NewTuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **NewTuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Locator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Locator )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **Locator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **Locator);
         
         DECLSPEC_XFGVIRT(ITuneRequest, put_Locator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Locator )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *Locator);
+            /* [in] */ __RPC__in_opt ILocator *Locator);
         
         DECLSPEC_XFGVIRT(IChannelTuneRequest, get_Channel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Channel )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Channel);
+            /* [retval][out] */ __RPC__out long *Channel);
         
         DECLSPEC_XFGVIRT(IChannelTuneRequest, put_Channel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Channel )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long Channel);
+            /* [in] */ long Channel);
         
         DECLSPEC_XFGVIRT(IATSCChannelTuneRequest, get_MinorChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorChannel )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *MinorChannel);
+            /* [retval][out] */ __RPC__out long *MinorChannel);
         
         DECLSPEC_XFGVIRT(IATSCChannelTuneRequest, put_MinorChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinorChannel )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long MinorChannel);
+            /* [in] */ long MinorChannel);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuneRequest, get_MajorChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorChannel )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pMajorChannel);
+            /* [retval][out] */ __RPC__out long *pMajorChannel);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuneRequest, put_MajorChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MajorChannel )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long MajorChannel);
+            /* [in] */ long MajorChannel);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuneRequest, get_SourceID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceID )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pSourceID);
+            /* [retval][out] */ __RPC__out long *pSourceID);
         
         DECLSPEC_XFGVIRT(IDigitalCableTuneRequest, put_SourceID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SourceID )( 
             __RPC__in IDigitalCableTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long SourceID);
+            /* [in] */ long SourceID);
         
         END_INTERFACE
     } IDigitalCableTuneRequestVtbl;
@@ -7414,28 +6787,22 @@ EXTERN_C const IID IID_IDVBTuneRequest;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ONID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ONID) = 0;
+            /* [retval][out] */ __RPC__out long *ONID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ONID( 
-            /* [annotation][in] */ 
-            _In_  long ONID) = 0;
+            /* [in] */ long ONID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TSID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *TSID) = 0;
+            /* [retval][out] */ __RPC__out long *TSID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TSID( 
-            /* [annotation][in] */ 
-            _In_  long TSID) = 0;
+            /* [in] */ long TSID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *SID) = 0;
+            /* [retval][out] */ __RPC__out long *SID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SID( 
-            /* [annotation][in] */ 
-            _In_  long SID) = 0;
+            /* [in] */ long SID) = 0;
         
     };
     
@@ -7449,8 +6816,7 @@ EXTERN_C const IID IID_IDVBTuneRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7465,31 +6831,23 @@ EXTERN_C const IID IID_IDVBTuneRequest;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7514,68 +6872,57 @@ EXTERN_C const IID IID_IDVBTuneRequest;
         DECLSPEC_XFGVIRT(ITuneRequest, get_TuningSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuningSpace )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Components)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Components )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **Components);
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **Components);
         
         DECLSPEC_XFGVIRT(ITuneRequest, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **NewTuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **NewTuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Locator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Locator )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **Locator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **Locator);
         
         DECLSPEC_XFGVIRT(ITuneRequest, put_Locator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Locator )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *Locator);
+            /* [in] */ __RPC__in_opt ILocator *Locator);
         
         DECLSPEC_XFGVIRT(IDVBTuneRequest, get_ONID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ONID )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ONID);
+            /* [retval][out] */ __RPC__out long *ONID);
         
         DECLSPEC_XFGVIRT(IDVBTuneRequest, put_ONID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ONID )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long ONID);
+            /* [in] */ long ONID);
         
         DECLSPEC_XFGVIRT(IDVBTuneRequest, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *TSID);
+            /* [retval][out] */ __RPC__out long *TSID);
         
         DECLSPEC_XFGVIRT(IDVBTuneRequest, put_TSID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TSID )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long TSID);
+            /* [in] */ long TSID);
         
         DECLSPEC_XFGVIRT(IDVBTuneRequest, get_SID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SID )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *SID);
+            /* [retval][out] */ __RPC__out long *SID);
         
         DECLSPEC_XFGVIRT(IDVBTuneRequest, put_SID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SID )( 
             __RPC__in IDVBTuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long SID);
+            /* [in] */ long SID);
         
         END_INTERFACE
     } IDVBTuneRequestVtbl;
@@ -7674,20 +7021,16 @@ EXTERN_C const IID IID_IMPEG2TuneRequest;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TSID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *TSID) = 0;
+            /* [retval][out] */ __RPC__out long *TSID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TSID( 
-            /* [annotation][in] */ 
-            _In_  long TSID) = 0;
+            /* [in] */ long TSID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProgNo( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ProgNo) = 0;
+            /* [retval][out] */ __RPC__out long *ProgNo) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ProgNo( 
-            /* [annotation][in] */ 
-            _In_  long ProgNo) = 0;
+            /* [in] */ long ProgNo) = 0;
         
     };
     
@@ -7701,8 +7044,7 @@ EXTERN_C const IID IID_IMPEG2TuneRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7717,31 +7059,23 @@ EXTERN_C const IID IID_IMPEG2TuneRequest;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7766,56 +7100,47 @@ EXTERN_C const IID IID_IMPEG2TuneRequest;
         DECLSPEC_XFGVIRT(ITuneRequest, get_TuningSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuningSpace )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Components)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Components )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **Components);
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **Components);
         
         DECLSPEC_XFGVIRT(ITuneRequest, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **NewTuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **NewTuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequest, get_Locator)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Locator )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **Locator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **Locator);
         
         DECLSPEC_XFGVIRT(ITuneRequest, put_Locator)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Locator )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  ILocator *Locator);
+            /* [in] */ __RPC__in_opt ILocator *Locator);
         
         DECLSPEC_XFGVIRT(IMPEG2TuneRequest, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *TSID);
+            /* [retval][out] */ __RPC__out long *TSID);
         
         DECLSPEC_XFGVIRT(IMPEG2TuneRequest, put_TSID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TSID )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long TSID);
+            /* [in] */ long TSID);
         
         DECLSPEC_XFGVIRT(IMPEG2TuneRequest, get_ProgNo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgNo )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ProgNo);
+            /* [retval][out] */ __RPC__out long *ProgNo);
         
         DECLSPEC_XFGVIRT(IMPEG2TuneRequest, put_ProgNo)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProgNo )( 
             __RPC__in IMPEG2TuneRequest * This,
-            /* [annotation][in] */ 
-            _In_  long ProgNo);
+            /* [in] */ long ProgNo);
         
         END_INTERFACE
     } IMPEG2TuneRequestVtbl;
@@ -7908,10 +7233,8 @@ EXTERN_C const IID IID_IMPEG2TuneRequestFactory;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTuneRequest( 
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IMPEG2TuneRequest **TuneRequest) = 0;
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace,
+            /* [retval][out] */ __RPC__deref_out_opt IMPEG2TuneRequest **TuneRequest) = 0;
         
     };
     
@@ -7925,8 +7248,7 @@ EXTERN_C const IID IID_IMPEG2TuneRequestFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMPEG2TuneRequestFactory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7941,31 +7263,23 @@ EXTERN_C const IID IID_IMPEG2TuneRequestFactory;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMPEG2TuneRequestFactory * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMPEG2TuneRequestFactory * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMPEG2TuneRequestFactory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7990,10 +7304,8 @@ EXTERN_C const IID IID_IMPEG2TuneRequestFactory;
         DECLSPEC_XFGVIRT(IMPEG2TuneRequestFactory, CreateTuneRequest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTuneRequest )( 
             __RPC__in IMPEG2TuneRequestFactory * This,
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IMPEG2TuneRequest **TuneRequest);
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace,
+            /* [retval][out] */ __RPC__deref_out_opt IMPEG2TuneRequest **TuneRequest);
         
         END_INTERFACE
     } IMPEG2TuneRequestFactoryVtbl;
@@ -8072,8 +7384,7 @@ EXTERN_C const IID IID_IMPEG2TuneRequestSupport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMPEG2TuneRequestSupport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8135,24 +7446,17 @@ EXTERN_C const IID IID_ITunerCap;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_SupportedNetworkTypes( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulcNetworkTypesMax,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulcNetworkTypes,
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidNetworkTypes) = 0;
+            /* [in] */ ULONG ulcNetworkTypesMax,
+            /* [out] */ __RPC__out ULONG *pulcNetworkTypes,
+            /* [out][in] */ __RPC__inout GUID *pguidNetworkTypes) = 0;
         
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_SupportedVideoFormats( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulAMTunerModeType,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulAnalogVideoStandard) = 0;
+            /* [out] */ __RPC__out ULONG *pulAMTunerModeType,
+            /* [out] */ __RPC__out ULONG *pulAnalogVideoStandard) = 0;
         
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_AuxInputCount( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulCompositeCount,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulSvideoCount) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulCompositeCount,
+            /* [out][in] */ __RPC__inout ULONG *pulSvideoCount) = 0;
         
     };
     
@@ -8166,8 +7470,7 @@ EXTERN_C const IID IID_ITunerCap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITunerCap * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8182,28 +7485,21 @@ EXTERN_C const IID IID_ITunerCap;
         DECLSPEC_XFGVIRT(ITunerCap, get_SupportedNetworkTypes)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedNetworkTypes )( 
             __RPC__in ITunerCap * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcNetworkTypesMax,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulcNetworkTypes,
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidNetworkTypes);
+            /* [in] */ ULONG ulcNetworkTypesMax,
+            /* [out] */ __RPC__out ULONG *pulcNetworkTypes,
+            /* [out][in] */ __RPC__inout GUID *pguidNetworkTypes);
         
         DECLSPEC_XFGVIRT(ITunerCap, get_SupportedVideoFormats)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedVideoFormats )( 
             __RPC__in ITunerCap * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulAMTunerModeType,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulAnalogVideoStandard);
+            /* [out] */ __RPC__out ULONG *pulAMTunerModeType,
+            /* [out] */ __RPC__out ULONG *pulAnalogVideoStandard);
         
         DECLSPEC_XFGVIRT(ITunerCap, get_AuxInputCount)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AuxInputCount )( 
             __RPC__in ITunerCap * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulCompositeCount,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulSvideoCount);
+            /* [out][in] */ __RPC__inout ULONG *pulCompositeCount,
+            /* [out][in] */ __RPC__inout ULONG *pulSvideoCount);
         
         END_INTERFACE
     } ITunerCapVtbl;
@@ -8264,8 +7560,7 @@ EXTERN_C const IID IID_ITunerCapEx;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Has608_708Caption( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbHasCaption) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbHasCaption) = 0;
         
     };
     
@@ -8279,8 +7574,7 @@ EXTERN_C const IID IID_ITunerCapEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITunerCapEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8295,8 +7589,7 @@ EXTERN_C const IID IID_ITunerCapEx;
         DECLSPEC_XFGVIRT(ITunerCapEx, get_Has608_708Caption)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Has608_708Caption )( 
             __RPC__in ITunerCapEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbHasCaption);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbHasCaption);
         
         END_INTERFACE
     } ITunerCapExVtbl;
@@ -8351,44 +7644,34 @@ EXTERN_C const IID IID_ITuner;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_TuningSpace( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace) = 0;
         
         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_TuningSpace( 
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace) = 0;
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace) = 0;
         
         virtual /* [helpstring][restricted][hidden] */ HRESULT STDMETHODCALLTYPE EnumTuningSpaces( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumTuningSpaces **ppEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumTuningSpaces **ppEnum) = 0;
         
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_TuneRequest( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest) = 0;
         
         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_TuneRequest( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *TuneRequest) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *TuneRequest) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Validate( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *TuneRequest) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *TuneRequest) = 0;
         
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_PreferredComponentTypes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes) = 0;
         
         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_PreferredComponentTypes( 
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *ComponentTypes) = 0;
+            /* [in] */ __RPC__in_opt IComponentTypes *ComponentTypes) = 0;
         
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_SignalStrength( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Strength) = 0;
+            /* [retval][out] */ __RPC__out long *Strength) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE TriggerSignalEvents( 
-            /* [annotation][in] */ 
-            _In_  long Interval) = 0;
+            /* [in] */ long Interval) = 0;
         
     };
     
@@ -8402,8 +7685,7 @@ EXTERN_C const IID IID_ITuner;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITuner * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8418,62 +7700,52 @@ EXTERN_C const IID IID_ITuner;
         DECLSPEC_XFGVIRT(ITuner, get_TuningSpace)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuningSpace )( 
             __RPC__in ITuner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuner, put_TuningSpace)
         /* [helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TuningSpace )( 
             __RPC__in ITuner * This,
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace);
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuner, EnumTuningSpaces)
         /* [helpstring][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *EnumTuningSpaces )( 
             __RPC__in ITuner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumTuningSpaces **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumTuningSpaces **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuner, get_TuneRequest)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuneRequest )( 
             __RPC__in ITuner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuner, put_TuneRequest)
         /* [helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TuneRequest )( 
             __RPC__in ITuner * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuner, Validate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Validate )( 
             __RPC__in ITuner * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuner, get_PreferredComponentTypes)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreferredComponentTypes )( 
             __RPC__in ITuner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuner, put_PreferredComponentTypes)
         /* [helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PreferredComponentTypes )( 
             __RPC__in ITuner * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *ComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuner, get_SignalStrength)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignalStrength )( 
             __RPC__in ITuner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Strength);
+            /* [retval][out] */ __RPC__out long *Strength);
         
         DECLSPEC_XFGVIRT(ITuner, TriggerSignalEvents)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TriggerSignalEvents )( 
             __RPC__in ITuner * This,
-            /* [annotation][in] */ 
-            _In_  long Interval);
+            /* [in] */ long Interval);
         
         END_INTERFACE
     } ITunerVtbl;
@@ -8559,12 +7831,10 @@ EXTERN_C const IID IID_IScanningTuner;
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SeekDown( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ScanUp( 
-            /* [annotation][in] */ 
-            _In_  long MillisecondsPause) = 0;
+            /* [in] */ long MillisecondsPause) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ScanDown( 
-            /* [annotation][in] */ 
-            _In_  long MillisecondsPause) = 0;
+            /* [in] */ long MillisecondsPause) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AutoProgram( void) = 0;
         
@@ -8580,8 +7850,7 @@ EXTERN_C const IID IID_IScanningTuner;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8596,62 +7865,52 @@ EXTERN_C const IID IID_IScanningTuner;
         DECLSPEC_XFGVIRT(ITuner, get_TuningSpace)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuningSpace )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuner, put_TuningSpace)
         /* [helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TuningSpace )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace);
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuner, EnumTuningSpaces)
         /* [helpstring][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *EnumTuningSpaces )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumTuningSpaces **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumTuningSpaces **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuner, get_TuneRequest)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuneRequest )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuner, put_TuneRequest)
         /* [helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TuneRequest )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuner, Validate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Validate )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuner, get_PreferredComponentTypes)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreferredComponentTypes )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuner, put_PreferredComponentTypes)
         /* [helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PreferredComponentTypes )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *ComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuner, get_SignalStrength)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignalStrength )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Strength);
+            /* [retval][out] */ __RPC__out long *Strength);
         
         DECLSPEC_XFGVIRT(ITuner, TriggerSignalEvents)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TriggerSignalEvents )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][in] */ 
-            _In_  long Interval);
+            /* [in] */ long Interval);
         
         DECLSPEC_XFGVIRT(IScanningTuner, SeekUp)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SeekUp )( 
@@ -8664,14 +7923,12 @@ EXTERN_C const IID IID_IScanningTuner;
         DECLSPEC_XFGVIRT(IScanningTuner, ScanUp)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ScanUp )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][in] */ 
-            _In_  long MillisecondsPause);
+            /* [in] */ long MillisecondsPause);
         
         DECLSPEC_XFGVIRT(IScanningTuner, ScanDown)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ScanDown )( 
             __RPC__in IScanningTuner * This,
-            /* [annotation][in] */ 
-            _In_  long MillisecondsPause);
+            /* [in] */ long MillisecondsPause);
         
         DECLSPEC_XFGVIRT(IScanningTuner, AutoProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AutoProgram )( 
@@ -8776,54 +8033,36 @@ EXTERN_C const IID IID_IScanningTunerEx;
             __RPC__deref_in_opt ILocator **pILocator) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE PerformExhaustiveScan( 
-            /* [annotation][in] */ 
-            _In_  long dwLowerFreq,
-            /* [annotation][in] */ 
-            _In_  long dwHigherFreq,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bFineTune,
-            /* [annotation][in] */ 
-            _In_  HEVENT hEvent) = 0;
+            /* [in] */ long dwLowerFreq,
+            /* [in] */ long dwHigherFreq,
+            /* [in] */ VARIANT_BOOL bFineTune,
+            /* [in] */ HEVENT hEvent) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE TerminateCurrentScan( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pcurrentFreq) = 0;
+            /* [retval][out] */ __RPC__out long *pcurrentFreq) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ResumeCurrentScan( 
-            /* [annotation][in] */ 
-            _In_  HEVENT hEvent) = 0;
+            /* [in] */ HEVENT hEvent) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTunerScanningCapability( 
-            /* [annotation][out] */ 
-            _Out_  long *HardwareAssistedScanning,
-            /* [annotation][out] */ 
-            _Out_  long *NumStandardsSupported,
-            /* [annotation][out] */ 
-            _Out_  GUID *BroadcastStandards) = 0;
+            /* [out] */ __RPC__out long *HardwareAssistedScanning,
+            /* [out] */ __RPC__out long *NumStandardsSupported,
+            /* [out] */ __RPC__out GUID *BroadcastStandards) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTunerStatus( 
-            /* [annotation][out] */ 
-            _Out_  long *SecondsLeft,
-            /* [annotation][out] */ 
-            _Out_  long *CurrentLockType,
-            /* [annotation][out] */ 
-            _Out_  long *AutoDetect,
-            /* [annotation][out] */ 
-            _Out_  long *CurrentFreq) = 0;
+            /* [out] */ __RPC__out long *SecondsLeft,
+            /* [out] */ __RPC__out long *CurrentLockType,
+            /* [out] */ __RPC__out long *AutoDetect,
+            /* [out] */ __RPC__out long *CurrentFreq) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetCurrentTunerStandardCapability( 
-            /* [annotation][in] */ 
-            _In_  GUID CurrentBroadcastStandard,
-            /* [annotation][out] */ 
-            _Out_  long *SettlingTime,
-            /* [annotation][out] */ 
-            _Out_  long *TvStandardsSupported) = 0;
+            /* [in] */ GUID CurrentBroadcastStandard,
+            /* [out] */ __RPC__out long *SettlingTime,
+            /* [out] */ __RPC__out long *TvStandardsSupported) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetScanSignalTypeFilter( 
-            /* [annotation][in] */ 
-            _In_  long ScanModulationTypes,
-            /* [annotation][in] */ 
-            _In_  long AnalogVideoStandard) = 0;
+            /* [in] */ long ScanModulationTypes,
+            /* [in] */ long AnalogVideoStandard) = 0;
         
     };
     
@@ -8837,8 +8076,7 @@ EXTERN_C const IID IID_IScanningTunerEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8853,62 +8091,52 @@ EXTERN_C const IID IID_IScanningTunerEx;
         DECLSPEC_XFGVIRT(ITuner, get_TuningSpace)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuningSpace )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuningSpace **TuningSpace);
+            /* [retval][out] */ __RPC__deref_out_opt ITuningSpace **TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuner, put_TuningSpace)
         /* [helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TuningSpace )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuningSpace *TuningSpace);
+            /* [in] */ __RPC__in_opt ITuningSpace *TuningSpace);
         
         DECLSPEC_XFGVIRT(ITuner, EnumTuningSpaces)
         /* [helpstring][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *EnumTuningSpaces )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumTuningSpaces **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumTuningSpaces **ppEnum);
         
         DECLSPEC_XFGVIRT(ITuner, get_TuneRequest)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TuneRequest )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuner, put_TuneRequest)
         /* [helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TuneRequest )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuner, Validate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Validate )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuner, get_PreferredComponentTypes)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreferredComponentTypes )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **ComponentTypes);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuner, put_PreferredComponentTypes)
         /* [helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PreferredComponentTypes )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  IComponentTypes *ComponentTypes);
+            /* [in] */ __RPC__in_opt IComponentTypes *ComponentTypes);
         
         DECLSPEC_XFGVIRT(ITuner, get_SignalStrength)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignalStrength )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Strength);
+            /* [retval][out] */ __RPC__out long *Strength);
         
         DECLSPEC_XFGVIRT(ITuner, TriggerSignalEvents)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TriggerSignalEvents )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  long Interval);
+            /* [in] */ long Interval);
         
         DECLSPEC_XFGVIRT(IScanningTuner, SeekUp)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SeekUp )( 
@@ -8921,14 +8149,12 @@ EXTERN_C const IID IID_IScanningTunerEx;
         DECLSPEC_XFGVIRT(IScanningTuner, ScanUp)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ScanUp )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  long MillisecondsPause);
+            /* [in] */ long MillisecondsPause);
         
         DECLSPEC_XFGVIRT(IScanningTuner, ScanDown)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ScanDown )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  long MillisecondsPause);
+            /* [in] */ long MillisecondsPause);
         
         DECLSPEC_XFGVIRT(IScanningTuner, AutoProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AutoProgram )( 
@@ -8942,66 +8168,48 @@ EXTERN_C const IID IID_IScanningTunerEx;
         DECLSPEC_XFGVIRT(IScanningTunerEx, PerformExhaustiveScan)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *PerformExhaustiveScan )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  long dwLowerFreq,
-            /* [annotation][in] */ 
-            _In_  long dwHigherFreq,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bFineTune,
-            /* [annotation][in] */ 
-            _In_  HEVENT hEvent);
+            /* [in] */ long dwLowerFreq,
+            /* [in] */ long dwHigherFreq,
+            /* [in] */ VARIANT_BOOL bFineTune,
+            /* [in] */ HEVENT hEvent);
         
         DECLSPEC_XFGVIRT(IScanningTunerEx, TerminateCurrentScan)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TerminateCurrentScan )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pcurrentFreq);
+            /* [retval][out] */ __RPC__out long *pcurrentFreq);
         
         DECLSPEC_XFGVIRT(IScanningTunerEx, ResumeCurrentScan)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ResumeCurrentScan )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  HEVENT hEvent);
+            /* [in] */ HEVENT hEvent);
         
         DECLSPEC_XFGVIRT(IScanningTunerEx, GetTunerScanningCapability)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTunerScanningCapability )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][out] */ 
-            _Out_  long *HardwareAssistedScanning,
-            /* [annotation][out] */ 
-            _Out_  long *NumStandardsSupported,
-            /* [annotation][out] */ 
-            _Out_  GUID *BroadcastStandards);
+            /* [out] */ __RPC__out long *HardwareAssistedScanning,
+            /* [out] */ __RPC__out long *NumStandardsSupported,
+            /* [out] */ __RPC__out GUID *BroadcastStandards);
         
         DECLSPEC_XFGVIRT(IScanningTunerEx, GetTunerStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTunerStatus )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][out] */ 
-            _Out_  long *SecondsLeft,
-            /* [annotation][out] */ 
-            _Out_  long *CurrentLockType,
-            /* [annotation][out] */ 
-            _Out_  long *AutoDetect,
-            /* [annotation][out] */ 
-            _Out_  long *CurrentFreq);
+            /* [out] */ __RPC__out long *SecondsLeft,
+            /* [out] */ __RPC__out long *CurrentLockType,
+            /* [out] */ __RPC__out long *AutoDetect,
+            /* [out] */ __RPC__out long *CurrentFreq);
         
         DECLSPEC_XFGVIRT(IScanningTunerEx, GetCurrentTunerStandardCapability)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCurrentTunerStandardCapability )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  GUID CurrentBroadcastStandard,
-            /* [annotation][out] */ 
-            _Out_  long *SettlingTime,
-            /* [annotation][out] */ 
-            _Out_  long *TvStandardsSupported);
+            /* [in] */ GUID CurrentBroadcastStandard,
+            /* [out] */ __RPC__out long *SettlingTime,
+            /* [out] */ __RPC__out long *TvStandardsSupported);
         
         DECLSPEC_XFGVIRT(IScanningTunerEx, SetScanSignalTypeFilter)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetScanSignalTypeFilter )( 
             __RPC__in IScanningTunerEx * This,
-            /* [annotation][in] */ 
-            _In_  long ScanModulationTypes,
-            /* [annotation][in] */ 
-            _In_  long AnalogVideoStandard);
+            /* [in] */ long ScanModulationTypes,
+            /* [in] */ long AnalogVideoStandard);
         
         END_INTERFACE
     } IScanningTunerExVtbl;
@@ -9124,72 +8332,55 @@ EXTERN_C const IID IID_IComponentType;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Category( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ComponentCategory *Category) = 0;
+            /* [retval][out] */ __RPC__out ComponentCategory *Category) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Category( 
-            /* [annotation][in] */ 
-            _In_  ComponentCategory Category) = 0;
+            /* [in] */ ComponentCategory Category) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaMajorType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaMajorType) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaMajorType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MediaMajorType( 
-            /* [annotation][in] */ 
-            _In_  BSTR MediaMajorType) = 0;
+            /* [in] */ __RPC__in BSTR MediaMajorType) = 0;
         
         virtual /* [restricted][hidden][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__MediaMajorType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaMajorTypeGuid) = 0;
+            /* [retval][out] */ __RPC__out GUID *MediaMajorTypeGuid) = 0;
         
         virtual /* [restricted][hidden][helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put__MediaMajorType( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaMajorTypeGuid) = 0;
+            /* [in] */ __RPC__in REFCLSID MediaMajorTypeGuid) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaSubType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaSubType) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaSubType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MediaSubType( 
-            /* [annotation][in] */ 
-            _In_  BSTR MediaSubType) = 0;
+            /* [in] */ __RPC__in BSTR MediaSubType) = 0;
         
         virtual /* [restricted][hidden][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__MediaSubType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaSubTypeGuid) = 0;
+            /* [retval][out] */ __RPC__out GUID *MediaSubTypeGuid) = 0;
         
         virtual /* [restricted][hidden][helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put__MediaSubType( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaSubTypeGuid) = 0;
+            /* [in] */ __RPC__in REFCLSID MediaSubTypeGuid) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaFormatType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaFormatType) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaFormatType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MediaFormatType( 
-            /* [annotation][in] */ 
-            _In_  BSTR MediaFormatType) = 0;
+            /* [in] */ __RPC__in BSTR MediaFormatType) = 0;
         
         virtual /* [restricted][hidden][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__MediaFormatType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaFormatTypeGuid) = 0;
+            /* [retval][out] */ __RPC__out GUID *MediaFormatTypeGuid) = 0;
         
         virtual /* [restricted][hidden][helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put__MediaFormatType( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaFormatTypeGuid) = 0;
+            /* [in] */ __RPC__in REFCLSID MediaFormatTypeGuid) = 0;
         
         virtual /* [helpstring][restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  AM_MEDIA_TYPE *MediaType) = 0;
+            /* [retval][out] */ __RPC__out AM_MEDIA_TYPE *MediaType) = 0;
         
         virtual /* [helpstring][restricted][hidden][id][propput] */ HRESULT STDMETHODCALLTYPE put_MediaType( 
-            /* [annotation][in] */ 
-            _In_  AM_MEDIA_TYPE *MediaType) = 0;
+            /* [in] */ __RPC__in AM_MEDIA_TYPE *MediaType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **NewCT) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **NewCT) = 0;
         
     };
     
@@ -9203,8 +8394,7 @@ EXTERN_C const IID IID_IComponentType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9219,31 +8409,23 @@ EXTERN_C const IID IID_IComponentType;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IComponentType * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9268,104 +8450,87 @@ EXTERN_C const IID IID_IComponentType;
         DECLSPEC_XFGVIRT(IComponentType, get_Category)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Category )( 
             __RPC__in IComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ComponentCategory *Category);
+            /* [retval][out] */ __RPC__out ComponentCategory *Category);
         
         DECLSPEC_XFGVIRT(IComponentType, put_Category)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Category )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  ComponentCategory Category);
+            /* [in] */ ComponentCategory Category);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaMajorType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaMajorType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaMajorType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaMajorType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaMajorType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaMajorType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaMajorType);
+            /* [in] */ __RPC__in BSTR MediaMajorType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaMajorType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaMajorType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaMajorTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaMajorTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaMajorType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaMajorType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaMajorTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaMajorTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaSubType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaSubType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaSubType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaSubType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaSubType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaSubType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaSubType);
+            /* [in] */ __RPC__in BSTR MediaSubType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaSubType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaSubType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaSubTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaSubTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaSubType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaSubType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaSubTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaSubTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaFormatType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaFormatType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaFormatType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaFormatType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaFormatType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaFormatType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaFormatType);
+            /* [in] */ __RPC__in BSTR MediaFormatType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaFormatType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaFormatType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaFormatTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaFormatTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaFormatType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaFormatType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaFormatTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaFormatTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaType)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  AM_MEDIA_TYPE *MediaType);
+            /* [retval][out] */ __RPC__out AM_MEDIA_TYPE *MediaType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaType)
         /* [helpstring][restricted][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaType )( 
             __RPC__in IComponentType * This,
-            /* [annotation][in] */ 
-            _In_  AM_MEDIA_TYPE *MediaType);
+            /* [in] */ __RPC__in AM_MEDIA_TYPE *MediaType);
         
         DECLSPEC_XFGVIRT(IComponentType, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **NewCT);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **NewCT);
         
         END_INTERFACE
     } IComponentTypeVtbl;
@@ -9481,12 +8646,10 @@ EXTERN_C const IID IID_ILanguageComponentType;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LangID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LangID) = 0;
+            /* [retval][out] */ __RPC__out long *LangID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LangID( 
-            /* [annotation][in] */ 
-            _In_  long LangID) = 0;
+            /* [in] */ long LangID) = 0;
         
     };
     
@@ -9500,8 +8663,7 @@ EXTERN_C const IID IID_ILanguageComponentType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9516,31 +8678,23 @@ EXTERN_C const IID IID_ILanguageComponentType;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9565,116 +8719,97 @@ EXTERN_C const IID IID_ILanguageComponentType;
         DECLSPEC_XFGVIRT(IComponentType, get_Category)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Category )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ComponentCategory *Category);
+            /* [retval][out] */ __RPC__out ComponentCategory *Category);
         
         DECLSPEC_XFGVIRT(IComponentType, put_Category)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Category )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  ComponentCategory Category);
+            /* [in] */ ComponentCategory Category);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaMajorType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaMajorType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaMajorType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaMajorType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaMajorType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaMajorType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaMajorType);
+            /* [in] */ __RPC__in BSTR MediaMajorType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaMajorType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaMajorType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaMajorTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaMajorTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaMajorType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaMajorType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaMajorTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaMajorTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaSubType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaSubType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaSubType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaSubType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaSubType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaSubType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaSubType);
+            /* [in] */ __RPC__in BSTR MediaSubType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaSubType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaSubType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaSubTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaSubTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaSubType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaSubType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaSubTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaSubTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaFormatType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaFormatType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaFormatType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaFormatType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaFormatType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaFormatType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaFormatType);
+            /* [in] */ __RPC__in BSTR MediaFormatType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaFormatType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaFormatType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaFormatTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaFormatTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaFormatType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaFormatType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaFormatTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaFormatTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaType)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  AM_MEDIA_TYPE *MediaType);
+            /* [retval][out] */ __RPC__out AM_MEDIA_TYPE *MediaType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaType)
         /* [helpstring][restricted][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaType )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  AM_MEDIA_TYPE *MediaType);
+            /* [in] */ __RPC__in AM_MEDIA_TYPE *MediaType);
         
         DECLSPEC_XFGVIRT(IComponentType, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **NewCT);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **NewCT);
         
         DECLSPEC_XFGVIRT(ILanguageComponentType, get_LangID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LangID )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LangID);
+            /* [retval][out] */ __RPC__out long *LangID);
         
         DECLSPEC_XFGVIRT(ILanguageComponentType, put_LangID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LangID )( 
             __RPC__in ILanguageComponentType * This,
-            /* [annotation][in] */ 
-            _In_  long LangID);
+            /* [in] */ long LangID);
         
         END_INTERFACE
     } ILanguageComponentTypeVtbl;
@@ -9797,12 +8932,10 @@ EXTERN_C const IID IID_IMPEG2ComponentType;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StreamType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  MPEG2StreamType *MP2StreamType) = 0;
+            /* [retval][out] */ __RPC__out MPEG2StreamType *MP2StreamType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StreamType( 
-            /* [annotation][in] */ 
-            _In_  MPEG2StreamType MP2StreamType) = 0;
+            /* [in] */ MPEG2StreamType MP2StreamType) = 0;
         
     };
     
@@ -9816,8 +8949,7 @@ EXTERN_C const IID IID_IMPEG2ComponentType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9832,31 +8964,23 @@ EXTERN_C const IID IID_IMPEG2ComponentType;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9881,128 +9005,107 @@ EXTERN_C const IID IID_IMPEG2ComponentType;
         DECLSPEC_XFGVIRT(IComponentType, get_Category)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Category )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ComponentCategory *Category);
+            /* [retval][out] */ __RPC__out ComponentCategory *Category);
         
         DECLSPEC_XFGVIRT(IComponentType, put_Category)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Category )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  ComponentCategory Category);
+            /* [in] */ ComponentCategory Category);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaMajorType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaMajorType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaMajorType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaMajorType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaMajorType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaMajorType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaMajorType);
+            /* [in] */ __RPC__in BSTR MediaMajorType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaMajorType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaMajorType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaMajorTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaMajorTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaMajorType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaMajorType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaMajorTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaMajorTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaSubType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaSubType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaSubType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaSubType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaSubType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaSubType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaSubType);
+            /* [in] */ __RPC__in BSTR MediaSubType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaSubType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaSubType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaSubTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaSubTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaSubType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaSubType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaSubTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaSubTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaFormatType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaFormatType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaFormatType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaFormatType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaFormatType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaFormatType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaFormatType);
+            /* [in] */ __RPC__in BSTR MediaFormatType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaFormatType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaFormatType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaFormatTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaFormatTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaFormatType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaFormatType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaFormatTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaFormatTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaType)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  AM_MEDIA_TYPE *MediaType);
+            /* [retval][out] */ __RPC__out AM_MEDIA_TYPE *MediaType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaType)
         /* [helpstring][restricted][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  AM_MEDIA_TYPE *MediaType);
+            /* [in] */ __RPC__in AM_MEDIA_TYPE *MediaType);
         
         DECLSPEC_XFGVIRT(IComponentType, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **NewCT);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **NewCT);
         
         DECLSPEC_XFGVIRT(ILanguageComponentType, get_LangID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LangID )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LangID);
+            /* [retval][out] */ __RPC__out long *LangID);
         
         DECLSPEC_XFGVIRT(ILanguageComponentType, put_LangID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LangID )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  long LangID);
+            /* [in] */ long LangID);
         
         DECLSPEC_XFGVIRT(IMPEG2ComponentType, get_StreamType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StreamType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  MPEG2StreamType *MP2StreamType);
+            /* [retval][out] */ __RPC__out MPEG2StreamType *MP2StreamType);
         
         DECLSPEC_XFGVIRT(IMPEG2ComponentType, put_StreamType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StreamType )( 
             __RPC__in IMPEG2ComponentType * This,
-            /* [annotation][in] */ 
-            _In_  MPEG2StreamType MP2StreamType);
+            /* [in] */ MPEG2StreamType MP2StreamType);
         
         END_INTERFACE
     } IMPEG2ComponentTypeVtbl;
@@ -10132,12 +9235,10 @@ EXTERN_C const IID IID_IATSCComponentType;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Flags) = 0;
+            /* [retval][out] */ __RPC__out long *Flags) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Flags( 
-            /* [annotation][in] */ 
-            _In_  long flags) = 0;
+            /* [in] */ long flags) = 0;
         
     };
     
@@ -10151,8 +9252,7 @@ EXTERN_C const IID IID_IATSCComponentType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10167,31 +9267,23 @@ EXTERN_C const IID IID_IATSCComponentType;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10216,140 +9308,117 @@ EXTERN_C const IID IID_IATSCComponentType;
         DECLSPEC_XFGVIRT(IComponentType, get_Category)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Category )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ComponentCategory *Category);
+            /* [retval][out] */ __RPC__out ComponentCategory *Category);
         
         DECLSPEC_XFGVIRT(IComponentType, put_Category)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Category )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  ComponentCategory Category);
+            /* [in] */ ComponentCategory Category);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaMajorType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaMajorType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaMajorType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaMajorType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaMajorType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaMajorType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaMajorType);
+            /* [in] */ __RPC__in BSTR MediaMajorType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaMajorType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaMajorType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaMajorTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaMajorTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaMajorType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaMajorType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaMajorTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaMajorTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaSubType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaSubType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaSubType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaSubType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaSubType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaSubType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaSubType);
+            /* [in] */ __RPC__in BSTR MediaSubType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaSubType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaSubType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaSubTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaSubTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaSubType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaSubType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaSubTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaSubTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaFormatType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaFormatType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaFormatType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaFormatType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaFormatType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaFormatType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaFormatType);
+            /* [in] */ __RPC__in BSTR MediaFormatType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaFormatType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaFormatType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaFormatTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaFormatTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaFormatType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaFormatType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaFormatTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaFormatTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaType)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  AM_MEDIA_TYPE *MediaType);
+            /* [retval][out] */ __RPC__out AM_MEDIA_TYPE *MediaType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaType)
         /* [helpstring][restricted][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  AM_MEDIA_TYPE *MediaType);
+            /* [in] */ __RPC__in AM_MEDIA_TYPE *MediaType);
         
         DECLSPEC_XFGVIRT(IComponentType, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **NewCT);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **NewCT);
         
         DECLSPEC_XFGVIRT(ILanguageComponentType, get_LangID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LangID )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LangID);
+            /* [retval][out] */ __RPC__out long *LangID);
         
         DECLSPEC_XFGVIRT(ILanguageComponentType, put_LangID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LangID )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  long LangID);
+            /* [in] */ long LangID);
         
         DECLSPEC_XFGVIRT(IMPEG2ComponentType, get_StreamType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StreamType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  MPEG2StreamType *MP2StreamType);
+            /* [retval][out] */ __RPC__out MPEG2StreamType *MP2StreamType);
         
         DECLSPEC_XFGVIRT(IMPEG2ComponentType, put_StreamType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StreamType )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  MPEG2StreamType MP2StreamType);
+            /* [in] */ MPEG2StreamType MP2StreamType);
         
         DECLSPEC_XFGVIRT(IATSCComponentType, get_Flags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Flags )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Flags);
+            /* [retval][out] */ __RPC__out long *Flags);
         
         DECLSPEC_XFGVIRT(IATSCComponentType, put_Flags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Flags )( 
             __RPC__in IATSCComponentType * This,
-            /* [annotation][in] */ 
-            _In_  long flags);
+            /* [in] */ long flags);
         
         END_INTERFACE
     } IATSCComponentTypeVtbl;
@@ -10486,22 +9555,17 @@ EXTERN_C const IID IID_IEnumComponentTypes;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  IComponentType **rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IComponentType **rgelt,
+            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumComponentTypes **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumComponentTypes **ppEnum) = 0;
         
     };
     
@@ -10515,8 +9579,7 @@ EXTERN_C const IID IID_IEnumComponentTypes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumComponentTypes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10531,18 +9594,14 @@ EXTERN_C const IID IID_IEnumComponentTypes;
         DECLSPEC_XFGVIRT(IEnumComponentTypes, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumComponentTypes * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  IComponentType **rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IComponentType **rgelt,
+            /* [out] */ __RPC__out ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumComponentTypes, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumComponentTypes * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumComponentTypes, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -10551,8 +9610,7 @@ EXTERN_C const IID IID_IEnumComponentTypes;
         DECLSPEC_XFGVIRT(IEnumComponentTypes, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumComponentTypes * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumComponentTypes **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumComponentTypes **ppEnum);
         
         END_INTERFACE
     } IEnumComponentTypesVtbl;
@@ -10616,42 +9674,31 @@ EXTERN_C const IID IID_IComponentTypes;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count) = 0;
+            /* [retval][out] */ __RPC__out long *Count) = 0;
         
         virtual /* [restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppNewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppNewEnum) = 0;
         
         virtual /* [helpstring][restricted][hidden] */ HRESULT STDMETHODCALLTYPE EnumComponentTypes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumComponentTypes **ppNewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumComponentTypes **ppNewEnum) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT Index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **ComponentType) = 0;
+            /* [in] */ VARIANT Index,
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **ComponentType) = 0;
         
         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT Index,
-            /* [annotation][in] */ 
-            _In_  IComponentType *ComponentType) = 0;
+            /* [in] */ VARIANT Index,
+            /* [in] */ __RPC__in_opt IComponentType *ComponentType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][in] */ 
-            _In_  IComponentType *ComponentType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *NewIndex) = 0;
+            /* [in] */ __RPC__in_opt IComponentType *ComponentType,
+            /* [retval][out] */ __RPC__out VARIANT *NewIndex) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [annotation][in] */ 
-            _In_  VARIANT Index) = 0;
+            /* [in] */ VARIANT Index) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **NewList) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **NewList) = 0;
         
     };
     
@@ -10665,8 +9712,7 @@ EXTERN_C const IID IID_IComponentTypes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10681,31 +9727,23 @@ EXTERN_C const IID IID_IComponentTypes;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10730,56 +9768,45 @@ EXTERN_C const IID IID_IComponentTypes;
         DECLSPEC_XFGVIRT(IComponentTypes, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count);
+            /* [retval][out] */ __RPC__out long *Count);
         
         DECLSPEC_XFGVIRT(IComponentTypes, get__NewEnum)
         /* [restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppNewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppNewEnum);
         
         DECLSPEC_XFGVIRT(IComponentTypes, EnumComponentTypes)
         /* [helpstring][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *EnumComponentTypes )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumComponentTypes **ppNewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumComponentTypes **ppNewEnum);
         
         DECLSPEC_XFGVIRT(IComponentTypes, get_Item)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **ComponentType);
+            /* [in] */ VARIANT Index,
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **ComponentType);
         
         DECLSPEC_XFGVIRT(IComponentTypes, put_Item)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Item )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Index,
-            /* [annotation][in] */ 
-            _In_  IComponentType *ComponentType);
+            /* [in] */ VARIANT Index,
+            /* [in] */ __RPC__in_opt IComponentType *ComponentType);
         
         DECLSPEC_XFGVIRT(IComponentTypes, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][in] */ 
-            _In_  IComponentType *ComponentType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *NewIndex);
+            /* [in] */ __RPC__in_opt IComponentType *ComponentType,
+            /* [retval][out] */ __RPC__out VARIANT *NewIndex);
         
         DECLSPEC_XFGVIRT(IComponentTypes, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Index);
+            /* [in] */ VARIANT Index);
         
         DECLSPEC_XFGVIRT(IComponentTypes, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IComponentTypes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentTypes **NewList);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentTypes **NewList);
         
         END_INTERFACE
     } IComponentTypesVtbl;
@@ -10868,40 +9895,31 @@ EXTERN_C const IID IID_IComponent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **CT) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **CT) = 0;
         
         virtual /* [helpstring][id][propput][restricted][hidden] */ HRESULT STDMETHODCALLTYPE put_Type( 
-            /* [annotation][in] */ 
-            _In_  IComponentType *CT) = 0;
+            /* [in] */ __RPC__in_opt IComponentType *CT) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DescLangID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LangID) = 0;
+            /* [retval][out] */ __RPC__out long *LangID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DescLangID( 
-            /* [annotation][in] */ 
-            _In_  long LangID) = 0;
+            /* [in] */ long LangID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Status( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ComponentStatus *Status) = 0;
+            /* [retval][out] */ __RPC__out ComponentStatus *Status) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Status( 
-            /* [annotation][in] */ 
-            _In_  ComponentStatus Status) = 0;
+            /* [in] */ ComponentStatus Status) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Description) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Description) = 0;
         
         virtual /* [helpstring][id][propput][restricted][hidden] */ HRESULT STDMETHODCALLTYPE put_Description( 
-            /* [annotation][in] */ 
-            _In_  BSTR Description) = 0;
+            /* [in] */ __RPC__in BSTR Description) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponent **NewComponent) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IComponent **NewComponent) = 0;
         
     };
     
@@ -10915,8 +9933,7 @@ EXTERN_C const IID IID_IComponent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IComponent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10931,31 +9948,23 @@ EXTERN_C const IID IID_IComponent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IComponent * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IComponent * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IComponent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10980,56 +9989,47 @@ EXTERN_C const IID IID_IComponent;
         DECLSPEC_XFGVIRT(IComponent, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IComponent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **CT);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **CT);
         
         DECLSPEC_XFGVIRT(IComponent, put_Type)
         /* [helpstring][id][propput][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in IComponent * This,
-            /* [annotation][in] */ 
-            _In_  IComponentType *CT);
+            /* [in] */ __RPC__in_opt IComponentType *CT);
         
         DECLSPEC_XFGVIRT(IComponent, get_DescLangID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DescLangID )( 
             __RPC__in IComponent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LangID);
+            /* [retval][out] */ __RPC__out long *LangID);
         
         DECLSPEC_XFGVIRT(IComponent, put_DescLangID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DescLangID )( 
             __RPC__in IComponent * This,
-            /* [annotation][in] */ 
-            _In_  long LangID);
+            /* [in] */ long LangID);
         
         DECLSPEC_XFGVIRT(IComponent, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IComponent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ComponentStatus *Status);
+            /* [retval][out] */ __RPC__out ComponentStatus *Status);
         
         DECLSPEC_XFGVIRT(IComponent, put_Status)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Status )( 
             __RPC__in IComponent * This,
-            /* [annotation][in] */ 
-            _In_  ComponentStatus Status);
+            /* [in] */ ComponentStatus Status);
         
         DECLSPEC_XFGVIRT(IComponent, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IComponent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Description);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Description);
         
         DECLSPEC_XFGVIRT(IComponent, put_Description)
         /* [helpstring][id][propput][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IComponent * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Description);
+            /* [in] */ __RPC__in BSTR Description);
         
         DECLSPEC_XFGVIRT(IComponent, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IComponent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponent **NewComponent);
+            /* [retval][out] */ __RPC__deref_out_opt IComponent **NewComponent);
         
         END_INTERFACE
     } IComponentVtbl;
@@ -11121,12 +10121,10 @@ EXTERN_C const IID IID_IAnalogAudioComponentType;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AnalogAudioMode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TVAudioMode *Mode) = 0;
+            /* [retval][out] */ __RPC__out TVAudioMode *Mode) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AnalogAudioMode( 
-            /* [annotation][in] */ 
-            _In_  TVAudioMode Mode) = 0;
+            /* [in] */ TVAudioMode Mode) = 0;
         
     };
     
@@ -11140,8 +10138,7 @@ EXTERN_C const IID IID_IAnalogAudioComponentType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11156,31 +10153,23 @@ EXTERN_C const IID IID_IAnalogAudioComponentType;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11205,116 +10194,97 @@ EXTERN_C const IID IID_IAnalogAudioComponentType;
         DECLSPEC_XFGVIRT(IComponentType, get_Category)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Category )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ComponentCategory *Category);
+            /* [retval][out] */ __RPC__out ComponentCategory *Category);
         
         DECLSPEC_XFGVIRT(IComponentType, put_Category)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Category )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  ComponentCategory Category);
+            /* [in] */ ComponentCategory Category);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaMajorType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaMajorType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaMajorType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaMajorType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaMajorType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaMajorType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaMajorType);
+            /* [in] */ __RPC__in BSTR MediaMajorType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaMajorType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaMajorType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaMajorTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaMajorTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaMajorType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaMajorType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaMajorTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaMajorTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaSubType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaSubType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaSubType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaSubType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaSubType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaSubType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaSubType);
+            /* [in] */ __RPC__in BSTR MediaSubType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaSubType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaSubType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaSubTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaSubTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaSubType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaSubType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaSubTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaSubTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaFormatType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaFormatType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *MediaFormatType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *MediaFormatType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaFormatType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaFormatType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR MediaFormatType);
+            /* [in] */ __RPC__in BSTR MediaFormatType);
         
         DECLSPEC_XFGVIRT(IComponentType, get__MediaFormatType)
         /* [restricted][hidden][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__MediaFormatType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *MediaFormatTypeGuid);
+            /* [retval][out] */ __RPC__out GUID *MediaFormatTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, put__MediaFormatType)
         /* [restricted][hidden][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put__MediaFormatType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID MediaFormatTypeGuid);
+            /* [in] */ __RPC__in REFCLSID MediaFormatTypeGuid);
         
         DECLSPEC_XFGVIRT(IComponentType, get_MediaType)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  AM_MEDIA_TYPE *MediaType);
+            /* [retval][out] */ __RPC__out AM_MEDIA_TYPE *MediaType);
         
         DECLSPEC_XFGVIRT(IComponentType, put_MediaType)
         /* [helpstring][restricted][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaType )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  AM_MEDIA_TYPE *MediaType);
+            /* [in] */ __RPC__in AM_MEDIA_TYPE *MediaType);
         
         DECLSPEC_XFGVIRT(IComponentType, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **NewCT);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **NewCT);
         
         DECLSPEC_XFGVIRT(IAnalogAudioComponentType, get_AnalogAudioMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AnalogAudioMode )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TVAudioMode *Mode);
+            /* [retval][out] */ __RPC__out TVAudioMode *Mode);
         
         DECLSPEC_XFGVIRT(IAnalogAudioComponentType, put_AnalogAudioMode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AnalogAudioMode )( 
             __RPC__in IAnalogAudioComponentType * This,
-            /* [annotation][in] */ 
-            _In_  TVAudioMode Mode);
+            /* [in] */ TVAudioMode Mode);
         
         END_INTERFACE
     } IAnalogAudioComponentTypeVtbl;
@@ -11437,28 +10407,22 @@ EXTERN_C const IID IID_IMPEG2Component;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *PID) = 0;
+            /* [retval][out] */ __RPC__out long *PID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PID( 
-            /* [annotation][in] */ 
-            _In_  long PID) = 0;
+            /* [in] */ long PID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PCRPID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *PCRPID) = 0;
+            /* [retval][out] */ __RPC__out long *PCRPID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PCRPID( 
-            /* [annotation][in] */ 
-            _In_  long PCRPID) = 0;
+            /* [in] */ long PCRPID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProgramNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ProgramNumber) = 0;
+            /* [retval][out] */ __RPC__out long *ProgramNumber) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ProgramNumber( 
-            /* [annotation][in] */ 
-            _In_  long ProgramNumber) = 0;
+            /* [in] */ long ProgramNumber) = 0;
         
     };
     
@@ -11472,8 +10436,7 @@ EXTERN_C const IID IID_IMPEG2Component;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11488,31 +10451,23 @@ EXTERN_C const IID IID_IMPEG2Component;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11537,92 +10492,77 @@ EXTERN_C const IID IID_IMPEG2Component;
         DECLSPEC_XFGVIRT(IComponent, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponentType **CT);
+            /* [retval][out] */ __RPC__deref_out_opt IComponentType **CT);
         
         DECLSPEC_XFGVIRT(IComponent, put_Type)
         /* [helpstring][id][propput][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][in] */ 
-            _In_  IComponentType *CT);
+            /* [in] */ __RPC__in_opt IComponentType *CT);
         
         DECLSPEC_XFGVIRT(IComponent, get_DescLangID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DescLangID )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LangID);
+            /* [retval][out] */ __RPC__out long *LangID);
         
         DECLSPEC_XFGVIRT(IComponent, put_DescLangID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DescLangID )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][in] */ 
-            _In_  long LangID);
+            /* [in] */ long LangID);
         
         DECLSPEC_XFGVIRT(IComponent, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ComponentStatus *Status);
+            /* [retval][out] */ __RPC__out ComponentStatus *Status);
         
         DECLSPEC_XFGVIRT(IComponent, put_Status)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Status )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][in] */ 
-            _In_  ComponentStatus Status);
+            /* [in] */ ComponentStatus Status);
         
         DECLSPEC_XFGVIRT(IComponent, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Description);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Description);
         
         DECLSPEC_XFGVIRT(IComponent, put_Description)
         /* [helpstring][id][propput][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Description);
+            /* [in] */ __RPC__in BSTR Description);
         
         DECLSPEC_XFGVIRT(IComponent, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponent **NewComponent);
+            /* [retval][out] */ __RPC__deref_out_opt IComponent **NewComponent);
         
         DECLSPEC_XFGVIRT(IMPEG2Component, get_PID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PID )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *PID);
+            /* [retval][out] */ __RPC__out long *PID);
         
         DECLSPEC_XFGVIRT(IMPEG2Component, put_PID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PID )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][in] */ 
-            _In_  long PID);
+            /* [in] */ long PID);
         
         DECLSPEC_XFGVIRT(IMPEG2Component, get_PCRPID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PCRPID )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *PCRPID);
+            /* [retval][out] */ __RPC__out long *PCRPID);
         
         DECLSPEC_XFGVIRT(IMPEG2Component, put_PCRPID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PCRPID )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][in] */ 
-            _In_  long PCRPID);
+            /* [in] */ long PCRPID);
         
         DECLSPEC_XFGVIRT(IMPEG2Component, get_ProgramNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramNumber )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ProgramNumber);
+            /* [retval][out] */ __RPC__out long *ProgramNumber);
         
         DECLSPEC_XFGVIRT(IMPEG2Component, put_ProgramNumber)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProgramNumber )( 
             __RPC__in IMPEG2Component * This,
-            /* [annotation][in] */ 
-            _In_  long ProgramNumber);
+            /* [in] */ long ProgramNumber);
         
         END_INTERFACE
     } IMPEG2ComponentVtbl;
@@ -11733,22 +10673,17 @@ EXTERN_C const IID IID_IEnumComponents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  IComponent **rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IComponent **rgelt,
+            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumComponents **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumComponents **ppEnum) = 0;
         
     };
     
@@ -11762,8 +10697,7 @@ EXTERN_C const IID IID_IEnumComponents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumComponents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11778,18 +10712,14 @@ EXTERN_C const IID IID_IEnumComponents;
         DECLSPEC_XFGVIRT(IEnumComponents, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumComponents * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  IComponent **rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IComponent **rgelt,
+            /* [out] */ __RPC__out ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumComponents, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumComponents * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumComponents, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -11798,8 +10728,7 @@ EXTERN_C const IID IID_IEnumComponents;
         DECLSPEC_XFGVIRT(IEnumComponents, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumComponents * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumComponents **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumComponents **ppEnum);
         
         END_INTERFACE
     } IEnumComponentsVtbl;
@@ -11863,42 +10792,31 @@ EXTERN_C const IID IID_IComponents;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count) = 0;
+            /* [retval][out] */ __RPC__out long *Count) = 0;
         
         virtual /* [restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppNewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppNewEnum) = 0;
         
         virtual /* [helpstring][restricted][hidden] */ HRESULT STDMETHODCALLTYPE EnumComponents( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumComponents **ppNewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumComponents **ppNewEnum) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT Index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponent **ppComponent) = 0;
+            /* [in] */ VARIANT Index,
+            /* [retval][out] */ __RPC__deref_out_opt IComponent **ppComponent) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][in] */ 
-            _In_  IComponent *Component,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *NewIndex) = 0;
+            /* [in] */ __RPC__in_opt IComponent *Component,
+            /* [retval][out] */ __RPC__out VARIANT *NewIndex) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [annotation][in] */ 
-            _In_  VARIANT Index) = 0;
+            /* [in] */ VARIANT Index) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **NewList) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **NewList) = 0;
         
         virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT Index,
-            /* [annotation][in] */ 
-            _In_  IComponent *ppComponent) = 0;
+            /* [in] */ VARIANT Index,
+            /* [in] */ __RPC__in_opt IComponent *ppComponent) = 0;
         
     };
     
@@ -11912,8 +10830,7 @@ EXTERN_C const IID IID_IComponents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IComponents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11928,31 +10845,23 @@ EXTERN_C const IID IID_IComponents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IComponents * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IComponents * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IComponents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11977,56 +10886,45 @@ EXTERN_C const IID IID_IComponents;
         DECLSPEC_XFGVIRT(IComponents, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IComponents * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count);
+            /* [retval][out] */ __RPC__out long *Count);
         
         DECLSPEC_XFGVIRT(IComponents, get__NewEnum)
         /* [restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IComponents * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppNewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppNewEnum);
         
         DECLSPEC_XFGVIRT(IComponents, EnumComponents)
         /* [helpstring][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *EnumComponents )( 
             __RPC__in IComponents * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumComponents **ppNewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumComponents **ppNewEnum);
         
         DECLSPEC_XFGVIRT(IComponents, get_Item)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IComponents * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponent **ppComponent);
+            /* [in] */ VARIANT Index,
+            /* [retval][out] */ __RPC__deref_out_opt IComponent **ppComponent);
         
         DECLSPEC_XFGVIRT(IComponents, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IComponents * This,
-            /* [annotation][in] */ 
-            _In_  IComponent *Component,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *NewIndex);
+            /* [in] */ __RPC__in_opt IComponent *Component,
+            /* [retval][out] */ __RPC__out VARIANT *NewIndex);
         
         DECLSPEC_XFGVIRT(IComponents, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IComponents * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Index);
+            /* [in] */ VARIANT Index);
         
         DECLSPEC_XFGVIRT(IComponents, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IComponents * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **NewList);
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **NewList);
         
         DECLSPEC_XFGVIRT(IComponents, put_Item)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Item )( 
             __RPC__in IComponents * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Index,
-            /* [annotation][in] */ 
-            _In_  IComponent *ppComponent);
+            /* [in] */ VARIANT Index,
+            /* [in] */ __RPC__in_opt IComponent *ppComponent);
         
         END_INTERFACE
     } IComponentsVtbl;
@@ -12115,36 +11013,27 @@ EXTERN_C const IID IID_IComponentsOld;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count) = 0;
+            /* [retval][out] */ __RPC__out long *Count) = 0;
         
         virtual /* [restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppNewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppNewEnum) = 0;
         
         virtual /* [helpstring][restricted][hidden] */ HRESULT STDMETHODCALLTYPE EnumComponents( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumComponents **ppNewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumComponents **ppNewEnum) = 0;
         
         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT Index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponent **ppComponent) = 0;
+            /* [in] */ VARIANT Index,
+            /* [retval][out] */ __RPC__deref_out_opt IComponent **ppComponent) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][in] */ 
-            _In_  IComponent *Component,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *NewIndex) = 0;
+            /* [in] */ __RPC__in_opt IComponent *Component,
+            /* [retval][out] */ __RPC__out VARIANT *NewIndex) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [annotation][in] */ 
-            _In_  VARIANT Index) = 0;
+            /* [in] */ VARIANT Index) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **NewList) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **NewList) = 0;
         
     };
     
@@ -12158,8 +11047,7 @@ EXTERN_C const IID IID_IComponentsOld;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12174,31 +11062,23 @@ EXTERN_C const IID IID_IComponentsOld;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12223,48 +11103,39 @@ EXTERN_C const IID IID_IComponentsOld;
         DECLSPEC_XFGVIRT(IComponentsOld, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count);
+            /* [retval][out] */ __RPC__out long *Count);
         
         DECLSPEC_XFGVIRT(IComponentsOld, get__NewEnum)
         /* [restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppNewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppNewEnum);
         
         DECLSPEC_XFGVIRT(IComponentsOld, EnumComponents)
         /* [helpstring][restricted][hidden] */ HRESULT ( STDMETHODCALLTYPE *EnumComponents )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumComponents **ppNewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumComponents **ppNewEnum);
         
         DECLSPEC_XFGVIRT(IComponentsOld, get_Item)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponent **ppComponent);
+            /* [in] */ VARIANT Index,
+            /* [retval][out] */ __RPC__deref_out_opt IComponent **ppComponent);
         
         DECLSPEC_XFGVIRT(IComponentsOld, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][in] */ 
-            _In_  IComponent *Component,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *NewIndex);
+            /* [in] */ __RPC__in_opt IComponent *Component,
+            /* [retval][out] */ __RPC__out VARIANT *NewIndex);
         
         DECLSPEC_XFGVIRT(IComponentsOld, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Index);
+            /* [in] */ VARIANT Index);
         
         DECLSPEC_XFGVIRT(IComponentsOld, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IComponentsOld * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IComponents **NewList);
+            /* [retval][out] */ __RPC__deref_out_opt IComponents **NewList);
         
         END_INTERFACE
     } IComponentsOldVtbl;
@@ -12350,64 +11221,49 @@ EXTERN_C const IID IID_ILocator;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CarrierFrequency( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency) = 0;
+            /* [retval][out] */ __RPC__out long *Frequency) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CarrierFrequency( 
-            /* [annotation][in] */ 
-            _In_  long Frequency) = 0;
+            /* [in] */ long Frequency) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InnerFEC( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC) = 0;
+            /* [retval][out] */ __RPC__out FECMethod *FEC) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InnerFEC( 
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC) = 0;
+            /* [in] */ FECMethod FEC) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InnerFECRate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC) = 0;
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InnerFECRate( 
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC) = 0;
+            /* [in] */ BinaryConvolutionCodeRate FEC) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OuterFEC( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC) = 0;
+            /* [retval][out] */ __RPC__out FECMethod *FEC) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OuterFEC( 
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC) = 0;
+            /* [in] */ FECMethod FEC) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OuterFECRate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC) = 0;
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OuterFECRate( 
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC) = 0;
+            /* [in] */ BinaryConvolutionCodeRate FEC) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Modulation( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation) = 0;
+            /* [retval][out] */ __RPC__out ModulationType *Modulation) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Modulation( 
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation) = 0;
+            /* [in] */ ModulationType Modulation) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SymbolRate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate) = 0;
+            /* [retval][out] */ __RPC__out long *Rate) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SymbolRate( 
-            /* [annotation][in] */ 
-            _In_  long Rate) = 0;
+            /* [in] */ long Rate) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator) = 0;
         
     };
     
@@ -12421,8 +11277,7 @@ EXTERN_C const IID IID_ILocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12437,31 +11292,23 @@ EXTERN_C const IID IID_ILocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ILocator * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ILocator * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ILocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12486,92 +11333,77 @@ EXTERN_C const IID IID_ILocator;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in ILocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in ILocator * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in ILocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in ILocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in ILocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in ILocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in ILocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in ILocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in ILocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in ILocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in ILocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in ILocator * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in ILocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in ILocator * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in ILocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         END_INTERFACE
     } ILocatorVtbl;
@@ -12681,12 +11513,10 @@ EXTERN_C const IID IID_IAnalogLocator;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VideoStandard( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  AnalogVideoStandard *AVS) = 0;
+            /* [retval][out] */ __RPC__out AnalogVideoStandard *AVS) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_VideoStandard( 
-            /* [annotation][in] */ 
-            _In_  AnalogVideoStandard AVS) = 0;
+            /* [in] */ AnalogVideoStandard AVS) = 0;
         
     };
     
@@ -12700,8 +11530,7 @@ EXTERN_C const IID IID_IAnalogLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12716,31 +11545,23 @@ EXTERN_C const IID IID_IAnalogLocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12765,104 +11586,87 @@ EXTERN_C const IID IID_IAnalogLocator;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         DECLSPEC_XFGVIRT(IAnalogLocator, get_VideoStandard)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VideoStandard )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  AnalogVideoStandard *AVS);
+            /* [retval][out] */ __RPC__out AnalogVideoStandard *AVS);
         
         DECLSPEC_XFGVIRT(IAnalogLocator, put_VideoStandard)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_VideoStandard )( 
             __RPC__in IAnalogLocator * This,
-            /* [annotation][in] */ 
-            _In_  AnalogVideoStandard AVS);
+            /* [in] */ AnalogVideoStandard AVS);
         
         END_INTERFACE
     } IAnalogLocatorVtbl;
@@ -12990,8 +11794,7 @@ EXTERN_C const IID IID_IDigitalLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13006,31 +11809,23 @@ EXTERN_C const IID IID_IDigitalLocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13055,92 +11850,77 @@ EXTERN_C const IID IID_IDigitalLocator;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDigitalLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         END_INTERFACE
     } IDigitalLocatorVtbl;
@@ -13251,20 +12031,16 @@ EXTERN_C const IID IID_IATSCLocator;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PhysicalChannel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *PhysicalChannel) = 0;
+            /* [retval][out] */ __RPC__out long *PhysicalChannel) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PhysicalChannel( 
-            /* [annotation][in] */ 
-            _In_  long PhysicalChannel) = 0;
+            /* [in] */ long PhysicalChannel) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TSID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *TSID) = 0;
+            /* [retval][out] */ __RPC__out long *TSID) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TSID( 
-            /* [annotation][in] */ 
-            _In_  long TSID) = 0;
+            /* [in] */ long TSID) = 0;
         
     };
     
@@ -13278,8 +12054,7 @@ EXTERN_C const IID IID_IATSCLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13294,31 +12069,23 @@ EXTERN_C const IID IID_IATSCLocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13343,116 +12110,97 @@ EXTERN_C const IID IID_IATSCLocator;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         DECLSPEC_XFGVIRT(IATSCLocator, get_PhysicalChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhysicalChannel )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *PhysicalChannel);
+            /* [retval][out] */ __RPC__out long *PhysicalChannel);
         
         DECLSPEC_XFGVIRT(IATSCLocator, put_PhysicalChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PhysicalChannel )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  long PhysicalChannel);
+            /* [in] */ long PhysicalChannel);
         
         DECLSPEC_XFGVIRT(IATSCLocator, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *TSID);
+            /* [retval][out] */ __RPC__out long *TSID);
         
         DECLSPEC_XFGVIRT(IATSCLocator, put_TSID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TSID )( 
             __RPC__in IATSCLocator * This,
-            /* [annotation][in] */ 
-            _In_  long TSID);
+            /* [in] */ long TSID);
         
         END_INTERFACE
     } IATSCLocatorVtbl;
@@ -13576,12 +12324,10 @@ EXTERN_C const IID IID_IATSCLocator2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProgramNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ProgramNumber) = 0;
+            /* [retval][out] */ __RPC__out long *ProgramNumber) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ProgramNumber( 
-            /* [annotation][in] */ 
-            _In_  long ProgramNumber) = 0;
+            /* [in] */ long ProgramNumber) = 0;
         
     };
     
@@ -13595,8 +12341,7 @@ EXTERN_C const IID IID_IATSCLocator2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13611,31 +12356,23 @@ EXTERN_C const IID IID_IATSCLocator2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13660,128 +12397,107 @@ EXTERN_C const IID IID_IATSCLocator2;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         DECLSPEC_XFGVIRT(IATSCLocator, get_PhysicalChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhysicalChannel )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *PhysicalChannel);
+            /* [retval][out] */ __RPC__out long *PhysicalChannel);
         
         DECLSPEC_XFGVIRT(IATSCLocator, put_PhysicalChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PhysicalChannel )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long PhysicalChannel);
+            /* [in] */ long PhysicalChannel);
         
         DECLSPEC_XFGVIRT(IATSCLocator, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *TSID);
+            /* [retval][out] */ __RPC__out long *TSID);
         
         DECLSPEC_XFGVIRT(IATSCLocator, put_TSID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TSID )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long TSID);
+            /* [in] */ long TSID);
         
         DECLSPEC_XFGVIRT(IATSCLocator2, get_ProgramNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramNumber )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ProgramNumber);
+            /* [retval][out] */ __RPC__out long *ProgramNumber);
         
         DECLSPEC_XFGVIRT(IATSCLocator2, put_ProgramNumber)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProgramNumber )( 
             __RPC__in IATSCLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long ProgramNumber);
+            /* [in] */ long ProgramNumber);
         
         END_INTERFACE
     } IATSCLocator2Vtbl;
@@ -13923,8 +12639,7 @@ EXTERN_C const IID IID_IDigitalCableLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13939,31 +12654,23 @@ EXTERN_C const IID IID_IDigitalCableLocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13988,128 +12695,107 @@ EXTERN_C const IID IID_IDigitalCableLocator;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         DECLSPEC_XFGVIRT(IATSCLocator, get_PhysicalChannel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhysicalChannel )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *PhysicalChannel);
+            /* [retval][out] */ __RPC__out long *PhysicalChannel);
         
         DECLSPEC_XFGVIRT(IATSCLocator, put_PhysicalChannel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PhysicalChannel )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  long PhysicalChannel);
+            /* [in] */ long PhysicalChannel);
         
         DECLSPEC_XFGVIRT(IATSCLocator, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *TSID);
+            /* [retval][out] */ __RPC__out long *TSID);
         
         DECLSPEC_XFGVIRT(IATSCLocator, put_TSID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TSID )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  long TSID);
+            /* [in] */ long TSID);
         
         DECLSPEC_XFGVIRT(IATSCLocator2, get_ProgramNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgramNumber )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *ProgramNumber);
+            /* [retval][out] */ __RPC__out long *ProgramNumber);
         
         DECLSPEC_XFGVIRT(IATSCLocator2, put_ProgramNumber)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProgramNumber )( 
             __RPC__in IDigitalCableLocator * This,
-            /* [annotation][in] */ 
-            _In_  long ProgramNumber);
+            /* [in] */ long ProgramNumber);
         
         END_INTERFACE
     } IDigitalCableLocatorVtbl;
@@ -14241,60 +12927,46 @@ EXTERN_C const IID IID_IDVBTLocator;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Bandwidth( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *BandWidthVal) = 0;
+            /* [retval][out] */ __RPC__out long *BandWidthVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Bandwidth( 
-            /* [annotation][in] */ 
-            _In_  long BandwidthVal) = 0;
+            /* [in] */ long BandwidthVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LPInnerFEC( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC) = 0;
+            /* [retval][out] */ __RPC__out FECMethod *FEC) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LPInnerFEC( 
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC) = 0;
+            /* [in] */ FECMethod FEC) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LPInnerFECRate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC) = 0;
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LPInnerFECRate( 
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC) = 0;
+            /* [in] */ BinaryConvolutionCodeRate FEC) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_HAlpha( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  HierarchyAlpha *Alpha) = 0;
+            /* [retval][out] */ __RPC__out HierarchyAlpha *Alpha) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_HAlpha( 
-            /* [annotation][in] */ 
-            _In_  HierarchyAlpha Alpha) = 0;
+            /* [in] */ HierarchyAlpha Alpha) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Guard( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GuardInterval *GI) = 0;
+            /* [retval][out] */ __RPC__out GuardInterval *GI) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Guard( 
-            /* [annotation][in] */ 
-            _In_  GuardInterval GI) = 0;
+            /* [in] */ GuardInterval GI) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Mode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TransmissionMode *mode) = 0;
+            /* [retval][out] */ __RPC__out TransmissionMode *mode) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Mode( 
-            /* [annotation][in] */ 
-            _In_  TransmissionMode mode) = 0;
+            /* [in] */ TransmissionMode mode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OtherFrequencyInUse( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *OtherFrequencyInUseVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *OtherFrequencyInUseVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OtherFrequencyInUse( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL OtherFrequencyInUseVal) = 0;
+            /* [in] */ VARIANT_BOOL OtherFrequencyInUseVal) = 0;
         
     };
     
@@ -14308,8 +12980,7 @@ EXTERN_C const IID IID_IDVBTLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14324,31 +12995,23 @@ EXTERN_C const IID IID_IDVBTLocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -14373,176 +13036,147 @@ EXTERN_C const IID IID_IDVBTLocator;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_Bandwidth)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Bandwidth )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *BandWidthVal);
+            /* [retval][out] */ __RPC__out long *BandWidthVal);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_Bandwidth)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Bandwidth )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  long BandwidthVal);
+            /* [in] */ long BandwidthVal);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_LPInnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LPInnerFEC )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_LPInnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LPInnerFEC )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_LPInnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LPInnerFECRate )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_LPInnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LPInnerFECRate )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_HAlpha)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HAlpha )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  HierarchyAlpha *Alpha);
+            /* [retval][out] */ __RPC__out HierarchyAlpha *Alpha);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_HAlpha)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_HAlpha )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  HierarchyAlpha Alpha);
+            /* [in] */ HierarchyAlpha Alpha);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_Guard)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Guard )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GuardInterval *GI);
+            /* [retval][out] */ __RPC__out GuardInterval *GI);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_Guard)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Guard )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  GuardInterval GI);
+            /* [in] */ GuardInterval GI);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_Mode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Mode )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TransmissionMode *mode);
+            /* [retval][out] */ __RPC__out TransmissionMode *mode);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_Mode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Mode )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  TransmissionMode mode);
+            /* [in] */ TransmissionMode mode);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_OtherFrequencyInUse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OtherFrequencyInUse )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *OtherFrequencyInUseVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *OtherFrequencyInUseVal);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_OtherFrequencyInUse)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OtherFrequencyInUse )( 
             __RPC__in IDVBTLocator * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL OtherFrequencyInUseVal);
+            /* [in] */ VARIANT_BOOL OtherFrequencyInUseVal);
         
         END_INTERFACE
     } IDVBTLocatorVtbl;
@@ -14696,12 +13330,10 @@ EXTERN_C const IID IID_IDVBTLocator2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PhysicalLayerPipeId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *PhysicalLayerPipeIdVal) = 0;
+            /* [retval][out] */ __RPC__out long *PhysicalLayerPipeIdVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PhysicalLayerPipeId( 
-            /* [annotation][in] */ 
-            _In_  long PhysicalLayerPipeIdVal) = 0;
+            /* [in] */ long PhysicalLayerPipeIdVal) = 0;
         
     };
     
@@ -14715,8 +13347,7 @@ EXTERN_C const IID IID_IDVBTLocator2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14731,31 +13362,23 @@ EXTERN_C const IID IID_IDVBTLocator2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -14780,188 +13403,157 @@ EXTERN_C const IID IID_IDVBTLocator2;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_Bandwidth)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Bandwidth )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *BandWidthVal);
+            /* [retval][out] */ __RPC__out long *BandWidthVal);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_Bandwidth)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Bandwidth )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long BandwidthVal);
+            /* [in] */ long BandwidthVal);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_LPInnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LPInnerFEC )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_LPInnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LPInnerFEC )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_LPInnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LPInnerFECRate )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_LPInnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LPInnerFECRate )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_HAlpha)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HAlpha )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  HierarchyAlpha *Alpha);
+            /* [retval][out] */ __RPC__out HierarchyAlpha *Alpha);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_HAlpha)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_HAlpha )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  HierarchyAlpha Alpha);
+            /* [in] */ HierarchyAlpha Alpha);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_Guard)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Guard )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GuardInterval *GI);
+            /* [retval][out] */ __RPC__out GuardInterval *GI);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_Guard)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Guard )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  GuardInterval GI);
+            /* [in] */ GuardInterval GI);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_Mode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Mode )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TransmissionMode *mode);
+            /* [retval][out] */ __RPC__out TransmissionMode *mode);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_Mode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Mode )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  TransmissionMode mode);
+            /* [in] */ TransmissionMode mode);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, get_OtherFrequencyInUse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OtherFrequencyInUse )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *OtherFrequencyInUseVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *OtherFrequencyInUseVal);
         
         DECLSPEC_XFGVIRT(IDVBTLocator, put_OtherFrequencyInUse)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OtherFrequencyInUse )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL OtherFrequencyInUseVal);
+            /* [in] */ VARIANT_BOOL OtherFrequencyInUseVal);
         
         DECLSPEC_XFGVIRT(IDVBTLocator2, get_PhysicalLayerPipeId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PhysicalLayerPipeId )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *PhysicalLayerPipeIdVal);
+            /* [retval][out] */ __RPC__out long *PhysicalLayerPipeIdVal);
         
         DECLSPEC_XFGVIRT(IDVBTLocator2, put_PhysicalLayerPipeId)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PhysicalLayerPipeId )( 
             __RPC__in IDVBTLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long PhysicalLayerPipeIdVal);
+            /* [in] */ long PhysicalLayerPipeIdVal);
         
         END_INTERFACE
     } IDVBTLocator2Vtbl;
@@ -15122,44 +13714,34 @@ EXTERN_C const IID IID_IDVBSLocator;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SignalPolarisation( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  Polarisation *PolarisationVal) = 0;
+            /* [retval][out] */ __RPC__out Polarisation *PolarisationVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SignalPolarisation( 
-            /* [annotation][in] */ 
-            _In_  Polarisation PolarisationVal) = 0;
+            /* [in] */ Polarisation PolarisationVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_WestPosition( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *WestLongitude) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *WestLongitude) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_WestPosition( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL WestLongitude) = 0;
+            /* [in] */ VARIANT_BOOL WestLongitude) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OrbitalPosition( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *longitude) = 0;
+            /* [retval][out] */ __RPC__out long *longitude) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OrbitalPosition( 
-            /* [annotation][in] */ 
-            _In_  long longitude) = 0;
+            /* [in] */ long longitude) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Azimuth( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Azimuth) = 0;
+            /* [retval][out] */ __RPC__out long *Azimuth) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Azimuth( 
-            /* [annotation][in] */ 
-            _In_  long Azimuth) = 0;
+            /* [in] */ long Azimuth) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Elevation( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Elevation) = 0;
+            /* [retval][out] */ __RPC__out long *Elevation) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Elevation( 
-            /* [annotation][in] */ 
-            _In_  long Elevation) = 0;
+            /* [in] */ long Elevation) = 0;
         
     };
     
@@ -15173,8 +13755,7 @@ EXTERN_C const IID IID_IDVBSLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15189,31 +13770,23 @@ EXTERN_C const IID IID_IDVBSLocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -15238,152 +13811,127 @@ EXTERN_C const IID IID_IDVBSLocator;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_SignalPolarisation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignalPolarisation )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  Polarisation *PolarisationVal);
+            /* [retval][out] */ __RPC__out Polarisation *PolarisationVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_SignalPolarisation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SignalPolarisation )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  Polarisation PolarisationVal);
+            /* [in] */ Polarisation PolarisationVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_WestPosition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WestPosition )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *WestLongitude);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *WestLongitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_WestPosition)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_WestPosition )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL WestLongitude);
+            /* [in] */ VARIANT_BOOL WestLongitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_OrbitalPosition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OrbitalPosition )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *longitude);
+            /* [retval][out] */ __RPC__out long *longitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_OrbitalPosition)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OrbitalPosition )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  long longitude);
+            /* [in] */ long longitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_Azimuth)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Azimuth )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Azimuth);
+            /* [retval][out] */ __RPC__out long *Azimuth);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_Azimuth)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Azimuth )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Azimuth);
+            /* [in] */ long Azimuth);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_Elevation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Elevation )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Elevation);
+            /* [retval][out] */ __RPC__out long *Elevation);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_Elevation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Elevation )( 
             __RPC__in IDVBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Elevation);
+            /* [in] */ long Elevation);
         
         END_INTERFACE
     } IDVBSLocatorVtbl;
@@ -15525,60 +14073,46 @@ EXTERN_C const IID IID_IDVBSLocator2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DiseqLNBSource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LNB_Source *DiseqLNBSourceVal) = 0;
+            /* [retval][out] */ __RPC__out LNB_Source *DiseqLNBSourceVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DiseqLNBSource( 
-            /* [annotation][in] */ 
-            _In_  LNB_Source DiseqLNBSourceVal) = 0;
+            /* [in] */ LNB_Source DiseqLNBSourceVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalOscillatorOverrideLow( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LocalOscillatorOverrideLowVal) = 0;
+            /* [retval][out] */ __RPC__out long *LocalOscillatorOverrideLowVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LocalOscillatorOverrideLow( 
-            /* [annotation][in] */ 
-            _In_  long LocalOscillatorOverrideLowVal) = 0;
+            /* [in] */ long LocalOscillatorOverrideLowVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalOscillatorOverrideHigh( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LocalOscillatorOverrideHighVal) = 0;
+            /* [retval][out] */ __RPC__out long *LocalOscillatorOverrideHighVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LocalOscillatorOverrideHigh( 
-            /* [annotation][in] */ 
-            _In_  long LocalOscillatorOverrideHighVal) = 0;
+            /* [in] */ long LocalOscillatorOverrideHighVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalLNBSwitchOverride( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LocalLNBSwitchOverrideVal) = 0;
+            /* [retval][out] */ __RPC__out long *LocalLNBSwitchOverrideVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LocalLNBSwitchOverride( 
-            /* [annotation][in] */ 
-            _In_  long LocalLNBSwitchOverrideVal) = 0;
+            /* [in] */ long LocalLNBSwitchOverrideVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalSpectralInversionOverride( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SpectralInversion *LocalSpectralInversionOverrideVal) = 0;
+            /* [retval][out] */ __RPC__out SpectralInversion *LocalSpectralInversionOverrideVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LocalSpectralInversionOverride( 
-            /* [annotation][in] */ 
-            _In_  SpectralInversion LocalSpectralInversionOverrideVal) = 0;
+            /* [in] */ SpectralInversion LocalSpectralInversionOverrideVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SignalRollOff( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  RollOff *RollOffVal) = 0;
+            /* [retval][out] */ __RPC__out RollOff *RollOffVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SignalRollOff( 
-            /* [annotation][in] */ 
-            _In_  RollOff RollOffVal) = 0;
+            /* [in] */ RollOff RollOffVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SignalPilot( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  Pilot *PilotVal) = 0;
+            /* [retval][out] */ __RPC__out Pilot *PilotVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SignalPilot( 
-            /* [annotation][in] */ 
-            _In_  Pilot PilotVal) = 0;
+            /* [in] */ Pilot PilotVal) = 0;
         
     };
     
@@ -15592,8 +14126,7 @@ EXTERN_C const IID IID_IDVBSLocator2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15608,31 +14141,23 @@ EXTERN_C const IID IID_IDVBSLocator2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -15657,236 +14182,197 @@ EXTERN_C const IID IID_IDVBSLocator2;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_SignalPolarisation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignalPolarisation )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  Polarisation *PolarisationVal);
+            /* [retval][out] */ __RPC__out Polarisation *PolarisationVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_SignalPolarisation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SignalPolarisation )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  Polarisation PolarisationVal);
+            /* [in] */ Polarisation PolarisationVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_WestPosition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WestPosition )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *WestLongitude);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *WestLongitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_WestPosition)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_WestPosition )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL WestLongitude);
+            /* [in] */ VARIANT_BOOL WestLongitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_OrbitalPosition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OrbitalPosition )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *longitude);
+            /* [retval][out] */ __RPC__out long *longitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_OrbitalPosition)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OrbitalPosition )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long longitude);
+            /* [in] */ long longitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_Azimuth)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Azimuth )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Azimuth);
+            /* [retval][out] */ __RPC__out long *Azimuth);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_Azimuth)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Azimuth )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long Azimuth);
+            /* [in] */ long Azimuth);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_Elevation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Elevation )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Elevation);
+            /* [retval][out] */ __RPC__out long *Elevation);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_Elevation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Elevation )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long Elevation);
+            /* [in] */ long Elevation);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, get_DiseqLNBSource)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiseqLNBSource )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LNB_Source *DiseqLNBSourceVal);
+            /* [retval][out] */ __RPC__out LNB_Source *DiseqLNBSourceVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, put_DiseqLNBSource)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DiseqLNBSource )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  LNB_Source DiseqLNBSourceVal);
+            /* [in] */ LNB_Source DiseqLNBSourceVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, get_LocalOscillatorOverrideLow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalOscillatorOverrideLow )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LocalOscillatorOverrideLowVal);
+            /* [retval][out] */ __RPC__out long *LocalOscillatorOverrideLowVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, put_LocalOscillatorOverrideLow)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LocalOscillatorOverrideLow )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long LocalOscillatorOverrideLowVal);
+            /* [in] */ long LocalOscillatorOverrideLowVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, get_LocalOscillatorOverrideHigh)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalOscillatorOverrideHigh )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LocalOscillatorOverrideHighVal);
+            /* [retval][out] */ __RPC__out long *LocalOscillatorOverrideHighVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, put_LocalOscillatorOverrideHigh)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LocalOscillatorOverrideHigh )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long LocalOscillatorOverrideHighVal);
+            /* [in] */ long LocalOscillatorOverrideHighVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, get_LocalLNBSwitchOverride)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalLNBSwitchOverride )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *LocalLNBSwitchOverrideVal);
+            /* [retval][out] */ __RPC__out long *LocalLNBSwitchOverrideVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, put_LocalLNBSwitchOverride)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LocalLNBSwitchOverride )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  long LocalLNBSwitchOverrideVal);
+            /* [in] */ long LocalLNBSwitchOverrideVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, get_LocalSpectralInversionOverride)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LocalSpectralInversionOverride )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SpectralInversion *LocalSpectralInversionOverrideVal);
+            /* [retval][out] */ __RPC__out SpectralInversion *LocalSpectralInversionOverrideVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, put_LocalSpectralInversionOverride)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LocalSpectralInversionOverride )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  SpectralInversion LocalSpectralInversionOverrideVal);
+            /* [in] */ SpectralInversion LocalSpectralInversionOverrideVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, get_SignalRollOff)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignalRollOff )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  RollOff *RollOffVal);
+            /* [retval][out] */ __RPC__out RollOff *RollOffVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, put_SignalRollOff)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SignalRollOff )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  RollOff RollOffVal);
+            /* [in] */ RollOff RollOffVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, get_SignalPilot)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignalPilot )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  Pilot *PilotVal);
+            /* [retval][out] */ __RPC__out Pilot *PilotVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator2, put_SignalPilot)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SignalPilot )( 
             __RPC__in IDVBSLocator2 * This,
-            /* [annotation][in] */ 
-            _In_  Pilot PilotVal);
+            /* [in] */ Pilot PilotVal);
         
         END_INTERFACE
     } IDVBSLocator2Vtbl;
@@ -16082,8 +14568,7 @@ EXTERN_C const IID IID_IDVBCLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16098,31 +14583,23 @@ EXTERN_C const IID IID_IDVBCLocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -16147,92 +14624,77 @@ EXTERN_C const IID IID_IDVBCLocator;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IDVBCLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         END_INTERFACE
     } IDVBCLocatorVtbl;
@@ -16355,8 +14817,7 @@ EXTERN_C const IID IID_IISDBSLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16371,31 +14832,23 @@ EXTERN_C const IID IID_IISDBSLocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -16420,152 +14873,127 @@ EXTERN_C const IID IID_IISDBSLocator;
         DECLSPEC_XFGVIRT(ILocator, get_CarrierFrequency)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CarrierFrequency )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Frequency);
+            /* [retval][out] */ __RPC__out long *Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, put_CarrierFrequency)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CarrierFrequency )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Frequency);
+            /* [in] */ long Frequency);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFEC )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFEC )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_InnerFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_InnerFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFEC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFEC )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FECMethod *FEC);
+            /* [retval][out] */ __RPC__out FECMethod *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFEC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFEC )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod FEC);
+            /* [in] */ FECMethod FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_OuterFECRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BinaryConvolutionCodeRate *FEC);
+            /* [retval][out] */ __RPC__out BinaryConvolutionCodeRate *FEC);
         
         DECLSPEC_XFGVIRT(ILocator, put_OuterFECRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate FEC);
+            /* [in] */ BinaryConvolutionCodeRate FEC);
         
         DECLSPEC_XFGVIRT(ILocator, get_Modulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modulation )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ModulationType *Modulation);
+            /* [retval][out] */ __RPC__out ModulationType *Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, put_Modulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Modulation )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType Modulation);
+            /* [in] */ ModulationType Modulation);
         
         DECLSPEC_XFGVIRT(ILocator, get_SymbolRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Rate);
+            /* [retval][out] */ __RPC__out long *Rate);
         
         DECLSPEC_XFGVIRT(ILocator, put_SymbolRate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Rate);
+            /* [in] */ long Rate);
         
         DECLSPEC_XFGVIRT(ILocator, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ILocator **NewLocator);
+            /* [retval][out] */ __RPC__deref_out_opt ILocator **NewLocator);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_SignalPolarisation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SignalPolarisation )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  Polarisation *PolarisationVal);
+            /* [retval][out] */ __RPC__out Polarisation *PolarisationVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_SignalPolarisation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SignalPolarisation )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  Polarisation PolarisationVal);
+            /* [in] */ Polarisation PolarisationVal);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_WestPosition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WestPosition )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *WestLongitude);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *WestLongitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_WestPosition)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_WestPosition )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL WestLongitude);
+            /* [in] */ VARIANT_BOOL WestLongitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_OrbitalPosition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OrbitalPosition )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *longitude);
+            /* [retval][out] */ __RPC__out long *longitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_OrbitalPosition)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OrbitalPosition )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  long longitude);
+            /* [in] */ long longitude);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_Azimuth)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Azimuth )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Azimuth);
+            /* [retval][out] */ __RPC__out long *Azimuth);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_Azimuth)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Azimuth )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Azimuth);
+            /* [in] */ long Azimuth);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, get_Elevation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Elevation )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Elevation);
+            /* [retval][out] */ __RPC__out long *Elevation);
         
         DECLSPEC_XFGVIRT(IDVBSLocator, put_Elevation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Elevation )( 
             __RPC__in IISDBSLocator * This,
-            /* [annotation][in] */ 
-            _In_  long Elevation);
+            /* [in] */ long Elevation);
         
         END_INTERFACE
     } IISDBSLocatorVtbl;
@@ -16708,24 +15136,18 @@ EXTERN_C const IID IID_IESOpenMmiEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDialogNumber( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pDialogRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pDialogNumber) = 0;
+            /* [out] */ __RPC__out DWORD *pDialogRequest,
+            /* [retval][out] */ __RPC__out DWORD *pDialogNumber) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDialogType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *guidDialogType) = 0;
+            /* [retval][out] */ __RPC__out GUID *guidDialogType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDialogData( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDialogStringData( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrBaseUrl,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrBaseUrl,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData) = 0;
         
     };
     
@@ -16739,8 +15161,7 @@ EXTERN_C const IID IID_IESOpenMmiEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESOpenMmiEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16755,60 +15176,49 @@ EXTERN_C const IID IID_IESOpenMmiEvent;
         DECLSPEC_XFGVIRT(IESEvent, GetEventId)
         HRESULT ( STDMETHODCALLTYPE *GetEventId )( 
             __RPC__in IESOpenMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEventId);
+            /* [retval][out] */ __RPC__out DWORD *pdwEventId);
         
         DECLSPEC_XFGVIRT(IESEvent, GetEventType)
         HRESULT ( STDMETHODCALLTYPE *GetEventType )( 
             __RPC__in IESOpenMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidEventType);
+            /* [retval][out] */ __RPC__out GUID *pguidEventType);
         
         DECLSPEC_XFGVIRT(IESEvent, SetCompletionStatus)
         HRESULT ( STDMETHODCALLTYPE *SetCompletionStatus )( 
             __RPC__in IESOpenMmiEvent * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwResult);
+            /* [in] */ DWORD dwResult);
         
         DECLSPEC_XFGVIRT(IESEvent, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in IESOpenMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         DECLSPEC_XFGVIRT(IESEvent, GetStringData)
         HRESULT ( STDMETHODCALLTYPE *GetStringData )( 
             __RPC__in IESOpenMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData);
         
         DECLSPEC_XFGVIRT(IESOpenMmiEvent, GetDialogNumber)
         HRESULT ( STDMETHODCALLTYPE *GetDialogNumber )( 
             __RPC__in IESOpenMmiEvent * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pDialogRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pDialogNumber);
+            /* [out] */ __RPC__out DWORD *pDialogRequest,
+            /* [retval][out] */ __RPC__out DWORD *pDialogNumber);
         
         DECLSPEC_XFGVIRT(IESOpenMmiEvent, GetDialogType)
         HRESULT ( STDMETHODCALLTYPE *GetDialogType )( 
             __RPC__in IESOpenMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *guidDialogType);
+            /* [retval][out] */ __RPC__out GUID *guidDialogType);
         
         DECLSPEC_XFGVIRT(IESOpenMmiEvent, GetDialogData)
         HRESULT ( STDMETHODCALLTYPE *GetDialogData )( 
             __RPC__in IESOpenMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         DECLSPEC_XFGVIRT(IESOpenMmiEvent, GetDialogStringData)
         HRESULT ( STDMETHODCALLTYPE *GetDialogStringData )( 
             __RPC__in IESOpenMmiEvent * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrBaseUrl,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrBaseUrl,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData);
         
         END_INTERFACE
     } IESOpenMmiEventVtbl;
@@ -16888,8 +15298,7 @@ EXTERN_C const IID IID_IESCloseMmiEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDialogNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pDialogNumber) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pDialogNumber) = 0;
         
     };
     
@@ -16903,8 +15312,7 @@ EXTERN_C const IID IID_IESCloseMmiEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESCloseMmiEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16919,38 +15327,32 @@ EXTERN_C const IID IID_IESCloseMmiEvent;
         DECLSPEC_XFGVIRT(IESEvent, GetEventId)
         HRESULT ( STDMETHODCALLTYPE *GetEventId )( 
             __RPC__in IESCloseMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEventId);
+            /* [retval][out] */ __RPC__out DWORD *pdwEventId);
         
         DECLSPEC_XFGVIRT(IESEvent, GetEventType)
         HRESULT ( STDMETHODCALLTYPE *GetEventType )( 
             __RPC__in IESCloseMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidEventType);
+            /* [retval][out] */ __RPC__out GUID *pguidEventType);
         
         DECLSPEC_XFGVIRT(IESEvent, SetCompletionStatus)
         HRESULT ( STDMETHODCALLTYPE *SetCompletionStatus )( 
             __RPC__in IESCloseMmiEvent * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwResult);
+            /* [in] */ DWORD dwResult);
         
         DECLSPEC_XFGVIRT(IESEvent, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in IESCloseMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         DECLSPEC_XFGVIRT(IESEvent, GetStringData)
         HRESULT ( STDMETHODCALLTYPE *GetStringData )( 
             __RPC__in IESCloseMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData);
         
         DECLSPEC_XFGVIRT(IESCloseMmiEvent, GetDialogNumber)
         HRESULT ( STDMETHODCALLTYPE *GetDialogNumber )( 
             __RPC__in IESCloseMmiEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pDialogNumber);
+            /* [retval][out] */ __RPC__out DWORD *pDialogNumber);
         
         END_INTERFACE
     } IESCloseMmiEventVtbl;
@@ -17021,8 +15423,7 @@ EXTERN_C const IID IID_IESValueUpdatedEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetValueNames( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbstrNames) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbstrNames) = 0;
         
     };
     
@@ -17036,8 +15437,7 @@ EXTERN_C const IID IID_IESValueUpdatedEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESValueUpdatedEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17052,38 +15452,32 @@ EXTERN_C const IID IID_IESValueUpdatedEvent;
         DECLSPEC_XFGVIRT(IESEvent, GetEventId)
         HRESULT ( STDMETHODCALLTYPE *GetEventId )( 
             __RPC__in IESValueUpdatedEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEventId);
+            /* [retval][out] */ __RPC__out DWORD *pdwEventId);
         
         DECLSPEC_XFGVIRT(IESEvent, GetEventType)
         HRESULT ( STDMETHODCALLTYPE *GetEventType )( 
             __RPC__in IESValueUpdatedEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidEventType);
+            /* [retval][out] */ __RPC__out GUID *pguidEventType);
         
         DECLSPEC_XFGVIRT(IESEvent, SetCompletionStatus)
         HRESULT ( STDMETHODCALLTYPE *SetCompletionStatus )( 
             __RPC__in IESValueUpdatedEvent * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwResult);
+            /* [in] */ DWORD dwResult);
         
         DECLSPEC_XFGVIRT(IESEvent, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in IESValueUpdatedEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         DECLSPEC_XFGVIRT(IESEvent, GetStringData)
         HRESULT ( STDMETHODCALLTYPE *GetStringData )( 
             __RPC__in IESValueUpdatedEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData);
         
         DECLSPEC_XFGVIRT(IESValueUpdatedEvent, GetValueNames)
         HRESULT ( STDMETHODCALLTYPE *GetValueNames )( 
             __RPC__in IESValueUpdatedEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbstrNames);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbstrNames);
         
         END_INTERFACE
     } IESValueUpdatedEventVtbl;
@@ -17154,20 +15548,16 @@ EXTERN_C const IID IID_IESRequestTunerEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPriority( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BYTE *pbyPriority) = 0;
+            /* [retval][out] */ __RPC__out BYTE *pbyPriority) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetReason( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BYTE *pbyReason) = 0;
+            /* [retval][out] */ __RPC__out BYTE *pbyReason) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConsequences( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BYTE *pbyConsequences) = 0;
+            /* [retval][out] */ __RPC__out BYTE *pbyConsequences) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEstimatedTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEstimatedTime) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwEstimatedTime) = 0;
         
     };
     
@@ -17181,8 +15571,7 @@ EXTERN_C const IID IID_IESRequestTunerEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESRequestTunerEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17197,56 +15586,47 @@ EXTERN_C const IID IID_IESRequestTunerEvent;
         DECLSPEC_XFGVIRT(IESEvent, GetEventId)
         HRESULT ( STDMETHODCALLTYPE *GetEventId )( 
             __RPC__in IESRequestTunerEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEventId);
+            /* [retval][out] */ __RPC__out DWORD *pdwEventId);
         
         DECLSPEC_XFGVIRT(IESEvent, GetEventType)
         HRESULT ( STDMETHODCALLTYPE *GetEventType )( 
             __RPC__in IESRequestTunerEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidEventType);
+            /* [retval][out] */ __RPC__out GUID *pguidEventType);
         
         DECLSPEC_XFGVIRT(IESEvent, SetCompletionStatus)
         HRESULT ( STDMETHODCALLTYPE *SetCompletionStatus )( 
             __RPC__in IESRequestTunerEvent * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwResult);
+            /* [in] */ DWORD dwResult);
         
         DECLSPEC_XFGVIRT(IESEvent, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in IESRequestTunerEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         DECLSPEC_XFGVIRT(IESEvent, GetStringData)
         HRESULT ( STDMETHODCALLTYPE *GetStringData )( 
             __RPC__in IESRequestTunerEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData);
         
         DECLSPEC_XFGVIRT(IESRequestTunerEvent, GetPriority)
         HRESULT ( STDMETHODCALLTYPE *GetPriority )( 
             __RPC__in IESRequestTunerEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BYTE *pbyPriority);
+            /* [retval][out] */ __RPC__out BYTE *pbyPriority);
         
         DECLSPEC_XFGVIRT(IESRequestTunerEvent, GetReason)
         HRESULT ( STDMETHODCALLTYPE *GetReason )( 
             __RPC__in IESRequestTunerEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BYTE *pbyReason);
+            /* [retval][out] */ __RPC__out BYTE *pbyReason);
         
         DECLSPEC_XFGVIRT(IESRequestTunerEvent, GetConsequences)
         HRESULT ( STDMETHODCALLTYPE *GetConsequences )( 
             __RPC__in IESRequestTunerEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BYTE *pbyConsequences);
+            /* [retval][out] */ __RPC__out BYTE *pbyConsequences);
         
         DECLSPEC_XFGVIRT(IESRequestTunerEvent, GetEstimatedTime)
         HRESULT ( STDMETHODCALLTYPE *GetEstimatedTime )( 
             __RPC__in IESRequestTunerEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEstimatedTime);
+            /* [retval][out] */ __RPC__out DWORD *pdwEstimatedTime);
         
         END_INTERFACE
     } IESRequestTunerEventVtbl;
@@ -17326,20 +15706,16 @@ EXTERN_C const IID IID_IESIsdbCasResponseEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRequestId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pRequestId) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pRequestId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pStatus) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDataLength( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pRequestLength) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pRequestLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetResponseData( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData) = 0;
         
     };
     
@@ -17353,8 +15729,7 @@ EXTERN_C const IID IID_IESIsdbCasResponseEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESIsdbCasResponseEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17369,56 +15744,47 @@ EXTERN_C const IID IID_IESIsdbCasResponseEvent;
         DECLSPEC_XFGVIRT(IESEvent, GetEventId)
         HRESULT ( STDMETHODCALLTYPE *GetEventId )( 
             __RPC__in IESIsdbCasResponseEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEventId);
+            /* [retval][out] */ __RPC__out DWORD *pdwEventId);
         
         DECLSPEC_XFGVIRT(IESEvent, GetEventType)
         HRESULT ( STDMETHODCALLTYPE *GetEventType )( 
             __RPC__in IESIsdbCasResponseEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidEventType);
+            /* [retval][out] */ __RPC__out GUID *pguidEventType);
         
         DECLSPEC_XFGVIRT(IESEvent, SetCompletionStatus)
         HRESULT ( STDMETHODCALLTYPE *SetCompletionStatus )( 
             __RPC__in IESIsdbCasResponseEvent * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwResult);
+            /* [in] */ DWORD dwResult);
         
         DECLSPEC_XFGVIRT(IESEvent, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in IESIsdbCasResponseEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         DECLSPEC_XFGVIRT(IESEvent, GetStringData)
         HRESULT ( STDMETHODCALLTYPE *GetStringData )( 
             __RPC__in IESIsdbCasResponseEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData);
         
         DECLSPEC_XFGVIRT(IESIsdbCasResponseEvent, GetRequestId)
         HRESULT ( STDMETHODCALLTYPE *GetRequestId )( 
             __RPC__in IESIsdbCasResponseEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pRequestId);
+            /* [retval][out] */ __RPC__out DWORD *pRequestId);
         
         DECLSPEC_XFGVIRT(IESIsdbCasResponseEvent, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IESIsdbCasResponseEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pStatus);
+            /* [retval][out] */ __RPC__out DWORD *pStatus);
         
         DECLSPEC_XFGVIRT(IESIsdbCasResponseEvent, GetDataLength)
         HRESULT ( STDMETHODCALLTYPE *GetDataLength )( 
             __RPC__in IESIsdbCasResponseEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pRequestLength);
+            /* [retval][out] */ __RPC__out DWORD *pRequestLength);
         
         DECLSPEC_XFGVIRT(IESIsdbCasResponseEvent, GetResponseData)
         HRESULT ( STDMETHODCALLTYPE *GetResponseData )( 
             __RPC__in IESIsdbCasResponseEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         END_INTERFACE
     } IESIsdbCasResponseEventVtbl;
@@ -17498,8 +15864,7 @@ EXTERN_C const IID IID_IGpnvsCommonBase;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetValueUpdateName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
     };
     
@@ -17513,8 +15878,7 @@ EXTERN_C const IID IID_IGpnvsCommonBase;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGpnvsCommonBase * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17529,8 +15893,7 @@ EXTERN_C const IID IID_IGpnvsCommonBase;
         DECLSPEC_XFGVIRT(IGpnvsCommonBase, GetValueUpdateName)
         HRESULT ( STDMETHODCALLTYPE *GetValueUpdateName )( 
             __RPC__in IGpnvsCommonBase * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         END_INTERFACE
     } IGpnvsCommonBaseVtbl;
@@ -17585,22 +15948,14 @@ EXTERN_C const IID IID_IESEventFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateESEvent( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pServiceProvider,
-            /* [annotation][in] */ 
-            _In_  DWORD dwEventId,
-            /* [annotation][in] */ 
-            _In_  GUID guidEventType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwEventDataLength,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwEventDataLength)  BYTE *pEventData,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBaseUrl,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pInitContext,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IESEvent **ppESEvent) = 0;
+            /* [in] */ __RPC__in_opt IUnknown *pServiceProvider,
+            /* [in] */ DWORD dwEventId,
+            /* [in] */ GUID guidEventType,
+            /* [in] */ DWORD dwEventDataLength,
+            /* [size_is][in] */ __RPC__in_ecount_full(dwEventDataLength) BYTE *pEventData,
+            /* [in] */ __RPC__in BSTR bstrBaseUrl,
+            /* [in] */ __RPC__in_opt IUnknown *pInitContext,
+            /* [retval][out] */ __RPC__deref_out_opt IESEvent **ppESEvent) = 0;
         
     };
     
@@ -17614,8 +15969,7 @@ EXTERN_C const IID IID_IESEventFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESEventFactory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17630,22 +15984,14 @@ EXTERN_C const IID IID_IESEventFactory;
         DECLSPEC_XFGVIRT(IESEventFactory, CreateESEvent)
         HRESULT ( STDMETHODCALLTYPE *CreateESEvent )( 
             __RPC__in IESEventFactory * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pServiceProvider,
-            /* [annotation][in] */ 
-            _In_  DWORD dwEventId,
-            /* [annotation][in] */ 
-            _In_  GUID guidEventType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwEventDataLength,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwEventDataLength)  BYTE *pEventData,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBaseUrl,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pInitContext,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IESEvent **ppESEvent);
+            /* [in] */ __RPC__in_opt IUnknown *pServiceProvider,
+            /* [in] */ DWORD dwEventId,
+            /* [in] */ GUID guidEventType,
+            /* [in] */ DWORD dwEventDataLength,
+            /* [size_is][in] */ __RPC__in_ecount_full(dwEventDataLength) BYTE *pEventData,
+            /* [in] */ __RPC__in BSTR bstrBaseUrl,
+            /* [in] */ __RPC__in_opt IUnknown *pInitContext,
+            /* [retval][out] */ __RPC__deref_out_opt IESEvent **ppESEvent);
         
         END_INTERFACE
     } IESEventFactoryVtbl;
@@ -17700,48 +16046,37 @@ EXTERN_C const IID IID_IESLicenseRenewalResultEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCallersId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwCallersId) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwCallersId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFileName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFilename) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFilename) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsRenewalSuccessful( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfRenewalSuccessful) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pfRenewalSuccessful) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsCheckEntitlementCallRequired( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfCheckEntTokenCallNeeded) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pfCheckEntTokenCallNeeded) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescrambledStatus( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pDescrambledStatus) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pDescrambledStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRenewalResultCode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwRenewalResultCode) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwRenewalResultCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCASFailureCode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwCASFailureCode) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwCASFailureCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRenewalHResult( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  HRESULT *phr) = 0;
+            /* [retval][out] */ __RPC__out HRESULT *phr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEntitlementTokenLength( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwLength) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEntitlementToken( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetExpiryDate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD64 *pqwExpiryDate) = 0;
+            /* [retval][out] */ __RPC__out DWORD64 *pqwExpiryDate) = 0;
         
     };
     
@@ -17755,8 +16090,7 @@ EXTERN_C const IID IID_IESLicenseRenewalResultEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17771,98 +16105,82 @@ EXTERN_C const IID IID_IESLicenseRenewalResultEvent;
         DECLSPEC_XFGVIRT(IESEvent, GetEventId)
         HRESULT ( STDMETHODCALLTYPE *GetEventId )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEventId);
+            /* [retval][out] */ __RPC__out DWORD *pdwEventId);
         
         DECLSPEC_XFGVIRT(IESEvent, GetEventType)
         HRESULT ( STDMETHODCALLTYPE *GetEventType )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidEventType);
+            /* [retval][out] */ __RPC__out GUID *pguidEventType);
         
         DECLSPEC_XFGVIRT(IESEvent, SetCompletionStatus)
         HRESULT ( STDMETHODCALLTYPE *SetCompletionStatus )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwResult);
+            /* [in] */ DWORD dwResult);
         
         DECLSPEC_XFGVIRT(IESEvent, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         DECLSPEC_XFGVIRT(IESEvent, GetStringData)
         HRESULT ( STDMETHODCALLTYPE *GetStringData )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, GetCallersId)
         HRESULT ( STDMETHODCALLTYPE *GetCallersId )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwCallersId);
+            /* [retval][out] */ __RPC__out DWORD *pdwCallersId);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, GetFileName)
         HRESULT ( STDMETHODCALLTYPE *GetFileName )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFilename);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFilename);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, IsRenewalSuccessful)
         HRESULT ( STDMETHODCALLTYPE *IsRenewalSuccessful )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfRenewalSuccessful);
+            /* [retval][out] */ __RPC__out BOOL *pfRenewalSuccessful);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, IsCheckEntitlementCallRequired)
         HRESULT ( STDMETHODCALLTYPE *IsCheckEntitlementCallRequired )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfCheckEntTokenCallNeeded);
+            /* [retval][out] */ __RPC__out BOOL *pfCheckEntTokenCallNeeded);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, GetDescrambledStatus)
         HRESULT ( STDMETHODCALLTYPE *GetDescrambledStatus )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pDescrambledStatus);
+            /* [retval][out] */ __RPC__out DWORD *pDescrambledStatus);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, GetRenewalResultCode)
         HRESULT ( STDMETHODCALLTYPE *GetRenewalResultCode )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwRenewalResultCode);
+            /* [retval][out] */ __RPC__out DWORD *pdwRenewalResultCode);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, GetCASFailureCode)
         HRESULT ( STDMETHODCALLTYPE *GetCASFailureCode )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwCASFailureCode);
+            /* [retval][out] */ __RPC__out DWORD *pdwCASFailureCode);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, GetRenewalHResult)
         HRESULT ( STDMETHODCALLTYPE *GetRenewalHResult )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  HRESULT *phr);
+            /* [retval][out] */ __RPC__out HRESULT *phr);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, GetEntitlementTokenLength)
         HRESULT ( STDMETHODCALLTYPE *GetEntitlementTokenLength )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwLength);
+            /* [retval][out] */ __RPC__out DWORD *pdwLength);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, GetEntitlementToken)
         HRESULT ( STDMETHODCALLTYPE *GetEntitlementToken )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         DECLSPEC_XFGVIRT(IESLicenseRenewalResultEvent, GetExpiryDate)
         HRESULT ( STDMETHODCALLTYPE *GetExpiryDate )( 
             __RPC__in IESLicenseRenewalResultEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD64 *pqwExpiryDate);
+            /* [retval][out] */ __RPC__out DWORD64 *pqwExpiryDate);
         
         END_INTERFACE
     } IESLicenseRenewalResultEventVtbl;
@@ -17963,28 +16281,22 @@ EXTERN_C const IID IID_IESFileExpiryDateEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTunerId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidTunerId) = 0;
+            /* [retval][out] */ __RPC__out GUID *pguidTunerId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetExpiryDate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD64 *pqwExpiryDate) = 0;
+            /* [retval][out] */ __RPC__out DWORD64 *pqwExpiryDate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFinalExpiryDate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD64 *pqwExpiryDate) = 0;
+            /* [retval][out] */ __RPC__out DWORD64 *pqwExpiryDate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMaxRenewalCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *dwMaxRenewalCount) = 0;
+            /* [retval][out] */ __RPC__out DWORD *dwMaxRenewalCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsEntitlementTokenPresent( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfEntTokenPresent) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pfEntTokenPresent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DoesExpireAfterFirstUse( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfExpireAfterFirstUse) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pfExpireAfterFirstUse) = 0;
         
     };
     
@@ -17998,8 +16310,7 @@ EXTERN_C const IID IID_IESFileExpiryDateEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18014,68 +16325,57 @@ EXTERN_C const IID IID_IESFileExpiryDateEvent;
         DECLSPEC_XFGVIRT(IESEvent, GetEventId)
         HRESULT ( STDMETHODCALLTYPE *GetEventId )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEventId);
+            /* [retval][out] */ __RPC__out DWORD *pdwEventId);
         
         DECLSPEC_XFGVIRT(IESEvent, GetEventType)
         HRESULT ( STDMETHODCALLTYPE *GetEventType )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidEventType);
+            /* [retval][out] */ __RPC__out GUID *pguidEventType);
         
         DECLSPEC_XFGVIRT(IESEvent, SetCompletionStatus)
         HRESULT ( STDMETHODCALLTYPE *SetCompletionStatus )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwResult);
+            /* [in] */ DWORD dwResult);
         
         DECLSPEC_XFGVIRT(IESEvent, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         DECLSPEC_XFGVIRT(IESEvent, GetStringData)
         HRESULT ( STDMETHODCALLTYPE *GetStringData )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData);
         
         DECLSPEC_XFGVIRT(IESFileExpiryDateEvent, GetTunerId)
         HRESULT ( STDMETHODCALLTYPE *GetTunerId )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidTunerId);
+            /* [retval][out] */ __RPC__out GUID *pguidTunerId);
         
         DECLSPEC_XFGVIRT(IESFileExpiryDateEvent, GetExpiryDate)
         HRESULT ( STDMETHODCALLTYPE *GetExpiryDate )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD64 *pqwExpiryDate);
+            /* [retval][out] */ __RPC__out DWORD64 *pqwExpiryDate);
         
         DECLSPEC_XFGVIRT(IESFileExpiryDateEvent, GetFinalExpiryDate)
         HRESULT ( STDMETHODCALLTYPE *GetFinalExpiryDate )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD64 *pqwExpiryDate);
+            /* [retval][out] */ __RPC__out DWORD64 *pqwExpiryDate);
         
         DECLSPEC_XFGVIRT(IESFileExpiryDateEvent, GetMaxRenewalCount)
         HRESULT ( STDMETHODCALLTYPE *GetMaxRenewalCount )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *dwMaxRenewalCount);
+            /* [retval][out] */ __RPC__out DWORD *dwMaxRenewalCount);
         
         DECLSPEC_XFGVIRT(IESFileExpiryDateEvent, IsEntitlementTokenPresent)
         HRESULT ( STDMETHODCALLTYPE *IsEntitlementTokenPresent )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfEntTokenPresent);
+            /* [retval][out] */ __RPC__out BOOL *pfEntTokenPresent);
         
         DECLSPEC_XFGVIRT(IESFileExpiryDateEvent, DoesExpireAfterFirstUse)
         HRESULT ( STDMETHODCALLTYPE *DoesExpireAfterFirstUse )( 
             __RPC__in IESFileExpiryDateEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfExpireAfterFirstUse);
+            /* [retval][out] */ __RPC__out BOOL *pfExpireAfterFirstUse);
         
         END_INTERFACE
     } IESFileExpiryDateEventVtbl;
@@ -18175,8 +16475,7 @@ EXTERN_C const IID IID_IESEventService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESEventService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18273,8 +16572,7 @@ EXTERN_C const IID IID_IESEventServiceConfiguration;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESEventServiceConfiguration * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18382,10 +16680,8 @@ EXTERN_C const IID IID_IRegisterTuner;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Register( 
-            /* [annotation][in] */ 
-            _In_  ITuner *pTuner,
-            /* [annotation][in] */ 
-            _In_  IGraphBuilder *pGraph) = 0;
+            /* [in] */ __RPC__in_opt ITuner *pTuner,
+            /* [in] */ __RPC__in_opt IGraphBuilder *pGraph) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Unregister( void) = 0;
         
@@ -18401,8 +16697,7 @@ EXTERN_C const IID IID_IRegisterTuner;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRegisterTuner * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18417,10 +16712,8 @@ EXTERN_C const IID IID_IRegisterTuner;
         DECLSPEC_XFGVIRT(IRegisterTuner, Register)
         HRESULT ( STDMETHODCALLTYPE *Register )( 
             __RPC__in IRegisterTuner * This,
-            /* [annotation][in] */ 
-            _In_  ITuner *pTuner,
-            /* [annotation][in] */ 
-            _In_  IGraphBuilder *pGraph);
+            /* [in] */ __RPC__in_opt ITuner *pTuner,
+            /* [in] */ __RPC__in_opt IGraphBuilder *pGraph);
         
         DECLSPEC_XFGVIRT(IRegisterTuner, Unregister)
         HRESULT ( STDMETHODCALLTYPE *Unregister )( 
@@ -18482,42 +16775,29 @@ EXTERN_C const IID IID_IBDAComparable;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CompareExact( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *CompareTo,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Result) = 0;
+            /* [in] */ __RPC__in_opt IDispatch *CompareTo,
+            /* [retval][out] */ __RPC__out long *Result) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CompareEquivalent( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *CompareTo,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Result) = 0;
+            /* [in] */ __RPC__in_opt IDispatch *CompareTo,
+            /* [in] */ DWORD dwFlags,
+            /* [retval][out] */ __RPC__out long *Result) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE HashExact( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  __int64 *Result) = 0;
+            /* [retval][out] */ __RPC__out __int64 *Result) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HashExactIncremental( 
-            /* [annotation][in] */ 
-            _In_  __int64 PartialResult,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  __int64 *Result) = 0;
+            /* [in] */ __int64 PartialResult,
+            /* [retval][out] */ __RPC__out __int64 *Result) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE HashEquivalent( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  __int64 *Result) = 0;
+            /* [in] */ DWORD dwFlags,
+            /* [retval][out] */ __RPC__out __int64 *Result) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HashEquivalentIncremental( 
-            /* [annotation][in] */ 
-            _In_  __int64 PartialResult,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  __int64 *Result) = 0;
+            /* [in] */ __int64 PartialResult,
+            /* [in] */ DWORD dwFlags,
+            /* [retval][out] */ __RPC__out __int64 *Result) = 0;
         
     };
     
@@ -18531,8 +16811,7 @@ EXTERN_C const IID IID_IBDAComparable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDAComparable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18547,52 +16826,39 @@ EXTERN_C const IID IID_IBDAComparable;
         DECLSPEC_XFGVIRT(IBDAComparable, CompareExact)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CompareExact )( 
             __RPC__in IBDAComparable * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *CompareTo,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Result);
+            /* [in] */ __RPC__in_opt IDispatch *CompareTo,
+            /* [retval][out] */ __RPC__out long *Result);
         
         DECLSPEC_XFGVIRT(IBDAComparable, CompareEquivalent)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CompareEquivalent )( 
             __RPC__in IBDAComparable * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *CompareTo,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Result);
+            /* [in] */ __RPC__in_opt IDispatch *CompareTo,
+            /* [in] */ DWORD dwFlags,
+            /* [retval][out] */ __RPC__out long *Result);
         
         DECLSPEC_XFGVIRT(IBDAComparable, HashExact)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *HashExact )( 
             __RPC__in IBDAComparable * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  __int64 *Result);
+            /* [retval][out] */ __RPC__out __int64 *Result);
         
         DECLSPEC_XFGVIRT(IBDAComparable, HashExactIncremental)
         HRESULT ( STDMETHODCALLTYPE *HashExactIncremental )( 
             __RPC__in IBDAComparable * This,
-            /* [annotation][in] */ 
-            _In_  __int64 PartialResult,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  __int64 *Result);
+            /* [in] */ __int64 PartialResult,
+            /* [retval][out] */ __RPC__out __int64 *Result);
         
         DECLSPEC_XFGVIRT(IBDAComparable, HashEquivalent)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *HashEquivalent )( 
             __RPC__in IBDAComparable * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  __int64 *Result);
+            /* [in] */ DWORD dwFlags,
+            /* [retval][out] */ __RPC__out __int64 *Result);
         
         DECLSPEC_XFGVIRT(IBDAComparable, HashEquivalentIncremental)
         HRESULT ( STDMETHODCALLTYPE *HashEquivalentIncremental )( 
             __RPC__in IBDAComparable * This,
-            /* [annotation][in] */ 
-            _In_  __int64 PartialResult,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  __int64 *Result);
+            /* [in] */ __int64 PartialResult,
+            /* [in] */ DWORD dwFlags,
+            /* [retval][out] */ __RPC__out __int64 *Result);
         
         END_INTERFACE
     } IBDAComparableVtbl;
@@ -18664,12 +16930,10 @@ EXTERN_C const IID IID_IPersistTuneXml;
         virtual HRESULT STDMETHODCALLTYPE InitNew( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Load( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue) = 0;
+            /* [in] */ VARIANT varValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Save( 
-            /* [annotation][out] */ 
-            _Out_  VARIANT *pvarFragment) = 0;
+            /* [out] */ __RPC__out VARIANT *pvarFragment) = 0;
         
     };
     
@@ -18683,8 +16947,7 @@ EXTERN_C const IID IID_IPersistTuneXml;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPersistTuneXml * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18699,8 +16962,7 @@ EXTERN_C const IID IID_IPersistTuneXml;
         DECLSPEC_XFGVIRT(IPersist, GetClassID)
         HRESULT ( STDMETHODCALLTYPE *GetClassID )( 
             __RPC__in IPersistTuneXml * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pClassID);
+            /* [out] */ __RPC__out CLSID *pClassID);
         
         DECLSPEC_XFGVIRT(IPersistTuneXml, InitNew)
         HRESULT ( STDMETHODCALLTYPE *InitNew )( 
@@ -18709,14 +16971,12 @@ EXTERN_C const IID IID_IPersistTuneXml;
         DECLSPEC_XFGVIRT(IPersistTuneXml, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             __RPC__in IPersistTuneXml * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue);
+            /* [in] */ VARIANT varValue);
         
         DECLSPEC_XFGVIRT(IPersistTuneXml, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IPersistTuneXml * This,
-            /* [annotation][out] */ 
-            _Out_  VARIANT *pvarFragment);
+            /* [out] */ __RPC__out VARIANT *pvarFragment);
         
         END_INTERFACE
     } IPersistTuneXmlVtbl;
@@ -18781,10 +17041,8 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Deserialize( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppObject) = 0;
+            /* [in] */ VARIANT varValue,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppObject) = 0;
         
     };
     
@@ -18798,8 +17056,7 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPersistTuneXmlUtility * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18814,10 +17071,8 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility;
         DECLSPEC_XFGVIRT(IPersistTuneXmlUtility, Deserialize)
         HRESULT ( STDMETHODCALLTYPE *Deserialize )( 
             __RPC__in IPersistTuneXmlUtility * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppObject);
+            /* [in] */ VARIANT varValue,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppObject);
         
         END_INTERFACE
     } IPersistTuneXmlUtilityVtbl;
@@ -18872,10 +17127,8 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Serialize( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *piTuneRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pString) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *piTuneRequest,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pString) = 0;
         
     };
     
@@ -18889,8 +17142,7 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPersistTuneXmlUtility2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18905,18 +17157,14 @@ EXTERN_C const IID IID_IPersistTuneXmlUtility2;
         DECLSPEC_XFGVIRT(IPersistTuneXmlUtility, Deserialize)
         HRESULT ( STDMETHODCALLTYPE *Deserialize )( 
             __RPC__in IPersistTuneXmlUtility2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppObject);
+            /* [in] */ VARIANT varValue,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppObject);
         
         DECLSPEC_XFGVIRT(IPersistTuneXmlUtility2, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             __RPC__in IPersistTuneXmlUtility2 * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *piTuneRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pString);
+            /* [in] */ __RPC__in_opt ITuneRequest *piTuneRequest,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pString);
         
         END_INTERFACE
     } IPersistTuneXmlUtility2Vtbl;
@@ -18975,10 +17223,8 @@ EXTERN_C const IID IID_IBDACreateTuneRequestEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateTuneRequestEx( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID TuneRequestIID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest) = 0;
+            /* [in] */ __RPC__in REFCLSID TuneRequestIID,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest) = 0;
         
     };
     
@@ -18992,8 +17238,7 @@ EXTERN_C const IID IID_IBDACreateTuneRequestEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDACreateTuneRequestEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -19008,10 +17253,8 @@ EXTERN_C const IID IID_IBDACreateTuneRequestEx;
         DECLSPEC_XFGVIRT(IBDACreateTuneRequestEx, CreateTuneRequestEx)
         HRESULT ( STDMETHODCALLTYPE *CreateTuneRequestEx )( 
             __RPC__in IBDACreateTuneRequestEx * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID TuneRequestIID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [in] */ __RPC__in REFCLSID TuneRequestIID,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         END_INTERFACE
     } IBDACreateTuneRequestExVtbl;

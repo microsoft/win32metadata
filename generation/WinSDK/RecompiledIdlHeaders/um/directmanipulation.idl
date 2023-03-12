@@ -328,10 +328,12 @@ interface IDirectManipulationManager : IUnknown
     // Deactivates a reference of Direct Manipulation, specific to a particular window handle.
     HRESULT Deactivate([in, annotation("_In_")] HWND window);
 
+#ifndef LIFTED_SDK
     // Registers an optional window for hit-testing, which will receive WM_POINTERDOWN first
     HRESULT RegisterHitTestTarget([in, annotation("_In_")] HWND window,
                                   [in, annotation("_In_opt_")] HWND hitTestWindow,
                                   [in, annotation("_In_")] DIRECTMANIPULATION_HITTEST_TYPE type);
+#endif /*!LIFTED_SDK*/
 
     // Process a keyboard or mouse message to drive manipulations.
     // An output value of handled == TRUE indicates that Direct Manipulation has handled the event and no further action
@@ -805,22 +807,6 @@ interface IDirectManipulationDeferContactService : IUnknown
 }
 
 #ifdef LIFTED_SDK
-// Defines a Direct Manipulation viewport (Experimental)
-[
-    local,
-    object,
-    uuid(2cdef8b7-ac1b-43ce-b8c8-349a54901412),
-    helpstring("IExpDirectManipulationViewport Interface"),
-    pointer_default(unique)
-]
-interface IExpDirectManipulationViewport : IDirectManipulationViewport2
-{
-    HRESULT AddEventHandler(
-        [in, annotation("_In_opt_")] IUnknown* inputSite,
-        [in, annotation("_In_")] IDirectManipulationViewportEventHandler* eventHandler,
-        [out, retval, annotation("_Out_")] DWORD* cookie);
-}
-
 // Defines a Direct Manipulation compositor (Experimental)
 [
     local,

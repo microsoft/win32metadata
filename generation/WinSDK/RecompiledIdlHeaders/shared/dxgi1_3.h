@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -154,8 +154,7 @@ EXTERN_C const IID IID_IDXGIDevice3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDXGIDevice3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -172,8 +171,7 @@ EXTERN_C const IID IID_IDXGIDevice3;
             IDXGIDevice3 * This,
             /* [annotation][in] */ 
             _In_  REFGUID Name,
-            /* [annotation][in] */ 
-            _In_  UINT DataSize,
+            /* [in] */ UINT DataSize,
             /* [annotation][in] */ 
             _In_reads_bytes_(DataSize)  const void *pData);
         
@@ -214,10 +212,8 @@ EXTERN_C const IID IID_IDXGIDevice3;
             IDXGIDevice3 * This,
             /* [annotation][in] */ 
             _In_  const DXGI_SURFACE_DESC *pDesc,
-            /* [annotation][in] */ 
-            _In_  UINT NumSurfaces,
-            /* [annotation][in] */ 
-            _In_  DXGI_USAGE Usage,
+            /* [in] */ UINT NumSurfaces,
+            /* [in] */ DXGI_USAGE Usage,
             /* [annotation][in] */ 
             _In_opt_  const DXGI_SHARED_RESOURCE *pSharedResource,
             /* [annotation][size_is][out] */ 
@@ -230,14 +226,12 @@ EXTERN_C const IID IID_IDXGIDevice3;
             _In_reads_(NumResources)  IUnknown *const *ppResources,
             /* [annotation][size_is][out] */ 
             _Out_writes_(NumResources)  DXGI_RESIDENCY *pResidencyStatus,
-            /* [annotation][in] */ 
-            _In_  UINT NumResources);
+            /* [in] */ UINT NumResources);
         
         DECLSPEC_XFGVIRT(IDXGIDevice, SetGPUThreadPriority)
         HRESULT ( STDMETHODCALLTYPE *SetGPUThreadPriority )( 
             IDXGIDevice3 * This,
-            /* [annotation][in] */ 
-            _In_  INT Priority);
+            /* [in] */ INT Priority);
         
         DECLSPEC_XFGVIRT(IDXGIDevice, GetGPUThreadPriority)
         HRESULT ( STDMETHODCALLTYPE *GetGPUThreadPriority )( 
@@ -248,8 +242,7 @@ EXTERN_C const IID IID_IDXGIDevice3;
         DECLSPEC_XFGVIRT(IDXGIDevice1, SetMaximumFrameLatency)
         HRESULT ( STDMETHODCALLTYPE *SetMaximumFrameLatency )( 
             IDXGIDevice3 * This,
-            /* [annotation][in] */ 
-            _In_  UINT MaxLatency);
+            /* [in] */ UINT MaxLatency);
         
         DECLSPEC_XFGVIRT(IDXGIDevice1, GetMaximumFrameLatency)
         HRESULT ( STDMETHODCALLTYPE *GetMaximumFrameLatency )( 
@@ -441,8 +434,7 @@ EXTERN_C const IID IID_IDXGISwapChain2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDXGISwapChain2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -459,8 +451,7 @@ EXTERN_C const IID IID_IDXGISwapChain2;
             IDXGISwapChain2 * This,
             /* [annotation][in] */ 
             _In_  REFGUID Name,
-            /* [annotation][in] */ 
-            _In_  UINT DataSize,
+            /* [in] */ UINT DataSize,
             /* [annotation][in] */ 
             _In_reads_bytes_(DataSize)  const void *pData);
         
@@ -501,16 +492,13 @@ EXTERN_C const IID IID_IDXGISwapChain2;
         DECLSPEC_XFGVIRT(IDXGISwapChain, Present)
         HRESULT ( STDMETHODCALLTYPE *Present )( 
             IDXGISwapChain2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT SyncInterval,
-            /* [annotation][in] */ 
-            _In_  UINT Flags);
+            /* [in] */ UINT SyncInterval,
+            /* [in] */ UINT Flags);
         
         DECLSPEC_XFGVIRT(IDXGISwapChain, GetBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetBuffer )( 
             IDXGISwapChain2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT Buffer,
+            /* [in] */ UINT Buffer,
             /* [annotation][in] */ 
             _In_  REFIID riid,
             /* [annotation][out][in] */ 
@@ -519,8 +507,7 @@ EXTERN_C const IID IID_IDXGISwapChain2;
         DECLSPEC_XFGVIRT(IDXGISwapChain, SetFullscreenState)
         HRESULT ( STDMETHODCALLTYPE *SetFullscreenState )( 
             IDXGISwapChain2 * This,
-            /* [annotation][in] */ 
-            _In_  BOOL Fullscreen,
+            /* [in] */ BOOL Fullscreen,
             /* [annotation][in] */ 
             _In_opt_  IDXGIOutput *pTarget);
         
@@ -541,16 +528,11 @@ EXTERN_C const IID IID_IDXGISwapChain2;
         DECLSPEC_XFGVIRT(IDXGISwapChain, ResizeBuffers)
         HRESULT ( STDMETHODCALLTYPE *ResizeBuffers )( 
             IDXGISwapChain2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT BufferCount,
-            /* [annotation][in] */ 
-            _In_  UINT Width,
-            /* [annotation][in] */ 
-            _In_  UINT Height,
-            /* [annotation][in] */ 
-            _In_  DXGI_FORMAT NewFormat,
-            /* [annotation][in] */ 
-            _In_  UINT SwapChainFlags);
+            /* [in] */ UINT BufferCount,
+            /* [in] */ UINT Width,
+            /* [in] */ UINT Height,
+            /* [in] */ DXGI_FORMAT NewFormat,
+            /* [in] */ UINT SwapChainFlags);
         
         DECLSPEC_XFGVIRT(IDXGISwapChain, ResizeTarget)
         HRESULT ( STDMETHODCALLTYPE *ResizeTarget )( 
@@ -605,10 +587,8 @@ EXTERN_C const IID IID_IDXGISwapChain2;
         DECLSPEC_XFGVIRT(IDXGISwapChain1, Present1)
         HRESULT ( STDMETHODCALLTYPE *Present1 )( 
             IDXGISwapChain2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT SyncInterval,
-            /* [annotation][in] */ 
-            _In_  UINT PresentFlags,
+            /* [in] */ UINT SyncInterval,
+            /* [in] */ UINT PresentFlags,
             /* [annotation][in] */ 
             _In_  const DXGI_PRESENT_PARAMETERS *pPresentParameters);
         
@@ -852,8 +832,7 @@ EXTERN_C const IID IID_IDXGIOutput2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDXGIOutput2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -870,8 +849,7 @@ EXTERN_C const IID IID_IDXGIOutput2;
             IDXGIOutput2 * This,
             /* [annotation][in] */ 
             _In_  REFGUID Name,
-            /* [annotation][in] */ 
-            _In_  UINT DataSize,
+            /* [in] */ UINT DataSize,
             /* [annotation][in] */ 
             _In_reads_bytes_(DataSize)  const void *pData);
         
@@ -910,10 +888,8 @@ EXTERN_C const IID IID_IDXGIOutput2;
         DECLSPEC_XFGVIRT(IDXGIOutput, GetDisplayModeList)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayModeList )( 
             IDXGIOutput2 * This,
-            /* [annotation][in] */ 
-            _In_  DXGI_FORMAT EnumFormat,
-            /* [annotation][in] */ 
-            _In_  UINT Flags,
+            /* [in] */ DXGI_FORMAT EnumFormat,
+            /* [in] */ UINT Flags,
             /* [annotation][out][in] */ 
             _Inout_  UINT *pNumModes,
             /* [annotation][out] */ 
@@ -983,10 +959,8 @@ EXTERN_C const IID IID_IDXGIOutput2;
         DECLSPEC_XFGVIRT(IDXGIOutput1, GetDisplayModeList1)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayModeList1 )( 
             IDXGIOutput2 * This,
-            /* [annotation][in] */ 
-            _In_  DXGI_FORMAT EnumFormat,
-            /* [annotation][in] */ 
-            _In_  UINT Flags,
+            /* [in] */ DXGI_FORMAT EnumFormat,
+            /* [in] */ UINT Flags,
             /* [annotation][out][in] */ 
             _Inout_  UINT *pNumModes,
             /* [annotation][out] */ 
@@ -1149,8 +1123,7 @@ EXTERN_C const IID IID_IDXGIFactory3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDXGIFactory3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1167,8 +1140,7 @@ EXTERN_C const IID IID_IDXGIFactory3;
             IDXGIFactory3 * This,
             /* [annotation][in] */ 
             _In_  REFGUID Name,
-            /* [annotation][in] */ 
-            _In_  UINT DataSize,
+            /* [in] */ UINT DataSize,
             /* [annotation][in] */ 
             _In_reads_bytes_(DataSize)  const void *pData);
         
@@ -1201,8 +1173,7 @@ EXTERN_C const IID IID_IDXGIFactory3;
         DECLSPEC_XFGVIRT(IDXGIFactory, EnumAdapters)
         HRESULT ( STDMETHODCALLTYPE *EnumAdapters )( 
             IDXGIFactory3 * This,
-            /* [annotation][in] */ 
-            _In_  UINT Adapter,
+            /* [in] */ UINT Adapter,
             /* [annotation][out] */ 
             _COM_Outptr_  IDXGIAdapter **ppAdapter);
         
@@ -1231,16 +1202,14 @@ EXTERN_C const IID IID_IDXGIFactory3;
         DECLSPEC_XFGVIRT(IDXGIFactory, CreateSoftwareAdapter)
         HRESULT ( STDMETHODCALLTYPE *CreateSoftwareAdapter )( 
             IDXGIFactory3 * This,
-            /* [annotation][in] */ 
-            _In_  HMODULE Module,
+            /* [in] */ HMODULE Module,
             /* [annotation][out] */ 
             _COM_Outptr_  IDXGIAdapter **ppAdapter);
         
         DECLSPEC_XFGVIRT(IDXGIFactory1, EnumAdapters1)
         HRESULT ( STDMETHODCALLTYPE *EnumAdapters1 )( 
             IDXGIFactory3 * This,
-            /* [annotation][in] */ 
-            _In_  UINT Adapter,
+            /* [in] */ UINT Adapter,
             /* [annotation][out] */ 
             _COM_Outptr_  IDXGIAdapter1 **ppAdapter);
         
@@ -1547,8 +1516,7 @@ EXTERN_C const IID IID_IDXGIDecodeSwapChain;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDXGIDecodeSwapChain * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1726,8 +1694,7 @@ EXTERN_C const IID IID_IDXGIFactoryMedia;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDXGIFactoryMedia * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1878,8 +1845,7 @@ EXTERN_C const IID IID_IDXGISwapChainMedia;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDXGISwapChainMedia * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2008,8 +1974,7 @@ EXTERN_C const IID IID_IDXGIOutput3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDXGIOutput3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2026,8 +1991,7 @@ EXTERN_C const IID IID_IDXGIOutput3;
             IDXGIOutput3 * This,
             /* [annotation][in] */ 
             _In_  REFGUID Name,
-            /* [annotation][in] */ 
-            _In_  UINT DataSize,
+            /* [in] */ UINT DataSize,
             /* [annotation][in] */ 
             _In_reads_bytes_(DataSize)  const void *pData);
         
@@ -2066,10 +2030,8 @@ EXTERN_C const IID IID_IDXGIOutput3;
         DECLSPEC_XFGVIRT(IDXGIOutput, GetDisplayModeList)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayModeList )( 
             IDXGIOutput3 * This,
-            /* [annotation][in] */ 
-            _In_  DXGI_FORMAT EnumFormat,
-            /* [annotation][in] */ 
-            _In_  UINT Flags,
+            /* [in] */ DXGI_FORMAT EnumFormat,
+            /* [in] */ UINT Flags,
             /* [annotation][out][in] */ 
             _Inout_  UINT *pNumModes,
             /* [annotation][out] */ 
@@ -2139,10 +2101,8 @@ EXTERN_C const IID IID_IDXGIOutput3;
         DECLSPEC_XFGVIRT(IDXGIOutput1, GetDisplayModeList1)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayModeList1 )( 
             IDXGIOutput3 * This,
-            /* [annotation][in] */ 
-            _In_  DXGI_FORMAT EnumFormat,
-            /* [annotation][in] */ 
-            _In_  UINT Flags,
+            /* [in] */ DXGI_FORMAT EnumFormat,
+            /* [in] */ UINT Flags,
             /* [annotation][out][in] */ 
             _Inout_  UINT *pNumModes,
             /* [annotation][out] */ 

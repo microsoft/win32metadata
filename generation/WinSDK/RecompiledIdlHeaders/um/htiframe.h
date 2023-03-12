@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -137,14 +137,11 @@ EXTERN_C const IID IID_ITargetNotify;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnCreate( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkDestination,
-            /* [annotation][in] */ 
-            _In_  ULONG cbCookie) = 0;
+            /* [in] */ __RPC__in_opt IUnknown *pUnkDestination,
+            /* [in] */ ULONG cbCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnReuse( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkDestination) = 0;
+            /* [in] */ __RPC__in_opt IUnknown *pUnkDestination) = 0;
         
     };
     
@@ -158,8 +155,7 @@ EXTERN_C const IID IID_ITargetNotify;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITargetNotify * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -174,16 +170,13 @@ EXTERN_C const IID IID_ITargetNotify;
         DECLSPEC_XFGVIRT(ITargetNotify, OnCreate)
         HRESULT ( STDMETHODCALLTYPE *OnCreate )( 
             __RPC__in ITargetNotify * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkDestination,
-            /* [annotation][in] */ 
-            _In_  ULONG cbCookie);
+            /* [in] */ __RPC__in_opt IUnknown *pUnkDestination,
+            /* [in] */ ULONG cbCookie);
         
         DECLSPEC_XFGVIRT(ITargetNotify, OnReuse)
         HRESULT ( STDMETHODCALLTYPE *OnReuse )( 
             __RPC__in ITargetNotify * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkDestination);
+            /* [in] */ __RPC__in_opt IUnknown *pUnkDestination);
         
         END_INTERFACE
     } ITargetNotifyVtbl;
@@ -243,8 +236,7 @@ EXTERN_C const IID IID_ITargetNotify2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOptionString( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *pbstrOptions) = 0;
+            /* [out][in] */ __RPC__deref_inout_opt BSTR *pbstrOptions) = 0;
         
     };
     
@@ -258,8 +250,7 @@ EXTERN_C const IID IID_ITargetNotify2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITargetNotify2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -274,22 +265,18 @@ EXTERN_C const IID IID_ITargetNotify2;
         DECLSPEC_XFGVIRT(ITargetNotify, OnCreate)
         HRESULT ( STDMETHODCALLTYPE *OnCreate )( 
             __RPC__in ITargetNotify2 * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkDestination,
-            /* [annotation][in] */ 
-            _In_  ULONG cbCookie);
+            /* [in] */ __RPC__in_opt IUnknown *pUnkDestination,
+            /* [in] */ ULONG cbCookie);
         
         DECLSPEC_XFGVIRT(ITargetNotify, OnReuse)
         HRESULT ( STDMETHODCALLTYPE *OnReuse )( 
             __RPC__in ITargetNotify2 * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkDestination);
+            /* [in] */ __RPC__in_opt IUnknown *pUnkDestination);
         
         DECLSPEC_XFGVIRT(ITargetNotify2, GetOptionString)
         HRESULT ( STDMETHODCALLTYPE *GetOptionString )( 
             __RPC__in ITargetNotify2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *pbstrOptions);
+            /* [out][in] */ __RPC__deref_inout_opt BSTR *pbstrOptions);
         
         END_INTERFACE
     } ITargetNotify2Vtbl;
@@ -373,62 +360,45 @@ EXTERN_C const IID IID_ITargetFrame2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetFrameName( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszFrameName) = 0;
+            /* [in] */ __RPC__in LPCWSTR pszFrameName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFrameName( 
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppszFrameName) = 0;
+            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszFrameName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParentFrame( 
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkParent) = 0;
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppunkParent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFrameSrc( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszFrameSrc) = 0;
+            /* [in] */ __RPC__in LPCWSTR pszFrameSrc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFrameSrc( 
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppszFrameSrc) = 0;
+            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszFrameSrc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFramesContainer( 
-            /* [annotation][out] */ 
-            _Out_  IOleContainer **ppContainer) = 0;
+            /* [out] */ __RPC__deref_out_opt IOleContainer **ppContainer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFrameOptions( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFrameOptions( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ __RPC__out DWORD *pdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFrameMargins( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwWidth,
-            /* [annotation][in] */ 
-            _In_  DWORD dwHeight) = 0;
+            /* [in] */ DWORD dwWidth,
+            /* [in] */ DWORD dwHeight) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFrameMargins( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwWidth,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwHeight) = 0;
+            /* [out] */ __RPC__out DWORD *pdwWidth,
+            /* [out] */ __RPC__out DWORD *pdwHeight) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindFrame( 
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pszTargetName,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkTargetFrame) = 0;
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pszTargetName,
+            /* [in] */ DWORD dwFlags,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppunkTargetFrame) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTargetAlias( 
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pszTargetName,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppszTargetAlias) = 0;
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pszTargetName,
+            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszTargetAlias) = 0;
         
     };
     
@@ -442,8 +412,7 @@ EXTERN_C const IID IID_ITargetFrame2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -458,84 +427,67 @@ EXTERN_C const IID IID_ITargetFrame2;
         DECLSPEC_XFGVIRT(ITargetFrame2, SetFrameName)
         HRESULT ( STDMETHODCALLTYPE *SetFrameName )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszFrameName);
+            /* [in] */ __RPC__in LPCWSTR pszFrameName);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, GetFrameName)
         HRESULT ( STDMETHODCALLTYPE *GetFrameName )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppszFrameName);
+            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszFrameName);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, GetParentFrame)
         HRESULT ( STDMETHODCALLTYPE *GetParentFrame )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkParent);
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppunkParent);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, SetFrameSrc)
         HRESULT ( STDMETHODCALLTYPE *SetFrameSrc )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszFrameSrc);
+            /* [in] */ __RPC__in LPCWSTR pszFrameSrc);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, GetFrameSrc)
         HRESULT ( STDMETHODCALLTYPE *GetFrameSrc )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppszFrameSrc);
+            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszFrameSrc);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, GetFramesContainer)
         HRESULT ( STDMETHODCALLTYPE *GetFramesContainer )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][out] */ 
-            _Out_  IOleContainer **ppContainer);
+            /* [out] */ __RPC__deref_out_opt IOleContainer **ppContainer);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, SetFrameOptions)
         HRESULT ( STDMETHODCALLTYPE *SetFrameOptions )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, GetFrameOptions)
         HRESULT ( STDMETHODCALLTYPE *GetFrameOptions )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ __RPC__out DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, SetFrameMargins)
         HRESULT ( STDMETHODCALLTYPE *SetFrameMargins )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwWidth,
-            /* [annotation][in] */ 
-            _In_  DWORD dwHeight);
+            /* [in] */ DWORD dwWidth,
+            /* [in] */ DWORD dwHeight);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, GetFrameMargins)
         HRESULT ( STDMETHODCALLTYPE *GetFrameMargins )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwWidth,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwHeight);
+            /* [out] */ __RPC__out DWORD *pdwWidth,
+            /* [out] */ __RPC__out DWORD *pdwHeight);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, FindFrame)
         HRESULT ( STDMETHODCALLTYPE *FindFrame )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pszTargetName,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkTargetFrame);
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pszTargetName,
+            /* [in] */ DWORD dwFlags,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppunkTargetFrame);
         
         DECLSPEC_XFGVIRT(ITargetFrame2, GetTargetAlias)
         HRESULT ( STDMETHODCALLTYPE *GetTargetAlias )( 
             __RPC__in ITargetFrame2 * This,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pszTargetName,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppszTargetAlias);
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pszTargetName,
+            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszTargetAlias);
         
         END_INTERFACE
     } ITargetFrame2Vtbl;
@@ -625,12 +577,10 @@ EXTERN_C const IID IID_ITargetContainer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetFrameUrl( 
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppszFrameSrc) = 0;
+            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszFrameSrc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFramesContainer( 
-            /* [annotation][out] */ 
-            _Out_  IOleContainer **ppContainer) = 0;
+            /* [out] */ __RPC__deref_out_opt IOleContainer **ppContainer) = 0;
         
     };
     
@@ -644,8 +594,7 @@ EXTERN_C const IID IID_ITargetContainer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITargetContainer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -660,14 +609,12 @@ EXTERN_C const IID IID_ITargetContainer;
         DECLSPEC_XFGVIRT(ITargetContainer, GetFrameUrl)
         HRESULT ( STDMETHODCALLTYPE *GetFrameUrl )( 
             __RPC__in ITargetContainer * This,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppszFrameSrc);
+            /* [out] */ __RPC__deref_out_opt LPWSTR *ppszFrameSrc);
         
         DECLSPEC_XFGVIRT(ITargetContainer, GetFramesContainer)
         HRESULT ( STDMETHODCALLTYPE *GetFramesContainer )( 
             __RPC__in ITargetContainer * This,
-            /* [annotation][out] */ 
-            _Out_  IOleContainer **ppContainer);
+            /* [out] */ __RPC__deref_out_opt IOleContainer **ppContainer);
         
         END_INTERFACE
     } ITargetContainerVtbl;

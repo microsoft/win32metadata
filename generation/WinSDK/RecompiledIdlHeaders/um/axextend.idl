@@ -360,7 +360,7 @@ typedef struct REGFILTER2
             {
                 ULONG cPins;
                 [size_is(cPins)] const REGFILTERPINS *rgPins;
-            };
+            } DUMMYSTRUCTNAME;
 
         [case(2)]
 
@@ -368,8 +368,8 @@ typedef struct REGFILTER2
             {
                 ULONG cPins2;
                 [size_is(cPins2)] const REGFILTERPINS2 *rgPins2;
-            };
-    } ;
+            } DUMMYSTRUCTNAME2;
+    } DUMMYUNIONNAME;
 
 } REGFILTER2;
 
@@ -1256,14 +1256,14 @@ interface IFilterGraph2: IGraphBuilder {
 ]
 interface IFilterGraph3 : IFilterGraph2 {
 
-    // 
+    //
     // SetSyncSourceEx()
     //
-    //      SetSyncSourceEx() allows applications to use two different clocks in 
-    // the same filter graph.  pClockForMostOfFilterGraph is used by every filter 
+    //      SetSyncSourceEx() allows applications to use two different clocks in
+    // the same filter graph.  pClockForMostOfFilterGraph is used by every filter
     // in the filter graph except for pFilter.  pFilter uses pClockForFilter.
     //
-    HRESULT SetSyncSourceEx( 
+    HRESULT SetSyncSourceEx(
         [in AM_ANNOTATION("_In_")] IReferenceClock *pClockForMostOfFilterGraph,
         [in AM_ANNOTATION("_In_")] IReferenceClock *pClockForFilter,
         [in AM_ANNOTATION("_In_")] IBaseFilter *pFilter);
@@ -3487,7 +3487,7 @@ interface IAMExtTransport : IUnknown {
         [out AM_ANNOTATION("_Out_")] long *pValue
     );
 
-    
+
     // Parameters such as recording speed, servo reference, ballistics, etc.
     [local] HRESULT GetTransportBasicParameters(
         [in] long Param,
@@ -3648,7 +3648,7 @@ cpp_quote("   struct {")
 cpp_quote("  WORD   wFrameRate;")
 cpp_quote("  WORD   wFrameFract;")
 cpp_quote("  DWORD  dwFrames;")
-cpp_quote("  };")
+cpp_quote("  } DUMMYSTRUCTNAME;")
 cpp_quote("   DWORDLONG  qw;")
 cpp_quote("   } TIMECODE;")
 cpp_quote("")
@@ -5058,7 +5058,7 @@ interface IAMAsyncReaderTimestampScaling : IUnknown
 //  Objects are controlled by CLSID for regular filter and DMOs
 //  and by DLL name for legacy ACM and ICM codecs
 //
-//  This interface is implemented by the CLSID_DirectShowPluginControl 
+//  This interface is implemented by the CLSID_DirectShowPluginControl
 //  COM object
 //
 

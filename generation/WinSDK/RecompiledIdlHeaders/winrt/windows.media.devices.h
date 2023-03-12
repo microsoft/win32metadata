@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_CAPTURE_APPBROADCASTCONTRACT_VERSION)
@@ -257,6 +257,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController10 ABI::Windows::Media::Devices::IAdvancedVideoCaptureDeviceController10
 
 #endif // ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController10_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Devices {
+                interface IAdvancedVideoCaptureDeviceController11;
+            } /* Devices */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11 ABI::Windows::Media::Devices::IAdvancedVideoCaptureDeviceController11
+
+#endif // ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController2_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController2_FWD_DEFINED__
@@ -2924,6 +2939,16 @@ namespace ABI {
     namespace Windows {
         namespace Media {
             namespace Capture {
+                typedef enum MediaCaptureDeviceExclusiveControlReleaseMode : int MediaCaptureDeviceExclusiveControlReleaseMode;
+            } /* Capture */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Capture {
                 typedef enum MediaStreamType : int MediaStreamType;
             } /* Capture */
         } /* Media */
@@ -4455,6 +4480,44 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController10;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController10_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Media.Devices.IAdvancedVideoCaptureDeviceController11
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Devices.VideoDeviceController
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Devices_IAdvancedVideoCaptureDeviceController11[] = L"Windows.Media.Devices.IAdvancedVideoCaptureDeviceController11";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Devices {
+                MIDL_INTERFACE("d5b65ae2-3772-580c-a630-e75de9106904")
+                IAdvancedVideoCaptureDeviceController11 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE TryAcquireExclusiveControl(
+                        HSTRING deviceId,
+                        ABI::Windows::Media::Capture::MediaCaptureDeviceExclusiveControlReleaseMode mode,
+                        boolean* result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IAdvancedVideoCaptureDeviceController11 = _uuidof(IAdvancedVideoCaptureDeviceController11);
+            } /* Devices */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -8286,6 +8349,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Media.Devices.IAdvancedVideoCaptureDeviceController8
  *    Windows.Media.Devices.IAdvancedVideoCaptureDeviceController9
  *    Windows.Media.Devices.IAdvancedVideoCaptureDeviceController10
+ *    Windows.Media.Devices.IAdvancedVideoCaptureDeviceController11
  *
  * Class Threading Model:  Multi Threaded Apartment
  *
@@ -8457,6 +8521,12 @@ typedef interface __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceC
 typedef interface __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController10 __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController10;
 
 #endif // ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController10_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11 __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11;
+
+#endif // ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController2_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController2_FWD_DEFINED__
@@ -12910,6 +12980,8 @@ typedef struct __x_ABI_CWindows_CFoundation_CRect __x_ABI_CWindows_CFoundation_C
 
 typedef struct __x_ABI_CWindows_CFoundation_CTimeSpan __x_ABI_CWindows_CFoundation_CTimeSpan;
 
+typedef enum __x_ABI_CWindows_CMedia_CCapture_CMediaCaptureDeviceExclusiveControlReleaseMode __x_ABI_CWindows_CMedia_CCapture_CMediaCaptureDeviceExclusiveControlReleaseMode;
+
 typedef enum __x_ABI_CWindows_CMedia_CCapture_CMediaStreamType __x_ABI_CWindows_CMedia_CCapture_CMediaStreamType;
 
 typedef enum __x_ABI_CWindows_CMedia_CCapture_CPowerlineFrequency __x_ABI_CWindows_CMedia_CCapture_CPowerlineFrequency;
@@ -13938,6 +14010,77 @@ interface __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceControlle
 EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController10;
 #endif /* !defined(____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController10_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.Media.Devices.IAdvancedVideoCaptureDeviceController11
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Devices.VideoDeviceController
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Devices_IAdvancedVideoCaptureDeviceController11[] = L"Windows.Media.Devices.IAdvancedVideoCaptureDeviceController11";
+typedef struct __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* TryAcquireExclusiveControl)(__x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11* This,
+        HSTRING deviceId,
+        enum __x_ABI_CWindows_CMedia_CCapture_CMediaCaptureDeviceExclusiveControlReleaseMode mode,
+        boolean* result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11Vtbl;
+
+interface __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_TryAcquireExclusiveControl(This, deviceId, mode, result) \
+    ((This)->lpVtbl->TryAcquireExclusiveControl(This, deviceId, mode, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CDevices_CIAdvancedVideoCaptureDeviceController11_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -20249,6 +20392,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Media.Devices.IAdvancedVideoCaptureDeviceController8
  *    Windows.Media.Devices.IAdvancedVideoCaptureDeviceController9
  *    Windows.Media.Devices.IAdvancedVideoCaptureDeviceController10
+ *    Windows.Media.Devices.IAdvancedVideoCaptureDeviceController11
  *
  * Class Threading Model:  Multi Threaded Apartment
  *

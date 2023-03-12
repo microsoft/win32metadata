@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -1178,38 +1178,24 @@ EXTERN_C const IID IID_IActiveScriptDebug32;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetScriptTextAttributes( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(uNumCodeChars)  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumCodeChars,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(uNumCodeChars)  SOURCE_TEXT_ATTR *pattr) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(uNumCodeChars) LPCOLESTR pstrCode,
+            /* [in] */ ULONG uNumCodeChars,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(uNumCodeChars) SOURCE_TEXT_ATTR *pattr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScriptletTextAttributes( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(uNumCodeChars)  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumCodeChars,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(uNumCodeChars)  SOURCE_TEXT_ATTR *pattr) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(uNumCodeChars) LPCOLESTR pstrCode,
+            /* [in] */ ULONG uNumCodeChars,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(uNumCodeChars) SOURCE_TEXT_ATTR *pattr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumCodeContextsOfPosition( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwSourceContext,
-            /* [annotation][in] */ 
-            _In_  ULONG uCharacterOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumChars,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugCodeContexts **ppescc) = 0;
+            /* [in] */ DWORD dwSourceContext,
+            /* [in] */ ULONG uCharacterOffset,
+            /* [in] */ ULONG uNumChars,
+            /* [out] */ __RPC__deref_out_opt IEnumDebugCodeContexts **ppescc) = 0;
         
     };
     
@@ -1223,8 +1209,7 @@ EXTERN_C const IID IID_IActiveScriptDebug32;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptDebug32 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1239,42 +1224,28 @@ EXTERN_C const IID IID_IActiveScriptDebug32;
         DECLSPEC_XFGVIRT(IActiveScriptDebug32, GetScriptTextAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetScriptTextAttributes )( 
             __RPC__in IActiveScriptDebug32 * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(uNumCodeChars)  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumCodeChars,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(uNumCodeChars)  SOURCE_TEXT_ATTR *pattr);
+            /* [size_is][in] */ __RPC__in_ecount_full(uNumCodeChars) LPCOLESTR pstrCode,
+            /* [in] */ ULONG uNumCodeChars,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(uNumCodeChars) SOURCE_TEXT_ATTR *pattr);
         
         DECLSPEC_XFGVIRT(IActiveScriptDebug32, GetScriptletTextAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetScriptletTextAttributes )( 
             __RPC__in IActiveScriptDebug32 * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(uNumCodeChars)  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumCodeChars,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(uNumCodeChars)  SOURCE_TEXT_ATTR *pattr);
+            /* [size_is][in] */ __RPC__in_ecount_full(uNumCodeChars) LPCOLESTR pstrCode,
+            /* [in] */ ULONG uNumCodeChars,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(uNumCodeChars) SOURCE_TEXT_ATTR *pattr);
         
         DECLSPEC_XFGVIRT(IActiveScriptDebug32, EnumCodeContextsOfPosition)
         HRESULT ( STDMETHODCALLTYPE *EnumCodeContextsOfPosition )( 
             __RPC__in IActiveScriptDebug32 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSourceContext,
-            /* [annotation][in] */ 
-            _In_  ULONG uCharacterOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumChars,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugCodeContexts **ppescc);
+            /* [in] */ DWORD dwSourceContext,
+            /* [in] */ ULONG uCharacterOffset,
+            /* [in] */ ULONG uNumChars,
+            /* [out] */ __RPC__deref_out_opt IEnumDebugCodeContexts **ppescc);
         
         END_INTERFACE
     } IActiveScriptDebug32Vtbl;
@@ -1335,38 +1306,24 @@ EXTERN_C const IID IID_IActiveScriptDebug64;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetScriptTextAttributes( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(uNumCodeChars)  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumCodeChars,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(uNumCodeChars)  SOURCE_TEXT_ATTR *pattr) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(uNumCodeChars) LPCOLESTR pstrCode,
+            /* [in] */ ULONG uNumCodeChars,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(uNumCodeChars) SOURCE_TEXT_ATTR *pattr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScriptletTextAttributes( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(uNumCodeChars)  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumCodeChars,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(uNumCodeChars)  SOURCE_TEXT_ATTR *pattr) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(uNumCodeChars) LPCOLESTR pstrCode,
+            /* [in] */ ULONG uNumCodeChars,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(uNumCodeChars) SOURCE_TEXT_ATTR *pattr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumCodeContextsOfPosition( 
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwSourceContext,
-            /* [annotation][in] */ 
-            _In_  ULONG uCharacterOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumChars,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugCodeContexts **ppescc) = 0;
+            /* [in] */ DWORDLONG dwSourceContext,
+            /* [in] */ ULONG uCharacterOffset,
+            /* [in] */ ULONG uNumChars,
+            /* [out] */ __RPC__deref_out_opt IEnumDebugCodeContexts **ppescc) = 0;
         
     };
     
@@ -1380,8 +1337,7 @@ EXTERN_C const IID IID_IActiveScriptDebug64;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptDebug64 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1396,42 +1352,28 @@ EXTERN_C const IID IID_IActiveScriptDebug64;
         DECLSPEC_XFGVIRT(IActiveScriptDebug64, GetScriptTextAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetScriptTextAttributes )( 
             __RPC__in IActiveScriptDebug64 * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(uNumCodeChars)  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumCodeChars,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(uNumCodeChars)  SOURCE_TEXT_ATTR *pattr);
+            /* [size_is][in] */ __RPC__in_ecount_full(uNumCodeChars) LPCOLESTR pstrCode,
+            /* [in] */ ULONG uNumCodeChars,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(uNumCodeChars) SOURCE_TEXT_ATTR *pattr);
         
         DECLSPEC_XFGVIRT(IActiveScriptDebug64, GetScriptletTextAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetScriptletTextAttributes )( 
             __RPC__in IActiveScriptDebug64 * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(uNumCodeChars)  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumCodeChars,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(uNumCodeChars)  SOURCE_TEXT_ATTR *pattr);
+            /* [size_is][in] */ __RPC__in_ecount_full(uNumCodeChars) LPCOLESTR pstrCode,
+            /* [in] */ ULONG uNumCodeChars,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(uNumCodeChars) SOURCE_TEXT_ATTR *pattr);
         
         DECLSPEC_XFGVIRT(IActiveScriptDebug64, EnumCodeContextsOfPosition)
         HRESULT ( STDMETHODCALLTYPE *EnumCodeContextsOfPosition )( 
             __RPC__in IActiveScriptDebug64 * This,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwSourceContext,
-            /* [annotation][in] */ 
-            _In_  ULONG uCharacterOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumChars,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugCodeContexts **ppescc);
+            /* [in] */ DWORDLONG dwSourceContext,
+            /* [in] */ ULONG uCharacterOffset,
+            /* [in] */ ULONG uNumChars,
+            /* [out] */ __RPC__deref_out_opt IEnumDebugCodeContexts **ppescc);
         
         END_INTERFACE
     } IActiveScriptDebug64Vtbl;
@@ -1509,30 +1451,21 @@ EXTERN_C const IID IID_IActiveScriptSiteDebug32;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentContextFromPosition( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwSourceContext,
-            /* [annotation][in] */ 
-            _In_  ULONG uCharacterOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppsc) = 0;
+            /* [in] */ DWORD dwSourceContext,
+            /* [in] */ ULONG uCharacterOffset,
+            /* [in] */ ULONG uNumChars,
+            /* [out] */ IDebugDocumentContext **ppsc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetApplication( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication32 **ppda) = 0;
+            /* [out] */ IDebugApplication32 **ppda) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRootApplicationNode( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanRoot) = 0;
+            /* [out] */ IDebugApplicationNode **ppdanRoot) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnScriptErrorDebug( 
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pErrorDebug,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfEnterDebugger,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCallOnScriptErrorWhenContinuing) = 0;
+            /* [in] */ IActiveScriptErrorDebug *pErrorDebug,
+            /* [out] */ BOOL *pfEnterDebugger,
+            /* [out] */ BOOL *pfCallOnScriptErrorWhenContinuing) = 0;
         
     };
     
@@ -1546,8 +1479,7 @@ EXTERN_C const IID IID_IActiveScriptSiteDebug32;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IActiveScriptSiteDebug32 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1562,36 +1494,27 @@ EXTERN_C const IID IID_IActiveScriptSiteDebug32;
         DECLSPEC_XFGVIRT(IActiveScriptSiteDebug32, GetDocumentContextFromPosition)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentContextFromPosition )( 
             IActiveScriptSiteDebug32 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSourceContext,
-            /* [annotation][in] */ 
-            _In_  ULONG uCharacterOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppsc);
+            /* [in] */ DWORD dwSourceContext,
+            /* [in] */ ULONG uCharacterOffset,
+            /* [in] */ ULONG uNumChars,
+            /* [out] */ IDebugDocumentContext **ppsc);
         
         DECLSPEC_XFGVIRT(IActiveScriptSiteDebug32, GetApplication)
         HRESULT ( STDMETHODCALLTYPE *GetApplication )( 
             IActiveScriptSiteDebug32 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication32 **ppda);
+            /* [out] */ IDebugApplication32 **ppda);
         
         DECLSPEC_XFGVIRT(IActiveScriptSiteDebug32, GetRootApplicationNode)
         HRESULT ( STDMETHODCALLTYPE *GetRootApplicationNode )( 
             IActiveScriptSiteDebug32 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanRoot);
+            /* [out] */ IDebugApplicationNode **ppdanRoot);
         
         DECLSPEC_XFGVIRT(IActiveScriptSiteDebug32, OnScriptErrorDebug)
         HRESULT ( STDMETHODCALLTYPE *OnScriptErrorDebug )( 
             IActiveScriptSiteDebug32 * This,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pErrorDebug,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfEnterDebugger,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCallOnScriptErrorWhenContinuing);
+            /* [in] */ IActiveScriptErrorDebug *pErrorDebug,
+            /* [out] */ BOOL *pfEnterDebugger,
+            /* [out] */ BOOL *pfCallOnScriptErrorWhenContinuing);
         
         END_INTERFACE
     } IActiveScriptSiteDebug32Vtbl;
@@ -1655,30 +1578,21 @@ EXTERN_C const IID IID_IActiveScriptSiteDebug64;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentContextFromPosition( 
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwSourceContext,
-            /* [annotation][in] */ 
-            _In_  ULONG uCharacterOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppsc) = 0;
+            /* [in] */ DWORDLONG dwSourceContext,
+            /* [in] */ ULONG uCharacterOffset,
+            /* [in] */ ULONG uNumChars,
+            /* [out] */ IDebugDocumentContext **ppsc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetApplication( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication64 **ppda) = 0;
+            /* [out] */ IDebugApplication64 **ppda) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRootApplicationNode( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanRoot) = 0;
+            /* [out] */ IDebugApplicationNode **ppdanRoot) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnScriptErrorDebug( 
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pErrorDebug,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfEnterDebugger,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCallOnScriptErrorWhenContinuing) = 0;
+            /* [in] */ IActiveScriptErrorDebug *pErrorDebug,
+            /* [out] */ BOOL *pfEnterDebugger,
+            /* [out] */ BOOL *pfCallOnScriptErrorWhenContinuing) = 0;
         
     };
     
@@ -1692,8 +1606,7 @@ EXTERN_C const IID IID_IActiveScriptSiteDebug64;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IActiveScriptSiteDebug64 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1708,36 +1621,27 @@ EXTERN_C const IID IID_IActiveScriptSiteDebug64;
         DECLSPEC_XFGVIRT(IActiveScriptSiteDebug64, GetDocumentContextFromPosition)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentContextFromPosition )( 
             IActiveScriptSiteDebug64 * This,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwSourceContext,
-            /* [annotation][in] */ 
-            _In_  ULONG uCharacterOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppsc);
+            /* [in] */ DWORDLONG dwSourceContext,
+            /* [in] */ ULONG uCharacterOffset,
+            /* [in] */ ULONG uNumChars,
+            /* [out] */ IDebugDocumentContext **ppsc);
         
         DECLSPEC_XFGVIRT(IActiveScriptSiteDebug64, GetApplication)
         HRESULT ( STDMETHODCALLTYPE *GetApplication )( 
             IActiveScriptSiteDebug64 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication64 **ppda);
+            /* [out] */ IDebugApplication64 **ppda);
         
         DECLSPEC_XFGVIRT(IActiveScriptSiteDebug64, GetRootApplicationNode)
         HRESULT ( STDMETHODCALLTYPE *GetRootApplicationNode )( 
             IActiveScriptSiteDebug64 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanRoot);
+            /* [out] */ IDebugApplicationNode **ppdanRoot);
         
         DECLSPEC_XFGVIRT(IActiveScriptSiteDebug64, OnScriptErrorDebug)
         HRESULT ( STDMETHODCALLTYPE *OnScriptErrorDebug )( 
             IActiveScriptSiteDebug64 * This,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pErrorDebug,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfEnterDebugger,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCallOnScriptErrorWhenContinuing);
+            /* [in] */ IActiveScriptErrorDebug *pErrorDebug,
+            /* [out] */ BOOL *pfEnterDebugger,
+            /* [out] */ BOOL *pfCallOnScriptErrorWhenContinuing);
         
         END_INTERFACE
     } IActiveScriptSiteDebug64Vtbl;
@@ -1801,10 +1705,8 @@ EXTERN_C const IID IID_IActiveScriptSiteDebugEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnCanNotJITScriptErrorDebug( 
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pErrorDebug,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCallOnScriptErrorWhenContinuing) = 0;
+            /* [in] */ IActiveScriptErrorDebug *pErrorDebug,
+            /* [out] */ BOOL *pfCallOnScriptErrorWhenContinuing) = 0;
         
     };
     
@@ -1818,8 +1720,7 @@ EXTERN_C const IID IID_IActiveScriptSiteDebugEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IActiveScriptSiteDebugEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1834,10 +1735,8 @@ EXTERN_C const IID IID_IActiveScriptSiteDebugEx;
         DECLSPEC_XFGVIRT(IActiveScriptSiteDebugEx, OnCanNotJITScriptErrorDebug)
         HRESULT ( STDMETHODCALLTYPE *OnCanNotJITScriptErrorDebug )( 
             IActiveScriptSiteDebugEx * This,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pErrorDebug,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCallOnScriptErrorWhenContinuing);
+            /* [in] */ IActiveScriptErrorDebug *pErrorDebug,
+            /* [out] */ BOOL *pfCallOnScriptErrorWhenContinuing);
         
         END_INTERFACE
     } IActiveScriptSiteDebugExVtbl;
@@ -1892,12 +1791,10 @@ EXTERN_C const IID IID_IActiveScriptErrorDebug;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentContext( 
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppssc) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppssc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStackFrame( 
-            /* [annotation][out] */ 
-            _Out_  IDebugStackFrame **ppdsf) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugStackFrame **ppdsf) = 0;
         
     };
     
@@ -1911,8 +1808,7 @@ EXTERN_C const IID IID_IActiveScriptErrorDebug;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IActiveScriptErrorDebug * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1927,36 +1823,29 @@ EXTERN_C const IID IID_IActiveScriptErrorDebug;
         DECLSPEC_XFGVIRT(IActiveScriptError, GetExceptionInfo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetExceptionInfo )( 
             IActiveScriptErrorDebug * This,
-            /* [annotation][out] */ 
-            _Out_  EXCEPINFO *pexcepinfo);
+            /* [out] */ EXCEPINFO *pexcepinfo);
         
         DECLSPEC_XFGVIRT(IActiveScriptError, GetSourcePosition)
         HRESULT ( STDMETHODCALLTYPE *GetSourcePosition )( 
             __RPC__in IActiveScriptErrorDebug * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwSourceContext,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulLineNumber,
-            /* [annotation][out] */ 
-            _Out_  LONG *plCharacterPosition);
+            /* [out] */ __RPC__out DWORD *pdwSourceContext,
+            /* [out] */ __RPC__out ULONG *pulLineNumber,
+            /* [out] */ __RPC__out LONG *plCharacterPosition);
         
         DECLSPEC_XFGVIRT(IActiveScriptError, GetSourceLineText)
         HRESULT ( STDMETHODCALLTYPE *GetSourceLineText )( 
             __RPC__in IActiveScriptErrorDebug * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrSourceLine);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrSourceLine);
         
         DECLSPEC_XFGVIRT(IActiveScriptErrorDebug, GetDocumentContext)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentContext )( 
             __RPC__in IActiveScriptErrorDebug * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppssc);
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppssc);
         
         DECLSPEC_XFGVIRT(IActiveScriptErrorDebug, GetStackFrame)
         HRESULT ( STDMETHODCALLTYPE *GetStackFrame )( 
             __RPC__in IActiveScriptErrorDebug * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugStackFrame **ppdsf);
+            /* [out] */ __RPC__deref_out_opt IDebugStackFrame **ppdsf);
         
         END_INTERFACE
     } IActiveScriptErrorDebugVtbl;
@@ -2024,12 +1913,10 @@ EXTERN_C const IID IID_IDebugCodeContext;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentContext( 
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppsc) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppsc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBreakPoint( 
-            /* [annotation][in] */ 
-            _In_  BREAKPOINT_STATE bps) = 0;
+            /* [in] */ BREAKPOINT_STATE bps) = 0;
         
     };
     
@@ -2043,8 +1930,7 @@ EXTERN_C const IID IID_IDebugCodeContext;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugCodeContext * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2059,14 +1945,12 @@ EXTERN_C const IID IID_IDebugCodeContext;
         DECLSPEC_XFGVIRT(IDebugCodeContext, GetDocumentContext)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentContext )( 
             __RPC__in IDebugCodeContext * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppsc);
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppsc);
         
         DECLSPEC_XFGVIRT(IDebugCodeContext, SetBreakPoint)
         HRESULT ( STDMETHODCALLTYPE *SetBreakPoint )( 
             __RPC__in IDebugCodeContext * This,
-            /* [annotation][in] */ 
-            _In_  BREAKPOINT_STATE bps);
+            /* [in] */ BREAKPOINT_STATE bps);
         
         END_INTERFACE
     } IDebugCodeContextVtbl;
@@ -2124,24 +2008,19 @@ EXTERN_C const IID IID_IDebugExpression;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Start( 
-            /* [annotation][in] */ 
-            _In_  IDebugExpressionCallBack *pdecb) = 0;
+            /* [in] */ __RPC__in_opt IDebugExpressionCallBack *pdecb) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Abort( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryIsComplete( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetResultAsString( 
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrResult,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrResult) = 0;
+            /* [out] */ __RPC__out HRESULT *phrResult,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetResultAsDebugProperty( 
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrResult,
-            /* [annotation][out] */ 
-            _Out_  IDebugProperty **ppdp) = 0;
+            /* [out] */ __RPC__out HRESULT *phrResult,
+            /* [out] */ __RPC__deref_out_opt IDebugProperty **ppdp) = 0;
         
     };
     
@@ -2155,8 +2034,7 @@ EXTERN_C const IID IID_IDebugExpression;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugExpression * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2171,8 +2049,7 @@ EXTERN_C const IID IID_IDebugExpression;
         DECLSPEC_XFGVIRT(IDebugExpression, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             __RPC__in IDebugExpression * This,
-            /* [annotation][in] */ 
-            _In_  IDebugExpressionCallBack *pdecb);
+            /* [in] */ __RPC__in_opt IDebugExpressionCallBack *pdecb);
         
         DECLSPEC_XFGVIRT(IDebugExpression, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
@@ -2185,18 +2062,14 @@ EXTERN_C const IID IID_IDebugExpression;
         DECLSPEC_XFGVIRT(IDebugExpression, GetResultAsString)
         HRESULT ( STDMETHODCALLTYPE *GetResultAsString )( 
             __RPC__in IDebugExpression * This,
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrResult,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrResult);
+            /* [out] */ __RPC__out HRESULT *phrResult,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrResult);
         
         DECLSPEC_XFGVIRT(IDebugExpression, GetResultAsDebugProperty)
         HRESULT ( STDMETHODCALLTYPE *GetResultAsDebugProperty )( 
             __RPC__in IDebugExpression * This,
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrResult,
-            /* [annotation][out] */ 
-            _Out_  IDebugProperty **ppdp);
+            /* [out] */ __RPC__out HRESULT *phrResult,
+            /* [out] */ __RPC__deref_out_opt IDebugProperty **ppdp);
         
         END_INTERFACE
     } IDebugExpressionVtbl;
@@ -2263,22 +2136,15 @@ EXTERN_C const IID IID_IDebugExpressionContext;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ParseLanguageText( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  UINT nRadix,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][out] */ 
-            _Out_  IDebugExpression **ppe) = 0;
+            /* [in] */ __RPC__in LPCOLESTR pstrCode,
+            /* [in] */ UINT nRadix,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [out] */ __RPC__deref_out_opt IDebugExpression **ppe) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguageInfo( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrLanguageName,
-            /* [annotation][out] */ 
-            _Out_  GUID *pLanguageID) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrLanguageName,
+            /* [out] */ __RPC__out GUID *pLanguageID) = 0;
         
     };
     
@@ -2292,8 +2158,7 @@ EXTERN_C const IID IID_IDebugExpressionContext;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugExpressionContext * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2308,24 +2173,17 @@ EXTERN_C const IID IID_IDebugExpressionContext;
         DECLSPEC_XFGVIRT(IDebugExpressionContext, ParseLanguageText)
         HRESULT ( STDMETHODCALLTYPE *ParseLanguageText )( 
             __RPC__in IDebugExpressionContext * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  UINT nRadix,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][out] */ 
-            _Out_  IDebugExpression **ppe);
+            /* [in] */ __RPC__in LPCOLESTR pstrCode,
+            /* [in] */ UINT nRadix,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [out] */ __RPC__deref_out_opt IDebugExpression **ppe);
         
         DECLSPEC_XFGVIRT(IDebugExpressionContext, GetLanguageInfo)
         HRESULT ( STDMETHODCALLTYPE *GetLanguageInfo )( 
             __RPC__in IDebugExpressionContext * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrLanguageName,
-            /* [annotation][out] */ 
-            _Out_  GUID *pLanguageID);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrLanguageName,
+            /* [out] */ __RPC__out GUID *pLanguageID);
         
         END_INTERFACE
     } IDebugExpressionContextVtbl;
@@ -2396,8 +2254,7 @@ EXTERN_C const IID IID_IDebugExpressionCallBack;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugExpressionCallBack * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2466,28 +2323,21 @@ EXTERN_C const IID IID_IDebugStackFrame;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCodeContext( 
-            /* [annotation][out] */ 
-            _Out_  IDebugCodeContext **ppcc) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugCodeContext **ppcc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescriptionString( 
-            /* [annotation][in] */ 
-            _In_  BOOL fLong,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDescription) = 0;
+            /* [in] */ BOOL fLong,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguageString( 
-            /* [annotation][in] */ 
-            _In_  BOOL fLong,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrLanguage) = 0;
+            /* [in] */ BOOL fLong,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrLanguage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetThread( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationThread **ppat) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugApplicationThread **ppat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDebugProperty( 
-            /* [annotation][out] */ 
-            _Out_  IDebugProperty **ppDebugProp) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugProperty **ppDebugProp) = 0;
         
     };
     
@@ -2501,8 +2351,7 @@ EXTERN_C const IID IID_IDebugStackFrame;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugStackFrame * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2517,36 +2366,29 @@ EXTERN_C const IID IID_IDebugStackFrame;
         DECLSPEC_XFGVIRT(IDebugStackFrame, GetCodeContext)
         HRESULT ( STDMETHODCALLTYPE *GetCodeContext )( 
             __RPC__in IDebugStackFrame * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugCodeContext **ppcc);
+            /* [out] */ __RPC__deref_out_opt IDebugCodeContext **ppcc);
         
         DECLSPEC_XFGVIRT(IDebugStackFrame, GetDescriptionString)
         HRESULT ( STDMETHODCALLTYPE *GetDescriptionString )( 
             __RPC__in IDebugStackFrame * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fLong,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDescription);
+            /* [in] */ BOOL fLong,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
         DECLSPEC_XFGVIRT(IDebugStackFrame, GetLanguageString)
         HRESULT ( STDMETHODCALLTYPE *GetLanguageString )( 
             __RPC__in IDebugStackFrame * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fLong,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrLanguage);
+            /* [in] */ BOOL fLong,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrLanguage);
         
         DECLSPEC_XFGVIRT(IDebugStackFrame, GetThread)
         HRESULT ( STDMETHODCALLTYPE *GetThread )( 
             __RPC__in IDebugStackFrame * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationThread **ppat);
+            /* [out] */ __RPC__deref_out_opt IDebugApplicationThread **ppat);
         
         DECLSPEC_XFGVIRT(IDebugStackFrame, GetDebugProperty)
         HRESULT ( STDMETHODCALLTYPE *GetDebugProperty )( 
             __RPC__in IDebugStackFrame * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugProperty **ppDebugProp);
+            /* [out] */ __RPC__deref_out_opt IDebugProperty **ppDebugProp);
         
         END_INTERFACE
     } IDebugStackFrameVtbl;
@@ -2613,8 +2455,7 @@ EXTERN_C const IID IID_IDebugStackFrameSniffer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumStackFrames( 
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf) = 0;
         
     };
     
@@ -2628,8 +2469,7 @@ EXTERN_C const IID IID_IDebugStackFrameSniffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugStackFrameSniffer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2644,8 +2484,7 @@ EXTERN_C const IID IID_IDebugStackFrameSniffer;
         DECLSPEC_XFGVIRT(IDebugStackFrameSniffer, EnumStackFrames)
         HRESULT ( STDMETHODCALLTYPE *EnumStackFrames )( 
             __RPC__in IDebugStackFrameSniffer * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf);
         
         END_INTERFACE
     } IDebugStackFrameSnifferVtbl;
@@ -2719,10 +2558,8 @@ EXTERN_C const IID IID_IDebugStackFrameSnifferEx32;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumStackFramesEx32( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwSpMin,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf) = 0;
+            /* [in] */ DWORD dwSpMin,
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf) = 0;
         
     };
     
@@ -2736,8 +2573,7 @@ EXTERN_C const IID IID_IDebugStackFrameSnifferEx32;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugStackFrameSnifferEx32 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2752,16 +2588,13 @@ EXTERN_C const IID IID_IDebugStackFrameSnifferEx32;
         DECLSPEC_XFGVIRT(IDebugStackFrameSniffer, EnumStackFrames)
         HRESULT ( STDMETHODCALLTYPE *EnumStackFrames )( 
             __RPC__in IDebugStackFrameSnifferEx32 * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf);
         
         DECLSPEC_XFGVIRT(IDebugStackFrameSnifferEx32, EnumStackFramesEx32)
         HRESULT ( STDMETHODCALLTYPE *EnumStackFramesEx32 )( 
             __RPC__in IDebugStackFrameSnifferEx32 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSpMin,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf);
+            /* [in] */ DWORD dwSpMin,
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf);
         
         END_INTERFACE
     } IDebugStackFrameSnifferEx32Vtbl;
@@ -2820,10 +2653,8 @@ EXTERN_C const IID IID_IDebugStackFrameSnifferEx64;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumStackFramesEx64( 
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwSpMin,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames64 **ppedsf) = 0;
+            /* [in] */ DWORDLONG dwSpMin,
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames64 **ppedsf) = 0;
         
     };
     
@@ -2837,8 +2668,7 @@ EXTERN_C const IID IID_IDebugStackFrameSnifferEx64;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugStackFrameSnifferEx64 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2853,16 +2683,13 @@ EXTERN_C const IID IID_IDebugStackFrameSnifferEx64;
         DECLSPEC_XFGVIRT(IDebugStackFrameSniffer, EnumStackFrames)
         HRESULT ( STDMETHODCALLTYPE *EnumStackFrames )( 
             __RPC__in IDebugStackFrameSnifferEx64 * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf);
         
         DECLSPEC_XFGVIRT(IDebugStackFrameSnifferEx64, EnumStackFramesEx64)
         HRESULT ( STDMETHODCALLTYPE *EnumStackFramesEx64 )( 
             __RPC__in IDebugStackFrameSnifferEx64 * This,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwSpMin,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames64 **ppedsf);
+            /* [in] */ DWORDLONG dwSpMin,
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames64 **ppedsf);
         
         END_INTERFACE
     } IDebugStackFrameSnifferEx64Vtbl;
@@ -2921,12 +2748,10 @@ EXTERN_C const IID IID_IDebugSyncOperation;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTargetThread( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationThread **ppatTarget) = 0;
+            /* [out] */ IDebugApplicationThread **ppatTarget) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Execute( 
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkResult) = 0;
+            /* [out] */ IUnknown **ppunkResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InProgressAbort( void) = 0;
         
@@ -2942,8 +2767,7 @@ EXTERN_C const IID IID_IDebugSyncOperation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugSyncOperation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2958,14 +2782,12 @@ EXTERN_C const IID IID_IDebugSyncOperation;
         DECLSPEC_XFGVIRT(IDebugSyncOperation, GetTargetThread)
         HRESULT ( STDMETHODCALLTYPE *GetTargetThread )( 
             IDebugSyncOperation * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationThread **ppatTarget);
+            /* [out] */ IDebugApplicationThread **ppatTarget);
         
         DECLSPEC_XFGVIRT(IDebugSyncOperation, Execute)
         HRESULT ( STDMETHODCALLTYPE *Execute )( 
             IDebugSyncOperation * This,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkResult);
+            /* [out] */ IUnknown **ppunkResult);
         
         DECLSPEC_XFGVIRT(IDebugSyncOperation, InProgressAbort)
         HRESULT ( STDMETHODCALLTYPE *InProgressAbort )( 
@@ -3030,8 +2852,7 @@ EXTERN_C const IID IID_IDebugAsyncOperation;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSyncDebugOperation( 
-            /* [annotation][out] */ 
-            _Out_  IDebugSyncOperation **ppsdo) = 0;
+            /* [out] */ IDebugSyncOperation **ppsdo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Start( 
             IDebugAsyncOperationCallBack *padocb) = 0;
@@ -3041,10 +2862,8 @@ EXTERN_C const IID IID_IDebugAsyncOperation;
         virtual HRESULT STDMETHODCALLTYPE QueryIsComplete( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetResult( 
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrResult,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkResult) = 0;
+            /* [out] */ HRESULT *phrResult,
+            /* [out] */ IUnknown **ppunkResult) = 0;
         
     };
     
@@ -3058,8 +2877,7 @@ EXTERN_C const IID IID_IDebugAsyncOperation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugAsyncOperation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3074,8 +2892,7 @@ EXTERN_C const IID IID_IDebugAsyncOperation;
         DECLSPEC_XFGVIRT(IDebugAsyncOperation, GetSyncDebugOperation)
         HRESULT ( STDMETHODCALLTYPE *GetSyncDebugOperation )( 
             IDebugAsyncOperation * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugSyncOperation **ppsdo);
+            /* [out] */ IDebugSyncOperation **ppsdo);
         
         DECLSPEC_XFGVIRT(IDebugAsyncOperation, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
@@ -3093,10 +2910,8 @@ EXTERN_C const IID IID_IDebugAsyncOperation;
         DECLSPEC_XFGVIRT(IDebugAsyncOperation, GetResult)
         HRESULT ( STDMETHODCALLTYPE *GetResult )( 
             IDebugAsyncOperation * This,
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrResult,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkResult);
+            /* [out] */ HRESULT *phrResult,
+            /* [out] */ IUnknown **ppunkResult);
         
         END_INTERFACE
     } IDebugAsyncOperationVtbl;
@@ -3176,8 +2991,7 @@ EXTERN_C const IID IID_IDebugAsyncOperationCallBack;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugAsyncOperationCallBack * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3246,22 +3060,17 @@ EXTERN_C const IID IID_IEnumDebugCodeContexts;
     {
     public:
         virtual /* [local] */ HRESULT __stdcall Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  IDebugCodeContext **pscc,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [out] */ IDebugCodeContext **pscc,
+            /* [out] */ ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugCodeContexts **ppescc) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumDebugCodeContexts **ppescc) = 0;
         
     };
     
@@ -3275,8 +3084,7 @@ EXTERN_C const IID IID_IEnumDebugCodeContexts;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDebugCodeContexts * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3291,18 +3099,14 @@ EXTERN_C const IID IID_IEnumDebugCodeContexts;
         DECLSPEC_XFGVIRT(IEnumDebugCodeContexts, Next)
         /* [local] */ HRESULT ( __stdcall *Next )( 
             IEnumDebugCodeContexts * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  IDebugCodeContext **pscc,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [out] */ IDebugCodeContext **pscc,
+            /* [out] */ ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumDebugCodeContexts, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDebugCodeContexts * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumDebugCodeContexts, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -3311,8 +3115,7 @@ EXTERN_C const IID IID_IEnumDebugCodeContexts;
         DECLSPEC_XFGVIRT(IEnumDebugCodeContexts, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDebugCodeContexts * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugCodeContexts **ppescc);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugCodeContexts **ppescc);
         
         END_INTERFACE
     } IEnumDebugCodeContextsVtbl;
@@ -3358,12 +3161,9 @@ EXTERN_C const IID IID_IEnumDebugCodeContexts;
 
 /* [call_as] */ HRESULT __stdcall IEnumDebugCodeContexts_RemoteNext_Proxy( 
     __RPC__in IEnumDebugCodeContexts * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IDebugCodeContext **pscc,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IDebugCodeContext **pscc,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumDebugCodeContexts_RemoteNext_Stub(
@@ -3419,22 +3219,17 @@ EXTERN_C const IID IID_IEnumDebugStackFrames;
     {
     public:
         virtual /* [local] */ HRESULT __stdcall Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  DebugStackFrameDescriptor *prgdsfd,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [out] */ DebugStackFrameDescriptor *prgdsfd,
+            /* [out] */ ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf) = 0;
         
     };
     
@@ -3448,8 +3243,7 @@ EXTERN_C const IID IID_IEnumDebugStackFrames;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDebugStackFrames * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3464,18 +3258,14 @@ EXTERN_C const IID IID_IEnumDebugStackFrames;
         DECLSPEC_XFGVIRT(IEnumDebugStackFrames, Next)
         /* [local] */ HRESULT ( __stdcall *Next )( 
             IEnumDebugStackFrames * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  DebugStackFrameDescriptor *prgdsfd,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [out] */ DebugStackFrameDescriptor *prgdsfd,
+            /* [out] */ ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumDebugStackFrames, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDebugStackFrames * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumDebugStackFrames, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -3484,8 +3274,7 @@ EXTERN_C const IID IID_IEnumDebugStackFrames;
         DECLSPEC_XFGVIRT(IEnumDebugStackFrames, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDebugStackFrames * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf);
         
         END_INTERFACE
     } IEnumDebugStackFramesVtbl;
@@ -3531,12 +3320,9 @@ EXTERN_C const IID IID_IEnumDebugStackFrames;
 
 /* [call_as] */ HRESULT __stdcall IEnumDebugStackFrames_RemoteNext_Proxy( 
     __RPC__in IEnumDebugStackFrames * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  DebugStackFrameDescriptor *prgdsfd,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) DebugStackFrameDescriptor *prgdsfd,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumDebugStackFrames_RemoteNext_Stub(
@@ -3566,12 +3352,9 @@ EXTERN_C const IID IID_IEnumDebugStackFrames64;
     {
     public:
         virtual /* [local] */ HRESULT __stdcall Next64( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  DebugStackFrameDescriptor64 *prgdsfd,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [out] */ DebugStackFrameDescriptor64 *prgdsfd,
+            /* [out] */ ULONG *pceltFetched) = 0;
         
     };
     
@@ -3585,8 +3368,7 @@ EXTERN_C const IID IID_IEnumDebugStackFrames64;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDebugStackFrames64 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3601,18 +3383,14 @@ EXTERN_C const IID IID_IEnumDebugStackFrames64;
         DECLSPEC_XFGVIRT(IEnumDebugStackFrames, Next)
         /* [local] */ HRESULT ( __stdcall *Next )( 
             IEnumDebugStackFrames64 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  DebugStackFrameDescriptor *prgdsfd,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [out] */ DebugStackFrameDescriptor *prgdsfd,
+            /* [out] */ ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumDebugStackFrames, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDebugStackFrames64 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumDebugStackFrames, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -3621,18 +3399,14 @@ EXTERN_C const IID IID_IEnumDebugStackFrames64;
         DECLSPEC_XFGVIRT(IEnumDebugStackFrames, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDebugStackFrames64 * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf);
         
         DECLSPEC_XFGVIRT(IEnumDebugStackFrames64, Next64)
         /* [local] */ HRESULT ( __stdcall *Next64 )( 
             IEnumDebugStackFrames64 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  DebugStackFrameDescriptor64 *prgdsfd,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [out] */ DebugStackFrameDescriptor64 *prgdsfd,
+            /* [out] */ ULONG *pceltFetched);
         
         END_INTERFACE
     } IEnumDebugStackFrames64Vtbl;
@@ -3682,12 +3456,9 @@ EXTERN_C const IID IID_IEnumDebugStackFrames64;
 
 /* [call_as] */ HRESULT __stdcall IEnumDebugStackFrames64_RemoteNext64_Proxy( 
     __RPC__in IEnumDebugStackFrames64 * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  DebugStackFrameDescriptor64 *prgdsfd,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) DebugStackFrameDescriptor64 *prgdsfd,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumDebugStackFrames64_RemoteNext64_Stub(
@@ -3717,14 +3488,11 @@ EXTERN_C const IID IID_IDebugDocumentInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetName( 
-            /* [annotation][in] */ 
-            _In_  DOCUMENTNAMETYPE dnt,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ DOCUMENTNAMETYPE dnt,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDocumentClassId( 
-            /* [annotation][out] */ 
-            _Out_  CLSID *pclsidDocument) = 0;
+            /* [out] */ __RPC__out CLSID *pclsidDocument) = 0;
         
     };
     
@@ -3738,8 +3506,7 @@ EXTERN_C const IID IID_IDebugDocumentInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocumentInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3754,16 +3521,13 @@ EXTERN_C const IID IID_IDebugDocumentInfo;
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IDebugDocumentInfo * This,
-            /* [annotation][in] */ 
-            _In_  DOCUMENTNAMETYPE dnt,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DOCUMENTNAMETYPE dnt,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetDocumentClassId)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentClassId )( 
             __RPC__in IDebugDocumentInfo * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pclsidDocument);
+            /* [out] */ __RPC__out CLSID *pclsidDocument);
         
         END_INTERFACE
     } IDebugDocumentInfoVtbl;
@@ -3821,8 +3585,7 @@ EXTERN_C const IID IID_IDebugDocumentProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocument( 
-            /* [annotation][out] */ 
-            _Out_  IDebugDocument **ppssd) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugDocument **ppssd) = 0;
         
     };
     
@@ -3836,8 +3599,7 @@ EXTERN_C const IID IID_IDebugDocumentProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocumentProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3852,22 +3614,18 @@ EXTERN_C const IID IID_IDebugDocumentProvider;
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IDebugDocumentProvider * This,
-            /* [annotation][in] */ 
-            _In_  DOCUMENTNAMETYPE dnt,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DOCUMENTNAMETYPE dnt,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetDocumentClassId)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentClassId )( 
             __RPC__in IDebugDocumentProvider * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pclsidDocument);
+            /* [out] */ __RPC__out CLSID *pclsidDocument);
         
         DECLSPEC_XFGVIRT(IDebugDocumentProvider, GetDocument)
         HRESULT ( STDMETHODCALLTYPE *GetDocument )( 
             __RPC__in IDebugDocumentProvider * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocument **ppssd);
+            /* [out] */ __RPC__deref_out_opt IDebugDocument **ppssd);
         
         END_INTERFACE
     } IDebugDocumentProviderVtbl;
@@ -3940,8 +3698,7 @@ EXTERN_C const IID IID_IDebugDocument;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocument * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3956,16 +3713,13 @@ EXTERN_C const IID IID_IDebugDocument;
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IDebugDocument * This,
-            /* [annotation][in] */ 
-            _In_  DOCUMENTNAMETYPE dnt,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DOCUMENTNAMETYPE dnt,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetDocumentClassId)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentClassId )( 
             __RPC__in IDebugDocument * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pclsidDocument);
+            /* [out] */ __RPC__out CLSID *pclsidDocument);
         
         END_INTERFACE
     } IDebugDocumentVtbl;
@@ -4034,55 +3788,37 @@ EXTERN_C const IID IID_IDebugDocumentText;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentAttributes( 
-            /* [annotation][out] */ 
-            _Out_  TEXT_DOC_ATTR *ptextdocattr) = 0;
+            /* [out] */ __RPC__out TEXT_DOC_ATTR *ptextdocattr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSize( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcNumLines,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcNumChars) = 0;
+            /* [out] */ __RPC__out ULONG *pcNumLines,
+            /* [out] */ __RPC__out ULONG *pcNumChars) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPositionOfLine( 
-            /* [annotation][in] */ 
-            _In_  ULONG cLineNumber,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcCharacterPosition) = 0;
+            /* [in] */ ULONG cLineNumber,
+            /* [out] */ __RPC__out ULONG *pcCharacterPosition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLineOfPosition( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcLineNumber,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcCharacterOffsetInLine) = 0;
+            /* [in] */ ULONG cCharacterPosition,
+            /* [out] */ __RPC__out ULONG *pcLineNumber,
+            /* [out] */ __RPC__out ULONG *pcCharacterOffsetInLine) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][size_is][length_is][out][in] */ 
-            _Inout_updates_to_(cMaxChars,*pcNumChars)  WCHAR *pcharText,
+            /* [in] */ ULONG cCharacterPosition,
+            /* [size_is][length_is][out][in] */ __RPC__inout_ecount_part(cMaxChars, *pcNumChars) WCHAR *pcharText,
             /* [full][size_is][length_is][out][in] */ __RPC__inout_ecount_part_opt(cMaxChars, *pcNumChars) SOURCE_TEXT_ATTR *pstaTextAttr,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcNumChars,
-            /* [annotation][in] */ 
-            _In_  ULONG cMaxChars) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pcNumChars,
+            /* [in] */ ULONG cMaxChars) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPositionOfContext( 
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentContext *psc,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcCharacterPosition,
-            /* [annotation][out] */ 
-            _Out_  ULONG *cNumChars) = 0;
+            /* [in] */ __RPC__in_opt IDebugDocumentContext *psc,
+            /* [out] */ __RPC__out ULONG *pcCharacterPosition,
+            /* [out] */ __RPC__out ULONG *cNumChars) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContextOfPosition( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppsc) = 0;
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumChars,
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppsc) = 0;
         
     };
     
@@ -4096,8 +3832,7 @@ EXTERN_C const IID IID_IDebugDocumentText;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocumentText * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4112,81 +3847,60 @@ EXTERN_C const IID IID_IDebugDocumentText;
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IDebugDocumentText * This,
-            /* [annotation][in] */ 
-            _In_  DOCUMENTNAMETYPE dnt,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DOCUMENTNAMETYPE dnt,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetDocumentClassId)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentClassId )( 
             __RPC__in IDebugDocumentText * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pclsidDocument);
+            /* [out] */ __RPC__out CLSID *pclsidDocument);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetDocumentAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentAttributes )( 
             __RPC__in IDebugDocumentText * This,
-            /* [annotation][out] */ 
-            _Out_  TEXT_DOC_ATTR *ptextdocattr);
+            /* [out] */ __RPC__out TEXT_DOC_ATTR *ptextdocattr);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IDebugDocumentText * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcNumLines,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcNumChars);
+            /* [out] */ __RPC__out ULONG *pcNumLines,
+            /* [out] */ __RPC__out ULONG *pcNumChars);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetPositionOfLine)
         HRESULT ( STDMETHODCALLTYPE *GetPositionOfLine )( 
             __RPC__in IDebugDocumentText * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cLineNumber,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcCharacterPosition);
+            /* [in] */ ULONG cLineNumber,
+            /* [out] */ __RPC__out ULONG *pcCharacterPosition);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetLineOfPosition)
         HRESULT ( STDMETHODCALLTYPE *GetLineOfPosition )( 
             __RPC__in IDebugDocumentText * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcLineNumber,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcCharacterOffsetInLine);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [out] */ __RPC__out ULONG *pcLineNumber,
+            /* [out] */ __RPC__out ULONG *pcCharacterOffsetInLine);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in IDebugDocumentText * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][size_is][length_is][out][in] */ 
-            _Inout_updates_to_(cMaxChars,*pcNumChars)  WCHAR *pcharText,
+            /* [in] */ ULONG cCharacterPosition,
+            /* [size_is][length_is][out][in] */ __RPC__inout_ecount_part(cMaxChars, *pcNumChars) WCHAR *pcharText,
             /* [full][size_is][length_is][out][in] */ __RPC__inout_ecount_part_opt(cMaxChars, *pcNumChars) SOURCE_TEXT_ATTR *pstaTextAttr,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcNumChars,
-            /* [annotation][in] */ 
-            _In_  ULONG cMaxChars);
+            /* [out][in] */ __RPC__inout ULONG *pcNumChars,
+            /* [in] */ ULONG cMaxChars);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetPositionOfContext)
         HRESULT ( STDMETHODCALLTYPE *GetPositionOfContext )( 
             __RPC__in IDebugDocumentText * This,
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentContext *psc,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcCharacterPosition,
-            /* [annotation][out] */ 
-            _Out_  ULONG *cNumChars);
+            /* [in] */ __RPC__in_opt IDebugDocumentContext *psc,
+            /* [out] */ __RPC__out ULONG *pcCharacterPosition,
+            /* [out] */ __RPC__out ULONG *cNumChars);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetContextOfPosition)
         HRESULT ( STDMETHODCALLTYPE *GetContextOfPosition )( 
             __RPC__in IDebugDocumentText * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppsc);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumChars,
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppsc);
         
         END_INTERFACE
     } IDebugDocumentTextVtbl;
@@ -4278,32 +3992,23 @@ EXTERN_C const IID IID_IDebugDocumentTextEvents;
         virtual HRESULT STDMETHODCALLTYPE onDestroy( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onInsertText( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToInsert) = 0;
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToInsert) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onRemoveText( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToRemove) = 0;
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToRemove) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onReplaceText( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToReplace) = 0;
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToReplace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onUpdateTextAttributes( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToUpdate) = 0;
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToUpdate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onUpdateDocumentAttributes( 
-            /* [annotation][in] */ 
-            _In_  TEXT_DOC_ATTR textdocattr) = 0;
+            /* [in] */ TEXT_DOC_ATTR textdocattr) = 0;
         
     };
     
@@ -4317,8 +4022,7 @@ EXTERN_C const IID IID_IDebugDocumentTextEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocumentTextEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4337,40 +4041,31 @@ EXTERN_C const IID IID_IDebugDocumentTextEvents;
         DECLSPEC_XFGVIRT(IDebugDocumentTextEvents, onInsertText)
         HRESULT ( STDMETHODCALLTYPE *onInsertText )( 
             __RPC__in IDebugDocumentTextEvents * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToInsert);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToInsert);
         
         DECLSPEC_XFGVIRT(IDebugDocumentTextEvents, onRemoveText)
         HRESULT ( STDMETHODCALLTYPE *onRemoveText )( 
             __RPC__in IDebugDocumentTextEvents * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToRemove);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToRemove);
         
         DECLSPEC_XFGVIRT(IDebugDocumentTextEvents, onReplaceText)
         HRESULT ( STDMETHODCALLTYPE *onReplaceText )( 
             __RPC__in IDebugDocumentTextEvents * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToReplace);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToReplace);
         
         DECLSPEC_XFGVIRT(IDebugDocumentTextEvents, onUpdateTextAttributes)
         HRESULT ( STDMETHODCALLTYPE *onUpdateTextAttributes )( 
             __RPC__in IDebugDocumentTextEvents * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToUpdate);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToUpdate);
         
         DECLSPEC_XFGVIRT(IDebugDocumentTextEvents, onUpdateDocumentAttributes)
         HRESULT ( STDMETHODCALLTYPE *onUpdateDocumentAttributes )( 
             __RPC__in IDebugDocumentTextEvents * This,
-            /* [annotation][in] */ 
-            _In_  TEXT_DOC_ATTR textdocattr);
+            /* [in] */ TEXT_DOC_ATTR textdocattr);
         
         END_INTERFACE
     } IDebugDocumentTextEventsVtbl;
@@ -4450,26 +4145,18 @@ EXTERN_C const IID IID_IDebugDocumentTextAuthor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE InsertText( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToInsert,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNumToInsert)  OLECHAR pcharText[  ]) = 0;
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToInsert,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNumToInsert) OLECHAR pcharText[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveText( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToRemove) = 0;
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToRemove) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReplaceText( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToReplace,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNumToReplace)  OLECHAR pcharText[  ]) = 0;
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToReplace,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNumToReplace) OLECHAR pcharText[  ]) = 0;
         
     };
     
@@ -4483,8 +4170,7 @@ EXTERN_C const IID IID_IDebugDocumentTextAuthor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4499,109 +4185,80 @@ EXTERN_C const IID IID_IDebugDocumentTextAuthor;
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][in] */ 
-            _In_  DOCUMENTNAMETYPE dnt,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DOCUMENTNAMETYPE dnt,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetDocumentClassId)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentClassId )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pclsidDocument);
+            /* [out] */ __RPC__out CLSID *pclsidDocument);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetDocumentAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentAttributes )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][out] */ 
-            _Out_  TEXT_DOC_ATTR *ptextdocattr);
+            /* [out] */ __RPC__out TEXT_DOC_ATTR *ptextdocattr);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetSize)
         HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcNumLines,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcNumChars);
+            /* [out] */ __RPC__out ULONG *pcNumLines,
+            /* [out] */ __RPC__out ULONG *pcNumChars);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetPositionOfLine)
         HRESULT ( STDMETHODCALLTYPE *GetPositionOfLine )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cLineNumber,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcCharacterPosition);
+            /* [in] */ ULONG cLineNumber,
+            /* [out] */ __RPC__out ULONG *pcCharacterPosition);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetLineOfPosition)
         HRESULT ( STDMETHODCALLTYPE *GetLineOfPosition )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcLineNumber,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcCharacterOffsetInLine);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [out] */ __RPC__out ULONG *pcLineNumber,
+            /* [out] */ __RPC__out ULONG *pcCharacterOffsetInLine);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][size_is][length_is][out][in] */ 
-            _Inout_updates_to_(cMaxChars,*pcNumChars)  WCHAR *pcharText,
+            /* [in] */ ULONG cCharacterPosition,
+            /* [size_is][length_is][out][in] */ __RPC__inout_ecount_part(cMaxChars, *pcNumChars) WCHAR *pcharText,
             /* [full][size_is][length_is][out][in] */ __RPC__inout_ecount_part_opt(cMaxChars, *pcNumChars) SOURCE_TEXT_ATTR *pstaTextAttr,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcNumChars,
-            /* [annotation][in] */ 
-            _In_  ULONG cMaxChars);
+            /* [out][in] */ __RPC__inout ULONG *pcNumChars,
+            /* [in] */ ULONG cMaxChars);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetPositionOfContext)
         HRESULT ( STDMETHODCALLTYPE *GetPositionOfContext )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentContext *psc,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcCharacterPosition,
-            /* [annotation][out] */ 
-            _Out_  ULONG *cNumChars);
+            /* [in] */ __RPC__in_opt IDebugDocumentContext *psc,
+            /* [out] */ __RPC__out ULONG *pcCharacterPosition,
+            /* [out] */ __RPC__out ULONG *cNumChars);
         
         DECLSPEC_XFGVIRT(IDebugDocumentText, GetContextOfPosition)
         HRESULT ( STDMETHODCALLTYPE *GetContextOfPosition )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppsc);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumChars,
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppsc);
         
         DECLSPEC_XFGVIRT(IDebugDocumentTextAuthor, InsertText)
         HRESULT ( STDMETHODCALLTYPE *InsertText )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToInsert,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNumToInsert)  OLECHAR pcharText[  ]);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToInsert,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNumToInsert) OLECHAR pcharText[  ]);
         
         DECLSPEC_XFGVIRT(IDebugDocumentTextAuthor, RemoveText)
         HRESULT ( STDMETHODCALLTYPE *RemoveText )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToRemove);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToRemove);
         
         DECLSPEC_XFGVIRT(IDebugDocumentTextAuthor, ReplaceText)
         HRESULT ( STDMETHODCALLTYPE *ReplaceText )( 
             __RPC__in IDebugDocumentTextAuthor * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCharacterPosition,
-            /* [annotation][in] */ 
-            _In_  ULONG cNumToReplace,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNumToReplace)  OLECHAR pcharText[  ]);
+            /* [in] */ ULONG cCharacterPosition,
+            /* [in] */ ULONG cNumToReplace,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNumToReplace) OLECHAR pcharText[  ]);
         
         END_INTERFACE
     } IDebugDocumentTextAuthorVtbl;
@@ -4701,14 +4358,11 @@ EXTERN_C const IID IID_IDebugDocumentTextExternalAuthor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPathName( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrLongName,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfIsOriginalFile) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrLongName,
+            /* [out] */ __RPC__out BOOL *pfIsOriginalFile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFileName( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrShortName) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrShortName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifyChanged( void) = 0;
         
@@ -4724,8 +4378,7 @@ EXTERN_C const IID IID_IDebugDocumentTextExternalAuthor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocumentTextExternalAuthor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4740,16 +4393,13 @@ EXTERN_C const IID IID_IDebugDocumentTextExternalAuthor;
         DECLSPEC_XFGVIRT(IDebugDocumentTextExternalAuthor, GetPathName)
         HRESULT ( STDMETHODCALLTYPE *GetPathName )( 
             __RPC__in IDebugDocumentTextExternalAuthor * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrLongName,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfIsOriginalFile);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrLongName,
+            /* [out] */ __RPC__out BOOL *pfIsOriginalFile);
         
         DECLSPEC_XFGVIRT(IDebugDocumentTextExternalAuthor, GetFileName)
         HRESULT ( STDMETHODCALLTYPE *GetFileName )( 
             __RPC__in IDebugDocumentTextExternalAuthor * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrShortName);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrShortName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentTextExternalAuthor, NotifyChanged)
         HRESULT ( STDMETHODCALLTYPE *NotifyChanged )( 
@@ -4831,95 +4481,66 @@ EXTERN_C const IID IID_IDebugDocumentHelper32;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Init( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplication32 *pda,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszShortName,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszLongName,
-            /* [annotation][in] */ 
-            _In_  TEXT_DOC_ATTR docAttr) = 0;
+            /* [in] */ __RPC__in_opt IDebugApplication32 *pda,
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszShortName,
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszLongName,
+            /* [in] */ TEXT_DOC_ATTR docAttr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Attach( 
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentHelper32 *pddhParent) = 0;
+            /* [in] */ __RPC__in_opt IDebugDocumentHelper32 *pddhParent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Detach( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddUnicodeText( 
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszText) = 0;
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddDBCSText( 
-            /* [annotation][string][in] */ 
-            _In_  LPCSTR pszText) = 0;
+            /* [string][in] */ __RPC__in_string LPCSTR pszText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDebugDocumentHost( 
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentHost *pddh) = 0;
+            /* [in] */ __RPC__in_opt IDebugDocumentHost *pddh) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddDeferredText( 
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTextStartCookie) = 0;
+            /* [in] */ ULONG cChars,
+            /* [in] */ DWORD dwTextStartCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DefineScriptBlock( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCharOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][in] */ 
-            _In_  IActiveScript *pas,
-            /* [annotation][in] */ 
-            _In_  BOOL fScriptlet,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwSourceContext) = 0;
+            /* [in] */ ULONG ulCharOffset,
+            /* [in] */ ULONG cChars,
+            /* [in] */ __RPC__in_opt IActiveScript *pas,
+            /* [in] */ BOOL fScriptlet,
+            /* [out] */ __RPC__out DWORD *pdwSourceContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDefaultTextAttr( 
             SOURCE_TEXT_ATTR staTextAttr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTextAttributes( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCharOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][size_is][length_is][in] */ 
-            _In_reads_(cChars)  SOURCE_TEXT_ATTR *pstaTextAttr) = 0;
+            /* [in] */ ULONG ulCharOffset,
+            /* [in] */ ULONG cChars,
+            /* [size_is][length_is][in] */ __RPC__in_ecount_part(cChars, cChars) SOURCE_TEXT_ATTR *pstaTextAttr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLongName( 
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszLongName) = 0;
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszLongName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetShortName( 
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszShortName) = 0;
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszShortName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDocumentAttr( 
-            /* [annotation][in] */ 
-            _In_  TEXT_DOC_ATTR pszAttributes) = 0;
+            /* [in] */ TEXT_DOC_ATTR pszAttributes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDebugApplicationNode( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdan) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugApplicationNode **ppdan) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScriptBlockInfo( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwSourceContext,
-            /* [annotation][out] */ 
-            _Out_  IActiveScript **ppasd,
-            /* [annotation][out] */ 
-            _Out_  ULONG *piCharPos,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcChars) = 0;
+            /* [in] */ DWORD dwSourceContext,
+            /* [out] */ __RPC__deref_out_opt IActiveScript **ppasd,
+            /* [out] */ __RPC__out ULONG *piCharPos,
+            /* [out] */ __RPC__out ULONG *pcChars) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDebugDocumentContext( 
-            /* [annotation][in] */ 
-            _In_  ULONG iCharPos,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppddc) = 0;
+            /* [in] */ ULONG iCharPos,
+            /* [in] */ ULONG cChars,
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppddc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BringDocumentToTop( void) = 0;
         
@@ -4938,8 +4559,7 @@ EXTERN_C const IID IID_IDebugDocumentHelper32;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4954,20 +4574,15 @@ EXTERN_C const IID IID_IDebugDocumentHelper32;
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplication32 *pda,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszShortName,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszLongName,
-            /* [annotation][in] */ 
-            _In_  TEXT_DOC_ATTR docAttr);
+            /* [in] */ __RPC__in_opt IDebugApplication32 *pda,
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszShortName,
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszLongName,
+            /* [in] */ TEXT_DOC_ATTR docAttr);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, Attach)
         HRESULT ( STDMETHODCALLTYPE *Attach )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentHelper32 *pddhParent);
+            /* [in] */ __RPC__in_opt IDebugDocumentHelper32 *pddhParent);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, Detach)
         HRESULT ( STDMETHODCALLTYPE *Detach )( 
@@ -4976,42 +4591,32 @@ EXTERN_C const IID IID_IDebugDocumentHelper32;
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, AddUnicodeText)
         HRESULT ( STDMETHODCALLTYPE *AddUnicodeText )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszText);
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszText);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, AddDBCSText)
         HRESULT ( STDMETHODCALLTYPE *AddDBCSText )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCSTR pszText);
+            /* [string][in] */ __RPC__in_string LPCSTR pszText);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, SetDebugDocumentHost)
         HRESULT ( STDMETHODCALLTYPE *SetDebugDocumentHost )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentHost *pddh);
+            /* [in] */ __RPC__in_opt IDebugDocumentHost *pddh);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, AddDeferredText)
         HRESULT ( STDMETHODCALLTYPE *AddDeferredText )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTextStartCookie);
+            /* [in] */ ULONG cChars,
+            /* [in] */ DWORD dwTextStartCookie);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, DefineScriptBlock)
         HRESULT ( STDMETHODCALLTYPE *DefineScriptBlock )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCharOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][in] */ 
-            _In_  IActiveScript *pas,
-            /* [annotation][in] */ 
-            _In_  BOOL fScriptlet,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwSourceContext);
+            /* [in] */ ULONG ulCharOffset,
+            /* [in] */ ULONG cChars,
+            /* [in] */ __RPC__in_opt IActiveScript *pas,
+            /* [in] */ BOOL fScriptlet,
+            /* [out] */ __RPC__out DWORD *pdwSourceContext);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, SetDefaultTextAttr)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultTextAttr )( 
@@ -5021,58 +4626,44 @@ EXTERN_C const IID IID_IDebugDocumentHelper32;
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, SetTextAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetTextAttributes )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCharOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][size_is][length_is][in] */ 
-            _In_reads_(cChars)  SOURCE_TEXT_ATTR *pstaTextAttr);
+            /* [in] */ ULONG ulCharOffset,
+            /* [in] */ ULONG cChars,
+            /* [size_is][length_is][in] */ __RPC__in_ecount_part(cChars, cChars) SOURCE_TEXT_ATTR *pstaTextAttr);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, SetLongName)
         HRESULT ( STDMETHODCALLTYPE *SetLongName )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszLongName);
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszLongName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, SetShortName)
         HRESULT ( STDMETHODCALLTYPE *SetShortName )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszShortName);
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszShortName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, SetDocumentAttr)
         HRESULT ( STDMETHODCALLTYPE *SetDocumentAttr )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][in] */ 
-            _In_  TEXT_DOC_ATTR pszAttributes);
+            /* [in] */ TEXT_DOC_ATTR pszAttributes);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, GetDebugApplicationNode)
         HRESULT ( STDMETHODCALLTYPE *GetDebugApplicationNode )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdan);
+            /* [out] */ __RPC__deref_out_opt IDebugApplicationNode **ppdan);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, GetScriptBlockInfo)
         HRESULT ( STDMETHODCALLTYPE *GetScriptBlockInfo )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSourceContext,
-            /* [annotation][out] */ 
-            _Out_  IActiveScript **ppasd,
-            /* [annotation][out] */ 
-            _Out_  ULONG *piCharPos,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcChars);
+            /* [in] */ DWORD dwSourceContext,
+            /* [out] */ __RPC__deref_out_opt IActiveScript **ppasd,
+            /* [out] */ __RPC__out ULONG *piCharPos,
+            /* [out] */ __RPC__out ULONG *pcChars);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, CreateDebugDocumentContext)
         HRESULT ( STDMETHODCALLTYPE *CreateDebugDocumentContext )( 
             __RPC__in IDebugDocumentHelper32 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG iCharPos,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppddc);
+            /* [in] */ ULONG iCharPos,
+            /* [in] */ ULONG cChars,
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppddc);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper32, BringDocumentToTop)
         HRESULT ( STDMETHODCALLTYPE *BringDocumentToTop )( 
@@ -5187,95 +4778,66 @@ EXTERN_C const IID IID_IDebugDocumentHelper64;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Init( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplication64 *pda,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszShortName,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszLongName,
-            /* [annotation][in] */ 
-            _In_  TEXT_DOC_ATTR docAttr) = 0;
+            /* [in] */ __RPC__in_opt IDebugApplication64 *pda,
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszShortName,
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszLongName,
+            /* [in] */ TEXT_DOC_ATTR docAttr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Attach( 
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentHelper64 *pddhParent) = 0;
+            /* [in] */ __RPC__in_opt IDebugDocumentHelper64 *pddhParent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Detach( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddUnicodeText( 
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszText) = 0;
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddDBCSText( 
-            /* [annotation][string][in] */ 
-            _In_  LPCSTR pszText) = 0;
+            /* [string][in] */ __RPC__in_string LPCSTR pszText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDebugDocumentHost( 
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentHost *pddh) = 0;
+            /* [in] */ __RPC__in_opt IDebugDocumentHost *pddh) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddDeferredText( 
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTextStartCookie) = 0;
+            /* [in] */ ULONG cChars,
+            /* [in] */ DWORD dwTextStartCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DefineScriptBlock( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCharOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][in] */ 
-            _In_  IActiveScript *pas,
-            /* [annotation][in] */ 
-            _In_  BOOL fScriptlet,
-            /* [annotation][out] */ 
-            _Out_  DWORDLONG *pdwSourceContext) = 0;
+            /* [in] */ ULONG ulCharOffset,
+            /* [in] */ ULONG cChars,
+            /* [in] */ __RPC__in_opt IActiveScript *pas,
+            /* [in] */ BOOL fScriptlet,
+            /* [out] */ __RPC__out DWORDLONG *pdwSourceContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDefaultTextAttr( 
             SOURCE_TEXT_ATTR staTextAttr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTextAttributes( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCharOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][size_is][length_is][in] */ 
-            _In_reads_(cChars)  SOURCE_TEXT_ATTR *pstaTextAttr) = 0;
+            /* [in] */ ULONG ulCharOffset,
+            /* [in] */ ULONG cChars,
+            /* [size_is][length_is][in] */ __RPC__in_ecount_part(cChars, cChars) SOURCE_TEXT_ATTR *pstaTextAttr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLongName( 
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszLongName) = 0;
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszLongName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetShortName( 
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszShortName) = 0;
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszShortName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDocumentAttr( 
-            /* [annotation][in] */ 
-            _In_  TEXT_DOC_ATTR pszAttributes) = 0;
+            /* [in] */ TEXT_DOC_ATTR pszAttributes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDebugApplicationNode( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdan) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugApplicationNode **ppdan) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScriptBlockInfo( 
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwSourceContext,
-            /* [annotation][out] */ 
-            _Out_  IActiveScript **ppasd,
-            /* [annotation][out] */ 
-            _Out_  ULONG *piCharPos,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcChars) = 0;
+            /* [in] */ DWORDLONG dwSourceContext,
+            /* [out] */ __RPC__deref_out_opt IActiveScript **ppasd,
+            /* [out] */ __RPC__out ULONG *piCharPos,
+            /* [out] */ __RPC__out ULONG *pcChars) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDebugDocumentContext( 
-            /* [annotation][in] */ 
-            _In_  ULONG iCharPos,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppddc) = 0;
+            /* [in] */ ULONG iCharPos,
+            /* [in] */ ULONG cChars,
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppddc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BringDocumentToTop( void) = 0;
         
@@ -5294,8 +4856,7 @@ EXTERN_C const IID IID_IDebugDocumentHelper64;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5310,20 +4871,15 @@ EXTERN_C const IID IID_IDebugDocumentHelper64;
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplication64 *pda,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszShortName,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszLongName,
-            /* [annotation][in] */ 
-            _In_  TEXT_DOC_ATTR docAttr);
+            /* [in] */ __RPC__in_opt IDebugApplication64 *pda,
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszShortName,
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszLongName,
+            /* [in] */ TEXT_DOC_ATTR docAttr);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, Attach)
         HRESULT ( STDMETHODCALLTYPE *Attach )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentHelper64 *pddhParent);
+            /* [in] */ __RPC__in_opt IDebugDocumentHelper64 *pddhParent);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, Detach)
         HRESULT ( STDMETHODCALLTYPE *Detach )( 
@@ -5332,42 +4888,32 @@ EXTERN_C const IID IID_IDebugDocumentHelper64;
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, AddUnicodeText)
         HRESULT ( STDMETHODCALLTYPE *AddUnicodeText )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszText);
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszText);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, AddDBCSText)
         HRESULT ( STDMETHODCALLTYPE *AddDBCSText )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCSTR pszText);
+            /* [string][in] */ __RPC__in_string LPCSTR pszText);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, SetDebugDocumentHost)
         HRESULT ( STDMETHODCALLTYPE *SetDebugDocumentHost )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentHost *pddh);
+            /* [in] */ __RPC__in_opt IDebugDocumentHost *pddh);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, AddDeferredText)
         HRESULT ( STDMETHODCALLTYPE *AddDeferredText )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTextStartCookie);
+            /* [in] */ ULONG cChars,
+            /* [in] */ DWORD dwTextStartCookie);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, DefineScriptBlock)
         HRESULT ( STDMETHODCALLTYPE *DefineScriptBlock )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCharOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][in] */ 
-            _In_  IActiveScript *pas,
-            /* [annotation][in] */ 
-            _In_  BOOL fScriptlet,
-            /* [annotation][out] */ 
-            _Out_  DWORDLONG *pdwSourceContext);
+            /* [in] */ ULONG ulCharOffset,
+            /* [in] */ ULONG cChars,
+            /* [in] */ __RPC__in_opt IActiveScript *pas,
+            /* [in] */ BOOL fScriptlet,
+            /* [out] */ __RPC__out DWORDLONG *pdwSourceContext);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, SetDefaultTextAttr)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultTextAttr )( 
@@ -5377,58 +4923,44 @@ EXTERN_C const IID IID_IDebugDocumentHelper64;
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, SetTextAttributes)
         HRESULT ( STDMETHODCALLTYPE *SetTextAttributes )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCharOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][size_is][length_is][in] */ 
-            _In_reads_(cChars)  SOURCE_TEXT_ATTR *pstaTextAttr);
+            /* [in] */ ULONG ulCharOffset,
+            /* [in] */ ULONG cChars,
+            /* [size_is][length_is][in] */ __RPC__in_ecount_part(cChars, cChars) SOURCE_TEXT_ATTR *pstaTextAttr);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, SetLongName)
         HRESULT ( STDMETHODCALLTYPE *SetLongName )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszLongName);
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszLongName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, SetShortName)
         HRESULT ( STDMETHODCALLTYPE *SetShortName )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCOLESTR pszShortName);
+            /* [string][in] */ __RPC__in_string LPCOLESTR pszShortName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, SetDocumentAttr)
         HRESULT ( STDMETHODCALLTYPE *SetDocumentAttr )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][in] */ 
-            _In_  TEXT_DOC_ATTR pszAttributes);
+            /* [in] */ TEXT_DOC_ATTR pszAttributes);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, GetDebugApplicationNode)
         HRESULT ( STDMETHODCALLTYPE *GetDebugApplicationNode )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdan);
+            /* [out] */ __RPC__deref_out_opt IDebugApplicationNode **ppdan);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, GetScriptBlockInfo)
         HRESULT ( STDMETHODCALLTYPE *GetScriptBlockInfo )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwSourceContext,
-            /* [annotation][out] */ 
-            _Out_  IActiveScript **ppasd,
-            /* [annotation][out] */ 
-            _Out_  ULONG *piCharPos,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcChars);
+            /* [in] */ DWORDLONG dwSourceContext,
+            /* [out] */ __RPC__deref_out_opt IActiveScript **ppasd,
+            /* [out] */ __RPC__out ULONG *piCharPos,
+            /* [out] */ __RPC__out ULONG *pcChars);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, CreateDebugDocumentContext)
         HRESULT ( STDMETHODCALLTYPE *CreateDebugDocumentContext )( 
             __RPC__in IDebugDocumentHelper64 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG iCharPos,
-            /* [annotation][in] */ 
-            _In_  ULONG cChars,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentContext **ppddc);
+            /* [in] */ ULONG iCharPos,
+            /* [in] */ ULONG cChars,
+            /* [out] */ __RPC__deref_out_opt IDebugDocumentContext **ppddc);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHelper64, BringDocumentToTop)
         HRESULT ( STDMETHODCALLTYPE *BringDocumentToTop )( 
@@ -5553,42 +5085,28 @@ EXTERN_C const IID IID_IDebugDocumentHost;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDeferredText( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTextStartCookie,
-            /* [annotation][size_is][length_is][out][in] */ 
-            _Inout_updates_to_(cMaxChars,*pcNumChars)  WCHAR *pcharText,
-            /* [annotation][size_is][length_is][out][in] */ 
-            _Inout_updates_to_(cMaxChars,*pcNumChars)  SOURCE_TEXT_ATTR *pstaTextAttr,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcNumChars,
-            /* [annotation][in] */ 
-            _In_  ULONG cMaxChars) = 0;
+            /* [in] */ DWORD dwTextStartCookie,
+            /* [size_is][length_is][out][in] */ __RPC__inout_ecount_part(cMaxChars, *pcNumChars) WCHAR *pcharText,
+            /* [size_is][length_is][out][in] */ __RPC__inout_ecount_part(cMaxChars, *pcNumChars) SOURCE_TEXT_ATTR *pstaTextAttr,
+            /* [out][in] */ __RPC__inout ULONG *pcNumChars,
+            /* [in] */ ULONG cMaxChars) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetScriptTextAttributes( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(uNumCodeChars)  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumCodeChars,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(uNumCodeChars)  SOURCE_TEXT_ATTR *pattr) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(uNumCodeChars) LPCOLESTR pstrCode,
+            /* [in] */ ULONG uNumCodeChars,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(uNumCodeChars) SOURCE_TEXT_ATTR *pattr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnCreateDocumentContext( 
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkOuter) = 0;
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppunkOuter) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPathName( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrLongName,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfIsOriginalFile) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrLongName,
+            /* [out] */ __RPC__out BOOL *pfIsOriginalFile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFileName( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrShortName) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrShortName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifyChanged( void) = 0;
         
@@ -5604,8 +5122,7 @@ EXTERN_C const IID IID_IDebugDocumentHost;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocumentHost * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5620,50 +5137,36 @@ EXTERN_C const IID IID_IDebugDocumentHost;
         DECLSPEC_XFGVIRT(IDebugDocumentHost, GetDeferredText)
         HRESULT ( STDMETHODCALLTYPE *GetDeferredText )( 
             __RPC__in IDebugDocumentHost * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTextStartCookie,
-            /* [annotation][size_is][length_is][out][in] */ 
-            _Inout_updates_to_(cMaxChars,*pcNumChars)  WCHAR *pcharText,
-            /* [annotation][size_is][length_is][out][in] */ 
-            _Inout_updates_to_(cMaxChars,*pcNumChars)  SOURCE_TEXT_ATTR *pstaTextAttr,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcNumChars,
-            /* [annotation][in] */ 
-            _In_  ULONG cMaxChars);
+            /* [in] */ DWORD dwTextStartCookie,
+            /* [size_is][length_is][out][in] */ __RPC__inout_ecount_part(cMaxChars, *pcNumChars) WCHAR *pcharText,
+            /* [size_is][length_is][out][in] */ __RPC__inout_ecount_part(cMaxChars, *pcNumChars) SOURCE_TEXT_ATTR *pstaTextAttr,
+            /* [out][in] */ __RPC__inout ULONG *pcNumChars,
+            /* [in] */ ULONG cMaxChars);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHost, GetScriptTextAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetScriptTextAttributes )( 
             __RPC__in IDebugDocumentHost * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(uNumCodeChars)  LPCOLESTR pstrCode,
-            /* [annotation][in] */ 
-            _In_  ULONG uNumCodeChars,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDelimiter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(uNumCodeChars)  SOURCE_TEXT_ATTR *pattr);
+            /* [size_is][in] */ __RPC__in_ecount_full(uNumCodeChars) LPCOLESTR pstrCode,
+            /* [in] */ ULONG uNumCodeChars,
+            /* [in] */ __RPC__in LPCOLESTR pstrDelimiter,
+            /* [in] */ DWORD dwFlags,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(uNumCodeChars) SOURCE_TEXT_ATTR *pattr);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHost, OnCreateDocumentContext)
         HRESULT ( STDMETHODCALLTYPE *OnCreateDocumentContext )( 
             __RPC__in IDebugDocumentHost * This,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkOuter);
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppunkOuter);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHost, GetPathName)
         HRESULT ( STDMETHODCALLTYPE *GetPathName )( 
             __RPC__in IDebugDocumentHost * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrLongName,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfIsOriginalFile);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrLongName,
+            /* [out] */ __RPC__out BOOL *pfIsOriginalFile);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHost, GetFileName)
         HRESULT ( STDMETHODCALLTYPE *GetFileName )( 
             __RPC__in IDebugDocumentHost * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrShortName);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrShortName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentHost, NotifyChanged)
         HRESULT ( STDMETHODCALLTYPE *NotifyChanged )( 
@@ -5746,12 +5249,10 @@ EXTERN_C const IID IID_IDebugDocumentContext;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocument( 
-            /* [annotation][out] */ 
-            _Out_  IDebugDocument **ppsd) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugDocument **ppsd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumCodeContexts( 
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugCodeContexts **ppescc) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumDebugCodeContexts **ppescc) = 0;
         
     };
     
@@ -5765,8 +5266,7 @@ EXTERN_C const IID IID_IDebugDocumentContext;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugDocumentContext * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5781,14 +5281,12 @@ EXTERN_C const IID IID_IDebugDocumentContext;
         DECLSPEC_XFGVIRT(IDebugDocumentContext, GetDocument)
         HRESULT ( STDMETHODCALLTYPE *GetDocument )( 
             __RPC__in IDebugDocumentContext * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocument **ppsd);
+            /* [out] */ __RPC__deref_out_opt IDebugDocument **ppsd);
         
         DECLSPEC_XFGVIRT(IDebugDocumentContext, EnumCodeContexts)
         HRESULT ( STDMETHODCALLTYPE *EnumCodeContexts )( 
             __RPC__in IDebugDocumentContext * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugCodeContexts **ppescc);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugCodeContexts **ppescc);
         
         END_INTERFACE
     } IDebugDocumentContextVtbl;
@@ -5846,8 +5344,7 @@ EXTERN_C const IID IID_IDebugSessionProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StartDebugSession( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplication *pda) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplication *pda) = 0;
         
     };
     
@@ -5861,8 +5358,7 @@ EXTERN_C const IID IID_IDebugSessionProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugSessionProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5877,8 +5373,7 @@ EXTERN_C const IID IID_IDebugSessionProvider;
         DECLSPEC_XFGVIRT(IDebugSessionProvider, StartDebugSession)
         HRESULT ( STDMETHODCALLTYPE *StartDebugSession )( 
             __RPC__in IDebugSessionProvider * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplication *pda);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplication *pda);
         
         END_INTERFACE
     } IDebugSessionProviderVtbl;
@@ -5935,36 +5430,25 @@ EXTERN_C const IID IID_IApplicationDebugger;
         virtual HRESULT STDMETHODCALLTYPE QueryAlive( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateInstanceAtDebugger( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkOuter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwClsContext,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  IUnknown **ppvObject) = 0;
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
+            /* [in] */ DWORD dwClsContext,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onDebugOutput( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstr) = 0;
+            /* [in] */ __RPC__in LPCOLESTR pstr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onHandleBreakPoint( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prpt,
-            /* [annotation][in] */ 
-            _In_  BREAKREASON br,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pError) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prpt,
+            /* [in] */ BREAKREASON br,
+            /* [in] */ __RPC__in_opt IActiveScriptErrorDebug *pError) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onClose( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onDebuggerEvent( 
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punk) = 0;
+            /* [in] */ __RPC__in REFIID riid,
+            /* [in] */ __RPC__in_opt IUnknown *punk) = 0;
         
     };
     
@@ -5978,8 +5462,7 @@ EXTERN_C const IID IID_IApplicationDebugger;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IApplicationDebugger * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5998,32 +5481,23 @@ EXTERN_C const IID IID_IApplicationDebugger;
         DECLSPEC_XFGVIRT(IApplicationDebugger, CreateInstanceAtDebugger)
         HRESULT ( STDMETHODCALLTYPE *CreateInstanceAtDebugger )( 
             __RPC__in IApplicationDebugger * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkOuter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwClsContext,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  IUnknown **ppvObject);
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
+            /* [in] */ DWORD dwClsContext,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
         DECLSPEC_XFGVIRT(IApplicationDebugger, onDebugOutput)
         HRESULT ( STDMETHODCALLTYPE *onDebugOutput )( 
             __RPC__in IApplicationDebugger * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstr);
+            /* [in] */ __RPC__in LPCOLESTR pstr);
         
         DECLSPEC_XFGVIRT(IApplicationDebugger, onHandleBreakPoint)
         HRESULT ( STDMETHODCALLTYPE *onHandleBreakPoint )( 
             __RPC__in IApplicationDebugger * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prpt,
-            /* [annotation][in] */ 
-            _In_  BREAKREASON br,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pError);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prpt,
+            /* [in] */ BREAKREASON br,
+            /* [in] */ __RPC__in_opt IActiveScriptErrorDebug *pError);
         
         DECLSPEC_XFGVIRT(IApplicationDebugger, onClose)
         HRESULT ( STDMETHODCALLTYPE *onClose )( 
@@ -6032,10 +5506,8 @@ EXTERN_C const IID IID_IApplicationDebugger;
         DECLSPEC_XFGVIRT(IApplicationDebugger, onDebuggerEvent)
         HRESULT ( STDMETHODCALLTYPE *onDebuggerEvent )( 
             __RPC__in IApplicationDebugger * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punk);
+            /* [in] */ __RPC__in REFIID riid,
+            /* [in] */ __RPC__in_opt IUnknown *punk);
         
         END_INTERFACE
     } IApplicationDebuggerVtbl;
@@ -6105,12 +5577,10 @@ EXTERN_C const IID IID_IApplicationDebuggerUI;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE BringDocumentToTop( 
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentText *pddt) = 0;
+            /* [in] */ __RPC__in_opt IDebugDocumentText *pddt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BringDocumentContextToTop( 
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentContext *pddc) = 0;
+            /* [in] */ __RPC__in_opt IDebugDocumentContext *pddc) = 0;
         
     };
     
@@ -6124,8 +5594,7 @@ EXTERN_C const IID IID_IApplicationDebuggerUI;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IApplicationDebuggerUI * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6140,14 +5609,12 @@ EXTERN_C const IID IID_IApplicationDebuggerUI;
         DECLSPEC_XFGVIRT(IApplicationDebuggerUI, BringDocumentToTop)
         HRESULT ( STDMETHODCALLTYPE *BringDocumentToTop )( 
             __RPC__in IApplicationDebuggerUI * This,
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentText *pddt);
+            /* [in] */ __RPC__in_opt IDebugDocumentText *pddt);
         
         DECLSPEC_XFGVIRT(IApplicationDebuggerUI, BringDocumentContextToTop)
         HRESULT ( STDMETHODCALLTYPE *BringDocumentContextToTop )( 
             __RPC__in IApplicationDebuggerUI * This,
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentContext *pddc);
+            /* [in] */ __RPC__in_opt IDebugDocumentContext *pddc);
         
         END_INTERFACE
     } IApplicationDebuggerUIVtbl;
@@ -6214,18 +5681,14 @@ EXTERN_C const IID IID_IMachineDebugManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddApplication( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplication *pda,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwAppCookie) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplication *pda,
+            /* [out] */ __RPC__out DWORD *pdwAppCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveApplication( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie) = 0;
+            /* [in] */ DWORD dwAppCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumApplications( 
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplications **ppeda) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumRemoteDebugApplications **ppeda) = 0;
         
     };
     
@@ -6239,8 +5702,7 @@ EXTERN_C const IID IID_IMachineDebugManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMachineDebugManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6255,22 +5717,18 @@ EXTERN_C const IID IID_IMachineDebugManager;
         DECLSPEC_XFGVIRT(IMachineDebugManager, AddApplication)
         HRESULT ( STDMETHODCALLTYPE *AddApplication )( 
             __RPC__in IMachineDebugManager * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplication *pda,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwAppCookie);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplication *pda,
+            /* [out] */ __RPC__out DWORD *pdwAppCookie);
         
         DECLSPEC_XFGVIRT(IMachineDebugManager, RemoveApplication)
         HRESULT ( STDMETHODCALLTYPE *RemoveApplication )( 
             __RPC__in IMachineDebugManager * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie);
+            /* [in] */ DWORD dwAppCookie);
         
         DECLSPEC_XFGVIRT(IMachineDebugManager, EnumApplications)
         HRESULT ( STDMETHODCALLTYPE *EnumApplications )( 
             __RPC__in IMachineDebugManager * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplications **ppeda);
+            /* [out] */ __RPC__deref_out_opt IEnumRemoteDebugApplications **ppeda);
         
         END_INTERFACE
     } IMachineDebugManagerVtbl;
@@ -6331,22 +5789,16 @@ EXTERN_C const IID IID_IMachineDebugManagerCookie;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddApplication( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplication *pda,
-            /* [annotation][in] */ 
-            _In_  DWORD dwDebugAppCookie,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwAppCookie) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplication *pda,
+            /* [in] */ DWORD dwDebugAppCookie,
+            /* [out] */ __RPC__out DWORD *pdwAppCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveApplication( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwDebugAppCookie,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie) = 0;
+            /* [in] */ DWORD dwDebugAppCookie,
+            /* [in] */ DWORD dwAppCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumApplications( 
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplications **ppeda) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumRemoteDebugApplications **ppeda) = 0;
         
     };
     
@@ -6360,8 +5812,7 @@ EXTERN_C const IID IID_IMachineDebugManagerCookie;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMachineDebugManagerCookie * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6376,26 +5827,20 @@ EXTERN_C const IID IID_IMachineDebugManagerCookie;
         DECLSPEC_XFGVIRT(IMachineDebugManagerCookie, AddApplication)
         HRESULT ( STDMETHODCALLTYPE *AddApplication )( 
             __RPC__in IMachineDebugManagerCookie * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplication *pda,
-            /* [annotation][in] */ 
-            _In_  DWORD dwDebugAppCookie,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwAppCookie);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplication *pda,
+            /* [in] */ DWORD dwDebugAppCookie,
+            /* [out] */ __RPC__out DWORD *pdwAppCookie);
         
         DECLSPEC_XFGVIRT(IMachineDebugManagerCookie, RemoveApplication)
         HRESULT ( STDMETHODCALLTYPE *RemoveApplication )( 
             __RPC__in IMachineDebugManagerCookie * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwDebugAppCookie,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie);
+            /* [in] */ DWORD dwDebugAppCookie,
+            /* [in] */ DWORD dwAppCookie);
         
         DECLSPEC_XFGVIRT(IMachineDebugManagerCookie, EnumApplications)
         HRESULT ( STDMETHODCALLTYPE *EnumApplications )( 
             __RPC__in IMachineDebugManagerCookie * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplications **ppeda);
+            /* [out] */ __RPC__deref_out_opt IEnumRemoteDebugApplications **ppeda);
         
         END_INTERFACE
     } IMachineDebugManagerCookieVtbl;
@@ -6456,16 +5901,12 @@ EXTERN_C const IID IID_IMachineDebugManagerEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE onAddApplication( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplication *pda,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplication *pda,
+            /* [in] */ DWORD dwAppCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onRemoveApplication( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplication *pda,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplication *pda,
+            /* [in] */ DWORD dwAppCookie) = 0;
         
     };
     
@@ -6479,8 +5920,7 @@ EXTERN_C const IID IID_IMachineDebugManagerEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMachineDebugManagerEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6495,18 +5935,14 @@ EXTERN_C const IID IID_IMachineDebugManagerEvents;
         DECLSPEC_XFGVIRT(IMachineDebugManagerEvents, onAddApplication)
         HRESULT ( STDMETHODCALLTYPE *onAddApplication )( 
             __RPC__in IMachineDebugManagerEvents * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplication *pda,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplication *pda,
+            /* [in] */ DWORD dwAppCookie);
         
         DECLSPEC_XFGVIRT(IMachineDebugManagerEvents, onRemoveApplication)
         HRESULT ( STDMETHODCALLTYPE *onRemoveApplication )( 
             __RPC__in IMachineDebugManagerEvents * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplication *pda,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplication *pda,
+            /* [in] */ DWORD dwAppCookie);
         
         END_INTERFACE
     } IMachineDebugManagerEventsVtbl;
@@ -6582,28 +6018,21 @@ EXTERN_C const IID IID_IProcessDebugManager32;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateApplication( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication32 **ppda) = 0;
+            /* [out] */ IDebugApplication32 **ppda) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDefaultApplication( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication32 **ppda) = 0;
+            /* [out] */ IDebugApplication32 **ppda) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddApplication( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplication32 *pda,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwAppCookie) = 0;
+            /* [in] */ IDebugApplication32 *pda,
+            /* [out] */ DWORD *pdwAppCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveApplication( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie) = 0;
+            /* [in] */ DWORD dwAppCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDebugDocumentHelper( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkOuter,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentHelper32 **pddh) = 0;
+            /* [in] */ IUnknown *punkOuter,
+            /* [out] */ IDebugDocumentHelper32 **pddh) = 0;
         
     };
     
@@ -6617,8 +6046,7 @@ EXTERN_C const IID IID_IProcessDebugManager32;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IProcessDebugManager32 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6633,36 +6061,29 @@ EXTERN_C const IID IID_IProcessDebugManager32;
         DECLSPEC_XFGVIRT(IProcessDebugManager32, CreateApplication)
         HRESULT ( STDMETHODCALLTYPE *CreateApplication )( 
             IProcessDebugManager32 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication32 **ppda);
+            /* [out] */ IDebugApplication32 **ppda);
         
         DECLSPEC_XFGVIRT(IProcessDebugManager32, GetDefaultApplication)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultApplication )( 
             IProcessDebugManager32 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication32 **ppda);
+            /* [out] */ IDebugApplication32 **ppda);
         
         DECLSPEC_XFGVIRT(IProcessDebugManager32, AddApplication)
         HRESULT ( STDMETHODCALLTYPE *AddApplication )( 
             IProcessDebugManager32 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplication32 *pda,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwAppCookie);
+            /* [in] */ IDebugApplication32 *pda,
+            /* [out] */ DWORD *pdwAppCookie);
         
         DECLSPEC_XFGVIRT(IProcessDebugManager32, RemoveApplication)
         HRESULT ( STDMETHODCALLTYPE *RemoveApplication )( 
             IProcessDebugManager32 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie);
+            /* [in] */ DWORD dwAppCookie);
         
         DECLSPEC_XFGVIRT(IProcessDebugManager32, CreateDebugDocumentHelper)
         HRESULT ( STDMETHODCALLTYPE *CreateDebugDocumentHelper )( 
             IProcessDebugManager32 * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkOuter,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentHelper32 **pddh);
+            /* [in] */ IUnknown *punkOuter,
+            /* [out] */ IDebugDocumentHelper32 **pddh);
         
         END_INTERFACE
     } IProcessDebugManager32Vtbl;
@@ -6729,28 +6150,21 @@ EXTERN_C const IID IID_IProcessDebugManager64;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateApplication( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication64 **ppda) = 0;
+            /* [out] */ IDebugApplication64 **ppda) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDefaultApplication( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication64 **ppda) = 0;
+            /* [out] */ IDebugApplication64 **ppda) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddApplication( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplication64 *pda,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwAppCookie) = 0;
+            /* [in] */ IDebugApplication64 *pda,
+            /* [out] */ DWORD *pdwAppCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveApplication( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie) = 0;
+            /* [in] */ DWORD dwAppCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDebugDocumentHelper( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkOuter,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentHelper64 **pddh) = 0;
+            /* [in] */ IUnknown *punkOuter,
+            /* [out] */ IDebugDocumentHelper64 **pddh) = 0;
         
     };
     
@@ -6764,8 +6178,7 @@ EXTERN_C const IID IID_IProcessDebugManager64;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IProcessDebugManager64 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6780,36 +6193,29 @@ EXTERN_C const IID IID_IProcessDebugManager64;
         DECLSPEC_XFGVIRT(IProcessDebugManager64, CreateApplication)
         HRESULT ( STDMETHODCALLTYPE *CreateApplication )( 
             IProcessDebugManager64 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication64 **ppda);
+            /* [out] */ IDebugApplication64 **ppda);
         
         DECLSPEC_XFGVIRT(IProcessDebugManager64, GetDefaultApplication)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultApplication )( 
             IProcessDebugManager64 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplication64 **ppda);
+            /* [out] */ IDebugApplication64 **ppda);
         
         DECLSPEC_XFGVIRT(IProcessDebugManager64, AddApplication)
         HRESULT ( STDMETHODCALLTYPE *AddApplication )( 
             IProcessDebugManager64 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplication64 *pda,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwAppCookie);
+            /* [in] */ IDebugApplication64 *pda,
+            /* [out] */ DWORD *pdwAppCookie);
         
         DECLSPEC_XFGVIRT(IProcessDebugManager64, RemoveApplication)
         HRESULT ( STDMETHODCALLTYPE *RemoveApplication )( 
             IProcessDebugManager64 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAppCookie);
+            /* [in] */ DWORD dwAppCookie);
         
         DECLSPEC_XFGVIRT(IProcessDebugManager64, CreateDebugDocumentHelper)
         HRESULT ( STDMETHODCALLTYPE *CreateDebugDocumentHelper )( 
             IProcessDebugManager64 * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkOuter,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocumentHelper64 **pddh);
+            /* [in] */ IUnknown *punkOuter,
+            /* [out] */ IDebugDocumentHelper64 **pddh);
         
         END_INTERFACE
     } IProcessDebugManager64Vtbl;
@@ -6876,54 +6282,40 @@ EXTERN_C const IID IID_IRemoteDebugApplication;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ResumeFromBreakPoint( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prptFocus,
-            /* [annotation][in] */ 
-            _In_  BREAKRESUMEACTION bra,
-            /* [annotation][in] */ 
-            _In_  ERRORRESUMEACTION era) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prptFocus,
+            /* [in] */ BREAKRESUMEACTION bra,
+            /* [in] */ ERRORRESUMEACTION era) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CauseBreak( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConnectDebugger( 
-            /* [annotation][in] */ 
-            _In_  IApplicationDebugger *pad) = 0;
+            /* [in] */ __RPC__in_opt IApplicationDebugger *pad) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisconnectDebugger( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDebugger( 
-            /* [annotation][out] */ 
-            _Out_  IApplicationDebugger **pad) = 0;
+            /* [out] */ __RPC__deref_out_opt IApplicationDebugger **pad) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateInstanceAtApplication( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkOuter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwClsContext,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  IUnknown **ppvObject) = 0;
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
+            /* [in] */ DWORD dwClsContext,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryAlive( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumThreads( 
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplicationThreads **pperdat) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumRemoteDebugApplicationThreads **pperdat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetName( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRootNode( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanRoot) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugApplicationNode **ppdanRoot) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumGlobalExpressionContexts( 
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugExpressionContexts **ppedec) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumDebugExpressionContexts **ppedec) = 0;
         
     };
     
@@ -6937,8 +6329,7 @@ EXTERN_C const IID IID_IRemoteDebugApplication;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRemoteDebugApplication * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6953,12 +6344,9 @@ EXTERN_C const IID IID_IRemoteDebugApplication;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, ResumeFromBreakPoint)
         HRESULT ( STDMETHODCALLTYPE *ResumeFromBreakPoint )( 
             __RPC__in IRemoteDebugApplication * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prptFocus,
-            /* [annotation][in] */ 
-            _In_  BREAKRESUMEACTION bra,
-            /* [annotation][in] */ 
-            _In_  ERRORRESUMEACTION era);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prptFocus,
+            /* [in] */ BREAKRESUMEACTION bra,
+            /* [in] */ ERRORRESUMEACTION era);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, CauseBreak)
         HRESULT ( STDMETHODCALLTYPE *CauseBreak )( 
@@ -6967,8 +6355,7 @@ EXTERN_C const IID IID_IRemoteDebugApplication;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, ConnectDebugger)
         HRESULT ( STDMETHODCALLTYPE *ConnectDebugger )( 
             __RPC__in IRemoteDebugApplication * This,
-            /* [annotation][in] */ 
-            _In_  IApplicationDebugger *pad);
+            /* [in] */ __RPC__in_opt IApplicationDebugger *pad);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, DisconnectDebugger)
         HRESULT ( STDMETHODCALLTYPE *DisconnectDebugger )( 
@@ -6977,22 +6364,16 @@ EXTERN_C const IID IID_IRemoteDebugApplication;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, GetDebugger)
         HRESULT ( STDMETHODCALLTYPE *GetDebugger )( 
             __RPC__in IRemoteDebugApplication * This,
-            /* [annotation][out] */ 
-            _Out_  IApplicationDebugger **pad);
+            /* [out] */ __RPC__deref_out_opt IApplicationDebugger **pad);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, CreateInstanceAtApplication)
         HRESULT ( STDMETHODCALLTYPE *CreateInstanceAtApplication )( 
             __RPC__in IRemoteDebugApplication * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkOuter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwClsContext,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  IUnknown **ppvObject);
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
+            /* [in] */ DWORD dwClsContext,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, QueryAlive)
         HRESULT ( STDMETHODCALLTYPE *QueryAlive )( 
@@ -7001,26 +6382,22 @@ EXTERN_C const IID IID_IRemoteDebugApplication;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, EnumThreads)
         HRESULT ( STDMETHODCALLTYPE *EnumThreads )( 
             __RPC__in IRemoteDebugApplication * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplicationThreads **pperdat);
+            /* [out] */ __RPC__deref_out_opt IEnumRemoteDebugApplicationThreads **pperdat);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IRemoteDebugApplication * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, GetRootNode)
         HRESULT ( STDMETHODCALLTYPE *GetRootNode )( 
             __RPC__in IRemoteDebugApplication * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanRoot);
+            /* [out] */ __RPC__deref_out_opt IDebugApplicationNode **ppdanRoot);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, EnumGlobalExpressionContexts)
         HRESULT ( STDMETHODCALLTYPE *EnumGlobalExpressionContexts )( 
             __RPC__in IRemoteDebugApplication * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugExpressionContexts **ppedec);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugExpressionContexts **ppedec);
         
         END_INTERFACE
     } IRemoteDebugApplicationVtbl;
@@ -7122,98 +6499,71 @@ EXTERN_C const IID IID_IDebugApplication32;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetName( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrName) = 0;
+            /* [in] */ LPCOLESTR pstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StepOutComplete( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DebugOutput( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstr) = 0;
+            /* [in] */ LPCOLESTR pstr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StartDebugSession( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HandleBreakPoint( 
-            /* [annotation][in] */ 
-            _In_  BREAKREASON br,
-            /* [annotation][out] */ 
-            _Out_  BREAKRESUMEACTION *pbra) = 0;
+            /* [in] */ BREAKREASON br,
+            /* [out] */ BREAKRESUMEACTION *pbra) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBreakFlags( 
-            /* [annotation][out] */ 
-            _Out_  APPBREAKFLAGS *pabf,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplicationThread **pprdatSteppingThread) = 0;
+            /* [out] */ APPBREAKFLAGS *pabf,
+            /* [out] */ IRemoteDebugApplicationThread **pprdatSteppingThread) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentThread( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationThread **pat) = 0;
+            /* [out] */ IDebugApplicationThread **pat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateAsyncDebugOperation( 
-            /* [annotation][in] */ 
-            _In_  IDebugSyncOperation *psdo,
-            /* [annotation][out] */ 
-            _Out_  IDebugAsyncOperation **ppado) = 0;
+            /* [in] */ IDebugSyncOperation *psdo,
+            /* [out] */ IDebugAsyncOperation **ppado) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddStackFrameSniffer( 
-            /* [annotation][in] */ 
-            _In_  IDebugStackFrameSniffer *pdsfs,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie) = 0;
+            /* [in] */ IDebugStackFrameSniffer *pdsfs,
+            /* [out] */ DWORD *pdwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveStackFrameSniffer( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie) = 0;
+            /* [in] */ DWORD dwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryCurrentThreadIsDebuggerThread( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SynchronousCallInDebuggerThread( 
-            /* [annotation][in] */ 
-            _In_  IDebugThreadCall32 *pptc,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam3) = 0;
+            /* [in] */ IDebugThreadCall32 *pptc,
+            /* [in] */ DWORD dwParam1,
+            /* [in] */ DWORD dwParam2,
+            /* [in] */ DWORD dwParam3) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateApplicationNode( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanNew) = 0;
+            /* [out] */ IDebugApplicationNode **ppdanNew) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FireDebuggerEvent( 
-            /* [annotation][in] */ 
-            _In_  REFGUID riid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punk) = 0;
+            /* [in] */ REFGUID riid,
+            /* [in] */ IUnknown *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HandleRuntimeError( 
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pErrorDebug,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptSite *pScriptSite,
-            /* [annotation][out] */ 
-            _Out_  BREAKRESUMEACTION *pbra,
-            /* [annotation][out] */ 
-            _Out_  ERRORRESUMEACTION *perra,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCallOnScriptError) = 0;
+            /* [in] */ IActiveScriptErrorDebug *pErrorDebug,
+            /* [in] */ IActiveScriptSite *pScriptSite,
+            /* [out] */ BREAKRESUMEACTION *pbra,
+            /* [out] */ ERRORRESUMEACTION *perra,
+            /* [out] */ BOOL *pfCallOnScriptError) = 0;
         
         virtual BOOL STDMETHODCALLTYPE FCanJitDebug( void) = 0;
         
         virtual BOOL STDMETHODCALLTYPE FIsAutoJitDebugEnabled( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddGlobalExpressionContextProvider( 
-            /* [annotation][in] */ 
-            _In_  IProvideExpressionContexts *pdsfs,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie) = 0;
+            /* [in] */ IProvideExpressionContexts *pdsfs,
+            /* [out] */ DWORD *pdwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveGlobalExpressionContextProvider( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie) = 0;
+            /* [in] */ DWORD dwCookie) = 0;
         
     };
     
@@ -7227,8 +6577,7 @@ EXTERN_C const IID IID_IDebugApplication32;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7243,12 +6592,9 @@ EXTERN_C const IID IID_IDebugApplication32;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, ResumeFromBreakPoint)
         HRESULT ( STDMETHODCALLTYPE *ResumeFromBreakPoint )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prptFocus,
-            /* [annotation][in] */ 
-            _In_  BREAKRESUMEACTION bra,
-            /* [annotation][in] */ 
-            _In_  ERRORRESUMEACTION era);
+            /* [in] */ IRemoteDebugApplicationThread *prptFocus,
+            /* [in] */ BREAKRESUMEACTION bra,
+            /* [in] */ ERRORRESUMEACTION era);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, CauseBreak)
         HRESULT ( STDMETHODCALLTYPE *CauseBreak )( 
@@ -7257,8 +6603,7 @@ EXTERN_C const IID IID_IDebugApplication32;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, ConnectDebugger)
         HRESULT ( STDMETHODCALLTYPE *ConnectDebugger )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  IApplicationDebugger *pad);
+            /* [in] */ IApplicationDebugger *pad);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, DisconnectDebugger)
         HRESULT ( STDMETHODCALLTYPE *DisconnectDebugger )( 
@@ -7267,22 +6612,16 @@ EXTERN_C const IID IID_IDebugApplication32;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, GetDebugger)
         HRESULT ( STDMETHODCALLTYPE *GetDebugger )( 
             IDebugApplication32 * This,
-            /* [annotation][out] */ 
-            _Out_  IApplicationDebugger **pad);
+            /* [out] */ IApplicationDebugger **pad);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, CreateInstanceAtApplication)
         HRESULT ( STDMETHODCALLTYPE *CreateInstanceAtApplication )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkOuter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwClsContext,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  IUnknown **ppvObject);
+            /* [in] */ REFCLSID rclsid,
+            /* [in] */ IUnknown *pUnkOuter,
+            /* [in] */ DWORD dwClsContext,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ IUnknown **ppvObject);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, QueryAlive)
         HRESULT ( STDMETHODCALLTYPE *QueryAlive )( 
@@ -7291,32 +6630,27 @@ EXTERN_C const IID IID_IDebugApplication32;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, EnumThreads)
         HRESULT ( STDMETHODCALLTYPE *EnumThreads )( 
             IDebugApplication32 * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplicationThreads **pperdat);
+            /* [out] */ IEnumRemoteDebugApplicationThreads **pperdat);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             IDebugApplication32 * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [out] */ BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, GetRootNode)
         HRESULT ( STDMETHODCALLTYPE *GetRootNode )( 
             IDebugApplication32 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanRoot);
+            /* [out] */ IDebugApplicationNode **ppdanRoot);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, EnumGlobalExpressionContexts)
         HRESULT ( STDMETHODCALLTYPE *EnumGlobalExpressionContexts )( 
             IDebugApplication32 * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugExpressionContexts **ppedec);
+            /* [out] */ IEnumDebugExpressionContexts **ppedec);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrName);
+            /* [in] */ LPCOLESTR pstrName);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, StepOutComplete)
         HRESULT ( STDMETHODCALLTYPE *StepOutComplete )( 
@@ -7325,8 +6659,7 @@ EXTERN_C const IID IID_IDebugApplication32;
         DECLSPEC_XFGVIRT(IDebugApplication32, DebugOutput)
         HRESULT ( STDMETHODCALLTYPE *DebugOutput )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstr);
+            /* [in] */ LPCOLESTR pstr);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, StartDebugSession)
         HRESULT ( STDMETHODCALLTYPE *StartDebugSession )( 
@@ -7335,10 +6668,8 @@ EXTERN_C const IID IID_IDebugApplication32;
         DECLSPEC_XFGVIRT(IDebugApplication32, HandleBreakPoint)
         HRESULT ( STDMETHODCALLTYPE *HandleBreakPoint )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  BREAKREASON br,
-            /* [annotation][out] */ 
-            _Out_  BREAKRESUMEACTION *pbra);
+            /* [in] */ BREAKREASON br,
+            /* [out] */ BREAKRESUMEACTION *pbra);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
@@ -7347,38 +6678,30 @@ EXTERN_C const IID IID_IDebugApplication32;
         DECLSPEC_XFGVIRT(IDebugApplication32, GetBreakFlags)
         HRESULT ( STDMETHODCALLTYPE *GetBreakFlags )( 
             IDebugApplication32 * This,
-            /* [annotation][out] */ 
-            _Out_  APPBREAKFLAGS *pabf,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplicationThread **pprdatSteppingThread);
+            /* [out] */ APPBREAKFLAGS *pabf,
+            /* [out] */ IRemoteDebugApplicationThread **pprdatSteppingThread);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, GetCurrentThread)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentThread )( 
             IDebugApplication32 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationThread **pat);
+            /* [out] */ IDebugApplicationThread **pat);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, CreateAsyncDebugOperation)
         HRESULT ( STDMETHODCALLTYPE *CreateAsyncDebugOperation )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugSyncOperation *psdo,
-            /* [annotation][out] */ 
-            _Out_  IDebugAsyncOperation **ppado);
+            /* [in] */ IDebugSyncOperation *psdo,
+            /* [out] */ IDebugAsyncOperation **ppado);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, AddStackFrameSniffer)
         HRESULT ( STDMETHODCALLTYPE *AddStackFrameSniffer )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugStackFrameSniffer *pdsfs,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie);
+            /* [in] */ IDebugStackFrameSniffer *pdsfs,
+            /* [out] */ DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, RemoveStackFrameSniffer)
         HRESULT ( STDMETHODCALLTYPE *RemoveStackFrameSniffer )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie);
+            /* [in] */ DWORD dwCookie);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, QueryCurrentThreadIsDebuggerThread)
         HRESULT ( STDMETHODCALLTYPE *QueryCurrentThreadIsDebuggerThread )( 
@@ -7387,42 +6710,30 @@ EXTERN_C const IID IID_IDebugApplication32;
         DECLSPEC_XFGVIRT(IDebugApplication32, SynchronousCallInDebuggerThread)
         HRESULT ( STDMETHODCALLTYPE *SynchronousCallInDebuggerThread )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugThreadCall32 *pptc,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam3);
+            /* [in] */ IDebugThreadCall32 *pptc,
+            /* [in] */ DWORD dwParam1,
+            /* [in] */ DWORD dwParam2,
+            /* [in] */ DWORD dwParam3);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, CreateApplicationNode)
         HRESULT ( STDMETHODCALLTYPE *CreateApplicationNode )( 
             IDebugApplication32 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanNew);
+            /* [out] */ IDebugApplicationNode **ppdanNew);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, FireDebuggerEvent)
         HRESULT ( STDMETHODCALLTYPE *FireDebuggerEvent )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  REFGUID riid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punk);
+            /* [in] */ REFGUID riid,
+            /* [in] */ IUnknown *punk);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, HandleRuntimeError)
         HRESULT ( STDMETHODCALLTYPE *HandleRuntimeError )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pErrorDebug,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptSite *pScriptSite,
-            /* [annotation][out] */ 
-            _Out_  BREAKRESUMEACTION *pbra,
-            /* [annotation][out] */ 
-            _Out_  ERRORRESUMEACTION *perra,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCallOnScriptError);
+            /* [in] */ IActiveScriptErrorDebug *pErrorDebug,
+            /* [in] */ IActiveScriptSite *pScriptSite,
+            /* [out] */ BREAKRESUMEACTION *pbra,
+            /* [out] */ ERRORRESUMEACTION *perra,
+            /* [out] */ BOOL *pfCallOnScriptError);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, FCanJitDebug)
         BOOL ( STDMETHODCALLTYPE *FCanJitDebug )( 
@@ -7435,16 +6746,13 @@ EXTERN_C const IID IID_IDebugApplication32;
         DECLSPEC_XFGVIRT(IDebugApplication32, AddGlobalExpressionContextProvider)
         HRESULT ( STDMETHODCALLTYPE *AddGlobalExpressionContextProvider )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  IProvideExpressionContexts *pdsfs,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie);
+            /* [in] */ IProvideExpressionContexts *pdsfs,
+            /* [out] */ DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(IDebugApplication32, RemoveGlobalExpressionContextProvider)
         HRESULT ( STDMETHODCALLTYPE *RemoveGlobalExpressionContextProvider )( 
             IDebugApplication32 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie);
+            /* [in] */ DWORD dwCookie);
         
         END_INTERFACE
     } IDebugApplication32Vtbl;
@@ -7590,98 +6898,71 @@ EXTERN_C const IID IID_IDebugApplication64;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetName( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrName) = 0;
+            /* [in] */ LPCOLESTR pstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StepOutComplete( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DebugOutput( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstr) = 0;
+            /* [in] */ LPCOLESTR pstr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StartDebugSession( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HandleBreakPoint( 
-            /* [annotation][in] */ 
-            _In_  BREAKREASON br,
-            /* [annotation][out] */ 
-            _Out_  BREAKRESUMEACTION *pbra) = 0;
+            /* [in] */ BREAKREASON br,
+            /* [out] */ BREAKRESUMEACTION *pbra) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBreakFlags( 
-            /* [annotation][out] */ 
-            _Out_  APPBREAKFLAGS *pabf,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplicationThread **pprdatSteppingThread) = 0;
+            /* [out] */ APPBREAKFLAGS *pabf,
+            /* [out] */ IRemoteDebugApplicationThread **pprdatSteppingThread) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurrentThread( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationThread **pat) = 0;
+            /* [out] */ IDebugApplicationThread **pat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateAsyncDebugOperation( 
-            /* [annotation][in] */ 
-            _In_  IDebugSyncOperation *psdo,
-            /* [annotation][out] */ 
-            _Out_  IDebugAsyncOperation **ppado) = 0;
+            /* [in] */ IDebugSyncOperation *psdo,
+            /* [out] */ IDebugAsyncOperation **ppado) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddStackFrameSniffer( 
-            /* [annotation][in] */ 
-            _In_  IDebugStackFrameSniffer *pdsfs,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie) = 0;
+            /* [in] */ IDebugStackFrameSniffer *pdsfs,
+            /* [out] */ DWORD *pdwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveStackFrameSniffer( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie) = 0;
+            /* [in] */ DWORD dwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryCurrentThreadIsDebuggerThread( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SynchronousCallInDebuggerThread( 
-            /* [annotation][in] */ 
-            _In_  IDebugThreadCall64 *pptc,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam3) = 0;
+            /* [in] */ IDebugThreadCall64 *pptc,
+            /* [in] */ DWORDLONG dwParam1,
+            /* [in] */ DWORDLONG dwParam2,
+            /* [in] */ DWORDLONG dwParam3) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateApplicationNode( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanNew) = 0;
+            /* [out] */ IDebugApplicationNode **ppdanNew) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FireDebuggerEvent( 
-            /* [annotation][in] */ 
-            _In_  REFGUID riid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punk) = 0;
+            /* [in] */ REFGUID riid,
+            /* [in] */ IUnknown *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HandleRuntimeError( 
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pErrorDebug,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptSite *pScriptSite,
-            /* [annotation][out] */ 
-            _Out_  BREAKRESUMEACTION *pbra,
-            /* [annotation][out] */ 
-            _Out_  ERRORRESUMEACTION *perra,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCallOnScriptError) = 0;
+            /* [in] */ IActiveScriptErrorDebug *pErrorDebug,
+            /* [in] */ IActiveScriptSite *pScriptSite,
+            /* [out] */ BREAKRESUMEACTION *pbra,
+            /* [out] */ ERRORRESUMEACTION *perra,
+            /* [out] */ BOOL *pfCallOnScriptError) = 0;
         
         virtual BOOL STDMETHODCALLTYPE FCanJitDebug( void) = 0;
         
         virtual BOOL STDMETHODCALLTYPE FIsAutoJitDebugEnabled( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddGlobalExpressionContextProvider( 
-            /* [annotation][in] */ 
-            _In_  IProvideExpressionContexts *pdsfs,
-            /* [annotation][out] */ 
-            _Out_  DWORDLONG *pdwCookie) = 0;
+            /* [in] */ IProvideExpressionContexts *pdsfs,
+            /* [out] */ DWORDLONG *pdwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveGlobalExpressionContextProvider( 
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwCookie) = 0;
+            /* [in] */ DWORDLONG dwCookie) = 0;
         
     };
     
@@ -7695,8 +6976,7 @@ EXTERN_C const IID IID_IDebugApplication64;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7711,12 +6991,9 @@ EXTERN_C const IID IID_IDebugApplication64;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, ResumeFromBreakPoint)
         HRESULT ( STDMETHODCALLTYPE *ResumeFromBreakPoint )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prptFocus,
-            /* [annotation][in] */ 
-            _In_  BREAKRESUMEACTION bra,
-            /* [annotation][in] */ 
-            _In_  ERRORRESUMEACTION era);
+            /* [in] */ IRemoteDebugApplicationThread *prptFocus,
+            /* [in] */ BREAKRESUMEACTION bra,
+            /* [in] */ ERRORRESUMEACTION era);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, CauseBreak)
         HRESULT ( STDMETHODCALLTYPE *CauseBreak )( 
@@ -7725,8 +7002,7 @@ EXTERN_C const IID IID_IDebugApplication64;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, ConnectDebugger)
         HRESULT ( STDMETHODCALLTYPE *ConnectDebugger )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  IApplicationDebugger *pad);
+            /* [in] */ IApplicationDebugger *pad);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, DisconnectDebugger)
         HRESULT ( STDMETHODCALLTYPE *DisconnectDebugger )( 
@@ -7735,22 +7011,16 @@ EXTERN_C const IID IID_IDebugApplication64;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, GetDebugger)
         HRESULT ( STDMETHODCALLTYPE *GetDebugger )( 
             IDebugApplication64 * This,
-            /* [annotation][out] */ 
-            _Out_  IApplicationDebugger **pad);
+            /* [out] */ IApplicationDebugger **pad);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, CreateInstanceAtApplication)
         HRESULT ( STDMETHODCALLTYPE *CreateInstanceAtApplication )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkOuter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwClsContext,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  IUnknown **ppvObject);
+            /* [in] */ REFCLSID rclsid,
+            /* [in] */ IUnknown *pUnkOuter,
+            /* [in] */ DWORD dwClsContext,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ IUnknown **ppvObject);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, QueryAlive)
         HRESULT ( STDMETHODCALLTYPE *QueryAlive )( 
@@ -7759,32 +7029,27 @@ EXTERN_C const IID IID_IDebugApplication64;
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, EnumThreads)
         HRESULT ( STDMETHODCALLTYPE *EnumThreads )( 
             IDebugApplication64 * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplicationThreads **pperdat);
+            /* [out] */ IEnumRemoteDebugApplicationThreads **pperdat);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             IDebugApplication64 * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [out] */ BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, GetRootNode)
         HRESULT ( STDMETHODCALLTYPE *GetRootNode )( 
             IDebugApplication64 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanRoot);
+            /* [out] */ IDebugApplicationNode **ppdanRoot);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplication, EnumGlobalExpressionContexts)
         HRESULT ( STDMETHODCALLTYPE *EnumGlobalExpressionContexts )( 
             IDebugApplication64 * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugExpressionContexts **ppedec);
+            /* [out] */ IEnumDebugExpressionContexts **ppedec);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrName);
+            /* [in] */ LPCOLESTR pstrName);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, StepOutComplete)
         HRESULT ( STDMETHODCALLTYPE *StepOutComplete )( 
@@ -7793,8 +7058,7 @@ EXTERN_C const IID IID_IDebugApplication64;
         DECLSPEC_XFGVIRT(IDebugApplication64, DebugOutput)
         HRESULT ( STDMETHODCALLTYPE *DebugOutput )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstr);
+            /* [in] */ LPCOLESTR pstr);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, StartDebugSession)
         HRESULT ( STDMETHODCALLTYPE *StartDebugSession )( 
@@ -7803,10 +7067,8 @@ EXTERN_C const IID IID_IDebugApplication64;
         DECLSPEC_XFGVIRT(IDebugApplication64, HandleBreakPoint)
         HRESULT ( STDMETHODCALLTYPE *HandleBreakPoint )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  BREAKREASON br,
-            /* [annotation][out] */ 
-            _Out_  BREAKRESUMEACTION *pbra);
+            /* [in] */ BREAKREASON br,
+            /* [out] */ BREAKRESUMEACTION *pbra);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
@@ -7815,38 +7077,30 @@ EXTERN_C const IID IID_IDebugApplication64;
         DECLSPEC_XFGVIRT(IDebugApplication64, GetBreakFlags)
         HRESULT ( STDMETHODCALLTYPE *GetBreakFlags )( 
             IDebugApplication64 * This,
-            /* [annotation][out] */ 
-            _Out_  APPBREAKFLAGS *pabf,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplicationThread **pprdatSteppingThread);
+            /* [out] */ APPBREAKFLAGS *pabf,
+            /* [out] */ IRemoteDebugApplicationThread **pprdatSteppingThread);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, GetCurrentThread)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentThread )( 
             IDebugApplication64 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationThread **pat);
+            /* [out] */ IDebugApplicationThread **pat);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, CreateAsyncDebugOperation)
         HRESULT ( STDMETHODCALLTYPE *CreateAsyncDebugOperation )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugSyncOperation *psdo,
-            /* [annotation][out] */ 
-            _Out_  IDebugAsyncOperation **ppado);
+            /* [in] */ IDebugSyncOperation *psdo,
+            /* [out] */ IDebugAsyncOperation **ppado);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, AddStackFrameSniffer)
         HRESULT ( STDMETHODCALLTYPE *AddStackFrameSniffer )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugStackFrameSniffer *pdsfs,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie);
+            /* [in] */ IDebugStackFrameSniffer *pdsfs,
+            /* [out] */ DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, RemoveStackFrameSniffer)
         HRESULT ( STDMETHODCALLTYPE *RemoveStackFrameSniffer )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie);
+            /* [in] */ DWORD dwCookie);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, QueryCurrentThreadIsDebuggerThread)
         HRESULT ( STDMETHODCALLTYPE *QueryCurrentThreadIsDebuggerThread )( 
@@ -7855,42 +7109,30 @@ EXTERN_C const IID IID_IDebugApplication64;
         DECLSPEC_XFGVIRT(IDebugApplication64, SynchronousCallInDebuggerThread)
         HRESULT ( STDMETHODCALLTYPE *SynchronousCallInDebuggerThread )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugThreadCall64 *pptc,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam3);
+            /* [in] */ IDebugThreadCall64 *pptc,
+            /* [in] */ DWORDLONG dwParam1,
+            /* [in] */ DWORDLONG dwParam2,
+            /* [in] */ DWORDLONG dwParam3);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, CreateApplicationNode)
         HRESULT ( STDMETHODCALLTYPE *CreateApplicationNode )( 
             IDebugApplication64 * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **ppdanNew);
+            /* [out] */ IDebugApplicationNode **ppdanNew);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, FireDebuggerEvent)
         HRESULT ( STDMETHODCALLTYPE *FireDebuggerEvent )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  REFGUID riid,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punk);
+            /* [in] */ REFGUID riid,
+            /* [in] */ IUnknown *punk);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, HandleRuntimeError)
         HRESULT ( STDMETHODCALLTYPE *HandleRuntimeError )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptErrorDebug *pErrorDebug,
-            /* [annotation][in] */ 
-            _In_  IActiveScriptSite *pScriptSite,
-            /* [annotation][out] */ 
-            _Out_  BREAKRESUMEACTION *pbra,
-            /* [annotation][out] */ 
-            _Out_  ERRORRESUMEACTION *perra,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCallOnScriptError);
+            /* [in] */ IActiveScriptErrorDebug *pErrorDebug,
+            /* [in] */ IActiveScriptSite *pScriptSite,
+            /* [out] */ BREAKRESUMEACTION *pbra,
+            /* [out] */ ERRORRESUMEACTION *perra,
+            /* [out] */ BOOL *pfCallOnScriptError);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, FCanJitDebug)
         BOOL ( STDMETHODCALLTYPE *FCanJitDebug )( 
@@ -7903,16 +7145,13 @@ EXTERN_C const IID IID_IDebugApplication64;
         DECLSPEC_XFGVIRT(IDebugApplication64, AddGlobalExpressionContextProvider)
         HRESULT ( STDMETHODCALLTYPE *AddGlobalExpressionContextProvider )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  IProvideExpressionContexts *pdsfs,
-            /* [annotation][out] */ 
-            _Out_  DWORDLONG *pdwCookie);
+            /* [in] */ IProvideExpressionContexts *pdsfs,
+            /* [out] */ DWORDLONG *pdwCookie);
         
         DECLSPEC_XFGVIRT(IDebugApplication64, RemoveGlobalExpressionContextProvider)
         HRESULT ( STDMETHODCALLTYPE *RemoveGlobalExpressionContextProvider )( 
             IDebugApplication64 * This,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwCookie);
+            /* [in] */ DWORDLONG dwCookie);
         
         END_INTERFACE
     } IDebugApplication64Vtbl;
@@ -8058,42 +7297,33 @@ EXTERN_C const IID IID_IRemoteDebugApplicationEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnConnectDebugger( 
-            /* [annotation][in] */ 
-            _In_  IApplicationDebugger *pad) = 0;
+            /* [in] */ __RPC__in_opt IApplicationDebugger *pad) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDisconnectDebugger( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnSetName( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrName) = 0;
+            /* [in] */ __RPC__in LPCOLESTR pstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDebugOutput( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstr) = 0;
+            /* [in] */ __RPC__in LPCOLESTR pstr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnClose( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnEnterBreakPoint( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prdat) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prdat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnLeaveBreakPoint( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prdat) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prdat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnCreateThread( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prdat) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prdat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDestroyThread( 
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prdat) = 0;
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prdat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnBreakFlagChange( 
-            /* [annotation][in] */ 
-            _In_  APPBREAKFLAGS abf,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prdatSteppingThread) = 0;
+            /* [in] */ APPBREAKFLAGS abf,
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prdatSteppingThread) = 0;
         
     };
     
@@ -8107,8 +7337,7 @@ EXTERN_C const IID IID_IRemoteDebugApplicationEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRemoteDebugApplicationEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8123,8 +7352,7 @@ EXTERN_C const IID IID_IRemoteDebugApplicationEvents;
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationEvents, OnConnectDebugger)
         HRESULT ( STDMETHODCALLTYPE *OnConnectDebugger )( 
             __RPC__in IRemoteDebugApplicationEvents * This,
-            /* [annotation][in] */ 
-            _In_  IApplicationDebugger *pad);
+            /* [in] */ __RPC__in_opt IApplicationDebugger *pad);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationEvents, OnDisconnectDebugger)
         HRESULT ( STDMETHODCALLTYPE *OnDisconnectDebugger )( 
@@ -8133,14 +7361,12 @@ EXTERN_C const IID IID_IRemoteDebugApplicationEvents;
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationEvents, OnSetName)
         HRESULT ( STDMETHODCALLTYPE *OnSetName )( 
             __RPC__in IRemoteDebugApplicationEvents * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrName);
+            /* [in] */ __RPC__in LPCOLESTR pstrName);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationEvents, OnDebugOutput)
         HRESULT ( STDMETHODCALLTYPE *OnDebugOutput )( 
             __RPC__in IRemoteDebugApplicationEvents * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstr);
+            /* [in] */ __RPC__in LPCOLESTR pstr);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationEvents, OnClose)
         HRESULT ( STDMETHODCALLTYPE *OnClose )( 
@@ -8149,34 +7375,28 @@ EXTERN_C const IID IID_IRemoteDebugApplicationEvents;
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationEvents, OnEnterBreakPoint)
         HRESULT ( STDMETHODCALLTYPE *OnEnterBreakPoint )( 
             __RPC__in IRemoteDebugApplicationEvents * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prdat);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prdat);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationEvents, OnLeaveBreakPoint)
         HRESULT ( STDMETHODCALLTYPE *OnLeaveBreakPoint )( 
             __RPC__in IRemoteDebugApplicationEvents * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prdat);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prdat);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationEvents, OnCreateThread)
         HRESULT ( STDMETHODCALLTYPE *OnCreateThread )( 
             __RPC__in IRemoteDebugApplicationEvents * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prdat);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prdat);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationEvents, OnDestroyThread)
         HRESULT ( STDMETHODCALLTYPE *OnDestroyThread )( 
             __RPC__in IRemoteDebugApplicationEvents * This,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prdat);
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prdat);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationEvents, OnBreakFlagChange)
         HRESULT ( STDMETHODCALLTYPE *OnBreakFlagChange )( 
             __RPC__in IRemoteDebugApplicationEvents * This,
-            /* [annotation][in] */ 
-            _In_  APPBREAKFLAGS abf,
-            /* [annotation][in] */ 
-            _In_  IRemoteDebugApplicationThread *prdatSteppingThread);
+            /* [in] */ APPBREAKFLAGS abf,
+            /* [in] */ __RPC__in_opt IRemoteDebugApplicationThread *prdatSteppingThread);
         
         END_INTERFACE
     } IRemoteDebugApplicationEventsVtbl;
@@ -8258,22 +7478,18 @@ EXTERN_C const IID IID_IDebugApplicationNode;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumChildren( 
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugApplicationNodes **pperddp) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumDebugApplicationNodes **pperddp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParent( 
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **pprddp) = 0;
+            /* [out] */ __RPC__deref_out_opt IDebugApplicationNode **pprddp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDocumentProvider( 
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentProvider *pddp) = 0;
+            /* [in] */ __RPC__in_opt IDebugDocumentProvider *pddp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Attach( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *pdanParent) = 0;
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *pdanParent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Detach( void) = 0;
         
@@ -8289,8 +7505,7 @@ EXTERN_C const IID IID_IDebugApplicationNode;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugApplicationNode * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8305,40 +7520,33 @@ EXTERN_C const IID IID_IDebugApplicationNode;
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IDebugApplicationNode * This,
-            /* [annotation][in] */ 
-            _In_  DOCUMENTNAMETYPE dnt,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DOCUMENTNAMETYPE dnt,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDebugDocumentInfo, GetDocumentClassId)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentClassId )( 
             __RPC__in IDebugApplicationNode * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pclsidDocument);
+            /* [out] */ __RPC__out CLSID *pclsidDocument);
         
         DECLSPEC_XFGVIRT(IDebugDocumentProvider, GetDocument)
         HRESULT ( STDMETHODCALLTYPE *GetDocument )( 
             __RPC__in IDebugApplicationNode * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugDocument **ppssd);
+            /* [out] */ __RPC__deref_out_opt IDebugDocument **ppssd);
         
         DECLSPEC_XFGVIRT(IDebugApplicationNode, EnumChildren)
         HRESULT ( STDMETHODCALLTYPE *EnumChildren )( 
             __RPC__in IDebugApplicationNode * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugApplicationNodes **pperddp);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugApplicationNodes **pperddp);
         
         DECLSPEC_XFGVIRT(IDebugApplicationNode, GetParent)
         HRESULT ( STDMETHODCALLTYPE *GetParent )( 
             __RPC__in IDebugApplicationNode * This,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **pprddp);
+            /* [out] */ __RPC__deref_out_opt IDebugApplicationNode **pprddp);
         
         DECLSPEC_XFGVIRT(IDebugApplicationNode, SetDocumentProvider)
         HRESULT ( STDMETHODCALLTYPE *SetDocumentProvider )( 
             __RPC__in IDebugApplicationNode * This,
-            /* [annotation][in] */ 
-            _In_  IDebugDocumentProvider *pddp);
+            /* [in] */ __RPC__in_opt IDebugDocumentProvider *pddp);
         
         DECLSPEC_XFGVIRT(IDebugApplicationNode, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
@@ -8347,8 +7555,7 @@ EXTERN_C const IID IID_IDebugApplicationNode;
         DECLSPEC_XFGVIRT(IDebugApplicationNode, Attach)
         HRESULT ( STDMETHODCALLTYPE *Attach )( 
             __RPC__in IDebugApplicationNode * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *pdanParent);
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *pdanParent);
         
         DECLSPEC_XFGVIRT(IDebugApplicationNode, Detach)
         HRESULT ( STDMETHODCALLTYPE *Detach )( 
@@ -8433,18 +7640,15 @@ EXTERN_C const IID IID_IDebugApplicationNodeEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE onAddChild( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpChild) = 0;
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpChild) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onRemoveChild( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpChild) = 0;
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpChild) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onDetach( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE onAttach( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpParent) = 0;
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpParent) = 0;
         
     };
     
@@ -8458,8 +7662,7 @@ EXTERN_C const IID IID_IDebugApplicationNodeEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDebugApplicationNodeEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8474,14 +7677,12 @@ EXTERN_C const IID IID_IDebugApplicationNodeEvents;
         DECLSPEC_XFGVIRT(IDebugApplicationNodeEvents, onAddChild)
         HRESULT ( STDMETHODCALLTYPE *onAddChild )( 
             __RPC__in IDebugApplicationNodeEvents * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpChild);
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpChild);
         
         DECLSPEC_XFGVIRT(IDebugApplicationNodeEvents, onRemoveChild)
         HRESULT ( STDMETHODCALLTYPE *onRemoveChild )( 
             __RPC__in IDebugApplicationNodeEvents * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpChild);
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpChild);
         
         DECLSPEC_XFGVIRT(IDebugApplicationNodeEvents, onDetach)
         HRESULT ( STDMETHODCALLTYPE *onDetach )( 
@@ -8490,8 +7691,7 @@ EXTERN_C const IID IID_IDebugApplicationNodeEvents;
         DECLSPEC_XFGVIRT(IDebugApplicationNodeEvents, onAttach)
         HRESULT ( STDMETHODCALLTYPE *onAttach )( 
             __RPC__in IDebugApplicationNodeEvents * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpParent);
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpParent);
         
         END_INTERFACE
     } IDebugApplicationNodeEventsVtbl;
@@ -8555,14 +7755,12 @@ EXTERN_C const IID IID_AsyncIDebugApplicationNodeEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Begin_onAddChild( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpChild) = 0;
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpChild) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Finish_onAddChild( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Begin_onRemoveChild( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpChild) = 0;
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpChild) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Finish_onRemoveChild( void) = 0;
         
@@ -8571,8 +7769,7 @@ EXTERN_C const IID IID_AsyncIDebugApplicationNodeEvents;
         virtual HRESULT STDMETHODCALLTYPE Finish_onDetach( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Begin_onAttach( 
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpParent) = 0;
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpParent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Finish_onAttach( void) = 0;
         
@@ -8588,8 +7785,7 @@ EXTERN_C const IID IID_AsyncIDebugApplicationNodeEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIDebugApplicationNodeEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8604,8 +7800,7 @@ EXTERN_C const IID IID_AsyncIDebugApplicationNodeEvents;
         DECLSPEC_XFGVIRT(AsyncIDebugApplicationNodeEvents, Begin_onAddChild)
         HRESULT ( STDMETHODCALLTYPE *Begin_onAddChild )( 
             __RPC__in AsyncIDebugApplicationNodeEvents * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpChild);
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpChild);
         
         DECLSPEC_XFGVIRT(AsyncIDebugApplicationNodeEvents, Finish_onAddChild)
         HRESULT ( STDMETHODCALLTYPE *Finish_onAddChild )( 
@@ -8614,8 +7809,7 @@ EXTERN_C const IID IID_AsyncIDebugApplicationNodeEvents;
         DECLSPEC_XFGVIRT(AsyncIDebugApplicationNodeEvents, Begin_onRemoveChild)
         HRESULT ( STDMETHODCALLTYPE *Begin_onRemoveChild )( 
             __RPC__in AsyncIDebugApplicationNodeEvents * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpChild);
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpChild);
         
         DECLSPEC_XFGVIRT(AsyncIDebugApplicationNodeEvents, Finish_onRemoveChild)
         HRESULT ( STDMETHODCALLTYPE *Finish_onRemoveChild )( 
@@ -8632,8 +7826,7 @@ EXTERN_C const IID IID_AsyncIDebugApplicationNodeEvents;
         DECLSPEC_XFGVIRT(AsyncIDebugApplicationNodeEvents, Begin_onAttach)
         HRESULT ( STDMETHODCALLTYPE *Begin_onAttach )( 
             __RPC__in AsyncIDebugApplicationNodeEvents * This,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationNode *prddpParent);
+            /* [in] */ __RPC__in_opt IDebugApplicationNode *prddpParent);
         
         DECLSPEC_XFGVIRT(AsyncIDebugApplicationNodeEvents, Finish_onAttach)
         HRESULT ( STDMETHODCALLTYPE *Finish_onAttach )( 
@@ -8730,12 +7923,9 @@ EXTERN_C const IID IID_IDebugThreadCall32;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ThreadCallHandler( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam3) = 0;
+            /* [in] */ DWORD dwParam1,
+            /* [in] */ DWORD dwParam2,
+            /* [in] */ DWORD dwParam3) = 0;
         
     };
     
@@ -8749,8 +7939,7 @@ EXTERN_C const IID IID_IDebugThreadCall32;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugThreadCall32 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8765,12 +7954,9 @@ EXTERN_C const IID IID_IDebugThreadCall32;
         DECLSPEC_XFGVIRT(IDebugThreadCall32, ThreadCallHandler)
         HRESULT ( STDMETHODCALLTYPE *ThreadCallHandler )( 
             IDebugThreadCall32 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam3);
+            /* [in] */ DWORD dwParam1,
+            /* [in] */ DWORD dwParam2,
+            /* [in] */ DWORD dwParam3);
         
         END_INTERFACE
     } IDebugThreadCall32Vtbl;
@@ -8825,12 +8011,9 @@ EXTERN_C const IID IID_IDebugThreadCall64;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ThreadCallHandler( 
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam3) = 0;
+            /* [in] */ DWORDLONG dwParam1,
+            /* [in] */ DWORDLONG dwParam2,
+            /* [in] */ DWORDLONG dwParam3) = 0;
         
     };
     
@@ -8844,8 +8027,7 @@ EXTERN_C const IID IID_IDebugThreadCall64;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugThreadCall64 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8860,12 +8042,9 @@ EXTERN_C const IID IID_IDebugThreadCall64;
         DECLSPEC_XFGVIRT(IDebugThreadCall64, ThreadCallHandler)
         HRESULT ( STDMETHODCALLTYPE *ThreadCallHandler )( 
             IDebugThreadCall64 * This,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam3);
+            /* [in] */ DWORDLONG dwParam1,
+            /* [in] */ DWORDLONG dwParam2,
+            /* [in] */ DWORDLONG dwParam3);
         
         END_INTERFACE
     } IDebugThreadCall64Vtbl;
@@ -8930,44 +8109,33 @@ EXTERN_C const IID IID_IRemoteDebugApplicationThread;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSystemThreadId( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *dwThreadId) = 0;
+            /* [out] */ __RPC__out DWORD *dwThreadId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetApplication( 
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplication **pprda) = 0;
+            /* [out] */ __RPC__deref_out_opt IRemoteDebugApplication **pprda) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumStackFrames( 
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDescription,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrState) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDescription,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrState) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetNextStatement( 
-            /* [annotation][in] */ 
-            _In_  IDebugStackFrame *pStackFrame,
-            /* [annotation][in] */ 
-            _In_  IDebugCodeContext *pCodeContext) = 0;
+            /* [in] */ __RPC__in_opt IDebugStackFrame *pStackFrame,
+            /* [in] */ __RPC__in_opt IDebugCodeContext *pCodeContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetState( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pState) = 0;
+            /* [out] */ __RPC__out DWORD *pState) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Suspend( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount) = 0;
+            /* [out] */ __RPC__out DWORD *pdwCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Resume( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount) = 0;
+            /* [out] */ __RPC__out DWORD *pdwCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSuspendCount( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount) = 0;
+            /* [out] */ __RPC__out DWORD *pdwCount) = 0;
         
     };
     
@@ -8981,8 +8149,7 @@ EXTERN_C const IID IID_IRemoteDebugApplicationThread;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRemoteDebugApplicationThread * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8997,60 +8164,49 @@ EXTERN_C const IID IID_IRemoteDebugApplicationThread;
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetSystemThreadId)
         HRESULT ( STDMETHODCALLTYPE *GetSystemThreadId )( 
             __RPC__in IRemoteDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *dwThreadId);
+            /* [out] */ __RPC__out DWORD *dwThreadId);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetApplication)
         HRESULT ( STDMETHODCALLTYPE *GetApplication )( 
             __RPC__in IRemoteDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplication **pprda);
+            /* [out] */ __RPC__deref_out_opt IRemoteDebugApplication **pprda);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, EnumStackFrames)
         HRESULT ( STDMETHODCALLTYPE *EnumStackFrames )( 
             __RPC__in IRemoteDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugStackFrames **ppedsf);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in IRemoteDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDescription,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrState);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDescription,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrState);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, SetNextStatement)
         HRESULT ( STDMETHODCALLTYPE *SetNextStatement )( 
             __RPC__in IRemoteDebugApplicationThread * This,
-            /* [annotation][in] */ 
-            _In_  IDebugStackFrame *pStackFrame,
-            /* [annotation][in] */ 
-            _In_  IDebugCodeContext *pCodeContext);
+            /* [in] */ __RPC__in_opt IDebugStackFrame *pStackFrame,
+            /* [in] */ __RPC__in_opt IDebugCodeContext *pCodeContext);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             __RPC__in IRemoteDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pState);
+            /* [out] */ __RPC__out DWORD *pState);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, Suspend)
         HRESULT ( STDMETHODCALLTYPE *Suspend )( 
             __RPC__in IRemoteDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount);
+            /* [out] */ __RPC__out DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
             __RPC__in IRemoteDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount);
+            /* [out] */ __RPC__out DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetSuspendCount)
         HRESULT ( STDMETHODCALLTYPE *GetSuspendCount )( 
             __RPC__in IRemoteDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount);
+            /* [out] */ __RPC__out DWORD *pdwCount);
         
         END_INTERFACE
     } IRemoteDebugApplicationThreadVtbl;
@@ -9144,26 +8300,20 @@ EXTERN_C const IID IID_IDebugApplicationThread;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SynchronousCallIntoThread32( 
-            /* [annotation][in] */ 
-            _In_  IDebugThreadCall32 *pstcb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam3) = 0;
+            /* [in] */ IDebugThreadCall32 *pstcb,
+            /* [in] */ DWORD dwParam1,
+            /* [in] */ DWORD dwParam2,
+            /* [in] */ DWORD dwParam3) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryIsCurrentThread( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryIsDebuggerThread( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDescription( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDescription) = 0;
+            /* [in] */ LPCOLESTR pstrDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStateString( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrState) = 0;
+            /* [in] */ LPCOLESTR pstrState) = 0;
         
     };
     
@@ -9177,8 +8327,7 @@ EXTERN_C const IID IID_IDebugApplicationThread;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugApplicationThread * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9193,72 +8342,57 @@ EXTERN_C const IID IID_IDebugApplicationThread;
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetSystemThreadId)
         HRESULT ( STDMETHODCALLTYPE *GetSystemThreadId )( 
             IDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *dwThreadId);
+            /* [out] */ DWORD *dwThreadId);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetApplication)
         HRESULT ( STDMETHODCALLTYPE *GetApplication )( 
             IDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplication **pprda);
+            /* [out] */ IRemoteDebugApplication **pprda);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, EnumStackFrames)
         HRESULT ( STDMETHODCALLTYPE *EnumStackFrames )( 
             IDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf);
+            /* [out] */ IEnumDebugStackFrames **ppedsf);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             IDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDescription,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrState);
+            /* [out] */ BSTR *pbstrDescription,
+            /* [out] */ BSTR *pbstrState);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, SetNextStatement)
         HRESULT ( STDMETHODCALLTYPE *SetNextStatement )( 
             IDebugApplicationThread * This,
-            /* [annotation][in] */ 
-            _In_  IDebugStackFrame *pStackFrame,
-            /* [annotation][in] */ 
-            _In_  IDebugCodeContext *pCodeContext);
+            /* [in] */ IDebugStackFrame *pStackFrame,
+            /* [in] */ IDebugCodeContext *pCodeContext);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             IDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pState);
+            /* [out] */ DWORD *pState);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, Suspend)
         HRESULT ( STDMETHODCALLTYPE *Suspend )( 
             IDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount);
+            /* [out] */ DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
             IDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount);
+            /* [out] */ DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetSuspendCount)
         HRESULT ( STDMETHODCALLTYPE *GetSuspendCount )( 
             IDebugApplicationThread * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount);
+            /* [out] */ DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IDebugApplicationThread, SynchronousCallIntoThread32)
         HRESULT ( STDMETHODCALLTYPE *SynchronousCallIntoThread32 )( 
             IDebugApplicationThread * This,
-            /* [annotation][in] */ 
-            _In_  IDebugThreadCall32 *pstcb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam3);
+            /* [in] */ IDebugThreadCall32 *pstcb,
+            /* [in] */ DWORD dwParam1,
+            /* [in] */ DWORD dwParam2,
+            /* [in] */ DWORD dwParam3);
         
         DECLSPEC_XFGVIRT(IDebugApplicationThread, QueryIsCurrentThread)
         HRESULT ( STDMETHODCALLTYPE *QueryIsCurrentThread )( 
@@ -9271,14 +8405,12 @@ EXTERN_C const IID IID_IDebugApplicationThread;
         DECLSPEC_XFGVIRT(IDebugApplicationThread, SetDescription)
         HRESULT ( STDMETHODCALLTYPE *SetDescription )( 
             IDebugApplicationThread * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDescription);
+            /* [in] */ LPCOLESTR pstrDescription);
         
         DECLSPEC_XFGVIRT(IDebugApplicationThread, SetStateString)
         HRESULT ( STDMETHODCALLTYPE *SetStateString )( 
             IDebugApplicationThread * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrState);
+            /* [in] */ LPCOLESTR pstrState);
         
         END_INTERFACE
     } IDebugApplicationThreadVtbl;
@@ -9373,14 +8505,10 @@ EXTERN_C const IID IID_IDebugApplicationThread64;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SynchronousCallIntoThread64( 
-            /* [annotation][in] */ 
-            _In_  IDebugThreadCall64 *pstcb,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam3) = 0;
+            /* [in] */ IDebugThreadCall64 *pstcb,
+            /* [in] */ DWORDLONG dwParam1,
+            /* [in] */ DWORDLONG dwParam2,
+            /* [in] */ DWORDLONG dwParam3) = 0;
         
     };
     
@@ -9394,8 +8522,7 @@ EXTERN_C const IID IID_IDebugApplicationThread64;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9410,72 +8537,57 @@ EXTERN_C const IID IID_IDebugApplicationThread64;
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetSystemThreadId)
         HRESULT ( STDMETHODCALLTYPE *GetSystemThreadId )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *dwThreadId);
+            /* [out] */ DWORD *dwThreadId);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetApplication)
         HRESULT ( STDMETHODCALLTYPE *GetApplication )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplication **pprda);
+            /* [out] */ IRemoteDebugApplication **pprda);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, EnumStackFrames)
         HRESULT ( STDMETHODCALLTYPE *EnumStackFrames )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugStackFrames **ppedsf);
+            /* [out] */ IEnumDebugStackFrames **ppedsf);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDescription,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrState);
+            /* [out] */ BSTR *pbstrDescription,
+            /* [out] */ BSTR *pbstrState);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, SetNextStatement)
         HRESULT ( STDMETHODCALLTYPE *SetNextStatement )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugStackFrame *pStackFrame,
-            /* [annotation][in] */ 
-            _In_  IDebugCodeContext *pCodeContext);
+            /* [in] */ IDebugStackFrame *pStackFrame,
+            /* [in] */ IDebugCodeContext *pCodeContext);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pState);
+            /* [out] */ DWORD *pState);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, Suspend)
         HRESULT ( STDMETHODCALLTYPE *Suspend )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount);
+            /* [out] */ DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount);
+            /* [out] */ DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IRemoteDebugApplicationThread, GetSuspendCount)
         HRESULT ( STDMETHODCALLTYPE *GetSuspendCount )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCount);
+            /* [out] */ DWORD *pdwCount);
         
         DECLSPEC_XFGVIRT(IDebugApplicationThread, SynchronousCallIntoThread32)
         HRESULT ( STDMETHODCALLTYPE *SynchronousCallIntoThread32 )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugThreadCall32 *pstcb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD dwParam3);
+            /* [in] */ IDebugThreadCall32 *pstcb,
+            /* [in] */ DWORD dwParam1,
+            /* [in] */ DWORD dwParam2,
+            /* [in] */ DWORD dwParam3);
         
         DECLSPEC_XFGVIRT(IDebugApplicationThread, QueryIsCurrentThread)
         HRESULT ( STDMETHODCALLTYPE *QueryIsCurrentThread )( 
@@ -9488,26 +8600,20 @@ EXTERN_C const IID IID_IDebugApplicationThread64;
         DECLSPEC_XFGVIRT(IDebugApplicationThread, SetDescription)
         HRESULT ( STDMETHODCALLTYPE *SetDescription )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrDescription);
+            /* [in] */ LPCOLESTR pstrDescription);
         
         DECLSPEC_XFGVIRT(IDebugApplicationThread, SetStateString)
         HRESULT ( STDMETHODCALLTYPE *SetStateString )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pstrState);
+            /* [in] */ LPCOLESTR pstrState);
         
         DECLSPEC_XFGVIRT(IDebugApplicationThread64, SynchronousCallIntoThread64)
         HRESULT ( STDMETHODCALLTYPE *SynchronousCallIntoThread64 )( 
             IDebugApplicationThread64 * This,
-            /* [annotation][in] */ 
-            _In_  IDebugThreadCall64 *pstcb,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam1,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam2,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwParam3);
+            /* [in] */ IDebugThreadCall64 *pstcb,
+            /* [in] */ DWORDLONG dwParam1,
+            /* [in] */ DWORDLONG dwParam2,
+            /* [in] */ DWORDLONG dwParam3);
         
         END_INTERFACE
     } IDebugApplicationThread64Vtbl;
@@ -9606,8 +8712,7 @@ EXTERN_C const IID IID_IDebugCookie;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetDebugCookie( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwDebugAppCookie) = 0;
+            /* [in] */ DWORD dwDebugAppCookie) = 0;
         
     };
     
@@ -9621,8 +8726,7 @@ EXTERN_C const IID IID_IDebugCookie;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugCookie * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9637,8 +8741,7 @@ EXTERN_C const IID IID_IDebugCookie;
         DECLSPEC_XFGVIRT(IDebugCookie, SetDebugCookie)
         HRESULT ( STDMETHODCALLTYPE *SetDebugCookie )( 
             IDebugCookie * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwDebugAppCookie);
+            /* [in] */ DWORD dwDebugAppCookie);
         
         END_INTERFACE
     } IDebugCookieVtbl;
@@ -9693,22 +8796,17 @@ EXTERN_C const IID IID_IEnumDebugApplicationNodes;
     {
     public:
         virtual /* [local] */ HRESULT __stdcall Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **pprddp,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [out] */ IDebugApplicationNode **pprddp,
+            /* [out] */ ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugApplicationNodes **pperddp) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumDebugApplicationNodes **pperddp) = 0;
         
     };
     
@@ -9722,8 +8820,7 @@ EXTERN_C const IID IID_IEnumDebugApplicationNodes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDebugApplicationNodes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9738,18 +8835,14 @@ EXTERN_C const IID IID_IEnumDebugApplicationNodes;
         DECLSPEC_XFGVIRT(IEnumDebugApplicationNodes, Next)
         /* [local] */ HRESULT ( __stdcall *Next )( 
             IEnumDebugApplicationNodes * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  IDebugApplicationNode **pprddp,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [out] */ IDebugApplicationNode **pprddp,
+            /* [out] */ ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumDebugApplicationNodes, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDebugApplicationNodes * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumDebugApplicationNodes, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -9758,8 +8851,7 @@ EXTERN_C const IID IID_IEnumDebugApplicationNodes;
         DECLSPEC_XFGVIRT(IEnumDebugApplicationNodes, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDebugApplicationNodes * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugApplicationNodes **pperddp);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugApplicationNodes **pperddp);
         
         END_INTERFACE
     } IEnumDebugApplicationNodesVtbl;
@@ -9805,12 +8897,9 @@ EXTERN_C const IID IID_IEnumDebugApplicationNodes;
 
 /* [call_as] */ HRESULT __stdcall IEnumDebugApplicationNodes_RemoteNext_Proxy( 
     __RPC__in IEnumDebugApplicationNodes * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IDebugApplicationNode **pprddp,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IDebugApplicationNode **pprddp,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumDebugApplicationNodes_RemoteNext_Stub(
@@ -9840,22 +8929,17 @@ EXTERN_C const IID IID_IEnumRemoteDebugApplications;
     {
     public:
         virtual /* [local] */ HRESULT __stdcall Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplication **ppda,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [out] */ IRemoteDebugApplication **ppda,
+            /* [out] */ ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplications **ppessd) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumRemoteDebugApplications **ppessd) = 0;
         
     };
     
@@ -9869,8 +8953,7 @@ EXTERN_C const IID IID_IEnumRemoteDebugApplications;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumRemoteDebugApplications * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9885,18 +8968,14 @@ EXTERN_C const IID IID_IEnumRemoteDebugApplications;
         DECLSPEC_XFGVIRT(IEnumRemoteDebugApplications, Next)
         /* [local] */ HRESULT ( __stdcall *Next )( 
             IEnumRemoteDebugApplications * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplication **ppda,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [out] */ IRemoteDebugApplication **ppda,
+            /* [out] */ ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumRemoteDebugApplications, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumRemoteDebugApplications * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumRemoteDebugApplications, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -9905,8 +8984,7 @@ EXTERN_C const IID IID_IEnumRemoteDebugApplications;
         DECLSPEC_XFGVIRT(IEnumRemoteDebugApplications, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumRemoteDebugApplications * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplications **ppessd);
+            /* [out] */ __RPC__deref_out_opt IEnumRemoteDebugApplications **ppessd);
         
         END_INTERFACE
     } IEnumRemoteDebugApplicationsVtbl;
@@ -9952,12 +9030,9 @@ EXTERN_C const IID IID_IEnumRemoteDebugApplications;
 
 /* [call_as] */ HRESULT __stdcall IEnumRemoteDebugApplications_RemoteNext_Proxy( 
     __RPC__in IEnumRemoteDebugApplications * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IRemoteDebugApplication **ppda,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IRemoteDebugApplication **ppda,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumRemoteDebugApplications_RemoteNext_Stub(
@@ -9987,22 +9062,17 @@ EXTERN_C const IID IID_IEnumRemoteDebugApplicationThreads;
     {
     public:
         virtual /* [local] */ HRESULT __stdcall Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplicationThread **pprdat,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [out] */ IRemoteDebugApplicationThread **pprdat,
+            /* [out] */ ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplicationThreads **pperdat) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumRemoteDebugApplicationThreads **pperdat) = 0;
         
     };
     
@@ -10016,8 +9086,7 @@ EXTERN_C const IID IID_IEnumRemoteDebugApplicationThreads;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumRemoteDebugApplicationThreads * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10032,18 +9101,14 @@ EXTERN_C const IID IID_IEnumRemoteDebugApplicationThreads;
         DECLSPEC_XFGVIRT(IEnumRemoteDebugApplicationThreads, Next)
         /* [local] */ HRESULT ( __stdcall *Next )( 
             IEnumRemoteDebugApplicationThreads * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  IRemoteDebugApplicationThread **pprdat,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [out] */ IRemoteDebugApplicationThread **pprdat,
+            /* [out] */ ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumRemoteDebugApplicationThreads, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumRemoteDebugApplicationThreads * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumRemoteDebugApplicationThreads, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -10052,8 +9117,7 @@ EXTERN_C const IID IID_IEnumRemoteDebugApplicationThreads;
         DECLSPEC_XFGVIRT(IEnumRemoteDebugApplicationThreads, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumRemoteDebugApplicationThreads * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumRemoteDebugApplicationThreads **pperdat);
+            /* [out] */ __RPC__deref_out_opt IEnumRemoteDebugApplicationThreads **pperdat);
         
         END_INTERFACE
     } IEnumRemoteDebugApplicationThreadsVtbl;
@@ -10099,12 +9163,9 @@ EXTERN_C const IID IID_IEnumRemoteDebugApplicationThreads;
 
 /* [call_as] */ HRESULT __stdcall IEnumRemoteDebugApplicationThreads_RemoteNext_Proxy( 
     __RPC__in IEnumRemoteDebugApplicationThreads * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IRemoteDebugApplicationThread **ppdat,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IRemoteDebugApplicationThread **ppdat,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumRemoteDebugApplicationThreads_RemoteNext_Stub(
@@ -10134,26 +9195,18 @@ EXTERN_C const IID IID_IDebugFormatter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStringForVariant( 
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvar,
-            /* [annotation][in] */ 
-            _In_  ULONG nRadix,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrValue) = 0;
+            /* [in] */ VARIANT *pvar,
+            /* [in] */ ULONG nRadix,
+            /* [out] */ BSTR *pbstrValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVariantForString( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pwstrValue,
-            /* [annotation][out] */ 
-            _Out_  VARIANT *pvar) = 0;
+            /* [in] */ LPCOLESTR pwstrValue,
+            /* [out] */ VARIANT *pvar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStringForVarType( 
-            /* [annotation][in] */ 
-            _In_  VARTYPE vt,
-            /* [annotation][in] */ 
-            _In_  TYPEDESC *ptdescArrayType,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstr) = 0;
+            /* [in] */ VARTYPE vt,
+            /* [in] */ TYPEDESC *ptdescArrayType,
+            /* [out] */ BSTR *pbstr) = 0;
         
     };
     
@@ -10167,8 +9220,7 @@ EXTERN_C const IID IID_IDebugFormatter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugFormatter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10183,30 +9235,22 @@ EXTERN_C const IID IID_IDebugFormatter;
         DECLSPEC_XFGVIRT(IDebugFormatter, GetStringForVariant)
         HRESULT ( STDMETHODCALLTYPE *GetStringForVariant )( 
             IDebugFormatter * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvar,
-            /* [annotation][in] */ 
-            _In_  ULONG nRadix,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrValue);
+            /* [in] */ VARIANT *pvar,
+            /* [in] */ ULONG nRadix,
+            /* [out] */ BSTR *pbstrValue);
         
         DECLSPEC_XFGVIRT(IDebugFormatter, GetVariantForString)
         HRESULT ( STDMETHODCALLTYPE *GetVariantForString )( 
             IDebugFormatter * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pwstrValue,
-            /* [annotation][out] */ 
-            _Out_  VARIANT *pvar);
+            /* [in] */ LPCOLESTR pwstrValue,
+            /* [out] */ VARIANT *pvar);
         
         DECLSPEC_XFGVIRT(IDebugFormatter, GetStringForVarType)
         HRESULT ( STDMETHODCALLTYPE *GetStringForVarType )( 
             IDebugFormatter * This,
-            /* [annotation][in] */ 
-            _In_  VARTYPE vt,
-            /* [annotation][in] */ 
-            _In_  TYPEDESC *ptdescArrayType,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstr);
+            /* [in] */ VARTYPE vt,
+            /* [in] */ TYPEDESC *ptdescArrayType,
+            /* [out] */ BSTR *pbstr);
         
         END_INTERFACE
     } IDebugFormatterVtbl;
@@ -10267,30 +9311,21 @@ EXTERN_C const IID IID_ISimpleConnectionPoint;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEventCount( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulCount) = 0;
+            /* [out] */ ULONG *pulCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DescribeEvents( 
-            /* [annotation][in] */ 
-            _In_  ULONG iEvent,
-            /* [annotation][in] */ 
-            _In_  ULONG cEvents,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cEvents,*pcEventsFetched)  DISPID *prgid,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cEvents,*pcEventsFetched)  BSTR *prgbstr,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcEventsFetched) = 0;
+            /* [in] */ ULONG iEvent,
+            /* [in] */ ULONG cEvents,
+            /* [length_is][size_is][out] */ DISPID *prgid,
+            /* [length_is][size_is][out] */ BSTR *prgbstr,
+            /* [out] */ ULONG *pcEventsFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Advise( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *pdisp,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie) = 0;
+            /* [in] */ IDispatch *pdisp,
+            /* [out] */ DWORD *pdwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Unadvise( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie) = 0;
+            /* [in] */ DWORD dwCookie) = 0;
         
     };
     
@@ -10304,8 +9339,7 @@ EXTERN_C const IID IID_ISimpleConnectionPoint;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISimpleConnectionPoint * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10320,36 +9354,27 @@ EXTERN_C const IID IID_ISimpleConnectionPoint;
         DECLSPEC_XFGVIRT(ISimpleConnectionPoint, GetEventCount)
         HRESULT ( STDMETHODCALLTYPE *GetEventCount )( 
             ISimpleConnectionPoint * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulCount);
+            /* [out] */ ULONG *pulCount);
         
         DECLSPEC_XFGVIRT(ISimpleConnectionPoint, DescribeEvents)
         HRESULT ( STDMETHODCALLTYPE *DescribeEvents )( 
             ISimpleConnectionPoint * This,
-            /* [annotation][in] */ 
-            _In_  ULONG iEvent,
-            /* [annotation][in] */ 
-            _In_  ULONG cEvents,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cEvents,*pcEventsFetched)  DISPID *prgid,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cEvents,*pcEventsFetched)  BSTR *prgbstr,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcEventsFetched);
+            /* [in] */ ULONG iEvent,
+            /* [in] */ ULONG cEvents,
+            /* [length_is][size_is][out] */ DISPID *prgid,
+            /* [length_is][size_is][out] */ BSTR *prgbstr,
+            /* [out] */ ULONG *pcEventsFetched);
         
         DECLSPEC_XFGVIRT(ISimpleConnectionPoint, Advise)
         HRESULT ( STDMETHODCALLTYPE *Advise )( 
             ISimpleConnectionPoint * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pdisp,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie);
+            /* [in] */ IDispatch *pdisp,
+            /* [out] */ DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(ISimpleConnectionPoint, Unadvise)
         HRESULT ( STDMETHODCALLTYPE *Unadvise )( 
             ISimpleConnectionPoint * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie);
+            /* [in] */ DWORD dwCookie);
         
         END_INTERFACE
     } ISimpleConnectionPointVtbl;
@@ -10422,32 +9447,21 @@ EXTERN_C const IID IID_IDebugHelper;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreatePropertyBrowser( 
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvar,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR bstrName,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationThread *pdat,
-            /* [annotation][out] */ 
-            _Out_  IDebugProperty **ppdob) = 0;
+            /* [in] */ VARIANT *pvar,
+            /* [in] */ LPCOLESTR bstrName,
+            /* [in] */ IDebugApplicationThread *pdat,
+            /* [out] */ IDebugProperty **ppdob) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePropertyBrowserEx( 
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvar,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR bstrName,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationThread *pdat,
-            /* [annotation][in] */ 
-            _In_  IDebugFormatter *pdf,
-            /* [annotation][out] */ 
-            _Out_  IDebugProperty **ppdob) = 0;
+            /* [in] */ VARIANT *pvar,
+            /* [in] */ LPCOLESTR bstrName,
+            /* [in] */ IDebugApplicationThread *pdat,
+            /* [in] */ IDebugFormatter *pdf,
+            /* [out] */ IDebugProperty **ppdob) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateSimpleConnectionPoint( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *pdisp,
-            /* [annotation][out] */ 
-            _Out_  ISimpleConnectionPoint **ppscp) = 0;
+            /* [in] */ IDispatch *pdisp,
+            /* [out] */ ISimpleConnectionPoint **ppscp) = 0;
         
     };
     
@@ -10461,8 +9475,7 @@ EXTERN_C const IID IID_IDebugHelper;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDebugHelper * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10477,36 +9490,25 @@ EXTERN_C const IID IID_IDebugHelper;
         DECLSPEC_XFGVIRT(IDebugHelper, CreatePropertyBrowser)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyBrowser )( 
             IDebugHelper * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvar,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR bstrName,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationThread *pdat,
-            /* [annotation][out] */ 
-            _Out_  IDebugProperty **ppdob);
+            /* [in] */ VARIANT *pvar,
+            /* [in] */ LPCOLESTR bstrName,
+            /* [in] */ IDebugApplicationThread *pdat,
+            /* [out] */ IDebugProperty **ppdob);
         
         DECLSPEC_XFGVIRT(IDebugHelper, CreatePropertyBrowserEx)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyBrowserEx )( 
             IDebugHelper * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvar,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR bstrName,
-            /* [annotation][in] */ 
-            _In_  IDebugApplicationThread *pdat,
-            /* [annotation][in] */ 
-            _In_  IDebugFormatter *pdf,
-            /* [annotation][out] */ 
-            _Out_  IDebugProperty **ppdob);
+            /* [in] */ VARIANT *pvar,
+            /* [in] */ LPCOLESTR bstrName,
+            /* [in] */ IDebugApplicationThread *pdat,
+            /* [in] */ IDebugFormatter *pdf,
+            /* [out] */ IDebugProperty **ppdob);
         
         DECLSPEC_XFGVIRT(IDebugHelper, CreateSimpleConnectionPoint)
         HRESULT ( STDMETHODCALLTYPE *CreateSimpleConnectionPoint )( 
             IDebugHelper * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pdisp,
-            /* [annotation][out] */ 
-            _Out_  ISimpleConnectionPoint **ppscp);
+            /* [in] */ IDispatch *pdisp,
+            /* [out] */ ISimpleConnectionPoint **ppscp);
         
         END_INTERFACE
     } IDebugHelperVtbl;
@@ -10567,22 +9569,17 @@ EXTERN_C const IID IID_IEnumDebugExpressionContexts;
     {
     public:
         virtual /* [local] */ HRESULT __stdcall Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  IDebugExpressionContext **ppdec,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [out] */ IDebugExpressionContext **ppdec,
+            /* [out] */ ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugExpressionContexts **ppedec) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumDebugExpressionContexts **ppedec) = 0;
         
     };
     
@@ -10596,8 +9593,7 @@ EXTERN_C const IID IID_IEnumDebugExpressionContexts;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumDebugExpressionContexts * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10612,18 +9608,14 @@ EXTERN_C const IID IID_IEnumDebugExpressionContexts;
         DECLSPEC_XFGVIRT(IEnumDebugExpressionContexts, Next)
         /* [local] */ HRESULT ( __stdcall *Next )( 
             IEnumDebugExpressionContexts * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  IDebugExpressionContext **ppdec,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [out] */ IDebugExpressionContext **ppdec,
+            /* [out] */ ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumDebugExpressionContexts, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumDebugExpressionContexts * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumDebugExpressionContexts, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -10632,8 +9624,7 @@ EXTERN_C const IID IID_IEnumDebugExpressionContexts;
         DECLSPEC_XFGVIRT(IEnumDebugExpressionContexts, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumDebugExpressionContexts * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugExpressionContexts **ppedec);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugExpressionContexts **ppedec);
         
         END_INTERFACE
     } IEnumDebugExpressionContextsVtbl;
@@ -10679,12 +9670,9 @@ EXTERN_C const IID IID_IEnumDebugExpressionContexts;
 
 /* [call_as] */ HRESULT __stdcall IEnumDebugExpressionContexts_RemoteNext_Proxy( 
     __RPC__in IEnumDebugExpressionContexts * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IDebugExpressionContext **pprgdec,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IDebugExpressionContext **pprgdec,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumDebugExpressionContexts_RemoteNext_Stub(
@@ -10714,8 +9702,7 @@ EXTERN_C const IID IID_IProvideExpressionContexts;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumExpressionContexts( 
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugExpressionContexts **ppedec) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumDebugExpressionContexts **ppedec) = 0;
         
     };
     
@@ -10729,8 +9716,7 @@ EXTERN_C const IID IID_IProvideExpressionContexts;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProvideExpressionContexts * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10745,8 +9731,7 @@ EXTERN_C const IID IID_IProvideExpressionContexts;
         DECLSPEC_XFGVIRT(IProvideExpressionContexts, EnumExpressionContexts)
         HRESULT ( STDMETHODCALLTYPE *EnumExpressionContexts )( 
             __RPC__in IProvideExpressionContexts * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumDebugExpressionContexts **ppedec);
+            /* [out] */ __RPC__deref_out_opt IEnumDebugExpressionContexts **ppedec);
         
         END_INTERFACE
     } IProvideExpressionContextsVtbl;
@@ -10937,136 +9922,94 @@ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned lo
 
 /* [local] */ HRESULT __stdcall IEnumDebugCodeContexts_Next_Proxy( 
     IEnumDebugCodeContexts * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][out] */ 
-    _Out_  IDebugCodeContext **pscc,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [out] */ IDebugCodeContext **pscc,
+    /* [out] */ ULONG *pceltFetched);
 
 
 /* [call_as] */ HRESULT __stdcall IEnumDebugCodeContexts_Next_Stub( 
     __RPC__in IEnumDebugCodeContexts * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IDebugCodeContext **pscc,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IDebugCodeContext **pscc,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT __stdcall IEnumDebugStackFrames_Next_Proxy( 
     IEnumDebugStackFrames * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][out] */ 
-    _Out_  DebugStackFrameDescriptor *prgdsfd,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [out] */ DebugStackFrameDescriptor *prgdsfd,
+    /* [out] */ ULONG *pceltFetched);
 
 
 /* [call_as] */ HRESULT __stdcall IEnumDebugStackFrames_Next_Stub( 
     __RPC__in IEnumDebugStackFrames * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  DebugStackFrameDescriptor *prgdsfd,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) DebugStackFrameDescriptor *prgdsfd,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT __stdcall IEnumDebugStackFrames64_Next64_Proxy( 
     IEnumDebugStackFrames64 * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][out] */ 
-    _Out_  DebugStackFrameDescriptor64 *prgdsfd,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [out] */ DebugStackFrameDescriptor64 *prgdsfd,
+    /* [out] */ ULONG *pceltFetched);
 
 
 /* [call_as] */ HRESULT __stdcall IEnumDebugStackFrames64_Next64_Stub( 
     __RPC__in IEnumDebugStackFrames64 * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  DebugStackFrameDescriptor64 *prgdsfd,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) DebugStackFrameDescriptor64 *prgdsfd,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT __stdcall IEnumDebugApplicationNodes_Next_Proxy( 
     IEnumDebugApplicationNodes * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][out] */ 
-    _Out_  IDebugApplicationNode **pprddp,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [out] */ IDebugApplicationNode **pprddp,
+    /* [out] */ ULONG *pceltFetched);
 
 
 /* [call_as] */ HRESULT __stdcall IEnumDebugApplicationNodes_Next_Stub( 
     __RPC__in IEnumDebugApplicationNodes * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IDebugApplicationNode **pprddp,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IDebugApplicationNode **pprddp,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT __stdcall IEnumRemoteDebugApplications_Next_Proxy( 
     IEnumRemoteDebugApplications * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][out] */ 
-    _Out_  IRemoteDebugApplication **ppda,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [out] */ IRemoteDebugApplication **ppda,
+    /* [out] */ ULONG *pceltFetched);
 
 
 /* [call_as] */ HRESULT __stdcall IEnumRemoteDebugApplications_Next_Stub( 
     __RPC__in IEnumRemoteDebugApplications * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IRemoteDebugApplication **ppda,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IRemoteDebugApplication **ppda,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT __stdcall IEnumRemoteDebugApplicationThreads_Next_Proxy( 
     IEnumRemoteDebugApplicationThreads * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][out] */ 
-    _Out_  IRemoteDebugApplicationThread **pprdat,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [out] */ IRemoteDebugApplicationThread **pprdat,
+    /* [out] */ ULONG *pceltFetched);
 
 
 /* [call_as] */ HRESULT __stdcall IEnumRemoteDebugApplicationThreads_Next_Stub( 
     __RPC__in IEnumRemoteDebugApplicationThreads * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IRemoteDebugApplicationThread **ppdat,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IRemoteDebugApplicationThread **ppdat,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT __stdcall IEnumDebugExpressionContexts_Next_Proxy( 
     IEnumDebugExpressionContexts * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][out] */ 
-    _Out_  IDebugExpressionContext **ppdec,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [out] */ IDebugExpressionContext **ppdec,
+    /* [out] */ ULONG *pceltFetched);
 
 
 /* [call_as] */ HRESULT __stdcall IEnumDebugExpressionContexts_Next_Stub( 
     __RPC__in IEnumDebugExpressionContexts * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IDebugExpressionContext **pprgdec,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IDebugExpressionContext **pprgdec,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 

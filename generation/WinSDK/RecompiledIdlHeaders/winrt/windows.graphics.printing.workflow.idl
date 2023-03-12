@@ -96,6 +96,10 @@ namespace Windows
         {
             namespace Workflow
             {
+                typedef enum PdlConversionHostBasedProcessingOperations PdlConversionHostBasedProcessingOperations;
+
+                typedef enum PrintWorkflowAttributesMergePolicy PrintWorkflowAttributesMergePolicy;
+
                 typedef enum PrintWorkflowJobAbortReason PrintWorkflowJobAbortReason;
 
                 typedef enum PrintWorkflowPdlConversionType PrintWorkflowPdlConversionType;
@@ -140,9 +144,13 @@ namespace Windows
 
                 interface IPrintWorkflowPdlConverter;
 
+                interface IPrintWorkflowPdlConverter2;
+
                 interface IPrintWorkflowPdlDataAvailableEventArgs;
 
                 interface IPrintWorkflowPdlModificationRequestedEventArgs;
+
+                interface IPrintWorkflowPdlModificationRequestedEventArgs2;
 
                 interface IPrintWorkflowPdlSourceContent;
 
@@ -275,6 +283,26 @@ namespace Windows
         {
             namespace Workflow
             {
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [flags]
+                enum PdlConversionHostBasedProcessingOperations
+                {
+                    None               = 0x0,
+                    PageRotation       = 0x1,
+                    PageOrdering       = 0x2,
+                    Copies             = 0x4,
+                    BlankPageInsertion = 0x8,
+                    All                = 0xFFFFFFFF
+                };
+
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                enum PrintWorkflowAttributesMergePolicy
+                {
+                    MergePreferPrintTicketOnConflict = 0,
+                    MergePreferPsaOnConflict         = 1,
+                    DoNotMergeWithPrintTicket        = 2
+                };
+
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
                 enum PrintWorkflowJobAbortReason
                 {
@@ -485,6 +513,14 @@ namespace Windows
                     HRESULT ConvertPdlAsync([in] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket* printTicket, [in] Windows.Storage.Streams.IInputStream* inputStream, [in] Windows.Storage.Streams.IOutputStream* outputStream, [out] [retval] Windows.Foundation.IAsyncAction** operation);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowPdlConverter)]
+                [uuid(854CEEC1-7837-5B93-B7AF-57A6998C2F71)]
+                interface IPrintWorkflowPdlConverter2 : IInspectable
+                {
+                    HRESULT ConvertPdlAsync([in] Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket* printTicket, [in] Windows.Storage.Streams.IInputStream* inputStream, [in] Windows.Storage.Streams.IOutputStream* outputStream, [in] Windows.Graphics.Printing.Workflow.PdlConversionHostBasedProcessingOperations hostBasedProcessingOperations, [out] [retval] Windows.Foundation.IAsyncAction** operation);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
                 [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowPdlDataAvailableEventArgs)]
                 [uuid(D4AD6B50-1547-5991-A0EF-E2EE20211518)]
@@ -510,6 +546,15 @@ namespace Windows
                     HRESULT CreateJobOnPrinterWithAttributesBuffer([in] Windows.Storage.Streams.IBuffer* jobAttributesBuffer, [in] HSTRING targetContentType, [out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowPdlTargetStream** result);
                     HRESULT GetPdlConverter([in] Windows.Graphics.Printing.Workflow.PrintWorkflowPdlConversionType conversionType, [out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowPdlConverter** result);
                     HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowPdlModificationRequestedEventArgs)]
+                [uuid(8D692147-6C62-5E31-A0E7-D49F92C111C0)]
+                interface IPrintWorkflowPdlModificationRequestedEventArgs2 : IInspectable
+                {
+                    HRESULT CreateJobOnPrinterWithAttributes([in] Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>* jobAttributes, [in] HSTRING targetContentType, [in] Windows.Foundation.Collections.IIterable<Windows.Foundation.Collections.IKeyValuePair<HSTRING, Windows.Devices.Printers.IppAttributeValue*>*>* operationAttributes, [in] Windows.Graphics.Printing.Workflow.PrintWorkflowAttributesMergePolicy jobAttributesMergePolicy, [in] Windows.Graphics.Printing.Workflow.PrintWorkflowAttributesMergePolicy operationAttributesMergePolicy, [out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowPdlTargetStream** result);
+                    HRESULT CreateJobOnPrinterWithAttributesBuffer([in] Windows.Storage.Streams.IBuffer* jobAttributesBuffer, [in] HSTRING targetContentType, [in] Windows.Storage.Streams.IBuffer* operationAttributesBuffer, [in] Windows.Graphics.Printing.Workflow.PrintWorkflowAttributesMergePolicy jobAttributesMergePolicy, [in] Windows.Graphics.Printing.Workflow.PrintWorkflowAttributesMergePolicy operationAttributesMergePolicy, [out] [retval] Windows.Graphics.Printing.Workflow.PrintWorkflowPdlTargetStream** result);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -744,6 +789,7 @@ namespace Windows
                 runtimeclass PrintWorkflowPdlConverter
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter;
+                    [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -758,6 +804,7 @@ namespace Windows
                 runtimeclass PrintWorkflowPdlModificationRequestedEventArgs
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs;
+                    [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs2;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]

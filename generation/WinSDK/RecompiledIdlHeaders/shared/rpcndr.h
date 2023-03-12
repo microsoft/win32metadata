@@ -25,7 +25,7 @@ Abstract:
 
 
 #ifndef __RPCNDR_H_VERSION__
-#define __RPCNDR_H_VERSION__        ( 500 )
+#define __RPCNDR_H_VERSION__        ( 501 )
 #endif // __RPCNDR_H_VERSION__
 
 
@@ -128,6 +128,17 @@ extern "C" {
  *  Macros for targeted platforms
  ****************************************************************************/
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
+#define TARGET_IS_NT1012_OR_LATER                   1
+#else
+#define TARGET_IS_NT1012_OR_LATER                   0
+#endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS1)
+#define TARGET_IS_NT102_OR_LATER                   1
+#else
+#define TARGET_IS_NT102_OR_LATER                   0
+#endif
 
 #if (0x0A00 <= _WIN32_WINNT)
 #define TARGET_IS_NT100_OR_LATER                   1
@@ -835,7 +846,9 @@ typedef struct __GENERIC_BINDING_INFO
 // typedef EXPR_EVAL - see above
 // typedefs for xmit_as
 
-#if (defined(_MSC_VER)) && !defined(MIDL_PASS)
+#ifdef __cplusplus
+#define NDR_SHAREABLE inline
+#elif (defined(_MSC_VER)) && !defined(MIDL_PASS)
 // a Microsoft C++ compiler
 #define NDR_SHAREABLE __inline
 #else
@@ -3084,6 +3097,24 @@ NdrOleFree (
   EXTERN_C const IID DECLSPEC_SELECTANY itf = {l1,s1,s2,{c1,c2,c3,c4,c5,c6,c7,c8}}
 #else
 #define EXTERN_GUID(itf,l1,s1,s2,c1,c2,c3,c4,c5,c6,c7,c8) EXTERN_C const IID itf
+#endif
+
+#if defined(__cplusplus) && defined(__cpp_inline_variables)
+
+#if defined(__cpp_constinit)
+#define MIDL_CONSTINIT_CONST_INLINE_VARIABLE EXTERN_C inline constinit const
+#else
+#define MIDL_CONSTINIT_CONST_INLINE_VARIABLE EXTERN_C inline const
+#endif
+
+#else
+
+#if (_MSC_VER >= 1100)
+#define MIDL_CONSTINIT_CONST_INLINE_VARIABLE EXTERN_C const __declspec(selectany)
+#else
+#define MIDL_CONSTINIT_CONST_INLINE_VARIABLE static const
+#endif
+
 #endif
 
 /****************************************************************************

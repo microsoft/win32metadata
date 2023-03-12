@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -143,22 +143,15 @@ EXTERN_C const IID IID_IEmptyVolumeCacheCallBack;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ScanProgress( 
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwlSpaceUsed,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pcwszStatus) = 0;
+            /* [in] */ DWORDLONG dwlSpaceUsed,
+            /* [in] */ DWORD dwFlags,
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pcwszStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PurgeProgress( 
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwlSpaceFreed,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwlSpaceToFree,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pcwszStatus) = 0;
+            /* [in] */ DWORDLONG dwlSpaceFreed,
+            /* [in] */ DWORDLONG dwlSpaceToFree,
+            /* [in] */ DWORD dwFlags,
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pcwszStatus) = 0;
         
     };
     
@@ -172,8 +165,7 @@ EXTERN_C const IID IID_IEmptyVolumeCacheCallBack;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEmptyVolumeCacheCallBack * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -188,24 +180,17 @@ EXTERN_C const IID IID_IEmptyVolumeCacheCallBack;
         DECLSPEC_XFGVIRT(IEmptyVolumeCacheCallBack, ScanProgress)
         HRESULT ( STDMETHODCALLTYPE *ScanProgress )( 
             __RPC__in IEmptyVolumeCacheCallBack * This,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwlSpaceUsed,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pcwszStatus);
+            /* [in] */ DWORDLONG dwlSpaceUsed,
+            /* [in] */ DWORD dwFlags,
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pcwszStatus);
         
         DECLSPEC_XFGVIRT(IEmptyVolumeCacheCallBack, PurgeProgress)
         HRESULT ( STDMETHODCALLTYPE *PurgeProgress )( 
             __RPC__in IEmptyVolumeCacheCallBack * This,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwlSpaceFreed,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwlSpaceToFree,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pcwszStatus);
+            /* [in] */ DWORDLONG dwlSpaceFreed,
+            /* [in] */ DWORDLONG dwlSpaceToFree,
+            /* [in] */ DWORD dwFlags,
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pcwszStatus);
         
         END_INTERFACE
     } IEmptyVolumeCacheCallBackVtbl;
@@ -276,36 +261,25 @@ EXTERN_C const IID IID_IEmptyVolumeCache;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  HKEY hkRegKey,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pcwszVolume,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszDisplayName,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszDescription,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [in] */ HKEY hkRegKey,
+            /* [in] */ LPCWSTR pcwszVolume,
+            /* [out] */ LPWSTR *ppwszDisplayName,
+            /* [out] */ LPWSTR *ppwszDescription,
+            /* [out] */ DWORD *pdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSpaceUsed( 
-            /* [annotation][out] */ 
-            _Out_  DWORDLONG *pdwlSpaceUsed,
-            /* [annotation][in] */ 
-            _In_  IEmptyVolumeCacheCallBack *picb) = 0;
+            /* [out] */ __RPC__out DWORDLONG *pdwlSpaceUsed,
+            /* [in] */ __RPC__in_opt IEmptyVolumeCacheCallBack *picb) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Purge( 
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwlSpaceToFree,
-            /* [annotation][in] */ 
-            _In_  IEmptyVolumeCacheCallBack *picb) = 0;
+            /* [in] */ DWORDLONG dwlSpaceToFree,
+            /* [in] */ __RPC__in_opt IEmptyVolumeCacheCallBack *picb) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShowProperties( 
-            /* [annotation][in] */ 
-            _In_  HWND hwnd) = 0;
+            /* [in] */ __RPC__in HWND hwnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Deactivate( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ __RPC__out DWORD *pdwFlags) = 0;
         
     };
     
@@ -319,8 +293,7 @@ EXTERN_C const IID IID_IEmptyVolumeCache;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEmptyVolumeCache * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -335,44 +308,33 @@ EXTERN_C const IID IID_IEmptyVolumeCache;
         DECLSPEC_XFGVIRT(IEmptyVolumeCache, Initialize)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IEmptyVolumeCache * This,
-            /* [annotation][in] */ 
-            _In_  HKEY hkRegKey,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pcwszVolume,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszDisplayName,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszDescription,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [in] */ HKEY hkRegKey,
+            /* [in] */ LPCWSTR pcwszVolume,
+            /* [out] */ LPWSTR *ppwszDisplayName,
+            /* [out] */ LPWSTR *ppwszDescription,
+            /* [out] */ DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IEmptyVolumeCache, GetSpaceUsed)
         HRESULT ( STDMETHODCALLTYPE *GetSpaceUsed )( 
             __RPC__in IEmptyVolumeCache * This,
-            /* [annotation][out] */ 
-            _Out_  DWORDLONG *pdwlSpaceUsed,
-            /* [annotation][in] */ 
-            _In_  IEmptyVolumeCacheCallBack *picb);
+            /* [out] */ __RPC__out DWORDLONG *pdwlSpaceUsed,
+            /* [in] */ __RPC__in_opt IEmptyVolumeCacheCallBack *picb);
         
         DECLSPEC_XFGVIRT(IEmptyVolumeCache, Purge)
         HRESULT ( STDMETHODCALLTYPE *Purge )( 
             __RPC__in IEmptyVolumeCache * This,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwlSpaceToFree,
-            /* [annotation][in] */ 
-            _In_  IEmptyVolumeCacheCallBack *picb);
+            /* [in] */ DWORDLONG dwlSpaceToFree,
+            /* [in] */ __RPC__in_opt IEmptyVolumeCacheCallBack *picb);
         
         DECLSPEC_XFGVIRT(IEmptyVolumeCache, ShowProperties)
         HRESULT ( STDMETHODCALLTYPE *ShowProperties )( 
             __RPC__in IEmptyVolumeCache * This,
-            /* [annotation][in] */ 
-            _In_  HWND hwnd);
+            /* [in] */ __RPC__in HWND hwnd);
         
         DECLSPEC_XFGVIRT(IEmptyVolumeCache, Deactivate)
         HRESULT ( STDMETHODCALLTYPE *Deactivate )( 
             __RPC__in IEmptyVolumeCache * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ __RPC__out DWORD *pdwFlags);
         
         END_INTERFACE
     } IEmptyVolumeCacheVtbl;
@@ -452,20 +414,13 @@ EXTERN_C const IID IID_IEmptyVolumeCache2;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE InitializeEx( 
-            /* [annotation][in] */ 
-            _In_  HKEY hkRegKey,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pcwszVolume,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pcwszKeyName,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszDisplayName,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszDescription,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszBtnText,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [in] */ HKEY hkRegKey,
+            /* [in] */ LPCWSTR pcwszVolume,
+            /* [in] */ LPCWSTR pcwszKeyName,
+            /* [out] */ LPWSTR *ppwszDisplayName,
+            /* [out] */ LPWSTR *ppwszDescription,
+            /* [out] */ LPWSTR *ppwszBtnText,
+            /* [out] */ DWORD *pdwFlags) = 0;
         
     };
     
@@ -479,8 +434,7 @@ EXTERN_C const IID IID_IEmptyVolumeCache2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEmptyVolumeCache2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -495,62 +449,44 @@ EXTERN_C const IID IID_IEmptyVolumeCache2;
         DECLSPEC_XFGVIRT(IEmptyVolumeCache, Initialize)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IEmptyVolumeCache2 * This,
-            /* [annotation][in] */ 
-            _In_  HKEY hkRegKey,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pcwszVolume,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszDisplayName,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszDescription,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [in] */ HKEY hkRegKey,
+            /* [in] */ LPCWSTR pcwszVolume,
+            /* [out] */ LPWSTR *ppwszDisplayName,
+            /* [out] */ LPWSTR *ppwszDescription,
+            /* [out] */ DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IEmptyVolumeCache, GetSpaceUsed)
         HRESULT ( STDMETHODCALLTYPE *GetSpaceUsed )( 
             __RPC__in IEmptyVolumeCache2 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORDLONG *pdwlSpaceUsed,
-            /* [annotation][in] */ 
-            _In_  IEmptyVolumeCacheCallBack *picb);
+            /* [out] */ __RPC__out DWORDLONG *pdwlSpaceUsed,
+            /* [in] */ __RPC__in_opt IEmptyVolumeCacheCallBack *picb);
         
         DECLSPEC_XFGVIRT(IEmptyVolumeCache, Purge)
         HRESULT ( STDMETHODCALLTYPE *Purge )( 
             __RPC__in IEmptyVolumeCache2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORDLONG dwlSpaceToFree,
-            /* [annotation][in] */ 
-            _In_  IEmptyVolumeCacheCallBack *picb);
+            /* [in] */ DWORDLONG dwlSpaceToFree,
+            /* [in] */ __RPC__in_opt IEmptyVolumeCacheCallBack *picb);
         
         DECLSPEC_XFGVIRT(IEmptyVolumeCache, ShowProperties)
         HRESULT ( STDMETHODCALLTYPE *ShowProperties )( 
             __RPC__in IEmptyVolumeCache2 * This,
-            /* [annotation][in] */ 
-            _In_  HWND hwnd);
+            /* [in] */ __RPC__in HWND hwnd);
         
         DECLSPEC_XFGVIRT(IEmptyVolumeCache, Deactivate)
         HRESULT ( STDMETHODCALLTYPE *Deactivate )( 
             __RPC__in IEmptyVolumeCache2 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ __RPC__out DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IEmptyVolumeCache2, InitializeEx)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *InitializeEx )( 
             IEmptyVolumeCache2 * This,
-            /* [annotation][in] */ 
-            _In_  HKEY hkRegKey,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pcwszVolume,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pcwszKeyName,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszDisplayName,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszDescription,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszBtnText,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [in] */ HKEY hkRegKey,
+            /* [in] */ LPCWSTR pcwszVolume,
+            /* [in] */ LPCWSTR pcwszKeyName,
+            /* [out] */ LPWSTR *ppwszDisplayName,
+            /* [out] */ LPWSTR *ppwszDescription,
+            /* [out] */ LPWSTR *ppwszBtnText,
+            /* [out] */ DWORD *pdwFlags);
         
         END_INTERFACE
     } IEmptyVolumeCache2Vtbl;

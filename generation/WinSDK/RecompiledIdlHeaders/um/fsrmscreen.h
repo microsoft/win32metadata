@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -184,28 +184,22 @@ EXTERN_C const IID IID_IFsrmFileGroup;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [annotation][in] */ 
-            _In_  BSTR name) = 0;
+            /* [in] */ __RPC__in BSTR name) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Members( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **members) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **members) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Members( 
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *members) = 0;
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *members) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NonMembers( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **nonMembers) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **nonMembers) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_NonMembers( 
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *nonMembers) = 0;
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *nonMembers) = 0;
         
     };
     
@@ -219,8 +213,7 @@ EXTERN_C const IID IID_IFsrmFileGroup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -235,31 +228,23 @@ EXTERN_C const IID IID_IFsrmFileGroup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -284,20 +269,17 @@ EXTERN_C const IID IID_IFsrmFileGroup;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *description);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][in] */ 
-            _In_  BSTR description);
+            /* [in] */ __RPC__in BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -310,38 +292,32 @@ EXTERN_C const IID IID_IFsrmFileGroup;
         DECLSPEC_XFGVIRT(IFsrmFileGroup, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroup, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name);
+            /* [in] */ __RPC__in BSTR name);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroup, get_Members)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Members )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **members);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **members);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroup, put_Members)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Members )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *members);
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *members);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroup, get_NonMembers)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NonMembers )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **nonMembers);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **nonMembers);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroup, put_NonMembers)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NonMembers )( 
             __RPC__in IFsrmFileGroup * This,
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *nonMembers);
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *nonMembers);
         
         END_INTERFACE
     } IFsrmFileGroupVtbl;
@@ -440,12 +416,10 @@ EXTERN_C const IID IID_IFsrmFileGroupImported;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OverwriteOnCommit( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *overwrite) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OverwriteOnCommit( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL overwrite) = 0;
+            /* [in] */ VARIANT_BOOL overwrite) = 0;
         
     };
     
@@ -459,8 +433,7 @@ EXTERN_C const IID IID_IFsrmFileGroupImported;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -475,31 +448,23 @@ EXTERN_C const IID IID_IFsrmFileGroupImported;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -524,20 +489,17 @@ EXTERN_C const IID IID_IFsrmFileGroupImported;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *description);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][in] */ 
-            _In_  BSTR description);
+            /* [in] */ __RPC__in BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -550,50 +512,42 @@ EXTERN_C const IID IID_IFsrmFileGroupImported;
         DECLSPEC_XFGVIRT(IFsrmFileGroup, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroup, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name);
+            /* [in] */ __RPC__in BSTR name);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroup, get_Members)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Members )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **members);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **members);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroup, put_Members)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Members )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *members);
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *members);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroup, get_NonMembers)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NonMembers )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **nonMembers);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **nonMembers);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroup, put_NonMembers)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NonMembers )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *nonMembers);
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *nonMembers);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroupImported, get_OverwriteOnCommit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OverwriteOnCommit )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *overwrite);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroupImported, put_OverwriteOnCommit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OverwriteOnCommit )( 
             __RPC__in IFsrmFileGroupImported * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL overwrite);
+            /* [in] */ VARIANT_BOOL overwrite);
         
         END_INTERFACE
     } IFsrmFileGroupImportedVtbl;
@@ -699,34 +653,24 @@ EXTERN_C const IID IID_IFsrmFileGroupManager;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateFileGroup( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileGroup **fileGroup) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileGroup **fileGroup) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFileGroup( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileGroup **fileGroup) = 0;
+            /* [in] */ __RPC__in BSTR name,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileGroup **fileGroup) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumFileGroups( 
-            /* [annotation][defaultvalue][in] */ 
-            _In_  FsrmEnumOptions options,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileGroups) = 0;
+            /* [defaultvalue][in] */ FsrmEnumOptions options,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileGroups) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExportFileGroups( 
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileGroupNamesArray,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *serializedFileGroups) = 0;
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileGroupNamesArray,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *serializedFileGroups) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportFileGroups( 
-            /* [annotation][in] */ 
-            _In_  BSTR serializedFileGroups,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileGroupNamesArray,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileGroups) = 0;
+            /* [in] */ __RPC__in BSTR serializedFileGroups,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileGroupNamesArray,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileGroups) = 0;
         
     };
     
@@ -740,8 +684,7 @@ EXTERN_C const IID IID_IFsrmFileGroupManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileGroupManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -756,31 +699,23 @@ EXTERN_C const IID IID_IFsrmFileGroupManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileGroupManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileGroupManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileGroupManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -805,42 +740,32 @@ EXTERN_C const IID IID_IFsrmFileGroupManager;
         DECLSPEC_XFGVIRT(IFsrmFileGroupManager, CreateFileGroup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateFileGroup )( 
             __RPC__in IFsrmFileGroupManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileGroup **fileGroup);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileGroup **fileGroup);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroupManager, GetFileGroup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFileGroup )( 
             __RPC__in IFsrmFileGroupManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileGroup **fileGroup);
+            /* [in] */ __RPC__in BSTR name,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileGroup **fileGroup);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroupManager, EnumFileGroups)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumFileGroups )( 
             __RPC__in IFsrmFileGroupManager * This,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  FsrmEnumOptions options,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileGroups);
+            /* [defaultvalue][in] */ FsrmEnumOptions options,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileGroups);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroupManager, ExportFileGroups)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExportFileGroups )( 
             __RPC__in IFsrmFileGroupManager * This,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileGroupNamesArray,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *serializedFileGroups);
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileGroupNamesArray,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *serializedFileGroups);
         
         DECLSPEC_XFGVIRT(IFsrmFileGroupManager, ImportFileGroups)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportFileGroups )( 
             __RPC__in IFsrmFileGroupManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR serializedFileGroups,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileGroupNamesArray,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileGroups);
+            /* [in] */ __RPC__in BSTR serializedFileGroups,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileGroupNamesArray,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileGroups);
         
         END_INTERFACE
     } IFsrmFileGroupManagerVtbl;
@@ -920,30 +845,23 @@ EXTERN_C const IID IID_IFsrmFileScreenBase;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BlockedFileGroups( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **blockList) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **blockList) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_BlockedFileGroups( 
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *blockList) = 0;
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *blockList) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileScreenFlags( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *fileScreenFlags) = 0;
+            /* [retval][out] */ __RPC__out long *fileScreenFlags) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FileScreenFlags( 
-            /* [annotation][in] */ 
-            _In_  long fileScreenFlags) = 0;
+            /* [in] */ long fileScreenFlags) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateAction( 
-            /* [annotation][in] */ 
-            _In_  FsrmActionType actionType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmAction **action) = 0;
+            /* [in] */ FsrmActionType actionType,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumActions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **actions) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions) = 0;
         
     };
     
@@ -957,8 +875,7 @@ EXTERN_C const IID IID_IFsrmFileScreenBase;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -973,31 +890,23 @@ EXTERN_C const IID IID_IFsrmFileScreenBase;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1022,20 +931,17 @@ EXTERN_C const IID IID_IFsrmFileScreenBase;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *description);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][in] */ 
-            _In_  BSTR description);
+            /* [in] */ __RPC__in BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -1048,40 +954,33 @@ EXTERN_C const IID IID_IFsrmFileScreenBase;
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, get_BlockedFileGroups)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockedFileGroups )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **blockList);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **blockList);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, put_BlockedFileGroups)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BlockedFileGroups )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *blockList);
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *blockList);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, get_FileScreenFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileScreenFlags )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *fileScreenFlags);
+            /* [retval][out] */ __RPC__out long *fileScreenFlags);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, put_FileScreenFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileScreenFlags )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][in] */ 
-            _In_  long fileScreenFlags);
+            /* [in] */ long fileScreenFlags);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, CreateAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAction )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][in] */ 
-            _In_  FsrmActionType actionType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmAction **action);
+            /* [in] */ FsrmActionType actionType,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, EnumActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumActions )( 
             __RPC__in IFsrmFileScreenBase * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **actions);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
         
         END_INTERFACE
     } IFsrmFileScreenBaseVtbl;
@@ -1180,28 +1079,22 @@ EXTERN_C const IID IID_IFsrmFileScreen;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *path) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *path) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SourceTemplateName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *fileScreenTemplateName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *fileScreenTemplateName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MatchesSourceTemplate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *matches) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *matches) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserSid( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *userSid) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *userSid) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserAccount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *userAccount) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *userAccount) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ApplyTemplate( 
-            /* [annotation][in] */ 
-            _In_  BSTR fileScreenTemplateName) = 0;
+            /* [in] */ __RPC__in BSTR fileScreenTemplateName) = 0;
         
     };
     
@@ -1215,8 +1108,7 @@ EXTERN_C const IID IID_IFsrmFileScreen;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1231,31 +1123,23 @@ EXTERN_C const IID IID_IFsrmFileScreen;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1280,20 +1164,17 @@ EXTERN_C const IID IID_IFsrmFileScreen;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *description);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][in] */ 
-            _In_  BSTR description);
+            /* [in] */ __RPC__in BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -1306,76 +1187,63 @@ EXTERN_C const IID IID_IFsrmFileScreen;
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, get_BlockedFileGroups)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockedFileGroups )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **blockList);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **blockList);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, put_BlockedFileGroups)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BlockedFileGroups )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *blockList);
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *blockList);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, get_FileScreenFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileScreenFlags )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *fileScreenFlags);
+            /* [retval][out] */ __RPC__out long *fileScreenFlags);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, put_FileScreenFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileScreenFlags )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][in] */ 
-            _In_  long fileScreenFlags);
+            /* [in] */ long fileScreenFlags);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, CreateAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAction )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][in] */ 
-            _In_  FsrmActionType actionType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmAction **action);
+            /* [in] */ FsrmActionType actionType,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, EnumActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumActions )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **actions);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreen, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *path);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreen, get_SourceTemplateName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SourceTemplateName )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *fileScreenTemplateName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *fileScreenTemplateName);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreen, get_MatchesSourceTemplate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MatchesSourceTemplate )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *matches);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *matches);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreen, get_UserSid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSid )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *userSid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *userSid);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreen, get_UserAccount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserAccount )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *userAccount);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *userAccount);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreen, ApplyTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ApplyTemplate )( 
             __RPC__in IFsrmFileScreen * This,
-            /* [annotation][in] */ 
-            _In_  BSTR fileScreenTemplateName);
+            /* [in] */ __RPC__in BSTR fileScreenTemplateName);
         
         END_INTERFACE
     } IFsrmFileScreenVtbl;
@@ -1493,16 +1361,13 @@ EXTERN_C const IID IID_IFsrmFileScreenException;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *path) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *path) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AllowedFileGroups( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **allowList) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **allowList) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AllowedFileGroups( 
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *allowList) = 0;
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *allowList) = 0;
         
     };
     
@@ -1516,8 +1381,7 @@ EXTERN_C const IID IID_IFsrmFileScreenException;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileScreenException * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1532,31 +1396,23 @@ EXTERN_C const IID IID_IFsrmFileScreenException;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileScreenException * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileScreenException * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileScreenException * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1581,20 +1437,17 @@ EXTERN_C const IID IID_IFsrmFileScreenException;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmFileScreenException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmFileScreenException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *description);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmFileScreenException * This,
-            /* [annotation][in] */ 
-            _In_  BSTR description);
+            /* [in] */ __RPC__in BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -1607,20 +1460,17 @@ EXTERN_C const IID IID_IFsrmFileScreenException;
         DECLSPEC_XFGVIRT(IFsrmFileScreenException, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IFsrmFileScreenException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *path);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenException, get_AllowedFileGroups)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowedFileGroups )( 
             __RPC__in IFsrmFileScreenException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **allowList);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **allowList);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenException, put_AllowedFileGroups)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowedFileGroups )( 
             __RPC__in IFsrmFileScreenException * This,
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *allowList);
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *allowList);
         
         END_INTERFACE
     } IFsrmFileScreenExceptionVtbl;
@@ -1710,56 +1560,39 @@ EXTERN_C const IID IID_IFsrmFileScreenManager;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ActionVariables( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *variables) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *variables) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ActionVariableDescriptions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *descriptions) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *descriptions) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateFileScreen( 
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreen **fileScreen) = 0;
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreen **fileScreen) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFileScreen( 
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreen **fileScreen) = 0;
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreen **fileScreen) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumFileScreens( 
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR path,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  FsrmEnumOptions options,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileScreens) = 0;
+            /* [defaultvalue][in] */ __RPC__in BSTR path,
+            /* [defaultvalue][in] */ FsrmEnumOptions options,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileScreens) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateFileScreenException( 
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreenException **fileScreenException) = 0;
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreenException **fileScreenException) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFileScreenException( 
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreenException **fileScreenException) = 0;
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreenException **fileScreenException) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumFileScreenExceptions( 
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR path,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  FsrmEnumOptions options,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileScreenExceptions) = 0;
+            /* [defaultvalue][in] */ __RPC__in BSTR path,
+            /* [defaultvalue][in] */ FsrmEnumOptions options,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileScreenExceptions) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateFileScreenCollection( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **collection) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **collection) = 0;
         
     };
     
@@ -1773,8 +1606,7 @@ EXTERN_C const IID IID_IFsrmFileScreenManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1789,31 +1621,23 @@ EXTERN_C const IID IID_IFsrmFileScreenManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1838,72 +1662,55 @@ EXTERN_C const IID IID_IFsrmFileScreenManager;
         DECLSPEC_XFGVIRT(IFsrmFileScreenManager, get_ActionVariables)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariables )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *variables);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *variables);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenManager, get_ActionVariableDescriptions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionVariableDescriptions )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *descriptions);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *descriptions);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenManager, CreateFileScreen)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateFileScreen )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreen **fileScreen);
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreen **fileScreen);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenManager, GetFileScreen)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFileScreen )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreen **fileScreen);
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreen **fileScreen);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenManager, EnumFileScreens)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumFileScreens )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR path,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  FsrmEnumOptions options,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileScreens);
+            /* [defaultvalue][in] */ __RPC__in BSTR path,
+            /* [defaultvalue][in] */ FsrmEnumOptions options,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileScreens);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenManager, CreateFileScreenException)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateFileScreenException )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreenException **fileScreenException);
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreenException **fileScreenException);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenManager, GetFileScreenException)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFileScreenException )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreenException **fileScreenException);
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreenException **fileScreenException);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenManager, EnumFileScreenExceptions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumFileScreenExceptions )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR path,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  FsrmEnumOptions options,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileScreenExceptions);
+            /* [defaultvalue][in] */ __RPC__in BSTR path,
+            /* [defaultvalue][in] */ FsrmEnumOptions options,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileScreenExceptions);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenManager, CreateFileScreenCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateFileScreenCollection )( 
             __RPC__in IFsrmFileScreenManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **collection);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **collection);
         
         END_INTERFACE
     } IFsrmFileScreenManagerVtbl;
@@ -1995,24 +1802,18 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplate;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *name) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [annotation][in] */ 
-            _In_  BSTR name) = 0;
+            /* [in] */ __RPC__in BSTR name) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CopyTemplate( 
-            /* [annotation][in] */ 
-            _In_  BSTR fileScreenTemplateName) = 0;
+            /* [in] */ __RPC__in BSTR fileScreenTemplateName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CommitAndUpdateDerived( 
-            /* [annotation][in] */ 
-            _In_  FsrmCommitOptions commitOptions,
-            /* [annotation][in] */ 
-            _In_  FsrmTemplateApplyOptions applyOptions,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult) = 0;
+            /* [in] */ FsrmCommitOptions commitOptions,
+            /* [in] */ FsrmTemplateApplyOptions applyOptions,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmDerivedObjectsResult **derivedObjectsResult) = 0;
         
     };
     
@@ -2026,8 +1827,7 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplate;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2042,31 +1842,23 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplate;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2091,20 +1883,17 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplate;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *description);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][in] */ 
-            _In_  BSTR description);
+            /* [in] */ __RPC__in BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2117,68 +1906,55 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplate;
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, get_BlockedFileGroups)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockedFileGroups )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **blockList);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **blockList);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, put_BlockedFileGroups)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BlockedFileGroups )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *blockList);
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *blockList);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, get_FileScreenFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileScreenFlags )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *fileScreenFlags);
+            /* [retval][out] */ __RPC__out long *fileScreenFlags);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, put_FileScreenFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileScreenFlags )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][in] */ 
-            _In_  long fileScreenFlags);
+            /* [in] */ long fileScreenFlags);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, CreateAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAction )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][in] */ 
-            _In_  FsrmActionType actionType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmAction **action);
+            /* [in] */ FsrmActionType actionType,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, EnumActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumActions )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **actions);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplate, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplate, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name);
+            /* [in] */ __RPC__in BSTR name);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplate, CopyTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTemplate )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][in] */ 
-            _In_  BSTR fileScreenTemplateName);
+            /* [in] */ __RPC__in BSTR fileScreenTemplateName);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplate, CommitAndUpdateDerived)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CommitAndUpdateDerived )( 
             __RPC__in IFsrmFileScreenTemplate * This,
-            /* [annotation][in] */ 
-            _In_  FsrmCommitOptions commitOptions,
-            /* [annotation][in] */ 
-            _In_  FsrmTemplateApplyOptions applyOptions,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult);
+            /* [in] */ FsrmCommitOptions commitOptions,
+            /* [in] */ FsrmTemplateApplyOptions applyOptions,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmDerivedObjectsResult **derivedObjectsResult);
         
         END_INTERFACE
     } IFsrmFileScreenTemplateVtbl;
@@ -2290,12 +2066,10 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateImported;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OverwriteOnCommit( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *overwrite) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_OverwriteOnCommit( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL overwrite) = 0;
+            /* [in] */ VARIANT_BOOL overwrite) = 0;
         
     };
     
@@ -2309,8 +2083,7 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateImported;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2325,31 +2098,23 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateImported;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2374,20 +2139,17 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateImported;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *description);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  BSTR description);
+            /* [in] */ __RPC__in BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2400,80 +2162,65 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateImported;
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, get_BlockedFileGroups)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockedFileGroups )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **blockList);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **blockList);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, put_BlockedFileGroups)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BlockedFileGroups )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  IFsrmMutableCollection *blockList);
+            /* [in] */ __RPC__in_opt IFsrmMutableCollection *blockList);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, get_FileScreenFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileScreenFlags )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *fileScreenFlags);
+            /* [retval][out] */ __RPC__out long *fileScreenFlags);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, put_FileScreenFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileScreenFlags )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  long fileScreenFlags);
+            /* [in] */ long fileScreenFlags);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, CreateAction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateAction )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  FsrmActionType actionType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmAction **action);
+            /* [in] */ FsrmActionType actionType,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmAction **action);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenBase, EnumActions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumActions )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **actions);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **actions);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplate, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplate, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name);
+            /* [in] */ __RPC__in BSTR name);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplate, CopyTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTemplate )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  BSTR fileScreenTemplateName);
+            /* [in] */ __RPC__in BSTR fileScreenTemplateName);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplate, CommitAndUpdateDerived)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CommitAndUpdateDerived )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  FsrmCommitOptions commitOptions,
-            /* [annotation][in] */ 
-            _In_  FsrmTemplateApplyOptions applyOptions,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmDerivedObjectsResult **derivedObjectsResult);
+            /* [in] */ FsrmCommitOptions commitOptions,
+            /* [in] */ FsrmTemplateApplyOptions applyOptions,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmDerivedObjectsResult **derivedObjectsResult);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplateImported, get_OverwriteOnCommit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OverwriteOnCommit )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *overwrite);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplateImported, put_OverwriteOnCommit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OverwriteOnCommit )( 
             __RPC__in IFsrmFileScreenTemplateImported * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL overwrite);
+            /* [in] */ VARIANT_BOOL overwrite);
         
         END_INTERFACE
     } IFsrmFileScreenTemplateImportedVtbl;
@@ -2592,34 +2339,24 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateManager;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTemplate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreenTemplate **fileScreenTemplate) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreenTemplate **fileScreenTemplate) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetTemplate( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreenTemplate **fileScreenTemplate) = 0;
+            /* [in] */ __RPC__in BSTR name,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreenTemplate **fileScreenTemplate) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumTemplates( 
-            /* [annotation][defaultvalue][in] */ 
-            _In_  FsrmEnumOptions options,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileScreenTemplates) = 0;
+            /* [defaultvalue][in] */ FsrmEnumOptions options,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileScreenTemplates) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExportTemplates( 
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileScreenTemplateNamesArray,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *serializedFileScreenTemplates) = 0;
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileScreenTemplateNamesArray,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *serializedFileScreenTemplates) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportTemplates( 
-            /* [annotation][in] */ 
-            _In_  BSTR serializedFileScreenTemplates,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileScreenTemplateNamesArray,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileScreenTemplates) = 0;
+            /* [in] */ __RPC__in BSTR serializedFileScreenTemplates,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileScreenTemplateNamesArray,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileScreenTemplates) = 0;
         
     };
     
@@ -2633,8 +2370,7 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmFileScreenTemplateManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2649,31 +2385,23 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmFileScreenTemplateManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmFileScreenTemplateManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmFileScreenTemplateManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2698,42 +2426,32 @@ EXTERN_C const IID IID_IFsrmFileScreenTemplateManager;
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplateManager, CreateTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTemplate )( 
             __RPC__in IFsrmFileScreenTemplateManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreenTemplate **fileScreenTemplate);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreenTemplate **fileScreenTemplate);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplateManager, GetTemplate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetTemplate )( 
             __RPC__in IFsrmFileScreenTemplateManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmFileScreenTemplate **fileScreenTemplate);
+            /* [in] */ __RPC__in BSTR name,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmFileScreenTemplate **fileScreenTemplate);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplateManager, EnumTemplates)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnumTemplates )( 
             __RPC__in IFsrmFileScreenTemplateManager * This,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  FsrmEnumOptions options,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileScreenTemplates);
+            /* [defaultvalue][in] */ FsrmEnumOptions options,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileScreenTemplates);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplateManager, ExportTemplates)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExportTemplates )( 
             __RPC__in IFsrmFileScreenTemplateManager * This,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileScreenTemplateNamesArray,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *serializedFileScreenTemplates);
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileScreenTemplateNamesArray,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *serializedFileScreenTemplates);
         
         DECLSPEC_XFGVIRT(IFsrmFileScreenTemplateManager, ImportTemplates)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportTemplates )( 
             __RPC__in IFsrmFileScreenTemplateManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR serializedFileScreenTemplates,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileScreenTemplateNamesArray,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileScreenTemplates);
+            /* [in] */ __RPC__in BSTR serializedFileScreenTemplates,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileScreenTemplateNamesArray,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileScreenTemplates);
         
         END_INTERFACE
     } IFsrmFileScreenTemplateManagerVtbl;

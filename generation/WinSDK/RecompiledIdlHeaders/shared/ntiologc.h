@@ -1016,6 +1016,16 @@ Revision History:
 //
 #define IO_DUMP_CALLBACK_EXCEPTION       ((NTSTATUS)0xC00400A3L)
 
+//
+// MessageId: IO_DUMP_INIT_DEDICATED_DUMP_FAILURE
+//
+// MessageText:
+//
+// Configuring the dedicated dump for crash dump failed. Make sure the dedicated
+// dump file path is set correctly, or the disk has enough space to create the dump file.
+//
+#define IO_DUMP_INIT_DEDICATED_DUMP_FAILURE ((NTSTATUS)0xC00400A4L)
+
 ////////////////////////////////////////////////////////
 // Facility MCA
 //

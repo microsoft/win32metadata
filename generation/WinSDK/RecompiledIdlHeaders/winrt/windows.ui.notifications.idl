@@ -111,6 +111,8 @@ namespace Windows
 
             typedef enum ToastHistoryChangedType ToastHistoryChangedType;
 
+            typedef enum ToastNotificationMode ToastNotificationMode;
+
             typedef enum ToastNotificationPriority ToastNotificationPriority;
 
             typedef enum ToastTemplateType ToastTemplateType;
@@ -228,6 +230,8 @@ namespace Windows
             interface IToastNotificationManagerForUser;
 
             interface IToastNotificationManagerForUser2;
+
+            interface IToastNotificationManagerForUser3;
 
             interface IToastNotificationManagerStatics;
 
@@ -400,6 +404,8 @@ namespace Windows
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Notifications.ToastNotification*, Windows.UI.Notifications.ToastDismissedEventArgs*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Notifications.ToastNotification*, Windows.UI.Notifications.ToastFailedEventArgs*>;
+
+                interface Windows.Foundation.TypedEventHandler<Windows.UI.Notifications.ToastNotificationManagerForUser*, IInspectable*>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.UI.Notifications.ToastNotifier*, Windows.UI.Notifications.ScheduledToastNotificationShowingEventArgs*>;
             }
@@ -748,6 +754,14 @@ namespace Windows
                 Removed = 1,
                 Expired = 2,
                 Added   = 3
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            enum ToastNotificationMode
+            {
+                Unrestricted = 0,
+                PriorityOnly = 1,
+                AlarmsOnly   = 2
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -1381,6 +1395,16 @@ namespace Windows
                 [overload("GetToastCollectionManager")] HRESULT GetToastCollectionManagerWithAppId([in] HSTRING appId, [out] [retval] Windows.UI.Notifications.ToastCollectionManager** result);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.UI.Notifications.ToastNotificationManagerForUser)]
+            [uuid(3EFCB176-6CC1-56DC-973B-251F7AACB1C5)]
+            interface IToastNotificationManagerForUser3 : IInspectable
+            {
+                [propget] HRESULT NotificationMode([out] [retval] Windows.UI.Notifications.ToastNotificationMode* value);
+                [eventadd] HRESULT NotificationModeChanged([in] Windows.Foundation.TypedEventHandler<Windows.UI.Notifications.ToastNotificationManagerForUser*, IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT NotificationModeChanged([in] EventRegistrationToken token);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.UI.Notifications.ToastNotificationManager)]
             [uuid(50AC103F-D235-4598-BBEF-98FE4D1A3AD4)]
@@ -1749,6 +1773,7 @@ namespace Windows
             {
                 [default] interface Windows.UI.Notifications.IToastNotificationManagerForUser;
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)] interface Windows.UI.Notifications.IToastNotificationManagerForUser2;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.UI.Notifications.IToastNotificationManagerForUser3;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

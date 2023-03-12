@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -100,30 +100,19 @@ EXTERN_C const IID IID_ISignalableNotifier;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AttachToWaitHandle( 
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR waitableHandle,
-            /* [annotation][in] */ 
-            _In_  IUnknown *handler,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkOuter,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **SignalNotifier) = 0;
+            /* [in] */ HANDLE_PTR waitableHandle,
+            /* [in] */ __RPC__in_opt IUnknown *handler,
+            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **SignalNotifier) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AttachToWaitHandleWithTimeout( 
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR waitableHandle,
-            /* [annotation][in] */ 
-            _In_  IUnknown *handler,
-            /* [annotation][in] */ 
-            _In_  LARGE_INTEGER timeout,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkOuter,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **SignalNotifier) = 0;
+            /* [in] */ HANDLE_PTR waitableHandle,
+            /* [in] */ __RPC__in_opt IUnknown *handler,
+            /* [in] */ LARGE_INTEGER timeout,
+            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **SignalNotifier) = 0;
         
     };
     
@@ -137,8 +126,7 @@ EXTERN_C const IID IID_ISignalableNotifier;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISignalableNotifier * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -153,32 +141,21 @@ EXTERN_C const IID IID_ISignalableNotifier;
         DECLSPEC_XFGVIRT(ISignalableNotifier, AttachToWaitHandle)
         HRESULT ( STDMETHODCALLTYPE *AttachToWaitHandle )( 
             __RPC__in ISignalableNotifier * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR waitableHandle,
-            /* [annotation][in] */ 
-            _In_  IUnknown *handler,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkOuter,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **SignalNotifier);
+            /* [in] */ HANDLE_PTR waitableHandle,
+            /* [in] */ __RPC__in_opt IUnknown *handler,
+            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **SignalNotifier);
         
         DECLSPEC_XFGVIRT(ISignalableNotifier, AttachToWaitHandleWithTimeout)
         HRESULT ( STDMETHODCALLTYPE *AttachToWaitHandleWithTimeout )( 
             __RPC__in ISignalableNotifier * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR waitableHandle,
-            /* [annotation][in] */ 
-            _In_  IUnknown *handler,
-            /* [annotation][in] */ 
-            _In_  LARGE_INTEGER timeout,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkOuter,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **SignalNotifier);
+            /* [in] */ HANDLE_PTR waitableHandle,
+            /* [in] */ __RPC__in_opt IUnknown *handler,
+            /* [in] */ LARGE_INTEGER timeout,
+            /* [in] */ __RPC__in_opt IUnknown *pUnkOuter,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **SignalNotifier);
         
         END_INTERFACE
     } ISignalableNotifierVtbl;

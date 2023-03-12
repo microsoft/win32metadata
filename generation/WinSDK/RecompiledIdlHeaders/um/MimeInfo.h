@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -107,12 +107,9 @@ EXTERN_C const IID IID_IMimeInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMimeCLSIDMapping( 
-            /* [annotation][out] */ 
-            _Out_  UINT *pcTypes,
-            /* [annotation][out] */ 
-            _Out_  LPCSTR **ppszTypes,
-            /* [annotation][out] */ 
-            _Out_  CLSID **ppclsID) = 0;
+            /* [out] */ UINT *pcTypes,
+            /* [out] */ LPCSTR **ppszTypes,
+            /* [out] */ CLSID **ppclsID) = 0;
         
     };
     
@@ -126,8 +123,7 @@ EXTERN_C const IID IID_IMimeInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMimeInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -142,12 +138,9 @@ EXTERN_C const IID IID_IMimeInfo;
         DECLSPEC_XFGVIRT(IMimeInfo, GetMimeCLSIDMapping)
         HRESULT ( STDMETHODCALLTYPE *GetMimeCLSIDMapping )( 
             IMimeInfo * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pcTypes,
-            /* [annotation][out] */ 
-            _Out_  LPCSTR **ppszTypes,
-            /* [annotation][out] */ 
-            _Out_  CLSID **ppclsID);
+            /* [out] */ UINT *pcTypes,
+            /* [out] */ LPCSTR **ppszTypes,
+            /* [out] */ CLSID **ppclsID);
         
         END_INTERFACE
     } IMimeInfoVtbl;

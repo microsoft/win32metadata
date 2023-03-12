@@ -5454,6 +5454,21 @@ WINAPI
 GetClipboardData(
     _In_ UINT uFormat);
 
+typedef struct tagGETCLIPBMETADATA {
+
+    UINT Version; // Currently version 1; increment this value to add more fields.
+    BOOL IsDelayRendered; // Indicates if the data is delay-rendered.
+    BOOL IsSynthetic; // Indicates if the data is produced on-demand from another format (some bitmap/text/metafile).
+
+} GETCLIPBMETADATA, *PGETCLIPBMETADATA;
+
+WINUSERAPI
+BOOL
+WINAPI
+GetClipboardMetadata(
+    UINT format,
+    _Inout_ PGETCLIPBMETADATA metadata);
+
 WINUSERAPI
 UINT
 WINAPI
@@ -11619,7 +11634,7 @@ DlgDirSelectComboBoxExW(
  */
 #define DS_ABSALIGN         0x01L
 #define DS_SYSMODAL         0x02L
-#define DS_LOCALEDIT        0x20L   /* Edit items get Local storage. */
+#define DS_LOCALEDIT        0x20L   /* 16-bit: Edit items get Local storage. 32-bit and up: meaningless. */
 #define DS_SETFONT          0x40L   /* User specified font for Dlg controls */
 #define DS_MODALFRAME       0x80L   /* Can be combined with WS_CAPTION  */
 #define DS_NOIDLEMSG        0x100L  /* WM_ENTERIDLE message will not be sent */
@@ -15824,7 +15839,7 @@ GetCIMSSM(
 
 #endif /* WINVER >= 0x0601 */
 
-#if(WINVER >= 0x0601)
+#if(WINVER >= 0x0602)
 
 #pragma region Application Family or OneCore Family or Games Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -15906,7 +15921,7 @@ SetDisplayAutoRotationPreferences(
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
-#endif /* WINVER >= 0x0601 */
+#endif /* WINVER >= 0x0602 */
 
 
 #if(WINVER >= 0x0601)
@@ -15942,6 +15957,51 @@ SetProcessRestrictionExemption(
 /*
  * Ink Feedback APIs
  */
+
+#if(WINVER >= 0x0607)
+
+WINUSERAPI
+BOOL
+WINAPI
+SetAdditionalForegroundBoostProcesses(HWND topLevelWindow,
+                                      DWORD processHandleCount,
+                                      _In_reads_(processHandleCount) HANDLE *processHandleArray);
+
+/* TOOLTIP_DISMISS_FLAGS:
+ *
+ * These are flags used with the RegisterForTooltipDismissNotification API.
+ *
+ * TDF_REGISTER -   Used to register tooltip to receive notification of trigger key combination
+ *                  via WM_TOOLTIPDISMISS.
+ *
+ * TDF_UNREGISTER - Used to unregister tooltip from receiving notification of trigger key
+ *                  combination via WM_TOOLTIPDISMISS.
+ */
+
+typedef enum {
+    TDF_REGISTER                = 0x0001,
+    TDF_UNREGISTER              = 0x0002,
+} TOOLTIP_DISMISS_FLAGS;
+
+WINUSERAPI
+BOOL
+WINAPI
+RegisterForTooltipDismissNotification(HWND hWnd,
+                                      TOOLTIP_DISMISS_FLAGS tdFlags);
+
+/*
+ * Support for Accessibility Tooltip Dismissal API:
+ *
+ * This message notifies apps/frameworks that a trigger event has occurred and they should dismiss the
+ * respective tooltip window.
+ * This is used with RegisterForTooltipDismissNotification.
+ *
+ * Note that only kernel mode can originate this message.
+ */
+#define WM_TOOLTIPDISMISS               0x0345
+
+#endif /* WINVER >= 0x0607 */
+
 
 #if _MSC_VER >= 1200
 #pragma warning(pop)

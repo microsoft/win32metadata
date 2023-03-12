@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -167,18 +167,14 @@ EXTERN_C const IID IID_IWorkspace;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetWorkspaceNames( 
-            /* [annotation][out] */ 
-            _Out_  SAFEARRAY * *psaWkspNames) = 0;
+            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *psaWkspNames) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE StartRemoteApplication( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * psaParams) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in SAFEARRAY * psaParams) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetProcessId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulProcessId) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulProcessId) = 0;
         
     };
     
@@ -192,8 +188,7 @@ EXTERN_C const IID IID_IWorkspace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -208,22 +203,18 @@ EXTERN_C const IID IID_IWorkspace;
         DECLSPEC_XFGVIRT(IWorkspace, GetWorkspaceNames)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetWorkspaceNames )( 
             __RPC__in IWorkspace * This,
-            /* [annotation][out] */ 
-            _Out_  SAFEARRAY * *psaWkspNames);
+            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *psaWkspNames);
         
         DECLSPEC_XFGVIRT(IWorkspace, StartRemoteApplication)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *StartRemoteApplication )( 
             __RPC__in IWorkspace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * psaParams);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in SAFEARRAY * psaParams);
         
         DECLSPEC_XFGVIRT(IWorkspace, GetProcessId)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProcessId )( 
             __RPC__in IWorkspace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulProcessId);
+            /* [retval][out] */ __RPC__out ULONG *pulProcessId);
         
         END_INTERFACE
     } IWorkspaceVtbl;
@@ -284,18 +275,12 @@ EXTERN_C const IID IID_IWorkspace2;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE StartRemoteApplicationEx( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRequestingAppId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRequestingAppFamilyName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bLaunchIntoImmersiveClient,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrImmersiveClientActivationContext,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * psaParams) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrRequestingAppId,
+            /* [in] */ __RPC__in BSTR bstrRequestingAppFamilyName,
+            /* [in] */ VARIANT_BOOL bLaunchIntoImmersiveClient,
+            /* [in] */ __RPC__in BSTR bstrImmersiveClientActivationContext,
+            /* [in] */ __RPC__in SAFEARRAY * psaParams) = 0;
         
     };
     
@@ -309,8 +294,7 @@ EXTERN_C const IID IID_IWorkspace2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspace2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -325,38 +309,28 @@ EXTERN_C const IID IID_IWorkspace2;
         DECLSPEC_XFGVIRT(IWorkspace, GetWorkspaceNames)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetWorkspaceNames )( 
             __RPC__in IWorkspace2 * This,
-            /* [annotation][out] */ 
-            _Out_  SAFEARRAY * *psaWkspNames);
+            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *psaWkspNames);
         
         DECLSPEC_XFGVIRT(IWorkspace, StartRemoteApplication)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *StartRemoteApplication )( 
             __RPC__in IWorkspace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * psaParams);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in SAFEARRAY * psaParams);
         
         DECLSPEC_XFGVIRT(IWorkspace, GetProcessId)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProcessId )( 
             __RPC__in IWorkspace2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulProcessId);
+            /* [retval][out] */ __RPC__out ULONG *pulProcessId);
         
         DECLSPEC_XFGVIRT(IWorkspace2, StartRemoteApplicationEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *StartRemoteApplicationEx )( 
             __RPC__in IWorkspace2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRequestingAppId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRequestingAppFamilyName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bLaunchIntoImmersiveClient,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrImmersiveClientActivationContext,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * psaParams);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrRequestingAppId,
+            /* [in] */ __RPC__in BSTR bstrRequestingAppFamilyName,
+            /* [in] */ VARIANT_BOOL bLaunchIntoImmersiveClient,
+            /* [in] */ __RPC__in BSTR bstrImmersiveClientActivationContext,
+            /* [in] */ __RPC__in SAFEARRAY * psaParams);
         
         END_INTERFACE
     } IWorkspace2Vtbl;
@@ -421,26 +395,17 @@ EXTERN_C const IID IID_IWorkspace3;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetClaimsToken2( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrClaimsHint,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserHint,
-            /* [annotation][in] */ 
-            _In_  ULONG claimCookie,
-            /* [annotation][in] */ 
-            _In_  ULONG hwndCredUiParent,
-            /* [annotation][in] */ 
-            _In_  RECT rectCredUiParent,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrAccessToken) = 0;
+            /* [in] */ __RPC__in BSTR bstrClaimsHint,
+            /* [in] */ __RPC__in BSTR bstrUserHint,
+            /* [in] */ ULONG claimCookie,
+            /* [in] */ ULONG hwndCredUiParent,
+            /* [in] */ RECT rectCredUiParent,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAccessToken) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetClaimsToken( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAccessToken,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullAccessTokenExpiration,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRefreshToken) = 0;
+            /* [in] */ __RPC__in BSTR bstrAccessToken,
+            /* [in] */ ULONGLONG ullAccessTokenExpiration,
+            /* [in] */ __RPC__in BSTR bstrRefreshToken) = 0;
         
     };
     
@@ -454,8 +419,7 @@ EXTERN_C const IID IID_IWorkspace3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspace3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -470,64 +434,45 @@ EXTERN_C const IID IID_IWorkspace3;
         DECLSPEC_XFGVIRT(IWorkspace, GetWorkspaceNames)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetWorkspaceNames )( 
             __RPC__in IWorkspace3 * This,
-            /* [annotation][out] */ 
-            _Out_  SAFEARRAY * *psaWkspNames);
+            /* [out] */ __RPC__deref_out_opt SAFEARRAY * *psaWkspNames);
         
         DECLSPEC_XFGVIRT(IWorkspace, StartRemoteApplication)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *StartRemoteApplication )( 
             __RPC__in IWorkspace3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * psaParams);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in SAFEARRAY * psaParams);
         
         DECLSPEC_XFGVIRT(IWorkspace, GetProcessId)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProcessId )( 
             __RPC__in IWorkspace3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulProcessId);
+            /* [retval][out] */ __RPC__out ULONG *pulProcessId);
         
         DECLSPEC_XFGVIRT(IWorkspace2, StartRemoteApplicationEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *StartRemoteApplicationEx )( 
             __RPC__in IWorkspace3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRequestingAppId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRequestingAppFamilyName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bLaunchIntoImmersiveClient,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrImmersiveClientActivationContext,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * psaParams);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrRequestingAppId,
+            /* [in] */ __RPC__in BSTR bstrRequestingAppFamilyName,
+            /* [in] */ VARIANT_BOOL bLaunchIntoImmersiveClient,
+            /* [in] */ __RPC__in BSTR bstrImmersiveClientActivationContext,
+            /* [in] */ __RPC__in SAFEARRAY * psaParams);
         
         DECLSPEC_XFGVIRT(IWorkspace3, GetClaimsToken2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetClaimsToken2 )( 
             __RPC__in IWorkspace3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrClaimsHint,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserHint,
-            /* [annotation][in] */ 
-            _In_  ULONG claimCookie,
-            /* [annotation][in] */ 
-            _In_  ULONG hwndCredUiParent,
-            /* [annotation][in] */ 
-            _In_  RECT rectCredUiParent,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrAccessToken);
+            /* [in] */ __RPC__in BSTR bstrClaimsHint,
+            /* [in] */ __RPC__in BSTR bstrUserHint,
+            /* [in] */ ULONG claimCookie,
+            /* [in] */ ULONG hwndCredUiParent,
+            /* [in] */ RECT rectCredUiParent,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAccessToken);
         
         DECLSPEC_XFGVIRT(IWorkspace3, SetClaimsToken)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetClaimsToken )( 
             __RPC__in IWorkspace3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAccessToken,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullAccessTokenExpiration,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRefreshToken);
+            /* [in] */ __RPC__in BSTR bstrAccessToken,
+            /* [in] */ ULONGLONG ullAccessTokenExpiration,
+            /* [in] */ __RPC__in BSTR bstrRefreshToken);
         
         END_INTERFACE
     } IWorkspace3Vtbl;
@@ -599,14 +544,11 @@ EXTERN_C const IID IID_IWorkspaceRegistration;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AddResource( 
-            /* [annotation][in] */ 
-            _In_  IWorkspaceClientExt *pUnk,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie) = 0;
+            /* [in] */ __RPC__in_opt IWorkspaceClientExt *pUnk,
+            /* [out] */ __RPC__out DWORD *pdwCookie) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RemoveResource( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookieConnection) = 0;
+            /* [in] */ DWORD dwCookieConnection) = 0;
         
     };
     
@@ -620,8 +562,7 @@ EXTERN_C const IID IID_IWorkspaceRegistration;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspaceRegistration * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -636,16 +577,13 @@ EXTERN_C const IID IID_IWorkspaceRegistration;
         DECLSPEC_XFGVIRT(IWorkspaceRegistration, AddResource)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddResource )( 
             __RPC__in IWorkspaceRegistration * This,
-            /* [annotation][in] */ 
-            _In_  IWorkspaceClientExt *pUnk,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie);
+            /* [in] */ __RPC__in_opt IWorkspaceClientExt *pUnk,
+            /* [out] */ __RPC__out DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(IWorkspaceRegistration, RemoveResource)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveResource )( 
             __RPC__in IWorkspaceRegistration * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookieConnection);
+            /* [in] */ DWORD dwCookieConnection);
         
         END_INTERFACE
     } IWorkspaceRegistrationVtbl;
@@ -703,20 +641,14 @@ EXTERN_C const IID IID_IWorkspaceRegistration2;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AddResourceEx( 
-            /* [annotation][in] */ 
-            _In_  IWorkspaceClientExt *pUnk,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrEventLogUploadAddress,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie,
-            /* [annotation][in] */ 
-            _In_  GUID correlationId) = 0;
+            /* [in] */ __RPC__in_opt IWorkspaceClientExt *pUnk,
+            /* [in] */ __RPC__in BSTR bstrEventLogUploadAddress,
+            /* [out] */ __RPC__out DWORD *pdwCookie,
+            /* [in] */ GUID correlationId) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RemoveResourceEx( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookieConnection,
-            /* [annotation][in] */ 
-            _In_  GUID correlationId) = 0;
+            /* [in] */ DWORD dwCookieConnection,
+            /* [in] */ GUID correlationId) = 0;
         
     };
     
@@ -730,8 +662,7 @@ EXTERN_C const IID IID_IWorkspaceRegistration2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspaceRegistration2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -746,36 +677,27 @@ EXTERN_C const IID IID_IWorkspaceRegistration2;
         DECLSPEC_XFGVIRT(IWorkspaceRegistration, AddResource)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddResource )( 
             __RPC__in IWorkspaceRegistration2 * This,
-            /* [annotation][in] */ 
-            _In_  IWorkspaceClientExt *pUnk,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie);
+            /* [in] */ __RPC__in_opt IWorkspaceClientExt *pUnk,
+            /* [out] */ __RPC__out DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(IWorkspaceRegistration, RemoveResource)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveResource )( 
             __RPC__in IWorkspaceRegistration2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookieConnection);
+            /* [in] */ DWORD dwCookieConnection);
         
         DECLSPEC_XFGVIRT(IWorkspaceRegistration2, AddResourceEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddResourceEx )( 
             __RPC__in IWorkspaceRegistration2 * This,
-            /* [annotation][in] */ 
-            _In_  IWorkspaceClientExt *pUnk,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrEventLogUploadAddress,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie,
-            /* [annotation][in] */ 
-            _In_  GUID correlationId);
+            /* [in] */ __RPC__in_opt IWorkspaceClientExt *pUnk,
+            /* [in] */ __RPC__in BSTR bstrEventLogUploadAddress,
+            /* [out] */ __RPC__out DWORD *pdwCookie,
+            /* [in] */ GUID correlationId);
         
         DECLSPEC_XFGVIRT(IWorkspaceRegistration2, RemoveResourceEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveResourceEx )( 
             __RPC__in IWorkspaceRegistration2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookieConnection,
-            /* [annotation][in] */ 
-            _In_  GUID correlationId);
+            /* [in] */ DWORD dwCookieConnection,
+            /* [in] */ GUID correlationId);
         
         END_INTERFACE
     } IWorkspaceRegistration2Vtbl;
@@ -840,48 +762,33 @@ EXTERN_C const IID IID_IWorkspaceScriptable;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DisconnectWorkspace( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StartWorkspace( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceParams,
-            /* [annotation][in] */ 
-            _In_  LONG lTimeout,
-            /* [annotation][in] */ 
-            _In_  LONG lFlags) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceParams,
+            /* [in] */ LONG lTimeout,
+            /* [in] */ LONG lFlags) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsWorkspaceCredentialSpecified( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bCountUnauthenticatedCredentials,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbCredExist) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ VARIANT_BOOL bCountUnauthenticatedCredentials,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbCredExist) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsWorkspaceSSOEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbSSOEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSSOEnabled) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ClearWorkspaceCredential( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnAuthenticated( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrUserName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DisconnectWorkspaceByFriendlyName( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName) = 0;
         
     };
     
@@ -895,8 +802,7 @@ EXTERN_C const IID IID_IWorkspaceScriptable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -911,31 +817,23 @@ EXTERN_C const IID IID_IWorkspaceScriptable;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -960,60 +858,45 @@ EXTERN_C const IID IID_IWorkspaceScriptable;
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, DisconnectWorkspace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisconnectWorkspace )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, StartWorkspace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartWorkspace )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceParams,
-            /* [annotation][in] */ 
-            _In_  LONG lTimeout,
-            /* [annotation][in] */ 
-            _In_  LONG lFlags);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceParams,
+            /* [in] */ LONG lTimeout,
+            /* [in] */ LONG lFlags);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, IsWorkspaceCredentialSpecified)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsWorkspaceCredentialSpecified )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bCountUnauthenticatedCredentials,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbCredExist);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ VARIANT_BOOL bCountUnauthenticatedCredentials,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbCredExist);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, IsWorkspaceSSOEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsWorkspaceSSOEnabled )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbSSOEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSSOEnabled);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, ClearWorkspaceCredential)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClearWorkspaceCredential )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, OnAuthenticated)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnAuthenticated )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrUserName);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, DisconnectWorkspaceByFriendlyName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisconnectWorkspaceByFriendlyName )( 
             __RPC__in IWorkspaceScriptable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName);
         
         END_INTERFACE
     } IWorkspaceScriptableVtbl;
@@ -1099,30 +982,19 @@ EXTERN_C const IID IID_IWorkspaceScriptable2;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StartWorkspaceEx( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRedirectorName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAppContainer,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceParams,
-            /* [annotation][in] */ 
-            _In_  LONG lTimeout,
-            /* [annotation][in] */ 
-            _In_  LONG lFlags) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName,
+            /* [in] */ __RPC__in BSTR bstrRedirectorName,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword,
+            /* [in] */ __RPC__in BSTR bstrAppContainer,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceParams,
+            /* [in] */ LONG lTimeout,
+            /* [in] */ LONG lFlags) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ResourceDismissed( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName) = 0;
         
     };
     
@@ -1136,8 +1008,7 @@ EXTERN_C const IID IID_IWorkspaceScriptable2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1152,31 +1023,23 @@ EXTERN_C const IID IID_IWorkspaceScriptable2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1201,90 +1064,64 @@ EXTERN_C const IID IID_IWorkspaceScriptable2;
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, DisconnectWorkspace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisconnectWorkspace )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, StartWorkspace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartWorkspace )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceParams,
-            /* [annotation][in] */ 
-            _In_  LONG lTimeout,
-            /* [annotation][in] */ 
-            _In_  LONG lFlags);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceParams,
+            /* [in] */ LONG lTimeout,
+            /* [in] */ LONG lFlags);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, IsWorkspaceCredentialSpecified)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsWorkspaceCredentialSpecified )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bCountUnauthenticatedCredentials,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbCredExist);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ VARIANT_BOOL bCountUnauthenticatedCredentials,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbCredExist);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, IsWorkspaceSSOEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsWorkspaceSSOEnabled )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbSSOEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSSOEnabled);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, ClearWorkspaceCredential)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClearWorkspaceCredential )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, OnAuthenticated)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnAuthenticated )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrUserName);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, DisconnectWorkspaceByFriendlyName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisconnectWorkspaceByFriendlyName )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable2, StartWorkspaceEx)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartWorkspaceEx )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRedirectorName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAppContainer,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceParams,
-            /* [annotation][in] */ 
-            _In_  LONG lTimeout,
-            /* [annotation][in] */ 
-            _In_  LONG lFlags);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName,
+            /* [in] */ __RPC__in BSTR bstrRedirectorName,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword,
+            /* [in] */ __RPC__in BSTR bstrAppContainer,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceParams,
+            /* [in] */ LONG lTimeout,
+            /* [in] */ LONG lFlags);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable2, ResourceDismissed)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ResourceDismissed )( 
             __RPC__in IWorkspaceScriptable2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName);
         
         END_INTERFACE
     } IWorkspaceScriptable2Vtbl;
@@ -1377,28 +1214,17 @@ EXTERN_C const IID IID_IWorkspaceScriptable3;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StartWorkspaceEx2( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRedirectorName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAppContainer,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceParams,
-            /* [annotation][in] */ 
-            _In_  LONG lTimeout,
-            /* [annotation][in] */ 
-            _In_  LONG lFlags,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrEventLogUploadAddress,
-            /* [annotation][in] */ 
-            _In_  GUID correlationId) = 0;
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName,
+            /* [in] */ __RPC__in BSTR bstrRedirectorName,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword,
+            /* [in] */ __RPC__in BSTR bstrAppContainer,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceParams,
+            /* [in] */ LONG lTimeout,
+            /* [in] */ LONG lFlags,
+            /* [in] */ __RPC__in BSTR bstrEventLogUploadAddress,
+            /* [in] */ GUID correlationId) = 0;
         
     };
     
@@ -1412,8 +1238,7 @@ EXTERN_C const IID IID_IWorkspaceScriptable3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1428,31 +1253,23 @@ EXTERN_C const IID IID_IWorkspaceScriptable3;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1477,116 +1294,79 @@ EXTERN_C const IID IID_IWorkspaceScriptable3;
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, DisconnectWorkspace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisconnectWorkspace )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, StartWorkspace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartWorkspace )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceParams,
-            /* [annotation][in] */ 
-            _In_  LONG lTimeout,
-            /* [annotation][in] */ 
-            _In_  LONG lFlags);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceParams,
+            /* [in] */ LONG lTimeout,
+            /* [in] */ LONG lFlags);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, IsWorkspaceCredentialSpecified)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsWorkspaceCredentialSpecified )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bCountUnauthenticatedCredentials,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbCredExist);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ VARIANT_BOOL bCountUnauthenticatedCredentials,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbCredExist);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, IsWorkspaceSSOEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsWorkspaceSSOEnabled )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbSSOEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSSOEnabled);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, ClearWorkspaceCredential)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClearWorkspaceCredential )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, OnAuthenticated)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnAuthenticated )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrUserName);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable, DisconnectWorkspaceByFriendlyName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisconnectWorkspaceByFriendlyName )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable2, StartWorkspaceEx)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartWorkspaceEx )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRedirectorName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAppContainer,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceParams,
-            /* [annotation][in] */ 
-            _In_  LONG lTimeout,
-            /* [annotation][in] */ 
-            _In_  LONG lFlags);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName,
+            /* [in] */ __RPC__in BSTR bstrRedirectorName,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword,
+            /* [in] */ __RPC__in BSTR bstrAppContainer,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceParams,
+            /* [in] */ LONG lTimeout,
+            /* [in] */ LONG lFlags);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable2, ResourceDismissed)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ResourceDismissed )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName);
         
         DECLSPEC_XFGVIRT(IWorkspaceScriptable3, StartWorkspaceEx2)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartWorkspaceEx2 )( 
             __RPC__in IWorkspaceScriptable3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceFriendlyName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRedirectorName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAppContainer,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWorkspaceParams,
-            /* [annotation][in] */ 
-            _In_  LONG lTimeout,
-            /* [annotation][in] */ 
-            _In_  LONG lFlags,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrEventLogUploadAddress,
-            /* [annotation][in] */ 
-            _In_  GUID correlationId);
+            /* [in] */ __RPC__in BSTR bstrWorkspaceId,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceFriendlyName,
+            /* [in] */ __RPC__in BSTR bstrRedirectorName,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword,
+            /* [in] */ __RPC__in BSTR bstrAppContainer,
+            /* [in] */ __RPC__in BSTR bstrWorkspaceParams,
+            /* [in] */ LONG lTimeout,
+            /* [in] */ LONG lFlags,
+            /* [in] */ __RPC__in BSTR bstrEventLogUploadAddress,
+            /* [in] */ GUID correlationId);
         
         END_INTERFACE
     } IWorkspaceScriptable3Vtbl;
@@ -1683,30 +1463,20 @@ EXTERN_C const IID IID_IWorkspaceReportMessage;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RegisterErrorLogMessage( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMessage) = 0;
+            /* [in] */ __RPC__in BSTR bstrMessage) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE IsErrorMessageRegistered( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWkspId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwErrorType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrErrorMessageType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwErrorCode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfErrorExist) = 0;
+            /* [in] */ __RPC__in BSTR bstrWkspId,
+            /* [in] */ DWORD dwErrorType,
+            /* [in] */ __RPC__in BSTR bstrErrorMessageType,
+            /* [in] */ DWORD dwErrorCode,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfErrorExist) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RegisterErrorEvent( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWkspId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwErrorType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrErrorMessageType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwErrorCode) = 0;
+            /* [in] */ __RPC__in BSTR bstrWkspId,
+            /* [in] */ DWORD dwErrorType,
+            /* [in] */ __RPC__in BSTR bstrErrorMessageType,
+            /* [in] */ DWORD dwErrorCode) = 0;
         
     };
     
@@ -1720,8 +1490,7 @@ EXTERN_C const IID IID_IWorkspaceReportMessage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWorkspaceReportMessage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1736,34 +1505,24 @@ EXTERN_C const IID IID_IWorkspaceReportMessage;
         DECLSPEC_XFGVIRT(IWorkspaceReportMessage, RegisterErrorLogMessage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterErrorLogMessage )( 
             __RPC__in IWorkspaceReportMessage * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMessage);
+            /* [in] */ __RPC__in BSTR bstrMessage);
         
         DECLSPEC_XFGVIRT(IWorkspaceReportMessage, IsErrorMessageRegistered)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *IsErrorMessageRegistered )( 
             __RPC__in IWorkspaceReportMessage * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWkspId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwErrorType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrErrorMessageType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwErrorCode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfErrorExist);
+            /* [in] */ __RPC__in BSTR bstrWkspId,
+            /* [in] */ DWORD dwErrorType,
+            /* [in] */ __RPC__in BSTR bstrErrorMessageType,
+            /* [in] */ DWORD dwErrorCode,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfErrorExist);
         
         DECLSPEC_XFGVIRT(IWorkspaceReportMessage, RegisterErrorEvent)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterErrorEvent )( 
             __RPC__in IWorkspaceReportMessage * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrWkspId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwErrorType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrErrorMessageType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwErrorCode);
+            /* [in] */ __RPC__in BSTR bstrWkspId,
+            /* [in] */ DWORD dwErrorType,
+            /* [in] */ __RPC__in BSTR bstrErrorMessageType,
+            /* [in] */ DWORD dwErrorCode);
         
         END_INTERFACE
     } IWorkspaceReportMessageVtbl;
@@ -1843,8 +1602,7 @@ EXTERN_C const IID DIID__ITSWkspEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _ITSWkspEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1859,31 +1617,23 @@ EXTERN_C const IID DIID__ITSWkspEvents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _ITSWkspEvents * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _ITSWkspEvents * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _ITSWkspEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 

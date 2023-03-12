@@ -84,6 +84,8 @@ namespace Windows
 
             interface ISharedModeSettingsStatics2;
 
+            interface ISmartAppControlPolicyStatics;
+
             interface ISystemIdentificationInfo;
 
             interface ISystemIdentificationStatics;
@@ -113,6 +115,8 @@ namespace Windows
             runtimeclass RetailInfo;
 
             runtimeclass SharedModeSettings;
+
+            runtimeclass SmartAppControlPolicy;
 
             runtimeclass SystemIdentification;
 
@@ -336,6 +340,16 @@ namespace Windows
                 [propget] HRESULT ShouldAvoidLocalStorage([out] [retval] boolean* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.System.Profile.SmartAppControlPolicy)]
+            [uuid(5FF8C75B-073E-5015-8D98-5FF224180A0B)]
+            interface ISmartAppControlPolicyStatics : IInspectable
+            {
+                [propget] HRESULT IsEnabled([out] [retval] boolean* value);
+                [eventadd] HRESULT Changed([in] Windows.Foundation.EventHandler<IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT Changed([in] EventRegistrationToken token);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
             [exclusiveto(Windows.System.Profile.SystemIdentificationInfo)]
             [uuid(0C659E7D-C3C2-4D33-A2DF-21BC41916EB3)]
@@ -356,7 +370,7 @@ namespace Windows
 
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]
             [exclusiveto(Windows.System.Profile.SystemSetupInfo)]
-            [uuid(2C9620A8-1D88-5E2D-A324-A543AF4247EE)]
+            [uuid(B8366A4B-FB6A-4571-BE0A-9A0F67954123)]
             interface ISystemSetupInfoStatics : IInspectable
             {
                 [propget] HRESULT OutOfBoxExperienceState([out] [retval] Windows.System.Profile.SystemOutOfBoxExperienceState* value);
@@ -462,6 +476,14 @@ namespace Windows
             [static(Windows.System.Profile.ISharedModeSettingsStatics, Windows.System.Profile.ProfileSharedModeContract, 1.0)]
             [static(Windows.System.Profile.ISharedModeSettingsStatics2, Windows.System.Profile.ProfileSharedModeContract, 2.0)]
             runtimeclass SharedModeSettings
+            {
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.System.Profile.ISmartAppControlPolicyStatics, Windows.Foundation.UniversalApiContract, 15.0)]
+            [threading(both)]
+            runtimeclass SmartAppControlPolicy
             {
             }
 

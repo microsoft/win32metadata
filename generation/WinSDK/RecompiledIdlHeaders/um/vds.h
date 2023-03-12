@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -1287,8 +1287,7 @@ EXTERN_C const IID IID_IEnumVdsObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumVdsObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1404,8 +1403,7 @@ EXTERN_C const IID IID_IVdsAsync;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsAsync * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1507,8 +1505,7 @@ EXTERN_C const IID IID_IVdsAdviseSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsAdviseSink * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1593,8 +1590,7 @@ EXTERN_C const IID IID_IVdsProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1678,8 +1674,7 @@ EXTERN_C const IID IID_IVdsProviderSupport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsProviderSupport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2268,8 +2263,7 @@ EXTERN_C const IID IID_IVdsSwProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSwProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2402,8 +2396,7 @@ EXTERN_C const IID IID_IVdsPack;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsPack * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2578,8 +2571,7 @@ EXTERN_C const IID IID_IVdsPack2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsPack2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2687,8 +2679,7 @@ EXTERN_C const IID IID_IVdsDisk;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsDisk * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2821,8 +2812,7 @@ EXTERN_C const IID IID_IVdsDisk2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsDisk2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2907,8 +2897,7 @@ EXTERN_C const IID IID_IVdsDiskOnline;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsDiskOnline * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3046,8 +3035,7 @@ EXTERN_C const IID IID_IVdsAdvancedDisk;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsAdvancedDisk * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3226,8 +3214,7 @@ EXTERN_C const IID IID_IVdsAdvancedDisk2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsAdvancedDisk2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3316,8 +3303,7 @@ EXTERN_C const IID IID_IVdsAdvancedDisk3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsAdvancedDisk3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3413,8 +3399,7 @@ EXTERN_C const IID IID_IVdsCreatePartitionEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsCreatePartitionEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3503,8 +3488,7 @@ EXTERN_C const IID IID_IVdsRemovable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsRemovable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3631,8 +3615,7 @@ EXTERN_C const IID IID_IVdsVolume;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsVolume * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3803,8 +3786,7 @@ EXTERN_C const IID IID_IVdsVolume2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsVolume2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3887,8 +3869,7 @@ EXTERN_C const IID IID_IVdsVolumeOnline;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsVolumeOnline * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3983,8 +3964,7 @@ EXTERN_C const IID IID_IVdsVolumePlex;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsVolumePlex * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4100,8 +4080,7 @@ EXTERN_C const IID IID_IVdsDisk3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsDisk3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4923,8 +4902,7 @@ EXTERN_C const IID IID_IVdsHwProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHwProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5022,8 +5000,7 @@ EXTERN_C const IID IID_IVdsHwProviderType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHwProviderType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5107,8 +5084,7 @@ EXTERN_C const IID IID_IVdsHwProviderType2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHwProviderType2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5209,8 +5185,7 @@ EXTERN_C const IID IID_IVdsHwProviderStoragePools;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHwProviderStoragePools * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5369,8 +5344,7 @@ EXTERN_C const IID IID_IVdsSubSystem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5579,8 +5553,7 @@ EXTERN_C const IID IID_IVdsSubSystem2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystem2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5701,8 +5674,7 @@ EXTERN_C const IID IID_IVdsSubSystemNaming;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystemNaming * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5797,8 +5769,7 @@ EXTERN_C const IID IID_IVdsSubSystemIscsi;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystemIscsi * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5908,8 +5879,7 @@ EXTERN_C const IID IID_IVdsSubSystemInterconnect;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystemInterconnect * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6004,8 +5974,7 @@ EXTERN_C const IID IID_IVdsControllerPort;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsControllerPort * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6139,8 +6108,7 @@ EXTERN_C const IID IID_IVdsController;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsController * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6278,8 +6246,7 @@ EXTERN_C const IID IID_IVdsControllerControllerPort;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsControllerControllerPort * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6379,8 +6346,7 @@ EXTERN_C const IID IID_IVdsDrive;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsDrive * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6505,8 +6471,7 @@ EXTERN_C const IID IID_IVdsDrive2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsDrive2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6648,8 +6613,7 @@ EXTERN_C const IID IID_IVdsLun;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLun * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6874,8 +6838,7 @@ EXTERN_C const IID IID_IVdsLun2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLun2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6967,8 +6930,7 @@ EXTERN_C const IID IID_IVdsLunNaming;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunNaming * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7052,8 +7014,7 @@ EXTERN_C const IID IID_IVdsLunNumber;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunNumber * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7143,8 +7104,7 @@ EXTERN_C const IID IID_IVdsLunControllerPorts;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunControllerPorts * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7253,8 +7213,7 @@ EXTERN_C const IID IID_IVdsLunMpio;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunMpio * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7371,8 +7330,7 @@ EXTERN_C const IID IID_IVdsLunIscsi;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunIscsi * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7478,8 +7436,7 @@ EXTERN_C const IID IID_IVdsLunPlex;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunPlex * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7618,8 +7575,7 @@ EXTERN_C const IID IID_IVdsIscsiPortal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsIscsiPortal * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7785,8 +7741,7 @@ EXTERN_C const IID IID_IVdsIscsiTarget;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsIscsiTarget * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7962,8 +7917,7 @@ EXTERN_C const IID IID_IVdsIscsiPortalGroup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsIscsiPortalGroup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8105,8 +8059,7 @@ EXTERN_C const IID IID_IVdsStoragePool;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsStoragePool * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8238,8 +8191,7 @@ EXTERN_C const IID IID_IVdsMaintenance;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsMaintenance * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8399,8 +8351,7 @@ EXTERN_C const IID IID_IVdsVdProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsVdProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8580,8 +8531,7 @@ EXTERN_C const IID IID_IVdsVDisk;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsVDisk * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8719,8 +8669,7 @@ EXTERN_C const IID IID_IVdsOpenVDisk;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsOpenVDisk * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9042,10 +8991,8 @@ EXTERN_C const IID IID_IVdsServiceLoader;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE LoadService( 
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszMachineName,
-            /* [annotation][out] */ 
-            _Out_  IVdsService **ppService) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszMachineName,
+            /* [out] */ __RPC__deref_out_opt IVdsService **ppService) = 0;
         
     };
     
@@ -9059,8 +9006,7 @@ EXTERN_C const IID IID_IVdsServiceLoader;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsServiceLoader * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9075,10 +9021,8 @@ EXTERN_C const IID IID_IVdsServiceLoader;
         DECLSPEC_XFGVIRT(IVdsServiceLoader, LoadService)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *LoadService )( 
             __RPC__in IVdsServiceLoader * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszMachineName,
-            /* [annotation][out] */ 
-            _Out_  IVdsService **ppService);
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszMachineName,
+            /* [out] */ __RPC__deref_out_opt IVdsService **ppService);
         
         END_INTERFACE
     } IVdsServiceLoaderVtbl;
@@ -9137,44 +9081,31 @@ EXTERN_C const IID IID_IVdsService;
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE WaitForServiceReady( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetProperties( 
-            /* [annotation][out] */ 
-            _Out_  VDS_SERVICE_PROP *pServiceProp) = 0;
+            /* [out] */ __RPC__out VDS_SERVICE_PROP *pServiceProp) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryProviders( 
-            /* [annotation][in] */ 
-            _In_  DWORD masks,
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum) = 0;
+            /* [in] */ DWORD masks,
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryMaskedDisks( 
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryUnallocatedDisks( 
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetObject( 
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID ObjectId,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_TYPE type,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppObjectUnk) = 0;
+            /* [in] */ VDS_OBJECT_ID ObjectId,
+            /* [in] */ VDS_OBJECT_TYPE type,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppObjectUnk) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryDriveLetters( 
-            /* [annotation][in] */ 
-            _In_  WCHAR wcFirstLetter,
-            /* [annotation][in] */ 
-            _In_  DWORD count,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(count)  VDS_DRIVE_LETTER_PROP *pDriveLetterPropArray) = 0;
+            /* [in] */ WCHAR wcFirstLetter,
+            /* [in] */ DWORD count,
+            /* [size_is][out] */ __RPC__out_ecount_full(count) VDS_DRIVE_LETTER_PROP *pDriveLetterPropArray) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryFileSystemTypes( 
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*plNumberOfFileSystems)  VDS_FILE_SYSTEM_TYPE_PROP **ppFileSystemTypeProps,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNumberOfFileSystems) = 0;
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfFileSystems) VDS_FILE_SYSTEM_TYPE_PROP **ppFileSystemTypeProps,
+            /* [out] */ __RPC__out LONG *plNumberOfFileSystems) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Reenumerate( void) = 0;
         
@@ -9183,24 +9114,19 @@ EXTERN_C const IID IID_IVdsService;
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CleanupObsoleteMountPoints( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Advise( 
-            /* [annotation][in] */ 
-            _In_  IVdsAdviseSink *pSink,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie) = 0;
+            /* [in] */ __RPC__in_opt IVdsAdviseSink *pSink,
+            /* [out] */ __RPC__out DWORD *pdwCookie) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Unadvise( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie) = 0;
+            /* [in] */ DWORD dwCookie) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Reboot( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetFlags( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulFlags) = 0;
+            /* [in] */ ULONG ulFlags) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ClearFlags( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulFlags) = 0;
+            /* [in] */ ULONG ulFlags) = 0;
         
     };
     
@@ -9214,8 +9140,7 @@ EXTERN_C const IID IID_IVdsService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9238,56 +9163,43 @@ EXTERN_C const IID IID_IVdsService;
         DECLSPEC_XFGVIRT(IVdsService, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsService * This,
-            /* [annotation][out] */ 
-            _Out_  VDS_SERVICE_PROP *pServiceProp);
+            /* [out] */ __RPC__out VDS_SERVICE_PROP *pServiceProp);
         
         DECLSPEC_XFGVIRT(IVdsService, QueryProviders)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryProviders )( 
             __RPC__in IVdsService * This,
-            /* [annotation][in] */ 
-            _In_  DWORD masks,
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum);
+            /* [in] */ DWORD masks,
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
         DECLSPEC_XFGVIRT(IVdsService, QueryMaskedDisks)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryMaskedDisks )( 
             __RPC__in IVdsService * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
         DECLSPEC_XFGVIRT(IVdsService, QueryUnallocatedDisks)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryUnallocatedDisks )( 
             __RPC__in IVdsService * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
         DECLSPEC_XFGVIRT(IVdsService, GetObject)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetObject )( 
             __RPC__in IVdsService * This,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID ObjectId,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_TYPE type,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppObjectUnk);
+            /* [in] */ VDS_OBJECT_ID ObjectId,
+            /* [in] */ VDS_OBJECT_TYPE type,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppObjectUnk);
         
         DECLSPEC_XFGVIRT(IVdsService, QueryDriveLetters)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryDriveLetters )( 
             __RPC__in IVdsService * This,
-            /* [annotation][in] */ 
-            _In_  WCHAR wcFirstLetter,
-            /* [annotation][in] */ 
-            _In_  DWORD count,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(count)  VDS_DRIVE_LETTER_PROP *pDriveLetterPropArray);
+            /* [in] */ WCHAR wcFirstLetter,
+            /* [in] */ DWORD count,
+            /* [size_is][out] */ __RPC__out_ecount_full(count) VDS_DRIVE_LETTER_PROP *pDriveLetterPropArray);
         
         DECLSPEC_XFGVIRT(IVdsService, QueryFileSystemTypes)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryFileSystemTypes )( 
             __RPC__in IVdsService * This,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*plNumberOfFileSystems)  VDS_FILE_SYSTEM_TYPE_PROP **ppFileSystemTypeProps,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNumberOfFileSystems);
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfFileSystems) VDS_FILE_SYSTEM_TYPE_PROP **ppFileSystemTypeProps,
+            /* [out] */ __RPC__out LONG *plNumberOfFileSystems);
         
         DECLSPEC_XFGVIRT(IVdsService, Reenumerate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reenumerate )( 
@@ -9304,16 +9216,13 @@ EXTERN_C const IID IID_IVdsService;
         DECLSPEC_XFGVIRT(IVdsService, Advise)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Advise )( 
             __RPC__in IVdsService * This,
-            /* [annotation][in] */ 
-            _In_  IVdsAdviseSink *pSink,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie);
+            /* [in] */ __RPC__in_opt IVdsAdviseSink *pSink,
+            /* [out] */ __RPC__out DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(IVdsService, Unadvise)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Unadvise )( 
             __RPC__in IVdsService * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie);
+            /* [in] */ DWORD dwCookie);
         
         DECLSPEC_XFGVIRT(IVdsService, Reboot)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reboot )( 
@@ -9322,14 +9231,12 @@ EXTERN_C const IID IID_IVdsService;
         DECLSPEC_XFGVIRT(IVdsService, SetFlags)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             __RPC__in IVdsService * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulFlags);
+            /* [in] */ ULONG ulFlags);
         
         DECLSPEC_XFGVIRT(IVdsService, ClearFlags)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ClearFlags )( 
             __RPC__in IVdsService * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulFlags);
+            /* [in] */ ULONG ulFlags);
         
         END_INTERFACE
     } IVdsServiceVtbl;
@@ -9432,22 +9339,15 @@ EXTERN_C const IID IID_IVdsServiceUninstallDisk;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDiskIdFromLunInfo( 
-            /* [annotation][in] */ 
-            _In_  VDS_LUN_INFORMATION *pLunInfo,
-            /* [annotation][out] */ 
-            _Out_  VDS_OBJECT_ID *pDiskId) = 0;
+            /* [in] */ __RPC__in VDS_LUN_INFORMATION *pLunInfo,
+            /* [out] */ __RPC__out VDS_OBJECT_ID *pDiskId) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE UninstallDisks( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  VDS_OBJECT_ID *pDiskIdArray,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][in] */ 
-            _In_  BOOLEAN bForce,
-            /* [annotation][out] */ 
-            _Out_  BOOLEAN *pbReboot,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(ulCount)  HRESULT *pResults) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) VDS_OBJECT_ID *pDiskIdArray,
+            /* [in] */ ULONG ulCount,
+            /* [in] */ BOOLEAN bForce,
+            /* [out] */ __RPC__out BOOLEAN *pbReboot,
+            /* [size_is][out] */ __RPC__out_ecount_full(ulCount) HRESULT *pResults) = 0;
         
     };
     
@@ -9461,8 +9361,7 @@ EXTERN_C const IID IID_IVdsServiceUninstallDisk;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsServiceUninstallDisk * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9477,24 +9376,17 @@ EXTERN_C const IID IID_IVdsServiceUninstallDisk;
         DECLSPEC_XFGVIRT(IVdsServiceUninstallDisk, GetDiskIdFromLunInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDiskIdFromLunInfo )( 
             __RPC__in IVdsServiceUninstallDisk * This,
-            /* [annotation][in] */ 
-            _In_  VDS_LUN_INFORMATION *pLunInfo,
-            /* [annotation][out] */ 
-            _Out_  VDS_OBJECT_ID *pDiskId);
+            /* [in] */ __RPC__in VDS_LUN_INFORMATION *pLunInfo,
+            /* [out] */ __RPC__out VDS_OBJECT_ID *pDiskId);
         
         DECLSPEC_XFGVIRT(IVdsServiceUninstallDisk, UninstallDisks)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UninstallDisks )( 
             __RPC__in IVdsServiceUninstallDisk * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  VDS_OBJECT_ID *pDiskIdArray,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][in] */ 
-            _In_  BOOLEAN bForce,
-            /* [annotation][out] */ 
-            _Out_  BOOLEAN *pbReboot,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(ulCount)  HRESULT *pResults);
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) VDS_OBJECT_ID *pDiskIdArray,
+            /* [in] */ ULONG ulCount,
+            /* [in] */ BOOLEAN bForce,
+            /* [out] */ __RPC__out BOOLEAN *pbReboot,
+            /* [size_is][out] */ __RPC__out_ecount_full(ulCount) HRESULT *pResults);
         
         END_INTERFACE
     } IVdsServiceUninstallDiskVtbl;
@@ -9552,8 +9444,7 @@ EXTERN_C const IID IID_IVdsServiceHba;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryHbaPorts( 
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum) = 0;
         
     };
     
@@ -9567,8 +9458,7 @@ EXTERN_C const IID IID_IVdsServiceHba;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsServiceHba * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9583,8 +9473,7 @@ EXTERN_C const IID IID_IVdsServiceHba;
         DECLSPEC_XFGVIRT(IVdsServiceHba, QueryHbaPorts)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryHbaPorts )( 
             __RPC__in IVdsServiceHba * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
         END_INTERFACE
     } IVdsServiceHbaVtbl;
@@ -9639,42 +9528,30 @@ EXTERN_C const IID IID_IVdsServiceIscsi;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetInitiatorName( 
-            /* [annotation][string][out] */ 
-            _Out_  LPWSTR *ppwszIscsiName) = 0;
+            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppwszIscsiName) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryInitiatorAdapters( 
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetIpsecGroupPresharedKey( 
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_IPSEC_KEY *pIpsecKey) = 0;
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_IPSEC_KEY *pIpsecKey) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetAllIpsecTunnelAddresses( 
-            /* [annotation][in] */ 
-            _In_  VDS_IPADDRESS *pTunnelAddress,
-            /* [annotation][in] */ 
-            _In_  VDS_IPADDRESS *pDestinationAddress) = 0;
+            /* [in] */ __RPC__in VDS_IPADDRESS *pTunnelAddress,
+            /* [in] */ __RPC__in VDS_IPADDRESS *pDestinationAddress) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetAllIpsecSecurity( 
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetPortalId,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullSecurityFlags,
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_IPSEC_KEY *pIpsecKey) = 0;
+            /* [in] */ VDS_OBJECT_ID targetPortalId,
+            /* [in] */ ULONGLONG ullSecurityFlags,
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_IPSEC_KEY *pIpsecKey) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetInitiatorSharedSecret( 
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_SHARED_SECRET *pInitiatorSharedSecret,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetId) = 0;
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_SHARED_SECRET *pInitiatorSharedSecret,
+            /* [in] */ VDS_OBJECT_ID targetId) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RememberTargetSharedSecret( 
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetId,
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_SHARED_SECRET *pTargetSharedSecret) = 0;
+            /* [in] */ VDS_OBJECT_ID targetId,
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_SHARED_SECRET *pTargetSharedSecret) = 0;
         
     };
     
@@ -9688,8 +9565,7 @@ EXTERN_C const IID IID_IVdsServiceIscsi;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsServiceIscsi * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9704,54 +9580,42 @@ EXTERN_C const IID IID_IVdsServiceIscsi;
         DECLSPEC_XFGVIRT(IVdsServiceIscsi, GetInitiatorName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetInitiatorName )( 
             __RPC__in IVdsServiceIscsi * This,
-            /* [annotation][string][out] */ 
-            _Out_  LPWSTR *ppwszIscsiName);
+            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppwszIscsiName);
         
         DECLSPEC_XFGVIRT(IVdsServiceIscsi, QueryInitiatorAdapters)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryInitiatorAdapters )( 
             __RPC__in IVdsServiceIscsi * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
         DECLSPEC_XFGVIRT(IVdsServiceIscsi, SetIpsecGroupPresharedKey)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetIpsecGroupPresharedKey )( 
             __RPC__in IVdsServiceIscsi * This,
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_IPSEC_KEY *pIpsecKey);
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_IPSEC_KEY *pIpsecKey);
         
         DECLSPEC_XFGVIRT(IVdsServiceIscsi, SetAllIpsecTunnelAddresses)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetAllIpsecTunnelAddresses )( 
             __RPC__in IVdsServiceIscsi * This,
-            /* [annotation][in] */ 
-            _In_  VDS_IPADDRESS *pTunnelAddress,
-            /* [annotation][in] */ 
-            _In_  VDS_IPADDRESS *pDestinationAddress);
+            /* [in] */ __RPC__in VDS_IPADDRESS *pTunnelAddress,
+            /* [in] */ __RPC__in VDS_IPADDRESS *pDestinationAddress);
         
         DECLSPEC_XFGVIRT(IVdsServiceIscsi, SetAllIpsecSecurity)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetAllIpsecSecurity )( 
             __RPC__in IVdsServiceIscsi * This,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetPortalId,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullSecurityFlags,
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_IPSEC_KEY *pIpsecKey);
+            /* [in] */ VDS_OBJECT_ID targetPortalId,
+            /* [in] */ ULONGLONG ullSecurityFlags,
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_IPSEC_KEY *pIpsecKey);
         
         DECLSPEC_XFGVIRT(IVdsServiceIscsi, SetInitiatorSharedSecret)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetInitiatorSharedSecret )( 
             __RPC__in IVdsServiceIscsi * This,
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_SHARED_SECRET *pInitiatorSharedSecret,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetId);
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_SHARED_SECRET *pInitiatorSharedSecret,
+            /* [in] */ VDS_OBJECT_ID targetId);
         
         DECLSPEC_XFGVIRT(IVdsServiceIscsi, RememberTargetSharedSecret)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RememberTargetSharedSecret )( 
             __RPC__in IVdsServiceIscsi * This,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetId,
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_SHARED_SECRET *pTargetSharedSecret);
+            /* [in] */ VDS_OBJECT_ID targetId,
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_SHARED_SECRET *pTargetSharedSecret);
         
         END_INTERFACE
     } IVdsServiceIscsiVtbl;
@@ -9824,8 +9688,7 @@ EXTERN_C const IID IID_IVdsServiceInitialization;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszMachineName) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszMachineName) = 0;
         
     };
     
@@ -9839,8 +9702,7 @@ EXTERN_C const IID IID_IVdsServiceInitialization;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsServiceInitialization * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9855,8 +9717,7 @@ EXTERN_C const IID IID_IVdsServiceInitialization;
         DECLSPEC_XFGVIRT(IVdsServiceInitialization, Initialize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IVdsServiceInitialization * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszMachineName);
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszMachineName);
         
         END_INTERFACE
     } IVdsServiceInitializationVtbl;
@@ -9911,12 +9772,10 @@ EXTERN_C const IID IID_IVdsHbaPort;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetProperties( 
-            /* [annotation][out] */ 
-            _Out_  VDS_HBAPORT_PROP *pHbaPortProp) = 0;
+            /* [out] */ __RPC__out VDS_HBAPORT_PROP *pHbaPortProp) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetAllPathStatuses( 
-            /* [annotation][in] */ 
-            _In_  VDS_PATH_STATUS status) = 0;
+            /* [in] */ VDS_PATH_STATUS status) = 0;
         
     };
     
@@ -9930,8 +9789,7 @@ EXTERN_C const IID IID_IVdsHbaPort;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHbaPort * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9946,14 +9804,12 @@ EXTERN_C const IID IID_IVdsHbaPort;
         DECLSPEC_XFGVIRT(IVdsHbaPort, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsHbaPort * This,
-            /* [annotation][out] */ 
-            _Out_  VDS_HBAPORT_PROP *pHbaPortProp);
+            /* [out] */ __RPC__out VDS_HBAPORT_PROP *pHbaPortProp);
         
         DECLSPEC_XFGVIRT(IVdsHbaPort, SetAllPathStatuses)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetAllPathStatuses )( 
             __RPC__in IVdsHbaPort * This,
-            /* [annotation][in] */ 
-            _In_  VDS_PATH_STATUS status);
+            /* [in] */ VDS_PATH_STATUS status);
         
         END_INTERFACE
     } IVdsHbaPortVtbl;
@@ -10011,38 +9867,25 @@ EXTERN_C const IID IID_IVdsIscsiInitiatorAdapter;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetProperties( 
-            /* [annotation][out] */ 
-            _Out_  VDS_ISCSI_INITIATOR_ADAPTER_PROP *pInitiatorAdapterProp) = 0;
+            /* [out] */ __RPC__out VDS_ISCSI_INITIATOR_ADAPTER_PROP *pInitiatorAdapterProp) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryInitiatorPortals( 
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE LoginToTarget( 
-            /* [annotation][in] */ 
-            _In_  VDS_ISCSI_LOGIN_TYPE loginType,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetId,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetPortalId,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID initiatorPortalId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulLoginFlags,
-            /* [annotation][in] */ 
-            _In_  BOOL bHeaderDigest,
-            /* [annotation][in] */ 
-            _In_  BOOL bDataDigest,
-            /* [annotation][in] */ 
-            _In_  VDS_ISCSI_AUTH_TYPE authType,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync) = 0;
+            /* [in] */ VDS_ISCSI_LOGIN_TYPE loginType,
+            /* [in] */ VDS_OBJECT_ID targetId,
+            /* [in] */ VDS_OBJECT_ID targetPortalId,
+            /* [in] */ VDS_OBJECT_ID initiatorPortalId,
+            /* [in] */ ULONG ulLoginFlags,
+            /* [in] */ BOOL bHeaderDigest,
+            /* [in] */ BOOL bDataDigest,
+            /* [in] */ VDS_ISCSI_AUTH_TYPE authType,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE LogoutFromTarget( 
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetId,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync) = 0;
+            /* [in] */ VDS_OBJECT_ID targetId,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync) = 0;
         
     };
     
@@ -10056,8 +9899,7 @@ EXTERN_C const IID IID_IVdsIscsiInitiatorAdapter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsIscsiInitiatorAdapter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10072,44 +9914,31 @@ EXTERN_C const IID IID_IVdsIscsiInitiatorAdapter;
         DECLSPEC_XFGVIRT(IVdsIscsiInitiatorAdapter, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsIscsiInitiatorAdapter * This,
-            /* [annotation][out] */ 
-            _Out_  VDS_ISCSI_INITIATOR_ADAPTER_PROP *pInitiatorAdapterProp);
+            /* [out] */ __RPC__out VDS_ISCSI_INITIATOR_ADAPTER_PROP *pInitiatorAdapterProp);
         
         DECLSPEC_XFGVIRT(IVdsIscsiInitiatorAdapter, QueryInitiatorPortals)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryInitiatorPortals )( 
             __RPC__in IVdsIscsiInitiatorAdapter * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumVdsObject **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
         DECLSPEC_XFGVIRT(IVdsIscsiInitiatorAdapter, LoginToTarget)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *LoginToTarget )( 
             __RPC__in IVdsIscsiInitiatorAdapter * This,
-            /* [annotation][in] */ 
-            _In_  VDS_ISCSI_LOGIN_TYPE loginType,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetId,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetPortalId,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID initiatorPortalId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulLoginFlags,
-            /* [annotation][in] */ 
-            _In_  BOOL bHeaderDigest,
-            /* [annotation][in] */ 
-            _In_  BOOL bDataDigest,
-            /* [annotation][in] */ 
-            _In_  VDS_ISCSI_AUTH_TYPE authType,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync);
+            /* [in] */ VDS_ISCSI_LOGIN_TYPE loginType,
+            /* [in] */ VDS_OBJECT_ID targetId,
+            /* [in] */ VDS_OBJECT_ID targetPortalId,
+            /* [in] */ VDS_OBJECT_ID initiatorPortalId,
+            /* [in] */ ULONG ulLoginFlags,
+            /* [in] */ BOOL bHeaderDigest,
+            /* [in] */ BOOL bDataDigest,
+            /* [in] */ VDS_ISCSI_AUTH_TYPE authType,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
         DECLSPEC_XFGVIRT(IVdsIscsiInitiatorAdapter, LogoutFromTarget)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *LogoutFromTarget )( 
             __RPC__in IVdsIscsiInitiatorAdapter * This,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetId,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync);
+            /* [in] */ VDS_OBJECT_ID targetId,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
         END_INTERFACE
     } IVdsIscsiInitiatorAdapterVtbl;
@@ -10173,32 +10002,23 @@ EXTERN_C const IID IID_IVdsIscsiInitiatorPortal;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetProperties( 
-            /* [annotation][out] */ 
-            _Out_  VDS_ISCSI_INITIATOR_PORTAL_PROP *pInitiatorPortalProp) = 0;
+            /* [out] */ __RPC__out VDS_ISCSI_INITIATOR_PORTAL_PROP *pInitiatorPortalProp) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetInitiatorAdapter( 
-            /* [annotation][out] */ 
-            _Out_  IVdsIscsiInitiatorAdapter **ppInitiatorAdapter) = 0;
+            /* [out] */ __RPC__deref_out_opt IVdsIscsiInitiatorAdapter **ppInitiatorAdapter) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetIpsecTunnelAddress( 
-            /* [annotation][in] */ 
-            _In_  VDS_IPADDRESS *pTunnelAddress,
-            /* [annotation][in] */ 
-            _In_  VDS_IPADDRESS *pDestinationAddress) = 0;
+            /* [in] */ __RPC__in VDS_IPADDRESS *pTunnelAddress,
+            /* [in] */ __RPC__in VDS_IPADDRESS *pDestinationAddress) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetIpsecSecurity( 
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetPortalId,
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *pullSecurityFlags) = 0;
+            /* [in] */ VDS_OBJECT_ID targetPortalId,
+            /* [out] */ __RPC__out ULONGLONG *pullSecurityFlags) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetIpsecSecurity( 
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetPortalId,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullSecurityFlags,
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_IPSEC_KEY *pIpsecKey) = 0;
+            /* [in] */ VDS_OBJECT_ID targetPortalId,
+            /* [in] */ ULONGLONG ullSecurityFlags,
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_IPSEC_KEY *pIpsecKey) = 0;
         
     };
     
@@ -10212,8 +10032,7 @@ EXTERN_C const IID IID_IVdsIscsiInitiatorPortal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsIscsiInitiatorPortal * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10228,40 +10047,31 @@ EXTERN_C const IID IID_IVdsIscsiInitiatorPortal;
         DECLSPEC_XFGVIRT(IVdsIscsiInitiatorPortal, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsIscsiInitiatorPortal * This,
-            /* [annotation][out] */ 
-            _Out_  VDS_ISCSI_INITIATOR_PORTAL_PROP *pInitiatorPortalProp);
+            /* [out] */ __RPC__out VDS_ISCSI_INITIATOR_PORTAL_PROP *pInitiatorPortalProp);
         
         DECLSPEC_XFGVIRT(IVdsIscsiInitiatorPortal, GetInitiatorAdapter)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetInitiatorAdapter )( 
             __RPC__in IVdsIscsiInitiatorPortal * This,
-            /* [annotation][out] */ 
-            _Out_  IVdsIscsiInitiatorAdapter **ppInitiatorAdapter);
+            /* [out] */ __RPC__deref_out_opt IVdsIscsiInitiatorAdapter **ppInitiatorAdapter);
         
         DECLSPEC_XFGVIRT(IVdsIscsiInitiatorPortal, SetIpsecTunnelAddress)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetIpsecTunnelAddress )( 
             __RPC__in IVdsIscsiInitiatorPortal * This,
-            /* [annotation][in] */ 
-            _In_  VDS_IPADDRESS *pTunnelAddress,
-            /* [annotation][in] */ 
-            _In_  VDS_IPADDRESS *pDestinationAddress);
+            /* [in] */ __RPC__in VDS_IPADDRESS *pTunnelAddress,
+            /* [in] */ __RPC__in VDS_IPADDRESS *pDestinationAddress);
         
         DECLSPEC_XFGVIRT(IVdsIscsiInitiatorPortal, GetIpsecSecurity)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetIpsecSecurity )( 
             __RPC__in IVdsIscsiInitiatorPortal * This,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetPortalId,
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *pullSecurityFlags);
+            /* [in] */ VDS_OBJECT_ID targetPortalId,
+            /* [out] */ __RPC__out ULONGLONG *pullSecurityFlags);
         
         DECLSPEC_XFGVIRT(IVdsIscsiInitiatorPortal, SetIpsecSecurity)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetIpsecSecurity )( 
             __RPC__in IVdsIscsiInitiatorPortal * This,
-            /* [annotation][in] */ 
-            _In_  VDS_OBJECT_ID targetPortalId,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullSecurityFlags,
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_IPSEC_KEY *pIpsecKey);
+            /* [in] */ VDS_OBJECT_ID targetPortalId,
+            /* [in] */ ULONGLONG ullSecurityFlags,
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_IPSEC_KEY *pIpsecKey);
         
         END_INTERFACE
     } IVdsIscsiInitiatorPortalVtbl;
@@ -10328,44 +10138,28 @@ EXTERN_C const IID IID_IVdsDiskPartitionMF;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPartitionFileSystemProperties( 
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullOffset,
-            /* [annotation][out] */ 
-            _Out_  VDS_FILE_SYSTEM_PROP *pFileSystemProp) = 0;
+            /* [in] */ ULONGLONG ullOffset,
+            /* [out] */ __RPC__out VDS_FILE_SYSTEM_PROP *pFileSystemProp) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPartitionFileSystemTypeName( 
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullOffset,
-            /* [annotation][string][out] */ 
-            _Out_  LPWSTR *ppwszFileSystemTypeName) = 0;
+            /* [in] */ ULONGLONG ullOffset,
+            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppwszFileSystemTypeName) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryPartitionFileSystemFormatSupport( 
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullOffset,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*plNumberOfFileSystems)  VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP **ppFileSystemSupportProps,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNumberOfFileSystems) = 0;
+            /* [in] */ ULONGLONG ullOffset,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfFileSystems) VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP **ppFileSystemSupportProps,
+            /* [out] */ __RPC__out LONG *plNumberOfFileSystems) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE FormatPartitionEx( 
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullOffset,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszFileSystemTypeName,
-            /* [annotation][in] */ 
-            _In_  USHORT usFileSystemRevision,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDesiredUnitAllocationSize,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszLabel,
-            /* [annotation][in] */ 
-            _In_  BOOL bForce,
-            /* [annotation][in] */ 
-            _In_  BOOL bQuickFormat,
-            /* [annotation][in] */ 
-            _In_  BOOL bEnableCompression,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync) = 0;
+            /* [in] */ ULONGLONG ullOffset,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszFileSystemTypeName,
+            /* [in] */ USHORT usFileSystemRevision,
+            /* [in] */ ULONG ulDesiredUnitAllocationSize,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszLabel,
+            /* [in] */ BOOL bForce,
+            /* [in] */ BOOL bQuickFormat,
+            /* [in] */ BOOL bEnableCompression,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync) = 0;
         
     };
     
@@ -10379,8 +10173,7 @@ EXTERN_C const IID IID_IVdsDiskPartitionMF;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsDiskPartitionMF * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10395,50 +10188,34 @@ EXTERN_C const IID IID_IVdsDiskPartitionMF;
         DECLSPEC_XFGVIRT(IVdsDiskPartitionMF, GetPartitionFileSystemProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPartitionFileSystemProperties )( 
             __RPC__in IVdsDiskPartitionMF * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullOffset,
-            /* [annotation][out] */ 
-            _Out_  VDS_FILE_SYSTEM_PROP *pFileSystemProp);
+            /* [in] */ ULONGLONG ullOffset,
+            /* [out] */ __RPC__out VDS_FILE_SYSTEM_PROP *pFileSystemProp);
         
         DECLSPEC_XFGVIRT(IVdsDiskPartitionMF, GetPartitionFileSystemTypeName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPartitionFileSystemTypeName )( 
             __RPC__in IVdsDiskPartitionMF * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullOffset,
-            /* [annotation][string][out] */ 
-            _Out_  LPWSTR *ppwszFileSystemTypeName);
+            /* [in] */ ULONGLONG ullOffset,
+            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppwszFileSystemTypeName);
         
         DECLSPEC_XFGVIRT(IVdsDiskPartitionMF, QueryPartitionFileSystemFormatSupport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryPartitionFileSystemFormatSupport )( 
             __RPC__in IVdsDiskPartitionMF * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullOffset,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*plNumberOfFileSystems)  VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP **ppFileSystemSupportProps,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNumberOfFileSystems);
+            /* [in] */ ULONGLONG ullOffset,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfFileSystems) VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP **ppFileSystemSupportProps,
+            /* [out] */ __RPC__out LONG *plNumberOfFileSystems);
         
         DECLSPEC_XFGVIRT(IVdsDiskPartitionMF, FormatPartitionEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *FormatPartitionEx )( 
             __RPC__in IVdsDiskPartitionMF * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullOffset,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszFileSystemTypeName,
-            /* [annotation][in] */ 
-            _In_  USHORT usFileSystemRevision,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDesiredUnitAllocationSize,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszLabel,
-            /* [annotation][in] */ 
-            _In_  BOOL bForce,
-            /* [annotation][in] */ 
-            _In_  BOOL bQuickFormat,
-            /* [annotation][in] */ 
-            _In_  BOOL bEnableCompression,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync);
+            /* [in] */ ULONGLONG ullOffset,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszFileSystemTypeName,
+            /* [in] */ USHORT usFileSystemRevision,
+            /* [in] */ ULONG ulDesiredUnitAllocationSize,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszLabel,
+            /* [in] */ BOOL bForce,
+            /* [in] */ BOOL bQuickFormat,
+            /* [in] */ BOOL bEnableCompression,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
         END_INTERFACE
     } IVdsDiskPartitionMFVtbl;
@@ -10502,60 +10279,43 @@ EXTERN_C const IID IID_IVdsVolumeMF;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetFileSystemProperties( 
-            /* [annotation][out] */ 
-            _Out_  VDS_FILE_SYSTEM_PROP *pFileSystemProp) = 0;
+            /* [out] */ __RPC__out VDS_FILE_SYSTEM_PROP *pFileSystemProp) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Format( 
-            /* [annotation][in] */ 
-            _In_  VDS_FILE_SYSTEM_TYPE type,
-            /* [annotation][string][in] */ 
-            _In_  LPWSTR pwszLabel,
-            /* [annotation][in] */ 
-            _In_  DWORD dwUnitAllocationSize,
-            /* [annotation][in] */ 
-            _In_  BOOL bForce,
-            /* [annotation][in] */ 
-            _In_  BOOL bQuickFormat,
-            /* [annotation][in] */ 
-            _In_  BOOL bEnableCompression,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync) = 0;
+            /* [in] */ VDS_FILE_SYSTEM_TYPE type,
+            /* [string][in] */ __RPC__in_string LPWSTR pwszLabel,
+            /* [in] */ DWORD dwUnitAllocationSize,
+            /* [in] */ BOOL bForce,
+            /* [in] */ BOOL bQuickFormat,
+            /* [in] */ BOOL bEnableCompression,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AddAccessPath( 
             /* [string][max_is][in] */ __RPC__in_ecount_full_string(( ( 260 - 1 )  + 1 ) ) LPWSTR pwszPath) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryAccessPaths( 
-            /* [annotation][size_is][size_is][string][out] */ 
-            _Out_writes_(*plNumberOfAccessPaths)  LPWSTR **pwszPathArray,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNumberOfAccessPaths) = 0;
+            /* [size_is][size_is][string][out] */ __RPC__deref_out_ecount_full_opt_string(*plNumberOfAccessPaths) LPWSTR **pwszPathArray,
+            /* [out] */ __RPC__out LONG *plNumberOfAccessPaths) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryReparsePoints( 
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*plNumberOfReparsePointProps)  VDS_REPARSE_POINT_PROP **ppReparsePointProps,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNumberOfReparsePointProps) = 0;
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfReparsePointProps) VDS_REPARSE_POINT_PROP **ppReparsePointProps,
+            /* [out] */ __RPC__out LONG *plNumberOfReparsePointProps) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE DeleteAccessPath( 
             /* [string][max_is][in] */ __RPC__in_ecount_full_string(( ( 260 - 1 )  + 1 ) ) LPWSTR pwszPath,
-            /* [annotation][in] */ 
-            _In_  BOOL bForce) = 0;
+            /* [in] */ BOOL bForce) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Mount( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Dismount( 
-            /* [annotation][in] */ 
-            _In_  BOOL bForce,
-            /* [annotation][in] */ 
-            _In_  BOOL bPermanent) = 0;
+            /* [in] */ BOOL bForce,
+            /* [in] */ BOOL bPermanent) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetFileSystemFlags( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulFlags) = 0;
+            /* [in] */ ULONG ulFlags) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ClearFileSystemFlags( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulFlags) = 0;
+            /* [in] */ ULONG ulFlags) = 0;
         
     };
     
@@ -10569,8 +10329,7 @@ EXTERN_C const IID IID_IVdsVolumeMF;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsVolumeMF * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10585,26 +10344,18 @@ EXTERN_C const IID IID_IVdsVolumeMF;
         DECLSPEC_XFGVIRT(IVdsVolumeMF, GetFileSystemProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFileSystemProperties )( 
             __RPC__in IVdsVolumeMF * This,
-            /* [annotation][out] */ 
-            _Out_  VDS_FILE_SYSTEM_PROP *pFileSystemProp);
+            /* [out] */ __RPC__out VDS_FILE_SYSTEM_PROP *pFileSystemProp);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF, Format)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Format )( 
             __RPC__in IVdsVolumeMF * This,
-            /* [annotation][in] */ 
-            _In_  VDS_FILE_SYSTEM_TYPE type,
-            /* [annotation][string][in] */ 
-            _In_  LPWSTR pwszLabel,
-            /* [annotation][in] */ 
-            _In_  DWORD dwUnitAllocationSize,
-            /* [annotation][in] */ 
-            _In_  BOOL bForce,
-            /* [annotation][in] */ 
-            _In_  BOOL bQuickFormat,
-            /* [annotation][in] */ 
-            _In_  BOOL bEnableCompression,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync);
+            /* [in] */ VDS_FILE_SYSTEM_TYPE type,
+            /* [string][in] */ __RPC__in_string LPWSTR pwszLabel,
+            /* [in] */ DWORD dwUnitAllocationSize,
+            /* [in] */ BOOL bForce,
+            /* [in] */ BOOL bQuickFormat,
+            /* [in] */ BOOL bEnableCompression,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF, AddAccessPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddAccessPath )( 
@@ -10614,25 +10365,20 @@ EXTERN_C const IID IID_IVdsVolumeMF;
         DECLSPEC_XFGVIRT(IVdsVolumeMF, QueryAccessPaths)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryAccessPaths )( 
             __RPC__in IVdsVolumeMF * This,
-            /* [annotation][size_is][size_is][string][out] */ 
-            _Out_writes_(*plNumberOfAccessPaths)  LPWSTR **pwszPathArray,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNumberOfAccessPaths);
+            /* [size_is][size_is][string][out] */ __RPC__deref_out_ecount_full_opt_string(*plNumberOfAccessPaths) LPWSTR **pwszPathArray,
+            /* [out] */ __RPC__out LONG *plNumberOfAccessPaths);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF, QueryReparsePoints)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryReparsePoints )( 
             __RPC__in IVdsVolumeMF * This,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*plNumberOfReparsePointProps)  VDS_REPARSE_POINT_PROP **ppReparsePointProps,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNumberOfReparsePointProps);
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfReparsePointProps) VDS_REPARSE_POINT_PROP **ppReparsePointProps,
+            /* [out] */ __RPC__out LONG *plNumberOfReparsePointProps);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF, DeleteAccessPath)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeleteAccessPath )( 
             __RPC__in IVdsVolumeMF * This,
             /* [string][max_is][in] */ __RPC__in_ecount_full_string(( ( 260 - 1 )  + 1 ) ) LPWSTR pwszPath,
-            /* [annotation][in] */ 
-            _In_  BOOL bForce);
+            /* [in] */ BOOL bForce);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF, Mount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Mount )( 
@@ -10641,22 +10387,18 @@ EXTERN_C const IID IID_IVdsVolumeMF;
         DECLSPEC_XFGVIRT(IVdsVolumeMF, Dismount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Dismount )( 
             __RPC__in IVdsVolumeMF * This,
-            /* [annotation][in] */ 
-            _In_  BOOL bForce,
-            /* [annotation][in] */ 
-            _In_  BOOL bPermanent);
+            /* [in] */ BOOL bForce,
+            /* [in] */ BOOL bPermanent);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF, SetFileSystemFlags)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetFileSystemFlags )( 
             __RPC__in IVdsVolumeMF * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulFlags);
+            /* [in] */ ULONG ulFlags);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF, ClearFileSystemFlags)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ClearFileSystemFlags )( 
             __RPC__in IVdsVolumeMF * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulFlags);
+            /* [in] */ ULONG ulFlags);
         
         END_INTERFACE
     } IVdsVolumeMFVtbl;
@@ -10738,32 +10480,21 @@ EXTERN_C const IID IID_IVdsVolumeMF2;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetFileSystemTypeName( 
-            /* [annotation][string][out] */ 
-            _Out_  LPWSTR *ppwszFileSystemTypeName) = 0;
+            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppwszFileSystemTypeName) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryFileSystemFormatSupport( 
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*plNumberOfFileSystems)  VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP **ppFileSystemSupportProps,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNumberOfFileSystems) = 0;
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfFileSystems) VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP **ppFileSystemSupportProps,
+            /* [out] */ __RPC__out LONG *plNumberOfFileSystems) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE FormatEx( 
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszFileSystemTypeName,
-            /* [annotation][in] */ 
-            _In_  USHORT usFileSystemRevision,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDesiredUnitAllocationSize,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszLabel,
-            /* [annotation][in] */ 
-            _In_  BOOL bForce,
-            /* [annotation][in] */ 
-            _In_  BOOL bQuickFormat,
-            /* [annotation][in] */ 
-            _In_  BOOL bEnableCompression,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszFileSystemTypeName,
+            /* [in] */ USHORT usFileSystemRevision,
+            /* [in] */ ULONG ulDesiredUnitAllocationSize,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszLabel,
+            /* [in] */ BOOL bForce,
+            /* [in] */ BOOL bQuickFormat,
+            /* [in] */ BOOL bEnableCompression,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync) = 0;
         
     };
     
@@ -10777,8 +10508,7 @@ EXTERN_C const IID IID_IVdsVolumeMF2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsVolumeMF2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10793,36 +10523,25 @@ EXTERN_C const IID IID_IVdsVolumeMF2;
         DECLSPEC_XFGVIRT(IVdsVolumeMF2, GetFileSystemTypeName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFileSystemTypeName )( 
             __RPC__in IVdsVolumeMF2 * This,
-            /* [annotation][string][out] */ 
-            _Out_  LPWSTR *ppwszFileSystemTypeName);
+            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppwszFileSystemTypeName);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF2, QueryFileSystemFormatSupport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryFileSystemFormatSupport )( 
             __RPC__in IVdsVolumeMF2 * This,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*plNumberOfFileSystems)  VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP **ppFileSystemSupportProps,
-            /* [annotation][out] */ 
-            _Out_  LONG *plNumberOfFileSystems);
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfFileSystems) VDS_FILE_SYSTEM_FORMAT_SUPPORT_PROP **ppFileSystemSupportProps,
+            /* [out] */ __RPC__out LONG *plNumberOfFileSystems);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF2, FormatEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *FormatEx )( 
             __RPC__in IVdsVolumeMF2 * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszFileSystemTypeName,
-            /* [annotation][in] */ 
-            _In_  USHORT usFileSystemRevision,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDesiredUnitAllocationSize,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszLabel,
-            /* [annotation][in] */ 
-            _In_  BOOL bForce,
-            /* [annotation][in] */ 
-            _In_  BOOL bQuickFormat,
-            /* [annotation][in] */ 
-            _In_  BOOL bEnableCompression,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync);
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszFileSystemTypeName,
+            /* [in] */ USHORT usFileSystemRevision,
+            /* [in] */ ULONG ulDesiredUnitAllocationSize,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszLabel,
+            /* [in] */ BOOL bForce,
+            /* [in] */ BOOL bQuickFormat,
+            /* [in] */ BOOL bEnableCompression,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
         END_INTERFACE
     } IVdsVolumeMF2Vtbl;
@@ -10883,16 +10602,12 @@ EXTERN_C const IID IID_IVdsVolumeShrink;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryMaxReclaimableBytes( 
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *pullMaxNumberOfReclaimableBytes) = 0;
+            /* [out] */ __RPC__out ULONGLONG *pullMaxNumberOfReclaimableBytes) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Shrink( 
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullDesiredNumberOfReclaimableBytes,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullMinNumberOfReclaimableBytes,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync) = 0;
+            /* [in] */ ULONGLONG ullDesiredNumberOfReclaimableBytes,
+            /* [in] */ ULONGLONG ullMinNumberOfReclaimableBytes,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync) = 0;
         
     };
     
@@ -10906,8 +10621,7 @@ EXTERN_C const IID IID_IVdsVolumeShrink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsVolumeShrink * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10922,18 +10636,14 @@ EXTERN_C const IID IID_IVdsVolumeShrink;
         DECLSPEC_XFGVIRT(IVdsVolumeShrink, QueryMaxReclaimableBytes)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryMaxReclaimableBytes )( 
             __RPC__in IVdsVolumeShrink * This,
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *pullMaxNumberOfReclaimableBytes);
+            /* [out] */ __RPC__out ULONGLONG *pullMaxNumberOfReclaimableBytes);
         
         DECLSPEC_XFGVIRT(IVdsVolumeShrink, Shrink)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Shrink )( 
             __RPC__in IVdsVolumeShrink * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullDesiredNumberOfReclaimableBytes,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullMinNumberOfReclaimableBytes,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync);
+            /* [in] */ ULONGLONG ullDesiredNumberOfReclaimableBytes,
+            /* [in] */ ULONGLONG ullMinNumberOfReclaimableBytes,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
         END_INTERFACE
     } IVdsVolumeShrinkVtbl;
@@ -10991,12 +10701,10 @@ EXTERN_C const IID IID_IVdsSubSystemImportTarget;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetImportTarget( 
-            /* [annotation][string][out] */ 
-            _Out_  LPWSTR *ppwszIscsiName) = 0;
+            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppwszIscsiName) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetImportTarget( 
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszIscsiName) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszIscsiName) = 0;
         
     };
     
@@ -11010,8 +10718,7 @@ EXTERN_C const IID IID_IVdsSubSystemImportTarget;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystemImportTarget * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11026,14 +10733,12 @@ EXTERN_C const IID IID_IVdsSubSystemImportTarget;
         DECLSPEC_XFGVIRT(IVdsSubSystemImportTarget, GetImportTarget)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetImportTarget )( 
             __RPC__in IVdsSubSystemImportTarget * This,
-            /* [annotation][string][out] */ 
-            _Out_  LPWSTR *ppwszIscsiName);
+            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppwszIscsiName);
         
         DECLSPEC_XFGVIRT(IVdsSubSystemImportTarget, SetImportTarget)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetImportTarget )( 
             __RPC__in IVdsSubSystemImportTarget * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszIscsiName);
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszIscsiName);
         
         END_INTERFACE
     } IVdsSubSystemImportTargetVtbl;
@@ -11091,10 +10796,8 @@ EXTERN_C const IID IID_IVdsIscsiPortalLocal;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetIpsecSecurityLocal( 
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullSecurityFlags,
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_IPSEC_KEY *pIpsecKey) = 0;
+            /* [in] */ ULONGLONG ullSecurityFlags,
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_IPSEC_KEY *pIpsecKey) = 0;
         
     };
     
@@ -11108,8 +10811,7 @@ EXTERN_C const IID IID_IVdsIscsiPortalLocal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsIscsiPortalLocal * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11124,10 +10826,8 @@ EXTERN_C const IID IID_IVdsIscsiPortalLocal;
         DECLSPEC_XFGVIRT(IVdsIscsiPortalLocal, SetIpsecSecurityLocal)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetIpsecSecurityLocal )( 
             __RPC__in IVdsIscsiPortalLocal * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullSecurityFlags,
-            /* [annotation][unique][in] */ 
-            _In_  VDS_ISCSI_IPSEC_KEY *pIpsecKey);
+            /* [in] */ ULONGLONG ullSecurityFlags,
+            /* [unique][in] */ __RPC__in_opt VDS_ISCSI_IPSEC_KEY *pIpsecKey);
         
         END_INTERFACE
     } IVdsIscsiPortalLocalVtbl;
@@ -11182,12 +10882,10 @@ EXTERN_C const IID IID_IVdsServiceSAN;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetSANPolicy( 
-            /* [annotation][out] */ 
-            _Out_  VDS_SAN_POLICY *pSanPolicy) = 0;
+            /* [out] */ __RPC__out VDS_SAN_POLICY *pSanPolicy) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetSANPolicy( 
-            /* [annotation][in] */ 
-            _In_  VDS_SAN_POLICY SanPolicy) = 0;
+            /* [in] */ VDS_SAN_POLICY SanPolicy) = 0;
         
     };
     
@@ -11201,8 +10899,7 @@ EXTERN_C const IID IID_IVdsServiceSAN;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsServiceSAN * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11217,14 +10914,12 @@ EXTERN_C const IID IID_IVdsServiceSAN;
         DECLSPEC_XFGVIRT(IVdsServiceSAN, GetSANPolicy)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSANPolicy )( 
             __RPC__in IVdsServiceSAN * This,
-            /* [annotation][out] */ 
-            _Out_  VDS_SAN_POLICY *pSanPolicy);
+            /* [out] */ __RPC__out VDS_SAN_POLICY *pSanPolicy);
         
         DECLSPEC_XFGVIRT(IVdsServiceSAN, SetSANPolicy)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetSANPolicy )( 
             __RPC__in IVdsServiceSAN * This,
-            /* [annotation][in] */ 
-            _In_  VDS_SAN_POLICY SanPolicy);
+            /* [in] */ VDS_SAN_POLICY SanPolicy);
         
         END_INTERFACE
     } IVdsServiceSANVtbl;
@@ -11282,24 +10977,16 @@ EXTERN_C const IID IID_IVdsVolumeMF3;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryVolumeGuidPathnames( 
-            /* [annotation][size_is][size_is][string][out] */ 
-            _Out_writes_(*pulNumberOfPaths)  LPWSTR **pwszPathArray,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulNumberOfPaths) = 0;
+            /* [size_is][size_is][string][out] */ __RPC__deref_out_ecount_full_opt_string(*pulNumberOfPaths) LPWSTR **pwszPathArray,
+            /* [out] */ __RPC__out ULONG *pulNumberOfPaths) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE FormatEx2( 
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszFileSystemTypeName,
-            /* [annotation][in] */ 
-            _In_  USHORT usFileSystemRevision,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDesiredUnitAllocationSize,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszLabel,
-            /* [annotation][in] */ 
-            _In_  DWORD Options,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszFileSystemTypeName,
+            /* [in] */ USHORT usFileSystemRevision,
+            /* [in] */ ULONG ulDesiredUnitAllocationSize,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszLabel,
+            /* [in] */ DWORD Options,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OfflineVolume( void) = 0;
         
@@ -11315,8 +11002,7 @@ EXTERN_C const IID IID_IVdsVolumeMF3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsVolumeMF3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11331,26 +11017,18 @@ EXTERN_C const IID IID_IVdsVolumeMF3;
         DECLSPEC_XFGVIRT(IVdsVolumeMF3, QueryVolumeGuidPathnames)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryVolumeGuidPathnames )( 
             __RPC__in IVdsVolumeMF3 * This,
-            /* [annotation][size_is][size_is][string][out] */ 
-            _Out_writes_(*pulNumberOfPaths)  LPWSTR **pwszPathArray,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulNumberOfPaths);
+            /* [size_is][size_is][string][out] */ __RPC__deref_out_ecount_full_opt_string(*pulNumberOfPaths) LPWSTR **pwszPathArray,
+            /* [out] */ __RPC__out ULONG *pulNumberOfPaths);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF3, FormatEx2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *FormatEx2 )( 
             __RPC__in IVdsVolumeMF3 * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszFileSystemTypeName,
-            /* [annotation][in] */ 
-            _In_  USHORT usFileSystemRevision,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDesiredUnitAllocationSize,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszLabel,
-            /* [annotation][in] */ 
-            _In_  DWORD Options,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync);
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszFileSystemTypeName,
+            /* [in] */ USHORT usFileSystemRevision,
+            /* [in] */ ULONG ulDesiredUnitAllocationSize,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszLabel,
+            /* [in] */ DWORD Options,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
         DECLSPEC_XFGVIRT(IVdsVolumeMF3, OfflineVolume)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OfflineVolume )( 
@@ -11415,20 +11093,13 @@ EXTERN_C const IID IID_IVdsDiskPartitionMF2;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE FormatPartitionEx2( 
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullOffset,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszFileSystemTypeName,
-            /* [annotation][in] */ 
-            _In_  USHORT usFileSystemRevision,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDesiredUnitAllocationSize,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszLabel,
-            /* [annotation][in] */ 
-            _In_  DWORD Options,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync) = 0;
+            /* [in] */ ULONGLONG ullOffset,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszFileSystemTypeName,
+            /* [in] */ USHORT usFileSystemRevision,
+            /* [in] */ ULONG ulDesiredUnitAllocationSize,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszLabel,
+            /* [in] */ DWORD Options,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync) = 0;
         
     };
     
@@ -11442,8 +11113,7 @@ EXTERN_C const IID IID_IVdsDiskPartitionMF2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsDiskPartitionMF2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11458,20 +11128,13 @@ EXTERN_C const IID IID_IVdsDiskPartitionMF2;
         DECLSPEC_XFGVIRT(IVdsDiskPartitionMF2, FormatPartitionEx2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *FormatPartitionEx2 )( 
             __RPC__in IVdsDiskPartitionMF2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullOffset,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszFileSystemTypeName,
-            /* [annotation][in] */ 
-            _In_  USHORT usFileSystemRevision,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDesiredUnitAllocationSize,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR pwszLabel,
-            /* [annotation][in] */ 
-            _In_  DWORD Options,
-            /* [annotation][out] */ 
-            _Out_  IVdsAsync **ppAsync);
+            /* [in] */ ULONGLONG ullOffset,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszFileSystemTypeName,
+            /* [in] */ USHORT usFileSystemRevision,
+            /* [in] */ ULONG ulDesiredUnitAllocationSize,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszLabel,
+            /* [in] */ DWORD Options,
+            /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
         END_INTERFACE
     } IVdsDiskPartitionMF2Vtbl;
@@ -11526,10 +11189,8 @@ EXTERN_C const IID IID_IVdsServiceSw;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDiskObject( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pwszDeviceID,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppDiskUnk) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR pwszDeviceID,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppDiskUnk) = 0;
         
     };
     
@@ -11543,8 +11204,7 @@ EXTERN_C const IID IID_IVdsServiceSw;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsServiceSw * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11559,10 +11219,8 @@ EXTERN_C const IID IID_IVdsServiceSw;
         DECLSPEC_XFGVIRT(IVdsServiceSw, GetDiskObject)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDiskObject )( 
             __RPC__in IVdsServiceSw * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pwszDeviceID,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppDiskUnk);
+            /* [string][in] */ __RPC__in_string LPCWSTR pwszDeviceID,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppDiskUnk);
         
         END_INTERFACE
     } IVdsServiceSwVtbl;

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -321,6 +321,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsStatics2 ABI::Windows::System::Profile::ISharedModeSettingsStatics2
 
 #endif // ____x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsStatics2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Profile {
+                interface ISmartAppControlPolicyStatics;
+            } /* Profile */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics ABI::Windows::System::Profile::ISmartAppControlPolicyStatics
+
+#endif // ____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CProfile_CISystemIdentificationInfo_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CProfile_CISystemIdentificationInfo_FWD_DEFINED__
@@ -1585,6 +1600,49 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsSta
 
 /*
  *
+ * Interface Windows.System.Profile.ISmartAppControlPolicyStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.System.Profile.SmartAppControlPolicy
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_Profile_ISmartAppControlPolicyStatics[] = L"Windows.System.Profile.ISmartAppControlPolicyStatics";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Profile {
+                MIDL_INTERFACE("5ff8c75b-073e-5015-8d98-5ff224180a0b")
+                ISmartAppControlPolicyStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_IsEnabled(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_Changed(
+                        __FIEventHandler_1_IInspectable* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_Changed(
+                        EventRegistrationToken token
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ISmartAppControlPolicyStatics = _uuidof(ISmartAppControlPolicyStatics);
+            } /* Profile */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.System.Profile.ISystemIdentificationInfo
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
@@ -1679,7 +1737,7 @@ namespace ABI {
     namespace Windows {
         namespace System {
             namespace Profile {
-                MIDL_INTERFACE("2c9620a8-1d88-5e2d-a324-a543af4247ee")
+                MIDL_INTERFACE("b8366a4b-fb6a-4571-be0a-9a0f67954123")
                 ISystemSetupInfoStatics : public IInspectable
                 {
                 public:
@@ -1803,8 +1861,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIWindowsIntegrityPolic
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -1988,8 +2046,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.Profile.ProfileSharedModeContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics interface starting with version 1.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
+ *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics interface starting with version 1.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2000,6 +2058,27 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_System_Profile_SharedModeSettings[] = L"Windows.System.Profile.SharedModeSettings";
 #endif
 #endif // WINDOWS_SYSTEM_PROFILE_PROFILESHAREDMODECONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.System.Profile.SmartAppControlPolicy
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.System.Profile.ISmartAppControlPolicyStatics interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_System_Profile_SmartAppControlPolicy_DEFINED
+#define RUNTIMECLASS_Windows_System_Profile_SmartAppControlPolicy_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_System_Profile_SmartAppControlPolicy[] = L"Windows.System.Profile.SmartAppControlPolicy";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *
@@ -2183,6 +2262,12 @@ typedef interface __x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsStatics 
 typedef interface __x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsStatics2 __x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsStatics2;
 
 #endif // ____x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsStatics2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics;
+
+#endif // ____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CProfile_CISystemIdentificationInfo_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CProfile_CISystemIdentificationInfo_FWD_DEFINED__
@@ -4473,6 +4558,86 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsSta
 
 /*
  *
+ * Interface Windows.System.Profile.ISmartAppControlPolicyStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.System.Profile.SmartAppControlPolicy
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_Profile_ISmartAppControlPolicyStatics[] = L"Windows.System.Profile.ISmartAppControlPolicyStatics";
+typedef struct __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IsEnabled)(__x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* add_Changed)(__x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics* This,
+        __FIEventHandler_1_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_Changed)(__x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStaticsVtbl;
+
+interface __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_get_IsEnabled(This, value) \
+    ((This)->lpVtbl->get_IsEnabled(This, value))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_add_Changed(This, handler, token) \
+    ((This)->lpVtbl->add_Changed(This, handler, token))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_remove_Changed(This, token) \
+    ((This)->lpVtbl->remove_Changed(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CProfile_CISmartAppControlPolicyStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.System.Profile.ISystemIdentificationInfo
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
@@ -4876,8 +5041,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIWindowsIntegrityPolic
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -5061,8 +5226,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.Profile.ProfileSharedModeContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics interface starting with version 1.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
+ *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics interface starting with version 1.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -5073,6 +5238,27 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_System_Profile_SharedModeSettings[] = L"Windows.System.Profile.SharedModeSettings";
 #endif
 #endif // WINDOWS_SYSTEM_PROFILE_PROFILESHAREDMODECONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.System.Profile.SmartAppControlPolicy
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.System.Profile.ISmartAppControlPolicyStatics interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_System_Profile_SmartAppControlPolicy_DEFINED
+#define RUNTIMECLASS_Windows_System_Profile_SmartAppControlPolicy_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_System_Profile_SmartAppControlPolicy[] = L"Windows.System.Profile.SmartAppControlPolicy";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 /*
  *

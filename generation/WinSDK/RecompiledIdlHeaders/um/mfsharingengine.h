@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -184,8 +184,7 @@ EXTERN_C const IID IID_IMFSharingEngineClassFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFSharingEngineClassFactory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -275,8 +274,7 @@ EXTERN_C const IID IID_IMFMediaSharingEngine;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaSharingEngine * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -737,8 +735,7 @@ EXTERN_C const IID IID_IMFMediaSharingEngineClassFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFMediaSharingEngineClassFactory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -843,8 +840,7 @@ EXTERN_C const IID IID_IMFImageSharingEngine;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFImageSharingEngine * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -948,8 +944,7 @@ EXTERN_C const IID IID_IMFImageSharingEngineClassFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFImageSharingEngineClassFactory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1042,8 +1037,7 @@ EXTERN_C const IID IID_IPlayToControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Connect( 
-            /* [annotation][in] */ 
-            _In_  IMFSharingEngineClassFactory *pFactory) = 0;
+            /* [in] */ __RPC__in_opt IMFSharingEngineClassFactory *pFactory) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Disconnect( void) = 0;
         
@@ -1059,8 +1053,7 @@ EXTERN_C const IID IID_IPlayToControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPlayToControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1075,8 +1068,7 @@ EXTERN_C const IID IID_IPlayToControl;
         DECLSPEC_XFGVIRT(IPlayToControl, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IPlayToControl * This,
-            /* [annotation][in] */ 
-            _In_  IMFSharingEngineClassFactory *pFactory);
+            /* [in] */ __RPC__in_opt IMFSharingEngineClassFactory *pFactory);
         
         DECLSPEC_XFGVIRT(IPlayToControl, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
@@ -1138,8 +1130,7 @@ EXTERN_C const IID IID_IPlayToControlWithCapabilities;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCapabilities( 
-            /* [annotation][out] */ 
-            _Out_  PLAYTO_SOURCE_CREATEFLAGS *pCapabilities) = 0;
+            /* [out] */ __RPC__out PLAYTO_SOURCE_CREATEFLAGS *pCapabilities) = 0;
         
     };
     
@@ -1153,8 +1144,7 @@ EXTERN_C const IID IID_IPlayToControlWithCapabilities;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPlayToControlWithCapabilities * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1169,8 +1159,7 @@ EXTERN_C const IID IID_IPlayToControlWithCapabilities;
         DECLSPEC_XFGVIRT(IPlayToControl, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IPlayToControlWithCapabilities * This,
-            /* [annotation][in] */ 
-            _In_  IMFSharingEngineClassFactory *pFactory);
+            /* [in] */ __RPC__in_opt IMFSharingEngineClassFactory *pFactory);
         
         DECLSPEC_XFGVIRT(IPlayToControl, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
@@ -1179,8 +1168,7 @@ EXTERN_C const IID IID_IPlayToControlWithCapabilities;
         DECLSPEC_XFGVIRT(IPlayToControlWithCapabilities, GetCapabilities)
         HRESULT ( STDMETHODCALLTYPE *GetCapabilities )( 
             __RPC__in IPlayToControlWithCapabilities * This,
-            /* [annotation][out] */ 
-            _Out_  PLAYTO_SOURCE_CREATEFLAGS *pCapabilities);
+            /* [out] */ __RPC__out PLAYTO_SOURCE_CREATEFLAGS *pCapabilities);
         
         END_INTERFACE
     } IPlayToControlWithCapabilitiesVtbl;
@@ -1261,8 +1249,7 @@ EXTERN_C const IID IID_IPlayToSourceClassFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPlayToSourceClassFactory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

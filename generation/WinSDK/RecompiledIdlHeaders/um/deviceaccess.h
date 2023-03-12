@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -112,10 +112,8 @@ EXTERN_C const IID IID_IDeviceRequestCompletionCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RequestCompletion( 
-            /* [annotation][in] */ 
-            _In_  HRESULT requestResult,
-            /* [annotation][in] */ 
-            _In_  DWORD bytesReturned) = 0;
+            /* [in] */ HRESULT requestResult,
+            /* [in] */ DWORD bytesReturned) = 0;
         
     };
     
@@ -129,8 +127,7 @@ EXTERN_C const IID IID_IDeviceRequestCompletionCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDeviceRequestCompletionCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -145,10 +142,8 @@ EXTERN_C const IID IID_IDeviceRequestCompletionCallback;
         DECLSPEC_XFGVIRT(IDeviceRequestCompletionCallback, RequestCompletion)
         HRESULT ( STDMETHODCALLTYPE *RequestCompletion )( 
             __RPC__in IDeviceRequestCompletionCallback * This,
-            /* [annotation][in] */ 
-            _In_  HRESULT requestResult,
-            /* [annotation][in] */ 
-            _In_  DWORD bytesReturned);
+            /* [in] */ HRESULT requestResult,
+            /* [in] */ DWORD bytesReturned);
         
         END_INTERFACE
     } IDeviceRequestCompletionCallbackVtbl;
@@ -248,8 +243,7 @@ EXTERN_C const IID IID_IDeviceIoControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDeviceIoControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -385,8 +379,7 @@ EXTERN_C const IID IID_ICreateDeviceAccessAsync;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICreateDeviceAccessAsync * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

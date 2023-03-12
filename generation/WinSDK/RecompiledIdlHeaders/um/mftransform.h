@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -251,103 +251,81 @@ EXTERN_C const IID IID_IMFTransform;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStreamLimits( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwInputMinimum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwInputMaximum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwOutputMinimum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwOutputMaximum) = 0;
+            /* [out] */ __RPC__out DWORD *pdwInputMinimum,
+            /* [out] */ __RPC__out DWORD *pdwInputMaximum,
+            /* [out] */ __RPC__out DWORD *pdwOutputMinimum,
+            /* [out] */ __RPC__out DWORD *pdwOutputMaximum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamCount( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcInputStreams,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcOutputStreams) = 0;
+            /* [out] */ __RPC__out DWORD *pcInputStreams,
+            /* [out] */ __RPC__out DWORD *pcOutputStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamIDs( 
             DWORD dwInputIDArraySize,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(dwInputIDArraySize)  DWORD *pdwInputIDs,
+            /* [size_is][out] */ __RPC__out_ecount_full(dwInputIDArraySize) DWORD *pdwInputIDs,
             DWORD dwOutputIDArraySize,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(dwOutputIDArraySize)  DWORD *pdwOutputIDs) = 0;
+            /* [size_is][out] */ __RPC__out_ecount_full(dwOutputIDArraySize) DWORD *pdwOutputIDs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputStreamInfo( 
             DWORD dwInputStreamID,
-            /* [annotation][out] */ 
-            _Out_  MFT_INPUT_STREAM_INFO *pStreamInfo) = 0;
+            /* [out] */ __RPC__out MFT_INPUT_STREAM_INFO *pStreamInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputStreamInfo( 
             DWORD dwOutputStreamID,
-            /* [annotation][out] */ 
-            _Out_  MFT_OUTPUT_STREAM_INFO *pStreamInfo) = 0;
+            /* [out] */ __RPC__out MFT_OUTPUT_STREAM_INFO *pStreamInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAttributes( 
-            /* [annotation][out] */ 
-            _Out_  IMFAttributes **pAttributes) = 0;
+            /* [out] */ __RPC__deref_out_opt IMFAttributes **pAttributes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputStreamAttributes( 
             DWORD dwInputStreamID,
-            /* [annotation][out] */ 
-            _Out_  IMFAttributes **pAttributes) = 0;
+            /* [out] */ __RPC__deref_out_opt IMFAttributes **pAttributes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputStreamAttributes( 
             DWORD dwOutputStreamID,
-            /* [annotation][out] */ 
-            _Out_  IMFAttributes **pAttributes) = 0;
+            /* [out] */ __RPC__deref_out_opt IMFAttributes **pAttributes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteInputStream( 
             DWORD dwStreamID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddInputStreams( 
             DWORD cStreams,
-            /* [annotation][in] */ 
-            _In_  DWORD *adwStreamIDs) = 0;
+            /* [in] */ __RPC__in DWORD *adwStreamIDs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputAvailableType( 
             DWORD dwInputStreamID,
             DWORD dwTypeIndex,
-            /* [annotation][out] */ 
-            _Out_  IMFMediaType **ppType) = 0;
+            /* [out] */ __RPC__deref_out_opt IMFMediaType **ppType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputAvailableType( 
             DWORD dwOutputStreamID,
             DWORD dwTypeIndex,
-            /* [annotation][out] */ 
-            _Out_  IMFMediaType **ppType) = 0;
+            /* [out] */ __RPC__deref_out_opt IMFMediaType **ppType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetInputType( 
             DWORD dwInputStreamID,
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pType,
+            /* [in] */ __RPC__in_opt IMFMediaType *pType,
             DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOutputType( 
             DWORD dwOutputStreamID,
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pType,
+            /* [in] */ __RPC__in_opt IMFMediaType *pType,
             DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputCurrentType( 
             DWORD dwInputStreamID,
-            /* [annotation][out] */ 
-            _Out_  IMFMediaType **ppType) = 0;
+            /* [out] */ __RPC__deref_out_opt IMFMediaType **ppType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputCurrentType( 
             DWORD dwOutputStreamID,
-            /* [annotation][out] */ 
-            _Out_  IMFMediaType **ppType) = 0;
+            /* [out] */ __RPC__deref_out_opt IMFMediaType **ppType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputStatus( 
             DWORD dwInputStreamID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ __RPC__out DWORD *pdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputStatus( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ __RPC__out DWORD *pdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOutputBounds( 
             LONGLONG hnsLowerBound,
@@ -355,8 +333,7 @@ EXTERN_C const IID IID_IMFTransform;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessEvent( 
             DWORD dwInputStreamID,
-            /* [annotation][in] */ 
-            _In_  IMFMediaEvent *pEvent) = 0;
+            /* [in] */ __RPC__in_opt IMFMediaEvent *pEvent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessMessage( 
             MFT_MESSAGE_TYPE eMessage,
@@ -370,10 +347,8 @@ EXTERN_C const IID IID_IMFTransform;
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE ProcessOutput( 
             DWORD dwFlags,
             DWORD cOutputBufferCount,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(cOutputBufferCount)  MFT_OUTPUT_DATA_BUFFER *pOutputSamples,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatus) = 0;
+            /* [size_is][out][in] */ MFT_OUTPUT_DATA_BUFFER *pOutputSamples,
+            /* [out] */ DWORD *pdwStatus) = 0;
         
     };
     
@@ -387,8 +362,7 @@ EXTERN_C const IID IID_IMFTransform;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMFTransform * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -403,66 +377,53 @@ EXTERN_C const IID IID_IMFTransform;
         DECLSPEC_XFGVIRT(IMFTransform, GetStreamLimits)
         HRESULT ( STDMETHODCALLTYPE *GetStreamLimits )( 
             __RPC__in IMFTransform * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwInputMinimum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwInputMaximum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwOutputMinimum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwOutputMaximum);
+            /* [out] */ __RPC__out DWORD *pdwInputMinimum,
+            /* [out] */ __RPC__out DWORD *pdwInputMaximum,
+            /* [out] */ __RPC__out DWORD *pdwOutputMinimum,
+            /* [out] */ __RPC__out DWORD *pdwOutputMaximum);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetStreamCount)
         HRESULT ( STDMETHODCALLTYPE *GetStreamCount )( 
             __RPC__in IMFTransform * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcInputStreams,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcOutputStreams);
+            /* [out] */ __RPC__out DWORD *pcInputStreams,
+            /* [out] */ __RPC__out DWORD *pcOutputStreams);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetStreamIDs)
         HRESULT ( STDMETHODCALLTYPE *GetStreamIDs )( 
             __RPC__in IMFTransform * This,
             DWORD dwInputIDArraySize,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(dwInputIDArraySize)  DWORD *pdwInputIDs,
+            /* [size_is][out] */ __RPC__out_ecount_full(dwInputIDArraySize) DWORD *pdwInputIDs,
             DWORD dwOutputIDArraySize,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(dwOutputIDArraySize)  DWORD *pdwOutputIDs);
+            /* [size_is][out] */ __RPC__out_ecount_full(dwOutputIDArraySize) DWORD *pdwOutputIDs);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetInputStreamInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInputStreamInfo )( 
             __RPC__in IMFTransform * This,
             DWORD dwInputStreamID,
-            /* [annotation][out] */ 
-            _Out_  MFT_INPUT_STREAM_INFO *pStreamInfo);
+            /* [out] */ __RPC__out MFT_INPUT_STREAM_INFO *pStreamInfo);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetOutputStreamInfo)
         HRESULT ( STDMETHODCALLTYPE *GetOutputStreamInfo )( 
             __RPC__in IMFTransform * This,
             DWORD dwOutputStreamID,
-            /* [annotation][out] */ 
-            _Out_  MFT_OUTPUT_STREAM_INFO *pStreamInfo);
+            /* [out] */ __RPC__out MFT_OUTPUT_STREAM_INFO *pStreamInfo);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IMFTransform * This,
-            /* [annotation][out] */ 
-            _Out_  IMFAttributes **pAttributes);
+            /* [out] */ __RPC__deref_out_opt IMFAttributes **pAttributes);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetInputStreamAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetInputStreamAttributes )( 
             __RPC__in IMFTransform * This,
             DWORD dwInputStreamID,
-            /* [annotation][out] */ 
-            _Out_  IMFAttributes **pAttributes);
+            /* [out] */ __RPC__deref_out_opt IMFAttributes **pAttributes);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetOutputStreamAttributes)
         HRESULT ( STDMETHODCALLTYPE *GetOutputStreamAttributes )( 
             __RPC__in IMFTransform * This,
             DWORD dwOutputStreamID,
-            /* [annotation][out] */ 
-            _Out_  IMFAttributes **pAttributes);
+            /* [out] */ __RPC__deref_out_opt IMFAttributes **pAttributes);
         
         DECLSPEC_XFGVIRT(IMFTransform, DeleteInputStream)
         HRESULT ( STDMETHODCALLTYPE *DeleteInputStream )( 
@@ -473,67 +434,58 @@ EXTERN_C const IID IID_IMFTransform;
         HRESULT ( STDMETHODCALLTYPE *AddInputStreams )( 
             __RPC__in IMFTransform * This,
             DWORD cStreams,
-            /* [annotation][in] */ 
-            _In_  DWORD *adwStreamIDs);
+            /* [in] */ __RPC__in DWORD *adwStreamIDs);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetInputAvailableType)
         HRESULT ( STDMETHODCALLTYPE *GetInputAvailableType )( 
             __RPC__in IMFTransform * This,
             DWORD dwInputStreamID,
             DWORD dwTypeIndex,
-            /* [annotation][out] */ 
-            _Out_  IMFMediaType **ppType);
+            /* [out] */ __RPC__deref_out_opt IMFMediaType **ppType);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetOutputAvailableType)
         HRESULT ( STDMETHODCALLTYPE *GetOutputAvailableType )( 
             __RPC__in IMFTransform * This,
             DWORD dwOutputStreamID,
             DWORD dwTypeIndex,
-            /* [annotation][out] */ 
-            _Out_  IMFMediaType **ppType);
+            /* [out] */ __RPC__deref_out_opt IMFMediaType **ppType);
         
         DECLSPEC_XFGVIRT(IMFTransform, SetInputType)
         HRESULT ( STDMETHODCALLTYPE *SetInputType )( 
             __RPC__in IMFTransform * This,
             DWORD dwInputStreamID,
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pType,
+            /* [in] */ __RPC__in_opt IMFMediaType *pType,
             DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IMFTransform, SetOutputType)
         HRESULT ( STDMETHODCALLTYPE *SetOutputType )( 
             __RPC__in IMFTransform * This,
             DWORD dwOutputStreamID,
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pType,
+            /* [in] */ __RPC__in_opt IMFMediaType *pType,
             DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetInputCurrentType)
         HRESULT ( STDMETHODCALLTYPE *GetInputCurrentType )( 
             __RPC__in IMFTransform * This,
             DWORD dwInputStreamID,
-            /* [annotation][out] */ 
-            _Out_  IMFMediaType **ppType);
+            /* [out] */ __RPC__deref_out_opt IMFMediaType **ppType);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetOutputCurrentType)
         HRESULT ( STDMETHODCALLTYPE *GetOutputCurrentType )( 
             __RPC__in IMFTransform * This,
             DWORD dwOutputStreamID,
-            /* [annotation][out] */ 
-            _Out_  IMFMediaType **ppType);
+            /* [out] */ __RPC__deref_out_opt IMFMediaType **ppType);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetInputStatus)
         HRESULT ( STDMETHODCALLTYPE *GetInputStatus )( 
             __RPC__in IMFTransform * This,
             DWORD dwInputStreamID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ __RPC__out DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IMFTransform, GetOutputStatus)
         HRESULT ( STDMETHODCALLTYPE *GetOutputStatus )( 
             __RPC__in IMFTransform * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ __RPC__out DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IMFTransform, SetOutputBounds)
         HRESULT ( STDMETHODCALLTYPE *SetOutputBounds )( 
@@ -545,8 +497,7 @@ EXTERN_C const IID IID_IMFTransform;
         HRESULT ( STDMETHODCALLTYPE *ProcessEvent )( 
             __RPC__in IMFTransform * This,
             DWORD dwInputStreamID,
-            /* [annotation][in] */ 
-            _In_  IMFMediaEvent *pEvent);
+            /* [in] */ __RPC__in_opt IMFMediaEvent *pEvent);
         
         DECLSPEC_XFGVIRT(IMFTransform, ProcessMessage)
         HRESULT ( STDMETHODCALLTYPE *ProcessMessage )( 
@@ -566,10 +517,8 @@ EXTERN_C const IID IID_IMFTransform;
             IMFTransform * This,
             DWORD dwFlags,
             DWORD cOutputBufferCount,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(cOutputBufferCount)  MFT_OUTPUT_DATA_BUFFER *pOutputSamples,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatus);
+            /* [size_is][out][in] */ MFT_OUTPUT_DATA_BUFFER *pOutputSamples,
+            /* [out] */ DWORD *pdwStatus);
         
         END_INTERFACE
     } IMFTransformVtbl;
@@ -918,8 +867,7 @@ EXTERN_C const IID IID_IMFDeviceTransform;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFDeviceTransform * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1251,8 +1199,7 @@ EXTERN_C const IID IID_IMFDeviceTransformCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFDeviceTransformCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

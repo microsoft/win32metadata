@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -240,12 +240,10 @@ EXTERN_C const IID IID_ITaskTrigger;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetTrigger( 
-            /* [annotation][in] */ 
-            _In_  const PTASK_TRIGGER pTrigger) = 0;
+            /* [in] */ const PTASK_TRIGGER pTrigger) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTrigger( 
-            /* [annotation][out] */ 
-            _Out_  PTASK_TRIGGER pTrigger) = 0;
+            /* [out] */ PTASK_TRIGGER pTrigger) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTriggerString( 
             /* [annotation][out] */ 
@@ -263,8 +261,7 @@ EXTERN_C const IID IID_ITaskTrigger;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITaskTrigger * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -279,14 +276,12 @@ EXTERN_C const IID IID_ITaskTrigger;
         DECLSPEC_XFGVIRT(ITaskTrigger, SetTrigger)
         HRESULT ( STDMETHODCALLTYPE *SetTrigger )( 
             ITaskTrigger * This,
-            /* [annotation][in] */ 
-            _In_  const PTASK_TRIGGER pTrigger);
+            /* [in] */ const PTASK_TRIGGER pTrigger);
         
         DECLSPEC_XFGVIRT(ITaskTrigger, GetTrigger)
         HRESULT ( STDMETHODCALLTYPE *GetTrigger )( 
             ITaskTrigger * This,
-            /* [annotation][out] */ 
-            _Out_  PTASK_TRIGGER pTrigger);
+            /* [out] */ PTASK_TRIGGER pTrigger);
         
         DECLSPEC_XFGVIRT(ITaskTrigger, GetTriggerString)
         HRESULT ( STDMETHODCALLTYPE *GetTriggerString )( 
@@ -364,136 +359,101 @@ EXTERN_C const IID IID_IScheduledWorkItem;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateTrigger( 
-            /* [annotation][out] */ 
-            _Out_  WORD *piNewTrigger,
-            /* [annotation][out] */ 
-            _Out_  ITaskTrigger **ppTrigger) = 0;
+            /* [out] */ WORD *piNewTrigger,
+            /* [out] */ ITaskTrigger **ppTrigger) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteTrigger( 
-            /* [annotation][in] */ 
-            _In_  WORD iTrigger) = 0;
+            /* [in] */ WORD iTrigger) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTriggerCount( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwCount) = 0;
+            /* [out] */ WORD *pwCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTrigger( 
-            /* [annotation][in] */ 
-            _In_  WORD iTrigger,
-            /* [annotation][out] */ 
-            _Out_  ITaskTrigger **ppTrigger) = 0;
+            /* [in] */ WORD iTrigger,
+            /* [out] */ ITaskTrigger **ppTrigger) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTriggerString( 
-            /* [annotation][in] */ 
-            _In_  WORD iTrigger,
+            /* [in] */ WORD iTrigger,
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *ppwszTrigger) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRunTimes( 
-            /* [annotation][in] */ 
-            _In_  const LPSYSTEMTIME pstBegin,
-            /* [annotation][in] */ 
-            _In_  const LPSYSTEMTIME pstEnd,
-            /* [annotation][out][in] */ 
-            _Inout_  WORD *pCount,
-            /* [annotation][out] */ 
-            _Out_  LPSYSTEMTIME *rgstTaskTimes) = 0;
+            /* [in] */ const LPSYSTEMTIME pstBegin,
+            /* [in] */ const LPSYSTEMTIME pstEnd,
+            /* [out][in] */ WORD *pCount,
+            /* [out] */ LPSYSTEMTIME *rgstTaskTimes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextRunTime( 
-            /* [annotation][out][in] */ 
-            _Inout_  SYSTEMTIME *pstNextRun) = 0;
+            /* [out][in] */ SYSTEMTIME *pstNextRun) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIdleWait( 
-            /* [annotation][in] */ 
-            _In_  WORD wIdleMinutes,
-            /* [annotation][in] */ 
-            _In_  WORD wDeadlineMinutes) = 0;
+            /* [in] */ WORD wIdleMinutes,
+            /* [in] */ WORD wDeadlineMinutes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIdleWait( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwIdleMinutes,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwDeadlineMinutes) = 0;
+            /* [out] */ WORD *pwIdleMinutes,
+            /* [out] */ WORD *pwDeadlineMinutes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Run( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Terminate( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EditWorkItem( 
-            /* [annotation][in] */ 
-            _In_  HWND hParent,
-            /* [annotation][in] */ 
-            _In_  DWORD dwReserved) = 0;
+            /* [in] */ HWND hParent,
+            /* [in] */ DWORD dwReserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMostRecentRunTime( 
-            /* [annotation][out] */ 
-            _Out_  SYSTEMTIME *pstLastRun) = 0;
+            /* [out] */ SYSTEMTIME *pstLastRun) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrStatus) = 0;
+            /* [out] */ HRESULT *phrStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetExitCode( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwExitCode) = 0;
+            /* [out] */ DWORD *pdwExitCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetComment( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszComment) = 0;
+            /* [in] */ LPCWSTR pwszComment) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComment( 
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *ppwszComment) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCreator( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszCreator) = 0;
+            /* [in] */ LPCWSTR pwszCreator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCreator( 
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *ppwszCreator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetWorkItemData( 
-            /* [annotation][in] */ 
-            _In_  WORD cbData,
-            /* [annotation][in] */ 
-            _In_  BYTE rgbData[  ]) = 0;
+            /* [in] */ WORD cbData,
+            /* [in] */ BYTE rgbData[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetWorkItemData( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pcbData,
-            /* [annotation][out] */ 
-            _Out_  BYTE **prgbData) = 0;
+            /* [out] */ WORD *pcbData,
+            /* [out] */ BYTE **prgbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetErrorRetryCount( 
-            /* [annotation][in] */ 
-            _In_  WORD wRetryCount) = 0;
+            /* [in] */ WORD wRetryCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetErrorRetryCount( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwRetryCount) = 0;
+            /* [out] */ WORD *pwRetryCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetErrorRetryInterval( 
-            /* [annotation][in] */ 
-            _In_  WORD wRetryInterval) = 0;
+            /* [in] */ WORD wRetryInterval) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetErrorRetryInterval( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwRetryInterval) = 0;
+            /* [out] */ WORD *pwRetryInterval) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFlags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ DWORD *pdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAccountInformation( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszAccountName,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszPassword) = 0;
+            /* [in] */ LPCWSTR pwszAccountName,
+            /* [in] */ LPCWSTR pwszPassword) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAccountInformation( 
             /* [annotation][out] */ 
@@ -511,8 +471,7 @@ EXTERN_C const IID IID_IScheduledWorkItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -527,72 +486,56 @@ EXTERN_C const IID IID_IScheduledWorkItem;
         DECLSPEC_XFGVIRT(IScheduledWorkItem, CreateTrigger)
         HRESULT ( STDMETHODCALLTYPE *CreateTrigger )( 
             IScheduledWorkItem * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *piNewTrigger,
-            /* [annotation][out] */ 
-            _Out_  ITaskTrigger **ppTrigger);
+            /* [out] */ WORD *piNewTrigger,
+            /* [out] */ ITaskTrigger **ppTrigger);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, DeleteTrigger)
         HRESULT ( STDMETHODCALLTYPE *DeleteTrigger )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  WORD iTrigger);
+            /* [in] */ WORD iTrigger);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetTriggerCount)
         HRESULT ( STDMETHODCALLTYPE *GetTriggerCount )( 
             IScheduledWorkItem * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwCount);
+            /* [out] */ WORD *pwCount);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetTrigger)
         HRESULT ( STDMETHODCALLTYPE *GetTrigger )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  WORD iTrigger,
-            /* [annotation][out] */ 
-            _Out_  ITaskTrigger **ppTrigger);
+            /* [in] */ WORD iTrigger,
+            /* [out] */ ITaskTrigger **ppTrigger);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetTriggerString)
         HRESULT ( STDMETHODCALLTYPE *GetTriggerString )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  WORD iTrigger,
+            /* [in] */ WORD iTrigger,
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *ppwszTrigger);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetRunTimes)
         HRESULT ( STDMETHODCALLTYPE *GetRunTimes )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  const LPSYSTEMTIME pstBegin,
-            /* [annotation][in] */ 
-            _In_  const LPSYSTEMTIME pstEnd,
-            /* [annotation][out][in] */ 
-            _Inout_  WORD *pCount,
-            /* [annotation][out] */ 
-            _Out_  LPSYSTEMTIME *rgstTaskTimes);
+            /* [in] */ const LPSYSTEMTIME pstBegin,
+            /* [in] */ const LPSYSTEMTIME pstEnd,
+            /* [out][in] */ WORD *pCount,
+            /* [out] */ LPSYSTEMTIME *rgstTaskTimes);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetNextRunTime)
         HRESULT ( STDMETHODCALLTYPE *GetNextRunTime )( 
             IScheduledWorkItem * This,
-            /* [annotation][out][in] */ 
-            _Inout_  SYSTEMTIME *pstNextRun);
+            /* [out][in] */ SYSTEMTIME *pstNextRun);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetIdleWait)
         HRESULT ( STDMETHODCALLTYPE *SetIdleWait )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  WORD wIdleMinutes,
-            /* [annotation][in] */ 
-            _In_  WORD wDeadlineMinutes);
+            /* [in] */ WORD wIdleMinutes,
+            /* [in] */ WORD wDeadlineMinutes);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetIdleWait)
         HRESULT ( STDMETHODCALLTYPE *GetIdleWait )( 
             IScheduledWorkItem * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwIdleMinutes,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwDeadlineMinutes);
+            /* [out] */ WORD *pwIdleMinutes,
+            /* [out] */ WORD *pwDeadlineMinutes);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, Run)
         HRESULT ( STDMETHODCALLTYPE *Run )( 
@@ -605,34 +548,28 @@ EXTERN_C const IID IID_IScheduledWorkItem;
         DECLSPEC_XFGVIRT(IScheduledWorkItem, EditWorkItem)
         HRESULT ( STDMETHODCALLTYPE *EditWorkItem )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  HWND hParent,
-            /* [annotation][in] */ 
-            _In_  DWORD dwReserved);
+            /* [in] */ HWND hParent,
+            /* [in] */ DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetMostRecentRunTime)
         HRESULT ( STDMETHODCALLTYPE *GetMostRecentRunTime )( 
             IScheduledWorkItem * This,
-            /* [annotation][out] */ 
-            _Out_  SYSTEMTIME *pstLastRun);
+            /* [out] */ SYSTEMTIME *pstLastRun);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             IScheduledWorkItem * This,
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrStatus);
+            /* [out] */ HRESULT *phrStatus);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetExitCode)
         HRESULT ( STDMETHODCALLTYPE *GetExitCode )( 
             IScheduledWorkItem * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwExitCode);
+            /* [out] */ DWORD *pdwExitCode);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetComment)
         HRESULT ( STDMETHODCALLTYPE *SetComment )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszComment);
+            /* [in] */ LPCWSTR pwszComment);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetComment)
         HRESULT ( STDMETHODCALLTYPE *GetComment )( 
@@ -643,8 +580,7 @@ EXTERN_C const IID IID_IScheduledWorkItem;
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetCreator)
         HRESULT ( STDMETHODCALLTYPE *SetCreator )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszCreator);
+            /* [in] */ LPCWSTR pwszCreator);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetCreator)
         HRESULT ( STDMETHODCALLTYPE *GetCreator )( 
@@ -655,62 +591,50 @@ EXTERN_C const IID IID_IScheduledWorkItem;
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetWorkItemData)
         HRESULT ( STDMETHODCALLTYPE *SetWorkItemData )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  WORD cbData,
-            /* [annotation][in] */ 
-            _In_  BYTE rgbData[  ]);
+            /* [in] */ WORD cbData,
+            /* [in] */ BYTE rgbData[  ]);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetWorkItemData)
         HRESULT ( STDMETHODCALLTYPE *GetWorkItemData )( 
             IScheduledWorkItem * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pcbData,
-            /* [annotation][out] */ 
-            _Out_  BYTE **prgbData);
+            /* [out] */ WORD *pcbData,
+            /* [out] */ BYTE **prgbData);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetErrorRetryCount)
         HRESULT ( STDMETHODCALLTYPE *SetErrorRetryCount )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  WORD wRetryCount);
+            /* [in] */ WORD wRetryCount);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetErrorRetryCount)
         HRESULT ( STDMETHODCALLTYPE *GetErrorRetryCount )( 
             IScheduledWorkItem * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwRetryCount);
+            /* [out] */ WORD *pwRetryCount);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetErrorRetryInterval)
         HRESULT ( STDMETHODCALLTYPE *SetErrorRetryInterval )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  WORD wRetryInterval);
+            /* [in] */ WORD wRetryInterval);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetErrorRetryInterval)
         HRESULT ( STDMETHODCALLTYPE *GetErrorRetryInterval )( 
             IScheduledWorkItem * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwRetryInterval);
+            /* [out] */ WORD *pwRetryInterval);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetFlags)
         HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IScheduledWorkItem * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetAccountInformation)
         HRESULT ( STDMETHODCALLTYPE *SetAccountInformation )( 
             IScheduledWorkItem * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszAccountName,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszPassword);
+            /* [in] */ LPCWSTR pwszAccountName,
+            /* [in] */ LPCWSTR pwszPassword);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetAccountInformation)
         HRESULT ( STDMETHODCALLTYPE *GetAccountInformation )( 
@@ -866,52 +790,40 @@ EXTERN_C const IID IID_ITask;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetApplicationName( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszApplicationName) = 0;
+            /* [in] */ LPCWSTR pwszApplicationName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetApplicationName( 
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszApplicationName) = 0;
+            /* [out] */ LPWSTR *ppwszApplicationName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetParameters( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszParameters) = 0;
+            /* [in] */ LPCWSTR pwszParameters) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParameters( 
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszParameters) = 0;
+            /* [out] */ LPWSTR *ppwszParameters) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetWorkingDirectory( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszWorkingDirectory) = 0;
+            /* [in] */ LPCWSTR pwszWorkingDirectory) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetWorkingDirectory( 
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszWorkingDirectory) = 0;
+            /* [out] */ LPWSTR *ppwszWorkingDirectory) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPriority( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwPriority) = 0;
+            /* [in] */ DWORD dwPriority) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPriority( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwPriority) = 0;
+            /* [out] */ DWORD *pdwPriority) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTaskFlags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTaskFlags( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ DWORD *pdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMaxRunTime( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwMaxRunTimeMS) = 0;
+            /* [in] */ DWORD dwMaxRunTimeMS) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMaxRunTime( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwMaxRunTimeMS) = 0;
+            /* [out] */ DWORD *pdwMaxRunTimeMS) = 0;
         
     };
     
@@ -925,8 +837,7 @@ EXTERN_C const IID IID_ITask;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -941,72 +852,56 @@ EXTERN_C const IID IID_ITask;
         DECLSPEC_XFGVIRT(IScheduledWorkItem, CreateTrigger)
         HRESULT ( STDMETHODCALLTYPE *CreateTrigger )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *piNewTrigger,
-            /* [annotation][out] */ 
-            _Out_  ITaskTrigger **ppTrigger);
+            /* [out] */ WORD *piNewTrigger,
+            /* [out] */ ITaskTrigger **ppTrigger);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, DeleteTrigger)
         HRESULT ( STDMETHODCALLTYPE *DeleteTrigger )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  WORD iTrigger);
+            /* [in] */ WORD iTrigger);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetTriggerCount)
         HRESULT ( STDMETHODCALLTYPE *GetTriggerCount )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwCount);
+            /* [out] */ WORD *pwCount);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetTrigger)
         HRESULT ( STDMETHODCALLTYPE *GetTrigger )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  WORD iTrigger,
-            /* [annotation][out] */ 
-            _Out_  ITaskTrigger **ppTrigger);
+            /* [in] */ WORD iTrigger,
+            /* [out] */ ITaskTrigger **ppTrigger);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetTriggerString)
         HRESULT ( STDMETHODCALLTYPE *GetTriggerString )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  WORD iTrigger,
+            /* [in] */ WORD iTrigger,
             /* [annotation][out] */ 
             _Outptr_  LPWSTR *ppwszTrigger);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetRunTimes)
         HRESULT ( STDMETHODCALLTYPE *GetRunTimes )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  const LPSYSTEMTIME pstBegin,
-            /* [annotation][in] */ 
-            _In_  const LPSYSTEMTIME pstEnd,
-            /* [annotation][out][in] */ 
-            _Inout_  WORD *pCount,
-            /* [annotation][out] */ 
-            _Out_  LPSYSTEMTIME *rgstTaskTimes);
+            /* [in] */ const LPSYSTEMTIME pstBegin,
+            /* [in] */ const LPSYSTEMTIME pstEnd,
+            /* [out][in] */ WORD *pCount,
+            /* [out] */ LPSYSTEMTIME *rgstTaskTimes);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetNextRunTime)
         HRESULT ( STDMETHODCALLTYPE *GetNextRunTime )( 
             ITask * This,
-            /* [annotation][out][in] */ 
-            _Inout_  SYSTEMTIME *pstNextRun);
+            /* [out][in] */ SYSTEMTIME *pstNextRun);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetIdleWait)
         HRESULT ( STDMETHODCALLTYPE *SetIdleWait )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  WORD wIdleMinutes,
-            /* [annotation][in] */ 
-            _In_  WORD wDeadlineMinutes);
+            /* [in] */ WORD wIdleMinutes,
+            /* [in] */ WORD wDeadlineMinutes);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetIdleWait)
         HRESULT ( STDMETHODCALLTYPE *GetIdleWait )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwIdleMinutes,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwDeadlineMinutes);
+            /* [out] */ WORD *pwIdleMinutes,
+            /* [out] */ WORD *pwDeadlineMinutes);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, Run)
         HRESULT ( STDMETHODCALLTYPE *Run )( 
@@ -1019,34 +914,28 @@ EXTERN_C const IID IID_ITask;
         DECLSPEC_XFGVIRT(IScheduledWorkItem, EditWorkItem)
         HRESULT ( STDMETHODCALLTYPE *EditWorkItem )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  HWND hParent,
-            /* [annotation][in] */ 
-            _In_  DWORD dwReserved);
+            /* [in] */ HWND hParent,
+            /* [in] */ DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetMostRecentRunTime)
         HRESULT ( STDMETHODCALLTYPE *GetMostRecentRunTime )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  SYSTEMTIME *pstLastRun);
+            /* [out] */ SYSTEMTIME *pstLastRun);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrStatus);
+            /* [out] */ HRESULT *phrStatus);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetExitCode)
         HRESULT ( STDMETHODCALLTYPE *GetExitCode )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwExitCode);
+            /* [out] */ DWORD *pdwExitCode);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetComment)
         HRESULT ( STDMETHODCALLTYPE *SetComment )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszComment);
+            /* [in] */ LPCWSTR pwszComment);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetComment)
         HRESULT ( STDMETHODCALLTYPE *GetComment )( 
@@ -1057,8 +946,7 @@ EXTERN_C const IID IID_ITask;
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetCreator)
         HRESULT ( STDMETHODCALLTYPE *SetCreator )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszCreator);
+            /* [in] */ LPCWSTR pwszCreator);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetCreator)
         HRESULT ( STDMETHODCALLTYPE *GetCreator )( 
@@ -1069,62 +957,50 @@ EXTERN_C const IID IID_ITask;
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetWorkItemData)
         HRESULT ( STDMETHODCALLTYPE *SetWorkItemData )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  WORD cbData,
-            /* [annotation][in] */ 
-            _In_  BYTE rgbData[  ]);
+            /* [in] */ WORD cbData,
+            /* [in] */ BYTE rgbData[  ]);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetWorkItemData)
         HRESULT ( STDMETHODCALLTYPE *GetWorkItemData )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pcbData,
-            /* [annotation][out] */ 
-            _Out_  BYTE **prgbData);
+            /* [out] */ WORD *pcbData,
+            /* [out] */ BYTE **prgbData);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetErrorRetryCount)
         HRESULT ( STDMETHODCALLTYPE *SetErrorRetryCount )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  WORD wRetryCount);
+            /* [in] */ WORD wRetryCount);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetErrorRetryCount)
         HRESULT ( STDMETHODCALLTYPE *GetErrorRetryCount )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwRetryCount);
+            /* [out] */ WORD *pwRetryCount);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetErrorRetryInterval)
         HRESULT ( STDMETHODCALLTYPE *SetErrorRetryInterval )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  WORD wRetryInterval);
+            /* [in] */ WORD wRetryInterval);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetErrorRetryInterval)
         HRESULT ( STDMETHODCALLTYPE *GetErrorRetryInterval )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwRetryInterval);
+            /* [out] */ WORD *pwRetryInterval);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetFlags)
         HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, SetAccountInformation)
         HRESULT ( STDMETHODCALLTYPE *SetAccountInformation )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszAccountName,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszPassword);
+            /* [in] */ LPCWSTR pwszAccountName,
+            /* [in] */ LPCWSTR pwszPassword);
         
         DECLSPEC_XFGVIRT(IScheduledWorkItem, GetAccountInformation)
         HRESULT ( STDMETHODCALLTYPE *GetAccountInformation )( 
@@ -1135,74 +1011,62 @@ EXTERN_C const IID IID_ITask;
         DECLSPEC_XFGVIRT(ITask, SetApplicationName)
         HRESULT ( STDMETHODCALLTYPE *SetApplicationName )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszApplicationName);
+            /* [in] */ LPCWSTR pwszApplicationName);
         
         DECLSPEC_XFGVIRT(ITask, GetApplicationName)
         HRESULT ( STDMETHODCALLTYPE *GetApplicationName )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszApplicationName);
+            /* [out] */ LPWSTR *ppwszApplicationName);
         
         DECLSPEC_XFGVIRT(ITask, SetParameters)
         HRESULT ( STDMETHODCALLTYPE *SetParameters )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszParameters);
+            /* [in] */ LPCWSTR pwszParameters);
         
         DECLSPEC_XFGVIRT(ITask, GetParameters)
         HRESULT ( STDMETHODCALLTYPE *GetParameters )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszParameters);
+            /* [out] */ LPWSTR *ppwszParameters);
         
         DECLSPEC_XFGVIRT(ITask, SetWorkingDirectory)
         HRESULT ( STDMETHODCALLTYPE *SetWorkingDirectory )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszWorkingDirectory);
+            /* [in] */ LPCWSTR pwszWorkingDirectory);
         
         DECLSPEC_XFGVIRT(ITask, GetWorkingDirectory)
         HRESULT ( STDMETHODCALLTYPE *GetWorkingDirectory )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszWorkingDirectory);
+            /* [out] */ LPWSTR *ppwszWorkingDirectory);
         
         DECLSPEC_XFGVIRT(ITask, SetPriority)
         HRESULT ( STDMETHODCALLTYPE *SetPriority )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwPriority);
+            /* [in] */ DWORD dwPriority);
         
         DECLSPEC_XFGVIRT(ITask, GetPriority)
         HRESULT ( STDMETHODCALLTYPE *GetPriority )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwPriority);
+            /* [out] */ DWORD *pdwPriority);
         
         DECLSPEC_XFGVIRT(ITask, SetTaskFlags)
         HRESULT ( STDMETHODCALLTYPE *SetTaskFlags )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITask, GetTaskFlags)
         HRESULT ( STDMETHODCALLTYPE *GetTaskFlags )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(ITask, SetMaxRunTime)
         HRESULT ( STDMETHODCALLTYPE *SetMaxRunTime )( 
             ITask * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMaxRunTimeMS);
+            /* [in] */ DWORD dwMaxRunTimeMS);
         
         DECLSPEC_XFGVIRT(ITask, GetMaxRunTime)
         HRESULT ( STDMETHODCALLTYPE *GetMaxRunTime )( 
             ITask * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwMaxRunTimeMS);
+            /* [out] */ DWORD *pdwMaxRunTimeMS);
         
         END_INTERFACE
     } ITaskVtbl;
@@ -1389,22 +1253,17 @@ EXTERN_C const IID IID_IEnumWorkItems;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR **rgpwszNames,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [out] */ LPWSTR **rgpwszNames,
+            /* [out] */ ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumWorkItems **ppEnumWorkItems) = 0;
+            /* [out] */ IEnumWorkItems **ppEnumWorkItems) = 0;
         
     };
     
@@ -1418,8 +1277,7 @@ EXTERN_C const IID IID_IEnumWorkItems;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumWorkItems * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1434,18 +1292,14 @@ EXTERN_C const IID IID_IEnumWorkItems;
         DECLSPEC_XFGVIRT(IEnumWorkItems, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumWorkItems * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR **rgpwszNames,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [out] */ LPWSTR **rgpwszNames,
+            /* [out] */ ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumWorkItems, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumWorkItems * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumWorkItems, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -1454,8 +1308,7 @@ EXTERN_C const IID IID_IEnumWorkItems;
         DECLSPEC_XFGVIRT(IEnumWorkItems, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumWorkItems * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumWorkItems **ppEnumWorkItems);
+            /* [out] */ IEnumWorkItems **ppEnumWorkItems);
         
         END_INTERFACE
     } IEnumWorkItemsVtbl;
@@ -1530,50 +1383,35 @@ EXTERN_C const IID IID_ITaskScheduler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetTargetComputer( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszComputer) = 0;
+            /* [in] */ LPCWSTR pwszComputer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTargetComputer( 
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszComputer) = 0;
+            /* [out] */ LPWSTR *ppwszComputer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Enum( 
-            /* [annotation][out] */ 
-            _Out_  IEnumWorkItems **ppEnumWorkItems) = 0;
+            /* [out] */ IEnumWorkItems **ppEnumWorkItems) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Activate( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszName,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppUnk) = 0;
+            /* [in] */ LPCWSTR pwszName,
+            /* [in] */ REFIID riid,
+            /* [out] */ IUnknown **ppUnk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Delete( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszName) = 0;
+            /* [in] */ LPCWSTR pwszName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NewWorkItem( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszTaskName,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppUnk) = 0;
+            /* [in] */ LPCWSTR pwszTaskName,
+            /* [in] */ REFCLSID rclsid,
+            /* [in] */ REFIID riid,
+            /* [out] */ IUnknown **ppUnk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddWorkItem( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszTaskName,
-            /* [annotation][in] */ 
-            _In_  IScheduledWorkItem *pWorkItem) = 0;
+            /* [in] */ LPCWSTR pwszTaskName,
+            /* [in] */ IScheduledWorkItem *pWorkItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsOfType( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszName,
-            /* [annotation][in] */ 
-            _In_  REFIID riid) = 0;
+            /* [in] */ LPCWSTR pwszName,
+            /* [in] */ REFIID riid) = 0;
         
     };
     
@@ -1587,8 +1425,7 @@ EXTERN_C const IID IID_ITaskScheduler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITaskScheduler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1603,64 +1440,49 @@ EXTERN_C const IID IID_ITaskScheduler;
         DECLSPEC_XFGVIRT(ITaskScheduler, SetTargetComputer)
         HRESULT ( STDMETHODCALLTYPE *SetTargetComputer )( 
             ITaskScheduler * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszComputer);
+            /* [in] */ LPCWSTR pwszComputer);
         
         DECLSPEC_XFGVIRT(ITaskScheduler, GetTargetComputer)
         HRESULT ( STDMETHODCALLTYPE *GetTargetComputer )( 
             ITaskScheduler * This,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszComputer);
+            /* [out] */ LPWSTR *ppwszComputer);
         
         DECLSPEC_XFGVIRT(ITaskScheduler, Enum)
         HRESULT ( STDMETHODCALLTYPE *Enum )( 
             ITaskScheduler * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumWorkItems **ppEnumWorkItems);
+            /* [out] */ IEnumWorkItems **ppEnumWorkItems);
         
         DECLSPEC_XFGVIRT(ITaskScheduler, Activate)
         HRESULT ( STDMETHODCALLTYPE *Activate )( 
             ITaskScheduler * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszName,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppUnk);
+            /* [in] */ LPCWSTR pwszName,
+            /* [in] */ REFIID riid,
+            /* [out] */ IUnknown **ppUnk);
         
         DECLSPEC_XFGVIRT(ITaskScheduler, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             ITaskScheduler * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszName);
+            /* [in] */ LPCWSTR pwszName);
         
         DECLSPEC_XFGVIRT(ITaskScheduler, NewWorkItem)
         HRESULT ( STDMETHODCALLTYPE *NewWorkItem )( 
             ITaskScheduler * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszTaskName,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppUnk);
+            /* [in] */ LPCWSTR pwszTaskName,
+            /* [in] */ REFCLSID rclsid,
+            /* [in] */ REFIID riid,
+            /* [out] */ IUnknown **ppUnk);
         
         DECLSPEC_XFGVIRT(ITaskScheduler, AddWorkItem)
         HRESULT ( STDMETHODCALLTYPE *AddWorkItem )( 
             ITaskScheduler * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszTaskName,
-            /* [annotation][in] */ 
-            _In_  IScheduledWorkItem *pWorkItem);
+            /* [in] */ LPCWSTR pwszTaskName,
+            /* [in] */ IScheduledWorkItem *pWorkItem);
         
         DECLSPEC_XFGVIRT(ITaskScheduler, IsOfType)
         HRESULT ( STDMETHODCALLTYPE *IsOfType )( 
             ITaskScheduler * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszName,
-            /* [annotation][in] */ 
-            _In_  REFIID riid);
+            /* [in] */ LPCWSTR pwszName,
+            /* [in] */ REFIID riid);
         
         END_INTERFACE
     } ITaskSchedulerVtbl;
@@ -1767,12 +1589,9 @@ EXTERN_C const IID IID_IProvideTaskPage;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPage( 
-            /* [annotation][in] */ 
-            _In_  TASKPAGE tpType,
-            /* [annotation][in] */ 
-            _In_  BOOL fPersistChanges,
-            /* [annotation][out] */ 
-            _Out_  HPROPSHEETPAGE *phPage) = 0;
+            /* [in] */ TASKPAGE tpType,
+            /* [in] */ BOOL fPersistChanges,
+            /* [out] */ HPROPSHEETPAGE *phPage) = 0;
         
     };
     
@@ -1786,8 +1605,7 @@ EXTERN_C const IID IID_IProvideTaskPage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IProvideTaskPage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1802,12 +1620,9 @@ EXTERN_C const IID IID_IProvideTaskPage;
         DECLSPEC_XFGVIRT(IProvideTaskPage, GetPage)
         HRESULT ( STDMETHODCALLTYPE *GetPage )( 
             IProvideTaskPage * This,
-            /* [annotation][in] */ 
-            _In_  TASKPAGE tpType,
-            /* [annotation][in] */ 
-            _In_  BOOL fPersistChanges,
-            /* [annotation][out] */ 
-            _Out_  HPROPSHEETPAGE *phPage);
+            /* [in] */ TASKPAGE tpType,
+            /* [in] */ BOOL fPersistChanges,
+            /* [out] */ HPROPSHEETPAGE *phPage);
         
         END_INTERFACE
     } IProvideTaskPageVtbl;

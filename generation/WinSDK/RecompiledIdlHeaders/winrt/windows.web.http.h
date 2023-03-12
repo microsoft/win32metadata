@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xf0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -162,6 +162,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CWeb_CHttp_CIHttpClient2 ABI::Windows::Web::Http::IHttpClient2
 
 #endif // ____x_ABI_CWindows_CWeb_CHttp_CIHttpClient2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Web {
+            namespace Http {
+                interface IHttpClient3;
+            } /* Http */
+        } /* Web */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3 ABI::Windows::Web::Http::IHttpClient3
+
+#endif // ____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CWeb_CHttp_CIHttpClientFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CWeb_CHttp_CIHttpClientFactory_FWD_DEFINED__
@@ -417,6 +432,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage ABI::Windows::Web::Http::IHttpRequestMessage
 
 #endif // ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Web {
+            namespace Http {
+                interface IHttpRequestMessage2;
+            } /* Http */
+        } /* Web */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2 ABI::Windows::Web::Http::IHttpRequestMessage2
+
+#endif // ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessageFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessageFactory_FWD_DEFINED__
@@ -2998,6 +3028,45 @@ EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CHttp_CIHttpClient2;
 
 /*
  *
+ * Interface Windows.Web.Http.IHttpClient3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Web.Http.HttpClient
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Web_Http_IHttpClient3[] = L"Windows.Web.Http.IHttpClient3";
+namespace ABI {
+    namespace Windows {
+        namespace Web {
+            namespace Http {
+                MIDL_INTERFACE("1172fd01-9899-4194-963f-8f9d72a7ec15")
+                IHttpClient3 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_DefaultPrivacyAnnotation(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_DefaultPrivacyAnnotation(
+                        HSTRING value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IHttpClient3 = _uuidof(IHttpClient3);
+            } /* Http */
+        } /* Web */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CHttp_CIHttpClient3;
+#endif /* !defined(____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Web.Http.IHttpClientFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -3774,6 +3843,45 @@ EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage;
 
 /*
  *
+ * Interface Windows.Web.Http.IHttpRequestMessage2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Web.Http.HttpRequestMessage
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Web_Http_IHttpRequestMessage2[] = L"Windows.Web.Http.IHttpRequestMessage2";
+namespace ABI {
+    namespace Windows {
+        namespace Web {
+            namespace Http {
+                MIDL_INTERFACE("c3c60489-62c2-4a3f-9554-226e7c60bd96")
+                IHttpRequestMessage2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_PrivacyAnnotation(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_PrivacyAnnotation(
+                        HSTRING value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IHttpRequestMessage2 = _uuidof(IHttpRequestMessage2);
+            } /* Http */
+        } /* Web */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2;
+#endif /* !defined(____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Web.Http.IHttpRequestMessageFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -4139,6 +4247,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpClient ** Default Interface **
  *    Windows.Web.Http.IHttpClient2
+ *    Windows.Web.Http.IHttpClient3
  *    Windows.Foundation.IClosable
  *    Windows.Foundation.IStringable
  *
@@ -4371,8 +4480,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Http.IHttpMultipartFormDataContentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpMultipartFormDataContent
@@ -4405,6 +4514,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpRequestMessage ** Default Interface **
+ *    Windows.Web.Http.IHttpRequestMessage2
  *    Windows.Foundation.IClosable
  *    Windows.Foundation.IStringable
  *
@@ -4448,8 +4558,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Http.IHttpResponseMessageFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpResponseMessage ** Default Interface **
@@ -4560,6 +4670,12 @@ typedef interface __x_ABI_CWindows_CWeb_CHttp_CIHttpClient2 __x_ABI_CWindows_CWe
 
 #endif // ____x_ABI_CWindows_CWeb_CHttp_CIHttpClient2_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_FWD_DEFINED__
+#define ____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3 __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3;
+
+#endif // ____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CWeb_CHttp_CIHttpClientFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CWeb_CHttp_CIHttpClientFactory_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CWeb_CHttp_CIHttpClientFactory __x_ABI_CWindows_CWeb_CHttp_CIHttpClientFactory;
@@ -4661,6 +4777,12 @@ typedef interface __x_ABI_CWindows_CWeb_CHttp_CIHttpMultipartFormDataContentFact
 typedef interface __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage;
 
 #endif // ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2 __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2;
+
+#endif // ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessageFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessageFactory_FWD_DEFINED__
@@ -9120,6 +9242,80 @@ EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CHttp_CIHttpClient2;
 
 /*
  *
+ * Interface Windows.Web.Http.IHttpClient3
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Web.Http.HttpClient
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Web_Http_IHttpClient3[] = L"Windows.Web.Http.IHttpClient3";
+typedef struct __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CWeb_CHttp_CIHttpClient3* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CWeb_CHttp_CIHttpClient3* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CWeb_CHttp_CIHttpClient3* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CWeb_CHttp_CIHttpClient3* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CWeb_CHttp_CIHttpClient3* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CWeb_CHttp_CIHttpClient3* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_DefaultPrivacyAnnotation)(__x_ABI_CWindows_CWeb_CHttp_CIHttpClient3* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_DefaultPrivacyAnnotation)(__x_ABI_CWindows_CWeb_CHttp_CIHttpClient3* This,
+        HSTRING value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3Vtbl;
+
+interface __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3
+{
+    CONST_VTBL struct __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_get_DefaultPrivacyAnnotation(This, value) \
+    ((This)->lpVtbl->get_DefaultPrivacyAnnotation(This, value))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_put_DefaultPrivacyAnnotation(This, value) \
+    ((This)->lpVtbl->put_DefaultPrivacyAnnotation(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CHttp_CIHttpClient3;
+#endif /* !defined(____x_ABI_CWindows_CWeb_CHttp_CIHttpClient3_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Web.Http.IHttpClientFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -10553,6 +10749,80 @@ EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage;
 
 /*
  *
+ * Interface Windows.Web.Http.IHttpRequestMessage2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Web.Http.HttpRequestMessage
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Web_Http_IHttpRequestMessage2[] = L"Windows.Web.Http.IHttpRequestMessage2";
+typedef struct __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_PrivacyAnnotation)(__x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* put_PrivacyAnnotation)(__x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2* This,
+        HSTRING value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2Vtbl;
+
+interface __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_get_PrivacyAnnotation(This, value) \
+    ((This)->lpVtbl->get_PrivacyAnnotation(This, value))
+
+#define __x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_put_PrivacyAnnotation(This, value) \
+    ((This)->lpVtbl->put_PrivacyAnnotation(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2;
+#endif /* !defined(____x_ABI_CWindows_CWeb_CHttp_CIHttpRequestMessage2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Interface Windows.Web.Http.IHttpRequestMessageFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -11193,6 +11463,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpClient ** Default Interface **
  *    Windows.Web.Http.IHttpClient2
+ *    Windows.Web.Http.IHttpClient3
  *    Windows.Foundation.IClosable
  *    Windows.Foundation.IStringable
  *
@@ -11425,8 +11696,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Http.IHttpMultipartFormDataContentFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpMultipartFormDataContent
@@ -11459,6 +11730,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpRequestMessage ** Default Interface **
+ *    Windows.Web.Http.IHttpRequestMessage2
  *    Windows.Foundation.IClosable
  *    Windows.Foundation.IStringable
  *
@@ -11502,8 +11774,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Web.Http.IHttpResponseMessageFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Web.Http.IHttpResponseMessage ** Default Interface **

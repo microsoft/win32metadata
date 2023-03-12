@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -260,16 +260,13 @@ EXTERN_C const IID IID_IFsrmObject;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id) = 0;
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *description) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *description) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
-            /* [annotation][in] */ 
-            _In_  BSTR description) = 0;
+            /* [in] */ __RPC__in BSTR description) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
@@ -287,8 +284,7 @@ EXTERN_C const IID IID_IFsrmObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -303,31 +299,23 @@ EXTERN_C const IID IID_IFsrmObject;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmObject * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmObject * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -352,20 +340,17 @@ EXTERN_C const IID IID_IFsrmObject;
         DECLSPEC_XFGVIRT(IFsrmObject, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmObject * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmObject, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFsrmObject * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *description);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFsrmObject * This,
-            /* [annotation][in] */ 
-            _In_  BSTR description);
+            /* [in] */ __RPC__in BSTR description);
         
         DECLSPEC_XFGVIRT(IFsrmObject, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -453,36 +438,27 @@ EXTERN_C const IID IID_IFsrmCollection;
     {
     public:
         virtual /* [restricted][helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **unknown) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **unknown) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *item) = 0;
+            /* [in] */ long index,
+            /* [retval][out] */ __RPC__out VARIANT *item) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *count) = 0;
+            /* [retval][out] */ __RPC__out long *count) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmCollectionState *state) = 0;
+            /* [retval][out] */ __RPC__out FsrmCollectionState *state) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE WaitForCompletion( 
-            /* [annotation][in] */ 
-            _In_  long waitSeconds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *completed) = 0;
+            /* [in] */ long waitSeconds,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *completed) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetById( 
-            /* [annotation][in] */ 
-            _In_  FSRM_OBJECT_ID id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *entry) = 0;
+            /* [in] */ FSRM_OBJECT_ID id,
+            /* [retval][out] */ __RPC__out VARIANT *entry) = 0;
         
     };
     
@@ -496,8 +472,7 @@ EXTERN_C const IID IID_IFsrmCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -512,31 +487,23 @@ EXTERN_C const IID IID_IFsrmCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -561,28 +528,23 @@ EXTERN_C const IID IID_IFsrmCollection;
         DECLSPEC_XFGVIRT(IFsrmCollection, get__NewEnum)
         /* [restricted][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFsrmCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **unknown);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **unknown);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFsrmCollection * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *item);
+            /* [in] */ long index,
+            /* [retval][out] */ __RPC__out VARIANT *item);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFsrmCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *count);
+            /* [retval][out] */ __RPC__out long *count);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in IFsrmCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmCollectionState *state);
+            /* [retval][out] */ __RPC__out FsrmCollectionState *state);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, Cancel)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
@@ -591,18 +553,14 @@ EXTERN_C const IID IID_IFsrmCollection;
         DECLSPEC_XFGVIRT(IFsrmCollection, WaitForCompletion)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *WaitForCompletion )( 
             __RPC__in IFsrmCollection * This,
-            /* [annotation][in] */ 
-            _In_  long waitSeconds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *completed);
+            /* [in] */ long waitSeconds,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *completed);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, GetById)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetById )( 
             __RPC__in IFsrmCollection * This,
-            /* [annotation][in] */ 
-            _In_  FSRM_OBJECT_ID id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *entry);
+            /* [in] */ FSRM_OBJECT_ID id,
+            /* [retval][out] */ __RPC__out VARIANT *entry);
         
         END_INTERFACE
     } IFsrmCollectionVtbl;
@@ -688,20 +646,16 @@ EXTERN_C const IID IID_IFsrmMutableCollection;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][in] */ 
-            _In_  VARIANT item) = 0;
+            /* [in] */ VARIANT item) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [annotation][in] */ 
-            _In_  long index) = 0;
+            /* [in] */ long index) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveById( 
-            /* [annotation][in] */ 
-            _In_  FSRM_OBJECT_ID id) = 0;
+            /* [in] */ FSRM_OBJECT_ID id) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **collection) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **collection) = 0;
         
     };
     
@@ -715,8 +669,7 @@ EXTERN_C const IID IID_IFsrmMutableCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -731,31 +684,23 @@ EXTERN_C const IID IID_IFsrmMutableCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -780,28 +725,23 @@ EXTERN_C const IID IID_IFsrmMutableCollection;
         DECLSPEC_XFGVIRT(IFsrmCollection, get__NewEnum)
         /* [restricted][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **unknown);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **unknown);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *item);
+            /* [in] */ long index,
+            /* [retval][out] */ __RPC__out VARIANT *item);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *count);
+            /* [retval][out] */ __RPC__out long *count);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmCollectionState *state);
+            /* [retval][out] */ __RPC__out FsrmCollectionState *state);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, Cancel)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
@@ -810,42 +750,34 @@ EXTERN_C const IID IID_IFsrmMutableCollection;
         DECLSPEC_XFGVIRT(IFsrmCollection, WaitForCompletion)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *WaitForCompletion )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][in] */ 
-            _In_  long waitSeconds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *completed);
+            /* [in] */ long waitSeconds,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *completed);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, GetById)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetById )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][in] */ 
-            _In_  FSRM_OBJECT_ID id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *entry);
+            /* [in] */ FSRM_OBJECT_ID id,
+            /* [retval][out] */ __RPC__out VARIANT *entry);
         
         DECLSPEC_XFGVIRT(IFsrmMutableCollection, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT item);
+            /* [in] */ VARIANT item);
         
         DECLSPEC_XFGVIRT(IFsrmMutableCollection, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][in] */ 
-            _In_  long index);
+            /* [in] */ long index);
         
         DECLSPEC_XFGVIRT(IFsrmMutableCollection, RemoveById)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveById )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][in] */ 
-            _In_  FSRM_OBJECT_ID id);
+            /* [in] */ FSRM_OBJECT_ID id);
         
         DECLSPEC_XFGVIRT(IFsrmMutableCollection, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IFsrmMutableCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **collection);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **collection);
         
         END_INTERFACE
     } IFsrmMutableCollectionVtbl;
@@ -944,10 +876,8 @@ EXTERN_C const IID IID_IFsrmCommittableCollection;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Commit( 
-            /* [annotation][in] */ 
-            _In_  FsrmCommitOptions options,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **results) = 0;
+            /* [in] */ FsrmCommitOptions options,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **results) = 0;
         
     };
     
@@ -961,8 +891,7 @@ EXTERN_C const IID IID_IFsrmCommittableCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -977,31 +906,23 @@ EXTERN_C const IID IID_IFsrmCommittableCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1026,28 +947,23 @@ EXTERN_C const IID IID_IFsrmCommittableCollection;
         DECLSPEC_XFGVIRT(IFsrmCollection, get__NewEnum)
         /* [restricted][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **unknown);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **unknown);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *item);
+            /* [in] */ long index,
+            /* [retval][out] */ __RPC__out VARIANT *item);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *count);
+            /* [retval][out] */ __RPC__out long *count);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmCollectionState *state);
+            /* [retval][out] */ __RPC__out FsrmCollectionState *state);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, Cancel)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
@@ -1056,50 +972,40 @@ EXTERN_C const IID IID_IFsrmCommittableCollection;
         DECLSPEC_XFGVIRT(IFsrmCollection, WaitForCompletion)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *WaitForCompletion )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][in] */ 
-            _In_  long waitSeconds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *completed);
+            /* [in] */ long waitSeconds,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *completed);
         
         DECLSPEC_XFGVIRT(IFsrmCollection, GetById)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetById )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][in] */ 
-            _In_  FSRM_OBJECT_ID id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *entry);
+            /* [in] */ FSRM_OBJECT_ID id,
+            /* [retval][out] */ __RPC__out VARIANT *entry);
         
         DECLSPEC_XFGVIRT(IFsrmMutableCollection, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT item);
+            /* [in] */ VARIANT item);
         
         DECLSPEC_XFGVIRT(IFsrmMutableCollection, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][in] */ 
-            _In_  long index);
+            /* [in] */ long index);
         
         DECLSPEC_XFGVIRT(IFsrmMutableCollection, RemoveById)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveById )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][in] */ 
-            _In_  FSRM_OBJECT_ID id);
+            /* [in] */ FSRM_OBJECT_ID id);
         
         DECLSPEC_XFGVIRT(IFsrmMutableCollection, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmMutableCollection **collection);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmMutableCollection **collection);
         
         DECLSPEC_XFGVIRT(IFsrmCommittableCollection, Commit)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IFsrmCommittableCollection * This,
-            /* [annotation][in] */ 
-            _In_  FsrmCommitOptions options,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **results);
+            /* [in] */ FsrmCommitOptions options,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **results);
         
         END_INTERFACE
     } IFsrmCommittableCollectionVtbl;
@@ -1202,20 +1108,16 @@ EXTERN_C const IID IID_IFsrmAction;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id) = 0;
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ActionType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmActionType *actionType) = 0;
+            /* [retval][out] */ __RPC__out FsrmActionType *actionType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RunLimitInterval( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *minutes) = 0;
+            /* [retval][out] */ __RPC__out long *minutes) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_RunLimitInterval( 
-            /* [annotation][in] */ 
-            _In_  long minutes) = 0;
+            /* [in] */ long minutes) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
@@ -1231,8 +1133,7 @@ EXTERN_C const IID IID_IFsrmAction;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmAction * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1247,31 +1148,23 @@ EXTERN_C const IID IID_IFsrmAction;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmAction * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmAction * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmAction * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1296,26 +1189,22 @@ EXTERN_C const IID IID_IFsrmAction;
         DECLSPEC_XFGVIRT(IFsrmAction, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmAction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_ActionType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionType )( 
             __RPC__in IFsrmAction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmActionType *actionType);
+            /* [retval][out] */ __RPC__out FsrmActionType *actionType);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_RunLimitInterval)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RunLimitInterval )( 
             __RPC__in IFsrmAction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *minutes);
+            /* [retval][out] */ __RPC__out long *minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, put_RunLimitInterval)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RunLimitInterval )( 
             __RPC__in IFsrmAction * This,
-            /* [annotation][in] */ 
-            _In_  long minutes);
+            /* [in] */ long minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -1399,60 +1288,46 @@ EXTERN_C const IID IID_IFsrmActionEmail;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailFrom( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailFrom) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailFrom) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailFrom( 
-            /* [annotation][in] */ 
-            _In_  BSTR mailFrom) = 0;
+            /* [in] */ __RPC__in BSTR mailFrom) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailReplyTo( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailReplyTo) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailReplyTo) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailReplyTo( 
-            /* [annotation][in] */ 
-            _In_  BSTR mailReplyTo) = 0;
+            /* [in] */ __RPC__in BSTR mailReplyTo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailTo( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailTo) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailTo) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailTo( 
-            /* [annotation][in] */ 
-            _In_  BSTR mailTo) = 0;
+            /* [in] */ __RPC__in BSTR mailTo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailCc( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailCc) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailCc) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailCc( 
-            /* [annotation][in] */ 
-            _In_  BSTR mailCc) = 0;
+            /* [in] */ __RPC__in BSTR mailCc) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailBcc( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailBcc) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailBcc) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailBcc( 
-            /* [annotation][in] */ 
-            _In_  BSTR mailBcc) = 0;
+            /* [in] */ __RPC__in BSTR mailBcc) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailSubject( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailSubject) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailSubject) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailSubject( 
-            /* [annotation][in] */ 
-            _In_  BSTR mailSubject) = 0;
+            /* [in] */ __RPC__in BSTR mailSubject) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MessageText( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *messageText) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *messageText) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MessageText( 
-            /* [annotation][in] */ 
-            _In_  BSTR messageText) = 0;
+            /* [in] */ __RPC__in BSTR messageText) = 0;
         
     };
     
@@ -1466,8 +1341,7 @@ EXTERN_C const IID IID_IFsrmActionEmail;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1482,31 +1356,23 @@ EXTERN_C const IID IID_IFsrmActionEmail;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1531,26 +1397,22 @@ EXTERN_C const IID IID_IFsrmActionEmail;
         DECLSPEC_XFGVIRT(IFsrmAction, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_ActionType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionType )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmActionType *actionType);
+            /* [retval][out] */ __RPC__out FsrmActionType *actionType);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_RunLimitInterval)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RunLimitInterval )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *minutes);
+            /* [retval][out] */ __RPC__out long *minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, put_RunLimitInterval)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RunLimitInterval )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  long minutes);
+            /* [in] */ long minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -1559,86 +1421,72 @@ EXTERN_C const IID IID_IFsrmActionEmail;
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailFrom)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailFrom )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailFrom);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailFrom);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailFrom)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailFrom )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailFrom);
+            /* [in] */ __RPC__in BSTR mailFrom);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailReplyTo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailReplyTo )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailReplyTo);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailReplyTo);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailReplyTo)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailReplyTo )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailReplyTo);
+            /* [in] */ __RPC__in BSTR mailReplyTo);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailTo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailTo )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailTo);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailTo);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailTo)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailTo )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailTo);
+            /* [in] */ __RPC__in BSTR mailTo);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailCc)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailCc )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailCc);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailCc);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailCc)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailCc )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailCc);
+            /* [in] */ __RPC__in BSTR mailCc);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailBcc)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailBcc )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailBcc);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailBcc);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailBcc)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailBcc )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailBcc);
+            /* [in] */ __RPC__in BSTR mailBcc);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailSubject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailSubject )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailSubject);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailSubject);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailSubject)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailSubject )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailSubject);
+            /* [in] */ __RPC__in BSTR mailSubject);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MessageText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MessageText )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *messageText);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *messageText);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MessageText)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MessageText )( 
             __RPC__in IFsrmActionEmail * This,
-            /* [annotation][in] */ 
-            _In_  BSTR messageText);
+            /* [in] */ __RPC__in BSTR messageText);
         
         END_INTERFACE
     } IFsrmActionEmailVtbl;
@@ -1761,12 +1609,10 @@ EXTERN_C const IID IID_IFsrmActionEmail2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AttachmentFileListSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *attachmentFileListSize) = 0;
+            /* [retval][out] */ __RPC__out long *attachmentFileListSize) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AttachmentFileListSize( 
-            /* [annotation][in] */ 
-            _In_  long attachmentFileListSize) = 0;
+            /* [in] */ long attachmentFileListSize) = 0;
         
     };
     
@@ -1780,8 +1626,7 @@ EXTERN_C const IID IID_IFsrmActionEmail2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1796,31 +1641,23 @@ EXTERN_C const IID IID_IFsrmActionEmail2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1845,26 +1682,22 @@ EXTERN_C const IID IID_IFsrmActionEmail2;
         DECLSPEC_XFGVIRT(IFsrmAction, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_ActionType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionType )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmActionType *actionType);
+            /* [retval][out] */ __RPC__out FsrmActionType *actionType);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_RunLimitInterval)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RunLimitInterval )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *minutes);
+            /* [retval][out] */ __RPC__out long *minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, put_RunLimitInterval)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RunLimitInterval )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  long minutes);
+            /* [in] */ long minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -1873,98 +1706,82 @@ EXTERN_C const IID IID_IFsrmActionEmail2;
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailFrom)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailFrom )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailFrom);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailFrom);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailFrom)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailFrom )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailFrom);
+            /* [in] */ __RPC__in BSTR mailFrom);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailReplyTo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailReplyTo )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailReplyTo);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailReplyTo);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailReplyTo)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailReplyTo )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailReplyTo);
+            /* [in] */ __RPC__in BSTR mailReplyTo);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailTo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailTo )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailTo);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailTo);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailTo)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailTo )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailTo);
+            /* [in] */ __RPC__in BSTR mailTo);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailCc)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailCc )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailCc);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailCc);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailCc)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailCc )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailCc);
+            /* [in] */ __RPC__in BSTR mailCc);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailBcc)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailBcc )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailBcc);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailBcc);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailBcc)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailBcc )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailBcc);
+            /* [in] */ __RPC__in BSTR mailBcc);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MailSubject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailSubject )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailSubject);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailSubject);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MailSubject)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailSubject )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailSubject);
+            /* [in] */ __RPC__in BSTR mailSubject);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, get_MessageText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MessageText )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *messageText);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *messageText);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail, put_MessageText)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MessageText )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR messageText);
+            /* [in] */ __RPC__in BSTR messageText);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail2, get_AttachmentFileListSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AttachmentFileListSize )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *attachmentFileListSize);
+            /* [retval][out] */ __RPC__out long *attachmentFileListSize);
         
         DECLSPEC_XFGVIRT(IFsrmActionEmail2, put_AttachmentFileListSize)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AttachmentFileListSize )( 
             __RPC__in IFsrmActionEmail2 * This,
-            /* [annotation][in] */ 
-            _In_  long attachmentFileListSize);
+            /* [in] */ long attachmentFileListSize);
         
         END_INTERFACE
     } IFsrmActionEmail2Vtbl;
@@ -2094,20 +1911,16 @@ EXTERN_C const IID IID_IFsrmActionReport;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReportTypes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *reportTypes) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *reportTypes) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ReportTypes( 
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * reportTypes) = 0;
+            /* [in] */ __RPC__in SAFEARRAY * reportTypes) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailTo( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailTo) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailTo) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailTo( 
-            /* [annotation][in] */ 
-            _In_  BSTR mailTo) = 0;
+            /* [in] */ __RPC__in BSTR mailTo) = 0;
         
     };
     
@@ -2121,8 +1934,7 @@ EXTERN_C const IID IID_IFsrmActionReport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2137,31 +1949,23 @@ EXTERN_C const IID IID_IFsrmActionReport;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2186,26 +1990,22 @@ EXTERN_C const IID IID_IFsrmActionReport;
         DECLSPEC_XFGVIRT(IFsrmAction, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_ActionType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionType )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmActionType *actionType);
+            /* [retval][out] */ __RPC__out FsrmActionType *actionType);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_RunLimitInterval)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RunLimitInterval )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *minutes);
+            /* [retval][out] */ __RPC__out long *minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, put_RunLimitInterval)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RunLimitInterval )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][in] */ 
-            _In_  long minutes);
+            /* [in] */ long minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2214,26 +2014,22 @@ EXTERN_C const IID IID_IFsrmActionReport;
         DECLSPEC_XFGVIRT(IFsrmActionReport, get_ReportTypes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportTypes )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *reportTypes);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *reportTypes);
         
         DECLSPEC_XFGVIRT(IFsrmActionReport, put_ReportTypes)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportTypes )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * reportTypes);
+            /* [in] */ __RPC__in SAFEARRAY * reportTypes);
         
         DECLSPEC_XFGVIRT(IFsrmActionReport, get_MailTo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailTo )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailTo);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailTo);
         
         DECLSPEC_XFGVIRT(IFsrmActionReport, put_MailTo)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailTo )( 
             __RPC__in IFsrmActionReport * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailTo);
+            /* [in] */ __RPC__in BSTR mailTo);
         
         END_INTERFACE
     } IFsrmActionReportVtbl;
@@ -2326,20 +2122,16 @@ EXTERN_C const IID IID_IFsrmActionEventLog;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EventType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmEventType *eventType) = 0;
+            /* [retval][out] */ __RPC__out FsrmEventType *eventType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EventType( 
-            /* [annotation][in] */ 
-            _In_  FsrmEventType eventType) = 0;
+            /* [in] */ FsrmEventType eventType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MessageText( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *messageText) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *messageText) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MessageText( 
-            /* [annotation][in] */ 
-            _In_  BSTR messageText) = 0;
+            /* [in] */ __RPC__in BSTR messageText) = 0;
         
     };
     
@@ -2353,8 +2145,7 @@ EXTERN_C const IID IID_IFsrmActionEventLog;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2369,31 +2160,23 @@ EXTERN_C const IID IID_IFsrmActionEventLog;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2418,26 +2201,22 @@ EXTERN_C const IID IID_IFsrmActionEventLog;
         DECLSPEC_XFGVIRT(IFsrmAction, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_ActionType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionType )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmActionType *actionType);
+            /* [retval][out] */ __RPC__out FsrmActionType *actionType);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_RunLimitInterval)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RunLimitInterval )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *minutes);
+            /* [retval][out] */ __RPC__out long *minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, put_RunLimitInterval)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RunLimitInterval )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][in] */ 
-            _In_  long minutes);
+            /* [in] */ long minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2446,26 +2225,22 @@ EXTERN_C const IID IID_IFsrmActionEventLog;
         DECLSPEC_XFGVIRT(IFsrmActionEventLog, get_EventType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventType )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmEventType *eventType);
+            /* [retval][out] */ __RPC__out FsrmEventType *eventType);
         
         DECLSPEC_XFGVIRT(IFsrmActionEventLog, put_EventType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventType )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][in] */ 
-            _In_  FsrmEventType eventType);
+            /* [in] */ FsrmEventType eventType);
         
         DECLSPEC_XFGVIRT(IFsrmActionEventLog, get_MessageText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MessageText )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *messageText);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *messageText);
         
         DECLSPEC_XFGVIRT(IFsrmActionEventLog, put_MessageText)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MessageText )( 
             __RPC__in IFsrmActionEventLog * This,
-            /* [annotation][in] */ 
-            _In_  BSTR messageText);
+            /* [in] */ __RPC__in BSTR messageText);
         
         END_INTERFACE
     } IFsrmActionEventLogVtbl;
@@ -2558,60 +2333,46 @@ EXTERN_C const IID IID_IFsrmActionCommand;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExecutablePath( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *executablePath) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *executablePath) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ExecutablePath( 
-            /* [annotation][in] */ 
-            _In_  BSTR executablePath) = 0;
+            /* [in] */ __RPC__in BSTR executablePath) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Arguments( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *arguments) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *arguments) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Arguments( 
-            /* [annotation][in] */ 
-            _In_  BSTR arguments) = 0;
+            /* [in] */ __RPC__in BSTR arguments) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Account( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmAccountType *account) = 0;
+            /* [retval][out] */ __RPC__out FsrmAccountType *account) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Account( 
-            /* [annotation][in] */ 
-            _In_  FsrmAccountType account) = 0;
+            /* [in] */ FsrmAccountType account) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_WorkingDirectory( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *workingDirectory) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *workingDirectory) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_WorkingDirectory( 
-            /* [annotation][in] */ 
-            _In_  BSTR workingDirectory) = 0;
+            /* [in] */ __RPC__in BSTR workingDirectory) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MonitorCommand( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *monitorCommand) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *monitorCommand) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MonitorCommand( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL monitorCommand) = 0;
+            /* [in] */ VARIANT_BOOL monitorCommand) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_KillTimeOut( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *minutes) = 0;
+            /* [retval][out] */ __RPC__out long *minutes) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_KillTimeOut( 
-            /* [annotation][in] */ 
-            _In_  long minutes) = 0;
+            /* [in] */ long minutes) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LogResult( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *logResults) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *logResults) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LogResult( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL logResults) = 0;
+            /* [in] */ VARIANT_BOOL logResults) = 0;
         
     };
     
@@ -2625,8 +2386,7 @@ EXTERN_C const IID IID_IFsrmActionCommand;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2641,31 +2401,23 @@ EXTERN_C const IID IID_IFsrmActionCommand;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2690,26 +2442,22 @@ EXTERN_C const IID IID_IFsrmActionCommand;
         DECLSPEC_XFGVIRT(IFsrmAction, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FSRM_OBJECT_ID *id);
+            /* [retval][out] */ __RPC__out FSRM_OBJECT_ID *id);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_ActionType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActionType )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmActionType *actionType);
+            /* [retval][out] */ __RPC__out FsrmActionType *actionType);
         
         DECLSPEC_XFGVIRT(IFsrmAction, get_RunLimitInterval)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RunLimitInterval )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *minutes);
+            /* [retval][out] */ __RPC__out long *minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, put_RunLimitInterval)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RunLimitInterval )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  long minutes);
+            /* [in] */ long minutes);
         
         DECLSPEC_XFGVIRT(IFsrmAction, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2718,86 +2466,72 @@ EXTERN_C const IID IID_IFsrmActionCommand;
         DECLSPEC_XFGVIRT(IFsrmActionCommand, get_ExecutablePath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExecutablePath )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *executablePath);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *executablePath);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, put_ExecutablePath)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ExecutablePath )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  BSTR executablePath);
+            /* [in] */ __RPC__in BSTR executablePath);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, get_Arguments)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Arguments )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *arguments);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *arguments);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, put_Arguments)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Arguments )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  BSTR arguments);
+            /* [in] */ __RPC__in BSTR arguments);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, get_Account)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Account )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FsrmAccountType *account);
+            /* [retval][out] */ __RPC__out FsrmAccountType *account);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, put_Account)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Account )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  FsrmAccountType account);
+            /* [in] */ FsrmAccountType account);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, get_WorkingDirectory)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WorkingDirectory )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *workingDirectory);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *workingDirectory);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, put_WorkingDirectory)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_WorkingDirectory )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  BSTR workingDirectory);
+            /* [in] */ __RPC__in BSTR workingDirectory);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, get_MonitorCommand)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MonitorCommand )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *monitorCommand);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *monitorCommand);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, put_MonitorCommand)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MonitorCommand )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL monitorCommand);
+            /* [in] */ VARIANT_BOOL monitorCommand);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, get_KillTimeOut)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_KillTimeOut )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *minutes);
+            /* [retval][out] */ __RPC__out long *minutes);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, put_KillTimeOut)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_KillTimeOut )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  long minutes);
+            /* [in] */ long minutes);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, get_LogResult)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogResult )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *logResults);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *logResults);
         
         DECLSPEC_XFGVIRT(IFsrmActionCommand, put_LogResult)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogResult )( 
             __RPC__in IFsrmActionCommand * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL logResults);
+            /* [in] */ VARIANT_BOOL logResults);
         
         END_INTERFACE
     } IFsrmActionCommandVtbl;
@@ -2920,60 +2654,45 @@ EXTERN_C const IID IID_IFsrmSetting;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SmtpServer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *smtpServer) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *smtpServer) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SmtpServer( 
-            /* [annotation][in] */ 
-            _In_  BSTR smtpServer) = 0;
+            /* [in] */ __RPC__in BSTR smtpServer) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailFrom( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailFrom) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailFrom) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailFrom( 
-            /* [annotation][in] */ 
-            _In_  BSTR mailFrom) = 0;
+            /* [in] */ __RPC__in BSTR mailFrom) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AdminEmail( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *adminEmail) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *adminEmail) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AdminEmail( 
-            /* [annotation][in] */ 
-            _In_  BSTR adminEmail) = 0;
+            /* [in] */ __RPC__in BSTR adminEmail) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisableCommandLine( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *disableCommandLine) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *disableCommandLine) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DisableCommandLine( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL disableCommandLine) = 0;
+            /* [in] */ VARIANT_BOOL disableCommandLine) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EnableScreeningAudit( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *enableScreeningAudit) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *enableScreeningAudit) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EnableScreeningAudit( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL enableScreeningAudit) = 0;
+            /* [in] */ VARIANT_BOOL enableScreeningAudit) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EmailTest( 
-            /* [annotation][in] */ 
-            _In_  BSTR mailTo) = 0;
+            /* [in] */ __RPC__in BSTR mailTo) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetActionRunLimitInterval( 
-            /* [annotation][in] */ 
-            _In_  FsrmActionType actionType,
-            /* [annotation][in] */ 
-            _In_  long delayTimeMinutes) = 0;
+            /* [in] */ FsrmActionType actionType,
+            /* [in] */ long delayTimeMinutes) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetActionRunLimitInterval( 
-            /* [annotation][in] */ 
-            _In_  FsrmActionType actionType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *delayTimeMinutes) = 0;
+            /* [in] */ FsrmActionType actionType,
+            /* [retval][out] */ __RPC__out long *delayTimeMinutes) = 0;
         
     };
     
@@ -2987,8 +2706,7 @@ EXTERN_C const IID IID_IFsrmSetting;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3003,31 +2721,23 @@ EXTERN_C const IID IID_IFsrmSetting;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3052,84 +2762,69 @@ EXTERN_C const IID IID_IFsrmSetting;
         DECLSPEC_XFGVIRT(IFsrmSetting, get_SmtpServer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SmtpServer )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *smtpServer);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *smtpServer);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, put_SmtpServer)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SmtpServer )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  BSTR smtpServer);
+            /* [in] */ __RPC__in BSTR smtpServer);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, get_MailFrom)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MailFrom )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mailFrom);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *mailFrom);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, put_MailFrom)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MailFrom )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailFrom);
+            /* [in] */ __RPC__in BSTR mailFrom);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, get_AdminEmail)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AdminEmail )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *adminEmail);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *adminEmail);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, put_AdminEmail)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AdminEmail )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  BSTR adminEmail);
+            /* [in] */ __RPC__in BSTR adminEmail);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, get_DisableCommandLine)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisableCommandLine )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *disableCommandLine);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *disableCommandLine);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, put_DisableCommandLine)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisableCommandLine )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL disableCommandLine);
+            /* [in] */ VARIANT_BOOL disableCommandLine);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, get_EnableScreeningAudit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableScreeningAudit )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *enableScreeningAudit);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *enableScreeningAudit);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, put_EnableScreeningAudit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableScreeningAudit )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL enableScreeningAudit);
+            /* [in] */ VARIANT_BOOL enableScreeningAudit);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, EmailTest)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EmailTest )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mailTo);
+            /* [in] */ __RPC__in BSTR mailTo);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, SetActionRunLimitInterval)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetActionRunLimitInterval )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  FsrmActionType actionType,
-            /* [annotation][in] */ 
-            _In_  long delayTimeMinutes);
+            /* [in] */ FsrmActionType actionType,
+            /* [in] */ long delayTimeMinutes);
         
         DECLSPEC_XFGVIRT(IFsrmSetting, GetActionRunLimitInterval)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetActionRunLimitInterval )( 
             __RPC__in IFsrmSetting * This,
-            /* [annotation][in] */ 
-            _In_  FsrmActionType actionType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *delayTimeMinutes);
+            /* [in] */ FsrmActionType actionType,
+            /* [retval][out] */ __RPC__out long *delayTimeMinutes);
         
         END_INTERFACE
     } IFsrmSettingVtbl;
@@ -3233,10 +2928,8 @@ EXTERN_C const IID IID_IFsrmPathMapper;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSharePathsForLocalPath( 
-            /* [annotation][in] */ 
-            _In_  BSTR localPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *sharePaths) = 0;
+            /* [in] */ __RPC__in BSTR localPath,
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *sharePaths) = 0;
         
     };
     
@@ -3250,8 +2943,7 @@ EXTERN_C const IID IID_IFsrmPathMapper;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmPathMapper * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3266,31 +2958,23 @@ EXTERN_C const IID IID_IFsrmPathMapper;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmPathMapper * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmPathMapper * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmPathMapper * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3315,10 +2999,8 @@ EXTERN_C const IID IID_IFsrmPathMapper;
         DECLSPEC_XFGVIRT(IFsrmPathMapper, GetSharePathsForLocalPath)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSharePathsForLocalPath )( 
             __RPC__in IFsrmPathMapper * This,
-            /* [annotation][in] */ 
-            _In_  BSTR localPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *sharePaths);
+            /* [in] */ __RPC__in BSTR localPath,
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *sharePaths);
         
         END_INTERFACE
     } IFsrmPathMapperVtbl;
@@ -3386,58 +3068,37 @@ EXTERN_C const IID IID_IFsrmExportImport;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExportFileGroups( 
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileGroupNamesSafeArray = 0,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost = (BSTR)L"") = 0;
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileGroupNamesSafeArray = 0,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost = (BSTR)L"") = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportFileGroups( 
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileGroupNamesSafeArray,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileGroups) = 0;
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileGroupNamesSafeArray,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileGroups) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExportFileScreenTemplates( 
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *templateNamesSafeArray = 0,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost = (BSTR)L"") = 0;
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *templateNamesSafeArray = 0,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost = (BSTR)L"") = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportFileScreenTemplates( 
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *templateNamesSafeArray,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **templates) = 0;
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *templateNamesSafeArray,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **templates) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ExportQuotaTemplates( 
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *templateNamesSafeArray = 0,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost = (BSTR)L"") = 0;
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *templateNamesSafeArray = 0,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost = (BSTR)L"") = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportQuotaTemplates( 
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *templateNamesSafeArray,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **templates) = 0;
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *templateNamesSafeArray,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **templates) = 0;
         
     };
     
@@ -3451,8 +3112,7 @@ EXTERN_C const IID IID_IFsrmExportImport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmExportImport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3467,31 +3127,23 @@ EXTERN_C const IID IID_IFsrmExportImport;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmExportImport * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmExportImport * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmExportImport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3516,68 +3168,47 @@ EXTERN_C const IID IID_IFsrmExportImport;
         DECLSPEC_XFGVIRT(IFsrmExportImport, ExportFileGroups)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExportFileGroups )( 
             __RPC__in IFsrmExportImport * This,
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileGroupNamesSafeArray,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost);
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileGroupNamesSafeArray,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost);
         
         DECLSPEC_XFGVIRT(IFsrmExportImport, ImportFileGroups)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportFileGroups )( 
             __RPC__in IFsrmExportImport * This,
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *fileGroupNamesSafeArray,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **fileGroups);
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *fileGroupNamesSafeArray,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **fileGroups);
         
         DECLSPEC_XFGVIRT(IFsrmExportImport, ExportFileScreenTemplates)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExportFileScreenTemplates )( 
             __RPC__in IFsrmExportImport * This,
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *templateNamesSafeArray,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost);
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *templateNamesSafeArray,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost);
         
         DECLSPEC_XFGVIRT(IFsrmExportImport, ImportFileScreenTemplates)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportFileScreenTemplates )( 
             __RPC__in IFsrmExportImport * This,
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *templateNamesSafeArray,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **templates);
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *templateNamesSafeArray,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **templates);
         
         DECLSPEC_XFGVIRT(IFsrmExportImport, ExportQuotaTemplates)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExportQuotaTemplates )( 
             __RPC__in IFsrmExportImport * This,
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *templateNamesSafeArray,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost);
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *templateNamesSafeArray,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost);
         
         DECLSPEC_XFGVIRT(IFsrmExportImport, ImportQuotaTemplates)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportQuotaTemplates )( 
             __RPC__in IFsrmExportImport * This,
-            /* [annotation][in] */ 
-            _In_  BSTR filePath,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT *templateNamesSafeArray,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR remoteHost,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCommittableCollection **templates);
+            /* [in] */ __RPC__in BSTR filePath,
+            /* [defaultvalue][in] */ __RPC__in VARIANT *templateNamesSafeArray,
+            /* [defaultvalue][in] */ __RPC__in BSTR remoteHost,
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCommittableCollection **templates);
         
         END_INTERFACE
     } IFsrmExportImportVtbl;
@@ -3660,12 +3291,10 @@ EXTERN_C const IID IID_IFsrmDerivedObjectsResult;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DerivedObjects( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **derivedObjects) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **derivedObjects) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Results( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **results) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **results) = 0;
         
     };
     
@@ -3679,8 +3308,7 @@ EXTERN_C const IID IID_IFsrmDerivedObjectsResult;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmDerivedObjectsResult * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3695,31 +3323,23 @@ EXTERN_C const IID IID_IFsrmDerivedObjectsResult;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmDerivedObjectsResult * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmDerivedObjectsResult * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmDerivedObjectsResult * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3744,14 +3364,12 @@ EXTERN_C const IID IID_IFsrmDerivedObjectsResult;
         DECLSPEC_XFGVIRT(IFsrmDerivedObjectsResult, get_DerivedObjects)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DerivedObjects )( 
             __RPC__in IFsrmDerivedObjectsResult * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **derivedObjects);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **derivedObjects);
         
         DECLSPEC_XFGVIRT(IFsrmDerivedObjectsResult, get_Results)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Results )( 
             __RPC__in IFsrmDerivedObjectsResult * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsrmCollection **results);
+            /* [retval][out] */ __RPC__deref_out_opt IFsrmCollection **results);
         
         END_INTERFACE
     } IFsrmDerivedObjectsResultVtbl;
@@ -3822,20 +3440,13 @@ EXTERN_C const IID IID_IFsrmAccessDeniedRemediationClient;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Show( 
-            /* [annotation][in] */ 
-            _In_  ULONG_PTR parentWnd,
-            /* [annotation][in] */ 
-            _In_  BSTR accessPath,
-            /* [annotation][in] */ 
-            _In_  AdrClientErrorType errorType,
-            /* [annotation][in] */ 
-            _In_  long flags,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR windowTitle,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR windowMessage,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *result) = 0;
+            /* [in] */ ULONG_PTR parentWnd,
+            /* [in] */ __RPC__in BSTR accessPath,
+            /* [in] */ AdrClientErrorType errorType,
+            /* [in] */ long flags,
+            /* [defaultvalue][in] */ __RPC__in BSTR windowTitle,
+            /* [defaultvalue][in] */ __RPC__in BSTR windowMessage,
+            /* [retval][out] */ __RPC__out long *result) = 0;
         
     };
     
@@ -3849,8 +3460,7 @@ EXTERN_C const IID IID_IFsrmAccessDeniedRemediationClient;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsrmAccessDeniedRemediationClient * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3865,31 +3475,23 @@ EXTERN_C const IID IID_IFsrmAccessDeniedRemediationClient;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsrmAccessDeniedRemediationClient * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsrmAccessDeniedRemediationClient * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsrmAccessDeniedRemediationClient * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3914,20 +3516,13 @@ EXTERN_C const IID IID_IFsrmAccessDeniedRemediationClient;
         DECLSPEC_XFGVIRT(IFsrmAccessDeniedRemediationClient, Show)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in IFsrmAccessDeniedRemediationClient * This,
-            /* [annotation][in] */ 
-            _In_  ULONG_PTR parentWnd,
-            /* [annotation][in] */ 
-            _In_  BSTR accessPath,
-            /* [annotation][in] */ 
-            _In_  AdrClientErrorType errorType,
-            /* [annotation][in] */ 
-            _In_  long flags,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR windowTitle,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR windowMessage,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *result);
+            /* [in] */ ULONG_PTR parentWnd,
+            /* [in] */ __RPC__in BSTR accessPath,
+            /* [in] */ AdrClientErrorType errorType,
+            /* [in] */ long flags,
+            /* [defaultvalue][in] */ __RPC__in BSTR windowTitle,
+            /* [defaultvalue][in] */ __RPC__in BSTR windowMessage,
+            /* [retval][out] */ __RPC__out long *result);
         
         END_INTERFACE
     } IFsrmAccessDeniedRemediationClientVtbl;

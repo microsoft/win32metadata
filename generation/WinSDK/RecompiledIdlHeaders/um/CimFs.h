@@ -77,39 +77,6 @@ CimCreateFile(_In_ CIMFS_IMAGE_HANDLE cimImageHandle,
               _Out_ CIMFS_STREAM_HANDLE* cimStreamHandle);
 
 //
-//  Adds the specified filesystem to the image represented by
-//  the image handle.
-//
-
-STDAPI
-CimAddFsToMergedImage(_In_ CIMFS_IMAGE_HANDLE cimImageHandle,
-                      _In_ PCWSTR existingImageName);
-
-//
-//  Adds a file with the metadata and data pointing to the
-//  specified backing file from the specified backing file
-//  system at a path relative to the image represented by
-//  the image handle.
-//
-
-STDAPI
-CimCreateMergedFile(_In_ CIMFS_IMAGE_HANDLE cimImageHandle,
-                    _In_ PCWSTR imageRelativePath,
-                    _In_ PVOID backingFsPointer,
-                    _In_ PVOID backingFilePointer,
-                    _In_ UINT16 fsIndex);
-
-//
-//  Returns whether the file name specified exists in the
-//  file system represented by the image handle.
-//
-
-STDAPI
-CimLookupFile(_In_ CIMFS_IMAGE_HANDLE cimImageHandle,
-              _In_ PCWSTR imageRelativePath,
-              _Out_ PBOOLEAN exists);
-
-//
 //  Adds an alternate stream with the specified size at a path
 //  relative to the image represented by the image handle.
 //  Returns a handle to the stream which can be used to write
@@ -183,17 +150,6 @@ CimMountImage(_In_ PCWSTR imageContainingPath,
               _In_ PCWSTR imageName,
               _In_ CIM_MOUNT_IMAGE_FLAGS mountImageFlags,
               _In_ const GUID* volumeId);
-
-//
-//  Mounts the merged image specified by the backingImagePaths
-//  as a volume with the volume GUID specified by volumeId.
-//
-
-STDAPI
-CimMergeMountImage(_In_ UINT32 numCimPaths,
-                   _In_ PVOID backingImagePaths,
-                   _In_ CIM_MOUNT_IMAGE_FLAGS mountImageFlags,
-                   _In_ const GUID* volumeId);
 
 //
 //  Dismounts an image mounted with volumeId as the volume GUID.

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -112,36 +112,25 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnDataReceived( 
-            /* [annotation][in] */ 
-            _In_  ULONG cbSize,
-            /* [annotation][in] */ 
-            _In_  BYTE *pBuffer) = 0;
+            /* [in] */ ULONG cbSize,
+            /* [in] */ __RPC__in BYTE *pBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnClose( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnChannelOpened( 
-            /* [annotation][in] */ 
-            _In_  HRESULT OpenResult,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pOpenContext) = 0;
+            /* [in] */ HRESULT OpenResult,
+            /* [in] */ __RPC__in_opt IUnknown *pOpenContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDataSent( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pWriteContext,
-            /* [annotation][in] */ 
-            _In_  BOOL bCancelled,
-            /* [annotation][in] */ 
-            _In_  BYTE *pBuffer,
-            /* [annotation][in] */ 
-            _In_  ULONG cbBuffer) = 0;
+            /* [in] */ __RPC__in_opt IUnknown *pWriteContext,
+            /* [in] */ BOOL bCancelled,
+            /* [in] */ __RPC__in BYTE *pBuffer,
+            /* [in] */ ULONG cbBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnMetricsUpdate( 
-            /* [annotation][in] */ 
-            _In_  DWORD bandwidth,
-            /* [annotation][in] */ 
-            _In_  DWORD RTT,
-            /* [annotation][in] */ 
-            _In_  UINT64 lastSentByteIndex) = 0;
+            /* [in] */ DWORD bandwidth,
+            /* [in] */ DWORD RTT,
+            /* [in] */ UINT64 lastSentByteIndex) = 0;
         
     };
     
@@ -155,8 +144,7 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsGraphicsChannelEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -171,10 +159,8 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelEvents;
         DECLSPEC_XFGVIRT(IWRdsGraphicsChannelEvents, OnDataReceived)
         HRESULT ( STDMETHODCALLTYPE *OnDataReceived )( 
             __RPC__in IWRdsGraphicsChannelEvents * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cbSize,
-            /* [annotation][in] */ 
-            _In_  BYTE *pBuffer);
+            /* [in] */ ULONG cbSize,
+            /* [in] */ __RPC__in BYTE *pBuffer);
         
         DECLSPEC_XFGVIRT(IWRdsGraphicsChannelEvents, OnClose)
         HRESULT ( STDMETHODCALLTYPE *OnClose )( 
@@ -183,32 +169,23 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelEvents;
         DECLSPEC_XFGVIRT(IWRdsGraphicsChannelEvents, OnChannelOpened)
         HRESULT ( STDMETHODCALLTYPE *OnChannelOpened )( 
             __RPC__in IWRdsGraphicsChannelEvents * This,
-            /* [annotation][in] */ 
-            _In_  HRESULT OpenResult,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pOpenContext);
+            /* [in] */ HRESULT OpenResult,
+            /* [in] */ __RPC__in_opt IUnknown *pOpenContext);
         
         DECLSPEC_XFGVIRT(IWRdsGraphicsChannelEvents, OnDataSent)
         HRESULT ( STDMETHODCALLTYPE *OnDataSent )( 
             __RPC__in IWRdsGraphicsChannelEvents * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pWriteContext,
-            /* [annotation][in] */ 
-            _In_  BOOL bCancelled,
-            /* [annotation][in] */ 
-            _In_  BYTE *pBuffer,
-            /* [annotation][in] */ 
-            _In_  ULONG cbBuffer);
+            /* [in] */ __RPC__in_opt IUnknown *pWriteContext,
+            /* [in] */ BOOL bCancelled,
+            /* [in] */ __RPC__in BYTE *pBuffer,
+            /* [in] */ ULONG cbBuffer);
         
         DECLSPEC_XFGVIRT(IWRdsGraphicsChannelEvents, OnMetricsUpdate)
         HRESULT ( STDMETHODCALLTYPE *OnMetricsUpdate )( 
             __RPC__in IWRdsGraphicsChannelEvents * This,
-            /* [annotation][in] */ 
-            _In_  DWORD bandwidth,
-            /* [annotation][in] */ 
-            _In_  DWORD RTT,
-            /* [annotation][in] */ 
-            _In_  UINT64 lastSentByteIndex);
+            /* [in] */ DWORD bandwidth,
+            /* [in] */ DWORD RTT,
+            /* [in] */ UINT64 lastSentByteIndex);
         
         END_INTERFACE
     } IWRdsGraphicsChannelEventsVtbl;
@@ -284,20 +261,15 @@ EXTERN_C const IID IID_IWRdsGraphicsChannel;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Write( 
-            /* [annotation][in] */ 
-            _In_  ULONG cbSize,
-            /* [annotation][in] */ 
-            _In_  BYTE *pBuffer,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pContext) = 0;
+            /* [in] */ ULONG cbSize,
+            /* [in] */ __RPC__in BYTE *pBuffer,
+            /* [in] */ __RPC__in_opt IUnknown *pContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Open( 
-            /* [annotation][in] */ 
-            _In_  IWRdsGraphicsChannelEvents *pChannelEvents,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pOpenContext) = 0;
+            /* [in] */ __RPC__in_opt IWRdsGraphicsChannelEvents *pChannelEvents,
+            /* [in] */ __RPC__in_opt IUnknown *pOpenContext) = 0;
         
     };
     
@@ -311,8 +283,7 @@ EXTERN_C const IID IID_IWRdsGraphicsChannel;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsGraphicsChannel * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -327,12 +298,9 @@ EXTERN_C const IID IID_IWRdsGraphicsChannel;
         DECLSPEC_XFGVIRT(IWRdsGraphicsChannel, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in IWRdsGraphicsChannel * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cbSize,
-            /* [annotation][in] */ 
-            _In_  BYTE *pBuffer,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pContext);
+            /* [in] */ ULONG cbSize,
+            /* [in] */ __RPC__in BYTE *pBuffer,
+            /* [in] */ __RPC__in_opt IUnknown *pContext);
         
         DECLSPEC_XFGVIRT(IWRdsGraphicsChannel, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
@@ -341,10 +309,8 @@ EXTERN_C const IID IID_IWRdsGraphicsChannel;
         DECLSPEC_XFGVIRT(IWRdsGraphicsChannel, Open)
         HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IWRdsGraphicsChannel * This,
-            /* [annotation][in] */ 
-            _In_  IWRdsGraphicsChannelEvents *pChannelEvents,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pOpenContext);
+            /* [in] */ __RPC__in_opt IWRdsGraphicsChannelEvents *pChannelEvents,
+            /* [in] */ __RPC__in_opt IUnknown *pOpenContext);
         
         END_INTERFACE
     } IWRdsGraphicsChannelVtbl;
@@ -421,12 +387,9 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateChannel( 
-            /* [annotation][in] */ 
-            _In_  const unsigned char *pszChannelName,
-            /* [annotation][in] */ 
-            _In_  WRdsGraphicsChannelType channelType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWRdsGraphicsChannel **ppVirtualChannel) = 0;
+            /* [in] */ __RPC__in const char *pszChannelName,
+            /* [in] */ WRdsGraphicsChannelType channelType,
+            /* [retval][out] */ __RPC__deref_out_opt IWRdsGraphicsChannel **ppVirtualChannel) = 0;
         
     };
     
@@ -440,8 +403,7 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsGraphicsChannelManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -456,12 +418,9 @@ EXTERN_C const IID IID_IWRdsGraphicsChannelManager;
         DECLSPEC_XFGVIRT(IWRdsGraphicsChannelManager, CreateChannel)
         HRESULT ( STDMETHODCALLTYPE *CreateChannel )( 
             __RPC__in IWRdsGraphicsChannelManager * This,
-            /* [annotation][in] */ 
-            _In_  const unsigned char *pszChannelName,
-            /* [annotation][in] */ 
-            _In_  WRdsGraphicsChannelType channelType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWRdsGraphicsChannel **ppVirtualChannel);
+            /* [in] */ __RPC__in const char *pszChannelName,
+            /* [in] */ WRdsGraphicsChannelType channelType,
+            /* [retval][out] */ __RPC__deref_out_opt IWRdsGraphicsChannel **ppVirtualChannel);
         
         END_INTERFACE
     } IWRdsGraphicsChannelManagerVtbl;

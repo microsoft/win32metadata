@@ -125,7 +125,7 @@ interface IAudioClient : IUnknown
     //     No local stream APOs will be inserted by the WAS to aid in the creation of the connection point. pFormat must be non-NULL in this mode,
     //     otherwise the call will fail.
     //
-    //  StreamFlags - [in] optional flags that can be specified to control stream creation. Possible flags are: 
+    //  StreamFlags - [in] optional flags that can be specified to control stream creation. Possible flags include: 
     //
     //     AUDCLNT_STREAMFLAGS_CROSSPROCESS - Treats a non-NULL audio session guid specified for this stream as a
     //     cross-process session, for purposes of volume and policy control. Otherwise, the default is for audio 
@@ -138,6 +138,8 @@ interface IAudioClient : IUnknown
     //
     //     AUDCLNT_STREAMFLAGS_EVENTCALLBACK - specifies that a client will supply an event handle 
     //     to be signaled for "pull model" render or capture.
+    //
+    //     For a complete list of flags, see AudioSessionTypes.h
     //
     //  hnsBufferDuration - [in] duration to use for the buffer that the audio application will
     //     share with the WAS, in 100-nanosecond (hns) units. The minimum allowed duration for
@@ -544,19 +546,27 @@ interface IAudioClient : IUnknown
     //      AUDCLNT_E_NOT_INITIALIZED if audio stream hasn't been successfully initialized.
     //      AUDCLNT_E_NOT_STOPPED if audio stream hasn't been stopped.
     //      AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
+    //      AUDCLNT_E_WRONG_ENDPOINT_TYPE if the service is recognized but not applicable to the audio endpoint type
+    //      E_INVALIDARG if the service is not supported by this audio stream based on how the stream was initialized
+    //      E_NOINTERFACE if the service is not implemented
     //
     // Remarks:
     //
-    //  The services supported via the method are:
+    //  The services supported via the method include:
     //
     //  IAudioRenderClient
     //  IAudioCaptureClient
     //  IAudioClock
+    //  IAudioClockAdjustment
     //  IAudioSessionControl
+    //  IAudioStreamVolume
     //  ISimpleAudioVolume
     //  IChannelAudioVolume
+    //  IAudioAmbisonicsControl
     //  IAudioClientDuckingControl
     //  IAudioEffectsManager
+    //  IAudioViewManagerService
+    //  IAcousticEchoCancellationControl
     //
     HRESULT GetService([in, annotation("_In_")] REFIID riid, [out, iid_is(riid), annotation("_Out_")] void **ppv);
 
@@ -1297,6 +1307,32 @@ interface IAudioClientDuckingControl : IUnknown
     HRESULT SetDuckingOptionsForCurrentStream([in] AUDIO_DUCKING_OPTIONS options);
 }
 
+//-----------------------------------------------------------------------------
+// Description: IAudioViewManagerService interface
+// Use IAudioClient::GetService to obtain this interface.
+//
+[
+    object,
+    uuid(A7A7EF10-1F49-45E0-AD35-612057CC8F74),
+    pointer_default(unique),
+    local
+]
+interface IAudioViewManagerService : IUnknown
+{
+    //-------------------------------------------------------------------------
+    // Description:
+    //
+    //     Associate the audio stream to a given HWND
+    //
+    // Parameters:
+    //
+    //     hwnd - [in] HWND to be associated with the audio stream
+    //
+    // 
+    HRESULT SetAudioStreamWindow([in] HWND hwnd);
+
+};
+
 typedef [v1_enum] enum AUDIO_EFFECT_STATE
 {
     AUDIO_EFFECT_STATE_OFF = 0,
@@ -1811,6 +1847,21 @@ cpp_quote("#define AUDCLNT_S_POSITION_STALLED             AUDCLNT_SUCCESS(0x003)
 
 // NOTE! error codes of 0x100 and above a reserved for SpatialAudioClient. AUDCLNT_ERR(0x100) to AUDCLNT_ERR(0x1FF)
 // NOTE! error codes of 0x200 and above a reserved for SpatialAudioMetadataClient. AUDCLNT_ERR(0x200) to AUDCLNT_ERR(0x2FF)
+
+//-----------------------------------------------------------------------------
+// Description: IAcousticEchoCancellationControl interface
+// Use IAudioClient::GetService to obtain this interface.
+//
+[
+    object,
+    uuid(f4ae25b5-aaa3-437d-b6b3-dbbe2d0e9549),
+    pointer_default(unique),
+    local
+]
+interface IAcousticEchoCancellationControl : IUnknown
+{
+    HRESULT SetEchoCancellationRenderEndpoint(LPCWSTR endpointId);
+};
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
 #pragma endregion

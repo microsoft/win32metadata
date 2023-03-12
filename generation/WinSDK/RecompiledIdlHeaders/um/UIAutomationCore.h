@@ -3,14 +3,15 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
+#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 475
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -34,7 +35,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -927,24 +928,18 @@ EXTERN_C const IID IID_IRawElementProviderSimple;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProviderOptions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum ProviderOptions *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out enum ProviderOptions *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPatternProvider( 
-            /* [annotation][in] */ 
-            _In_  PATTERNID patternId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **pRetVal) = 0;
+            /* [in] */ PATTERNID patternId,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyValue( 
-            /* [annotation][in] */ 
-            _In_  PROPERTYID propertyId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pRetVal) = 0;
+            /* [in] */ PROPERTYID propertyId,
+            /* [retval][out] */ __RPC__out VARIANT *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_HostRawElementProvider( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal) = 0;
         
     };
     
@@ -958,8 +953,7 @@ EXTERN_C const IID IID_IRawElementProviderSimple;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawElementProviderSimple * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -974,30 +968,24 @@ EXTERN_C const IID IID_IRawElementProviderSimple;
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, get_ProviderOptions)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderOptions )( 
             __RPC__in IRawElementProviderSimple * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum ProviderOptions *pRetVal);
+            /* [retval][out] */ __RPC__out enum ProviderOptions *pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, GetPatternProvider)
         HRESULT ( STDMETHODCALLTYPE *GetPatternProvider )( 
             __RPC__in IRawElementProviderSimple * This,
-            /* [annotation][in] */ 
-            _In_  PATTERNID patternId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **pRetVal);
+            /* [in] */ PATTERNID patternId,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, GetPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyValue )( 
             __RPC__in IRawElementProviderSimple * This,
-            /* [annotation][in] */ 
-            _In_  PROPERTYID propertyId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pRetVal);
+            /* [in] */ PROPERTYID propertyId,
+            /* [retval][out] */ __RPC__out VARIANT *pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, get_HostRawElementProvider)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HostRawElementProvider )( 
             __RPC__in IRawElementProviderSimple * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         END_INTERFACE
     } IRawElementProviderSimpleVtbl;
@@ -1061,26 +1049,19 @@ EXTERN_C const IID IID_IAccessibleEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetObjectForChild( 
-            /* [annotation][in] */ 
-            _In_  long idChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAccessibleEx **pRetVal) = 0;
+            /* [in] */ long idChild,
+            /* [retval][out] */ __RPC__deref_out_opt IAccessibleEx **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIAccessiblePair( 
-            /* [annotation][out] */ 
-            _Out_  IAccessible **ppAcc,
-            /* [annotation][out] */ 
-            _Out_  long *pidChild) = 0;
+            /* [out] */ __RPC__deref_out_opt IAccessible **ppAcc,
+            /* [out] */ __RPC__out long *pidChild) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRuntimeId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertReturnedElement( 
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pIn,
-            /* [annotation][out] */ 
-            _Out_  IAccessibleEx **ppRetValOut) = 0;
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pIn,
+            /* [out] */ __RPC__deref_out_opt IAccessibleEx **ppRetValOut) = 0;
         
     };
     
@@ -1094,8 +1075,7 @@ EXTERN_C const IID IID_IAccessibleEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccessibleEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1110,32 +1090,25 @@ EXTERN_C const IID IID_IAccessibleEx;
         DECLSPEC_XFGVIRT(IAccessibleEx, GetObjectForChild)
         HRESULT ( STDMETHODCALLTYPE *GetObjectForChild )( 
             __RPC__in IAccessibleEx * This,
-            /* [annotation][in] */ 
-            _In_  long idChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAccessibleEx **pRetVal);
+            /* [in] */ long idChild,
+            /* [retval][out] */ __RPC__deref_out_opt IAccessibleEx **pRetVal);
         
         DECLSPEC_XFGVIRT(IAccessibleEx, GetIAccessiblePair)
         HRESULT ( STDMETHODCALLTYPE *GetIAccessiblePair )( 
             __RPC__in IAccessibleEx * This,
-            /* [annotation][out] */ 
-            _Out_  IAccessible **ppAcc,
-            /* [annotation][out] */ 
-            _Out_  long *pidChild);
+            /* [out] */ __RPC__deref_out_opt IAccessible **ppAcc,
+            /* [out] */ __RPC__out long *pidChild);
         
         DECLSPEC_XFGVIRT(IAccessibleEx, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IAccessibleEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(IAccessibleEx, ConvertReturnedElement)
         HRESULT ( STDMETHODCALLTYPE *ConvertReturnedElement )( 
             __RPC__in IAccessibleEx * This,
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pIn,
-            /* [annotation][out] */ 
-            _Out_  IAccessibleEx **ppRetValOut);
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pIn,
+            /* [out] */ __RPC__deref_out_opt IAccessibleEx **ppRetValOut);
         
         END_INTERFACE
     } IAccessibleExVtbl;
@@ -1212,8 +1185,7 @@ EXTERN_C const IID IID_IRawElementProviderSimple2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawElementProviderSimple2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1228,30 +1200,24 @@ EXTERN_C const IID IID_IRawElementProviderSimple2;
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, get_ProviderOptions)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderOptions )( 
             __RPC__in IRawElementProviderSimple2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum ProviderOptions *pRetVal);
+            /* [retval][out] */ __RPC__out enum ProviderOptions *pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, GetPatternProvider)
         HRESULT ( STDMETHODCALLTYPE *GetPatternProvider )( 
             __RPC__in IRawElementProviderSimple2 * This,
-            /* [annotation][in] */ 
-            _In_  PATTERNID patternId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **pRetVal);
+            /* [in] */ PATTERNID patternId,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, GetPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyValue )( 
             __RPC__in IRawElementProviderSimple2 * This,
-            /* [annotation][in] */ 
-            _In_  PROPERTYID propertyId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pRetVal);
+            /* [in] */ PROPERTYID propertyId,
+            /* [retval][out] */ __RPC__out VARIANT *pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, get_HostRawElementProvider)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HostRawElementProvider )( 
             __RPC__in IRawElementProviderSimple2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple2, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -1323,12 +1289,9 @@ EXTERN_C const IID IID_IRawElementProviderSimple3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMetadataValue( 
-            /* [annotation][in] */ 
-            _In_  int targetId,
-            /* [annotation][in] */ 
-            _In_  METADATAID metadataId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *returnVal) = 0;
+            /* [in] */ int targetId,
+            /* [in] */ METADATAID metadataId,
+            /* [retval][out] */ __RPC__out VARIANT *returnVal) = 0;
         
     };
     
@@ -1342,8 +1305,7 @@ EXTERN_C const IID IID_IRawElementProviderSimple3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawElementProviderSimple3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1358,30 +1320,24 @@ EXTERN_C const IID IID_IRawElementProviderSimple3;
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, get_ProviderOptions)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderOptions )( 
             __RPC__in IRawElementProviderSimple3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum ProviderOptions *pRetVal);
+            /* [retval][out] */ __RPC__out enum ProviderOptions *pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, GetPatternProvider)
         HRESULT ( STDMETHODCALLTYPE *GetPatternProvider )( 
             __RPC__in IRawElementProviderSimple3 * This,
-            /* [annotation][in] */ 
-            _In_  PATTERNID patternId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **pRetVal);
+            /* [in] */ PATTERNID patternId,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, GetPropertyValue)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyValue )( 
             __RPC__in IRawElementProviderSimple3 * This,
-            /* [annotation][in] */ 
-            _In_  PROPERTYID propertyId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pRetVal);
+            /* [in] */ PROPERTYID propertyId,
+            /* [retval][out] */ __RPC__out VARIANT *pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple, get_HostRawElementProvider)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HostRawElementProvider )( 
             __RPC__in IRawElementProviderSimple3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderSimple2, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -1390,12 +1346,9 @@ EXTERN_C const IID IID_IRawElementProviderSimple3;
         DECLSPEC_XFGVIRT(IRawElementProviderSimple3, GetMetadataValue)
         HRESULT ( STDMETHODCALLTYPE *GetMetadataValue )( 
             __RPC__in IRawElementProviderSimple3 * This,
-            /* [annotation][in] */ 
-            _In_  int targetId,
-            /* [annotation][in] */ 
-            _In_  METADATAID metadataId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *returnVal);
+            /* [in] */ int targetId,
+            /* [in] */ METADATAID metadataId,
+            /* [retval][out] */ __RPC__out VARIANT *returnVal);
         
         END_INTERFACE
     } IRawElementProviderSimple3Vtbl;
@@ -1467,16 +1420,12 @@ EXTERN_C const IID IID_IRawElementProviderFragmentRoot;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ElementProviderFromPoint( 
-            /* [annotation][in] */ 
-            _In_  double x,
-            /* [annotation][in] */ 
-            _In_  double y,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderFragment **pRetVal) = 0;
+            /* [in] */ double x,
+            /* [in] */ double y,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderFragment **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFocus( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderFragment **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderFragment **pRetVal) = 0;
         
     };
     
@@ -1490,8 +1439,7 @@ EXTERN_C const IID IID_IRawElementProviderFragmentRoot;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawElementProviderFragmentRoot * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1506,18 +1454,14 @@ EXTERN_C const IID IID_IRawElementProviderFragmentRoot;
         DECLSPEC_XFGVIRT(IRawElementProviderFragmentRoot, ElementProviderFromPoint)
         HRESULT ( STDMETHODCALLTYPE *ElementProviderFromPoint )( 
             __RPC__in IRawElementProviderFragmentRoot * This,
-            /* [annotation][in] */ 
-            _In_  double x,
-            /* [annotation][in] */ 
-            _In_  double y,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderFragment **pRetVal);
+            /* [in] */ double x,
+            /* [in] */ double y,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderFragment **pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderFragmentRoot, GetFocus)
         HRESULT ( STDMETHODCALLTYPE *GetFocus )( 
             __RPC__in IRawElementProviderFragmentRoot * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderFragment **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderFragment **pRetVal);
         
         END_INTERFACE
     } IRawElementProviderFragmentRootVtbl;
@@ -1575,28 +1519,22 @@ EXTERN_C const IID IID_IRawElementProviderFragment;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Navigate( 
-            /* [annotation][in] */ 
-            _In_  enum NavigateDirection direction,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderFragment **pRetVal) = 0;
+            /* [in] */ enum NavigateDirection direction,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderFragment **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRuntimeId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_BoundingRectangle( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  struct UiaRect *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out struct UiaRect *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEmbeddedFragmentRoots( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFocus( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FragmentRoot( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderFragmentRoot **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderFragmentRoot **pRetVal) = 0;
         
     };
     
@@ -1610,8 +1548,7 @@ EXTERN_C const IID IID_IRawElementProviderFragment;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawElementProviderFragment * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1626,28 +1563,23 @@ EXTERN_C const IID IID_IRawElementProviderFragment;
         DECLSPEC_XFGVIRT(IRawElementProviderFragment, Navigate)
         HRESULT ( STDMETHODCALLTYPE *Navigate )( 
             __RPC__in IRawElementProviderFragment * This,
-            /* [annotation][in] */ 
-            _In_  enum NavigateDirection direction,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderFragment **pRetVal);
+            /* [in] */ enum NavigateDirection direction,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderFragment **pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderFragment, GetRuntimeId)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeId )( 
             __RPC__in IRawElementProviderFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderFragment, get_BoundingRectangle)
         HRESULT ( STDMETHODCALLTYPE *get_BoundingRectangle )( 
             __RPC__in IRawElementProviderFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  struct UiaRect *pRetVal);
+            /* [retval][out] */ __RPC__out struct UiaRect *pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderFragment, GetEmbeddedFragmentRoots)
         HRESULT ( STDMETHODCALLTYPE *GetEmbeddedFragmentRoots )( 
             __RPC__in IRawElementProviderFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(IRawElementProviderFragment, SetFocus)
         HRESULT ( STDMETHODCALLTYPE *SetFocus )( 
@@ -1656,8 +1588,7 @@ EXTERN_C const IID IID_IRawElementProviderFragment;
         DECLSPEC_XFGVIRT(IRawElementProviderFragment, get_FragmentRoot)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FragmentRoot )( 
             __RPC__in IRawElementProviderFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderFragmentRoot **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderFragmentRoot **pRetVal);
         
         END_INTERFACE
     } IRawElementProviderFragmentVtbl;
@@ -1727,16 +1658,12 @@ EXTERN_C const IID IID_IRawElementProviderAdviseEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AdviseEventAdded( 
-            /* [annotation][in] */ 
-            _In_  EVENTID eventId,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * propertyIDs) = 0;
+            /* [in] */ EVENTID eventId,
+            /* [in] */ __RPC__in SAFEARRAY * propertyIDs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AdviseEventRemoved( 
-            /* [annotation][in] */ 
-            _In_  EVENTID eventId,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * propertyIDs) = 0;
+            /* [in] */ EVENTID eventId,
+            /* [in] */ __RPC__in SAFEARRAY * propertyIDs) = 0;
         
     };
     
@@ -1750,8 +1677,7 @@ EXTERN_C const IID IID_IRawElementProviderAdviseEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawElementProviderAdviseEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1766,18 +1692,14 @@ EXTERN_C const IID IID_IRawElementProviderAdviseEvents;
         DECLSPEC_XFGVIRT(IRawElementProviderAdviseEvents, AdviseEventAdded)
         HRESULT ( STDMETHODCALLTYPE *AdviseEventAdded )( 
             __RPC__in IRawElementProviderAdviseEvents * This,
-            /* [annotation][in] */ 
-            _In_  EVENTID eventId,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * propertyIDs);
+            /* [in] */ EVENTID eventId,
+            /* [in] */ __RPC__in SAFEARRAY * propertyIDs);
         
         DECLSPEC_XFGVIRT(IRawElementProviderAdviseEvents, AdviseEventRemoved)
         HRESULT ( STDMETHODCALLTYPE *AdviseEventRemoved )( 
             __RPC__in IRawElementProviderAdviseEvents * This,
-            /* [annotation][in] */ 
-            _In_  EVENTID eventId,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * propertyIDs);
+            /* [in] */ EVENTID eventId,
+            /* [in] */ __RPC__in SAFEARRAY * propertyIDs);
         
         END_INTERFACE
     } IRawElementProviderAdviseEventsVtbl;
@@ -1835,10 +1757,8 @@ EXTERN_C const IID IID_IRawElementProviderHwndOverride;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOverrideProviderForHwnd( 
-            /* [annotation][in] */ 
-            _In_  HWND hwnd,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal) = 0;
+            /* [in] */ __RPC__in HWND hwnd,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal) = 0;
         
     };
     
@@ -1852,8 +1772,7 @@ EXTERN_C const IID IID_IRawElementProviderHwndOverride;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawElementProviderHwndOverride * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1868,10 +1787,8 @@ EXTERN_C const IID IID_IRawElementProviderHwndOverride;
         DECLSPEC_XFGVIRT(IRawElementProviderHwndOverride, GetOverrideProviderForHwnd)
         HRESULT ( STDMETHODCALLTYPE *GetOverrideProviderForHwnd )( 
             __RPC__in IRawElementProviderHwndOverride * This,
-            /* [annotation][in] */ 
-            _In_  HWND hwnd,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [in] */ __RPC__in HWND hwnd,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         END_INTERFACE
     } IRawElementProviderHwndOverrideVtbl;
@@ -1926,26 +1843,18 @@ EXTERN_C const IID IID_IProxyProviderWinEventSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddAutomationPropertyChangedEvent( 
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pProvider,
-            /* [annotation][in] */ 
-            _In_  PROPERTYID id,
-            /* [annotation][in] */ 
-            _In_  VARIANT newValue) = 0;
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pProvider,
+            /* [in] */ PROPERTYID id,
+            /* [in] */ VARIANT newValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddAutomationEvent( 
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pProvider,
-            /* [annotation][in] */ 
-            _In_  EVENTID id) = 0;
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pProvider,
+            /* [in] */ EVENTID id) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddStructureChangedEvent( 
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pProvider,
-            /* [annotation][in] */ 
-            _In_  enum StructureChangeType structureChangeType,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * runtimeId) = 0;
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pProvider,
+            /* [in] */ enum StructureChangeType structureChangeType,
+            /* [in] */ __RPC__in SAFEARRAY * runtimeId) = 0;
         
     };
     
@@ -1959,8 +1868,7 @@ EXTERN_C const IID IID_IProxyProviderWinEventSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProxyProviderWinEventSink * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1975,30 +1883,22 @@ EXTERN_C const IID IID_IProxyProviderWinEventSink;
         DECLSPEC_XFGVIRT(IProxyProviderWinEventSink, AddAutomationPropertyChangedEvent)
         HRESULT ( STDMETHODCALLTYPE *AddAutomationPropertyChangedEvent )( 
             __RPC__in IProxyProviderWinEventSink * This,
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pProvider,
-            /* [annotation][in] */ 
-            _In_  PROPERTYID id,
-            /* [annotation][in] */ 
-            _In_  VARIANT newValue);
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pProvider,
+            /* [in] */ PROPERTYID id,
+            /* [in] */ VARIANT newValue);
         
         DECLSPEC_XFGVIRT(IProxyProviderWinEventSink, AddAutomationEvent)
         HRESULT ( STDMETHODCALLTYPE *AddAutomationEvent )( 
             __RPC__in IProxyProviderWinEventSink * This,
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pProvider,
-            /* [annotation][in] */ 
-            _In_  EVENTID id);
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pProvider,
+            /* [in] */ EVENTID id);
         
         DECLSPEC_XFGVIRT(IProxyProviderWinEventSink, AddStructureChangedEvent)
         HRESULT ( STDMETHODCALLTYPE *AddStructureChangedEvent )( 
             __RPC__in IProxyProviderWinEventSink * This,
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pProvider,
-            /* [annotation][in] */ 
-            _In_  enum StructureChangeType structureChangeType,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * runtimeId);
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pProvider,
+            /* [in] */ enum StructureChangeType structureChangeType,
+            /* [in] */ __RPC__in SAFEARRAY * runtimeId);
         
         END_INTERFACE
     } IProxyProviderWinEventSinkVtbl;
@@ -2059,16 +1959,11 @@ EXTERN_C const IID IID_IProxyProviderWinEventHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RespondToWinEvent( 
-            /* [annotation][in] */ 
-            _In_  DWORD idWinEvent,
-            /* [annotation][in] */ 
-            _In_  HWND hwnd,
-            /* [annotation][in] */ 
-            _In_  LONG idObject,
-            /* [annotation][in] */ 
-            _In_  LONG idChild,
-            /* [annotation][in] */ 
-            _In_  IProxyProviderWinEventSink *pSink) = 0;
+            /* [in] */ DWORD idWinEvent,
+            /* [in] */ __RPC__in HWND hwnd,
+            /* [in] */ LONG idObject,
+            /* [in] */ LONG idChild,
+            /* [in] */ __RPC__in_opt IProxyProviderWinEventSink *pSink) = 0;
         
     };
     
@@ -2082,8 +1977,7 @@ EXTERN_C const IID IID_IProxyProviderWinEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProxyProviderWinEventHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2098,16 +1992,11 @@ EXTERN_C const IID IID_IProxyProviderWinEventHandler;
         DECLSPEC_XFGVIRT(IProxyProviderWinEventHandler, RespondToWinEvent)
         HRESULT ( STDMETHODCALLTYPE *RespondToWinEvent )( 
             __RPC__in IProxyProviderWinEventHandler * This,
-            /* [annotation][in] */ 
-            _In_  DWORD idWinEvent,
-            /* [annotation][in] */ 
-            _In_  HWND hwnd,
-            /* [annotation][in] */ 
-            _In_  LONG idObject,
-            /* [annotation][in] */ 
-            _In_  LONG idChild,
-            /* [annotation][in] */ 
-            _In_  IProxyProviderWinEventSink *pSink);
+            /* [in] */ DWORD idWinEvent,
+            /* [in] */ __RPC__in HWND hwnd,
+            /* [in] */ LONG idObject,
+            /* [in] */ LONG idChild,
+            /* [in] */ __RPC__in_opt IProxyProviderWinEventSink *pSink);
         
         END_INTERFACE
     } IProxyProviderWinEventHandlerVtbl;
@@ -2162,14 +2051,11 @@ EXTERN_C const IID IID_IRawElementProviderWindowlessSite;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetAdjacentFragment( 
-            /* [annotation][in] */ 
-            _In_  enum NavigateDirection direction,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderFragment **ppParent) = 0;
+            /* [in] */ enum NavigateDirection direction,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderFragment **ppParent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRuntimeIdPrefix( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
     };
     
@@ -2183,8 +2069,7 @@ EXTERN_C const IID IID_IRawElementProviderWindowlessSite;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawElementProviderWindowlessSite * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2199,16 +2084,13 @@ EXTERN_C const IID IID_IRawElementProviderWindowlessSite;
         DECLSPEC_XFGVIRT(IRawElementProviderWindowlessSite, GetAdjacentFragment)
         HRESULT ( STDMETHODCALLTYPE *GetAdjacentFragment )( 
             __RPC__in IRawElementProviderWindowlessSite * This,
-            /* [annotation][in] */ 
-            _In_  enum NavigateDirection direction,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderFragment **ppParent);
+            /* [in] */ enum NavigateDirection direction,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderFragment **ppParent);
         
         DECLSPEC_XFGVIRT(IRawElementProviderWindowlessSite, GetRuntimeIdPrefix)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeIdPrefix )( 
             __RPC__in IRawElementProviderWindowlessSite * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         END_INTERFACE
     } IRawElementProviderWindowlessSiteVtbl;
@@ -2266,14 +2148,11 @@ EXTERN_C const IID IID_IAccessibleHostingElementProviders;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEmbeddedFragmentRoots( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetObjectIdForProvider( 
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pProvider,
-            /* [annotation][out] */ 
-            _Out_  long *pidObject) = 0;
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pProvider,
+            /* [out] */ __RPC__out long *pidObject) = 0;
         
     };
     
@@ -2287,8 +2166,7 @@ EXTERN_C const IID IID_IAccessibleHostingElementProviders;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccessibleHostingElementProviders * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2303,16 +2181,13 @@ EXTERN_C const IID IID_IAccessibleHostingElementProviders;
         DECLSPEC_XFGVIRT(IAccessibleHostingElementProviders, GetEmbeddedFragmentRoots)
         HRESULT ( STDMETHODCALLTYPE *GetEmbeddedFragmentRoots )( 
             __RPC__in IAccessibleHostingElementProviders * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(IAccessibleHostingElementProviders, GetObjectIdForProvider)
         HRESULT ( STDMETHODCALLTYPE *GetObjectIdForProvider )( 
             __RPC__in IAccessibleHostingElementProviders * This,
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pProvider,
-            /* [annotation][out] */ 
-            _Out_  long *pidObject);
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pProvider,
+            /* [out] */ __RPC__out long *pidObject);
         
         END_INTERFACE
     } IAccessibleHostingElementProvidersVtbl;
@@ -2370,8 +2245,7 @@ EXTERN_C const IID IID_IRawElementProviderHostingAccessibles;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEmbeddedAccessibles( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
     };
     
@@ -2385,8 +2259,7 @@ EXTERN_C const IID IID_IRawElementProviderHostingAccessibles;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawElementProviderHostingAccessibles * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2401,8 +2274,7 @@ EXTERN_C const IID IID_IRawElementProviderHostingAccessibles;
         DECLSPEC_XFGVIRT(IRawElementProviderHostingAccessibles, GetEmbeddedAccessibles)
         HRESULT ( STDMETHODCALLTYPE *GetEmbeddedAccessibles )( 
             __RPC__in IRawElementProviderHostingAccessibles * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         END_INTERFACE
     } IRawElementProviderHostingAccessiblesVtbl;
@@ -2457,12 +2329,10 @@ EXTERN_C const IID IID_IDockProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetDockPosition( 
-            /* [annotation][in] */ 
-            _In_  enum DockPosition dockPosition) = 0;
+            /* [in] */ enum DockPosition dockPosition) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DockPosition( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum DockPosition *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out enum DockPosition *pRetVal) = 0;
         
     };
     
@@ -2476,8 +2346,7 @@ EXTERN_C const IID IID_IDockProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDockProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2492,14 +2361,12 @@ EXTERN_C const IID IID_IDockProvider;
         DECLSPEC_XFGVIRT(IDockProvider, SetDockPosition)
         HRESULT ( STDMETHODCALLTYPE *SetDockPosition )( 
             __RPC__in IDockProvider * This,
-            /* [annotation][in] */ 
-            _In_  enum DockPosition dockPosition);
+            /* [in] */ enum DockPosition dockPosition);
         
         DECLSPEC_XFGVIRT(IDockProvider, get_DockPosition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DockPosition )( 
             __RPC__in IDockProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum DockPosition *pRetVal);
+            /* [retval][out] */ __RPC__out enum DockPosition *pRetVal);
         
         END_INTERFACE
     } IDockProviderVtbl;
@@ -2561,8 +2428,7 @@ EXTERN_C const IID IID_IExpandCollapseProvider;
         virtual HRESULT STDMETHODCALLTYPE Collapse( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ExpandCollapseState( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum ExpandCollapseState *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out enum ExpandCollapseState *pRetVal) = 0;
         
     };
     
@@ -2576,8 +2442,7 @@ EXTERN_C const IID IID_IExpandCollapseProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IExpandCollapseProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2600,8 +2465,7 @@ EXTERN_C const IID IID_IExpandCollapseProvider;
         DECLSPEC_XFGVIRT(IExpandCollapseProvider, get_ExpandCollapseState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExpandCollapseState )( 
             __RPC__in IExpandCollapseProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum ExpandCollapseState *pRetVal);
+            /* [retval][out] */ __RPC__out enum ExpandCollapseState *pRetVal);
         
         END_INTERFACE
     } IExpandCollapseProviderVtbl;
@@ -2662,20 +2526,15 @@ EXTERN_C const IID IID_IGridProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetItem( 
-            /* [annotation][in] */ 
-            _In_  int row,
-            /* [annotation][in] */ 
-            _In_  int column,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal) = 0;
+            /* [in] */ int row,
+            /* [in] */ int column,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RowCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ColumnCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
     };
     
@@ -2689,8 +2548,7 @@ EXTERN_C const IID IID_IGridProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGridProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2705,24 +2563,19 @@ EXTERN_C const IID IID_IGridProvider;
         DECLSPEC_XFGVIRT(IGridProvider, GetItem)
         HRESULT ( STDMETHODCALLTYPE *GetItem )( 
             __RPC__in IGridProvider * This,
-            /* [annotation][in] */ 
-            _In_  int row,
-            /* [annotation][in] */ 
-            _In_  int column,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [in] */ int row,
+            /* [in] */ int column,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         DECLSPEC_XFGVIRT(IGridProvider, get_RowCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RowCount )( 
             __RPC__in IGridProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(IGridProvider, get_ColumnCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ColumnCount )( 
             __RPC__in IGridProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         END_INTERFACE
     } IGridProviderVtbl;
@@ -2783,24 +2636,19 @@ EXTERN_C const IID IID_IGridItemProvider;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Row( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Column( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RowSpan( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ColumnSpan( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ContainingGrid( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal) = 0;
         
     };
     
@@ -2814,8 +2662,7 @@ EXTERN_C const IID IID_IGridItemProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGridItemProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2830,32 +2677,27 @@ EXTERN_C const IID IID_IGridItemProvider;
         DECLSPEC_XFGVIRT(IGridItemProvider, get_Row)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Row )( 
             __RPC__in IGridItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(IGridItemProvider, get_Column)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Column )( 
             __RPC__in IGridItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(IGridItemProvider, get_RowSpan)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RowSpan )( 
             __RPC__in IGridItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(IGridItemProvider, get_ColumnSpan)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ColumnSpan )( 
             __RPC__in IGridItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(IGridItemProvider, get_ContainingGrid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContainingGrid )( 
             __RPC__in IGridItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         END_INTERFACE
     } IGridItemProviderVtbl;
@@ -2935,8 +2777,7 @@ EXTERN_C const IID IID_IInvokeProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInvokeProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3005,22 +2846,17 @@ EXTERN_C const IID IID_IMultipleViewProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetViewName( 
-            /* [annotation][in] */ 
-            _In_  int viewId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal) = 0;
+            /* [in] */ int viewId,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCurrentView( 
-            /* [annotation][in] */ 
-            _In_  int viewId) = 0;
+            /* [in] */ int viewId) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentView( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSupportedViews( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
     };
     
@@ -3034,8 +2870,7 @@ EXTERN_C const IID IID_IMultipleViewProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMultipleViewProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3050,28 +2885,23 @@ EXTERN_C const IID IID_IMultipleViewProvider;
         DECLSPEC_XFGVIRT(IMultipleViewProvider, GetViewName)
         HRESULT ( STDMETHODCALLTYPE *GetViewName )( 
             __RPC__in IMultipleViewProvider * This,
-            /* [annotation][in] */ 
-            _In_  int viewId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal);
+            /* [in] */ int viewId,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal);
         
         DECLSPEC_XFGVIRT(IMultipleViewProvider, SetCurrentView)
         HRESULT ( STDMETHODCALLTYPE *SetCurrentView )( 
             __RPC__in IMultipleViewProvider * This,
-            /* [annotation][in] */ 
-            _In_  int viewId);
+            /* [in] */ int viewId);
         
         DECLSPEC_XFGVIRT(IMultipleViewProvider, get_CurrentView)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentView )( 
             __RPC__in IMultipleViewProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(IMultipleViewProvider, GetSupportedViews)
         HRESULT ( STDMETHODCALLTYPE *GetSupportedViews )( 
             __RPC__in IMultipleViewProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         END_INTERFACE
     } IMultipleViewProviderVtbl;
@@ -3135,32 +2965,25 @@ EXTERN_C const IID IID_IRangeValueProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetValue( 
-            /* [annotation][in] */ 
-            _In_  double val) = 0;
+            /* [in] */ double val) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsReadOnly( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Maximum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Minimum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_LargeChange( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SmallChange( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
     };
     
@@ -3174,8 +2997,7 @@ EXTERN_C const IID IID_IRangeValueProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRangeValueProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3190,44 +3012,37 @@ EXTERN_C const IID IID_IRangeValueProvider;
         DECLSPEC_XFGVIRT(IRangeValueProvider, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IRangeValueProvider * This,
-            /* [annotation][in] */ 
-            _In_  double val);
+            /* [in] */ double val);
         
         DECLSPEC_XFGVIRT(IRangeValueProvider, get_Value)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in IRangeValueProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(IRangeValueProvider, get_IsReadOnly)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsReadOnly )( 
             __RPC__in IRangeValueProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IRangeValueProvider, get_Maximum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Maximum )( 
             __RPC__in IRangeValueProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(IRangeValueProvider, get_Minimum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Minimum )( 
             __RPC__in IRangeValueProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(IRangeValueProvider, get_LargeChange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LargeChange )( 
             __RPC__in IRangeValueProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(IRangeValueProvider, get_SmallChange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SmallChange )( 
             __RPC__in IRangeValueProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         END_INTERFACE
     } IRangeValueProviderVtbl;
@@ -3313,8 +3128,7 @@ EXTERN_C const IID IID_IScrollItemProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IScrollItemProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3383,16 +3197,13 @@ EXTERN_C const IID IID_ISelectionProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSelection( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CanSelectMultiple( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsSelectionRequired( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
     };
     
@@ -3406,8 +3217,7 @@ EXTERN_C const IID IID_ISelectionProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISelectionProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3422,20 +3232,17 @@ EXTERN_C const IID IID_ISelectionProvider;
         DECLSPEC_XFGVIRT(ISelectionProvider, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in ISelectionProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ISelectionProvider, get_CanSelectMultiple)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanSelectMultiple )( 
             __RPC__in ISelectionProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ISelectionProvider, get_IsSelectionRequired)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsSelectionRequired )( 
             __RPC__in ISelectionProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         END_INTERFACE
     } ISelectionProviderVtbl;
@@ -3496,20 +3303,16 @@ EXTERN_C const IID IID_ISelectionProvider2;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FirstSelectedItem( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_LastSelectedItem( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CurrentSelectedItem( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ItemCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *retVal) = 0;
+            /* [retval][out] */ __RPC__out int *retVal) = 0;
         
     };
     
@@ -3523,8 +3326,7 @@ EXTERN_C const IID IID_ISelectionProvider2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISelectionProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3539,44 +3341,37 @@ EXTERN_C const IID IID_ISelectionProvider2;
         DECLSPEC_XFGVIRT(ISelectionProvider, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in ISelectionProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ISelectionProvider, get_CanSelectMultiple)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanSelectMultiple )( 
             __RPC__in ISelectionProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ISelectionProvider, get_IsSelectionRequired)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsSelectionRequired )( 
             __RPC__in ISelectionProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ISelectionProvider2, get_FirstSelectedItem)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirstSelectedItem )( 
             __RPC__in ISelectionProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **retVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **retVal);
         
         DECLSPEC_XFGVIRT(ISelectionProvider2, get_LastSelectedItem)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastSelectedItem )( 
             __RPC__in ISelectionProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **retVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **retVal);
         
         DECLSPEC_XFGVIRT(ISelectionProvider2, get_CurrentSelectedItem)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentSelectedItem )( 
             __RPC__in ISelectionProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **retVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **retVal);
         
         DECLSPEC_XFGVIRT(ISelectionProvider2, get_ItemCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ItemCount )( 
             __RPC__in ISelectionProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *retVal);
+            /* [retval][out] */ __RPC__out int *retVal);
         
         END_INTERFACE
     } ISelectionProvider2Vtbl;
@@ -3650,40 +3445,30 @@ EXTERN_C const IID IID_IScrollProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Scroll( 
-            /* [annotation][in] */ 
-            _In_  enum ScrollAmount horizontalAmount,
-            /* [annotation][in] */ 
-            _In_  enum ScrollAmount verticalAmount) = 0;
+            /* [in] */ enum ScrollAmount horizontalAmount,
+            /* [in] */ enum ScrollAmount verticalAmount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetScrollPercent( 
-            /* [annotation][in] */ 
-            _In_  double horizontalPercent,
-            /* [annotation][in] */ 
-            _In_  double verticalPercent) = 0;
+            /* [in] */ double horizontalPercent,
+            /* [in] */ double verticalPercent) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_HorizontalScrollPercent( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_VerticalScrollPercent( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_HorizontalViewSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_VerticalViewSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_HorizontallyScrollable( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_VerticallyScrollable( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
     };
     
@@ -3697,8 +3482,7 @@ EXTERN_C const IID IID_IScrollProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IScrollProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3713,54 +3497,44 @@ EXTERN_C const IID IID_IScrollProvider;
         DECLSPEC_XFGVIRT(IScrollProvider, Scroll)
         HRESULT ( STDMETHODCALLTYPE *Scroll )( 
             __RPC__in IScrollProvider * This,
-            /* [annotation][in] */ 
-            _In_  enum ScrollAmount horizontalAmount,
-            /* [annotation][in] */ 
-            _In_  enum ScrollAmount verticalAmount);
+            /* [in] */ enum ScrollAmount horizontalAmount,
+            /* [in] */ enum ScrollAmount verticalAmount);
         
         DECLSPEC_XFGVIRT(IScrollProvider, SetScrollPercent)
         HRESULT ( STDMETHODCALLTYPE *SetScrollPercent )( 
             __RPC__in IScrollProvider * This,
-            /* [annotation][in] */ 
-            _In_  double horizontalPercent,
-            /* [annotation][in] */ 
-            _In_  double verticalPercent);
+            /* [in] */ double horizontalPercent,
+            /* [in] */ double verticalPercent);
         
         DECLSPEC_XFGVIRT(IScrollProvider, get_HorizontalScrollPercent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HorizontalScrollPercent )( 
             __RPC__in IScrollProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(IScrollProvider, get_VerticalScrollPercent)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_VerticalScrollPercent )( 
             __RPC__in IScrollProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(IScrollProvider, get_HorizontalViewSize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HorizontalViewSize )( 
             __RPC__in IScrollProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(IScrollProvider, get_VerticalViewSize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_VerticalViewSize )( 
             __RPC__in IScrollProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(IScrollProvider, get_HorizontallyScrollable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HorizontallyScrollable )( 
             __RPC__in IScrollProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IScrollProvider, get_VerticallyScrollable)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_VerticallyScrollable )( 
             __RPC__in IScrollProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         END_INTERFACE
     } IScrollProviderVtbl;
@@ -3842,12 +3616,10 @@ EXTERN_C const IID IID_ISelectionItemProvider;
         virtual HRESULT STDMETHODCALLTYPE RemoveFromSelection( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsSelected( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SelectionContainer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal) = 0;
         
     };
     
@@ -3861,8 +3633,7 @@ EXTERN_C const IID IID_ISelectionItemProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISelectionItemProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3889,14 +3660,12 @@ EXTERN_C const IID IID_ISelectionItemProvider;
         DECLSPEC_XFGVIRT(ISelectionItemProvider, get_IsSelected)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsSelected )( 
             __RPC__in ISelectionItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ISelectionItemProvider, get_SelectionContainer)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SelectionContainer )( 
             __RPC__in ISelectionItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         END_INTERFACE
     } ISelectionItemProviderVtbl;
@@ -3963,8 +3732,7 @@ EXTERN_C const IID IID_ISynchronizedInputProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StartListening( 
-            /* [annotation][in] */ 
-            _In_  enum SynchronizedInputType inputType) = 0;
+            /* [in] */ enum SynchronizedInputType inputType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
         
@@ -3980,8 +3748,7 @@ EXTERN_C const IID IID_ISynchronizedInputProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISynchronizedInputProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3996,8 +3763,7 @@ EXTERN_C const IID IID_ISynchronizedInputProvider;
         DECLSPEC_XFGVIRT(ISynchronizedInputProvider, StartListening)
         HRESULT ( STDMETHODCALLTYPE *StartListening )( 
             __RPC__in ISynchronizedInputProvider * This,
-            /* [annotation][in] */ 
-            _In_  enum SynchronizedInputType inputType);
+            /* [in] */ enum SynchronizedInputType inputType);
         
         DECLSPEC_XFGVIRT(ISynchronizedInputProvider, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 
@@ -4059,16 +3825,13 @@ EXTERN_C const IID IID_ITableProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRowHeaders( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetColumnHeaders( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RowOrColumnMajor( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum RowOrColumnMajor *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out enum RowOrColumnMajor *pRetVal) = 0;
         
     };
     
@@ -4082,8 +3845,7 @@ EXTERN_C const IID IID_ITableProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITableProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4098,20 +3860,17 @@ EXTERN_C const IID IID_ITableProvider;
         DECLSPEC_XFGVIRT(ITableProvider, GetRowHeaders)
         HRESULT ( STDMETHODCALLTYPE *GetRowHeaders )( 
             __RPC__in ITableProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITableProvider, GetColumnHeaders)
         HRESULT ( STDMETHODCALLTYPE *GetColumnHeaders )( 
             __RPC__in ITableProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITableProvider, get_RowOrColumnMajor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RowOrColumnMajor )( 
             __RPC__in ITableProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum RowOrColumnMajor *pRetVal);
+            /* [retval][out] */ __RPC__out enum RowOrColumnMajor *pRetVal);
         
         END_INTERFACE
     } ITableProviderVtbl;
@@ -4172,12 +3931,10 @@ EXTERN_C const IID IID_ITableItemProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRowHeaderItems( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetColumnHeaderItems( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
     };
     
@@ -4191,8 +3948,7 @@ EXTERN_C const IID IID_ITableItemProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITableItemProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4207,14 +3963,12 @@ EXTERN_C const IID IID_ITableItemProvider;
         DECLSPEC_XFGVIRT(ITableItemProvider, GetRowHeaderItems)
         HRESULT ( STDMETHODCALLTYPE *GetRowHeaderItems )( 
             __RPC__in ITableItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITableItemProvider, GetColumnHeaderItems)
         HRESULT ( STDMETHODCALLTYPE *GetColumnHeaderItems )( 
             __RPC__in ITableItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         END_INTERFACE
     } ITableItemProviderVtbl;
@@ -4274,8 +4028,7 @@ EXTERN_C const IID IID_IToggleProvider;
         virtual HRESULT STDMETHODCALLTYPE Toggle( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ToggleState( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum ToggleState *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out enum ToggleState *pRetVal) = 0;
         
     };
     
@@ -4289,8 +4042,7 @@ EXTERN_C const IID IID_IToggleProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IToggleProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4309,8 +4061,7 @@ EXTERN_C const IID IID_IToggleProvider;
         DECLSPEC_XFGVIRT(IToggleProvider, get_ToggleState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ToggleState )( 
             __RPC__in IToggleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum ToggleState *pRetVal);
+            /* [retval][out] */ __RPC__out enum ToggleState *pRetVal);
         
         END_INTERFACE
     } IToggleProviderVtbl;
@@ -4368,32 +4119,24 @@ EXTERN_C const IID IID_ITransformProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Move( 
-            /* [annotation][in] */ 
-            _In_  double x,
-            /* [annotation][in] */ 
-            _In_  double y) = 0;
+            /* [in] */ double x,
+            /* [in] */ double y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Resize( 
-            /* [annotation][in] */ 
-            _In_  double width,
-            /* [annotation][in] */ 
-            _In_  double height) = 0;
+            /* [in] */ double width,
+            /* [in] */ double height) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Rotate( 
-            /* [annotation][in] */ 
-            _In_  double degrees) = 0;
+            /* [in] */ double degrees) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CanMove( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CanResize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CanRotate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
     };
     
@@ -4407,8 +4150,7 @@ EXTERN_C const IID IID_ITransformProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransformProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4423,42 +4165,34 @@ EXTERN_C const IID IID_ITransformProvider;
         DECLSPEC_XFGVIRT(ITransformProvider, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in ITransformProvider * This,
-            /* [annotation][in] */ 
-            _In_  double x,
-            /* [annotation][in] */ 
-            _In_  double y);
+            /* [in] */ double x,
+            /* [in] */ double y);
         
         DECLSPEC_XFGVIRT(ITransformProvider, Resize)
         HRESULT ( STDMETHODCALLTYPE *Resize )( 
             __RPC__in ITransformProvider * This,
-            /* [annotation][in] */ 
-            _In_  double width,
-            /* [annotation][in] */ 
-            _In_  double height);
+            /* [in] */ double width,
+            /* [in] */ double height);
         
         DECLSPEC_XFGVIRT(ITransformProvider, Rotate)
         HRESULT ( STDMETHODCALLTYPE *Rotate )( 
             __RPC__in ITransformProvider * This,
-            /* [annotation][in] */ 
-            _In_  double degrees);
+            /* [in] */ double degrees);
         
         DECLSPEC_XFGVIRT(ITransformProvider, get_CanMove)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanMove )( 
             __RPC__in ITransformProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ITransformProvider, get_CanResize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanResize )( 
             __RPC__in ITransformProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ITransformProvider, get_CanRotate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanRotate )( 
             __RPC__in ITransformProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         END_INTERFACE
     } ITransformProviderVtbl;
@@ -4528,16 +4262,13 @@ EXTERN_C const IID IID_IValueProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetValue( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR val) = 0;
+            /* [in] */ __RPC__in LPCWSTR val) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsReadOnly( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
     };
     
@@ -4551,8 +4282,7 @@ EXTERN_C const IID IID_IValueProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IValueProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4567,20 +4297,17 @@ EXTERN_C const IID IID_IValueProvider;
         DECLSPEC_XFGVIRT(IValueProvider, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IValueProvider * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR val);
+            /* [in] */ __RPC__in LPCWSTR val);
         
         DECLSPEC_XFGVIRT(IValueProvider, get_Value)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in IValueProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal);
         
         DECLSPEC_XFGVIRT(IValueProvider, get_IsReadOnly)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsReadOnly )( 
             __RPC__in IValueProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         END_INTERFACE
     } IValueProviderVtbl;
@@ -4641,40 +4368,31 @@ EXTERN_C const IID IID_IWindowProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetVisualState( 
-            /* [annotation][in] */ 
-            _In_  enum WindowVisualState state) = 0;
+            /* [in] */ enum WindowVisualState state) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WaitForInputIdle( 
-            /* [annotation][in] */ 
-            _In_  int milliseconds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [in] */ int milliseconds,
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CanMaximize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CanMinimize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsModal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_WindowVisualState( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum WindowVisualState *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out enum WindowVisualState *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_WindowInteractionState( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum WindowInteractionState *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out enum WindowInteractionState *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsTopmost( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
     };
     
@@ -4688,8 +4406,7 @@ EXTERN_C const IID IID_IWindowProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWindowProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4704,8 +4421,7 @@ EXTERN_C const IID IID_IWindowProvider;
         DECLSPEC_XFGVIRT(IWindowProvider, SetVisualState)
         HRESULT ( STDMETHODCALLTYPE *SetVisualState )( 
             __RPC__in IWindowProvider * This,
-            /* [annotation][in] */ 
-            _In_  enum WindowVisualState state);
+            /* [in] */ enum WindowVisualState state);
         
         DECLSPEC_XFGVIRT(IWindowProvider, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
@@ -4714,46 +4430,38 @@ EXTERN_C const IID IID_IWindowProvider;
         DECLSPEC_XFGVIRT(IWindowProvider, WaitForInputIdle)
         HRESULT ( STDMETHODCALLTYPE *WaitForInputIdle )( 
             __RPC__in IWindowProvider * This,
-            /* [annotation][in] */ 
-            _In_  int milliseconds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [in] */ int milliseconds,
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IWindowProvider, get_CanMaximize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanMaximize )( 
             __RPC__in IWindowProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IWindowProvider, get_CanMinimize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanMinimize )( 
             __RPC__in IWindowProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IWindowProvider, get_IsModal)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsModal )( 
             __RPC__in IWindowProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IWindowProvider, get_WindowVisualState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowVisualState )( 
             __RPC__in IWindowProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum WindowVisualState *pRetVal);
+            /* [retval][out] */ __RPC__out enum WindowVisualState *pRetVal);
         
         DECLSPEC_XFGVIRT(IWindowProvider, get_WindowInteractionState)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowInteractionState )( 
             __RPC__in IWindowProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum WindowInteractionState *pRetVal);
+            /* [retval][out] */ __RPC__out enum WindowInteractionState *pRetVal);
         
         DECLSPEC_XFGVIRT(IWindowProvider, get_IsTopmost)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsTopmost )( 
             __RPC__in IWindowProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         END_INTERFACE
     } IWindowProviderVtbl;
@@ -4840,48 +4548,37 @@ EXTERN_C const IID IID_ILegacyIAccessibleProvider;
             __RPC__in LPCWSTR szValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIAccessible( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAccessible **ppAccessible) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAccessible **ppAccessible) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ChildId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszValue) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszDescription) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDescription) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Role( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwRole) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwRole) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwState) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwState) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Help( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszHelp) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszHelp) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_KeyboardShortcut( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszKeyboardShortcut) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszKeyboardShortcut) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSelection( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pvarSelectedChildren) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pvarSelectedChildren) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DefaultAction( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszDefaultAction) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDefaultAction) = 0;
         
     };
     
@@ -4895,8 +4592,7 @@ EXTERN_C const IID IID_ILegacyIAccessibleProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4925,68 +4621,57 @@ EXTERN_C const IID IID_ILegacyIAccessibleProvider;
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, GetIAccessible)
         HRESULT ( STDMETHODCALLTYPE *GetIAccessible )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAccessible **ppAccessible);
+            /* [retval][out] */ __RPC__deref_out_opt IAccessible **ppAccessible);
         
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, get_ChildId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChildId )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszName);
         
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, get_Value)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszValue);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszValue);
         
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszDescription);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDescription);
         
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, get_Role)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Role )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwRole);
+            /* [retval][out] */ __RPC__out DWORD *pdwRole);
         
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, get_State)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwState);
+            /* [retval][out] */ __RPC__out DWORD *pdwState);
         
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, get_Help)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Help )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszHelp);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszHelp);
         
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, get_KeyboardShortcut)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_KeyboardShortcut )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszKeyboardShortcut);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszKeyboardShortcut);
         
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pvarSelectedChildren);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pvarSelectedChildren);
         
         DECLSPEC_XFGVIRT(ILegacyIAccessibleProvider, get_DefaultAction)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultAction )( 
             __RPC__in ILegacyIAccessibleProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pszDefaultAction);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pszDefaultAction);
         
         END_INTERFACE
     } ILegacyIAccessibleProviderVtbl;
@@ -5080,14 +4765,10 @@ EXTERN_C const IID IID_IItemContainerProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE FindItemByProperty( 
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pStartAfter,
-            /* [annotation][in] */ 
-            _In_  PROPERTYID propertyId,
-            /* [annotation][in] */ 
-            _In_  VARIANT value,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pFound) = 0;
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pStartAfter,
+            /* [in] */ PROPERTYID propertyId,
+            /* [in] */ VARIANT value,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pFound) = 0;
         
     };
     
@@ -5101,8 +4782,7 @@ EXTERN_C const IID IID_IItemContainerProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IItemContainerProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5117,14 +4797,10 @@ EXTERN_C const IID IID_IItemContainerProvider;
         DECLSPEC_XFGVIRT(IItemContainerProvider, FindItemByProperty)
         HRESULT ( STDMETHODCALLTYPE *FindItemByProperty )( 
             __RPC__in IItemContainerProvider * This,
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *pStartAfter,
-            /* [annotation][in] */ 
-            _In_  PROPERTYID propertyId,
-            /* [annotation][in] */ 
-            _In_  VARIANT value,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pFound);
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *pStartAfter,
+            /* [in] */ PROPERTYID propertyId,
+            /* [in] */ VARIANT value,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pFound);
         
         END_INTERFACE
     } IItemContainerProviderVtbl;
@@ -5192,8 +4868,7 @@ EXTERN_C const IID IID_IVirtualizedItemProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVirtualizedItemProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5262,8 +4937,7 @@ EXTERN_C const IID IID_IObjectModelProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetUnderlyingObjectModel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppUnknown) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnknown) = 0;
         
     };
     
@@ -5277,8 +4951,7 @@ EXTERN_C const IID IID_IObjectModelProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IObjectModelProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5293,8 +4966,7 @@ EXTERN_C const IID IID_IObjectModelProvider;
         DECLSPEC_XFGVIRT(IObjectModelProvider, GetUnderlyingObjectModel)
         HRESULT ( STDMETHODCALLTYPE *GetUnderlyingObjectModel )( 
             __RPC__in IObjectModelProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppUnknown);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnknown);
         
         END_INTERFACE
     } IObjectModelProviderVtbl;
@@ -5349,24 +5021,19 @@ EXTERN_C const IID IID_IAnnotationProvider;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AnnotationTypeId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *retVal) = 0;
+            /* [retval][out] */ __RPC__out int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AnnotationTypeName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Author( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DateTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Target( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **retVal) = 0;
         
     };
     
@@ -5380,8 +5047,7 @@ EXTERN_C const IID IID_IAnnotationProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAnnotationProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5396,32 +5062,27 @@ EXTERN_C const IID IID_IAnnotationProvider;
         DECLSPEC_XFGVIRT(IAnnotationProvider, get_AnnotationTypeId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AnnotationTypeId )( 
             __RPC__in IAnnotationProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *retVal);
+            /* [retval][out] */ __RPC__out int *retVal);
         
         DECLSPEC_XFGVIRT(IAnnotationProvider, get_AnnotationTypeName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AnnotationTypeName )( 
             __RPC__in IAnnotationProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IAnnotationProvider, get_Author)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Author )( 
             __RPC__in IAnnotationProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IAnnotationProvider, get_DateTime)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DateTime )( 
             __RPC__in IAnnotationProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IAnnotationProvider, get_Target)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Target )( 
             __RPC__in IAnnotationProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **retVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **retVal);
         
         END_INTERFACE
     } IAnnotationProviderVtbl;
@@ -5488,32 +5149,25 @@ EXTERN_C const IID IID_IStylesProvider;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_StyleId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *retVal) = 0;
+            /* [retval][out] */ __RPC__out int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_StyleName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FillColor( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *retVal) = 0;
+            /* [retval][out] */ __RPC__out int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FillPatternStyle( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Shape( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FillPatternColor( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *retVal) = 0;
+            /* [retval][out] */ __RPC__out int *retVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ExtendedProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal) = 0;
         
     };
     
@@ -5527,8 +5181,7 @@ EXTERN_C const IID IID_IStylesProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStylesProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5543,44 +5196,37 @@ EXTERN_C const IID IID_IStylesProvider;
         DECLSPEC_XFGVIRT(IStylesProvider, get_StyleId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_StyleId )( 
             __RPC__in IStylesProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *retVal);
+            /* [retval][out] */ __RPC__out int *retVal);
         
         DECLSPEC_XFGVIRT(IStylesProvider, get_StyleName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_StyleName )( 
             __RPC__in IStylesProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IStylesProvider, get_FillColor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FillColor )( 
             __RPC__in IStylesProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *retVal);
+            /* [retval][out] */ __RPC__out int *retVal);
         
         DECLSPEC_XFGVIRT(IStylesProvider, get_FillPatternStyle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FillPatternStyle )( 
             __RPC__in IStylesProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IStylesProvider, get_Shape)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Shape )( 
             __RPC__in IStylesProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
         
         DECLSPEC_XFGVIRT(IStylesProvider, get_FillPatternColor)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FillPatternColor )( 
             __RPC__in IStylesProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *retVal);
+            /* [retval][out] */ __RPC__out int *retVal);
         
         DECLSPEC_XFGVIRT(IStylesProvider, get_ExtendedProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedProperties )( 
             __RPC__in IStylesProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *retVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *retVal);
         
         END_INTERFACE
     } IStylesProviderVtbl;
@@ -5653,10 +5299,8 @@ EXTERN_C const IID IID_ISpreadsheetProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetItemByName( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal) = 0;
+            /* [in] */ __RPC__in LPCWSTR name,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal) = 0;
         
     };
     
@@ -5670,8 +5314,7 @@ EXTERN_C const IID IID_ISpreadsheetProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpreadsheetProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5686,10 +5329,8 @@ EXTERN_C const IID IID_ISpreadsheetProvider;
         DECLSPEC_XFGVIRT(ISpreadsheetProvider, GetItemByName)
         HRESULT ( STDMETHODCALLTYPE *GetItemByName )( 
             __RPC__in ISpreadsheetProvider * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [in] */ __RPC__in LPCWSTR name,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         END_INTERFACE
     } ISpreadsheetProviderVtbl;
@@ -5744,16 +5385,13 @@ EXTERN_C const IID IID_ISpreadsheetItemProvider;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Formula( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAnnotationObjects( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAnnotationTypes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
     };
     
@@ -5767,8 +5405,7 @@ EXTERN_C const IID IID_ISpreadsheetItemProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpreadsheetItemProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5783,20 +5420,17 @@ EXTERN_C const IID IID_ISpreadsheetItemProvider;
         DECLSPEC_XFGVIRT(ISpreadsheetItemProvider, get_Formula)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Formula )( 
             __RPC__in ISpreadsheetItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal);
         
         DECLSPEC_XFGVIRT(ISpreadsheetItemProvider, GetAnnotationObjects)
         HRESULT ( STDMETHODCALLTYPE *GetAnnotationObjects )( 
             __RPC__in ISpreadsheetItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ISpreadsheetItemProvider, GetAnnotationTypes)
         HRESULT ( STDMETHODCALLTYPE *GetAnnotationTypes )( 
             __RPC__in ISpreadsheetItemProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         END_INTERFACE
     } ISpreadsheetItemProviderVtbl;
@@ -5857,28 +5491,22 @@ EXTERN_C const IID IID_ITransformProvider2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Zoom( 
-            /* [annotation][in] */ 
-            _In_  double zoom) = 0;
+            /* [in] */ double zoom) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CanZoom( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ZoomLevel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ZoomMinimum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ZoomMaximum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out double *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ZoomByUnit( 
-            /* [annotation][in] */ 
-            _In_  enum ZoomUnit zoomUnit) = 0;
+            /* [in] */ enum ZoomUnit zoomUnit) = 0;
         
     };
     
@@ -5892,8 +5520,7 @@ EXTERN_C const IID IID_ITransformProvider2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5908,78 +5535,64 @@ EXTERN_C const IID IID_ITransformProvider2;
         DECLSPEC_XFGVIRT(ITransformProvider, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  double x,
-            /* [annotation][in] */ 
-            _In_  double y);
+            /* [in] */ double x,
+            /* [in] */ double y);
         
         DECLSPEC_XFGVIRT(ITransformProvider, Resize)
         HRESULT ( STDMETHODCALLTYPE *Resize )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  double width,
-            /* [annotation][in] */ 
-            _In_  double height);
+            /* [in] */ double width,
+            /* [in] */ double height);
         
         DECLSPEC_XFGVIRT(ITransformProvider, Rotate)
         HRESULT ( STDMETHODCALLTYPE *Rotate )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  double degrees);
+            /* [in] */ double degrees);
         
         DECLSPEC_XFGVIRT(ITransformProvider, get_CanMove)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanMove )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ITransformProvider, get_CanResize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanResize )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ITransformProvider, get_CanRotate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanRotate )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ITransformProvider2, Zoom)
         HRESULT ( STDMETHODCALLTYPE *Zoom )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  double zoom);
+            /* [in] */ double zoom);
         
         DECLSPEC_XFGVIRT(ITransformProvider2, get_CanZoom)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CanZoom )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ITransformProvider2, get_ZoomLevel)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ZoomLevel )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(ITransformProvider2, get_ZoomMinimum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ZoomMinimum )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(ITransformProvider2, get_ZoomMaximum)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ZoomMaximum )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  double *pRetVal);
+            /* [retval][out] */ __RPC__out double *pRetVal);
         
         DECLSPEC_XFGVIRT(ITransformProvider2, ZoomByUnit)
         HRESULT ( STDMETHODCALLTYPE *ZoomByUnit )( 
             __RPC__in ITransformProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  enum ZoomUnit zoomUnit);
+            /* [in] */ enum ZoomUnit zoomUnit);
         
         END_INTERFACE
     } ITransformProvider2Vtbl;
@@ -6068,20 +5681,16 @@ EXTERN_C const IID IID_IDragProvider;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsGrabbed( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DropEffect( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DropEffects( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGrabbedItems( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
     };
     
@@ -6095,8 +5704,7 @@ EXTERN_C const IID IID_IDragProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDragProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6111,26 +5719,22 @@ EXTERN_C const IID IID_IDragProvider;
         DECLSPEC_XFGVIRT(IDragProvider, get_IsGrabbed)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsGrabbed )( 
             __RPC__in IDragProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(IDragProvider, get_DropEffect)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DropEffect )( 
             __RPC__in IDragProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal);
         
         DECLSPEC_XFGVIRT(IDragProvider, get_DropEffects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DropEffects )( 
             __RPC__in IDragProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(IDragProvider, GetGrabbedItems)
         HRESULT ( STDMETHODCALLTYPE *GetGrabbedItems )( 
             __RPC__in IDragProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         END_INTERFACE
     } IDragProviderVtbl;
@@ -6194,12 +5798,10 @@ EXTERN_C const IID IID_IDropTargetProvider;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DropTargetEffect( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DropTargetEffects( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
     };
     
@@ -6213,8 +5815,7 @@ EXTERN_C const IID IID_IDropTargetProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDropTargetProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6229,14 +5830,12 @@ EXTERN_C const IID IID_IDropTargetProvider;
         DECLSPEC_XFGVIRT(IDropTargetProvider, get_DropTargetEffect)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DropTargetEffect )( 
             __RPC__in IDropTargetProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal);
         
         DECLSPEC_XFGVIRT(IDropTargetProvider, get_DropTargetEffects)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DropTargetEffects )( 
             __RPC__in IDropTargetProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         END_INTERFACE
     } IDropTargetProviderVtbl;
@@ -6294,94 +5893,62 @@ EXTERN_C const IID IID_ITextRangeProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Compare( 
-            /* [annotation][in] */ 
-            _In_  ITextRangeProvider *range,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal) = 0;
+            /* [in] */ __RPC__in_opt ITextRangeProvider *range,
+            /* [retval][out] */ __RPC__out BOOL *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CompareEndpoints( 
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint endpoint,
-            /* [annotation][in] */ 
-            _In_  ITextRangeProvider *targetRange,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint targetEndpoint,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [in] */ enum TextPatternRangeEndpoint endpoint,
+            /* [in] */ __RPC__in_opt ITextRangeProvider *targetRange,
+            /* [in] */ enum TextPatternRangeEndpoint targetEndpoint,
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ExpandToEnclosingUnit( 
-            /* [annotation][in] */ 
-            _In_  enum TextUnit unit) = 0;
+            /* [in] */ enum TextUnit unit) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindAttribute( 
-            /* [annotation][in] */ 
-            _In_  TEXTATTRIBUTEID attributeId,
-            /* [annotation][in] */ 
-            _In_  VARIANT val,
-            /* [annotation][in] */ 
-            _In_  BOOL backward,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [in] */ TEXTATTRIBUTEID attributeId,
+            /* [in] */ VARIANT val,
+            /* [in] */ BOOL backward,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FindText( 
-            /* [annotation][in] */ 
-            _In_  BSTR text,
-            /* [annotation][in] */ 
-            _In_  BOOL backward,
-            /* [annotation][in] */ 
-            _In_  BOOL ignoreCase,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [in] */ __RPC__in BSTR text,
+            /* [in] */ BOOL backward,
+            /* [in] */ BOOL ignoreCase,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAttributeValue( 
-            /* [annotation][in] */ 
-            _In_  TEXTATTRIBUTEID attributeId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pRetVal) = 0;
+            /* [in] */ TEXTATTRIBUTEID attributeId,
+            /* [retval][out] */ __RPC__out VARIANT *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBoundingRectangles( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEnclosingElement( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [annotation][in] */ 
-            _In_  int maxLength,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal) = 0;
+            /* [in] */ int maxLength,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Move( 
-            /* [annotation][in] */ 
-            _In_  enum TextUnit unit,
-            /* [annotation][in] */ 
-            _In_  int count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [in] */ enum TextUnit unit,
+            /* [in] */ int count,
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE MoveEndpointByUnit( 
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint endpoint,
-            /* [annotation][in] */ 
-            _In_  enum TextUnit unit,
-            /* [annotation][in] */ 
-            _In_  int count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal) = 0;
+            /* [in] */ enum TextPatternRangeEndpoint endpoint,
+            /* [in] */ enum TextUnit unit,
+            /* [in] */ int count,
+            /* [retval][out] */ __RPC__out int *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE MoveEndpointByRange( 
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint endpoint,
-            /* [annotation][in] */ 
-            _In_  ITextRangeProvider *targetRange,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint targetEndpoint) = 0;
+            /* [in] */ enum TextPatternRangeEndpoint endpoint,
+            /* [in] */ __RPC__in_opt ITextRangeProvider *targetRange,
+            /* [in] */ enum TextPatternRangeEndpoint targetEndpoint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Select( void) = 0;
         
@@ -6390,12 +5957,10 @@ EXTERN_C const IID IID_ITextRangeProvider;
         virtual HRESULT STDMETHODCALLTYPE RemoveFromSelection( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ScrollIntoView( 
-            /* [annotation][in] */ 
-            _In_  BOOL alignToTop) = 0;
+            /* [in] */ BOOL alignToTop) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChildren( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
     };
     
@@ -6409,8 +5974,7 @@ EXTERN_C const IID IID_ITextRangeProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6425,118 +5989,86 @@ EXTERN_C const IID IID_ITextRangeProvider;
         DECLSPEC_XFGVIRT(ITextRangeProvider, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, Compare)
         HRESULT ( STDMETHODCALLTYPE *Compare )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  ITextRangeProvider *range,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [in] */ __RPC__in_opt ITextRangeProvider *range,
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, CompareEndpoints)
         HRESULT ( STDMETHODCALLTYPE *CompareEndpoints )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint endpoint,
-            /* [annotation][in] */ 
-            _In_  ITextRangeProvider *targetRange,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint targetEndpoint,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [in] */ enum TextPatternRangeEndpoint endpoint,
+            /* [in] */ __RPC__in_opt ITextRangeProvider *targetRange,
+            /* [in] */ enum TextPatternRangeEndpoint targetEndpoint,
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, ExpandToEnclosingUnit)
         HRESULT ( STDMETHODCALLTYPE *ExpandToEnclosingUnit )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  enum TextUnit unit);
+            /* [in] */ enum TextUnit unit);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, FindAttribute)
         HRESULT ( STDMETHODCALLTYPE *FindAttribute )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  TEXTATTRIBUTEID attributeId,
-            /* [annotation][in] */ 
-            _In_  VARIANT val,
-            /* [annotation][in] */ 
-            _In_  BOOL backward,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ TEXTATTRIBUTEID attributeId,
+            /* [in] */ VARIANT val,
+            /* [in] */ BOOL backward,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, FindText)
         HRESULT ( STDMETHODCALLTYPE *FindText )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text,
-            /* [annotation][in] */ 
-            _In_  BOOL backward,
-            /* [annotation][in] */ 
-            _In_  BOOL ignoreCase,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ __RPC__in BSTR text,
+            /* [in] */ BOOL backward,
+            /* [in] */ BOOL ignoreCase,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, GetAttributeValue)
         HRESULT ( STDMETHODCALLTYPE *GetAttributeValue )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  TEXTATTRIBUTEID attributeId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pRetVal);
+            /* [in] */ TEXTATTRIBUTEID attributeId,
+            /* [retval][out] */ __RPC__out VARIANT *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, GetBoundingRectangles)
         HRESULT ( STDMETHODCALLTYPE *GetBoundingRectangles )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, GetEnclosingElement)
         HRESULT ( STDMETHODCALLTYPE *GetEnclosingElement )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  int maxLength,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal);
+            /* [in] */ int maxLength,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  enum TextUnit unit,
-            /* [annotation][in] */ 
-            _In_  int count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [in] */ enum TextUnit unit,
+            /* [in] */ int count,
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, MoveEndpointByUnit)
         HRESULT ( STDMETHODCALLTYPE *MoveEndpointByUnit )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint endpoint,
-            /* [annotation][in] */ 
-            _In_  enum TextUnit unit,
-            /* [annotation][in] */ 
-            _In_  int count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [in] */ enum TextPatternRangeEndpoint endpoint,
+            /* [in] */ enum TextUnit unit,
+            /* [in] */ int count,
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, MoveEndpointByRange)
         HRESULT ( STDMETHODCALLTYPE *MoveEndpointByRange )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint endpoint,
-            /* [annotation][in] */ 
-            _In_  ITextRangeProvider *targetRange,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint targetEndpoint);
+            /* [in] */ enum TextPatternRangeEndpoint endpoint,
+            /* [in] */ __RPC__in_opt ITextRangeProvider *targetRange,
+            /* [in] */ enum TextPatternRangeEndpoint targetEndpoint);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, Select)
         HRESULT ( STDMETHODCALLTYPE *Select )( 
@@ -6553,14 +6085,12 @@ EXTERN_C const IID IID_ITextRangeProvider;
         DECLSPEC_XFGVIRT(ITextRangeProvider, ScrollIntoView)
         HRESULT ( STDMETHODCALLTYPE *ScrollIntoView )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][in] */ 
-            _In_  BOOL alignToTop);
+            /* [in] */ BOOL alignToTop);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, GetChildren)
         HRESULT ( STDMETHODCALLTYPE *GetChildren )( 
             __RPC__in ITextRangeProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         END_INTERFACE
     } ITextRangeProviderVtbl;
@@ -6666,32 +6196,24 @@ EXTERN_C const IID IID_ITextProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSelection( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVisibleRanges( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RangeFromChild( 
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *childElement,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *childElement,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RangeFromPoint( 
-            /* [annotation][in] */ 
-            _In_  struct UiaPoint point,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [in] */ struct UiaPoint point,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DocumentRange( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SupportedTextSelection( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum SupportedTextSelection *pRetVal) = 0;
+            /* [retval][out] */ __RPC__out enum SupportedTextSelection *pRetVal) = 0;
         
     };
     
@@ -6705,8 +6227,7 @@ EXTERN_C const IID IID_ITextProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6721,42 +6242,34 @@ EXTERN_C const IID IID_ITextProvider;
         DECLSPEC_XFGVIRT(ITextProvider, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in ITextProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, GetVisibleRanges)
         HRESULT ( STDMETHODCALLTYPE *GetVisibleRanges )( 
             __RPC__in ITextProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, RangeFromChild)
         HRESULT ( STDMETHODCALLTYPE *RangeFromChild )( 
             __RPC__in ITextProvider * This,
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *childElement,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *childElement,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, RangeFromPoint)
         HRESULT ( STDMETHODCALLTYPE *RangeFromPoint )( 
             __RPC__in ITextProvider * This,
-            /* [annotation][in] */ 
-            _In_  struct UiaPoint point,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ struct UiaPoint point,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, get_DocumentRange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentRange )( 
             __RPC__in ITextProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, get_SupportedTextSelection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedTextSelection )( 
             __RPC__in ITextProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum SupportedTextSelection *pRetVal);
+            /* [retval][out] */ __RPC__out enum SupportedTextSelection *pRetVal);
         
         END_INTERFACE
     } ITextProviderVtbl;
@@ -6826,16 +6339,12 @@ EXTERN_C const IID IID_ITextProvider2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RangeFromAnnotation( 
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *annotationElement,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *annotationElement,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCaretRange( 
-            /* [annotation][out] */ 
-            _Out_  BOOL *isActive,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [out] */ __RPC__out BOOL *isActive,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
     };
     
@@ -6849,8 +6358,7 @@ EXTERN_C const IID IID_ITextProvider2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6865,58 +6373,46 @@ EXTERN_C const IID IID_ITextProvider2;
         DECLSPEC_XFGVIRT(ITextProvider, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in ITextProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, GetVisibleRanges)
         HRESULT ( STDMETHODCALLTYPE *GetVisibleRanges )( 
             __RPC__in ITextProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, RangeFromChild)
         HRESULT ( STDMETHODCALLTYPE *RangeFromChild )( 
             __RPC__in ITextProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *childElement,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *childElement,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, RangeFromPoint)
         HRESULT ( STDMETHODCALLTYPE *RangeFromPoint )( 
             __RPC__in ITextProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  struct UiaPoint point,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ struct UiaPoint point,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, get_DocumentRange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentRange )( 
             __RPC__in ITextProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, get_SupportedTextSelection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedTextSelection )( 
             __RPC__in ITextProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum SupportedTextSelection *pRetVal);
+            /* [retval][out] */ __RPC__out enum SupportedTextSelection *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider2, RangeFromAnnotation)
         HRESULT ( STDMETHODCALLTYPE *RangeFromAnnotation )( 
             __RPC__in ITextProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *annotationElement,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *annotationElement,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider2, GetCaretRange)
         HRESULT ( STDMETHODCALLTYPE *GetCaretRange )( 
             __RPC__in ITextProvider2 * This,
-            /* [annotation][out] */ 
-            _Out_  BOOL *isActive,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [out] */ __RPC__out BOOL *isActive,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         END_INTERFACE
     } ITextProvider2Vtbl;
@@ -6993,12 +6489,10 @@ EXTERN_C const IID IID_ITextEditProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetActiveComposition( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConversionTarget( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
     };
     
@@ -7012,8 +6506,7 @@ EXTERN_C const IID IID_ITextEditProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextEditProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7028,54 +6521,44 @@ EXTERN_C const IID IID_ITextEditProvider;
         DECLSPEC_XFGVIRT(ITextProvider, GetSelection)
         HRESULT ( STDMETHODCALLTYPE *GetSelection )( 
             __RPC__in ITextEditProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, GetVisibleRanges)
         HRESULT ( STDMETHODCALLTYPE *GetVisibleRanges )( 
             __RPC__in ITextEditProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, RangeFromChild)
         HRESULT ( STDMETHODCALLTYPE *RangeFromChild )( 
             __RPC__in ITextEditProvider * This,
-            /* [annotation][in] */ 
-            _In_  IRawElementProviderSimple *childElement,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ __RPC__in_opt IRawElementProviderSimple *childElement,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, RangeFromPoint)
         HRESULT ( STDMETHODCALLTYPE *RangeFromPoint )( 
             __RPC__in ITextEditProvider * This,
-            /* [annotation][in] */ 
-            _In_  struct UiaPoint point,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ struct UiaPoint point,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, get_DocumentRange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentRange )( 
             __RPC__in ITextEditProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextProvider, get_SupportedTextSelection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedTextSelection )( 
             __RPC__in ITextEditProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  enum SupportedTextSelection *pRetVal);
+            /* [retval][out] */ __RPC__out enum SupportedTextSelection *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextEditProvider, GetActiveComposition)
         HRESULT ( STDMETHODCALLTYPE *GetActiveComposition )( 
             __RPC__in ITextEditProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextEditProvider, GetConversionTarget)
         HRESULT ( STDMETHODCALLTYPE *GetConversionTarget )( 
             __RPC__in ITextEditProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         END_INTERFACE
     } ITextEditProviderVtbl;
@@ -7165,8 +6648,7 @@ EXTERN_C const IID IID_ITextRangeProvider2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7181,118 +6663,86 @@ EXTERN_C const IID IID_ITextRangeProvider2;
         DECLSPEC_XFGVIRT(ITextRangeProvider, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, Compare)
         HRESULT ( STDMETHODCALLTYPE *Compare )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  ITextRangeProvider *range,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pRetVal);
+            /* [in] */ __RPC__in_opt ITextRangeProvider *range,
+            /* [retval][out] */ __RPC__out BOOL *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, CompareEndpoints)
         HRESULT ( STDMETHODCALLTYPE *CompareEndpoints )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint endpoint,
-            /* [annotation][in] */ 
-            _In_  ITextRangeProvider *targetRange,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint targetEndpoint,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [in] */ enum TextPatternRangeEndpoint endpoint,
+            /* [in] */ __RPC__in_opt ITextRangeProvider *targetRange,
+            /* [in] */ enum TextPatternRangeEndpoint targetEndpoint,
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, ExpandToEnclosingUnit)
         HRESULT ( STDMETHODCALLTYPE *ExpandToEnclosingUnit )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  enum TextUnit unit);
+            /* [in] */ enum TextUnit unit);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, FindAttribute)
         HRESULT ( STDMETHODCALLTYPE *FindAttribute )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  TEXTATTRIBUTEID attributeId,
-            /* [annotation][in] */ 
-            _In_  VARIANT val,
-            /* [annotation][in] */ 
-            _In_  BOOL backward,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ TEXTATTRIBUTEID attributeId,
+            /* [in] */ VARIANT val,
+            /* [in] */ BOOL backward,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, FindText)
         HRESULT ( STDMETHODCALLTYPE *FindText )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text,
-            /* [annotation][in] */ 
-            _In_  BOOL backward,
-            /* [annotation][in] */ 
-            _In_  BOOL ignoreCase,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [in] */ __RPC__in BSTR text,
+            /* [in] */ BOOL backward,
+            /* [in] */ BOOL ignoreCase,
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, GetAttributeValue)
         HRESULT ( STDMETHODCALLTYPE *GetAttributeValue )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  TEXTATTRIBUTEID attributeId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pRetVal);
+            /* [in] */ TEXTATTRIBUTEID attributeId,
+            /* [retval][out] */ __RPC__out VARIANT *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, GetBoundingRectangles)
         HRESULT ( STDMETHODCALLTYPE *GetBoundingRectangles )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, GetEnclosingElement)
         HRESULT ( STDMETHODCALLTYPE *GetEnclosingElement )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  int maxLength,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pRetVal);
+            /* [in] */ int maxLength,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, Move)
         HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  enum TextUnit unit,
-            /* [annotation][in] */ 
-            _In_  int count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [in] */ enum TextUnit unit,
+            /* [in] */ int count,
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, MoveEndpointByUnit)
         HRESULT ( STDMETHODCALLTYPE *MoveEndpointByUnit )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint endpoint,
-            /* [annotation][in] */ 
-            _In_  enum TextUnit unit,
-            /* [annotation][in] */ 
-            _In_  int count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pRetVal);
+            /* [in] */ enum TextPatternRangeEndpoint endpoint,
+            /* [in] */ enum TextUnit unit,
+            /* [in] */ int count,
+            /* [retval][out] */ __RPC__out int *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, MoveEndpointByRange)
         HRESULT ( STDMETHODCALLTYPE *MoveEndpointByRange )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint endpoint,
-            /* [annotation][in] */ 
-            _In_  ITextRangeProvider *targetRange,
-            /* [annotation][in] */ 
-            _In_  enum TextPatternRangeEndpoint targetEndpoint);
+            /* [in] */ enum TextPatternRangeEndpoint endpoint,
+            /* [in] */ __RPC__in_opt ITextRangeProvider *targetRange,
+            /* [in] */ enum TextPatternRangeEndpoint targetEndpoint);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, Select)
         HRESULT ( STDMETHODCALLTYPE *Select )( 
@@ -7309,14 +6759,12 @@ EXTERN_C const IID IID_ITextRangeProvider2;
         DECLSPEC_XFGVIRT(ITextRangeProvider, ScrollIntoView)
         HRESULT ( STDMETHODCALLTYPE *ScrollIntoView )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][in] */ 
-            _In_  BOOL alignToTop);
+            /* [in] */ BOOL alignToTop);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider, GetChildren)
         HRESULT ( STDMETHODCALLTYPE *GetChildren )( 
             __RPC__in ITextRangeProvider2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pRetVal);
         
         DECLSPEC_XFGVIRT(ITextRangeProvider2, ShowContextMenu)
         HRESULT ( STDMETHODCALLTYPE *ShowContextMenu )( 
@@ -7430,12 +6878,10 @@ EXTERN_C const IID IID_ITextChildProvider;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TextContainer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TextRange( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal) = 0;
         
     };
     
@@ -7449,8 +6895,7 @@ EXTERN_C const IID IID_ITextChildProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITextChildProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7465,14 +6910,12 @@ EXTERN_C const IID IID_ITextChildProvider;
         DECLSPEC_XFGVIRT(ITextChildProvider, get_TextContainer)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TextContainer )( 
             __RPC__in ITextChildProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         DECLSPEC_XFGVIRT(ITextChildProvider, get_TextRange)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TextRange )( 
             __RPC__in ITextChildProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITextRangeProvider **pRetVal);
+            /* [retval][out] */ __RPC__deref_out_opt ITextRangeProvider **pRetVal);
         
         END_INTERFACE
     } ITextChildProviderVtbl;
@@ -7530,10 +6973,8 @@ EXTERN_C const IID IID_ICustomNavigationProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Navigate( 
-            /* [annotation][in] */ 
-            _In_  enum NavigateDirection direction,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal) = 0;
+            /* [in] */ enum NavigateDirection direction,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal) = 0;
         
     };
     
@@ -7547,8 +6988,7 @@ EXTERN_C const IID IID_ICustomNavigationProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICustomNavigationProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7563,10 +7003,8 @@ EXTERN_C const IID IID_ICustomNavigationProvider;
         DECLSPEC_XFGVIRT(ICustomNavigationProvider, Navigate)
         HRESULT ( STDMETHODCALLTYPE *Navigate )( 
             __RPC__in ICustomNavigationProvider * This,
-            /* [annotation][in] */ 
-            _In_  enum NavigateDirection direction,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IRawElementProviderSimple **pRetVal);
+            /* [in] */ enum NavigateDirection direction,
+            /* [retval][out] */ __RPC__deref_out_opt IRawElementProviderSimple **pRetVal);
         
         END_INTERFACE
     } ICustomNavigationProviderVtbl;
@@ -7621,22 +7059,15 @@ EXTERN_C const IID IID_IUIAutomationPatternInstance;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [annotation][in] */ 
-            _In_  UINT index,
-            /* [annotation][in] */ 
-            _In_  BOOL cached,
-            /* [annotation][in] */ 
-            _In_  enum UIAutomationType type,
-            /* [annotation][out] */ 
-            _Out_  void *pPtr) = 0;
+            /* [in] */ UINT index,
+            /* [in] */ BOOL cached,
+            /* [in] */ enum UIAutomationType type,
+            /* [out] */ void *pPtr) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE CallMethod( 
-            /* [annotation][in] */ 
-            _In_  UINT index,
-            /* [annotation][in] */ 
-            _In_  const struct UIAutomationParameter *pParams,
-            /* [annotation][in] */ 
-            _In_  UINT cParams) = 0;
+            /* [in] */ UINT index,
+            /* [in] */ const struct UIAutomationParameter *pParams,
+            /* [in] */ UINT cParams) = 0;
         
     };
     
@@ -7650,8 +7081,7 @@ EXTERN_C const IID IID_IUIAutomationPatternInstance;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationPatternInstance * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7666,24 +7096,17 @@ EXTERN_C const IID IID_IUIAutomationPatternInstance;
         DECLSPEC_XFGVIRT(IUIAutomationPatternInstance, GetProperty)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             IUIAutomationPatternInstance * This,
-            /* [annotation][in] */ 
-            _In_  UINT index,
-            /* [annotation][in] */ 
-            _In_  BOOL cached,
-            /* [annotation][in] */ 
-            _In_  enum UIAutomationType type,
-            /* [annotation][out] */ 
-            _Out_  void *pPtr);
+            /* [in] */ UINT index,
+            /* [in] */ BOOL cached,
+            /* [in] */ enum UIAutomationType type,
+            /* [out] */ void *pPtr);
         
         DECLSPEC_XFGVIRT(IUIAutomationPatternInstance, CallMethod)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CallMethod )( 
             IUIAutomationPatternInstance * This,
-            /* [annotation][in] */ 
-            _In_  UINT index,
-            /* [annotation][in] */ 
-            _In_  const struct UIAutomationParameter *pParams,
-            /* [annotation][in] */ 
-            _In_  UINT cParams);
+            /* [in] */ UINT index,
+            /* [in] */ const struct UIAutomationParameter *pParams,
+            /* [in] */ UINT cParams);
         
         END_INTERFACE
     } IUIAutomationPatternInstanceVtbl;
@@ -7741,20 +7164,14 @@ EXTERN_C const IID IID_IUIAutomationPatternHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateClientWrapper( 
-            /* [annotation][in] */ 
-            _In_  IUIAutomationPatternInstance *pPatternInstance,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **pClientWrapper) = 0;
+            /* [in] */ __RPC__in_opt IUIAutomationPatternInstance *pPatternInstance,
+            /* [out] */ __RPC__deref_out_opt IUnknown **pClientWrapper) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Dispatch( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pTarget,
-            /* [annotation][in] */ 
-            _In_  UINT index,
-            /* [annotation][in] */ 
-            _In_  const struct UIAutomationParameter *pParams,
-            /* [annotation][in] */ 
-            _In_  UINT cParams) = 0;
+            /* [in] */ IUnknown *pTarget,
+            /* [in] */ UINT index,
+            /* [in] */ const struct UIAutomationParameter *pParams,
+            /* [in] */ UINT cParams) = 0;
         
     };
     
@@ -7768,8 +7185,7 @@ EXTERN_C const IID IID_IUIAutomationPatternHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationPatternHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7784,22 +7200,16 @@ EXTERN_C const IID IID_IUIAutomationPatternHandler;
         DECLSPEC_XFGVIRT(IUIAutomationPatternHandler, CreateClientWrapper)
         HRESULT ( STDMETHODCALLTYPE *CreateClientWrapper )( 
             __RPC__in IUIAutomationPatternHandler * This,
-            /* [annotation][in] */ 
-            _In_  IUIAutomationPatternInstance *pPatternInstance,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **pClientWrapper);
+            /* [in] */ __RPC__in_opt IUIAutomationPatternInstance *pPatternInstance,
+            /* [out] */ __RPC__deref_out_opt IUnknown **pClientWrapper);
         
         DECLSPEC_XFGVIRT(IUIAutomationPatternHandler, Dispatch)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Dispatch )( 
             IUIAutomationPatternHandler * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pTarget,
-            /* [annotation][in] */ 
-            _In_  UINT index,
-            /* [annotation][in] */ 
-            _In_  const struct UIAutomationParameter *pParams,
-            /* [annotation][in] */ 
-            _In_  UINT cParams);
+            /* [in] */ IUnknown *pTarget,
+            /* [in] */ UINT index,
+            /* [in] */ const struct UIAutomationParameter *pParams,
+            /* [in] */ UINT cParams);
         
         END_INTERFACE
     } IUIAutomationPatternHandlerVtbl;
@@ -7857,32 +7267,21 @@ EXTERN_C const IID IID_IUIAutomationRegistrar;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RegisterProperty( 
-            /* [annotation][in] */ 
-            _In_  const struct UIAutomationPropertyInfo *property,
-            /* [annotation][out] */ 
-            _Out_  PROPERTYID *propertyId) = 0;
+            /* [in] */ __RPC__in const struct UIAutomationPropertyInfo *property,
+            /* [out] */ __RPC__out PROPERTYID *propertyId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterEvent( 
-            /* [annotation][in] */ 
-            _In_  const struct UIAutomationEventInfo *event,
-            /* [annotation][out] */ 
-            _Out_  EVENTID *eventId) = 0;
+            /* [in] */ __RPC__in const struct UIAutomationEventInfo *event,
+            /* [out] */ __RPC__out EVENTID *eventId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterPattern( 
-            /* [annotation][in] */ 
-            _In_  const struct UIAutomationPatternInfo *pattern,
-            /* [annotation][out] */ 
-            _Out_  PATTERNID *pPatternId,
-            /* [annotation][out] */ 
-            _Out_  PROPERTYID *pPatternAvailablePropertyId,
-            /* [annotation][in] */ 
-            _In_  UINT propertyIdCount,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(propertyIdCount)  PROPERTYID *pPropertyIds,
-            /* [annotation][in] */ 
-            _In_  UINT eventIdCount,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(eventIdCount)  EVENTID *pEventIds) = 0;
+            /* [in] */ __RPC__in const struct UIAutomationPatternInfo *pattern,
+            /* [out] */ __RPC__out PATTERNID *pPatternId,
+            /* [out] */ __RPC__out PROPERTYID *pPatternAvailablePropertyId,
+            /* [in] */ UINT propertyIdCount,
+            /* [size_is][out] */ __RPC__out_ecount_full(propertyIdCount) PROPERTYID *pPropertyIds,
+            /* [in] */ UINT eventIdCount,
+            /* [size_is][out] */ __RPC__out_ecount_full(eventIdCount) EVENTID *pEventIds) = 0;
         
     };
     
@@ -7896,8 +7295,7 @@ EXTERN_C const IID IID_IUIAutomationRegistrar;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUIAutomationRegistrar * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7912,36 +7310,25 @@ EXTERN_C const IID IID_IUIAutomationRegistrar;
         DECLSPEC_XFGVIRT(IUIAutomationRegistrar, RegisterProperty)
         HRESULT ( STDMETHODCALLTYPE *RegisterProperty )( 
             __RPC__in IUIAutomationRegistrar * This,
-            /* [annotation][in] */ 
-            _In_  const struct UIAutomationPropertyInfo *property,
-            /* [annotation][out] */ 
-            _Out_  PROPERTYID *propertyId);
+            /* [in] */ __RPC__in const struct UIAutomationPropertyInfo *property,
+            /* [out] */ __RPC__out PROPERTYID *propertyId);
         
         DECLSPEC_XFGVIRT(IUIAutomationRegistrar, RegisterEvent)
         HRESULT ( STDMETHODCALLTYPE *RegisterEvent )( 
             __RPC__in IUIAutomationRegistrar * This,
-            /* [annotation][in] */ 
-            _In_  const struct UIAutomationEventInfo *event,
-            /* [annotation][out] */ 
-            _Out_  EVENTID *eventId);
+            /* [in] */ __RPC__in const struct UIAutomationEventInfo *event,
+            /* [out] */ __RPC__out EVENTID *eventId);
         
         DECLSPEC_XFGVIRT(IUIAutomationRegistrar, RegisterPattern)
         HRESULT ( STDMETHODCALLTYPE *RegisterPattern )( 
             __RPC__in IUIAutomationRegistrar * This,
-            /* [annotation][in] */ 
-            _In_  const struct UIAutomationPatternInfo *pattern,
-            /* [annotation][out] */ 
-            _Out_  PATTERNID *pPatternId,
-            /* [annotation][out] */ 
-            _Out_  PROPERTYID *pPatternAvailablePropertyId,
-            /* [annotation][in] */ 
-            _In_  UINT propertyIdCount,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(propertyIdCount)  PROPERTYID *pPropertyIds,
-            /* [annotation][in] */ 
-            _In_  UINT eventIdCount,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(eventIdCount)  EVENTID *pEventIds);
+            /* [in] */ __RPC__in const struct UIAutomationPatternInfo *pattern,
+            /* [out] */ __RPC__out PATTERNID *pPatternId,
+            /* [out] */ __RPC__out PROPERTYID *pPatternAvailablePropertyId,
+            /* [in] */ UINT propertyIdCount,
+            /* [size_is][out] */ __RPC__out_ecount_full(propertyIdCount) PROPERTYID *pPropertyIds,
+            /* [in] */ UINT eventIdCount,
+            /* [size_is][out] */ __RPC__out_ecount_full(eventIdCount) EVENTID *pEventIds);
         
         END_INTERFACE
     } IUIAutomationRegistrarVtbl;

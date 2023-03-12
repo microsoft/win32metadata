@@ -1367,6 +1367,71 @@ cpp_quote ("DEFINE_PROPERTYKEY(PKEY_CompositeFX_Offload_StreamEffectClsid, 0xD04
 // {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},20
 cpp_quote ("DEFINE_PROPERTYKEY(PKEY_CompositeFX_Offload_ModeEffectClsid, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 20);")
 
+// PKEY_FX_SupportAppLauncher:
+// vartype = VT_LPWSTR
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},21
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_SupportAppLauncher, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 21);")
+
+// PKEY_FX_SupportedFormats:
+// vartype = VT_LPWSTR
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},22
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_SupportedFormats, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 22);")
+
+// PKEY_FX_Enumerator:
+// vartype = VT_VECTOR | VT_LPWSTR
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},23
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_Enumerator, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 23);")
+
+// PKEY_FX_VersionMajor:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},24
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_VersionMajor, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 24);")
+
+// PKEY_FX_VersionMinor:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},25
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_VersionMinor, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 25);")
+
+// PKEY_FX_Author:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},26
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_Author, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 26);")
+
+// PKEY_FX_ObjectId:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},27
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_ObjectId, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 27);")
+
+// PKEY_FX_State:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},28
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_State, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 28);")
+
+// PKEY_FX_EffectPackSchema_Version:
+// vartype = VT_LPWSTR
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},29
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_EffectPackSchema_Version, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 29);")
+
+// PKEY_FX_ApplyToBluetooth:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},30
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_ApplyToBluetooth, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 30);")
+
+// PKEY_FX_ApplyToUsb:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},31
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_ApplyToUsb, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 31);")
+
+// PKEY_FX_ApplyToRender:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},32
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_ApplyToRender, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 32);")
+
+// PKEY_FX_ApplyToCapture:
+// vartype = VT_I4
+// {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},33
+cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_ApplyToCapture, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 33);")
+
 // PKEY_SFX_ProcessingModes_Supported_For_Streaming:
 // vartype = VT_VECTOR | VT_LPWSTR
 // {D3993A3F-99C2-4402-B5EC-A92A0367664B},5
@@ -1430,6 +1495,10 @@ cpp_quote ("DEFINE_PROPERTYKEY(PKEY_MFX_Offload_ProcessingModes_Supported_For_St
 // aren't available.
 cpp_quote ("DEFINE_PROPERTYKEY(PKEY_APO_SWFallback_ProcessingModes, 0xd3993a3f, 0x99c2, 0x4402, 0xb5, 0xec, 0xa9, 0x2a, 0x3, 0x67, 0x66, 0x4b, 13);")
 
+// PKEY_FX_EffectPack_Schema_V1:
+// {7abf23d9-727e-4d0b-86a3-dd501d260001}
+// Effect pack schema version 1 GUID, used with PKEY_FX_EffectPackSchema_Version
+cpp_quote ("DEFINE_GUID(PKEY_FX_EffectPack_Schema_V1, 0x7abf23d9, 0x727e, 0x4d0b, 0x86, 0xa3, 0xdd, 0x50, 0x1d, 0x26, 0x0, 0x1);")
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion

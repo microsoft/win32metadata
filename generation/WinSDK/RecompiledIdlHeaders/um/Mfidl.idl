@@ -12067,10 +12067,22 @@ cpp_quote( "EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_MEDIA_TYPE, 0x56a819ca, 0xc78, 0
 // Capture source category (e.g. CLSID_VideoInputDeviceCategory)
 cpp_quote( "EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_CATEGORY, 0x77f0ae69, 0xc3bd, 0x4509, 0x94, 0x1d, 0x46, 0x7e, 0x4d, 0x24, 0x89, 0x9e);" )
 
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+#pragma endregion
+
+#pragma region Application Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+
 // MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK
 // Data type: STRING
 // Symbolic link for creating a video capture source
 cpp_quote( "EXTERN_GUID( MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK, 0x58f0aad8, 0x22bf, 0x4f8a, 0xbb, 0x3d, 0xd2, 0xc4, 0x97, 0x8c, 0x6e, 0x2f);" )
+
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+#pragma endregion
+
+#pragma region Desktop Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
 
 // MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_AUDCAP_SYMBOLIC_LINK
 // Data type: STRING
@@ -13801,6 +13813,123 @@ cpp_quote("    _In_ PCWSTR displayMonitorDeviceId,")
 cpp_quote("    _COM_Outptr_ IMFRelativePanelWatcher** ppRelativePanelWatcher")
 cpp_quote("    );")
 
+[
+    object,
+    local,
+    uuid(725B77C7-CA9F-4FE5-9D72-9946BF9B3C70),
+    helpstring("IMFVideoCaptureSampleAllocator Interface"),
+    pointer_default(unique)
+]
+/// <summary>
+/// The IMFVideoCaptureSampleAllocator interface is a specialized
+/// sample allocator for video capture devices.
+/// </summary>
+interface IMFVideoCaptureSampleAllocator : IMFVideoSampleAllocator
+{
+    /// <param name="cbSampleSize">
+    /// Sample size in bytes.
+    /// The actual sample size used by the allocator is the maximum of
+    /// the size required by pMediaType and cbSampleSize.
+    /// </param>
+    /// <param name="cbCaptureMetadataSize">
+    /// Capture metadata size in bytes. Applies only to callers that want to
+    /// to include additional metadata with the captured frames. The metadata size
+    /// should include the size of a KSCAMERA_METADATA_ITEMHEADER in addition to
+    /// the size of the metadata payload itself.
+    /// </param>
+    /// <param name="cbAlignment">
+    /// Buffer alignment size in bytes.
+    /// The default and minimum alignment size is 4KB. Custom alignment sizes
+    /// less than 4KB will be treated as 4KB.
+    /// </param>
+    /// <param name="cMinimumSamples">
+    /// Minimum number of pre-allocated samples.
+    /// This method will fail if the allocator cannot pre-allocate the specified
+    /// minimum number of samples.
+    /// </param>
+    /// <param name="pAttributes">
+    /// Optional parameter. An IMFAttributes store with additional configuration
+    /// attributes for the sample allocator. The attributes that are accepted
+    /// are the same as for IMFVideoSampleAllocatorEx::InitializeSampleAllocatorEx.
+    /// (See online documentation for that API for more details.)
+    /// </param>
+    /// <param name="pMediaType">
+    /// The IMFMediaType for which samples will be allocator. The sample
+    /// allocator uses this parameter to calculate the minimum required size
+    /// for the media samples.
+    /// </param>
+    HRESULT InitializeCaptureSampleAllocator(
+        [in, annotation("_In_")] DWORD cbSampleSize,
+        [in, annotation("_In_")] DWORD cbCaptureMetadataSize,
+        [in, annotation("_In_")] DWORD cbAlignment,
+        [in, annotation("_In_")] DWORD cMinimumSamples,
+        [in, annotation("_In_opt_")] IMFAttributes *pAttributes,
+        [in, annotation("_In_")] IMFMediaType *pMediaType
+    );
+};
+
+/// <summary>
+///     The enumeration type defines video capture sample allocator mode
+/// </summary>
+typedef enum MFSampleAllocatorUsage
+{
+    MFSampleAllocatorUsage_UsesProvidedAllocator = 0,
+    MFSampleAllocatorUsage_UsesCustomAllocator,
+    MFSampleAllocatorUsage_DoesNotAllocate
+} MFSampleAllocatorUsage;
+
+[
+    object,
+    uuid(DA62B958-3A38-4A97-BD27-149C640C0771),
+    helpstring("IMFSampleAllocatorControl Interface"),
+    local
+]
+/// <summary>
+/// An enumeration that specifies how an object that implements
+/// IMFSampleAllocatorControl uses a sample allocator.
+/// </summary>
+interface IMFSampleAllocatorControl : IUnknown
+{
+    /// <summary>
+    /// Sets the default sample allocator to use for the specified output stream.
+    /// When this allocator is in use, the sample allocator usage value is
+    /// MFSampleAllocatorUsage_UsesProvidedAllocator.
+    /// </summary>
+    /// <param name="dwOutputStreamID">
+    /// The ID of the output stream that the pAllocator parameter applies to.
+    /// </param>
+    /// <param name="pAllocator">
+    /// Provides a sample allocator to use for the specified output stream. The
+    /// allocator must support one of the MF allocator interfaces, such as,
+    /// IMFVideoCaptureSampleAllocator or IMFVideoSampleAllocatorEx.
+    /// </param>
+    HRESULT SetDefaultAllocator(
+        [in, annotation("_In_")] DWORD dwOutputStreamID,
+        [in, annotation("_In_")] IUnknown *pAllocator
+    );
+
+    /// <summary>
+    /// Retrieves the sample allocator usage for the specified output stream.
+    /// </summary>
+    /// <param name="dwOutputStreamID">
+    /// The ID of the output stream whose sample allocator usage is requested.
+    /// </param>
+    /// <param name="pdwInputStreamID">
+    /// If the allocator usage is MFSampleAllocatorUsage_DoesNotAllocate,
+    /// then this output parameter is set to the ID of the input stream that
+    /// the output samples are coming from.
+    /// For all other allocator usage values, this parameter shall be ignored.
+    /// </param>
+    /// <param name="peUsage">
+    /// The sample allocator usage of the specified output stream.
+    /// </param>
+    HRESULT GetAllocatorUsage(
+        [in, annotation("_In_")] DWORD dwOutputStreamID,
+        [out, annotation("_Out_")] DWORD* pdwInputStreamID,
+        [out, annotation("_Out_")] MFSampleAllocatorUsage* peUsage
+    );
+};
+
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB) ")
 
 cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_CO) ")
@@ -13921,123 +14050,338 @@ cpp_quote("    );")
 
 cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO) ")
 
-cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_NI) ")
 
-[
-    object,
-    local,
-    uuid(725B77C7-CA9F-4FE5-9D72-9946BF9B3C70),
-    helpstring("IMFVideoCaptureSampleAllocator Interface"),
-    pointer_default(unique)
-]
-/// <summary>
-/// The IMFVideoCaptureSampleAllocator interface is a specialized
-/// sample allocator for video capture devices.
-/// </summary>
-interface IMFVideoCaptureSampleAllocator : IMFVideoSampleAllocator
-{
-    /// <param name="cbSampleSize">
-    /// Sample size in bytes.
-    /// The actual sample size used by the allocator is the maximum of
-    /// the size required by pMediaType and cbSampleSize.
-    /// </param>
-    /// <param name="cbCaptureMetadataSize">
-    /// Capture metadata size in bytes. Applies only to callers that want to
-    /// to include additional metadata with the captured frames. The metadata size
-    /// should include the size of a KSCAMERA_METADATA_ITEMHEADER in addition to
-    /// the size of the metadata payload itself.
-    /// </param>
-    /// <param name="cbAlignment">
-    /// Buffer alignment size in bytes.
-    /// The default and minimum alignment size is 4KB. Custom alignment sizes
-    /// less than 4KB will be treated as 4KB.
-    /// </param>
-    /// <param name="cMinimumSamples">
-    /// Minimum number of pre-allocated samples.
-    /// This method will fail if the allocator cannot pre-allocate the specified
-    /// minimum number of samples.
-    /// </param>
-    /// <param name="pAttributes">
-    /// Optional parameter. An IMFAttributes store with additional configuration
-    /// attributes for the sample allocator. The attributes that are accepted
-    /// are the same as for IMFVideoSampleAllocatorEx::InitializeSampleAllocatorEx.
-    /// (See online documentation for that API for more details.)
-    /// </param>
-    /// <param name="pMediaType">
-    /// The IMFMediaType for which samples will be allocator. The sample
-    /// allocator uses this parameter to calculate the minimum required size
-    /// for the media samples.
-    /// </param>
-    HRESULT InitializeCaptureSampleAllocator(
-        [in, annotation("_In_")] DWORD cbSampleSize,
-        [in, annotation("_In_")] DWORD cbCaptureMetadataSize,
-        [in, annotation("_In_")] DWORD cbAlignment,
-        [in, annotation("_In_")] DWORD cMinimumSamples,
-        [in, annotation("_In_opt_")] IMFAttributes *pAttributes,
-        [in, annotation("_In_")] IMFMediaType *pMediaType
-    );
-};
+// {94DD0C30-28C7-4EFB-9D6B-812300FB0C7F}
+// KSPROPERTYSETID_ANYCAMERACONTROL
+// This represents that a control is contained in a custom property set
+cpp_quote("EXTERN_GUID(KSPROPERTYSETID_ANYCAMERACONTROL, 0x94dd0c30, 0x28c7, 0x4efb, 0x9d, 0x6b, 0x81, 0x23, 0x0, 0xfb, 0xc, 0x7f);")
 
 /// <summary>
-///     The enumeration type defines video capture sample allocator mode
+/// This interface represents the callback mechanism for the camera control monitor object. 
+/// A client passes an implmented instance of this interface when creating a monitor
 /// </summary>
-typedef enum MFSampleAllocatorUsage
-{
-    MFSampleAllocatorUsage_UsesProvidedAllocator = 0,
-    MFSampleAllocatorUsage_UsesCustomAllocator,
-    MFSampleAllocatorUsage_DoesNotAllocate
-} MFSampleAllocatorUsage;
-
 [
     object,
-    uuid(DA62B958-3A38-4A97-BD27-149C640C0771),
-    helpstring("IMFSampleAllocatorControl Interface"),
+    uuid(E8F2540D-558A-4449-8B64-4863467A9FE8),
+    helpstring("IMFCameraControlNotify Interface"),
     local
 ]
-/// <summary>
-/// An enumeration that specifies how an object that implements
-/// IMFSampleAllocatorControl uses a sample allocator.
-/// </summary>
-interface IMFSampleAllocatorControl : IUnknown
+interface IMFCameraControlNotify : IUnknown
 {
     /// <summary>
-    /// Sets the default sample allocator to use for the specified output stream.
-    /// When this allocator is in use, the sample allocator usage value is
-    /// MFSampleAllocatorUsage_UsesProvidedAllocator.
+    /// This method represents the notification callback for changes to controls. 
     /// </summary>
-    /// <param name="dwOutputStreamID">
-    /// The ID of the output stream that the pAllocator parameter applies to.
+    /// <param name = "controlSet">
+    /// If provided controlSet GUID is MF_CAMERACONTROL_PROPSET_CUSTOM, then the callback was invoked by a 
+    /// subscription for a change to a control outside the supported Property Sets
     /// </param>
-    /// <param name="pAllocator">
-    /// Provides a sample allocator to use for the specified output stream. The
-    /// allocator must support one of the MF allocator interfaces, such as,
-    /// IMFVideoCaptureSampleAllocator or IMFVideoSampleAllocatorEx.
+    /// <param name = "id">
+    /// This is the id of the control in its set.
     /// </param>
-    HRESULT SetDefaultAllocator(
-        [in, annotation("_In_")] DWORD dwOutputStreamID,
-        [in, annotation("_In_")] IUnknown *pAllocator
+    void OnChange(
+        [in, annotation("_In_")] REFGUID controlSet,
+        [in, annotation("_In_")] UINT32 id);
+
+    /// <summary>
+    /// This method notifies client if an unrecoverable error occurs within the monitor.
+    /// After call returns to monitor, it will cleanup and remove reference to IMFCameraControlNotify
+    /// There is not a need to call IMFCameraControlMonitor::Shutdown after receiving an OnError
+    /// </summary>
+    /// <param name = "hrStatus">
+    /// The internal error code. 
+    /// If E_OUTOFMEMORY, then there were not enough resources available for the monitor to function properly
+    /// If MF_INVALID_STATE_ERR, then there has been some corruption of memory states.
+    /// </param>
+    void OnError(
+        [in, annotation("_In_")] HRESULT hrStatus);
+}
+
+/// <summary>
+/// This interface represents the main camera control monitor object.
+/// </summary>
+[
+    object,
+    uuid(4D46F2C9-28BA-4970-8C7B-1F0C9D80AF69),
+    helpstring("IMFCameraControlMonitor Interface"),
+    local
+]
+interface IMFCameraControlMonitor : IUnknown
+{
+    /// <summary>
+    /// This function will start the monitor. The monitor will call OnChange on Subscriptions linked to changed controls
+    /// If called when Monitor is already started or has shutdown, method will return error MF_E_INVALIDREQUEST
+    /// </summary>
+    HRESULT Start(
     );
 
     /// <summary>
-    /// Retrieves the sample allocator usage for the specified output stream.
+    /// This function will stop the monitor. A client can stop the monitor to pause notifications.
+    /// In Stopped state, client can Add/Remove Control Subscriptions.
+    /// If called when Monitor is already stopped or has shutdown, method will return error MF_E_INVALIDREQUEST
     /// </summary>
-    /// <param name="dwOutputStreamID">
-    /// The ID of the output stream whose sample allocator usage is requested.
-    /// </param>
-    /// <param name="pdwInputStreamID">
-    /// If the allocator usage is MFSampleAllocatorUsage_DoesNotAllocate,
-    /// then this output parameter is set to the ID of the input stream that
-    /// the output samples are coming from.
-    /// For all other allocator usage values, this parameter shall be ignored.
-    /// </param>
-    /// <param name="peUsage">
-    /// The sample allocator usage of the specified output stream.
-    /// </param>
-    HRESULT GetAllocatorUsage(
-        [in, annotation("_In_")] DWORD dwOutputStreamID,
-        [out, annotation("_Out_")] DWORD* pdwInputStreamID,
-        [out, annotation("_Out_")] MFSampleAllocatorUsage* peUsage
+    HRESULT Stop(
     );
+
+    /// <summary>
+    /// This function will add to the list of controls for which the client wants to be notified
+    /// If the provided controlSet is MF_CAMERACONTROL_PROPSET_CUSTOM, then the monitor's callback will be called for the change of "Any Control"
+    /// If called when Monitor is in Start or Shutdown state, method will return error MF_E_INVALIDREQUEST
+    /// If controlSet is not MF_CAMERACONTROL_PROPSET_CUSTOM, PROPSETID_VIDCAP_VIDEOPROCAMP, PROPSETID_VIDCAP_CAMERACONTROL or
+    /// KSPROPERTYSETID_ExtendedCameraControl then method will return with error E_INVALIDARG
+    /// </summary>
+    HRESULT AddControlSubscription(
+        [in, annotation("_In_")] GUID controlSet,
+        [in, annotation("_In_")] UINT32 id
+    );
+
+    /// <summary>
+    /// This function will remove the subscription for this control from the monitor
+    /// If the provided controlSet is MF_CAMERACONTROL_PROPSET_CUSTOM, then the subscription for "Any Control" change will be removed
+    /// If called when Monitor is in Start or Shutdown state, method will return with error MF_E_INVALIDREQUEST
+    /// If provided control description does not match a current subscription, method will return with error MF_E_NOT_FOUND
+    /// </summary>
+    HRESULT RemoveControlSubscription(
+        [in, annotation("_In_")] GUID controlSet,
+        [in, annotation("_In_")] UINT32 id
+    );
+
+    /// This function will cleanup and shutdown the monitor.
+    /// It is acceptable to call Shutdown even if monitor is not in stop state 
+    /// After Shutdown, a client cannot call on the Monitor to Add/Remove Control Subscriptions or Start/Stop notifications    
+    /// </summary>
+    void Shutdown();
+}
+
+/// <summary>
+/// Allows app to create CameraControlMonitor.
+/// If provided symbolic link name does not match a camera device, then method will return E_INVALIDARG
+/// </summary>
+/// <param name = "symbolicLink">
+/// String symbolic link name of the video capture device that is active.
+/// </param>
+/// <param name = "callback">
+/// Pointer to an object that implements the callback interface.
+/// </param>
+/// <param name = "ppCameraControlMonitor">
+/// Specifies a pointer to a variable where the IMFCameraControlMonitor object
+/// will be stored.
+/// </param>
+cpp_quote("")
+cpp_quote("STDAPI")
+cpp_quote("MFCreateCameraControlMonitor(")
+cpp_quote("    _In_z_ LPCWSTR symbolicLink,")
+cpp_quote("    _In_ IMFCameraControlNotify* callback,")
+cpp_quote("    _COM_Outptr_ IMFCameraControlMonitor ** ppCameraControlMonitor")
+cpp_quote("    );")
+
+typedef enum
+{
+    MF_CAMERA_CONTROL_CONFIGURATION_TYPE_PRESTART = 0,
+    MF_CAMERA_CONTROL_CONFIGURATION_TYPE_POSTSTART,
+} MF_CAMERA_CONTROL_CONFIGURATION_TYPE;
+
+typedef struct
+{
+    LONG    minValue;
+    LONG    maxValue;
+    LONG    stepValue;
+    LONG    defaultValue;
+} MF_CAMERA_CONTROL_RANGE_INFO;
+
+[
+    object,
+    uuid(75510662-B034-48F4-88A7-8DE61DAA4AF9),
+    helpstring("IMFCameraControlDefaults Interface"),
+    local
+]
+interface IMFCameraControlDefaults : IUnknown
+{
+    /// <summary>
+    /// Gets the configuration type (pre-start or post-start).  Some 
+    /// camera level controls can only be set after the camera has
+    /// started (such as focus/brightness/whitebalance) since the 
+    /// controls require frame data for the parameters to converge. 
+    /// While still other types of controls can only be configured 
+    /// when the camera is not in a running state (such as HDR 
+    /// support) since it requires a re-programming of the camera 
+    /// mode.
+    /// 
+    /// Whether a well known control is pre or post start is 
+    /// specified in the DDI specification of the control. 
+    /// (NOTE:  If the DDI specification does not explicitly 
+    /// indicate the control is a pre-start control, caller must 
+    /// assume the control is post-start).  
+    /// </summary>
+    MF_CAMERA_CONTROL_CONFIGURATION_TYPE GetType(
+        );
+
+    /// <summary>
+    /// The legacy PROPSETID_VIDCAP_VIDEOPROCAMP and 
+    /// PROPSETID_VIDCAP_CAMERACONTROL control sets provide a 
+    /// min/max/step/default value which bounds the acceptable range 
+    /// of values that can be configured. 
+    ///  
+    /// For other controls, the caller is responsible for knowing 
+    /// whether the underlying control supports the basic range 
+    /// information.  Calling into this method for a control that 
+    /// does not support basic range will return MF_E_NOT_FOUND. 
+    /// </summary>
+    HRESULT GetRangeInfo(
+        [out, annotation("_Out_")] MF_CAMERA_CONTROL_RANGE_INFO* rangeInfo
+        );
+
+    /// <summary>
+    /// Because the camera control schema and optional data payload 
+    /// schema can be arbitrary (the only constraint is that all 
+    /// control schema must have KSPROPERTY as the first structure 
+    /// in the binary format), this method provides the caller a way 
+    /// to modify the contents of the control and data payload 
+    /// directly. 
+    ///  
+    /// UnlockControlData must be called before the collection this 
+    /// control is contained in is sent to 
+    /// IMFCameraConfigurationManager::SaveDefaults() method. 
+    /// </summary>
+    HRESULT LockControlData(
+        [out, annotation("_Outptr_result_bytebuffer_(*controlSize)")] void** control, 
+        [out, annotation("_Out_")] ULONG* controlSize, 
+        [out, annotation("_Outptr_opt_result_bytebuffer_(*dataSize)")] void** data, 
+        [out, annotation("_Out_opt_")] ULONG* dataSize
+        );
+
+    /// <summary>
+    /// Once UnlockControlData is called, the caller must not attempt to 
+    /// modify the buffer pointer returned from LockControlData.  Doing 
+    /// so will result in undefined behavior. 
+    /// </summary>
+    HRESULT UnlockControlData(
+        );
 };
 
-#pragma endregion // Application Family  
+[
+    object,
+    uuid(92D43D0F-54A8-4BAE-96DA-356D259A5C26),
+    helpstring("IMFCameraControlDefaultsCollection Interface"),
+    local
+]
+interface IMFCameraControlDefaultsCollection : IMFAttributes
+{
+    /// <summary>
+    /// Return the number of controls currently in the collection.
+    /// </summary>
+    ULONG   GetControlCount(
+        );
+
+    /// <summary>
+    /// Return the control based on the 0 based index provided.  The
+    /// index provided must be -1 of the control count. 
+    /// </summary>
+    HRESULT GetControl(
+        [in, annotation("_In_")] ULONG index,
+        [out, annotation("_COM_Outptr_")] IMFCameraControlDefaults** configuration
+        );
+
+    /// <summary>
+    /// Add a new extended camera control to the collection.  The 
+    /// controlId provided must be an id in the 
+    /// KSPROPERTYSETID_ExtendedCameraControl property set. 
+    ///  
+    /// The streamId is only used when the underlying camera control 
+    /// is a pin level control, otherwise this value is ignored. 
+    ///  
+    /// Depending on the control, the data payload size/schema may 
+    /// vary.  The dataSize must be valid for the control payload 
+    /// schema so the control can reserve the buffer required. 
+    /// </summary>
+    HRESULT GetOrAddExtendedControl(
+        [in, annotation("_In_")] MF_CAMERA_CONTROL_CONFIGURATION_TYPE configType,
+        [in, annotation("_In_")] ULONG constrolId,
+        [in, annotation("_In_")] DWORD streamId,
+        [in, annotation("_In_")] ULONG dataSize,
+        [out, annotation("_COM_Outptr_")] IMFCameraControlDefaults** defaults
+        );
+
+    /// <summary>
+    /// For custom controls, controlSet/controlId are based on the 
+    /// custom control DDI published by the camera driver vendor. 
+    /// Similarly, the controlSize and dataSize are based on the DDI 
+    /// published by the vendor. 
+    ///  
+    /// NOTE:  controlSize must be >= sizeof(KSPROPERTY) even for 
+    /// custom controls. 
+    /// </summary>
+    HRESULT GetOrAddControl(
+        [in, annotation("_In_")] MF_CAMERA_CONTROL_CONFIGURATION_TYPE configType,
+        [in, annotation("_In_")] REFGUID controlSet,
+        [in, annotation("_In_")] ULONG constrolId,
+        [in, annotation("_In_")] ULONG controlSize,
+        [in, annotation("_In_")] ULONG dataSize,
+        [out, annotation("_COM_Outptr_")] IMFCameraControlDefaults** defaults
+        );
+
+    /// <summary>
+    /// Removes a control based on the set/id.
+    /// </summary>
+    HRESULT RemoveControl(
+        [in, annotation("_In_")] REFGUID controlSet,
+        [in, annotation("_In_")] ULONG constrolId
+        );
+
+    /// <summary>
+    /// Removes all controls in the collection. 
+    /// </summary>
+    HRESULT RemoveAllControls();
+};
+
+/// CLSID_CameraConfigurationManager
+///  
+/// Data type: GUID CLSID for creating the 
+/// IMFCameraConfigurationManager. 
+///  
+/// {6C92B540-5854-4A17-92B6-AC89C96E9683}
+cpp_quote( "EXTERN_GUID(CLSID_CameraConfigurationManager, 0x6C92B540, 0x5854, 0x4A17,0x92, 0xB6, 0xAC, 0x89, 0xC9, 0x6E, 0x96, 0x83);" )
+
+[
+    object,
+    uuid(A624F617-4704-4206-8A6D-EBDA4A093985),
+    helpstring("IMFCameraConfigurationManager Interface"),
+    local
+]
+interface IMFCameraConfigurationManager : IUnknown
+{
+    /// Loads the camera control defaults as specified by the 
+    /// MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK in 
+    /// the cameraAttributes parameter. 
+    /// If there are no default controls specified, the resulting 
+    /// collection will be empty (GetControlCount returns 0) 
+    ///  
+    /// NOTE: If the
+    /// MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK is 
+    /// not set, this method will return MF_E_ATTRIBUTENOTFOUND. 
+    HRESULT LoadDefaults(
+        [in, annotation("_In_")] IMFAttributes* cameraAttributes, 
+        [out, annotation("_COM_Outptr_")] IMFCameraControlDefaultsCollection** configurations
+        );
+
+    /// Save the collection of camera control defaults.  The 
+    /// information will be stored on the camera defined by the 
+    /// MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_SYMBOLIC_LINK when 
+    /// the collection was loaded.  Saving an empty collection will 
+    /// result in all the existing control defaults being cleared. 
+    HRESULT SaveDefaults(
+        [in, annotation("_In_")] IMFCameraControlDefaultsCollection* configurations
+        );
+
+    /// Shutdown the configuration manager.  Subsequent calls to 
+    /// LoadDefaults/SaveDefaults after the 
+    /// IMFCameraConfigurationManager is shutdown will result in 
+    /// MF_E_SHUTDOWN error. 
+    void Shutdown(
+        );
+};
+
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI) ")
+
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+#pragma endregion // Application Family

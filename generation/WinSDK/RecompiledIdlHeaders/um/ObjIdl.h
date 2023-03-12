@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -404,6 +404,13 @@ typedef interface IContext IContext;
 #endif 	/* __IContext_FWD_DEFINED__ */
 
 
+#ifndef __IObjContext_FWD_DEFINED__
+#define __IObjContext_FWD_DEFINED__
+typedef interface IObjContext IObjContext;
+
+#endif 	/* __IObjContext_FWD_DEFINED__ */
+
+
 #ifndef __IComThreadingInfo_FWD_DEFINED__
 #define __IComThreadingInfo_FWD_DEFINED__
 typedef interface IComThreadingInfo IComThreadingInfo;
@@ -444,6 +451,13 @@ typedef interface IAgileReference IAgileReference;
 typedef interface IMachineGlobalObjectTable IMachineGlobalObjectTable;
 
 #endif 	/* __IMachineGlobalObjectTable_FWD_DEFINED__ */
+
+
+#ifndef __ISupportAllowLowerTrustActivation_FWD_DEFINED__
+#define __ISupportAllowLowerTrustActivation_FWD_DEFINED__
+typedef interface ISupportAllowLowerTrustActivation ISupportAllowLowerTrustActivation;
+
+#endif 	/* __ISupportAllowLowerTrustActivation_FWD_DEFINED__ */
 
 
 #ifndef __IMallocSpy_FWD_DEFINED__
@@ -925,8 +939,7 @@ EXTERN_C const IID IID_IMarshal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMarshal * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1087,8 +1100,7 @@ EXTERN_C const IID IID_INoMarshal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INoMarshal * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1161,8 +1173,7 @@ EXTERN_C const IID IID_IAgileObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAgileObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1247,12 +1258,9 @@ EXTERN_C const IID IID_IActivationFilter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE HandleActivation( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwActivationType,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pReplacementClsId) = 0;
+            /* [in] */ DWORD dwActivationType,
+            /* [in] */ REFCLSID rclsid,
+            /* [out] */ CLSID *pReplacementClsId) = 0;
         
     };
     
@@ -1266,8 +1274,7 @@ EXTERN_C const IID IID_IActivationFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IActivationFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1282,12 +1289,9 @@ EXTERN_C const IID IID_IActivationFilter;
         DECLSPEC_XFGVIRT(IActivationFilter, HandleActivation)
         HRESULT ( STDMETHODCALLTYPE *HandleActivation )( 
             IActivationFilter * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwActivationType,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pReplacementClsId);
+            /* [in] */ DWORD dwActivationType,
+            /* [in] */ REFCLSID rclsid,
+            /* [out] */ CLSID *pReplacementClsId);
         
         END_INTERFACE
     } IActivationFilterVtbl;
@@ -1355,8 +1359,7 @@ EXTERN_C const IID IID_IMarshal2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMarshal2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1544,8 +1547,7 @@ EXTERN_C const IID IID_IMalloc;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMalloc * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1682,8 +1684,7 @@ EXTERN_C const IID IID_IStdMarshalInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IStdMarshalInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1793,8 +1794,7 @@ EXTERN_C const IID IID_IExternalConnection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IExternalConnection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1918,8 +1918,7 @@ EXTERN_C const IID IID_IMultiQI;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMultiQI * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2013,8 +2012,7 @@ EXTERN_C const IID IID_AsyncIMultiQI;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             AsyncIMultiQI * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2125,8 +2123,7 @@ EXTERN_C const IID IID_IInternalUnknown;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInternalUnknown * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2221,14 +2218,12 @@ EXTERN_C const IID IID_IEnumUnknown;
             _Out_opt_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumUnknown **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppenum) = 0;
         
     };
     
@@ -2242,8 +2237,7 @@ EXTERN_C const IID IID_IEnumUnknown;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumUnknown * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2268,8 +2262,7 @@ EXTERN_C const IID IID_IEnumUnknown;
         DECLSPEC_XFGVIRT(IEnumUnknown, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumUnknown * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumUnknown, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2278,8 +2271,7 @@ EXTERN_C const IID IID_IEnumUnknown;
         DECLSPEC_XFGVIRT(IEnumUnknown, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumUnknown * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumUnknown **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumUnknown **ppenum);
         
         END_INTERFACE
     } IEnumUnknownVtbl;
@@ -2325,12 +2317,9 @@ EXTERN_C const IID IID_IEnumUnknown;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumUnknown_RemoteNext_Proxy( 
     __RPC__in IEnumUnknown * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IUnknown **rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IUnknown **rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumUnknown_RemoteNext_Stub(
@@ -2362,22 +2351,19 @@ EXTERN_C const IID IID_IEnumString;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation] */ 
             _Out_writes_to_(celt,*pceltFetched)  LPOLESTR *rgelt,
             /* [annotation] */ 
             _Out_opt_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumString **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumString **ppenum) = 0;
         
     };
     
@@ -2391,8 +2377,7 @@ EXTERN_C const IID IID_IEnumString;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumString * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2407,8 +2392,7 @@ EXTERN_C const IID IID_IEnumString;
         DECLSPEC_XFGVIRT(IEnumString, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumString * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation] */ 
             _Out_writes_to_(celt,*pceltFetched)  LPOLESTR *rgelt,
             /* [annotation] */ 
@@ -2417,8 +2401,7 @@ EXTERN_C const IID IID_IEnumString;
         DECLSPEC_XFGVIRT(IEnumString, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumString * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumString, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2427,8 +2410,7 @@ EXTERN_C const IID IID_IEnumString;
         DECLSPEC_XFGVIRT(IEnumString, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumString * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumString **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumString **ppenum);
         
         END_INTERFACE
     } IEnumStringVtbl;
@@ -2474,12 +2456,9 @@ EXTERN_C const IID IID_IEnumString;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumString_RemoteNext_Proxy( 
     __RPC__in IEnumString * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  LPOLESTR *rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) LPOLESTR *rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumString_RemoteNext_Stub(
@@ -2536,8 +2515,7 @@ EXTERN_C const IID IID_ISequentialStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISequentialStream * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2607,12 +2585,9 @@ EXTERN_C const IID IID_ISequentialStream;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ISequentialStream_RemoteRead_Proxy( 
     __RPC__in ISequentialStream * This,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(cb,*pcbRead)  byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbRead);
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(cb, *pcbRead) byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbRead);
 
 
 void __RPC_STUB ISequentialStream_RemoteRead_Stub(
@@ -2624,12 +2599,9 @@ void __RPC_STUB ISequentialStream_RemoteRead_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ISequentialStream_RemoteWrite_Proxy( 
     __RPC__in ISequentialStream * This,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cb)  const byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbWritten);
+    /* [size_is][in] */ __RPC__in_ecount_full(cb) const byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbWritten);
 
 
 void __RPC_STUB ISequentialStream_RemoteWrite_Stub(
@@ -2701,58 +2673,44 @@ EXTERN_C const IID IID_IStream;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Seek( 
-            /* [annotation][in] */ 
-            _In_  LARGE_INTEGER dlibMove,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOrigin,
+            /* [in] */ LARGE_INTEGER dlibMove,
+            /* [in] */ DWORD dwOrigin,
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSize( 
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libNewSize) = 0;
+            /* [in] */ ULARGE_INTEGER libNewSize) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE CopyTo( 
             /* [annotation][unique][in] */ 
             _In_  IStream *pstm,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
+            /* [in] */ ULARGE_INTEGER cb,
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbRead,
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbWritten) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Commit( 
-            /* [annotation][in] */ 
-            _In_  DWORD grfCommitFlags) = 0;
+            /* [in] */ DWORD grfCommitFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Revert( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LockRegion( 
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libOffset,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwLockType) = 0;
+            /* [in] */ ULARGE_INTEGER libOffset,
+            /* [in] */ ULARGE_INTEGER cb,
+            /* [in] */ DWORD dwLockType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnlockRegion( 
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libOffset,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwLockType) = 0;
+            /* [in] */ ULARGE_INTEGER libOffset,
+            /* [in] */ ULARGE_INTEGER cb,
+            /* [in] */ DWORD dwLockType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Stat( 
-            /* [annotation][out] */ 
-            _Out_  STATSTG *pstatstg,
-            /* [annotation][in] */ 
-            _In_  DWORD grfStatFlag) = 0;
+            /* [out] */ __RPC__out STATSTG *pstatstg,
+            /* [in] */ DWORD grfStatFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IStream **ppstm) = 0;
+            /* [out] */ __RPC__deref_out_opt IStream **ppstm) = 0;
         
     };
     
@@ -2766,8 +2724,7 @@ EXTERN_C const IID IID_IStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStream * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2802,26 +2759,22 @@ EXTERN_C const IID IID_IStream;
         DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             IStream * This,
-            /* [annotation][in] */ 
-            _In_  LARGE_INTEGER dlibMove,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOrigin,
+            /* [in] */ LARGE_INTEGER dlibMove,
+            /* [in] */ DWORD dwOrigin,
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
         DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             __RPC__in IStream * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libNewSize);
+            /* [in] */ ULARGE_INTEGER libNewSize);
         
         DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             IStream * This,
             /* [annotation][unique][in] */ 
             _In_  IStream *pstm,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
+            /* [in] */ ULARGE_INTEGER cb,
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbRead,
             /* [annotation] */ 
@@ -2830,8 +2783,7 @@ EXTERN_C const IID IID_IStream;
         DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IStream * This,
-            /* [annotation][in] */ 
-            _In_  DWORD grfCommitFlags);
+            /* [in] */ DWORD grfCommitFlags);
         
         DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
@@ -2840,36 +2792,27 @@ EXTERN_C const IID IID_IStream;
         DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             __RPC__in IStream * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libOffset,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwLockType);
+            /* [in] */ ULARGE_INTEGER libOffset,
+            /* [in] */ ULARGE_INTEGER cb,
+            /* [in] */ DWORD dwLockType);
         
         DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             __RPC__in IStream * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libOffset,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwLockType);
+            /* [in] */ ULARGE_INTEGER libOffset,
+            /* [in] */ ULARGE_INTEGER cb,
+            /* [in] */ DWORD dwLockType);
         
         DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in IStream * This,
-            /* [annotation][out] */ 
-            _Out_  STATSTG *pstatstg,
-            /* [annotation][in] */ 
-            _In_  DWORD grfStatFlag);
+            /* [out] */ __RPC__out STATSTG *pstatstg,
+            /* [in] */ DWORD grfStatFlag);
         
         DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IStream * This,
-            /* [annotation][out] */ 
-            _Out_  IStream **ppstm);
+            /* [out] */ __RPC__deref_out_opt IStream **ppstm);
         
         END_INTERFACE
     } IStreamVtbl;
@@ -2937,12 +2880,9 @@ EXTERN_C const IID IID_IStream;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IStream_RemoteSeek_Proxy( 
     __RPC__in IStream * This,
-    /* [annotation][in] */ 
-    _In_  LARGE_INTEGER dlibMove,
-    /* [annotation][in] */ 
-    _In_  DWORD dwOrigin,
-    /* [annotation][out] */ 
-    _Out_  ULARGE_INTEGER *plibNewPosition);
+    /* [in] */ LARGE_INTEGER dlibMove,
+    /* [in] */ DWORD dwOrigin,
+    /* [out] */ __RPC__out ULARGE_INTEGER *plibNewPosition);
 
 
 void __RPC_STUB IStream_RemoteSeek_Stub(
@@ -2954,14 +2894,10 @@ void __RPC_STUB IStream_RemoteSeek_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IStream_RemoteCopyTo_Proxy( 
     __RPC__in IStream * This,
-    /* [annotation][unique][in] */ 
-    _In_  IStream *pstm,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER cb,
-    /* [annotation][out] */ 
-    _Out_  ULARGE_INTEGER *pcbRead,
-    /* [annotation][out] */ 
-    _Out_  ULARGE_INTEGER *pcbWritten);
+    /* [unique][in] */ __RPC__in_opt IStream *pstm,
+    /* [in] */ ULARGE_INTEGER cb,
+    /* [out] */ __RPC__out ULARGE_INTEGER *pcbRead,
+    /* [out] */ __RPC__out ULARGE_INTEGER *pcbWritten);
 
 
 void __RPC_STUB IStream_RemoteCopyTo_Stub(
@@ -3041,8 +2977,7 @@ EXTERN_C const IID IID_IRpcChannelBuffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRpcChannelBuffer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3180,8 +3115,7 @@ EXTERN_C const IID IID_IRpcChannelBuffer2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRpcChannelBuffer2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3335,8 +3269,7 @@ EXTERN_C const IID IID_IAsyncRpcChannelBuffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAsyncRpcChannelBuffer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3552,8 +3485,7 @@ EXTERN_C const IID IID_IRpcChannelBuffer3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRpcChannelBuffer3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3771,8 +3703,7 @@ EXTERN_C const IID IID_IRpcSyntaxNegotiate;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRpcSyntaxNegotiate * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3860,8 +3791,7 @@ EXTERN_C const IID IID_IRpcProxyBuffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRpcProxyBuffer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3988,8 +3918,7 @@ EXTERN_C const IID IID_IRpcStubBuffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRpcStubBuffer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4141,8 +4070,7 @@ EXTERN_C const IID IID_IPSFactoryBuffer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPSFactoryBuffer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4333,8 +4261,7 @@ EXTERN_C const IID IID_IChannelHook;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IChannelHook * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4612,8 +4539,7 @@ EXTERN_C const IID IID_IClientSecurity;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IClientSecurity * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4777,8 +4703,7 @@ EXTERN_C const IID IID_IServerSecurity;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IServerSecurity * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4936,8 +4861,7 @@ EXTERN_C const IID IID_IRpcOptions;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRpcOptions * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5113,8 +5037,7 @@ EXTERN_C const IID IID_IGlobalOptions;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGlobalOptions * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5213,8 +5136,7 @@ EXTERN_C const IID IID_ISurrogate;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE LoadDllServer( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID Clsid) = 0;
+            /* [in] */ __RPC__in REFCLSID Clsid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE FreeSurrogate( void) = 0;
         
@@ -5230,8 +5152,7 @@ EXTERN_C const IID IID_ISurrogate;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISurrogate * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5246,8 +5167,7 @@ EXTERN_C const IID IID_ISurrogate;
         DECLSPEC_XFGVIRT(ISurrogate, LoadDllServer)
         HRESULT ( STDMETHODCALLTYPE *LoadDllServer )( 
             __RPC__in ISurrogate * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID Clsid);
+            /* [in] */ __RPC__in REFCLSID Clsid);
         
         DECLSPEC_XFGVIRT(ISurrogate, FreeSurrogate)
         HRESULT ( STDMETHODCALLTYPE *FreeSurrogate )( 
@@ -5342,8 +5262,7 @@ EXTERN_C const IID IID_IGlobalInterfaceTable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGlobalInterfaceTable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5452,10 +5371,8 @@ EXTERN_C const IID IID_ISynchronize;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Wait( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMilliseconds) = 0;
+            /* [in] */ DWORD dwFlags,
+            /* [in] */ DWORD dwMilliseconds) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Signal( void) = 0;
         
@@ -5473,8 +5390,7 @@ EXTERN_C const IID IID_ISynchronize;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISynchronize * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5489,10 +5405,8 @@ EXTERN_C const IID IID_ISynchronize;
         DECLSPEC_XFGVIRT(ISynchronize, Wait)
         HRESULT ( STDMETHODCALLTYPE *Wait )( 
             __RPC__in ISynchronize * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMilliseconds);
+            /* [in] */ DWORD dwFlags,
+            /* [in] */ DWORD dwMilliseconds);
         
         DECLSPEC_XFGVIRT(ISynchronize, Signal)
         HRESULT ( STDMETHODCALLTYPE *Signal )( 
@@ -5576,8 +5490,7 @@ EXTERN_C const IID IID_ISynchronizeHandle;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISynchronizeHandle * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5663,8 +5576,7 @@ EXTERN_C const IID IID_ISynchronizeEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISynchronizeEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5768,8 +5680,7 @@ EXTERN_C const IID IID_ISynchronizeContainer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISynchronizeContainer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5866,8 +5777,7 @@ EXTERN_C const IID IID_ISynchronizeMutex;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISynchronizeMutex * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5882,10 +5792,8 @@ EXTERN_C const IID IID_ISynchronizeMutex;
         DECLSPEC_XFGVIRT(ISynchronize, Wait)
         HRESULT ( STDMETHODCALLTYPE *Wait )( 
             ISynchronizeMutex * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMilliseconds);
+            /* [in] */ DWORD dwFlags,
+            /* [in] */ DWORD dwMilliseconds);
         
         DECLSPEC_XFGVIRT(ISynchronize, Signal)
         HRESULT ( STDMETHODCALLTYPE *Signal )( 
@@ -5981,8 +5889,7 @@ EXTERN_C const IID IID_ICancelMethodCalls;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICancelMethodCalls * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6093,8 +6000,7 @@ EXTERN_C const IID IID_IAsyncManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAsyncManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6206,8 +6112,7 @@ EXTERN_C const IID IID_ICallFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICallFactory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6305,8 +6210,7 @@ EXTERN_C const IID IID_IRpcHelper;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRpcHelper * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6407,8 +6311,7 @@ EXTERN_C const IID IID_IReleaseMarshalBuffers;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IReleaseMarshalBuffers * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6504,8 +6407,7 @@ EXTERN_C const IID IID_IWaitMultiple;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWaitMultiple * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6604,8 +6506,7 @@ EXTERN_C const IID IID_IAddrTrackingControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAddrTrackingControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6704,8 +6605,7 @@ EXTERN_C const IID IID_IAddrExclusionControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAddrExclusionControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6787,18 +6687,13 @@ EXTERN_C const IID IID_IPipeByte;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Pull( 
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  BYTE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned) = 0;
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRequest, *pcReturned) BYTE *buf,
+            /* [in] */ ULONG cRequest,
+            /* [out] */ __RPC__out ULONG *pcReturned) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Push( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  BYTE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(cSent) BYTE *buf,
+            /* [in] */ ULONG cSent) = 0;
         
     };
     
@@ -6812,8 +6707,7 @@ EXTERN_C const IID IID_IPipeByte;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPipeByte * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6828,20 +6722,15 @@ EXTERN_C const IID IID_IPipeByte;
         DECLSPEC_XFGVIRT(IPipeByte, Pull)
         HRESULT ( STDMETHODCALLTYPE *Pull )( 
             __RPC__in IPipeByte * This,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  BYTE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned);
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRequest, *pcReturned) BYTE *buf,
+            /* [in] */ ULONG cRequest,
+            /* [out] */ __RPC__out ULONG *pcReturned);
         
         DECLSPEC_XFGVIRT(IPipeByte, Push)
         HRESULT ( STDMETHODCALLTYPE *Push )( 
             __RPC__in IPipeByte * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  BYTE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent);
+            /* [size_is][in] */ __RPC__in_ecount_full(cSent) BYTE *buf,
+            /* [in] */ ULONG cSent);
         
         END_INTERFACE
     } IPipeByteVtbl;
@@ -6899,20 +6788,15 @@ EXTERN_C const IID IID_AsyncIPipeByte;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Begin_Pull( 
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest) = 0;
+            /* [in] */ ULONG cRequest) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Finish_Pull( 
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  BYTE *buf,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned) = 0;
+            /* [length_is][size_is][out] */ __RPC__out_xcount_part(cRequest, *pcReturned) BYTE *buf,
+            /* [out] */ __RPC__out ULONG *pcReturned) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Begin_Push( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  BYTE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent) = 0;
+            /* [size_is][in] */ __RPC__in_xcount_full(cSent) BYTE *buf,
+            /* [in] */ ULONG cSent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Finish_Push( void) = 0;
         
@@ -6928,8 +6812,7 @@ EXTERN_C const IID IID_AsyncIPipeByte;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIPipeByte * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6944,24 +6827,19 @@ EXTERN_C const IID IID_AsyncIPipeByte;
         DECLSPEC_XFGVIRT(AsyncIPipeByte, Begin_Pull)
         HRESULT ( STDMETHODCALLTYPE *Begin_Pull )( 
             __RPC__in AsyncIPipeByte * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest);
+            /* [in] */ ULONG cRequest);
         
         DECLSPEC_XFGVIRT(AsyncIPipeByte, Finish_Pull)
         HRESULT ( STDMETHODCALLTYPE *Finish_Pull )( 
             __RPC__in AsyncIPipeByte * This,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  BYTE *buf,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned);
+            /* [length_is][size_is][out] */ __RPC__out_xcount_part(cRequest, *pcReturned) BYTE *buf,
+            /* [out] */ __RPC__out ULONG *pcReturned);
         
         DECLSPEC_XFGVIRT(AsyncIPipeByte, Begin_Push)
         HRESULT ( STDMETHODCALLTYPE *Begin_Push )( 
             __RPC__in AsyncIPipeByte * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  BYTE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent);
+            /* [size_is][in] */ __RPC__in_xcount_full(cSent) BYTE *buf,
+            /* [in] */ ULONG cSent);
         
         DECLSPEC_XFGVIRT(AsyncIPipeByte, Finish_Push)
         HRESULT ( STDMETHODCALLTYPE *Finish_Push )( 
@@ -7029,18 +6907,13 @@ EXTERN_C const IID IID_IPipeLong;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Pull( 
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  LONG *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned) = 0;
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRequest, *pcReturned) LONG *buf,
+            /* [in] */ ULONG cRequest,
+            /* [out] */ __RPC__out ULONG *pcReturned) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Push( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  LONG *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(cSent) LONG *buf,
+            /* [in] */ ULONG cSent) = 0;
         
     };
     
@@ -7054,8 +6927,7 @@ EXTERN_C const IID IID_IPipeLong;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPipeLong * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7070,20 +6942,15 @@ EXTERN_C const IID IID_IPipeLong;
         DECLSPEC_XFGVIRT(IPipeLong, Pull)
         HRESULT ( STDMETHODCALLTYPE *Pull )( 
             __RPC__in IPipeLong * This,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  LONG *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned);
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRequest, *pcReturned) LONG *buf,
+            /* [in] */ ULONG cRequest,
+            /* [out] */ __RPC__out ULONG *pcReturned);
         
         DECLSPEC_XFGVIRT(IPipeLong, Push)
         HRESULT ( STDMETHODCALLTYPE *Push )( 
             __RPC__in IPipeLong * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  LONG *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent);
+            /* [size_is][in] */ __RPC__in_ecount_full(cSent) LONG *buf,
+            /* [in] */ ULONG cSent);
         
         END_INTERFACE
     } IPipeLongVtbl;
@@ -7141,20 +7008,15 @@ EXTERN_C const IID IID_AsyncIPipeLong;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Begin_Pull( 
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest) = 0;
+            /* [in] */ ULONG cRequest) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Finish_Pull( 
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  LONG *buf,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned) = 0;
+            /* [length_is][size_is][out] */ __RPC__out_xcount_part(cRequest, *pcReturned) LONG *buf,
+            /* [out] */ __RPC__out ULONG *pcReturned) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Begin_Push( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  LONG *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent) = 0;
+            /* [size_is][in] */ __RPC__in_xcount_full(cSent) LONG *buf,
+            /* [in] */ ULONG cSent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Finish_Push( void) = 0;
         
@@ -7170,8 +7032,7 @@ EXTERN_C const IID IID_AsyncIPipeLong;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIPipeLong * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7186,24 +7047,19 @@ EXTERN_C const IID IID_AsyncIPipeLong;
         DECLSPEC_XFGVIRT(AsyncIPipeLong, Begin_Pull)
         HRESULT ( STDMETHODCALLTYPE *Begin_Pull )( 
             __RPC__in AsyncIPipeLong * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest);
+            /* [in] */ ULONG cRequest);
         
         DECLSPEC_XFGVIRT(AsyncIPipeLong, Finish_Pull)
         HRESULT ( STDMETHODCALLTYPE *Finish_Pull )( 
             __RPC__in AsyncIPipeLong * This,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  LONG *buf,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned);
+            /* [length_is][size_is][out] */ __RPC__out_xcount_part(cRequest, *pcReturned) LONG *buf,
+            /* [out] */ __RPC__out ULONG *pcReturned);
         
         DECLSPEC_XFGVIRT(AsyncIPipeLong, Begin_Push)
         HRESULT ( STDMETHODCALLTYPE *Begin_Push )( 
             __RPC__in AsyncIPipeLong * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  LONG *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent);
+            /* [size_is][in] */ __RPC__in_xcount_full(cSent) LONG *buf,
+            /* [in] */ ULONG cSent);
         
         DECLSPEC_XFGVIRT(AsyncIPipeLong, Finish_Push)
         HRESULT ( STDMETHODCALLTYPE *Finish_Push )( 
@@ -7271,18 +7127,13 @@ EXTERN_C const IID IID_IPipeDouble;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Pull( 
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  DOUBLE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned) = 0;
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRequest, *pcReturned) DOUBLE *buf,
+            /* [in] */ ULONG cRequest,
+            /* [out] */ __RPC__out ULONG *pcReturned) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Push( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  DOUBLE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(cSent) DOUBLE *buf,
+            /* [in] */ ULONG cSent) = 0;
         
     };
     
@@ -7296,8 +7147,7 @@ EXTERN_C const IID IID_IPipeDouble;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPipeDouble * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7312,20 +7162,15 @@ EXTERN_C const IID IID_IPipeDouble;
         DECLSPEC_XFGVIRT(IPipeDouble, Pull)
         HRESULT ( STDMETHODCALLTYPE *Pull )( 
             __RPC__in IPipeDouble * This,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  DOUBLE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned);
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRequest, *pcReturned) DOUBLE *buf,
+            /* [in] */ ULONG cRequest,
+            /* [out] */ __RPC__out ULONG *pcReturned);
         
         DECLSPEC_XFGVIRT(IPipeDouble, Push)
         HRESULT ( STDMETHODCALLTYPE *Push )( 
             __RPC__in IPipeDouble * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  DOUBLE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent);
+            /* [size_is][in] */ __RPC__in_ecount_full(cSent) DOUBLE *buf,
+            /* [in] */ ULONG cSent);
         
         END_INTERFACE
     } IPipeDoubleVtbl;
@@ -7383,20 +7228,15 @@ EXTERN_C const IID IID_AsyncIPipeDouble;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Begin_Pull( 
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest) = 0;
+            /* [in] */ ULONG cRequest) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Finish_Pull( 
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  DOUBLE *buf,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned) = 0;
+            /* [length_is][size_is][out] */ __RPC__out_xcount_part(cRequest, *pcReturned) DOUBLE *buf,
+            /* [out] */ __RPC__out ULONG *pcReturned) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Begin_Push( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  DOUBLE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent) = 0;
+            /* [size_is][in] */ __RPC__in_xcount_full(cSent) DOUBLE *buf,
+            /* [in] */ ULONG cSent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Finish_Push( void) = 0;
         
@@ -7412,8 +7252,7 @@ EXTERN_C const IID IID_AsyncIPipeDouble;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIPipeDouble * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7428,24 +7267,19 @@ EXTERN_C const IID IID_AsyncIPipeDouble;
         DECLSPEC_XFGVIRT(AsyncIPipeDouble, Begin_Pull)
         HRESULT ( STDMETHODCALLTYPE *Begin_Pull )( 
             __RPC__in AsyncIPipeDouble * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest);
+            /* [in] */ ULONG cRequest);
         
         DECLSPEC_XFGVIRT(AsyncIPipeDouble, Finish_Pull)
         HRESULT ( STDMETHODCALLTYPE *Finish_Pull )( 
             __RPC__in AsyncIPipeDouble * This,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequest,*pcReturned)  DOUBLE *buf,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReturned);
+            /* [length_is][size_is][out] */ __RPC__out_xcount_part(cRequest, *pcReturned) DOUBLE *buf,
+            /* [out] */ __RPC__out ULONG *pcReturned);
         
         DECLSPEC_XFGVIRT(AsyncIPipeDouble, Begin_Push)
         HRESULT ( STDMETHODCALLTYPE *Begin_Push )( 
             __RPC__in AsyncIPipeDouble * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cSent)  DOUBLE *buf,
-            /* [annotation][in] */ 
-            _In_  ULONG cSent);
+            /* [size_is][in] */ __RPC__in_xcount_full(cSent) DOUBLE *buf,
+            /* [in] */ ULONG cSent);
         
         DECLSPEC_XFGVIRT(AsyncIPipeDouble, Finish_Push)
         HRESULT ( STDMETHODCALLTYPE *Finish_Push )( 
@@ -7566,8 +7400,7 @@ EXTERN_C const IID IID_IEnumContextProps;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumContextProps * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7711,8 +7544,7 @@ EXTERN_C const IID IID_IContext;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IContext * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7805,6 +7637,197 @@ EXTERN_C const IID IID_IContext;
 /* interface __MIDL_itf_objidl_0000_0047 */
 /* [local] */ 
 
+#if !defined BUILDTYPE_COMSVCS && ! (defined _COMBASEAPI_ || defined _OLE32_)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0047_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0047_v0_0_s_ifspec;
+
+#ifndef __IObjContext_INTERFACE_DEFINED__
+#define __IObjContext_INTERFACE_DEFINED__
+
+/* interface IObjContext */
+/* [unique][uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_IObjContext;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("000001c6-0000-0000-C000-000000000046")
+    IObjContext : public IContext
+    {
+    public:
+        virtual void STDMETHODCALLTYPE Reserved1( void) = 0;
+        
+        virtual void STDMETHODCALLTYPE Reserved2( void) = 0;
+        
+        virtual void STDMETHODCALLTYPE Reserved3( void) = 0;
+        
+        virtual void STDMETHODCALLTYPE Reserved4( void) = 0;
+        
+        virtual void STDMETHODCALLTYPE Reserved5( void) = 0;
+        
+        virtual void STDMETHODCALLTYPE Reserved6( void) = 0;
+        
+        virtual void STDMETHODCALLTYPE Reserved7( void) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IObjContextVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IObjContext * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IObjContext * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IObjContext * This);
+        
+        DECLSPEC_XFGVIRT(IContext, SetProperty)
+        HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
+            IObjContext * This,
+            /* [annotation][in] */ 
+            _In_  REFGUID rpolicyId,
+            /* [annotation][in] */ 
+            _In_  CPFLAGS flags,
+            /* [annotation][in] */ 
+            _In_  IUnknown *pUnk);
+        
+        DECLSPEC_XFGVIRT(IContext, RemoveProperty)
+        HRESULT ( STDMETHODCALLTYPE *RemoveProperty )( 
+            IObjContext * This,
+            /* [annotation][in] */ 
+            _In_  REFGUID rPolicyId);
+        
+        DECLSPEC_XFGVIRT(IContext, GetProperty)
+        HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
+            IObjContext * This,
+            /* [annotation][in] */ 
+            _In_  REFGUID rGuid,
+            /* [annotation][out] */ 
+            _Out_  CPFLAGS *pFlags,
+            /* [annotation][out] */ 
+            _Outptr_  IUnknown **ppUnk);
+        
+        DECLSPEC_XFGVIRT(IContext, EnumContextProps)
+        HRESULT ( STDMETHODCALLTYPE *EnumContextProps )( 
+            IObjContext * This,
+            /* [annotation][out] */ 
+            _Outptr_  IEnumContextProps **ppEnumContextProps);
+        
+        DECLSPEC_XFGVIRT(IObjContext, Reserved1)
+        void ( STDMETHODCALLTYPE *Reserved1 )( 
+            IObjContext * This);
+        
+        DECLSPEC_XFGVIRT(IObjContext, Reserved2)
+        void ( STDMETHODCALLTYPE *Reserved2 )( 
+            IObjContext * This);
+        
+        DECLSPEC_XFGVIRT(IObjContext, Reserved3)
+        void ( STDMETHODCALLTYPE *Reserved3 )( 
+            IObjContext * This);
+        
+        DECLSPEC_XFGVIRT(IObjContext, Reserved4)
+        void ( STDMETHODCALLTYPE *Reserved4 )( 
+            IObjContext * This);
+        
+        DECLSPEC_XFGVIRT(IObjContext, Reserved5)
+        void ( STDMETHODCALLTYPE *Reserved5 )( 
+            IObjContext * This);
+        
+        DECLSPEC_XFGVIRT(IObjContext, Reserved6)
+        void ( STDMETHODCALLTYPE *Reserved6 )( 
+            IObjContext * This);
+        
+        DECLSPEC_XFGVIRT(IObjContext, Reserved7)
+        void ( STDMETHODCALLTYPE *Reserved7 )( 
+            IObjContext * This);
+        
+        END_INTERFACE
+    } IObjContextVtbl;
+
+    interface IObjContext
+    {
+        CONST_VTBL struct IObjContextVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IObjContext_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IObjContext_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IObjContext_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IObjContext_SetProperty(This,rpolicyId,flags,pUnk)	\
+    ( (This)->lpVtbl -> SetProperty(This,rpolicyId,flags,pUnk) ) 
+
+#define IObjContext_RemoveProperty(This,rPolicyId)	\
+    ( (This)->lpVtbl -> RemoveProperty(This,rPolicyId) ) 
+
+#define IObjContext_GetProperty(This,rGuid,pFlags,ppUnk)	\
+    ( (This)->lpVtbl -> GetProperty(This,rGuid,pFlags,ppUnk) ) 
+
+#define IObjContext_EnumContextProps(This,ppEnumContextProps)	\
+    ( (This)->lpVtbl -> EnumContextProps(This,ppEnumContextProps) ) 
+
+
+#define IObjContext_Reserved1(This)	\
+    ( (This)->lpVtbl -> Reserved1(This) ) 
+
+#define IObjContext_Reserved2(This)	\
+    ( (This)->lpVtbl -> Reserved2(This) ) 
+
+#define IObjContext_Reserved3(This)	\
+    ( (This)->lpVtbl -> Reserved3(This) ) 
+
+#define IObjContext_Reserved4(This)	\
+    ( (This)->lpVtbl -> Reserved4(This) ) 
+
+#define IObjContext_Reserved5(This)	\
+    ( (This)->lpVtbl -> Reserved5(This) ) 
+
+#define IObjContext_Reserved6(This)	\
+    ( (This)->lpVtbl -> Reserved6(This) ) 
+
+#define IObjContext_Reserved7(This)	\
+    ( (This)->lpVtbl -> Reserved7(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IObjContext_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_objidl_0000_0048 */
+/* [local] */ 
+
+#endif
 #endif
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -7848,8 +7871,8 @@ typedef DWORD APARTMENTID;
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0047_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0047_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0048_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0048_v0_0_s_ifspec;
 
 #ifndef __IComThreadingInfo_INTERFACE_DEFINED__
 #define __IComThreadingInfo_INTERFACE_DEFINED__
@@ -7894,8 +7917,7 @@ EXTERN_C const IID IID_IComThreadingInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IComThreadingInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7993,8 +8015,7 @@ EXTERN_C const IID IID_IProcessInitControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ResetInitializerTimeout( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwSecondsRemaining) = 0;
+            /* [in] */ DWORD dwSecondsRemaining) = 0;
         
     };
     
@@ -8008,8 +8029,7 @@ EXTERN_C const IID IID_IProcessInitControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProcessInitControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8024,8 +8044,7 @@ EXTERN_C const IID IID_IProcessInitControl;
         DECLSPEC_XFGVIRT(IProcessInitControl, ResetInitializerTimeout)
         HRESULT ( STDMETHODCALLTYPE *ResetInitializerTimeout )( 
             __RPC__in IProcessInitControl * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSecondsRemaining);
+            /* [in] */ DWORD dwSecondsRemaining);
         
         END_INTERFACE
     } IProcessInitControlVtbl;
@@ -8091,8 +8110,7 @@ EXTERN_C const IID IID_IFastRundown;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFastRundown * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8138,7 +8156,7 @@ EXTERN_C const IID IID_IFastRundown;
 #endif 	/* __IFastRundown_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0050 */
+/* interface __MIDL_itf_objidl_0000_0051 */
 /* [local] */ 
 
 typedef 
@@ -8167,8 +8185,8 @@ enum CO_MARSHALING_CONTEXT_ATTRIBUTES
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0050_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0050_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0051_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0051_v0_0_s_ifspec;
 
 #ifndef __IMarshalingStream_INTERFACE_DEFINED__
 #define __IMarshalingStream_INTERFACE_DEFINED__
@@ -8186,10 +8204,8 @@ EXTERN_C const IID IID_IMarshalingStream;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMarshalingContextAttribute( 
-            /* [annotation][in] */ 
-            _In_  CO_MARSHALING_CONTEXT_ATTRIBUTES attribute,
-            /* [annotation][out] */ 
-            _Out_  ULONG_PTR *pAttributeValue) = 0;
+            /* [in] */ CO_MARSHALING_CONTEXT_ATTRIBUTES attribute,
+            /* [out] */ ULONG_PTR *pAttributeValue) = 0;
         
     };
     
@@ -8203,8 +8219,7 @@ EXTERN_C const IID IID_IMarshalingStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMarshalingStream * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8239,26 +8254,22 @@ EXTERN_C const IID IID_IMarshalingStream;
         DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             IMarshalingStream * This,
-            /* [annotation][in] */ 
-            _In_  LARGE_INTEGER dlibMove,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOrigin,
+            /* [in] */ LARGE_INTEGER dlibMove,
+            /* [in] */ DWORD dwOrigin,
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
         DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             IMarshalingStream * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libNewSize);
+            /* [in] */ ULARGE_INTEGER libNewSize);
         
         DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             IMarshalingStream * This,
             /* [annotation][unique][in] */ 
             _In_  IStream *pstm,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
+            /* [in] */ ULARGE_INTEGER cb,
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbRead,
             /* [annotation] */ 
@@ -8267,8 +8278,7 @@ EXTERN_C const IID IID_IMarshalingStream;
         DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             IMarshalingStream * This,
-            /* [annotation][in] */ 
-            _In_  DWORD grfCommitFlags);
+            /* [in] */ DWORD grfCommitFlags);
         
         DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
@@ -8277,44 +8287,33 @@ EXTERN_C const IID IID_IMarshalingStream;
         DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             IMarshalingStream * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libOffset,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwLockType);
+            /* [in] */ ULARGE_INTEGER libOffset,
+            /* [in] */ ULARGE_INTEGER cb,
+            /* [in] */ DWORD dwLockType);
         
         DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             IMarshalingStream * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libOffset,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwLockType);
+            /* [in] */ ULARGE_INTEGER libOffset,
+            /* [in] */ ULARGE_INTEGER cb,
+            /* [in] */ DWORD dwLockType);
         
         DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             IMarshalingStream * This,
-            /* [annotation][out] */ 
-            _Out_  STATSTG *pstatstg,
-            /* [annotation][in] */ 
-            _In_  DWORD grfStatFlag);
+            /* [out] */ STATSTG *pstatstg,
+            /* [in] */ DWORD grfStatFlag);
         
         DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IMarshalingStream * This,
-            /* [annotation][out] */ 
-            _Out_  IStream **ppstm);
+            /* [out] */ IStream **ppstm);
         
         DECLSPEC_XFGVIRT(IMarshalingStream, GetMarshalingContextAttribute)
         HRESULT ( STDMETHODCALLTYPE *GetMarshalingContextAttribute )( 
             IMarshalingStream * This,
-            /* [annotation][in] */ 
-            _In_  CO_MARSHALING_CONTEXT_ATTRIBUTES attribute,
-            /* [annotation][out] */ 
-            _Out_  ULONG_PTR *pAttributeValue);
+            /* [in] */ CO_MARSHALING_CONTEXT_ATTRIBUTES attribute,
+            /* [out] */ ULONG_PTR *pAttributeValue);
         
         END_INTERFACE
     } IMarshalingStreamVtbl;
@@ -8388,7 +8387,7 @@ EXTERN_C const IID IID_IMarshalingStream;
 #endif 	/* __IMarshalingStream_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0051 */
+/* interface __MIDL_itf_objidl_0000_0052 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -8397,8 +8396,8 @@ EXTERN_C const IID IID_IMarshalingStream;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0051_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0051_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0052_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0052_v0_0_s_ifspec;
 
 #ifndef __IAgileReference_INTERFACE_DEFINED__
 #define __IAgileReference_INTERFACE_DEFINED__
@@ -8443,10 +8442,8 @@ EXTERN_C const IID IID_IAgileReference;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Resolve( 
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][retval][out] */ 
-            _COM_Outptr_retval_  void **ppvObjectReference) = 0;
+            /* [in] */ REFIID riid,
+            /* [iid_is][retval][out] */ void **ppvObjectReference) = 0;
         
     };
     
@@ -8460,8 +8457,7 @@ EXTERN_C const IID IID_IAgileReference;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAgileReference * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8476,10 +8472,8 @@ EXTERN_C const IID IID_IAgileReference;
         DECLSPEC_XFGVIRT(IAgileReference, Resolve)
         HRESULT ( STDMETHODCALLTYPE *Resolve )( 
             IAgileReference * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][retval][out] */ 
-            _COM_Outptr_retval_  void **ppvObjectReference);
+            /* [in] */ REFIID riid,
+            /* [iid_is][retval][out] */ void **ppvObjectReference);
         
         END_INTERFACE
     } IAgileReferenceVtbl;
@@ -8518,7 +8512,7 @@ EXTERN_C const IID IID_IAgileReference;
 #endif 	/* __IAgileReference_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0052 */
+/* interface __MIDL_itf_objidl_0000_0053 */
 /* [local] */ 
 
 #endif
@@ -8538,8 +8532,8 @@ typedef struct MachineGlobalObjectTableRegistrationToken__
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0052_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0052_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0053_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0053_v0_0_s_ifspec;
 
 #ifndef __IMachineGlobalObjectTable_INTERFACE_DEFINED__
 #define __IMachineGlobalObjectTable_INTERFACE_DEFINED__
@@ -8557,28 +8551,19 @@ EXTERN_C const IID IID_IMachineGlobalObjectTable;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RegisterObject( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID clsid,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR identifier,
-            /* [annotation][in] */ 
-            _In_  IUnknown *object,
-            /* [annotation][out] */ 
-            _Out_  MachineGlobalObjectTableRegistrationToken *token) = 0;
+            /* [in] */ REFCLSID clsid,
+            /* [in] */ LPCWSTR identifier,
+            /* [in] */ IUnknown *object,
+            /* [out] */ MachineGlobalObjectTableRegistrationToken *token) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetObject( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID clsid,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR identifier,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppv) = 0;
+            /* [in] */ REFCLSID clsid,
+            /* [in] */ LPCWSTR identifier,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppv) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RevokeObject( 
-            /* [annotation][in] */ 
-            _In_  MachineGlobalObjectTableRegistrationToken token) = 0;
+            /* [in] */ MachineGlobalObjectTableRegistrationToken token) = 0;
         
     };
     
@@ -8592,8 +8577,7 @@ EXTERN_C const IID IID_IMachineGlobalObjectTable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMachineGlobalObjectTable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8608,32 +8592,23 @@ EXTERN_C const IID IID_IMachineGlobalObjectTable;
         DECLSPEC_XFGVIRT(IMachineGlobalObjectTable, RegisterObject)
         HRESULT ( STDMETHODCALLTYPE *RegisterObject )( 
             IMachineGlobalObjectTable * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID clsid,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR identifier,
-            /* [annotation][in] */ 
-            _In_  IUnknown *object,
-            /* [annotation][out] */ 
-            _Out_  MachineGlobalObjectTableRegistrationToken *token);
+            /* [in] */ REFCLSID clsid,
+            /* [in] */ LPCWSTR identifier,
+            /* [in] */ IUnknown *object,
+            /* [out] */ MachineGlobalObjectTableRegistrationToken *token);
         
         DECLSPEC_XFGVIRT(IMachineGlobalObjectTable, GetObject)
         HRESULT ( STDMETHODCALLTYPE *GetObject )( 
             IMachineGlobalObjectTable * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID clsid,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR identifier,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppv);
+            /* [in] */ REFCLSID clsid,
+            /* [in] */ LPCWSTR identifier,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppv);
         
         DECLSPEC_XFGVIRT(IMachineGlobalObjectTable, RevokeObject)
         HRESULT ( STDMETHODCALLTYPE *RevokeObject )( 
             IMachineGlobalObjectTable * This,
-            /* [annotation][in] */ 
-            _In_  MachineGlobalObjectTableRegistrationToken token);
+            /* [in] */ MachineGlobalObjectTableRegistrationToken token);
         
         END_INTERFACE
     } IMachineGlobalObjectTableVtbl;
@@ -8678,7 +8653,92 @@ EXTERN_C const IID IID_IMachineGlobalObjectTable;
 #endif 	/* __IMachineGlobalObjectTable_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0053 */
+/* interface __MIDL_itf_objidl_0000_0054 */
+/* [local] */ 
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+#pragma region Application Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+
+
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0054_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0054_v0_0_s_ifspec;
+
+#ifndef __ISupportAllowLowerTrustActivation_INTERFACE_DEFINED__
+#define __ISupportAllowLowerTrustActivation_INTERFACE_DEFINED__
+
+/* interface ISupportAllowLowerTrustActivation */
+/* [uuid][object][local] */ 
+
+
+EXTERN_C const IID IID_ISupportAllowLowerTrustActivation;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("e9956ef2-3828-4b4b-8fa9-7db61dee4954")
+    ISupportAllowLowerTrustActivation : public IUnknown
+    {
+    public:
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ISupportAllowLowerTrustActivationVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISupportAllowLowerTrustActivation * This,
+            /* [in] */ REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISupportAllowLowerTrustActivation * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISupportAllowLowerTrustActivation * This);
+        
+        END_INTERFACE
+    } ISupportAllowLowerTrustActivationVtbl;
+
+    interface ISupportAllowLowerTrustActivation
+    {
+        CONST_VTBL struct ISupportAllowLowerTrustActivationVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISupportAllowLowerTrustActivation_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ISupportAllowLowerTrustActivation_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ISupportAllowLowerTrustActivation_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISupportAllowLowerTrustActivation_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_objidl_0000_0055 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -8705,8 +8765,8 @@ EXTERN_C const IID IID_IMachineGlobalObjectTable;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0053_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0053_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0055_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0055_v0_0_s_ifspec;
 
 #ifndef __IMallocSpy_INTERFACE_DEFINED__
 #define __IMallocSpy_INTERFACE_DEFINED__
@@ -8801,8 +8861,7 @@ EXTERN_C const IID IID_IMallocSpy;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMallocSpy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8972,7 +9031,7 @@ EXTERN_C const IID IID_IMallocSpy;
 #endif 	/* __IMallocSpy_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0054 */
+/* interface __MIDL_itf_objidl_0000_0056 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -8981,8 +9040,8 @@ EXTERN_C const IID IID_IMallocSpy;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0054_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0054_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0056_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0056_v0_0_s_ifspec;
 
 #ifndef __IBindCtx_INTERFACE_DEFINED__
 #define __IBindCtx_INTERFACE_DEFINED__
@@ -9075,12 +9134,10 @@ EXTERN_C const IID IID_IBindCtx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RegisterObjectBound( 
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *punk) = 0;
+            /* [unique][in] */ __RPC__in_opt IUnknown *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RevokeObjectBound( 
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *punk) = 0;
+            /* [unique][in] */ __RPC__in_opt IUnknown *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseBoundObjects( void) = 0;
         
@@ -9093,28 +9150,21 @@ EXTERN_C const IID IID_IBindCtx;
             _Inout_  BIND_OPTS *pbindopts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRunningObjectTable( 
-            /* [annotation][out] */ 
-            _Out_  IRunningObjectTable **pprot) = 0;
+            /* [out] */ __RPC__deref_out_opt IRunningObjectTable **pprot) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterObjectParam( 
-            /* [annotation][in] */ 
-            _In_  LPOLESTR pszKey,
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *punk) = 0;
+            /* [in] */ __RPC__in LPOLESTR pszKey,
+            /* [unique][in] */ __RPC__in_opt IUnknown *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetObjectParam( 
-            /* [annotation][in] */ 
-            _In_  LPOLESTR pszKey,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunk) = 0;
+            /* [in] */ __RPC__in LPOLESTR pszKey,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppunk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumObjectParam( 
-            /* [annotation][out] */ 
-            _Out_  IEnumString **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumString **ppenum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RevokeObjectParam( 
-            /* [annotation][in] */ 
-            _In_  LPOLESTR pszKey) = 0;
+            /* [in] */ __RPC__in LPOLESTR pszKey) = 0;
         
     };
     
@@ -9128,8 +9178,7 @@ EXTERN_C const IID IID_IBindCtx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBindCtx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9144,14 +9193,12 @@ EXTERN_C const IID IID_IBindCtx;
         DECLSPEC_XFGVIRT(IBindCtx, RegisterObjectBound)
         HRESULT ( STDMETHODCALLTYPE *RegisterObjectBound )( 
             __RPC__in IBindCtx * This,
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *punk);
+            /* [unique][in] */ __RPC__in_opt IUnknown *punk);
         
         DECLSPEC_XFGVIRT(IBindCtx, RevokeObjectBound)
         HRESULT ( STDMETHODCALLTYPE *RevokeObjectBound )( 
             __RPC__in IBindCtx * This,
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *punk);
+            /* [unique][in] */ __RPC__in_opt IUnknown *punk);
         
         DECLSPEC_XFGVIRT(IBindCtx, ReleaseBoundObjects)
         HRESULT ( STDMETHODCALLTYPE *ReleaseBoundObjects )( 
@@ -9172,36 +9219,29 @@ EXTERN_C const IID IID_IBindCtx;
         DECLSPEC_XFGVIRT(IBindCtx, GetRunningObjectTable)
         HRESULT ( STDMETHODCALLTYPE *GetRunningObjectTable )( 
             __RPC__in IBindCtx * This,
-            /* [annotation][out] */ 
-            _Out_  IRunningObjectTable **pprot);
+            /* [out] */ __RPC__deref_out_opt IRunningObjectTable **pprot);
         
         DECLSPEC_XFGVIRT(IBindCtx, RegisterObjectParam)
         HRESULT ( STDMETHODCALLTYPE *RegisterObjectParam )( 
             __RPC__in IBindCtx * This,
-            /* [annotation][in] */ 
-            _In_  LPOLESTR pszKey,
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *punk);
+            /* [in] */ __RPC__in LPOLESTR pszKey,
+            /* [unique][in] */ __RPC__in_opt IUnknown *punk);
         
         DECLSPEC_XFGVIRT(IBindCtx, GetObjectParam)
         HRESULT ( STDMETHODCALLTYPE *GetObjectParam )( 
             __RPC__in IBindCtx * This,
-            /* [annotation][in] */ 
-            _In_  LPOLESTR pszKey,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunk);
+            /* [in] */ __RPC__in LPOLESTR pszKey,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppunk);
         
         DECLSPEC_XFGVIRT(IBindCtx, EnumObjectParam)
         HRESULT ( STDMETHODCALLTYPE *EnumObjectParam )( 
             __RPC__in IBindCtx * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumString **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumString **ppenum);
         
         DECLSPEC_XFGVIRT(IBindCtx, RevokeObjectParam)
         HRESULT ( STDMETHODCALLTYPE *RevokeObjectParam )( 
             __RPC__in IBindCtx * This,
-            /* [annotation][in] */ 
-            _In_  LPOLESTR pszKey);
+            /* [in] */ __RPC__in LPOLESTR pszKey);
         
         END_INTERFACE
     } IBindCtxVtbl;
@@ -9265,8 +9305,7 @@ EXTERN_C const IID IID_IBindCtx;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindCtx_RemoteSetBindOptions_Proxy( 
     __RPC__in IBindCtx * This,
-    /* [annotation][in] */ 
-    _In_  BIND_OPTS2 *pbindopts);
+    /* [in] */ __RPC__in BIND_OPTS2 *pbindopts);
 
 
 void __RPC_STUB IBindCtx_RemoteSetBindOptions_Stub(
@@ -9278,8 +9317,7 @@ void __RPC_STUB IBindCtx_RemoteSetBindOptions_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindCtx_RemoteGetBindOptions_Proxy( 
     __RPC__in IBindCtx * This,
-    /* [annotation][out][in] */ 
-    _Inout_  BIND_OPTS2 *pbindopts);
+    /* [out][in] */ __RPC__inout BIND_OPTS2 *pbindopts);
 
 
 void __RPC_STUB IBindCtx_RemoteGetBindOptions_Stub(
@@ -9311,22 +9349,19 @@ EXTERN_C const IID IID_IEnumMoniker;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation] */ 
             _Out_writes_to_(celt,*pceltFetched)  IMoniker **rgelt,
             /* [annotation] */ 
             _Out_opt_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumMoniker **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumMoniker **ppenum) = 0;
         
     };
     
@@ -9340,8 +9375,7 @@ EXTERN_C const IID IID_IEnumMoniker;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumMoniker * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9356,8 +9390,7 @@ EXTERN_C const IID IID_IEnumMoniker;
         DECLSPEC_XFGVIRT(IEnumMoniker, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumMoniker * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation] */ 
             _Out_writes_to_(celt,*pceltFetched)  IMoniker **rgelt,
             /* [annotation] */ 
@@ -9366,8 +9399,7 @@ EXTERN_C const IID IID_IEnumMoniker;
         DECLSPEC_XFGVIRT(IEnumMoniker, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumMoniker * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumMoniker, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -9376,8 +9408,7 @@ EXTERN_C const IID IID_IEnumMoniker;
         DECLSPEC_XFGVIRT(IEnumMoniker, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumMoniker * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumMoniker **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumMoniker **ppenum);
         
         END_INTERFACE
     } IEnumMonikerVtbl;
@@ -9423,12 +9454,9 @@ EXTERN_C const IID IID_IEnumMoniker;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumMoniker_RemoteNext_Proxy( 
     __RPC__in IEnumMoniker * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IMoniker **rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IMoniker **rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumMoniker_RemoteNext_Stub(
@@ -9442,7 +9470,7 @@ void __RPC_STUB IEnumMoniker_RemoteNext_Stub(
 #endif 	/* __IEnumMoniker_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0056 */
+/* interface __MIDL_itf_objidl_0000_0058 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -9451,8 +9479,8 @@ void __RPC_STUB IEnumMoniker_RemoteNext_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0056_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0056_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0058_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0058_v0_0_s_ifspec;
 
 #ifndef __IRunnableObject_INTERFACE_DEFINED__
 #define __IRunnableObject_INTERFACE_DEFINED__
@@ -9472,24 +9500,19 @@ EXTERN_C const IID IID_IRunnableObject;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRunningClass( 
-            /* [annotation][out] */ 
-            _Out_  LPCLSID lpClsid) = 0;
+            /* [out] */ __RPC__out LPCLSID lpClsid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Run( 
-            /* [annotation][in] */ 
-            _In_  LPBINDCTX pbc) = 0;
+            /* [in] */ __RPC__in_opt LPBINDCTX pbc) = 0;
         
         virtual /* [local] */ BOOL STDMETHODCALLTYPE IsRunning( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LockRunning( 
-            /* [annotation][in] */ 
-            _In_  BOOL fLock,
-            /* [annotation][in] */ 
-            _In_  BOOL fLastUnlockCloses) = 0;
+            /* [in] */ BOOL fLock,
+            /* [in] */ BOOL fLastUnlockCloses) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContainedObject( 
-            /* [annotation][in] */ 
-            _In_  BOOL fContained) = 0;
+            /* [in] */ BOOL fContained) = 0;
         
     };
     
@@ -9503,8 +9526,7 @@ EXTERN_C const IID IID_IRunnableObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRunnableObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9519,14 +9541,12 @@ EXTERN_C const IID IID_IRunnableObject;
         DECLSPEC_XFGVIRT(IRunnableObject, GetRunningClass)
         HRESULT ( STDMETHODCALLTYPE *GetRunningClass )( 
             __RPC__in IRunnableObject * This,
-            /* [annotation][out] */ 
-            _Out_  LPCLSID lpClsid);
+            /* [out] */ __RPC__out LPCLSID lpClsid);
         
         DECLSPEC_XFGVIRT(IRunnableObject, Run)
         HRESULT ( STDMETHODCALLTYPE *Run )( 
             __RPC__in IRunnableObject * This,
-            /* [annotation][in] */ 
-            _In_  LPBINDCTX pbc);
+            /* [in] */ __RPC__in_opt LPBINDCTX pbc);
         
         DECLSPEC_XFGVIRT(IRunnableObject, IsRunning)
         /* [local] */ BOOL ( STDMETHODCALLTYPE *IsRunning )( 
@@ -9535,16 +9555,13 @@ EXTERN_C const IID IID_IRunnableObject;
         DECLSPEC_XFGVIRT(IRunnableObject, LockRunning)
         HRESULT ( STDMETHODCALLTYPE *LockRunning )( 
             __RPC__in IRunnableObject * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fLock,
-            /* [annotation][in] */ 
-            _In_  BOOL fLastUnlockCloses);
+            /* [in] */ BOOL fLock,
+            /* [in] */ BOOL fLastUnlockCloses);
         
         DECLSPEC_XFGVIRT(IRunnableObject, SetContainedObject)
         HRESULT ( STDMETHODCALLTYPE *SetContainedObject )( 
             __RPC__in IRunnableObject * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fContained);
+            /* [in] */ BOOL fContained);
         
         END_INTERFACE
     } IRunnableObjectVtbl;
@@ -9624,44 +9641,31 @@ EXTERN_C const IID IID_IRunningObjectTable;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Register( 
-            /* [annotation][in] */ 
-            _In_  DWORD grfFlags,
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *punkObject,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkObjectName,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwRegister) = 0;
+            /* [in] */ DWORD grfFlags,
+            /* [unique][in] */ __RPC__in_opt IUnknown *punkObject,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkObjectName,
+            /* [out] */ __RPC__out DWORD *pdwRegister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Revoke( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRegister) = 0;
+            /* [in] */ DWORD dwRegister) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsRunning( 
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkObjectName) = 0;
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkObjectName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetObject( 
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkObjectName,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkObject) = 0;
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkObjectName,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppunkObject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NoteChangeTime( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRegister,
-            /* [annotation][in] */ 
-            _In_  FILETIME *pfiletime) = 0;
+            /* [in] */ DWORD dwRegister,
+            /* [in] */ __RPC__in FILETIME *pfiletime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTimeOfLastChange( 
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkObjectName,
-            /* [annotation][out] */ 
-            _Out_  FILETIME *pfiletime) = 0;
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkObjectName,
+            /* [out] */ __RPC__out FILETIME *pfiletime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumRunning( 
-            /* [annotation][out] */ 
-            _Out_  IEnumMoniker **ppenumMoniker) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumMoniker **ppenumMoniker) = 0;
         
     };
     
@@ -9675,8 +9679,7 @@ EXTERN_C const IID IID_IRunningObjectTable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRunningObjectTable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9691,56 +9694,43 @@ EXTERN_C const IID IID_IRunningObjectTable;
         DECLSPEC_XFGVIRT(IRunningObjectTable, Register)
         HRESULT ( STDMETHODCALLTYPE *Register )( 
             __RPC__in IRunningObjectTable * This,
-            /* [annotation][in] */ 
-            _In_  DWORD grfFlags,
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *punkObject,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkObjectName,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwRegister);
+            /* [in] */ DWORD grfFlags,
+            /* [unique][in] */ __RPC__in_opt IUnknown *punkObject,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkObjectName,
+            /* [out] */ __RPC__out DWORD *pdwRegister);
         
         DECLSPEC_XFGVIRT(IRunningObjectTable, Revoke)
         HRESULT ( STDMETHODCALLTYPE *Revoke )( 
             __RPC__in IRunningObjectTable * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRegister);
+            /* [in] */ DWORD dwRegister);
         
         DECLSPEC_XFGVIRT(IRunningObjectTable, IsRunning)
         HRESULT ( STDMETHODCALLTYPE *IsRunning )( 
             __RPC__in IRunningObjectTable * This,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkObjectName);
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkObjectName);
         
         DECLSPEC_XFGVIRT(IRunningObjectTable, GetObject)
         HRESULT ( STDMETHODCALLTYPE *GetObject )( 
             __RPC__in IRunningObjectTable * This,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkObjectName,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppunkObject);
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkObjectName,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppunkObject);
         
         DECLSPEC_XFGVIRT(IRunningObjectTable, NoteChangeTime)
         HRESULT ( STDMETHODCALLTYPE *NoteChangeTime )( 
             __RPC__in IRunningObjectTable * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRegister,
-            /* [annotation][in] */ 
-            _In_  FILETIME *pfiletime);
+            /* [in] */ DWORD dwRegister,
+            /* [in] */ __RPC__in FILETIME *pfiletime);
         
         DECLSPEC_XFGVIRT(IRunningObjectTable, GetTimeOfLastChange)
         HRESULT ( STDMETHODCALLTYPE *GetTimeOfLastChange )( 
             __RPC__in IRunningObjectTable * This,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkObjectName,
-            /* [annotation][out] */ 
-            _Out_  FILETIME *pfiletime);
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkObjectName,
+            /* [out] */ __RPC__out FILETIME *pfiletime);
         
         DECLSPEC_XFGVIRT(IRunningObjectTable, EnumRunning)
         HRESULT ( STDMETHODCALLTYPE *EnumRunning )( 
             __RPC__in IRunningObjectTable * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumMoniker **ppenumMoniker);
+            /* [out] */ __RPC__deref_out_opt IEnumMoniker **ppenumMoniker);
         
         END_INTERFACE
     } IRunningObjectTableVtbl;
@@ -9797,7 +9787,7 @@ EXTERN_C const IID IID_IRunningObjectTable;
 #endif 	/* __IRunningObjectTable_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0058 */
+/* interface __MIDL_itf_objidl_0000_0060 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -9806,8 +9796,8 @@ EXTERN_C const IID IID_IRunningObjectTable;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0058_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0058_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0060_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0060_v0_0_s_ifspec;
 
 #ifndef __IPersist_INTERFACE_DEFINED__
 #define __IPersist_INTERFACE_DEFINED__
@@ -9827,8 +9817,7 @@ EXTERN_C const IID IID_IPersist;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetClassID( 
-            /* [annotation][out] */ 
-            _Out_  CLSID *pClassID) = 0;
+            /* [out] */ __RPC__out CLSID *pClassID) = 0;
         
     };
     
@@ -9842,8 +9831,7 @@ EXTERN_C const IID IID_IPersist;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPersist * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9858,8 +9846,7 @@ EXTERN_C const IID IID_IPersist;
         DECLSPEC_XFGVIRT(IPersist, GetClassID)
         HRESULT ( STDMETHODCALLTYPE *GetClassID )( 
             __RPC__in IPersist * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pClassID);
+            /* [out] */ __RPC__out CLSID *pClassID);
         
         END_INTERFACE
     } IPersistVtbl;
@@ -9918,18 +9905,14 @@ EXTERN_C const IID IID_IPersistStream;
         virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Load( 
-            /* [annotation][unique][in] */ 
-            _In_  IStream *pStm) = 0;
+            /* [unique][in] */ __RPC__in_opt IStream *pStm) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Save( 
-            /* [annotation][unique][in] */ 
-            _In_  IStream *pStm,
-            /* [annotation][in] */ 
-            _In_  BOOL fClearDirty) = 0;
+            /* [unique][in] */ __RPC__in_opt IStream *pStm,
+            /* [in] */ BOOL fClearDirty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSizeMax( 
-            /* [annotation][out] */ 
-            _Out_  ULARGE_INTEGER *pcbSize) = 0;
+            /* [out] */ __RPC__out ULARGE_INTEGER *pcbSize) = 0;
         
     };
     
@@ -9943,8 +9926,7 @@ EXTERN_C const IID IID_IPersistStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPersistStream * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9959,8 +9941,7 @@ EXTERN_C const IID IID_IPersistStream;
         DECLSPEC_XFGVIRT(IPersist, GetClassID)
         HRESULT ( STDMETHODCALLTYPE *GetClassID )( 
             __RPC__in IPersistStream * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pClassID);
+            /* [out] */ __RPC__out CLSID *pClassID);
         
         DECLSPEC_XFGVIRT(IPersistStream, IsDirty)
         HRESULT ( STDMETHODCALLTYPE *IsDirty )( 
@@ -9969,22 +9950,18 @@ EXTERN_C const IID IID_IPersistStream;
         DECLSPEC_XFGVIRT(IPersistStream, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             __RPC__in IPersistStream * This,
-            /* [annotation][unique][in] */ 
-            _In_  IStream *pStm);
+            /* [unique][in] */ __RPC__in_opt IStream *pStm);
         
         DECLSPEC_XFGVIRT(IPersistStream, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IPersistStream * This,
-            /* [annotation][unique][in] */ 
-            _In_  IStream *pStm,
-            /* [annotation][in] */ 
-            _In_  BOOL fClearDirty);
+            /* [unique][in] */ __RPC__in_opt IStream *pStm,
+            /* [in] */ BOOL fClearDirty);
         
         DECLSPEC_XFGVIRT(IPersistStream, GetSizeMax)
         HRESULT ( STDMETHODCALLTYPE *GetSizeMax )( 
             __RPC__in IPersistStream * This,
-            /* [annotation][out] */ 
-            _Out_  ULARGE_INTEGER *pcbSize);
+            /* [out] */ __RPC__out ULARGE_INTEGER *pcbSize);
         
         END_INTERFACE
     } IPersistStreamVtbl;
@@ -10098,92 +10075,61 @@ EXTERN_C const IID IID_IMoniker;
             _Outptr_  void **ppvObj) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reduce( 
-            /* [annotation][unique][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][in] */ 
-            _In_  DWORD dwReduceHowFar,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  IMoniker **ppmkToLeft,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmkReduced) = 0;
+            /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [in] */ DWORD dwReduceHowFar,
+            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IMoniker **ppmkToLeft,
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmkReduced) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ComposeWith( 
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkRight,
-            /* [annotation][in] */ 
-            _In_  BOOL fOnlyIfNotGeneric,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmkComposite) = 0;
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkRight,
+            /* [in] */ BOOL fOnlyIfNotGeneric,
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmkComposite) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Enum( 
-            /* [annotation][in] */ 
-            _In_  BOOL fForward,
-            /* [annotation][out] */ 
-            _Out_  IEnumMoniker **ppenumMoniker) = 0;
+            /* [in] */ BOOL fForward,
+            /* [out] */ __RPC__deref_out_opt IEnumMoniker **ppenumMoniker) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsEqual( 
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkOtherMoniker) = 0;
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkOtherMoniker) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Hash( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwHash) = 0;
+            /* [out] */ __RPC__out DWORD *pdwHash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsRunning( 
-            /* [annotation][unique][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkToLeft,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkNewlyRunning) = 0;
+            /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkNewlyRunning) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTimeOfLastChange( 
-            /* [annotation][unique][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkToLeft,
-            /* [annotation][out] */ 
-            _Out_  FILETIME *pFileTime) = 0;
+            /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+            /* [out] */ __RPC__out FILETIME *pFileTime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Inverse( 
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmk) = 0;
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CommonPrefixWith( 
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkOther,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmkPrefix) = 0;
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkOther,
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmkPrefix) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RelativePathTo( 
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkOther,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmkRelPath) = 0;
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkOther,
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmkRelPath) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDisplayName( 
-            /* [annotation][unique][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkToLeft,
-            /* [annotation][out] */ 
-            _Out_  LPOLESTR *ppszDisplayName) = 0;
+            /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+            /* [out] */ __RPC__deref_out_opt LPOLESTR *ppszDisplayName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ParseDisplayName( 
-            /* [annotation][unique][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkToLeft,
-            /* [annotation][in] */ 
-            _In_  LPOLESTR pszDisplayName,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pchEaten,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmkOut) = 0;
+            /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+            /* [in] */ __RPC__in LPOLESTR pszDisplayName,
+            /* [out] */ __RPC__out ULONG *pchEaten,
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmkOut) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsSystemMoniker( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwMksys) = 0;
+            /* [out] */ __RPC__out DWORD *pdwMksys) = 0;
         
     };
     
@@ -10197,8 +10143,7 @@ EXTERN_C const IID IID_IMoniker;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMoniker * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10213,8 +10158,7 @@ EXTERN_C const IID IID_IMoniker;
         DECLSPEC_XFGVIRT(IPersist, GetClassID)
         HRESULT ( STDMETHODCALLTYPE *GetClassID )( 
             __RPC__in IMoniker * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pClassID);
+            /* [out] */ __RPC__out CLSID *pClassID);
         
         DECLSPEC_XFGVIRT(IPersistStream, IsDirty)
         HRESULT ( STDMETHODCALLTYPE *IsDirty )( 
@@ -10223,22 +10167,18 @@ EXTERN_C const IID IID_IMoniker;
         DECLSPEC_XFGVIRT(IPersistStream, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IStream *pStm);
+            /* [unique][in] */ __RPC__in_opt IStream *pStm);
         
         DECLSPEC_XFGVIRT(IPersistStream, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IStream *pStm,
-            /* [annotation][in] */ 
-            _In_  BOOL fClearDirty);
+            /* [unique][in] */ __RPC__in_opt IStream *pStm,
+            /* [in] */ BOOL fClearDirty);
         
         DECLSPEC_XFGVIRT(IPersistStream, GetSizeMax)
         HRESULT ( STDMETHODCALLTYPE *GetSizeMax )( 
             __RPC__in IMoniker * This,
-            /* [annotation][out] */ 
-            _Out_  ULARGE_INTEGER *pcbSize);
+            /* [out] */ __RPC__out ULARGE_INTEGER *pcbSize);
         
         DECLSPEC_XFGVIRT(IMoniker, BindToObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *BindToObject )( 
@@ -10267,116 +10207,85 @@ EXTERN_C const IID IID_IMoniker;
         DECLSPEC_XFGVIRT(IMoniker, Reduce)
         HRESULT ( STDMETHODCALLTYPE *Reduce )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][in] */ 
-            _In_  DWORD dwReduceHowFar,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  IMoniker **ppmkToLeft,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmkReduced);
+            /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [in] */ DWORD dwReduceHowFar,
+            /* [unique][out][in] */ __RPC__deref_opt_inout_opt IMoniker **ppmkToLeft,
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmkReduced);
         
         DECLSPEC_XFGVIRT(IMoniker, ComposeWith)
         HRESULT ( STDMETHODCALLTYPE *ComposeWith )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkRight,
-            /* [annotation][in] */ 
-            _In_  BOOL fOnlyIfNotGeneric,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmkComposite);
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkRight,
+            /* [in] */ BOOL fOnlyIfNotGeneric,
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmkComposite);
         
         DECLSPEC_XFGVIRT(IMoniker, Enum)
         HRESULT ( STDMETHODCALLTYPE *Enum )( 
             __RPC__in IMoniker * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fForward,
-            /* [annotation][out] */ 
-            _Out_  IEnumMoniker **ppenumMoniker);
+            /* [in] */ BOOL fForward,
+            /* [out] */ __RPC__deref_out_opt IEnumMoniker **ppenumMoniker);
         
         DECLSPEC_XFGVIRT(IMoniker, IsEqual)
         HRESULT ( STDMETHODCALLTYPE *IsEqual )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkOtherMoniker);
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkOtherMoniker);
         
         DECLSPEC_XFGVIRT(IMoniker, Hash)
         HRESULT ( STDMETHODCALLTYPE *Hash )( 
             __RPC__in IMoniker * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwHash);
+            /* [out] */ __RPC__out DWORD *pdwHash);
         
         DECLSPEC_XFGVIRT(IMoniker, IsRunning)
         HRESULT ( STDMETHODCALLTYPE *IsRunning )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkToLeft,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkNewlyRunning);
+            /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkNewlyRunning);
         
         DECLSPEC_XFGVIRT(IMoniker, GetTimeOfLastChange)
         HRESULT ( STDMETHODCALLTYPE *GetTimeOfLastChange )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkToLeft,
-            /* [annotation][out] */ 
-            _Out_  FILETIME *pFileTime);
+            /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+            /* [out] */ __RPC__out FILETIME *pFileTime);
         
         DECLSPEC_XFGVIRT(IMoniker, Inverse)
         HRESULT ( STDMETHODCALLTYPE *Inverse )( 
             __RPC__in IMoniker * This,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmk);
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmk);
         
         DECLSPEC_XFGVIRT(IMoniker, CommonPrefixWith)
         HRESULT ( STDMETHODCALLTYPE *CommonPrefixWith )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkOther,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmkPrefix);
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkOther,
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmkPrefix);
         
         DECLSPEC_XFGVIRT(IMoniker, RelativePathTo)
         HRESULT ( STDMETHODCALLTYPE *RelativePathTo )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkOther,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmkRelPath);
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkOther,
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmkRelPath);
         
         DECLSPEC_XFGVIRT(IMoniker, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkToLeft,
-            /* [annotation][out] */ 
-            _Out_  LPOLESTR *ppszDisplayName);
+            /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+            /* [out] */ __RPC__deref_out_opt LPOLESTR *ppszDisplayName);
         
         DECLSPEC_XFGVIRT(IMoniker, ParseDisplayName)
         HRESULT ( STDMETHODCALLTYPE *ParseDisplayName )( 
             __RPC__in IMoniker * This,
-            /* [annotation][unique][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][unique][in] */ 
-            _In_  IMoniker *pmkToLeft,
-            /* [annotation][in] */ 
-            _In_  LPOLESTR pszDisplayName,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pchEaten,
-            /* [annotation][out] */ 
-            _Out_  IMoniker **ppmkOut);
+            /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+            /* [in] */ __RPC__in LPOLESTR pszDisplayName,
+            /* [out] */ __RPC__out ULONG *pchEaten,
+            /* [out] */ __RPC__deref_out_opt IMoniker **ppmkOut);
         
         DECLSPEC_XFGVIRT(IMoniker, IsSystemMoniker)
         HRESULT ( STDMETHODCALLTYPE *IsSystemMoniker )( 
             __RPC__in IMoniker * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwMksys);
+            /* [out] */ __RPC__out DWORD *pdwMksys);
         
         END_INTERFACE
     } IMonikerVtbl;
@@ -10472,14 +10381,10 @@ EXTERN_C const IID IID_IMoniker;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IMoniker_RemoteBindToObject_Proxy( 
     __RPC__in IMoniker * This,
-    /* [annotation][unique][in] */ 
-    _In_  IBindCtx *pbc,
-    /* [annotation][unique][in] */ 
-    _In_  IMoniker *pmkToLeft,
-    /* [annotation][in] */ 
-    _In_  REFIID riidResult,
-    /* [annotation][iid_is][out] */ 
-    _COM_Outptr_  IUnknown **ppvResult);
+    /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+    /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+    /* [in] */ __RPC__in REFIID riidResult,
+    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvResult);
 
 
 void __RPC_STUB IMoniker_RemoteBindToObject_Stub(
@@ -10491,14 +10396,10 @@ void __RPC_STUB IMoniker_RemoteBindToObject_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IMoniker_RemoteBindToStorage_Proxy( 
     __RPC__in IMoniker * This,
-    /* [annotation][unique][in] */ 
-    _In_  IBindCtx *pbc,
-    /* [annotation][unique][in] */ 
-    _In_  IMoniker *pmkToLeft,
-    /* [annotation][in] */ 
-    _In_  REFIID riid,
-    /* [annotation][iid_is][out] */ 
-    _COM_Outptr_  IUnknown **ppvObj);
+    /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+    /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+    /* [in] */ __RPC__in REFIID riid,
+    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObj);
 
 
 void __RPC_STUB IMoniker_RemoteBindToStorage_Stub(
@@ -10512,7 +10413,7 @@ void __RPC_STUB IMoniker_RemoteBindToStorage_Stub(
 #endif 	/* __IMoniker_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0061 */
+/* interface __MIDL_itf_objidl_0000_0063 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -10521,8 +10422,8 @@ void __RPC_STUB IMoniker_RemoteBindToStorage_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0061_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0061_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0063_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0063_v0_0_s_ifspec;
 
 #ifndef __IROTData_INTERFACE_DEFINED__
 #define __IROTData_INTERFACE_DEFINED__
@@ -10540,12 +10441,9 @@ EXTERN_C const IID IID_IROTData;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetComparisonData( 
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cbMax)  byte *pbData,
-            /* [annotation][in] */ 
-            _In_  ULONG cbMax,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbData) = 0;
+            /* [size_is][out] */ __RPC__out_ecount_full(cbMax) byte *pbData,
+            /* [in] */ ULONG cbMax,
+            /* [out] */ __RPC__out ULONG *pcbData) = 0;
         
     };
     
@@ -10559,8 +10457,7 @@ EXTERN_C const IID IID_IROTData;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IROTData * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10575,12 +10472,9 @@ EXTERN_C const IID IID_IROTData;
         DECLSPEC_XFGVIRT(IROTData, GetComparisonData)
         HRESULT ( STDMETHODCALLTYPE *GetComparisonData )( 
             __RPC__in IROTData * This,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cbMax)  byte *pbData,
-            /* [annotation][in] */ 
-            _In_  ULONG cbMax,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbData);
+            /* [size_is][out] */ __RPC__out_ecount_full(cbMax) byte *pbData,
+            /* [in] */ ULONG cbMax,
+            /* [out] */ __RPC__out ULONG *pcbData);
         
         END_INTERFACE
     } IROTDataVtbl;
@@ -10619,7 +10513,7 @@ EXTERN_C const IID IID_IROTData;
 #endif 	/* __IROTData_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0062 */
+/* interface __MIDL_itf_objidl_0000_0064 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -10628,8 +10522,8 @@ EXTERN_C const IID IID_IROTData;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0062_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0062_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0064_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0064_v0_0_s_ifspec;
 
 #ifndef __IEnumSTATSTG_INTERFACE_DEFINED__
 #define __IEnumSTATSTG_INTERFACE_DEFINED__
@@ -10649,22 +10543,19 @@ EXTERN_C const IID IID_IEnumSTATSTG;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation] */ 
             _Out_writes_to_(celt,*pceltFetched)  STATSTG *rgelt,
             /* [annotation] */ 
             _Out_opt_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumSTATSTG **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumSTATSTG **ppenum) = 0;
         
     };
     
@@ -10678,8 +10569,7 @@ EXTERN_C const IID IID_IEnumSTATSTG;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSTATSTG * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10694,8 +10584,7 @@ EXTERN_C const IID IID_IEnumSTATSTG;
         DECLSPEC_XFGVIRT(IEnumSTATSTG, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumSTATSTG * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation] */ 
             _Out_writes_to_(celt,*pceltFetched)  STATSTG *rgelt,
             /* [annotation] */ 
@@ -10704,8 +10593,7 @@ EXTERN_C const IID IID_IEnumSTATSTG;
         DECLSPEC_XFGVIRT(IEnumSTATSTG, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSTATSTG * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumSTATSTG, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -10714,8 +10602,7 @@ EXTERN_C const IID IID_IEnumSTATSTG;
         DECLSPEC_XFGVIRT(IEnumSTATSTG, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSTATSTG * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumSTATSTG **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumSTATSTG **ppenum);
         
         END_INTERFACE
     } IEnumSTATSTGVtbl;
@@ -10761,12 +10648,9 @@ EXTERN_C const IID IID_IEnumSTATSTG;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumSTATSTG_RemoteNext_Proxy( 
     __RPC__in IEnumSTATSTG * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  STATSTG *rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) STATSTG *rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumSTATSTG_RemoteNext_Stub(
@@ -10811,58 +10695,39 @@ EXTERN_C const IID IID_IStorage;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateStream( 
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsName,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved1,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved2,
-            /* [annotation][out] */ 
-            _Out_  IStream **ppstm) = 0;
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsName,
+            /* [in] */ DWORD grfMode,
+            /* [in] */ DWORD reserved1,
+            /* [in] */ DWORD reserved2,
+            /* [out] */ __RPC__deref_out_opt IStream **ppstm) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE OpenStream( 
             /* [annotation][string][in] */ 
             _In_z_  const OLECHAR *pwcsName,
             /* [annotation][unique][in] */ 
             _Reserved_  void *reserved1,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved2,
+            /* [in] */ DWORD grfMode,
+            /* [in] */ DWORD reserved2,
             /* [annotation][out] */ 
             _Outptr_  IStream **ppstm) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateStorage( 
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsName,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved1,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved2,
-            /* [annotation][out] */ 
-            _Out_  IStorage **ppstg) = 0;
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsName,
+            /* [in] */ DWORD grfMode,
+            /* [in] */ DWORD reserved1,
+            /* [in] */ DWORD reserved2,
+            /* [out] */ __RPC__deref_out_opt IStorage **ppstg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OpenStorage( 
-            /* [annotation][string][unique][in] */ 
-            _In_  const OLECHAR *pwcsName,
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pstgPriority,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][unique][in] */ 
-            _In_  SNB snbExclude,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved,
-            /* [annotation][out] */ 
-            _Out_  IStorage **ppstg) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string const OLECHAR *pwcsName,
+            /* [unique][in] */ __RPC__in_opt IStorage *pstgPriority,
+            /* [in] */ DWORD grfMode,
+            /* [unique][in] */ __RPC__deref_opt_in_opt SNB snbExclude,
+            /* [in] */ DWORD reserved,
+            /* [out] */ __RPC__deref_out_opt IStorage **ppstg) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE CopyTo( 
-            /* [annotation][in] */ 
-            _In_  DWORD ciidExclude,
+            /* [in] */ DWORD ciidExclude,
             /* [annotation][size_is][unique][in] */ 
             _In_reads_opt_(ciidExclude)  const IID *rgiidExclude,
             /* [annotation][unique][in] */ 
@@ -10871,18 +10736,13 @@ EXTERN_C const IID IID_IStorage;
             _In_  IStorage *pstgDest) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE MoveElementTo( 
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsName,
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pstgDest,
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsNewName,
-            /* [annotation][in] */ 
-            _In_  DWORD grfFlags) = 0;
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsName,
+            /* [unique][in] */ __RPC__in_opt IStorage *pstgDest,
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsNewName,
+            /* [in] */ DWORD grfFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Commit( 
-            /* [annotation][in] */ 
-            _In_  DWORD grfCommitFlags) = 0;
+            /* [in] */ DWORD grfCommitFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Revert( void) = 0;
         
@@ -10897,40 +10757,28 @@ EXTERN_C const IID IID_IStorage;
             _Outptr_  IEnumSTATSTG **ppenum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DestroyElement( 
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsName) = 0;
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RenameElement( 
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsOldName,
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsNewName) = 0;
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsOldName,
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsNewName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetElementTimes( 
-            /* [annotation][string][unique][in] */ 
-            _In_  const OLECHAR *pwcsName,
-            /* [annotation][unique][in] */ 
-            _In_  const FILETIME *pctime,
-            /* [annotation][unique][in] */ 
-            _In_  const FILETIME *patime,
-            /* [annotation][unique][in] */ 
-            _In_  const FILETIME *pmtime) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string const OLECHAR *pwcsName,
+            /* [unique][in] */ __RPC__in_opt const FILETIME *pctime,
+            /* [unique][in] */ __RPC__in_opt const FILETIME *patime,
+            /* [unique][in] */ __RPC__in_opt const FILETIME *pmtime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetClass( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID clsid) = 0;
+            /* [in] */ __RPC__in REFCLSID clsid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStateBits( 
-            /* [annotation][in] */ 
-            _In_  DWORD grfStateBits,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMask) = 0;
+            /* [in] */ DWORD grfStateBits,
+            /* [in] */ DWORD grfMask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Stat( 
-            /* [annotation][out] */ 
-            _Out_  STATSTG *pstatstg,
-            /* [annotation][in] */ 
-            _In_  DWORD grfStatFlag) = 0;
+            /* [out] */ __RPC__out STATSTG *pstatstg,
+            /* [in] */ DWORD grfStatFlag) = 0;
         
     };
     
@@ -10944,8 +10792,7 @@ EXTERN_C const IID IID_IStorage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStorage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10960,16 +10807,11 @@ EXTERN_C const IID IID_IStorage;
         DECLSPEC_XFGVIRT(IStorage, CreateStream)
         HRESULT ( STDMETHODCALLTYPE *CreateStream )( 
             __RPC__in IStorage * This,
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsName,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved1,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved2,
-            /* [annotation][out] */ 
-            _Out_  IStream **ppstm);
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsName,
+            /* [in] */ DWORD grfMode,
+            /* [in] */ DWORD reserved1,
+            /* [in] */ DWORD reserved2,
+            /* [out] */ __RPC__deref_out_opt IStream **ppstm);
         
         DECLSPEC_XFGVIRT(IStorage, OpenStream)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *OpenStream )( 
@@ -10978,48 +10820,34 @@ EXTERN_C const IID IID_IStorage;
             _In_z_  const OLECHAR *pwcsName,
             /* [annotation][unique][in] */ 
             _Reserved_  void *reserved1,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved2,
+            /* [in] */ DWORD grfMode,
+            /* [in] */ DWORD reserved2,
             /* [annotation][out] */ 
             _Outptr_  IStream **ppstm);
         
         DECLSPEC_XFGVIRT(IStorage, CreateStorage)
         HRESULT ( STDMETHODCALLTYPE *CreateStorage )( 
             __RPC__in IStorage * This,
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsName,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved1,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved2,
-            /* [annotation][out] */ 
-            _Out_  IStorage **ppstg);
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsName,
+            /* [in] */ DWORD grfMode,
+            /* [in] */ DWORD reserved1,
+            /* [in] */ DWORD reserved2,
+            /* [out] */ __RPC__deref_out_opt IStorage **ppstg);
         
         DECLSPEC_XFGVIRT(IStorage, OpenStorage)
         HRESULT ( STDMETHODCALLTYPE *OpenStorage )( 
             __RPC__in IStorage * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  const OLECHAR *pwcsName,
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pstgPriority,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][unique][in] */ 
-            _In_  SNB snbExclude,
-            /* [annotation][in] */ 
-            _In_  DWORD reserved,
-            /* [annotation][out] */ 
-            _Out_  IStorage **ppstg);
+            /* [string][unique][in] */ __RPC__in_opt_string const OLECHAR *pwcsName,
+            /* [unique][in] */ __RPC__in_opt IStorage *pstgPriority,
+            /* [in] */ DWORD grfMode,
+            /* [unique][in] */ __RPC__deref_opt_in_opt SNB snbExclude,
+            /* [in] */ DWORD reserved,
+            /* [out] */ __RPC__deref_out_opt IStorage **ppstg);
         
         DECLSPEC_XFGVIRT(IStorage, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             IStorage * This,
-            /* [annotation][in] */ 
-            _In_  DWORD ciidExclude,
+            /* [in] */ DWORD ciidExclude,
             /* [annotation][size_is][unique][in] */ 
             _In_reads_opt_(ciidExclude)  const IID *rgiidExclude,
             /* [annotation][unique][in] */ 
@@ -11030,20 +10858,15 @@ EXTERN_C const IID IID_IStorage;
         DECLSPEC_XFGVIRT(IStorage, MoveElementTo)
         HRESULT ( STDMETHODCALLTYPE *MoveElementTo )( 
             __RPC__in IStorage * This,
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsName,
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pstgDest,
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsNewName,
-            /* [annotation][in] */ 
-            _In_  DWORD grfFlags);
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsName,
+            /* [unique][in] */ __RPC__in_opt IStorage *pstgDest,
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsNewName,
+            /* [in] */ DWORD grfFlags);
         
         DECLSPEC_XFGVIRT(IStorage, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IStorage * This,
-            /* [annotation][in] */ 
-            _In_  DWORD grfCommitFlags);
+            /* [in] */ DWORD grfCommitFlags);
         
         DECLSPEC_XFGVIRT(IStorage, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
@@ -11064,50 +10887,38 @@ EXTERN_C const IID IID_IStorage;
         DECLSPEC_XFGVIRT(IStorage, DestroyElement)
         HRESULT ( STDMETHODCALLTYPE *DestroyElement )( 
             __RPC__in IStorage * This,
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsName);
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsName);
         
         DECLSPEC_XFGVIRT(IStorage, RenameElement)
         HRESULT ( STDMETHODCALLTYPE *RenameElement )( 
             __RPC__in IStorage * This,
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsOldName,
-            /* [annotation][string][in] */ 
-            _In_  const OLECHAR *pwcsNewName);
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsOldName,
+            /* [string][in] */ __RPC__in_string const OLECHAR *pwcsNewName);
         
         DECLSPEC_XFGVIRT(IStorage, SetElementTimes)
         HRESULT ( STDMETHODCALLTYPE *SetElementTimes )( 
             __RPC__in IStorage * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  const OLECHAR *pwcsName,
-            /* [annotation][unique][in] */ 
-            _In_  const FILETIME *pctime,
-            /* [annotation][unique][in] */ 
-            _In_  const FILETIME *patime,
-            /* [annotation][unique][in] */ 
-            _In_  const FILETIME *pmtime);
+            /* [string][unique][in] */ __RPC__in_opt_string const OLECHAR *pwcsName,
+            /* [unique][in] */ __RPC__in_opt const FILETIME *pctime,
+            /* [unique][in] */ __RPC__in_opt const FILETIME *patime,
+            /* [unique][in] */ __RPC__in_opt const FILETIME *pmtime);
         
         DECLSPEC_XFGVIRT(IStorage, SetClass)
         HRESULT ( STDMETHODCALLTYPE *SetClass )( 
             __RPC__in IStorage * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID clsid);
+            /* [in] */ __RPC__in REFCLSID clsid);
         
         DECLSPEC_XFGVIRT(IStorage, SetStateBits)
         HRESULT ( STDMETHODCALLTYPE *SetStateBits )( 
             __RPC__in IStorage * This,
-            /* [annotation][in] */ 
-            _In_  DWORD grfStateBits,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMask);
+            /* [in] */ DWORD grfStateBits,
+            /* [in] */ DWORD grfMask);
         
         DECLSPEC_XFGVIRT(IStorage, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in IStorage * This,
-            /* [annotation][out] */ 
-            _Out_  STATSTG *pstatstg,
-            /* [annotation][in] */ 
-            _In_  DWORD grfStatFlag);
+            /* [out] */ __RPC__out STATSTG *pstatstg,
+            /* [in] */ DWORD grfStatFlag);
         
         END_INTERFACE
     } IStorageVtbl;
@@ -11186,18 +10997,12 @@ EXTERN_C const IID IID_IStorage;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IStorage_RemoteOpenStream_Proxy( 
     __RPC__in IStorage * This,
-    /* [annotation][string][in] */ 
-    _In_  const OLECHAR *pwcsName,
-    /* [annotation][in] */ 
-    _In_  ULONG cbReserved1,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cbReserved1)  byte *reserved1,
-    /* [annotation][in] */ 
-    _In_  DWORD grfMode,
-    /* [annotation][in] */ 
-    _In_  DWORD reserved2,
-    /* [annotation][out] */ 
-    _Out_  IStream **ppstm);
+    /* [string][in] */ __RPC__in_string const OLECHAR *pwcsName,
+    /* [in] */ ULONG cbReserved1,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbReserved1) byte *reserved1,
+    /* [in] */ DWORD grfMode,
+    /* [in] */ DWORD reserved2,
+    /* [out] */ __RPC__deref_out_opt IStream **ppstm);
 
 
 void __RPC_STUB IStorage_RemoteOpenStream_Stub(
@@ -11209,13 +11014,10 @@ void __RPC_STUB IStorage_RemoteOpenStream_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IStorage_RemoteCopyTo_Proxy( 
     __RPC__in IStorage * This,
-    /* [annotation][in] */ 
-    _In_  DWORD ciidExclude,
+    /* [in] */ DWORD ciidExclude,
     /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(ciidExclude) const IID *rgiidExclude,
-    /* [annotation][unique][in] */ 
-    _In_  SNB snbExclude,
-    /* [annotation][unique][in] */ 
-    _In_  IStorage *pstgDest);
+    /* [unique][in] */ __RPC__deref_opt_in_opt SNB snbExclude,
+    /* [unique][in] */ __RPC__in_opt IStorage *pstgDest);
 
 
 void __RPC_STUB IStorage_RemoteCopyTo_Stub(
@@ -11227,16 +11029,11 @@ void __RPC_STUB IStorage_RemoteCopyTo_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IStorage_RemoteEnumElements_Proxy( 
     __RPC__in IStorage * This,
-    /* [annotation][in] */ 
-    _In_  DWORD reserved1,
-    /* [annotation][in] */ 
-    _In_  ULONG cbReserved2,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cbReserved2)  byte *reserved2,
-    /* [annotation][in] */ 
-    _In_  DWORD reserved3,
-    /* [annotation][out] */ 
-    _Out_  IEnumSTATSTG **ppenum);
+    /* [in] */ DWORD reserved1,
+    /* [in] */ ULONG cbReserved2,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbReserved2) byte *reserved2,
+    /* [in] */ DWORD reserved3,
+    /* [out] */ __RPC__deref_out_opt IEnumSTATSTG **ppenum);
 
 
 void __RPC_STUB IStorage_RemoteEnumElements_Stub(
@@ -11250,7 +11047,7 @@ void __RPC_STUB IStorage_RemoteEnumElements_Stub(
 #endif 	/* __IStorage_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0064 */
+/* interface __MIDL_itf_objidl_0000_0066 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -11259,8 +11056,8 @@ void __RPC_STUB IStorage_RemoteEnumElements_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0064_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0064_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0066_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0066_v0_0_s_ifspec;
 
 #ifndef __IPersistFile_INTERFACE_DEFINED__
 #define __IPersistFile_INTERFACE_DEFINED__
@@ -11282,24 +11079,18 @@ EXTERN_C const IID IID_IPersistFile;
         virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Load( 
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pszFileName,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMode) = 0;
+            /* [in] */ __RPC__in LPCOLESTR pszFileName,
+            /* [in] */ DWORD dwMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Save( 
-            /* [annotation][unique][in] */ 
-            _In_  LPCOLESTR pszFileName,
-            /* [annotation][in] */ 
-            _In_  BOOL fRemember) = 0;
+            /* [unique][in] */ __RPC__in_opt LPCOLESTR pszFileName,
+            /* [in] */ BOOL fRemember) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SaveCompleted( 
-            /* [annotation][unique][in] */ 
-            _In_  LPCOLESTR pszFileName) = 0;
+            /* [unique][in] */ __RPC__in_opt LPCOLESTR pszFileName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCurFile( 
-            /* [annotation][out] */ 
-            _Out_  LPOLESTR *ppszFileName) = 0;
+            /* [out] */ __RPC__deref_out_opt LPOLESTR *ppszFileName) = 0;
         
     };
     
@@ -11313,8 +11104,7 @@ EXTERN_C const IID IID_IPersistFile;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPersistFile * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11329,8 +11119,7 @@ EXTERN_C const IID IID_IPersistFile;
         DECLSPEC_XFGVIRT(IPersist, GetClassID)
         HRESULT ( STDMETHODCALLTYPE *GetClassID )( 
             __RPC__in IPersistFile * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pClassID);
+            /* [out] */ __RPC__out CLSID *pClassID);
         
         DECLSPEC_XFGVIRT(IPersistFile, IsDirty)
         HRESULT ( STDMETHODCALLTYPE *IsDirty )( 
@@ -11339,30 +11128,24 @@ EXTERN_C const IID IID_IPersistFile;
         DECLSPEC_XFGVIRT(IPersistFile, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             __RPC__in IPersistFile * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pszFileName,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMode);
+            /* [in] */ __RPC__in LPCOLESTR pszFileName,
+            /* [in] */ DWORD dwMode);
         
         DECLSPEC_XFGVIRT(IPersistFile, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IPersistFile * This,
-            /* [annotation][unique][in] */ 
-            _In_  LPCOLESTR pszFileName,
-            /* [annotation][in] */ 
-            _In_  BOOL fRemember);
+            /* [unique][in] */ __RPC__in_opt LPCOLESTR pszFileName,
+            /* [in] */ BOOL fRemember);
         
         DECLSPEC_XFGVIRT(IPersistFile, SaveCompleted)
         HRESULT ( STDMETHODCALLTYPE *SaveCompleted )( 
             __RPC__in IPersistFile * This,
-            /* [annotation][unique][in] */ 
-            _In_  LPCOLESTR pszFileName);
+            /* [unique][in] */ __RPC__in_opt LPCOLESTR pszFileName);
         
         DECLSPEC_XFGVIRT(IPersistFile, GetCurFile)
         HRESULT ( STDMETHODCALLTYPE *GetCurFile )( 
             __RPC__in IPersistFile * This,
-            /* [annotation][out] */ 
-            _Out_  LPOLESTR *ppszFileName);
+            /* [out] */ __RPC__deref_out_opt LPOLESTR *ppszFileName);
         
         END_INTERFACE
     } IPersistFileVtbl;
@@ -11437,22 +11220,17 @@ EXTERN_C const IID IID_IPersistStorage;
         virtual HRESULT STDMETHODCALLTYPE IsDirty( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitNew( 
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pStg) = 0;
+            /* [unique][in] */ __RPC__in_opt IStorage *pStg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Load( 
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pStg) = 0;
+            /* [unique][in] */ __RPC__in_opt IStorage *pStg) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Save( 
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pStgSave,
-            /* [annotation][in] */ 
-            _In_  BOOL fSameAsLoad) = 0;
+            /* [unique][in] */ __RPC__in_opt IStorage *pStgSave,
+            /* [in] */ BOOL fSameAsLoad) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SaveCompleted( 
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pStgNew) = 0;
+            /* [unique][in] */ __RPC__in_opt IStorage *pStgNew) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HandsOffStorage( void) = 0;
         
@@ -11468,8 +11246,7 @@ EXTERN_C const IID IID_IPersistStorage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPersistStorage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11484,8 +11261,7 @@ EXTERN_C const IID IID_IPersistStorage;
         DECLSPEC_XFGVIRT(IPersist, GetClassID)
         HRESULT ( STDMETHODCALLTYPE *GetClassID )( 
             __RPC__in IPersistStorage * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pClassID);
+            /* [out] */ __RPC__out CLSID *pClassID);
         
         DECLSPEC_XFGVIRT(IPersistStorage, IsDirty)
         HRESULT ( STDMETHODCALLTYPE *IsDirty )( 
@@ -11494,28 +11270,23 @@ EXTERN_C const IID IID_IPersistStorage;
         DECLSPEC_XFGVIRT(IPersistStorage, InitNew)
         HRESULT ( STDMETHODCALLTYPE *InitNew )( 
             __RPC__in IPersistStorage * This,
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pStg);
+            /* [unique][in] */ __RPC__in_opt IStorage *pStg);
         
         DECLSPEC_XFGVIRT(IPersistStorage, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             __RPC__in IPersistStorage * This,
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pStg);
+            /* [unique][in] */ __RPC__in_opt IStorage *pStg);
         
         DECLSPEC_XFGVIRT(IPersistStorage, Save)
         HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IPersistStorage * This,
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pStgSave,
-            /* [annotation][in] */ 
-            _In_  BOOL fSameAsLoad);
+            /* [unique][in] */ __RPC__in_opt IStorage *pStgSave,
+            /* [in] */ BOOL fSameAsLoad);
         
         DECLSPEC_XFGVIRT(IPersistStorage, SaveCompleted)
         HRESULT ( STDMETHODCALLTYPE *SaveCompleted )( 
             __RPC__in IPersistStorage * This,
-            /* [annotation][unique][in] */ 
-            _In_  IStorage *pStgNew);
+            /* [unique][in] */ __RPC__in_opt IStorage *pStgNew);
         
         DECLSPEC_XFGVIRT(IPersistStorage, HandsOffStorage)
         HRESULT ( STDMETHODCALLTYPE *HandsOffStorage )( 
@@ -11577,7 +11348,7 @@ EXTERN_C const IID IID_IPersistStorage;
 #endif 	/* __IPersistStorage_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0066 */
+/* interface __MIDL_itf_objidl_0000_0068 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -11586,8 +11357,8 @@ EXTERN_C const IID IID_IPersistStorage;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0066_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0066_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0068_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0068_v0_0_s_ifspec;
 
 #ifndef __ILockBytes_INTERFACE_DEFINED__
 #define __ILockBytes_INTERFACE_DEFINED__
@@ -11607,52 +11378,39 @@ EXTERN_C const IID IID_ILockBytes;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE ReadAt( 
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER ulOffset,
+            /* [in] */ ULARGE_INTEGER ulOffset,
             /* [annotation][length_is][size_is][out] */ 
             _Out_writes_bytes_to_(cb, *pcbRead)  void *pv,
-            /* [annotation][in] */ 
-            _In_  ULONG cb,
+            /* [in] */ ULONG cb,
             /* [annotation][out] */ 
             _Out_opt_  ULONG *pcbRead) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE WriteAt( 
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER ulOffset,
+            /* [in] */ ULARGE_INTEGER ulOffset,
             /* [annotation][size_is][in] */ 
             _In_reads_bytes_(cb)  const void *pv,
-            /* [annotation][in] */ 
-            _In_  ULONG cb,
+            /* [in] */ ULONG cb,
             /* [annotation][out] */ 
             _Out_opt_  ULONG *pcbWritten) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Flush( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSize( 
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb) = 0;
+            /* [in] */ ULARGE_INTEGER cb) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LockRegion( 
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libOffset,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwLockType) = 0;
+            /* [in] */ ULARGE_INTEGER libOffset,
+            /* [in] */ ULARGE_INTEGER cb,
+            /* [in] */ DWORD dwLockType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnlockRegion( 
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libOffset,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwLockType) = 0;
+            /* [in] */ ULARGE_INTEGER libOffset,
+            /* [in] */ ULARGE_INTEGER cb,
+            /* [in] */ DWORD dwLockType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Stat( 
-            /* [annotation][out] */ 
-            _Out_  STATSTG *pstatstg,
-            /* [annotation][in] */ 
-            _In_  DWORD grfStatFlag) = 0;
+            /* [out] */ __RPC__out STATSTG *pstatstg,
+            /* [in] */ DWORD grfStatFlag) = 0;
         
     };
     
@@ -11666,8 +11424,7 @@ EXTERN_C const IID IID_ILockBytes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILockBytes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11682,24 +11439,20 @@ EXTERN_C const IID IID_ILockBytes;
         DECLSPEC_XFGVIRT(ILockBytes, ReadAt)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *ReadAt )( 
             ILockBytes * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER ulOffset,
+            /* [in] */ ULARGE_INTEGER ulOffset,
             /* [annotation][length_is][size_is][out] */ 
             _Out_writes_bytes_to_(cb, *pcbRead)  void *pv,
-            /* [annotation][in] */ 
-            _In_  ULONG cb,
+            /* [in] */ ULONG cb,
             /* [annotation][out] */ 
             _Out_opt_  ULONG *pcbRead);
         
         DECLSPEC_XFGVIRT(ILockBytes, WriteAt)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *WriteAt )( 
             ILockBytes * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER ulOffset,
+            /* [in] */ ULARGE_INTEGER ulOffset,
             /* [annotation][size_is][in] */ 
             _In_reads_bytes_(cb)  const void *pv,
-            /* [annotation][in] */ 
-            _In_  ULONG cb,
+            /* [in] */ ULONG cb,
             /* [annotation][out] */ 
             _Out_opt_  ULONG *pcbWritten);
         
@@ -11710,36 +11463,27 @@ EXTERN_C const IID IID_ILockBytes;
         DECLSPEC_XFGVIRT(ILockBytes, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             __RPC__in ILockBytes * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb);
+            /* [in] */ ULARGE_INTEGER cb);
         
         DECLSPEC_XFGVIRT(ILockBytes, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             __RPC__in ILockBytes * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libOffset,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwLockType);
+            /* [in] */ ULARGE_INTEGER libOffset,
+            /* [in] */ ULARGE_INTEGER cb,
+            /* [in] */ DWORD dwLockType);
         
         DECLSPEC_XFGVIRT(ILockBytes, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             __RPC__in ILockBytes * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER libOffset,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER cb,
-            /* [annotation][in] */ 
-            _In_  DWORD dwLockType);
+            /* [in] */ ULARGE_INTEGER libOffset,
+            /* [in] */ ULARGE_INTEGER cb,
+            /* [in] */ DWORD dwLockType);
         
         DECLSPEC_XFGVIRT(ILockBytes, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in ILockBytes * This,
-            /* [annotation][out] */ 
-            _Out_  STATSTG *pstatstg,
-            /* [annotation][in] */ 
-            _In_  DWORD grfStatFlag);
+            /* [out] */ __RPC__out STATSTG *pstatstg,
+            /* [in] */ DWORD grfStatFlag);
         
         END_INTERFACE
     } ILockBytesVtbl;
@@ -11794,14 +11538,10 @@ EXTERN_C const IID IID_ILockBytes;
 
 /* [call_as] */ HRESULT __stdcall ILockBytes_RemoteReadAt_Proxy( 
     __RPC__in ILockBytes * This,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER ulOffset,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(cb,*pcbRead)  byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbRead);
+    /* [in] */ ULARGE_INTEGER ulOffset,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(cb, *pcbRead) byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbRead);
 
 
 void __RPC_STUB ILockBytes_RemoteReadAt_Stub(
@@ -11813,14 +11553,10 @@ void __RPC_STUB ILockBytes_RemoteReadAt_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ILockBytes_RemoteWriteAt_Proxy( 
     __RPC__in ILockBytes * This,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER ulOffset,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cb)  const byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbWritten);
+    /* [in] */ ULARGE_INTEGER ulOffset,
+    /* [size_is][in] */ __RPC__in_ecount_full(cb) const byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbWritten);
 
 
 void __RPC_STUB ILockBytes_RemoteWriteAt_Stub(
@@ -11877,22 +11613,19 @@ EXTERN_C const IID IID_IEnumFORMATETC;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation] */ 
             _Out_writes_to_(celt,*pceltFetched)  FORMATETC *rgelt,
             /* [annotation] */ 
             _Out_opt_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumFORMATETC **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumFORMATETC **ppenum) = 0;
         
     };
     
@@ -11906,8 +11639,7 @@ EXTERN_C const IID IID_IEnumFORMATETC;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumFORMATETC * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11922,8 +11654,7 @@ EXTERN_C const IID IID_IEnumFORMATETC;
         DECLSPEC_XFGVIRT(IEnumFORMATETC, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumFORMATETC * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation] */ 
             _Out_writes_to_(celt,*pceltFetched)  FORMATETC *rgelt,
             /* [annotation] */ 
@@ -11932,8 +11663,7 @@ EXTERN_C const IID IID_IEnumFORMATETC;
         DECLSPEC_XFGVIRT(IEnumFORMATETC, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumFORMATETC * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumFORMATETC, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -11942,8 +11672,7 @@ EXTERN_C const IID IID_IEnumFORMATETC;
         DECLSPEC_XFGVIRT(IEnumFORMATETC, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumFORMATETC * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumFORMATETC **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumFORMATETC **ppenum);
         
         END_INTERFACE
     } IEnumFORMATETCVtbl;
@@ -11989,12 +11718,9 @@ EXTERN_C const IID IID_IEnumFORMATETC;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumFORMATETC_RemoteNext_Proxy( 
     __RPC__in IEnumFORMATETC * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  FORMATETC *rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) FORMATETC *rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumFORMATETC_RemoteNext_Stub(
@@ -12048,22 +11774,19 @@ EXTERN_C const IID IID_IEnumSTATDATA;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation] */ 
             _Out_writes_to_(celt,*pceltFetched)  STATDATA *rgelt,
             /* [annotation] */ 
             _Out_opt_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumSTATDATA **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumSTATDATA **ppenum) = 0;
         
     };
     
@@ -12077,8 +11800,7 @@ EXTERN_C const IID IID_IEnumSTATDATA;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSTATDATA * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12093,8 +11815,7 @@ EXTERN_C const IID IID_IEnumSTATDATA;
         DECLSPEC_XFGVIRT(IEnumSTATDATA, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumSTATDATA * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation] */ 
             _Out_writes_to_(celt,*pceltFetched)  STATDATA *rgelt,
             /* [annotation] */ 
@@ -12103,8 +11824,7 @@ EXTERN_C const IID IID_IEnumSTATDATA;
         DECLSPEC_XFGVIRT(IEnumSTATDATA, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSTATDATA * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumSTATDATA, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -12113,8 +11833,7 @@ EXTERN_C const IID IID_IEnumSTATDATA;
         DECLSPEC_XFGVIRT(IEnumSTATDATA, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSTATDATA * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumSTATDATA **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumSTATDATA **ppenum);
         
         END_INTERFACE
     } IEnumSTATDATAVtbl;
@@ -12160,12 +11879,9 @@ EXTERN_C const IID IID_IEnumSTATDATA;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumSTATDATA_RemoteNext_Proxy( 
     __RPC__in IEnumSTATDATA * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  STATDATA *rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) STATDATA *rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumSTATDATA_RemoteNext_Stub(
@@ -12197,8 +11913,7 @@ EXTERN_C const IID IID_IRootStorage;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SwitchToFile( 
-            /* [annotation][in] */ 
-            _In_  LPOLESTR pszFile) = 0;
+            /* [in] */ __RPC__in LPOLESTR pszFile) = 0;
         
     };
     
@@ -12212,8 +11927,7 @@ EXTERN_C const IID IID_IRootStorage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRootStorage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12228,8 +11942,7 @@ EXTERN_C const IID IID_IRootStorage;
         DECLSPEC_XFGVIRT(IRootStorage, SwitchToFile)
         HRESULT ( STDMETHODCALLTYPE *SwitchToFile )( 
             __RPC__in IRootStorage * This,
-            /* [annotation][in] */ 
-            _In_  LPOLESTR pszFile);
+            /* [in] */ __RPC__in LPOLESTR pszFile);
         
         END_INTERFACE
     } IRootStorageVtbl;
@@ -12418,10 +12131,8 @@ EXTERN_C const IID IID_IAdviseSink;
             _In_  STGMEDIUM *pStgmed) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE OnViewChange( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwAspect,
-            /* [annotation][in] */ 
-            _In_  LONG lindex) = 0;
+            /* [in] */ DWORD dwAspect,
+            /* [in] */ LONG lindex) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE OnRename( 
             /* [annotation][in] */ 
@@ -12443,8 +12154,7 @@ EXTERN_C const IID IID_IAdviseSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAdviseSink * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12467,10 +12177,8 @@ EXTERN_C const IID IID_IAdviseSink;
         DECLSPEC_XFGVIRT(IAdviseSink, OnViewChange)
         /* [local] */ void ( STDMETHODCALLTYPE *OnViewChange )( 
             IAdviseSink * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAspect,
-            /* [annotation][in] */ 
-            _In_  LONG lindex);
+            /* [in] */ DWORD dwAspect,
+            /* [in] */ LONG lindex);
         
         DECLSPEC_XFGVIRT(IAdviseSink, OnRename)
         /* [local] */ void ( STDMETHODCALLTYPE *OnRename )( 
@@ -12533,10 +12241,8 @@ EXTERN_C const IID IID_IAdviseSink;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IAdviseSink_RemoteOnDataChange_Proxy( 
     __RPC__in IAdviseSink * This,
-    /* [annotation][unique][in] */ 
-    _In_  FORMATETC *pFormatetc,
-    /* [annotation][unique][in] */ 
-    _In_  ASYNC_STGMEDIUM *pStgmed);
+    /* [unique][in] */ __RPC__in_opt FORMATETC *pFormatetc,
+    /* [unique][in] */ __RPC__in_opt ASYNC_STGMEDIUM *pStgmed);
 
 
 void __RPC_STUB IAdviseSink_RemoteOnDataChange_Stub(
@@ -12548,10 +12254,8 @@ void __RPC_STUB IAdviseSink_RemoteOnDataChange_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IAdviseSink_RemoteOnViewChange_Proxy( 
     __RPC__in IAdviseSink * This,
-    /* [annotation][in] */ 
-    _In_  DWORD dwAspect,
-    /* [annotation][in] */ 
-    _In_  LONG lindex);
+    /* [in] */ DWORD dwAspect,
+    /* [in] */ LONG lindex);
 
 
 void __RPC_STUB IAdviseSink_RemoteOnViewChange_Stub(
@@ -12563,8 +12267,7 @@ void __RPC_STUB IAdviseSink_RemoteOnViewChange_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IAdviseSink_RemoteOnRename_Proxy( 
     __RPC__in IAdviseSink * This,
-    /* [annotation][in] */ 
-    _In_  IMoniker *pmk);
+    /* [in] */ __RPC__in_opt IMoniker *pmk);
 
 
 void __RPC_STUB IAdviseSink_RemoteOnRename_Stub(
@@ -12624,10 +12327,8 @@ EXTERN_C const IID IID_AsyncIAdviseSink;
         virtual /* [local] */ void STDMETHODCALLTYPE Finish_OnDataChange( void) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE Begin_OnViewChange( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwAspect,
-            /* [annotation][in] */ 
-            _In_  LONG lindex) = 0;
+            /* [in] */ DWORD dwAspect,
+            /* [in] */ LONG lindex) = 0;
         
         virtual /* [local] */ void STDMETHODCALLTYPE Finish_OnViewChange( void) = 0;
         
@@ -12657,8 +12358,7 @@ EXTERN_C const IID IID_AsyncIAdviseSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIAdviseSink * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12685,10 +12385,8 @@ EXTERN_C const IID IID_AsyncIAdviseSink;
         DECLSPEC_XFGVIRT(AsyncIAdviseSink, Begin_OnViewChange)
         /* [local] */ void ( STDMETHODCALLTYPE *Begin_OnViewChange )( 
             AsyncIAdviseSink * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAspect,
-            /* [annotation][in] */ 
-            _In_  LONG lindex);
+            /* [in] */ DWORD dwAspect,
+            /* [in] */ LONG lindex);
         
         DECLSPEC_XFGVIRT(AsyncIAdviseSink, Finish_OnViewChange)
         /* [local] */ void ( STDMETHODCALLTYPE *Finish_OnViewChange )( 
@@ -12782,10 +12480,8 @@ EXTERN_C const IID IID_AsyncIAdviseSink;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE AsyncIAdviseSink_Begin_RemoteOnDataChange_Proxy( 
     __RPC__in AsyncIAdviseSink * This,
-    /* [annotation][unique][in] */ 
-    _In_  FORMATETC *pFormatetc,
-    /* [annotation][unique][in] */ 
-    _In_  ASYNC_STGMEDIUM *pStgmed);
+    /* [unique][in] */ __RPC__in_opt FORMATETC *pFormatetc,
+    /* [unique][in] */ __RPC__in_opt ASYNC_STGMEDIUM *pStgmed);
 
 
 void __RPC_STUB AsyncIAdviseSink_Begin_RemoteOnDataChange_Stub(
@@ -12808,10 +12504,8 @@ void __RPC_STUB AsyncIAdviseSink_Finish_RemoteOnDataChange_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE AsyncIAdviseSink_Begin_RemoteOnViewChange_Proxy( 
     __RPC__in AsyncIAdviseSink * This,
-    /* [annotation][in] */ 
-    _In_  DWORD dwAspect,
-    /* [annotation][in] */ 
-    _In_  LONG lindex);
+    /* [in] */ DWORD dwAspect,
+    /* [in] */ LONG lindex);
 
 
 void __RPC_STUB AsyncIAdviseSink_Begin_RemoteOnViewChange_Stub(
@@ -12834,8 +12528,7 @@ void __RPC_STUB AsyncIAdviseSink_Finish_RemoteOnViewChange_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE AsyncIAdviseSink_Begin_RemoteOnRename_Proxy( 
     __RPC__in AsyncIAdviseSink * This,
-    /* [annotation][in] */ 
-    _In_  IMoniker *pmk);
+    /* [in] */ __RPC__in_opt IMoniker *pmk);
 
 
 void __RPC_STUB AsyncIAdviseSink_Begin_RemoteOnRename_Stub(
@@ -12904,7 +12597,7 @@ void __RPC_STUB AsyncIAdviseSink_Finish_RemoteOnClose_Stub(
 #endif 	/* __AsyncIAdviseSink_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0071 */
+/* interface __MIDL_itf_objidl_0000_0073 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
@@ -12913,8 +12606,8 @@ void __RPC_STUB AsyncIAdviseSink_Finish_RemoteOnClose_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0071_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0071_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0073_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0073_v0_0_s_ifspec;
 
 #ifndef __IAdviseSink2_INTERFACE_DEFINED__
 #define __IAdviseSink2_INTERFACE_DEFINED__
@@ -12949,8 +12642,7 @@ EXTERN_C const IID IID_IAdviseSink2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAdviseSink2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12973,10 +12665,8 @@ EXTERN_C const IID IID_IAdviseSink2;
         DECLSPEC_XFGVIRT(IAdviseSink, OnViewChange)
         /* [local] */ void ( STDMETHODCALLTYPE *OnViewChange )( 
             IAdviseSink2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAspect,
-            /* [annotation][in] */ 
-            _In_  LONG lindex);
+            /* [in] */ DWORD dwAspect,
+            /* [in] */ LONG lindex);
         
         DECLSPEC_XFGVIRT(IAdviseSink, OnRename)
         /* [local] */ void ( STDMETHODCALLTYPE *OnRename )( 
@@ -13049,8 +12739,7 @@ EXTERN_C const IID IID_IAdviseSink2;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IAdviseSink2_RemoteOnLinkSrcChange_Proxy( 
     __RPC__in IAdviseSink2 * This,
-    /* [annotation][unique][in] */ 
-    _In_  IMoniker *pmk);
+    /* [unique][in] */ __RPC__in_opt IMoniker *pmk);
 
 
 void __RPC_STUB IAdviseSink2_RemoteOnLinkSrcChange_Stub(
@@ -13097,8 +12786,7 @@ EXTERN_C const IID IID_AsyncIAdviseSink2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIAdviseSink2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13125,10 +12813,8 @@ EXTERN_C const IID IID_AsyncIAdviseSink2;
         DECLSPEC_XFGVIRT(AsyncIAdviseSink, Begin_OnViewChange)
         /* [local] */ void ( STDMETHODCALLTYPE *Begin_OnViewChange )( 
             AsyncIAdviseSink2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAspect,
-            /* [annotation][in] */ 
-            _In_  LONG lindex);
+            /* [in] */ DWORD dwAspect,
+            /* [in] */ LONG lindex);
         
         DECLSPEC_XFGVIRT(AsyncIAdviseSink, Finish_OnViewChange)
         /* [local] */ void ( STDMETHODCALLTYPE *Finish_OnViewChange )( 
@@ -13239,8 +12925,7 @@ EXTERN_C const IID IID_AsyncIAdviseSink2;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE AsyncIAdviseSink2_Begin_RemoteOnLinkSrcChange_Proxy( 
     __RPC__in AsyncIAdviseSink2 * This,
-    /* [annotation][unique][in] */ 
-    _In_  IMoniker *pmk);
+    /* [unique][in] */ __RPC__in_opt IMoniker *pmk);
 
 
 void __RPC_STUB AsyncIAdviseSink2_Begin_RemoteOnLinkSrcChange_Stub(
@@ -13265,7 +12950,7 @@ void __RPC_STUB AsyncIAdviseSink2_Finish_RemoteOnLinkSrcChange_Stub(
 #endif 	/* __AsyncIAdviseSink2_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0072 */
+/* interface __MIDL_itf_objidl_0000_0074 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -13274,8 +12959,8 @@ void __RPC_STUB AsyncIAdviseSink2_Finish_RemoteOnLinkSrcChange_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0072_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0072_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0074_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0074_v0_0_s_ifspec;
 
 #ifndef __IDataObject_INTERFACE_DEFINED__
 #define __IDataObject_INTERFACE_DEFINED__
@@ -13314,46 +12999,34 @@ EXTERN_C const IID IID_IDataObject;
             _Inout_  STGMEDIUM *pmedium) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryGetData( 
-            /* [annotation][unique][in] */ 
-            _In_  FORMATETC *pformatetc) = 0;
+            /* [unique][in] */ __RPC__in_opt FORMATETC *pformatetc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCanonicalFormatEtc( 
-            /* [annotation][unique][in] */ 
-            _In_  FORMATETC *pformatectIn,
-            /* [annotation][out] */ 
-            _Out_  FORMATETC *pformatetcOut) = 0;
+            /* [unique][in] */ __RPC__in_opt FORMATETC *pformatectIn,
+            /* [out] */ __RPC__out FORMATETC *pformatetcOut) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE SetData( 
             /* [annotation][unique][in] */ 
             _In_  FORMATETC *pformatetc,
             /* [annotation][unique][in] */ 
             _In_  STGMEDIUM *pmedium,
-            /* [annotation][in] */ 
-            _In_  BOOL fRelease) = 0;
+            /* [in] */ BOOL fRelease) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumFormatEtc( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwDirection,
-            /* [annotation][out] */ 
-            _Out_  IEnumFORMATETC **ppenumFormatEtc) = 0;
+            /* [in] */ DWORD dwDirection,
+            /* [out] */ __RPC__deref_out_opt IEnumFORMATETC **ppenumFormatEtc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DAdvise( 
-            /* [annotation][in] */ 
-            _In_  FORMATETC *pformatetc,
-            /* [annotation][in] */ 
-            _In_  DWORD advf,
-            /* [annotation][unique][in] */ 
-            _In_  IAdviseSink *pAdvSink,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwConnection) = 0;
+            /* [in] */ __RPC__in FORMATETC *pformatetc,
+            /* [in] */ DWORD advf,
+            /* [unique][in] */ __RPC__in_opt IAdviseSink *pAdvSink,
+            /* [out] */ __RPC__out DWORD *pdwConnection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DUnadvise( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwConnection) = 0;
+            /* [in] */ DWORD dwConnection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumDAdvise( 
-            /* [annotation][out] */ 
-            _Out_  IEnumSTATDATA **ppenumAdvise) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumSTATDATA **ppenumAdvise) = 0;
         
     };
     
@@ -13367,8 +13040,7 @@ EXTERN_C const IID IID_IDataObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDataObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13399,16 +13071,13 @@ EXTERN_C const IID IID_IDataObject;
         DECLSPEC_XFGVIRT(IDataObject, QueryGetData)
         HRESULT ( STDMETHODCALLTYPE *QueryGetData )( 
             __RPC__in IDataObject * This,
-            /* [annotation][unique][in] */ 
-            _In_  FORMATETC *pformatetc);
+            /* [unique][in] */ __RPC__in_opt FORMATETC *pformatetc);
         
         DECLSPEC_XFGVIRT(IDataObject, GetCanonicalFormatEtc)
         HRESULT ( STDMETHODCALLTYPE *GetCanonicalFormatEtc )( 
             __RPC__in IDataObject * This,
-            /* [annotation][unique][in] */ 
-            _In_  FORMATETC *pformatectIn,
-            /* [annotation][out] */ 
-            _Out_  FORMATETC *pformatetcOut);
+            /* [unique][in] */ __RPC__in_opt FORMATETC *pformatectIn,
+            /* [out] */ __RPC__out FORMATETC *pformatetcOut);
         
         DECLSPEC_XFGVIRT(IDataObject, SetData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetData )( 
@@ -13417,40 +13086,31 @@ EXTERN_C const IID IID_IDataObject;
             _In_  FORMATETC *pformatetc,
             /* [annotation][unique][in] */ 
             _In_  STGMEDIUM *pmedium,
-            /* [annotation][in] */ 
-            _In_  BOOL fRelease);
+            /* [in] */ BOOL fRelease);
         
         DECLSPEC_XFGVIRT(IDataObject, EnumFormatEtc)
         HRESULT ( STDMETHODCALLTYPE *EnumFormatEtc )( 
             __RPC__in IDataObject * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwDirection,
-            /* [annotation][out] */ 
-            _Out_  IEnumFORMATETC **ppenumFormatEtc);
+            /* [in] */ DWORD dwDirection,
+            /* [out] */ __RPC__deref_out_opt IEnumFORMATETC **ppenumFormatEtc);
         
         DECLSPEC_XFGVIRT(IDataObject, DAdvise)
         HRESULT ( STDMETHODCALLTYPE *DAdvise )( 
             __RPC__in IDataObject * This,
-            /* [annotation][in] */ 
-            _In_  FORMATETC *pformatetc,
-            /* [annotation][in] */ 
-            _In_  DWORD advf,
-            /* [annotation][unique][in] */ 
-            _In_  IAdviseSink *pAdvSink,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwConnection);
+            /* [in] */ __RPC__in FORMATETC *pformatetc,
+            /* [in] */ DWORD advf,
+            /* [unique][in] */ __RPC__in_opt IAdviseSink *pAdvSink,
+            /* [out] */ __RPC__out DWORD *pdwConnection);
         
         DECLSPEC_XFGVIRT(IDataObject, DUnadvise)
         HRESULT ( STDMETHODCALLTYPE *DUnadvise )( 
             __RPC__in IDataObject * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwConnection);
+            /* [in] */ DWORD dwConnection);
         
         DECLSPEC_XFGVIRT(IDataObject, EnumDAdvise)
         HRESULT ( STDMETHODCALLTYPE *EnumDAdvise )( 
             __RPC__in IDataObject * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumSTATDATA **ppenumAdvise);
+            /* [out] */ __RPC__deref_out_opt IEnumSTATDATA **ppenumAdvise);
         
         END_INTERFACE
     } IDataObjectVtbl;
@@ -13511,10 +13171,8 @@ EXTERN_C const IID IID_IDataObject;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IDataObject_RemoteGetData_Proxy( 
     __RPC__in IDataObject * This,
-    /* [annotation][unique][in] */ 
-    _In_  FORMATETC *pformatetcIn,
-    /* [annotation][out] */ 
-    _Out_  STGMEDIUM *pRemoteMedium);
+    /* [unique][in] */ __RPC__in_opt FORMATETC *pformatetcIn,
+    /* [out] */ __RPC__out STGMEDIUM *pRemoteMedium);
 
 
 void __RPC_STUB IDataObject_RemoteGetData_Stub(
@@ -13526,10 +13184,8 @@ void __RPC_STUB IDataObject_RemoteGetData_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IDataObject_RemoteGetDataHere_Proxy( 
     __RPC__in IDataObject * This,
-    /* [annotation][unique][in] */ 
-    _In_  FORMATETC *pformatetc,
-    /* [annotation][out][in] */ 
-    _Inout_  STGMEDIUM *pRemoteMedium);
+    /* [unique][in] */ __RPC__in_opt FORMATETC *pformatetc,
+    /* [out][in] */ __RPC__inout STGMEDIUM *pRemoteMedium);
 
 
 void __RPC_STUB IDataObject_RemoteGetDataHere_Stub(
@@ -13541,12 +13197,9 @@ void __RPC_STUB IDataObject_RemoteGetDataHere_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IDataObject_RemoteSetData_Proxy( 
     __RPC__in IDataObject * This,
-    /* [annotation][unique][in] */ 
-    _In_  FORMATETC *pformatetc,
-    /* [annotation][unique][in] */ 
-    _In_  FLAG_STGMEDIUM *pmedium,
-    /* [annotation][in] */ 
-    _In_  BOOL fRelease);
+    /* [unique][in] */ __RPC__in_opt FORMATETC *pformatetc,
+    /* [unique][in] */ __RPC__in_opt FLAG_STGMEDIUM *pmedium,
+    /* [in] */ BOOL fRelease);
 
 
 void __RPC_STUB IDataObject_RemoteSetData_Stub(
@@ -13560,7 +13213,7 @@ void __RPC_STUB IDataObject_RemoteSetData_Stub(
 #endif 	/* __IDataObject_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0073 */
+/* interface __MIDL_itf_objidl_0000_0075 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -13569,8 +13222,8 @@ void __RPC_STUB IDataObject_RemoteSetData_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0073_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0073_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0075_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0075_v0_0_s_ifspec;
 
 #ifndef __IDataAdviseHolder_INTERFACE_DEFINED__
 #define __IDataAdviseHolder_INTERFACE_DEFINED__
@@ -13629,8 +13282,7 @@ EXTERN_C const IID IID_IDataAdviseHolder;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDataAdviseHolder * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13821,8 +13473,7 @@ EXTERN_C const IID IID_IMessageFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMessageFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13909,7 +13560,7 @@ EXTERN_C const IID IID_IMessageFilter;
 #endif 	/* __IMessageFilter_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0075 */
+/* interface __MIDL_itf_objidl_0000_0077 */
 /* [local] */ 
 
 
@@ -13932,8 +13583,8 @@ extern const FMTID FMTID_MediaFileSummaryInformation;
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0075_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0075_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0077_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0077_v0_0_s_ifspec;
 
 #ifndef __IClassActivator_INTERFACE_DEFINED__
 #define __IClassActivator_INTERFACE_DEFINED__
@@ -13951,16 +13602,11 @@ EXTERN_C const IID IID_IClassActivator;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetClassObject( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  DWORD dwClassContext,
-            /* [annotation][in] */ 
-            _In_  LCID locale,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppv) = 0;
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ DWORD dwClassContext,
+            /* [in] */ LCID locale,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
         
     };
     
@@ -13974,8 +13620,7 @@ EXTERN_C const IID IID_IClassActivator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IClassActivator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13990,16 +13635,11 @@ EXTERN_C const IID IID_IClassActivator;
         DECLSPEC_XFGVIRT(IClassActivator, GetClassObject)
         HRESULT ( STDMETHODCALLTYPE *GetClassObject )( 
             __RPC__in IClassActivator * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  DWORD dwClassContext,
-            /* [annotation][in] */ 
-            _In_  LCID locale,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppv);
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ DWORD dwClassContext,
+            /* [in] */ LCID locale,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
         
         END_INTERFACE
     } IClassActivatorVtbl;
@@ -14038,7 +13678,7 @@ EXTERN_C const IID IID_IClassActivator;
 #endif 	/* __IClassActivator_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0076 */
+/* interface __MIDL_itf_objidl_0000_0078 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
@@ -14047,8 +13687,8 @@ EXTERN_C const IID IID_IClassActivator;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0076_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0076_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0078_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0078_v0_0_s_ifspec;
 
 #ifndef __IFillLockBytes_INTERFACE_DEFINED__
 #define __IFillLockBytes_INTERFACE_DEFINED__
@@ -14084,12 +13724,10 @@ EXTERN_C const IID IID_IFillLockBytes;
             _Out_  ULONG *pcbWritten) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFillSize( 
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER ulSize) = 0;
+            /* [in] */ ULARGE_INTEGER ulSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Terminate( 
-            /* [annotation][in] */ 
-            _In_  BOOL bCanceled) = 0;
+            /* [in] */ BOOL bCanceled) = 0;
         
     };
     
@@ -14103,8 +13741,7 @@ EXTERN_C const IID IID_IFillLockBytes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFillLockBytes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14141,14 +13778,12 @@ EXTERN_C const IID IID_IFillLockBytes;
         DECLSPEC_XFGVIRT(IFillLockBytes, SetFillSize)
         HRESULT ( STDMETHODCALLTYPE *SetFillSize )( 
             __RPC__in IFillLockBytes * This,
-            /* [annotation][in] */ 
-            _In_  ULARGE_INTEGER ulSize);
+            /* [in] */ ULARGE_INTEGER ulSize);
         
         DECLSPEC_XFGVIRT(IFillLockBytes, Terminate)
         HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             __RPC__in IFillLockBytes * This,
-            /* [annotation][in] */ 
-            _In_  BOOL bCanceled);
+            /* [in] */ BOOL bCanceled);
         
         END_INTERFACE
     } IFillLockBytesVtbl;
@@ -14194,12 +13829,9 @@ EXTERN_C const IID IID_IFillLockBytes;
 
 /* [call_as] */ HRESULT __stdcall IFillLockBytes_RemoteFillAppend_Proxy( 
     __RPC__in IFillLockBytes * This,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cb)  const byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbWritten);
+    /* [size_is][in] */ __RPC__in_ecount_full(cb) const byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbWritten);
 
 
 void __RPC_STUB IFillLockBytes_RemoteFillAppend_Stub(
@@ -14211,14 +13843,10 @@ void __RPC_STUB IFillLockBytes_RemoteFillAppend_Stub(
 
 /* [call_as] */ HRESULT __stdcall IFillLockBytes_RemoteFillAt_Proxy( 
     __RPC__in IFillLockBytes * This,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER ulOffset,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cb)  const byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbWritten);
+    /* [in] */ ULARGE_INTEGER ulOffset,
+    /* [size_is][in] */ __RPC__in_ecount_full(cb) const byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbWritten);
 
 
 void __RPC_STUB IFillLockBytes_RemoteFillAt_Stub(
@@ -14232,7 +13860,7 @@ void __RPC_STUB IFillLockBytes_RemoteFillAt_Stub(
 #endif 	/* __IFillLockBytes_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0077 */
+/* interface __MIDL_itf_objidl_0000_0079 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
@@ -14241,8 +13869,8 @@ void __RPC_STUB IFillLockBytes_RemoteFillAt_Stub(
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0077_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0077_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0079_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0079_v0_0_s_ifspec;
 
 #ifndef __IProgressNotify_INTERFACE_DEFINED__
 #define __IProgressNotify_INTERFACE_DEFINED__
@@ -14260,14 +13888,10 @@ EXTERN_C const IID IID_IProgressNotify;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnProgress( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwProgressCurrent,
-            /* [annotation][in] */ 
-            _In_  DWORD dwProgressMaximum,
-            /* [annotation][in] */ 
-            _In_  BOOL fAccurate,
-            /* [annotation][in] */ 
-            _In_  BOOL fOwner) = 0;
+            /* [in] */ DWORD dwProgressCurrent,
+            /* [in] */ DWORD dwProgressMaximum,
+            /* [in] */ BOOL fAccurate,
+            /* [in] */ BOOL fOwner) = 0;
         
     };
     
@@ -14281,8 +13905,7 @@ EXTERN_C const IID IID_IProgressNotify;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProgressNotify * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14297,14 +13920,10 @@ EXTERN_C const IID IID_IProgressNotify;
         DECLSPEC_XFGVIRT(IProgressNotify, OnProgress)
         HRESULT ( STDMETHODCALLTYPE *OnProgress )( 
             __RPC__in IProgressNotify * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwProgressCurrent,
-            /* [annotation][in] */ 
-            _In_  DWORD dwProgressMaximum,
-            /* [annotation][in] */ 
-            _In_  BOOL fAccurate,
-            /* [annotation][in] */ 
-            _In_  BOOL fOwner);
+            /* [in] */ DWORD dwProgressCurrent,
+            /* [in] */ DWORD dwProgressMaximum,
+            /* [in] */ BOOL fAccurate,
+            /* [in] */ BOOL fOwner);
         
         END_INTERFACE
     } IProgressNotifyVtbl;
@@ -14343,7 +13962,7 @@ EXTERN_C const IID IID_IProgressNotify;
 #endif 	/* __IProgressNotify_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0078 */
+/* interface __MIDL_itf_objidl_0000_0080 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -14352,8 +13971,8 @@ EXTERN_C const IID IID_IProgressNotify;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0078_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0078_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0080_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0080_v0_0_s_ifspec;
 
 #ifndef __ILayoutStorage_INTERFACE_DEFINED__
 #define __ILayoutStorage_INTERFACE_DEFINED__
@@ -14410,8 +14029,7 @@ EXTERN_C const IID IID_ILayoutStorage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ILayoutStorage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14502,7 +14120,7 @@ EXTERN_C const IID IID_ILayoutStorage;
 #endif 	/* __ILayoutStorage_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0079 */
+/* interface __MIDL_itf_objidl_0000_0081 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
@@ -14511,8 +14129,8 @@ EXTERN_C const IID IID_ILayoutStorage;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0079_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0079_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0081_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0081_v0_0_s_ifspec;
 
 #ifndef __IBlockingLock_INTERFACE_DEFINED__
 #define __IBlockingLock_INTERFACE_DEFINED__
@@ -14530,8 +14148,7 @@ EXTERN_C const IID IID_IBlockingLock;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Lock( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout) = 0;
+            /* [in] */ DWORD dwTimeout) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Unlock( void) = 0;
         
@@ -14547,8 +14164,7 @@ EXTERN_C const IID IID_IBlockingLock;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBlockingLock * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14563,8 +14179,7 @@ EXTERN_C const IID IID_IBlockingLock;
         DECLSPEC_XFGVIRT(IBlockingLock, Lock)
         HRESULT ( STDMETHODCALLTYPE *Lock )( 
             __RPC__in IBlockingLock * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout);
+            /* [in] */ DWORD dwTimeout);
         
         DECLSPEC_XFGVIRT(IBlockingLock, Unlock)
         HRESULT ( STDMETHODCALLTYPE *Unlock )( 
@@ -14626,10 +14241,8 @@ EXTERN_C const IID IID_ITimeAndNoticeControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SuppressChanges( 
-            /* [annotation][in] */ 
-            _In_  DWORD res1,
-            /* [annotation][in] */ 
-            _In_  DWORD res2) = 0;
+            /* [in] */ DWORD res1,
+            /* [in] */ DWORD res2) = 0;
         
     };
     
@@ -14643,8 +14256,7 @@ EXTERN_C const IID IID_ITimeAndNoticeControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITimeAndNoticeControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14659,10 +14271,8 @@ EXTERN_C const IID IID_ITimeAndNoticeControl;
         DECLSPEC_XFGVIRT(ITimeAndNoticeControl, SuppressChanges)
         HRESULT ( STDMETHODCALLTYPE *SuppressChanges )( 
             __RPC__in ITimeAndNoticeControl * This,
-            /* [annotation][in] */ 
-            _In_  DWORD res1,
-            /* [annotation][in] */ 
-            _In_  DWORD res2);
+            /* [in] */ DWORD res1,
+            /* [in] */ DWORD res2);
         
         END_INTERFACE
     } ITimeAndNoticeControlVtbl;
@@ -14717,32 +14327,20 @@ EXTERN_C const IID IID_IOplockStorage;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateStorageEx( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwcsName,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][in] */ 
-            _In_  DWORD stgfmt,
-            /* [annotation][in] */ 
-            _In_  DWORD grfAttrs,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppstgOpen) = 0;
+            /* [in] */ __RPC__in LPCWSTR pwcsName,
+            /* [in] */ DWORD grfMode,
+            /* [in] */ DWORD stgfmt,
+            /* [in] */ DWORD grfAttrs,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **ppstgOpen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OpenStorageEx( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwcsName,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][in] */ 
-            _In_  DWORD stgfmt,
-            /* [annotation][in] */ 
-            _In_  DWORD grfAttrs,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppstgOpen) = 0;
+            /* [in] */ __RPC__in LPCWSTR pwcsName,
+            /* [in] */ DWORD grfMode,
+            /* [in] */ DWORD stgfmt,
+            /* [in] */ DWORD grfAttrs,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **ppstgOpen) = 0;
         
     };
     
@@ -14756,8 +14354,7 @@ EXTERN_C const IID IID_IOplockStorage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOplockStorage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14772,34 +14369,22 @@ EXTERN_C const IID IID_IOplockStorage;
         DECLSPEC_XFGVIRT(IOplockStorage, CreateStorageEx)
         HRESULT ( STDMETHODCALLTYPE *CreateStorageEx )( 
             __RPC__in IOplockStorage * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwcsName,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][in] */ 
-            _In_  DWORD stgfmt,
-            /* [annotation][in] */ 
-            _In_  DWORD grfAttrs,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppstgOpen);
+            /* [in] */ __RPC__in LPCWSTR pwcsName,
+            /* [in] */ DWORD grfMode,
+            /* [in] */ DWORD stgfmt,
+            /* [in] */ DWORD grfAttrs,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **ppstgOpen);
         
         DECLSPEC_XFGVIRT(IOplockStorage, OpenStorageEx)
         HRESULT ( STDMETHODCALLTYPE *OpenStorageEx )( 
             __RPC__in IOplockStorage * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwcsName,
-            /* [annotation][in] */ 
-            _In_  DWORD grfMode,
-            /* [annotation][in] */ 
-            _In_  DWORD stgfmt,
-            /* [annotation][in] */ 
-            _In_  DWORD grfAttrs,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppstgOpen);
+            /* [in] */ __RPC__in LPCWSTR pwcsName,
+            /* [in] */ DWORD grfMode,
+            /* [in] */ DWORD stgfmt,
+            /* [in] */ DWORD grfAttrs,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **ppstgOpen);
         
         END_INTERFACE
     } IOplockStorageVtbl;
@@ -14841,7 +14426,7 @@ EXTERN_C const IID IID_IOplockStorage;
 #endif 	/* __IOplockStorage_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0082 */
+/* interface __MIDL_itf_objidl_0000_0084 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
@@ -14850,8 +14435,8 @@ EXTERN_C const IID IID_IOplockStorage;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0082_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0082_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0084_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0084_v0_0_s_ifspec;
 
 #ifndef __IDirectWriterLock_INTERFACE_DEFINED__
 #define __IDirectWriterLock_INTERFACE_DEFINED__
@@ -14869,8 +14454,7 @@ EXTERN_C const IID IID_IDirectWriterLock;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE WaitForWriteAccess( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout) = 0;
+            /* [in] */ DWORD dwTimeout) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseWriteAccess( void) = 0;
         
@@ -14888,8 +14472,7 @@ EXTERN_C const IID IID_IDirectWriterLock;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDirectWriterLock * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14904,8 +14487,7 @@ EXTERN_C const IID IID_IDirectWriterLock;
         DECLSPEC_XFGVIRT(IDirectWriterLock, WaitForWriteAccess)
         HRESULT ( STDMETHODCALLTYPE *WaitForWriteAccess )( 
             __RPC__in IDirectWriterLock * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout);
+            /* [in] */ DWORD dwTimeout);
         
         DECLSPEC_XFGVIRT(IDirectWriterLock, ReleaseWriteAccess)
         HRESULT ( STDMETHODCALLTYPE *ReleaseWriteAccess )( 
@@ -14958,7 +14540,7 @@ EXTERN_C const IID IID_IDirectWriterLock;
 #endif 	/* __IDirectWriterLock_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0083 */
+/* interface __MIDL_itf_objidl_0000_0085 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
@@ -14967,8 +14549,8 @@ EXTERN_C const IID IID_IDirectWriterLock;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0083_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0083_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0085_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0085_v0_0_s_ifspec;
 
 #ifndef __IUrlMon_INTERFACE_DEFINED__
 #define __IUrlMon_INTERFACE_DEFINED__
@@ -14986,26 +14568,16 @@ EXTERN_C const IID IID_IUrlMon;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AsyncGetClassBits( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pszTYPE,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pszExt,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFileVersionMS,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFileVersionLS,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pszCodeBase,
-            /* [annotation][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][in] */ 
-            _In_  DWORD dwClassContext,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][in] */ 
-            _In_  DWORD flags) = 0;
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pszTYPE,
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pszExt,
+            /* [in] */ DWORD dwFileVersionMS,
+            /* [in] */ DWORD dwFileVersionLS,
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pszCodeBase,
+            /* [in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [in] */ DWORD dwClassContext,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [in] */ DWORD flags) = 0;
         
     };
     
@@ -15019,8 +14591,7 @@ EXTERN_C const IID IID_IUrlMon;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUrlMon * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15035,26 +14606,16 @@ EXTERN_C const IID IID_IUrlMon;
         DECLSPEC_XFGVIRT(IUrlMon, AsyncGetClassBits)
         HRESULT ( STDMETHODCALLTYPE *AsyncGetClassBits )( 
             __RPC__in IUrlMon * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pszTYPE,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pszExt,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFileVersionMS,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFileVersionLS,
-            /* [annotation][unique][in] */ 
-            _In_  LPCWSTR pszCodeBase,
-            /* [annotation][in] */ 
-            _In_  IBindCtx *pbc,
-            /* [annotation][in] */ 
-            _In_  DWORD dwClassContext,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][in] */ 
-            _In_  DWORD flags);
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pszTYPE,
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pszExt,
+            /* [in] */ DWORD dwFileVersionMS,
+            /* [in] */ DWORD dwFileVersionLS,
+            /* [unique][in] */ __RPC__in_opt LPCWSTR pszCodeBase,
+            /* [in] */ __RPC__in_opt IBindCtx *pbc,
+            /* [in] */ DWORD dwClassContext,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [in] */ DWORD flags);
         
         END_INTERFACE
     } IUrlMonVtbl;
@@ -15124,8 +14685,7 @@ EXTERN_C const IID IID_IForegroundTransfer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IForegroundTransfer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15196,22 +14756,15 @@ EXTERN_C const IID IID_IThumbnailExtractor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ExtractThumbnail( 
-            /* [annotation][in] */ 
-            _In_  IStorage *pStg,
-            /* [annotation][in] */ 
-            _In_  ULONG ulLength,
-            /* [annotation][in] */ 
-            _In_  ULONG ulHeight,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulOutputLength,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulOutputHeight,
-            /* [annotation][out] */ 
-            _Out_  HBITMAP *phOutputBitmap) = 0;
+            /* [in] */ __RPC__in_opt IStorage *pStg,
+            /* [in] */ ULONG ulLength,
+            /* [in] */ ULONG ulHeight,
+            /* [out] */ __RPC__out ULONG *pulOutputLength,
+            /* [out] */ __RPC__out ULONG *pulOutputHeight,
+            /* [out] */ __RPC__deref_out_opt HBITMAP *phOutputBitmap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnFileUpdated( 
-            /* [annotation][in] */ 
-            _In_  IStorage *pStg) = 0;
+            /* [in] */ __RPC__in_opt IStorage *pStg) = 0;
         
     };
     
@@ -15225,8 +14778,7 @@ EXTERN_C const IID IID_IThumbnailExtractor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IThumbnailExtractor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15241,24 +14793,17 @@ EXTERN_C const IID IID_IThumbnailExtractor;
         DECLSPEC_XFGVIRT(IThumbnailExtractor, ExtractThumbnail)
         HRESULT ( STDMETHODCALLTYPE *ExtractThumbnail )( 
             __RPC__in IThumbnailExtractor * This,
-            /* [annotation][in] */ 
-            _In_  IStorage *pStg,
-            /* [annotation][in] */ 
-            _In_  ULONG ulLength,
-            /* [annotation][in] */ 
-            _In_  ULONG ulHeight,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulOutputLength,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulOutputHeight,
-            /* [annotation][out] */ 
-            _Out_  HBITMAP *phOutputBitmap);
+            /* [in] */ __RPC__in_opt IStorage *pStg,
+            /* [in] */ ULONG ulLength,
+            /* [in] */ ULONG ulHeight,
+            /* [out] */ __RPC__out ULONG *pulOutputLength,
+            /* [out] */ __RPC__out ULONG *pulOutputHeight,
+            /* [out] */ __RPC__deref_out_opt HBITMAP *phOutputBitmap);
         
         DECLSPEC_XFGVIRT(IThumbnailExtractor, OnFileUpdated)
         HRESULT ( STDMETHODCALLTYPE *OnFileUpdated )( 
             __RPC__in IThumbnailExtractor * This,
-            /* [annotation][in] */ 
-            _In_  IStorage *pStg);
+            /* [in] */ __RPC__in_opt IStorage *pStg);
         
         END_INTERFACE
     } IThumbnailExtractorVtbl;
@@ -15316,10 +14861,8 @@ EXTERN_C const IID IID_IDummyHICONIncluder;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Dummy( 
-            /* [annotation][in] */ 
-            _In_  HICON h1,
-            /* [annotation][in] */ 
-            _In_  HDC h2) = 0;
+            /* [in] */ __RPC__in HICON h1,
+            /* [in] */ __RPC__in HDC h2) = 0;
         
     };
     
@@ -15333,8 +14876,7 @@ EXTERN_C const IID IID_IDummyHICONIncluder;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDummyHICONIncluder * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15349,10 +14891,8 @@ EXTERN_C const IID IID_IDummyHICONIncluder;
         DECLSPEC_XFGVIRT(IDummyHICONIncluder, Dummy)
         HRESULT ( STDMETHODCALLTYPE *Dummy )( 
             __RPC__in IDummyHICONIncluder * This,
-            /* [annotation][in] */ 
-            _In_  HICON h1,
-            /* [annotation][in] */ 
-            _In_  HDC h2);
+            /* [in] */ __RPC__in HICON h1,
+            /* [in] */ __RPC__in HDC h2);
         
         END_INTERFACE
     } IDummyHICONIncluderVtbl;
@@ -15391,7 +14931,7 @@ EXTERN_C const IID IID_IDummyHICONIncluder;
 #endif 	/* __IDummyHICONIncluder_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0087 */
+/* interface __MIDL_itf_objidl_0000_0089 */
 /* [local] */ 
 
 typedef 
@@ -15410,8 +14950,8 @@ enum tagShutdownType
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0087_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0087_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0089_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0089_v0_0_s_ifspec;
 
 #ifndef __IProcessLock_INTERFACE_DEFINED__
 #define __IProcessLock_INTERFACE_DEFINED__
@@ -15444,8 +14984,7 @@ EXTERN_C const IID IID_IProcessLock;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IProcessLock * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15558,8 +15097,7 @@ EXTERN_C const IID IID_ISurrogateService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISurrogateService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15656,14 +15194,14 @@ EXTERN_C const IID IID_ISurrogateService;
 #endif 	/* __ISurrogateService_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0089 */
+/* interface __MIDL_itf_objidl_0000_0091 */
 /* [local] */ 
 
 #if  (_WIN32_WINNT >= 0x0501 )
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0089_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0089_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0091_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0091_v0_0_s_ifspec;
 
 #ifndef __IInitializeSpy_INTERFACE_DEFINED__
 #define __IInitializeSpy_INTERFACE_DEFINED__
@@ -15716,8 +15254,7 @@ EXTERN_C const IID IID_IInitializeSpy;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IInitializeSpy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15805,7 +15342,7 @@ EXTERN_C const IID IID_IInitializeSpy;
 #endif 	/* __IInitializeSpy_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0090 */
+/* interface __MIDL_itf_objidl_0000_0092 */
 /* [local] */ 
 
 #endif
@@ -15815,8 +15352,8 @@ EXTERN_C const IID IID_IInitializeSpy;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0090_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0090_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0092_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0092_v0_0_s_ifspec;
 
 #ifndef __IApartmentShutdown_INTERFACE_DEFINED__
 #define __IApartmentShutdown_INTERFACE_DEFINED__
@@ -15849,8 +15386,7 @@ EXTERN_C const IID IID_IApartmentShutdown;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IApartmentShutdown * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15905,7 +15441,7 @@ EXTERN_C const IID IID_IApartmentShutdown;
 #endif 	/* __IApartmentShutdown_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_objidl_0000_0091 */
+/* interface __MIDL_itf_objidl_0000_0093 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
@@ -15919,8 +15455,8 @@ EXTERN_C const IID IID_IApartmentShutdown;
 #endif
 
 
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0091_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0091_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0093_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_objidl_0000_0093_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 
@@ -16016,17 +15552,13 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumUnknown_Next_Stub( 
     __RPC__in IEnumUnknown * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IUnknown **rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IUnknown **rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IEnumString_Next_Proxy( 
     IEnumString * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
+    /* [in] */ ULONG celt,
     /* [annotation] */ 
     _Out_writes_to_(celt,*pceltFetched)  LPOLESTR *rgelt,
     /* [annotation] */ 
@@ -16035,12 +15567,9 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumString_Next_Stub( 
     __RPC__in IEnumString * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  LPOLESTR *rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) LPOLESTR *rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ISequentialStream_Read_Proxy( 
     ISequentialStream * This,
@@ -16054,12 +15583,9 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ISequentialStream_Read_Stub( 
     __RPC__in ISequentialStream * This,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(cb,*pcbRead)  byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbRead);
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(cb, *pcbRead) byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbRead);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ISequentialStream_Write_Proxy( 
     ISequentialStream * This,
@@ -16073,38 +15599,29 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ISequentialStream_Write_Stub( 
     __RPC__in ISequentialStream * This,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cb)  const byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbWritten);
+    /* [size_is][in] */ __RPC__in_ecount_full(cb) const byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbWritten);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IStream_Seek_Proxy( 
     IStream * This,
-    /* [annotation][in] */ 
-    _In_  LARGE_INTEGER dlibMove,
-    /* [annotation][in] */ 
-    _In_  DWORD dwOrigin,
+    /* [in] */ LARGE_INTEGER dlibMove,
+    /* [in] */ DWORD dwOrigin,
     /* [annotation] */ 
     _Out_opt_  ULARGE_INTEGER *plibNewPosition);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IStream_Seek_Stub( 
     __RPC__in IStream * This,
-    /* [annotation][in] */ 
-    _In_  LARGE_INTEGER dlibMove,
-    /* [annotation][in] */ 
-    _In_  DWORD dwOrigin,
-    /* [annotation][out] */ 
-    _Out_  ULARGE_INTEGER *plibNewPosition);
+    /* [in] */ LARGE_INTEGER dlibMove,
+    /* [in] */ DWORD dwOrigin,
+    /* [out] */ __RPC__out ULARGE_INTEGER *plibNewPosition);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IStream_CopyTo_Proxy( 
     IStream * This,
     /* [annotation][unique][in] */ 
     _In_  IStream *pstm,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER cb,
+    /* [in] */ ULARGE_INTEGER cb,
     /* [annotation] */ 
     _Out_opt_  ULARGE_INTEGER *pcbRead,
     /* [annotation] */ 
@@ -16113,14 +15630,10 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IStream_CopyTo_Stub( 
     __RPC__in IStream * This,
-    /* [annotation][unique][in] */ 
-    _In_  IStream *pstm,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER cb,
-    /* [annotation][out] */ 
-    _Out_  ULARGE_INTEGER *pcbRead,
-    /* [annotation][out] */ 
-    _Out_  ULARGE_INTEGER *pcbWritten);
+    /* [unique][in] */ __RPC__in_opt IStream *pstm,
+    /* [in] */ ULARGE_INTEGER cb,
+    /* [out] */ __RPC__out ULARGE_INTEGER *pcbRead,
+    /* [out] */ __RPC__out ULARGE_INTEGER *pcbWritten);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IBindCtx_SetBindOptions_Proxy( 
     IBindCtx * This,
@@ -16130,8 +15643,7 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindCtx_SetBindOptions_Stub( 
     __RPC__in IBindCtx * This,
-    /* [annotation][in] */ 
-    _In_  BIND_OPTS2 *pbindopts);
+    /* [in] */ __RPC__in BIND_OPTS2 *pbindopts);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IBindCtx_GetBindOptions_Proxy( 
     IBindCtx * This,
@@ -16141,13 +15653,11 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IBindCtx_GetBindOptions_Stub( 
     __RPC__in IBindCtx * This,
-    /* [annotation][out][in] */ 
-    _Inout_  BIND_OPTS2 *pbindopts);
+    /* [out][in] */ __RPC__inout BIND_OPTS2 *pbindopts);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IEnumMoniker_Next_Proxy( 
     IEnumMoniker * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
+    /* [in] */ ULONG celt,
     /* [annotation] */ 
     _Out_writes_to_(celt,*pceltFetched)  IMoniker **rgelt,
     /* [annotation] */ 
@@ -16156,12 +15666,9 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumMoniker_Next_Stub( 
     __RPC__in IEnumMoniker * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  IMoniker **rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) IMoniker **rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ BOOL STDMETHODCALLTYPE IRunnableObject_IsRunning_Proxy( 
     IRunnableObject * This);
@@ -16184,14 +15691,10 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IMoniker_BindToObject_Stub( 
     __RPC__in IMoniker * This,
-    /* [annotation][unique][in] */ 
-    _In_  IBindCtx *pbc,
-    /* [annotation][unique][in] */ 
-    _In_  IMoniker *pmkToLeft,
-    /* [annotation][in] */ 
-    _In_  REFIID riidResult,
-    /* [annotation][iid_is][out] */ 
-    _COM_Outptr_  IUnknown **ppvResult);
+    /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+    /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+    /* [in] */ __RPC__in REFIID riidResult,
+    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvResult);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IMoniker_BindToStorage_Proxy( 
     IMoniker * This,
@@ -16207,19 +15710,14 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IMoniker_BindToStorage_Stub( 
     __RPC__in IMoniker * This,
-    /* [annotation][unique][in] */ 
-    _In_  IBindCtx *pbc,
-    /* [annotation][unique][in] */ 
-    _In_  IMoniker *pmkToLeft,
-    /* [annotation][in] */ 
-    _In_  REFIID riid,
-    /* [annotation][iid_is][out] */ 
-    _COM_Outptr_  IUnknown **ppvObj);
+    /* [unique][in] */ __RPC__in_opt IBindCtx *pbc,
+    /* [unique][in] */ __RPC__in_opt IMoniker *pmkToLeft,
+    /* [in] */ __RPC__in REFIID riid,
+    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObj);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IEnumSTATSTG_Next_Proxy( 
     IEnumSTATSTG * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
+    /* [in] */ ULONG celt,
     /* [annotation] */ 
     _Out_writes_to_(celt,*pceltFetched)  STATSTG *rgelt,
     /* [annotation] */ 
@@ -16228,12 +15726,9 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumSTATSTG_Next_Stub( 
     __RPC__in IEnumSTATSTG * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  STATSTG *rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) STATSTG *rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IStorage_OpenStream_Proxy( 
     IStorage * This,
@@ -16241,33 +15736,24 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
     _In_z_  const OLECHAR *pwcsName,
     /* [annotation][unique][in] */ 
     _Reserved_  void *reserved1,
-    /* [annotation][in] */ 
-    _In_  DWORD grfMode,
-    /* [annotation][in] */ 
-    _In_  DWORD reserved2,
+    /* [in] */ DWORD grfMode,
+    /* [in] */ DWORD reserved2,
     /* [annotation][out] */ 
     _Outptr_  IStream **ppstm);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IStorage_OpenStream_Stub( 
     __RPC__in IStorage * This,
-    /* [annotation][string][in] */ 
-    _In_  const OLECHAR *pwcsName,
-    /* [annotation][in] */ 
-    _In_  ULONG cbReserved1,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cbReserved1)  byte *reserved1,
-    /* [annotation][in] */ 
-    _In_  DWORD grfMode,
-    /* [annotation][in] */ 
-    _In_  DWORD reserved2,
-    /* [annotation][out] */ 
-    _Out_  IStream **ppstm);
+    /* [string][in] */ __RPC__in_string const OLECHAR *pwcsName,
+    /* [in] */ ULONG cbReserved1,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbReserved1) byte *reserved1,
+    /* [in] */ DWORD grfMode,
+    /* [in] */ DWORD reserved2,
+    /* [out] */ __RPC__deref_out_opt IStream **ppstm);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IStorage_CopyTo_Proxy( 
     IStorage * This,
-    /* [annotation][in] */ 
-    _In_  DWORD ciidExclude,
+    /* [in] */ DWORD ciidExclude,
     /* [annotation][size_is][unique][in] */ 
     _In_reads_opt_(ciidExclude)  const IID *rgiidExclude,
     /* [annotation][unique][in] */ 
@@ -16278,13 +15764,10 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IStorage_CopyTo_Stub( 
     __RPC__in IStorage * This,
-    /* [annotation][in] */ 
-    _In_  DWORD ciidExclude,
+    /* [in] */ DWORD ciidExclude,
     /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(ciidExclude) const IID *rgiidExclude,
-    /* [annotation][unique][in] */ 
-    _In_  SNB snbExclude,
-    /* [annotation][unique][in] */ 
-    _In_  IStorage *pstgDest);
+    /* [unique][in] */ __RPC__deref_opt_in_opt SNB snbExclude,
+    /* [unique][in] */ __RPC__in_opt IStorage *pstgDest);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IStorage_EnumElements_Proxy( 
     IStorage * This,
@@ -16300,67 +15783,49 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IStorage_EnumElements_Stub( 
     __RPC__in IStorage * This,
-    /* [annotation][in] */ 
-    _In_  DWORD reserved1,
-    /* [annotation][in] */ 
-    _In_  ULONG cbReserved2,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cbReserved2)  byte *reserved2,
-    /* [annotation][in] */ 
-    _In_  DWORD reserved3,
-    /* [annotation][out] */ 
-    _Out_  IEnumSTATSTG **ppenum);
+    /* [in] */ DWORD reserved1,
+    /* [in] */ ULONG cbReserved2,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cbReserved2) byte *reserved2,
+    /* [in] */ DWORD reserved3,
+    /* [out] */ __RPC__deref_out_opt IEnumSTATSTG **ppenum);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ILockBytes_ReadAt_Proxy( 
     ILockBytes * This,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER ulOffset,
+    /* [in] */ ULARGE_INTEGER ulOffset,
     /* [annotation][length_is][size_is][out] */ 
     _Out_writes_bytes_to_(cb, *pcbRead)  void *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
+    /* [in] */ ULONG cb,
     /* [annotation][out] */ 
     _Out_opt_  ULONG *pcbRead);
 
 
 /* [call_as] */ HRESULT __stdcall ILockBytes_ReadAt_Stub( 
     __RPC__in ILockBytes * This,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER ulOffset,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(cb,*pcbRead)  byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbRead);
+    /* [in] */ ULARGE_INTEGER ulOffset,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(cb, *pcbRead) byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbRead);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ILockBytes_WriteAt_Proxy( 
     ILockBytes * This,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER ulOffset,
+    /* [in] */ ULARGE_INTEGER ulOffset,
     /* [annotation][size_is][in] */ 
     _In_reads_bytes_(cb)  const void *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
+    /* [in] */ ULONG cb,
     /* [annotation][out] */ 
     _Out_opt_  ULONG *pcbWritten);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ILockBytes_WriteAt_Stub( 
     __RPC__in ILockBytes * This,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER ulOffset,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cb)  const byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbWritten);
+    /* [in] */ ULARGE_INTEGER ulOffset,
+    /* [size_is][in] */ __RPC__in_ecount_full(cb) const byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbWritten);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IEnumFORMATETC_Next_Proxy( 
     IEnumFORMATETC * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
+    /* [in] */ ULONG celt,
     /* [annotation] */ 
     _Out_writes_to_(celt,*pceltFetched)  FORMATETC *rgelt,
     /* [annotation] */ 
@@ -16369,17 +15834,13 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumFORMATETC_Next_Stub( 
     __RPC__in IEnumFORMATETC * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  FORMATETC *rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) FORMATETC *rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IEnumSTATDATA_Next_Proxy( 
     IEnumSTATDATA * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
+    /* [in] */ ULONG celt,
     /* [annotation] */ 
     _Out_writes_to_(celt,*pceltFetched)  STATDATA *rgelt,
     /* [annotation] */ 
@@ -16388,12 +15849,9 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumSTATDATA_Next_Stub( 
     __RPC__in IEnumSTATDATA * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  STATDATA *rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) STATDATA *rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ void STDMETHODCALLTYPE IAdviseSink_OnDataChange_Proxy( 
     IAdviseSink * This,
@@ -16405,25 +15863,19 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IAdviseSink_OnDataChange_Stub( 
     __RPC__in IAdviseSink * This,
-    /* [annotation][unique][in] */ 
-    _In_  FORMATETC *pFormatetc,
-    /* [annotation][unique][in] */ 
-    _In_  ASYNC_STGMEDIUM *pStgmed);
+    /* [unique][in] */ __RPC__in_opt FORMATETC *pFormatetc,
+    /* [unique][in] */ __RPC__in_opt ASYNC_STGMEDIUM *pStgmed);
 
 /* [local] */ void STDMETHODCALLTYPE IAdviseSink_OnViewChange_Proxy( 
     IAdviseSink * This,
-    /* [annotation][in] */ 
-    _In_  DWORD dwAspect,
-    /* [annotation][in] */ 
-    _In_  LONG lindex);
+    /* [in] */ DWORD dwAspect,
+    /* [in] */ LONG lindex);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IAdviseSink_OnViewChange_Stub( 
     __RPC__in IAdviseSink * This,
-    /* [annotation][in] */ 
-    _In_  DWORD dwAspect,
-    /* [annotation][in] */ 
-    _In_  LONG lindex);
+    /* [in] */ DWORD dwAspect,
+    /* [in] */ LONG lindex);
 
 /* [local] */ void STDMETHODCALLTYPE IAdviseSink_OnRename_Proxy( 
     IAdviseSink * This,
@@ -16433,8 +15885,7 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IAdviseSink_OnRename_Stub( 
     __RPC__in IAdviseSink * This,
-    /* [annotation][in] */ 
-    _In_  IMoniker *pmk);
+    /* [in] */ __RPC__in_opt IMoniker *pmk);
 
 /* [local] */ void STDMETHODCALLTYPE IAdviseSink_OnSave_Proxy( 
     IAdviseSink * This);
@@ -16460,10 +15911,8 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE AsyncIAdviseSink_Begin_OnDataChange_Stub( 
     __RPC__in AsyncIAdviseSink * This,
-    /* [annotation][unique][in] */ 
-    _In_  FORMATETC *pFormatetc,
-    /* [annotation][unique][in] */ 
-    _In_  ASYNC_STGMEDIUM *pStgmed);
+    /* [unique][in] */ __RPC__in_opt FORMATETC *pFormatetc,
+    /* [unique][in] */ __RPC__in_opt ASYNC_STGMEDIUM *pStgmed);
 
 /* [local] */ void STDMETHODCALLTYPE AsyncIAdviseSink_Finish_OnDataChange_Proxy( 
     AsyncIAdviseSink * This);
@@ -16474,18 +15923,14 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [local] */ void STDMETHODCALLTYPE AsyncIAdviseSink_Begin_OnViewChange_Proxy( 
     AsyncIAdviseSink * This,
-    /* [annotation][in] */ 
-    _In_  DWORD dwAspect,
-    /* [annotation][in] */ 
-    _In_  LONG lindex);
+    /* [in] */ DWORD dwAspect,
+    /* [in] */ LONG lindex);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE AsyncIAdviseSink_Begin_OnViewChange_Stub( 
     __RPC__in AsyncIAdviseSink * This,
-    /* [annotation][in] */ 
-    _In_  DWORD dwAspect,
-    /* [annotation][in] */ 
-    _In_  LONG lindex);
+    /* [in] */ DWORD dwAspect,
+    /* [in] */ LONG lindex);
 
 /* [local] */ void STDMETHODCALLTYPE AsyncIAdviseSink_Finish_OnViewChange_Proxy( 
     AsyncIAdviseSink * This);
@@ -16502,8 +15947,7 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE AsyncIAdviseSink_Begin_OnRename_Stub( 
     __RPC__in AsyncIAdviseSink * This,
-    /* [annotation][in] */ 
-    _In_  IMoniker *pmk);
+    /* [in] */ __RPC__in_opt IMoniker *pmk);
 
 /* [local] */ void STDMETHODCALLTYPE AsyncIAdviseSink_Finish_OnRename_Proxy( 
     AsyncIAdviseSink * This);
@@ -16548,8 +15992,7 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IAdviseSink2_OnLinkSrcChange_Stub( 
     __RPC__in IAdviseSink2 * This,
-    /* [annotation][unique][in] */ 
-    _In_  IMoniker *pmk);
+    /* [unique][in] */ __RPC__in_opt IMoniker *pmk);
 
 /* [local] */ void STDMETHODCALLTYPE AsyncIAdviseSink2_Begin_OnLinkSrcChange_Proxy( 
     AsyncIAdviseSink2 * This,
@@ -16559,8 +16002,7 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE AsyncIAdviseSink2_Begin_OnLinkSrcChange_Stub( 
     __RPC__in AsyncIAdviseSink2 * This,
-    /* [annotation][unique][in] */ 
-    _In_  IMoniker *pmk);
+    /* [unique][in] */ __RPC__in_opt IMoniker *pmk);
 
 /* [local] */ void STDMETHODCALLTYPE AsyncIAdviseSink2_Finish_OnLinkSrcChange_Proxy( 
     AsyncIAdviseSink2 * This);
@@ -16579,10 +16021,8 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IDataObject_GetData_Stub( 
     __RPC__in IDataObject * This,
-    /* [annotation][unique][in] */ 
-    _In_  FORMATETC *pformatetcIn,
-    /* [annotation][out] */ 
-    _Out_  STGMEDIUM *pRemoteMedium);
+    /* [unique][in] */ __RPC__in_opt FORMATETC *pformatetcIn,
+    /* [out] */ __RPC__out STGMEDIUM *pRemoteMedium);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IDataObject_GetDataHere_Proxy( 
     IDataObject * This,
@@ -16594,10 +16034,8 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IDataObject_GetDataHere_Stub( 
     __RPC__in IDataObject * This,
-    /* [annotation][unique][in] */ 
-    _In_  FORMATETC *pformatetc,
-    /* [annotation][out][in] */ 
-    _Inout_  STGMEDIUM *pRemoteMedium);
+    /* [unique][in] */ __RPC__in_opt FORMATETC *pformatetc,
+    /* [out][in] */ __RPC__inout STGMEDIUM *pRemoteMedium);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IDataObject_SetData_Proxy( 
     IDataObject * This,
@@ -16605,18 +16043,14 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
     _In_  FORMATETC *pformatetc,
     /* [annotation][unique][in] */ 
     _In_  STGMEDIUM *pmedium,
-    /* [annotation][in] */ 
-    _In_  BOOL fRelease);
+    /* [in] */ BOOL fRelease);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IDataObject_SetData_Stub( 
     __RPC__in IDataObject * This,
-    /* [annotation][unique][in] */ 
-    _In_  FORMATETC *pformatetc,
-    /* [annotation][unique][in] */ 
-    _In_  FLAG_STGMEDIUM *pmedium,
-    /* [annotation][in] */ 
-    _In_  BOOL fRelease);
+    /* [unique][in] */ __RPC__in_opt FORMATETC *pformatetc,
+    /* [unique][in] */ __RPC__in_opt FLAG_STGMEDIUM *pmedium,
+    /* [in] */ BOOL fRelease);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IFillLockBytes_FillAppend_Proxy( 
     IFillLockBytes * This,
@@ -16630,12 +16064,9 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT __stdcall IFillLockBytes_FillAppend_Stub( 
     __RPC__in IFillLockBytes * This,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cb)  const byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbWritten);
+    /* [size_is][in] */ __RPC__in_ecount_full(cb) const byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbWritten);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IFillLockBytes_FillAt_Proxy( 
     IFillLockBytes * This,
@@ -16651,14 +16082,10 @@ void                      __RPC_USER  STGMEDIUM_UserFree64(     __RPC__in unsign
 
 /* [call_as] */ HRESULT __stdcall IFillLockBytes_FillAt_Stub( 
     __RPC__in IFillLockBytes * This,
-    /* [annotation][in] */ 
-    _In_  ULARGE_INTEGER ulOffset,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cb)  const byte *pv,
-    /* [annotation][in] */ 
-    _In_  ULONG cb,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pcbWritten);
+    /* [in] */ ULARGE_INTEGER ulOffset,
+    /* [size_is][in] */ __RPC__in_ecount_full(cb) const byte *pv,
+    /* [in] */ ULONG cb,
+    /* [out] */ __RPC__out ULONG *pcbWritten);
 
 
 

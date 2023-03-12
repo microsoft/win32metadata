@@ -1,16 +1,21 @@
+/*-------------------------------------------------------------------------------------
+ *
+ * Copyright (c) Microsoft Corporation
+ * Licensed under the MIT license
+ *
+ *-------------------------------------------------------------------------------------*/
 
 
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
-/* @@MIDL_FILE_HEADING(  ) */
+ /* File created by MIDL compiler version 8.01.0628 */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +43,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -87,6 +92,13 @@ typedef interface OpenCLOn12CreatorID OpenCLOn12CreatorID;
 typedef interface DirectMLTensorFlowCreatorID DirectMLTensorFlowCreatorID;
 
 #endif 	/* __DirectMLTensorFlowCreatorID_FWD_DEFINED__ */
+
+
+#ifndef __DirectMLPyTorchCreatorID_FWD_DEFINED__
+#define __DirectMLPyTorchCreatorID_FWD_DEFINED__
+typedef interface DirectMLPyTorchCreatorID DirectMLPyTorchCreatorID;
+
+#endif 	/* __DirectMLPyTorchCreatorID_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -144,38 +156,27 @@ EXTERN_C const IID IID_ID3D12CompatibilityDevice;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateSharedResource( 
-            /* [annotation] */ 
             _In_  const D3D12_HEAP_PROPERTIES *pHeapProperties,
             D3D12_HEAP_FLAGS HeapFlags,
-            /* [annotation] */ 
             _In_  const D3D12_RESOURCE_DESC *pDesc,
             D3D12_RESOURCE_STATES InitialResourceState,
-            /* [annotation] */ 
             _In_opt_  const D3D12_CLEAR_VALUE *pOptimizedClearValue,
-            /* [annotation] */ 
             _In_opt_  const D3D11_RESOURCE_FLAGS *pFlags11,
             D3D12_COMPATIBILITY_SHARED_FLAGS CompatibilityFlags,
-            /* [annotation] */ 
             _In_opt_  ID3D12LifetimeTracker *pLifetimeTracker,
-            /* [annotation] */ 
             _In_opt_  ID3D12SwapChainAssistant *pOwningSwapchain,
             REFIID riid,
-            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateSharedHeap( 
-            /* [annotation] */ 
             _In_  const D3D12_HEAP_DESC *pHeapDesc,
             D3D12_COMPATIBILITY_SHARED_FLAGS CompatibilityFlags,
             REFIID riid,
-            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppHeap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReflectSharedProperties( 
-            /* [annotation] */ 
             _In_  ID3D12Object *pHeapOrResource,
             D3D12_REFLECT_SHARED_PROPERTY ReflectType,
-            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize) = 0;
         
@@ -191,9 +192,7 @@ EXTERN_C const IID IID_ID3D12CompatibilityDevice;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D12CompatibilityDevice * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -207,42 +206,31 @@ EXTERN_C const IID IID_ID3D12CompatibilityDevice;
         DECLSPEC_XFGVIRT(ID3D12CompatibilityDevice, CreateSharedResource)
         HRESULT ( STDMETHODCALLTYPE *CreateSharedResource )( 
             ID3D12CompatibilityDevice * This,
-            /* [annotation] */ 
             _In_  const D3D12_HEAP_PROPERTIES *pHeapProperties,
             D3D12_HEAP_FLAGS HeapFlags,
-            /* [annotation] */ 
             _In_  const D3D12_RESOURCE_DESC *pDesc,
             D3D12_RESOURCE_STATES InitialResourceState,
-            /* [annotation] */ 
             _In_opt_  const D3D12_CLEAR_VALUE *pOptimizedClearValue,
-            /* [annotation] */ 
             _In_opt_  const D3D11_RESOURCE_FLAGS *pFlags11,
             D3D12_COMPATIBILITY_SHARED_FLAGS CompatibilityFlags,
-            /* [annotation] */ 
             _In_opt_  ID3D12LifetimeTracker *pLifetimeTracker,
-            /* [annotation] */ 
             _In_opt_  ID3D12SwapChainAssistant *pOwningSwapchain,
             REFIID riid,
-            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppResource);
         
         DECLSPEC_XFGVIRT(ID3D12CompatibilityDevice, CreateSharedHeap)
         HRESULT ( STDMETHODCALLTYPE *CreateSharedHeap )( 
             ID3D12CompatibilityDevice * This,
-            /* [annotation] */ 
             _In_  const D3D12_HEAP_DESC *pHeapDesc,
             D3D12_COMPATIBILITY_SHARED_FLAGS CompatibilityFlags,
             REFIID riid,
-            /* [annotation][iid_is][out] */ 
             _COM_Outptr_opt_  void **ppHeap);
         
         DECLSPEC_XFGVIRT(ID3D12CompatibilityDevice, ReflectSharedProperties)
         HRESULT ( STDMETHODCALLTYPE *ReflectSharedProperties )( 
             ID3D12CompatibilityDevice * This,
-            /* [annotation] */ 
             _In_  ID3D12Object *pHeapOrResource,
             D3D12_REFLECT_SHARED_PROPERTY ReflectType,
-            /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData,
             UINT DataSize);
         
@@ -316,9 +304,7 @@ EXTERN_C const IID IID_D3D11On12CreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             D3D11On12CreatorID * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -390,9 +376,7 @@ EXTERN_C const IID IID_D3D9On12CreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             D3D9On12CreatorID * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -464,9 +448,7 @@ EXTERN_C const IID IID_OpenGLOn12CreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             OpenGLOn12CreatorID * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -538,9 +520,7 @@ EXTERN_C const IID IID_OpenCLOn12CreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             OpenCLOn12CreatorID * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -612,9 +592,7 @@ EXTERN_C const IID IID_DirectMLTensorFlowCreatorID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             DirectMLTensorFlowCreatorID * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -659,7 +637,79 @@ EXTERN_C const IID IID_DirectMLTensorFlowCreatorID;
 #endif 	/* __DirectMLTensorFlowCreatorID_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12compatibility_0000_0006 */
+#ifndef __DirectMLPyTorchCreatorID_INTERFACE_DEFINED__
+#define __DirectMLPyTorchCreatorID_INTERFACE_DEFINED__
+
+/* interface DirectMLPyTorchCreatorID */
+/* [unique][local][object][uuid] */ 
+
+
+EXTERN_C const IID IID_DirectMLPyTorchCreatorID;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("af029192-fba1-4b05-9116-235e06560354")
+    DirectMLPyTorchCreatorID : public IUnknown
+    {
+    public:
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct DirectMLPyTorchCreatorIDVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            DirectMLPyTorchCreatorID * This,
+            REFIID riid,
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            DirectMLPyTorchCreatorID * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            DirectMLPyTorchCreatorID * This);
+        
+        END_INTERFACE
+    } DirectMLPyTorchCreatorIDVtbl;
+
+    interface DirectMLPyTorchCreatorID
+    {
+        CONST_VTBL struct DirectMLPyTorchCreatorIDVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define DirectMLPyTorchCreatorID_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define DirectMLPyTorchCreatorID_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define DirectMLPyTorchCreatorID_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __DirectMLPyTorchCreatorID_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_d3d12compatibility_0000_0007 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
@@ -670,10 +720,11 @@ DEFINE_GUID(IID_D3D9On12CreatorID,0xfffcbb7f,0x15d3,0x42a2,0x84,0x1e,0x9d,0x8d,0
 DEFINE_GUID(IID_OpenGLOn12CreatorID,0x6bb3cd34,0x0d19,0x45ab,0x97,0xed,0xd7,0x20,0xba,0x3d,0xfc,0x80);
 DEFINE_GUID(IID_OpenCLOn12CreatorID,0x3f76bb74,0x91b5,0x4a88,0xb1,0x26,0x20,0xca,0x03,0x31,0xcd,0x60);
 DEFINE_GUID(IID_DirectMLTensorFlowCreatorID,0xcb7490ac,0x8a0f,0x44ec,0x9b,0x7b,0x6f,0x4c,0xaf,0xe8,0xe9,0xab);
+DEFINE_GUID(IID_DirectMLPyTorchCreatorID,0xaf029192,0xfba1,0x4b05,0x91,0x16,0x23,0x5e,0x06,0x56,0x03,0x54);
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12compatibility_0000_0006_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12compatibility_0000_0006_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12compatibility_0000_0007_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12compatibility_0000_0007_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -26,15 +26,15 @@
 #endif /* __RPCNDR_H_VERSION__ */
 
 
-#ifndef __presentationtypes_h__
-#define __presentationtypes_h__
+#ifndef __PresentationTypes_h__
+#define __PresentationTypes_h__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -53,7 +53,7 @@ extern "C"{
 #endif 
 
 
-/* interface __MIDL_itf_presentationtypes_0000_0000 */
+/* interface __MIDL_itf_PresentationTypes_0000_0000 */
 /* [local] */ 
 
 typedef struct SystemInterruptTime
@@ -83,8 +83,8 @@ enum PresentStatisticsKind
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_presentationtypes_0000_0000_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_presentationtypes_0000_0000_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_PresentationTypes_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_PresentationTypes_0000_0000_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

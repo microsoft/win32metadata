@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -203,8 +203,7 @@ EXTERN_C const IID IID_IAudioSessionEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -390,8 +389,7 @@ EXTERN_C const IID IID_IAudioSessionControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -563,8 +561,7 @@ EXTERN_C const IID IID_IAudioSessionControl2;
         virtual HRESULT STDMETHODCALLTYPE IsSystemSoundsSession( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDuckingPreference( 
-            /* [annotation][in] */ 
-            _In_  BOOL optOut) = 0;
+            /* [in] */ BOOL optOut) = 0;
         
     };
     
@@ -578,8 +575,7 @@ EXTERN_C const IID IID_IAudioSessionControl2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionControl2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -673,8 +669,7 @@ EXTERN_C const IID IID_IAudioSessionControl2;
         DECLSPEC_XFGVIRT(IAudioSessionControl2, SetDuckingPreference)
         HRESULT ( STDMETHODCALLTYPE *SetDuckingPreference )( 
             IAudioSessionControl2 * This,
-            /* [annotation][in] */ 
-            _In_  BOOL optOut);
+            /* [in] */ BOOL optOut);
         
         END_INTERFACE
     } IAudioSessionControl2Vtbl;
@@ -796,8 +791,7 @@ EXTERN_C const IID IID_IAudioSessionManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -885,14 +879,11 @@ EXTERN_C const IID IID_IAudioVolumeDuckNotification;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnVolumeDuckNotification( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR sessionID,
-            /* [annotation][in] */ 
-            _In_  UINT32 countCommunicationSessions) = 0;
+            /* [in] */ LPCWSTR sessionID,
+            /* [in] */ UINT32 countCommunicationSessions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnVolumeUnduckNotification( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR sessionID) = 0;
+            /* [in] */ LPCWSTR sessionID) = 0;
         
     };
     
@@ -906,8 +897,7 @@ EXTERN_C const IID IID_IAudioVolumeDuckNotification;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioVolumeDuckNotification * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -922,16 +912,13 @@ EXTERN_C const IID IID_IAudioVolumeDuckNotification;
         DECLSPEC_XFGVIRT(IAudioVolumeDuckNotification, OnVolumeDuckNotification)
         HRESULT ( STDMETHODCALLTYPE *OnVolumeDuckNotification )( 
             IAudioVolumeDuckNotification * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR sessionID,
-            /* [annotation][in] */ 
-            _In_  UINT32 countCommunicationSessions);
+            /* [in] */ LPCWSTR sessionID,
+            /* [in] */ UINT32 countCommunicationSessions);
         
         DECLSPEC_XFGVIRT(IAudioVolumeDuckNotification, OnVolumeUnduckNotification)
         HRESULT ( STDMETHODCALLTYPE *OnVolumeUnduckNotification )( 
             IAudioVolumeDuckNotification * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR sessionID);
+            /* [in] */ LPCWSTR sessionID);
         
         END_INTERFACE
     } IAudioVolumeDuckNotificationVtbl;
@@ -989,8 +976,7 @@ EXTERN_C const IID IID_IAudioSessionNotification;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnSessionCreated( 
-            /* [annotation][in] */ 
-            _In_  IAudioSessionControl *NewSession) = 0;
+            /* [in] */ IAudioSessionControl *NewSession) = 0;
         
     };
     
@@ -1004,8 +990,7 @@ EXTERN_C const IID IID_IAudioSessionNotification;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionNotification * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1020,8 +1005,7 @@ EXTERN_C const IID IID_IAudioSessionNotification;
         DECLSPEC_XFGVIRT(IAudioSessionNotification, OnSessionCreated)
         HRESULT ( STDMETHODCALLTYPE *OnSessionCreated )( 
             IAudioSessionNotification * This,
-            /* [annotation][in] */ 
-            _In_  IAudioSessionControl *NewSession);
+            /* [in] */ IAudioSessionControl *NewSession);
         
         END_INTERFACE
     } IAudioSessionNotificationVtbl;
@@ -1076,14 +1060,11 @@ EXTERN_C const IID IID_IAudioSessionEnumerator;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][out] */ 
-            _Out_  int *SessionCount) = 0;
+            /* [out] */ int *SessionCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSession( 
-            /* [annotation][in] */ 
-            _In_  int SessionCount,
-            /* [annotation][out] */ 
-            _Out_  IAudioSessionControl **Session) = 0;
+            /* [in] */ int SessionCount,
+            /* [out] */ IAudioSessionControl **Session) = 0;
         
     };
     
@@ -1097,8 +1078,7 @@ EXTERN_C const IID IID_IAudioSessionEnumerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionEnumerator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1113,16 +1093,13 @@ EXTERN_C const IID IID_IAudioSessionEnumerator;
         DECLSPEC_XFGVIRT(IAudioSessionEnumerator, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IAudioSessionEnumerator * This,
-            /* [annotation][out] */ 
-            _Out_  int *SessionCount);
+            /* [out] */ int *SessionCount);
         
         DECLSPEC_XFGVIRT(IAudioSessionEnumerator, GetSession)
         HRESULT ( STDMETHODCALLTYPE *GetSession )( 
             IAudioSessionEnumerator * This,
-            /* [annotation][in] */ 
-            _In_  int SessionCount,
-            /* [annotation][out] */ 
-            _Out_  IAudioSessionControl **Session);
+            /* [in] */ int SessionCount,
+            /* [out] */ IAudioSessionControl **Session);
         
         END_INTERFACE
     } IAudioSessionEnumeratorVtbl;
@@ -1180,8 +1157,7 @@ EXTERN_C const IID IID_IAudioSessionManager2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSessionEnumerator( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAudioSessionEnumerator **SessionEnum) = 0;
+            /* [retval][out] */ IAudioSessionEnumerator **SessionEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterSessionNotification( 
             IAudioSessionNotification *SessionNotification) = 0;
@@ -1210,8 +1186,7 @@ EXTERN_C const IID IID_IAudioSessionManager2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioSessionManager2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1246,8 +1221,7 @@ EXTERN_C const IID IID_IAudioSessionManager2;
         DECLSPEC_XFGVIRT(IAudioSessionManager2, GetSessionEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetSessionEnumerator )( 
             IAudioSessionManager2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAudioSessionEnumerator **SessionEnum);
+            /* [retval][out] */ IAudioSessionEnumerator **SessionEnum);
         
         DECLSPEC_XFGVIRT(IAudioSessionManager2, RegisterSessionNotification)
         HRESULT ( STDMETHODCALLTYPE *RegisterSessionNotification )( 

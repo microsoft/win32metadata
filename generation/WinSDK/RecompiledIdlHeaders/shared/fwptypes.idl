@@ -300,6 +300,19 @@ typedef struct FWP_CONDITION_VALUE0_
    };
 } FWP_CONDITION_VALUE0;
 
+///////////////////////////////////////////////////////////////////////////////
+//
+// Types for Network Connection Policy options.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+typedef [v1_enum] enum FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE_
+{
+    FWP_NETWORK_CONNECTION_POLICY_SOURCE_ADDRESS,
+    FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP_INTERFACE,
+    FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP,
+    FWP_NETWORK_CONNECTION_POLICY_MAX,
+} FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE;
 
 ///////////////////////////////////////////////////////////////////////////////
 //

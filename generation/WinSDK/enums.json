@@ -11774,7 +11774,7 @@
     ]
   },
   {
-    "name": "POWER_SETTING_REGISTER_NOTIFICATION_FLAGS",
+    "name": "REGISTER_NOTIFICATION_FLAGS",
     "members": [
       {
         "name": "DEVICE_NOTIFY_SERVICE_HANDLE",
@@ -11786,11 +11786,14 @@
       {
         "name": "DEVICE_NOTIFY_WINDOW_HANDLE",
         "value": "0"
+      },
+      {
+        "name": "DEVICE_NOTIFY_ALL_INTERFACE_CLASSES"
       }
     ],
     "uses": [
       {
-        "method": "PowerSettingRegisterNotification",
+        "method": "RegisterDeviceNotificationA",
         "parameter": "Flags"
       },
       {
@@ -11798,7 +11801,15 @@
         "parameter": "Flags"
       },
       {
-        "method": "RegisterDeviceNotificationA",
+        "method": "RegisterSuspendResumeNotification",
+        "parameter": "Flags"
+      },
+      {
+        "method": "PowerSettingRegisterNotification",
+        "parameter": "Flags"
+      },
+      {
+        "method": "PowerRegisterSuspendResumeNotification",
         "parameter": "Flags"
       }
     ]
@@ -30402,6 +30413,10 @@
       {
         "name": "ISC_REQ_DEFERRED_CRED_VALIDATION",
         "value": "0x0000000200000000"
+      },
+      {
+        "name": "ISC_REQ_NO_POST_HANDSHAKE_AUTH",
+        "value": "0x0000000400000000"
       }
     ]
   },
@@ -30409,7 +30424,7 @@
     "name": "ISC_REQ_FLAGS",
     "flags": true,
     "autoPopulate": {
-      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION)",
+      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION|NO_POST_HANDSHAKE_AUTH)",
       "header": "sspi.h"
     },
     "members": [],

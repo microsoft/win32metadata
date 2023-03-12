@@ -624,9 +624,9 @@ typedef struct {
         struct {
             ULONG Zone : 28;
             ULONG Level : 4;
-        };
+        } DUMMYSTRUCTNAME;
         ULONG Value;
-    };
+    } DUMMYUNIONNAME;
 } SCOPE_ID, *PSCOPE_ID;
 
 #define SCOPEID_UNSPECIFIED_INIT    { 0 }

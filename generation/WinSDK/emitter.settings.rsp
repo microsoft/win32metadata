@@ -158,6 +158,7 @@ SpExchangeMetaDataFn
 SpGetCredUIContextFn
 SpUpdateCredentialsFn
 SpValidateTargetInfoFn
+SpExtractTargetInfoFn
 SpGetRemoteCredGuardLogonBufferFn
 SpGetRemoteCredGuardSupplementalCredsFn
 SpGetTbalSupplementalCredsFn

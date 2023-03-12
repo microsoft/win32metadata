@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -195,16 +195,12 @@ EXTERN_C const IID IID_IBDA_TIF_REGISTRATION;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RegisterTIFEx( 
-            /* [annotation][in] */ 
-            _In_  IPin *pTIFInputPin,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *ppvRegistrationContext,
-            /* [annotation][out][in] */ 
-            _Inout_  IUnknown **ppMpeg2DataControl) = 0;
+            /* [in] */ __RPC__in_opt IPin *pTIFInputPin,
+            /* [out][in] */ __RPC__inout ULONG *ppvRegistrationContext,
+            /* [out][in] */ __RPC__deref_inout_opt IUnknown **ppMpeg2DataControl) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE UnregisterTIF( 
-            /* [annotation][in] */ 
-            _In_  ULONG pvRegistrationContext) = 0;
+            /* [in] */ ULONG pvRegistrationContext) = 0;
         
     };
     
@@ -218,8 +214,7 @@ EXTERN_C const IID IID_IBDA_TIF_REGISTRATION;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_TIF_REGISTRATION * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -234,18 +229,14 @@ EXTERN_C const IID IID_IBDA_TIF_REGISTRATION;
         DECLSPEC_XFGVIRT(IBDA_TIF_REGISTRATION, RegisterTIFEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterTIFEx )( 
             __RPC__in IBDA_TIF_REGISTRATION * This,
-            /* [annotation][in] */ 
-            _In_  IPin *pTIFInputPin,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *ppvRegistrationContext,
-            /* [annotation][out][in] */ 
-            _Inout_  IUnknown **ppMpeg2DataControl);
+            /* [in] */ __RPC__in_opt IPin *pTIFInputPin,
+            /* [out][in] */ __RPC__inout ULONG *ppvRegistrationContext,
+            /* [out][in] */ __RPC__deref_inout_opt IUnknown **ppMpeg2DataControl);
         
         DECLSPEC_XFGVIRT(IBDA_TIF_REGISTRATION, UnregisterTIF)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnregisterTIF )( 
             __RPC__in IBDA_TIF_REGISTRATION * This,
-            /* [annotation][in] */ 
-            _In_  ULONG pvRegistrationContext);
+            /* [in] */ ULONG pvRegistrationContext);
         
         END_INTERFACE
     } IBDA_TIF_REGISTRATIONVtbl;
@@ -303,36 +294,26 @@ EXTERN_C const IID IID_IMPEG2_TIF_CONTROL;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RegisterTIF( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkTIF,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *ppvRegistrationContext) = 0;
+            /* [in] */ __RPC__in_opt IUnknown *pUnkTIF,
+            /* [out][in] */ __RPC__inout ULONG *ppvRegistrationContext) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE UnregisterTIF( 
-            /* [annotation][in] */ 
-            _In_  ULONG pvRegistrationContext) = 0;
+            /* [in] */ ULONG pvRegistrationContext) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AddPIDs( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulcPIDs,
-            /* [annotation][in] */ 
-            _In_  ULONG *pulPIDs) = 0;
+            /* [in] */ ULONG ulcPIDs,
+            /* [in] */ __RPC__in ULONG *pulPIDs) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE DeletePIDs( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulcPIDs,
-            /* [annotation][in] */ 
-            _In_  ULONG *pulPIDs) = 0;
+            /* [in] */ ULONG ulcPIDs,
+            /* [in] */ __RPC__in ULONG *pulPIDs) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPIDCount( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulcPIDs) = 0;
+            /* [out] */ __RPC__out ULONG *pulcPIDs) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPIDs( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulcPIDs,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulPIDs) = 0;
+            /* [out] */ __RPC__out ULONG *pulcPIDs,
+            /* [out] */ __RPC__out ULONG *pulPIDs) = 0;
         
     };
     
@@ -346,8 +327,7 @@ EXTERN_C const IID IID_IMPEG2_TIF_CONTROL;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -362,46 +342,36 @@ EXTERN_C const IID IID_IMPEG2_TIF_CONTROL;
         DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, RegisterTIF)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterTIF )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkTIF,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *ppvRegistrationContext);
+            /* [in] */ __RPC__in_opt IUnknown *pUnkTIF,
+            /* [out][in] */ __RPC__inout ULONG *ppvRegistrationContext);
         
         DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, UnregisterTIF)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnregisterTIF )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
-            /* [annotation][in] */ 
-            _In_  ULONG pvRegistrationContext);
+            /* [in] */ ULONG pvRegistrationContext);
         
         DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, AddPIDs)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddPIDs )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcPIDs,
-            /* [annotation][in] */ 
-            _In_  ULONG *pulPIDs);
+            /* [in] */ ULONG ulcPIDs,
+            /* [in] */ __RPC__in ULONG *pulPIDs);
         
         DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, DeletePIDs)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeletePIDs )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcPIDs,
-            /* [annotation][in] */ 
-            _In_  ULONG *pulPIDs);
+            /* [in] */ ULONG ulcPIDs,
+            /* [in] */ __RPC__in ULONG *pulPIDs);
         
         DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, GetPIDCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPIDCount )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulcPIDs);
+            /* [out] */ __RPC__out ULONG *pulcPIDs);
         
         DECLSPEC_XFGVIRT(IMPEG2_TIF_CONTROL, GetPIDs)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPIDs )( 
             __RPC__in IMPEG2_TIF_CONTROL * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulcPIDs,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulPIDs);
+            /* [out] */ __RPC__out ULONG *pulcPIDs,
+            /* [out] */ __RPC__out ULONG *pulPIDs);
         
         END_INTERFACE
     } IMPEG2_TIF_CONTROLVtbl;
@@ -471,40 +441,29 @@ EXTERN_C const IID IID_ITuneRequestInfo;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetLocatorData( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *Request) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *Request) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetComponentData( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CreateComponentList( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetNextProgram( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPreviousProgram( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetNextLocator( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPreviousLocator( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest) = 0;
         
     };
     
@@ -518,8 +477,7 @@ EXTERN_C const IID IID_ITuneRequestInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITuneRequestInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -534,52 +492,41 @@ EXTERN_C const IID IID_ITuneRequestInfo;
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetLocatorData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLocatorData )( 
             __RPC__in ITuneRequestInfo * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *Request);
+            /* [in] */ __RPC__in_opt ITuneRequest *Request);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetComponentData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetComponentData )( 
             __RPC__in ITuneRequestInfo * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, CreateComponentList)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateComponentList )( 
             __RPC__in ITuneRequestInfo * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetNextProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextProgram )( 
             __RPC__in ITuneRequestInfo * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetPreviousProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPreviousProgram )( 
             __RPC__in ITuneRequestInfo * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetNextLocator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextLocator )( 
             __RPC__in ITuneRequestInfo * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetPreviousLocator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPreviousLocator )( 
             __RPC__in ITuneRequestInfo * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         END_INTERFACE
     } ITuneRequestInfoVtbl;
@@ -652,10 +599,8 @@ EXTERN_C const IID IID_ITuneRequestInfoEx;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CreateComponentListEx( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppCurPMT) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppCurPMT) = 0;
         
     };
     
@@ -669,8 +614,7 @@ EXTERN_C const IID IID_ITuneRequestInfoEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITuneRequestInfoEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -685,60 +629,47 @@ EXTERN_C const IID IID_ITuneRequestInfoEx;
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetLocatorData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLocatorData )( 
             __RPC__in ITuneRequestInfoEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *Request);
+            /* [in] */ __RPC__in_opt ITuneRequest *Request);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetComponentData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetComponentData )( 
             __RPC__in ITuneRequestInfoEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, CreateComponentList)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateComponentList )( 
             __RPC__in ITuneRequestInfoEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetNextProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextProgram )( 
             __RPC__in ITuneRequestInfoEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetPreviousProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPreviousProgram )( 
             __RPC__in ITuneRequestInfoEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetNextLocator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextLocator )( 
             __RPC__in ITuneRequestInfoEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfo, GetPreviousLocator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPreviousLocator )( 
             __RPC__in ITuneRequestInfoEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ITuneRequest **TuneRequest);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [retval][out] */ __RPC__deref_out_opt ITuneRequest **TuneRequest);
         
         DECLSPEC_XFGVIRT(ITuneRequestInfoEx, CreateComponentListEx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateComponentListEx )( 
             __RPC__in ITuneRequestInfoEx * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *CurrentRequest,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppCurPMT);
+            /* [in] */ __RPC__in_opt ITuneRequest *CurrentRequest,
+            /* [out] */ __RPC__deref_out_opt IUnknown **ppCurPMT);
         
         END_INTERFACE
     } ITuneRequestInfoExVtbl;
@@ -815,12 +746,9 @@ EXTERN_C const IID IID_ISIInbandEPGEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SIObjectEvent( 
-            /* [annotation][in] */ 
-            _In_  IDVB_EIT2 *pIDVB_EIT,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTable_ID,
-            /* [annotation][in] */ 
-            _In_  DWORD dwService_ID) = 0;
+            /* [in] */ __RPC__in_opt IDVB_EIT2 *pIDVB_EIT,
+            /* [in] */ DWORD dwTable_ID,
+            /* [in] */ DWORD dwService_ID) = 0;
         
     };
     
@@ -834,8 +762,7 @@ EXTERN_C const IID IID_ISIInbandEPGEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISIInbandEPGEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -850,12 +777,9 @@ EXTERN_C const IID IID_ISIInbandEPGEvent;
         DECLSPEC_XFGVIRT(ISIInbandEPGEvent, SIObjectEvent)
         HRESULT ( STDMETHODCALLTYPE *SIObjectEvent )( 
             __RPC__in ISIInbandEPGEvent * This,
-            /* [annotation][in] */ 
-            _In_  IDVB_EIT2 *pIDVB_EIT,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTable_ID,
-            /* [annotation][in] */ 
-            _In_  DWORD dwService_ID);
+            /* [in] */ __RPC__in_opt IDVB_EIT2 *pIDVB_EIT,
+            /* [in] */ DWORD dwTable_ID,
+            /* [in] */ DWORD dwService_ID);
         
         END_INTERFACE
     } ISIInbandEPGEventVtbl;
@@ -914,8 +838,7 @@ EXTERN_C const IID IID_ISIInbandEPG;
         virtual HRESULT STDMETHODCALLTYPE StopSIEPGScan( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsSIEPGScanRunning( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *bRunning) = 0;
+            /* [retval][out] */ __RPC__out BOOL *bRunning) = 0;
         
     };
     
@@ -929,8 +852,7 @@ EXTERN_C const IID IID_ISIInbandEPG;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISIInbandEPG * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -953,8 +875,7 @@ EXTERN_C const IID IID_ISIInbandEPG;
         DECLSPEC_XFGVIRT(ISIInbandEPG, IsSIEPGScanRunning)
         HRESULT ( STDMETHODCALLTYPE *IsSIEPGScanRunning )( 
             __RPC__in ISIInbandEPG * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *bRunning);
+            /* [retval][out] */ __RPC__out BOOL *bRunning);
         
         END_INTERFACE
     } ISIInbandEPGVtbl;
@@ -1017,28 +938,22 @@ EXTERN_C const IID IID_IGuideDataEvent;
         virtual HRESULT STDMETHODCALLTYPE GuideDataAcquired( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProgramChanged( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varProgramDescriptionID) = 0;
+            /* [in] */ VARIANT varProgramDescriptionID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ServiceChanged( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varServiceDescriptionID) = 0;
+            /* [in] */ VARIANT varServiceDescriptionID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ScheduleEntryChanged( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varScheduleEntryDescriptionID) = 0;
+            /* [in] */ VARIANT varScheduleEntryDescriptionID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProgramDeleted( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varProgramDescriptionID) = 0;
+            /* [in] */ VARIANT varProgramDescriptionID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ServiceDeleted( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varServiceDescriptionID) = 0;
+            /* [in] */ VARIANT varServiceDescriptionID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ScheduleDeleted( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varScheduleEntryDescriptionID) = 0;
+            /* [in] */ VARIANT varScheduleEntryDescriptionID) = 0;
         
     };
     
@@ -1052,8 +967,7 @@ EXTERN_C const IID IID_IGuideDataEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGuideDataEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1072,38 +986,32 @@ EXTERN_C const IID IID_IGuideDataEvent;
         DECLSPEC_XFGVIRT(IGuideDataEvent, ProgramChanged)
         HRESULT ( STDMETHODCALLTYPE *ProgramChanged )( 
             __RPC__in IGuideDataEvent * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varProgramDescriptionID);
+            /* [in] */ VARIANT varProgramDescriptionID);
         
         DECLSPEC_XFGVIRT(IGuideDataEvent, ServiceChanged)
         HRESULT ( STDMETHODCALLTYPE *ServiceChanged )( 
             __RPC__in IGuideDataEvent * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varServiceDescriptionID);
+            /* [in] */ VARIANT varServiceDescriptionID);
         
         DECLSPEC_XFGVIRT(IGuideDataEvent, ScheduleEntryChanged)
         HRESULT ( STDMETHODCALLTYPE *ScheduleEntryChanged )( 
             __RPC__in IGuideDataEvent * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varScheduleEntryDescriptionID);
+            /* [in] */ VARIANT varScheduleEntryDescriptionID);
         
         DECLSPEC_XFGVIRT(IGuideDataEvent, ProgramDeleted)
         HRESULT ( STDMETHODCALLTYPE *ProgramDeleted )( 
             __RPC__in IGuideDataEvent * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varProgramDescriptionID);
+            /* [in] */ VARIANT varProgramDescriptionID);
         
         DECLSPEC_XFGVIRT(IGuideDataEvent, ServiceDeleted)
         HRESULT ( STDMETHODCALLTYPE *ServiceDeleted )( 
             __RPC__in IGuideDataEvent * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varServiceDescriptionID);
+            /* [in] */ VARIANT varServiceDescriptionID);
         
         DECLSPEC_XFGVIRT(IGuideDataEvent, ScheduleDeleted)
         HRESULT ( STDMETHODCALLTYPE *ScheduleDeleted )( 
             __RPC__in IGuideDataEvent * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varScheduleEntryDescriptionID);
+            /* [in] */ VARIANT varScheduleEntryDescriptionID);
         
         END_INTERFACE
     } IGuideDataEventVtbl;
@@ -1176,16 +1084,13 @@ EXTERN_C const IID IID_IGuideDataProperty;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Language( 
-            /* [annotation][out] */ 
-            _Out_  long *idLang) = 0;
+            /* [out] */ __RPC__out long *idLang) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [annotation][out] */ 
-            _Out_  VARIANT *pvar) = 0;
+            /* [out] */ __RPC__out VARIANT *pvar) = 0;
         
     };
     
@@ -1199,8 +1104,7 @@ EXTERN_C const IID IID_IGuideDataProperty;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGuideDataProperty * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1215,20 +1119,17 @@ EXTERN_C const IID IID_IGuideDataProperty;
         DECLSPEC_XFGVIRT(IGuideDataProperty, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IGuideDataProperty * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IGuideDataProperty, get_Language)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Language )( 
             __RPC__in IGuideDataProperty * This,
-            /* [annotation][out] */ 
-            _Out_  long *idLang);
+            /* [out] */ __RPC__out long *idLang);
         
         DECLSPEC_XFGVIRT(IGuideDataProperty, get_Value)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in IGuideDataProperty * This,
-            /* [annotation][out] */ 
-            _Out_  VARIANT *pvar);
+            /* [out] */ __RPC__out VARIANT *pvar);
         
         END_INTERFACE
     } IGuideDataPropertyVtbl;
@@ -1289,22 +1190,17 @@ EXTERN_C const IID IID_IEnumGuideDataProperties;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  unsigned long celt,
-            /* [annotation][out] */ 
-            _Out_  IGuideDataProperty **ppprop,
-            /* [annotation][out] */ 
-            _Out_  unsigned long *pcelt) = 0;
+            /* [in] */ unsigned long celt,
+            /* [out] */ __RPC__deref_out_opt IGuideDataProperty **ppprop,
+            /* [out] */ __RPC__out unsigned long *pcelt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  unsigned long celt) = 0;
+            /* [in] */ unsigned long celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumGuideDataProperties **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumGuideDataProperties **ppenum) = 0;
         
     };
     
@@ -1318,8 +1214,7 @@ EXTERN_C const IID IID_IEnumGuideDataProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumGuideDataProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1334,18 +1229,14 @@ EXTERN_C const IID IID_IEnumGuideDataProperties;
         DECLSPEC_XFGVIRT(IEnumGuideDataProperties, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumGuideDataProperties * This,
-            /* [annotation][in] */ 
-            _In_  unsigned long celt,
-            /* [annotation][out] */ 
-            _Out_  IGuideDataProperty **ppprop,
-            /* [annotation][out] */ 
-            _Out_  unsigned long *pcelt);
+            /* [in] */ unsigned long celt,
+            /* [out] */ __RPC__deref_out_opt IGuideDataProperty **ppprop,
+            /* [out] */ __RPC__out unsigned long *pcelt);
         
         DECLSPEC_XFGVIRT(IEnumGuideDataProperties, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumGuideDataProperties * This,
-            /* [annotation][in] */ 
-            _In_  unsigned long celt);
+            /* [in] */ unsigned long celt);
         
         DECLSPEC_XFGVIRT(IEnumGuideDataProperties, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -1354,8 +1245,7 @@ EXTERN_C const IID IID_IEnumGuideDataProperties;
         DECLSPEC_XFGVIRT(IEnumGuideDataProperties, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumGuideDataProperties * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumGuideDataProperties **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumGuideDataProperties **ppenum);
         
         END_INTERFACE
     } IEnumGuideDataPropertiesVtbl;
@@ -1419,22 +1309,17 @@ EXTERN_C const IID IID_IEnumTuneRequests;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  unsigned long celt,
-            /* [annotation][out] */ 
-            _Out_  ITuneRequest **ppprop,
-            /* [annotation][out] */ 
-            _Out_  unsigned long *pcelt) = 0;
+            /* [in] */ unsigned long celt,
+            /* [out] */ __RPC__deref_out_opt ITuneRequest **ppprop,
+            /* [out] */ __RPC__out unsigned long *pcelt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  unsigned long celt) = 0;
+            /* [in] */ unsigned long celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumTuneRequests **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumTuneRequests **ppenum) = 0;
         
     };
     
@@ -1448,8 +1333,7 @@ EXTERN_C const IID IID_IEnumTuneRequests;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumTuneRequests * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1464,18 +1348,14 @@ EXTERN_C const IID IID_IEnumTuneRequests;
         DECLSPEC_XFGVIRT(IEnumTuneRequests, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumTuneRequests * This,
-            /* [annotation][in] */ 
-            _In_  unsigned long celt,
-            /* [annotation][out] */ 
-            _Out_  ITuneRequest **ppprop,
-            /* [annotation][out] */ 
-            _Out_  unsigned long *pcelt);
+            /* [in] */ unsigned long celt,
+            /* [out] */ __RPC__deref_out_opt ITuneRequest **ppprop,
+            /* [out] */ __RPC__out unsigned long *pcelt);
         
         DECLSPEC_XFGVIRT(IEnumTuneRequests, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumTuneRequests * This,
-            /* [annotation][in] */ 
-            _In_  unsigned long celt);
+            /* [in] */ unsigned long celt);
         
         DECLSPEC_XFGVIRT(IEnumTuneRequests, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -1484,8 +1364,7 @@ EXTERN_C const IID IID_IEnumTuneRequests;
         DECLSPEC_XFGVIRT(IEnumTuneRequests, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumTuneRequests * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumTuneRequests **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumTuneRequests **ppenum);
         
         END_INTERFACE
     } IEnumTuneRequestsVtbl;
@@ -1549,34 +1428,25 @@ EXTERN_C const IID IID_IGuideData;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetServices( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumTuneRequests **ppEnumTuneRequests) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumTuneRequests **ppEnumTuneRequests) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetServiceProperties( 
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *pTuneRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGuideDataProperties **ppEnumProperties) = 0;
+            /* [in] */ __RPC__in_opt ITuneRequest *pTuneRequest,
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGuideDataProperties **ppEnumProperties) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetGuideProgramIDs( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **pEnumPrograms) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **pEnumPrograms) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetProgramProperties( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varProgramDescriptionID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGuideDataProperties **ppEnumProperties) = 0;
+            /* [in] */ VARIANT varProgramDescriptionID,
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGuideDataProperties **ppEnumProperties) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetScheduleEntryIDs( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **pEnumScheduleEntries) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **pEnumScheduleEntries) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetScheduleEntryProperties( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varScheduleEntryDescriptionID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGuideDataProperties **ppEnumProperties) = 0;
+            /* [in] */ VARIANT varScheduleEntryDescriptionID,
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGuideDataProperties **ppEnumProperties) = 0;
         
     };
     
@@ -1590,8 +1460,7 @@ EXTERN_C const IID IID_IGuideData;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGuideData * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1606,44 +1475,35 @@ EXTERN_C const IID IID_IGuideData;
         DECLSPEC_XFGVIRT(IGuideData, GetServices)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetServices )( 
             __RPC__in IGuideData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumTuneRequests **ppEnumTuneRequests);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumTuneRequests **ppEnumTuneRequests);
         
         DECLSPEC_XFGVIRT(IGuideData, GetServiceProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetServiceProperties )( 
             __RPC__in IGuideData * This,
-            /* [annotation][in] */ 
-            _In_  ITuneRequest *pTuneRequest,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGuideDataProperties **ppEnumProperties);
+            /* [in] */ __RPC__in_opt ITuneRequest *pTuneRequest,
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGuideDataProperties **ppEnumProperties);
         
         DECLSPEC_XFGVIRT(IGuideData, GetGuideProgramIDs)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetGuideProgramIDs )( 
             __RPC__in IGuideData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **pEnumPrograms);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **pEnumPrograms);
         
         DECLSPEC_XFGVIRT(IGuideData, GetProgramProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProgramProperties )( 
             __RPC__in IGuideData * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varProgramDescriptionID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGuideDataProperties **ppEnumProperties);
+            /* [in] */ VARIANT varProgramDescriptionID,
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGuideDataProperties **ppEnumProperties);
         
         DECLSPEC_XFGVIRT(IGuideData, GetScheduleEntryIDs)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetScheduleEntryIDs )( 
             __RPC__in IGuideData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **pEnumScheduleEntries);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **pEnumScheduleEntries);
         
         DECLSPEC_XFGVIRT(IGuideData, GetScheduleEntryProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetScheduleEntryProperties )( 
             __RPC__in IGuideData * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varScheduleEntryDescriptionID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumGuideDataProperties **ppEnumProperties);
+            /* [in] */ VARIANT varScheduleEntryDescriptionID,
+            /* [retval][out] */ __RPC__deref_out_opt IEnumGuideDataProperties **ppEnumProperties);
         
         END_INTERFACE
     } IGuideDataVtbl;
@@ -1713,8 +1573,7 @@ EXTERN_C const IID IID_IGuideDataLoader;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Init( 
-            /* [annotation][in] */ 
-            _In_  IGuideData *pGuideStore) = 0;
+            /* [in] */ __RPC__in_opt IGuideData *pGuideStore) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Terminate( void) = 0;
         
@@ -1730,8 +1589,7 @@ EXTERN_C const IID IID_IGuideDataLoader;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGuideDataLoader * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1746,8 +1604,7 @@ EXTERN_C const IID IID_IGuideDataLoader;
         DECLSPEC_XFGVIRT(IGuideDataLoader, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in IGuideDataLoader * This,
-            /* [annotation][in] */ 
-            _In_  IGuideData *pGuideStore);
+            /* [in] */ __RPC__in_opt IGuideData *pGuideStore);
         
         DECLSPEC_XFGVIRT(IGuideDataLoader, Terminate)
         HRESULT ( STDMETHODCALLTYPE *Terminate )( 

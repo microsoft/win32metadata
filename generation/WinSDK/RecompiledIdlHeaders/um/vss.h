@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -426,22 +426,17 @@ EXTERN_C const IID IID_IVssEnumObject;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  VSS_OBJECT_PROP *rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) VSS_OBJECT_PROP *rgelt,
+            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out][in] */ 
-            _Inout_  IVssEnumObject **ppenum) = 0;
+            /* [out][in] */ __RPC__deref_inout_opt IVssEnumObject **ppenum) = 0;
         
     };
     
@@ -455,8 +450,7 @@ EXTERN_C const IID IID_IVssEnumObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVssEnumObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -471,18 +465,14 @@ EXTERN_C const IID IID_IVssEnumObject;
         DECLSPEC_XFGVIRT(IVssEnumObject, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IVssEnumObject * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  VSS_OBJECT_PROP *rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) VSS_OBJECT_PROP *rgelt,
+            /* [out] */ __RPC__out ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IVssEnumObject, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IVssEnumObject * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IVssEnumObject, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -491,8 +481,7 @@ EXTERN_C const IID IID_IVssEnumObject;
         DECLSPEC_XFGVIRT(IVssEnumObject, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IVssEnumObject * This,
-            /* [annotation][out][in] */ 
-            _Inout_  IVssEnumObject **ppenum);
+            /* [out][in] */ __RPC__deref_inout_opt IVssEnumObject **ppenum);
         
         END_INTERFACE
     } IVssEnumObjectVtbl;
@@ -558,14 +547,11 @@ EXTERN_C const IID IID_IVssAsync;
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Cancel( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Wait( 
-            /* [annotation][defaultvalue][in] */ 
-            _In_  DWORD dwMilliseconds = 0xffffffff) = 0;
+            /* [defaultvalue][in] */ DWORD dwMilliseconds = 0xffffffff) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryStatus( 
-            /* [annotation][out] */ 
-            _Out_  HRESULT *pHrResult,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  INT *pReserved) = 0;
+            /* [out] */ __RPC__out HRESULT *pHrResult,
+            /* [unique][out][in] */ __RPC__inout_opt INT *pReserved) = 0;
         
     };
     
@@ -579,8 +565,7 @@ EXTERN_C const IID IID_IVssAsync;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVssAsync * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -599,16 +584,13 @@ EXTERN_C const IID IID_IVssAsync;
         DECLSPEC_XFGVIRT(IVssAsync, Wait)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Wait )( 
             __RPC__in IVssAsync * This,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  DWORD dwMilliseconds);
+            /* [defaultvalue][in] */ DWORD dwMilliseconds);
         
         DECLSPEC_XFGVIRT(IVssAsync, QueryStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryStatus )( 
             __RPC__in IVssAsync * This,
-            /* [annotation][out] */ 
-            _Out_  HRESULT *pHrResult,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  INT *pReserved);
+            /* [out] */ __RPC__out HRESULT *pHrResult,
+            /* [unique][out][in] */ __RPC__inout_opt INT *pReserved);
         
         END_INTERFACE
     } IVssAsyncVtbl;

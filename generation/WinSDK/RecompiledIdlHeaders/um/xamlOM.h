@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -278,12 +278,9 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnVisualTreeChange( 
-            /* [annotation][in] */ 
-            _In_  ParentChildRelation relation,
-            /* [annotation][in] */ 
-            _In_  VisualElement element,
-            /* [annotation][in] */ 
-            _In_  VisualMutationType mutationType) = 0;
+            /* [in] */ ParentChildRelation relation,
+            /* [in] */ VisualElement element,
+            /* [in] */ VisualMutationType mutationType) = 0;
         
     };
     
@@ -297,8 +294,7 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVisualTreeServiceCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -313,12 +309,9 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback;
         DECLSPEC_XFGVIRT(IVisualTreeServiceCallback, OnVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *OnVisualTreeChange )( 
             __RPC__in IVisualTreeServiceCallback * This,
-            /* [annotation][in] */ 
-            _In_  ParentChildRelation relation,
-            /* [annotation][in] */ 
-            _In_  VisualElement element,
-            /* [annotation][in] */ 
-            _In_  VisualMutationType mutationType);
+            /* [in] */ ParentChildRelation relation,
+            /* [in] */ VisualElement element,
+            /* [in] */ VisualMutationType mutationType);
         
         END_INTERFACE
     } IVisualTreeServiceCallbackVtbl;
@@ -373,12 +366,9 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnElementStateChanged( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle element,
-            /* [annotation][in] */ 
-            _In_  VisualElementState elementState,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR context) = 0;
+            /* [in] */ InstanceHandle element,
+            /* [in] */ VisualElementState elementState,
+            /* [in] */ __RPC__in LPCWSTR context) = 0;
         
     };
     
@@ -392,8 +382,7 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVisualTreeServiceCallback2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -408,22 +397,16 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback2;
         DECLSPEC_XFGVIRT(IVisualTreeServiceCallback, OnVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *OnVisualTreeChange )( 
             __RPC__in IVisualTreeServiceCallback2 * This,
-            /* [annotation][in] */ 
-            _In_  ParentChildRelation relation,
-            /* [annotation][in] */ 
-            _In_  VisualElement element,
-            /* [annotation][in] */ 
-            _In_  VisualMutationType mutationType);
+            /* [in] */ ParentChildRelation relation,
+            /* [in] */ VisualElement element,
+            /* [in] */ VisualMutationType mutationType);
         
         DECLSPEC_XFGVIRT(IVisualTreeServiceCallback2, OnElementStateChanged)
         HRESULT ( STDMETHODCALLTYPE *OnElementStateChanged )( 
             __RPC__in IVisualTreeServiceCallback2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle element,
-            /* [annotation][in] */ 
-            _In_  VisualElementState elementState,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR context);
+            /* [in] */ InstanceHandle element,
+            /* [in] */ VisualElementState elementState,
+            /* [in] */ __RPC__in LPCWSTR context);
         
         END_INTERFACE
     } IVisualTreeServiceCallback2Vtbl;
@@ -482,86 +465,57 @@ EXTERN_C const IID IID_IVisualTreeService;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AdviseVisualTreeChange( 
-            /* [annotation][in] */ 
-            _In_  IVisualTreeServiceCallback *pCallback) = 0;
+            /* [in] */ __RPC__in_opt IVisualTreeServiceCallback *pCallback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnadviseVisualTreeChange( 
-            /* [annotation][in] */ 
-            _In_  IVisualTreeServiceCallback *pCallback) = 0;
+            /* [in] */ __RPC__in_opt IVisualTreeServiceCallback *pCallback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEnums( 
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pCount)  EnumType **ppEnums) = 0;
+            /* [out] */ __RPC__out unsigned int *pCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pCount) EnumType **ppEnums) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateInstance( 
-            /* [annotation][in] */ 
-            _In_  BSTR typeName,
-            /* [annotation][in] */ 
-            _In_  BSTR value,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  InstanceHandle *pInstanceHandle) = 0;
+            /* [in] */ __RPC__in BSTR typeName,
+            /* [in] */ __RPC__in BSTR value,
+            /* [retval][out] */ __RPC__out InstanceHandle *pInstanceHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyValuesChain( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pSourceCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pSourceCount)  PropertyChainSource **ppPropertySources,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pPropertyCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pPropertyCount)  PropertyChainValue **ppPropertyValues) = 0;
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [out] */ __RPC__out unsigned int *pSourceCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pSourceCount) PropertyChainSource **ppPropertySources,
+            /* [out] */ __RPC__out unsigned int *pPropertyCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pPropertyCount) PropertyChainValue **ppPropertyValues) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle value,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex) = 0;
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ InstanceHandle value,
+            /* [in] */ unsigned int propertyIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ClearProperty( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex) = 0;
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ unsigned int propertyIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCollectionCount( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pCollectionSize) = 0;
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [out] */ __RPC__out unsigned int *pCollectionSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCollectionElements( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  unsigned int startIndex,
-            /* [annotation][out][in] */ 
-            _Inout_  unsigned int *pElementCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pElementCount)  CollectionElementValue **ppElementValues) = 0;
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ unsigned int startIndex,
+            /* [out][in] */ __RPC__inout unsigned int *pElementCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pElementCount) CollectionElementValue **ppElementValues) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddChild( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle child,
-            /* [annotation][in] */ 
-            _In_  unsigned int index) = 0;
+            /* [in] */ InstanceHandle parent,
+            /* [in] */ InstanceHandle child,
+            /* [in] */ unsigned int index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveChild( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent,
-            /* [annotation][in] */ 
-            _In_  unsigned int index) = 0;
+            /* [in] */ InstanceHandle parent,
+            /* [in] */ unsigned int index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ClearChildren( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent) = 0;
+            /* [in] */ InstanceHandle parent) = 0;
         
     };
     
@@ -575,8 +529,7 @@ EXTERN_C const IID IID_IVisualTreeService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -591,108 +544,79 @@ EXTERN_C const IID IID_IVisualTreeService;
         DECLSPEC_XFGVIRT(IVisualTreeService, AdviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *AdviseVisualTreeChange )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  IVisualTreeServiceCallback *pCallback);
+            /* [in] */ __RPC__in_opt IVisualTreeServiceCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, UnadviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *UnadviseVisualTreeChange )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  IVisualTreeServiceCallback *pCallback);
+            /* [in] */ __RPC__in_opt IVisualTreeServiceCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetEnums)
         HRESULT ( STDMETHODCALLTYPE *GetEnums )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pCount)  EnumType **ppEnums);
+            /* [out] */ __RPC__out unsigned int *pCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pCount) EnumType **ppEnums);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  BSTR typeName,
-            /* [annotation][in] */ 
-            _In_  BSTR value,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  InstanceHandle *pInstanceHandle);
+            /* [in] */ __RPC__in BSTR typeName,
+            /* [in] */ __RPC__in BSTR value,
+            /* [retval][out] */ __RPC__out InstanceHandle *pInstanceHandle);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetPropertyValuesChain)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyValuesChain )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pSourceCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pSourceCount)  PropertyChainSource **ppPropertySources,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pPropertyCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pPropertyCount)  PropertyChainValue **ppPropertyValues);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [out] */ __RPC__out unsigned int *pSourceCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pSourceCount) PropertyChainSource **ppPropertySources,
+            /* [out] */ __RPC__out unsigned int *pPropertyCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pPropertyCount) PropertyChainValue **ppPropertyValues);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle value,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ InstanceHandle value,
+            /* [in] */ unsigned int propertyIndex);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, ClearProperty)
         HRESULT ( STDMETHODCALLTYPE *ClearProperty )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ unsigned int propertyIndex);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionCount)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionCount )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pCollectionSize);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [out] */ __RPC__out unsigned int *pCollectionSize);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionElements)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionElements )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  unsigned int startIndex,
-            /* [annotation][out][in] */ 
-            _Inout_  unsigned int *pElementCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pElementCount)  CollectionElementValue **ppElementValues);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ unsigned int startIndex,
+            /* [out][in] */ __RPC__inout unsigned int *pElementCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pElementCount) CollectionElementValue **ppElementValues);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, AddChild)
         HRESULT ( STDMETHODCALLTYPE *AddChild )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle child,
-            /* [annotation][in] */ 
-            _In_  unsigned int index);
+            /* [in] */ InstanceHandle parent,
+            /* [in] */ InstanceHandle child,
+            /* [in] */ unsigned int index);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, RemoveChild)
         HRESULT ( STDMETHODCALLTYPE *RemoveChild )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent,
-            /* [annotation][in] */ 
-            _In_  unsigned int index);
+            /* [in] */ InstanceHandle parent,
+            /* [in] */ unsigned int index);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, ClearChildren)
         HRESULT ( STDMETHODCALLTYPE *ClearChildren )( 
             __RPC__in IVisualTreeService * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent);
+            /* [in] */ InstanceHandle parent);
         
         END_INTERFACE
     } IVisualTreeServiceVtbl;
@@ -780,46 +704,33 @@ EXTERN_C const IID IID_IXamlDiagnostics;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDispatcher( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IInspectable **ppDispatcher) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IInspectable **ppDispatcher) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUiLayer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IInspectable **ppLayer) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IInspectable **ppLayer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetApplication( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IInspectable **ppApplication) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IInspectable **ppApplication) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIInspectableFromHandle( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IInspectable **ppInstance) = 0;
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [retval][out] */ __RPC__deref_out_opt IInspectable **ppInstance) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHandleFromIInspectable( 
-            /* [annotation][in] */ 
-            _In_  IInspectable *pInstance,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  InstanceHandle *pHandle) = 0;
+            /* [in] */ __RPC__in_opt IInspectable *pInstance,
+            /* [retval][out] */ __RPC__out InstanceHandle *pHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HitTest( 
-            /* [annotation][in] */ 
-            _In_  RECT rect,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pCount)  InstanceHandle **ppInstanceHandles) = 0;
+            /* [in] */ RECT rect,
+            /* [out] */ __RPC__out unsigned int *pCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pCount) InstanceHandle **ppInstanceHandles) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterInstance( 
-            /* [annotation][in] */ 
-            _In_  IInspectable *pInstance,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  InstanceHandle *pInstanceHandle) = 0;
+            /* [in] */ __RPC__in_opt IInspectable *pInstance,
+            /* [retval][out] */ __RPC__out InstanceHandle *pInstanceHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInitializationData( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pInitializationData) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pInitializationData) = 0;
         
     };
     
@@ -833,8 +744,7 @@ EXTERN_C const IID IID_IXamlDiagnostics;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXamlDiagnostics * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -849,60 +759,47 @@ EXTERN_C const IID IID_IXamlDiagnostics;
         DECLSPEC_XFGVIRT(IXamlDiagnostics, GetDispatcher)
         HRESULT ( STDMETHODCALLTYPE *GetDispatcher )( 
             __RPC__in IXamlDiagnostics * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IInspectable **ppDispatcher);
+            /* [retval][out] */ __RPC__deref_out_opt IInspectable **ppDispatcher);
         
         DECLSPEC_XFGVIRT(IXamlDiagnostics, GetUiLayer)
         HRESULT ( STDMETHODCALLTYPE *GetUiLayer )( 
             __RPC__in IXamlDiagnostics * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IInspectable **ppLayer);
+            /* [retval][out] */ __RPC__deref_out_opt IInspectable **ppLayer);
         
         DECLSPEC_XFGVIRT(IXamlDiagnostics, GetApplication)
         HRESULT ( STDMETHODCALLTYPE *GetApplication )( 
             __RPC__in IXamlDiagnostics * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IInspectable **ppApplication);
+            /* [retval][out] */ __RPC__deref_out_opt IInspectable **ppApplication);
         
         DECLSPEC_XFGVIRT(IXamlDiagnostics, GetIInspectableFromHandle)
         HRESULT ( STDMETHODCALLTYPE *GetIInspectableFromHandle )( 
             __RPC__in IXamlDiagnostics * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IInspectable **ppInstance);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [retval][out] */ __RPC__deref_out_opt IInspectable **ppInstance);
         
         DECLSPEC_XFGVIRT(IXamlDiagnostics, GetHandleFromIInspectable)
         HRESULT ( STDMETHODCALLTYPE *GetHandleFromIInspectable )( 
             __RPC__in IXamlDiagnostics * This,
-            /* [annotation][in] */ 
-            _In_  IInspectable *pInstance,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  InstanceHandle *pHandle);
+            /* [in] */ __RPC__in_opt IInspectable *pInstance,
+            /* [retval][out] */ __RPC__out InstanceHandle *pHandle);
         
         DECLSPEC_XFGVIRT(IXamlDiagnostics, HitTest)
         HRESULT ( STDMETHODCALLTYPE *HitTest )( 
             __RPC__in IXamlDiagnostics * This,
-            /* [annotation][in] */ 
-            _In_  RECT rect,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pCount)  InstanceHandle **ppInstanceHandles);
+            /* [in] */ RECT rect,
+            /* [out] */ __RPC__out unsigned int *pCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pCount) InstanceHandle **ppInstanceHandles);
         
         DECLSPEC_XFGVIRT(IXamlDiagnostics, RegisterInstance)
         HRESULT ( STDMETHODCALLTYPE *RegisterInstance )( 
             __RPC__in IXamlDiagnostics * This,
-            /* [annotation][in] */ 
-            _In_  IInspectable *pInstance,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  InstanceHandle *pInstanceHandle);
+            /* [in] */ __RPC__in_opt IInspectable *pInstance,
+            /* [retval][out] */ __RPC__out InstanceHandle *pInstanceHandle);
         
         DECLSPEC_XFGVIRT(IXamlDiagnostics, GetInitializationData)
         HRESULT ( STDMETHODCALLTYPE *GetInitializationData )( 
             __RPC__in IXamlDiagnostics * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pInitializationData);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pInitializationData);
         
         END_INTERFACE
     } IXamlDiagnosticsVtbl;
@@ -978,26 +875,19 @@ EXTERN_C const IID IID_IBitmapData;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CopyBytesTo( 
-            /* [annotation][in] */ 
-            _In_  unsigned int sourceOffsetInBytes,
-            /* [annotation][in] */ 
-            _In_  unsigned int maxBytesToCopy,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(maxBytesToCopy)  byte *pvBytes,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *numberOfBytesCopied) = 0;
+            /* [in] */ unsigned int sourceOffsetInBytes,
+            /* [in] */ unsigned int maxBytesToCopy,
+            /* [size_is][out] */ __RPC__out_ecount_full(maxBytesToCopy) byte *pvBytes,
+            /* [out] */ __RPC__out unsigned int *numberOfBytesCopied) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStride( 
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pStride) = 0;
+            /* [out] */ __RPC__out unsigned int *pStride) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBitmapDescription( 
-            /* [annotation][out] */ 
-            _Out_  BitmapDescription *pBitmapDescription) = 0;
+            /* [out] */ __RPC__out BitmapDescription *pBitmapDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSourceBitmapDescription( 
-            /* [annotation][out] */ 
-            _Out_  BitmapDescription *pBitmapDescription) = 0;
+            /* [out] */ __RPC__out BitmapDescription *pBitmapDescription) = 0;
         
     };
     
@@ -1011,8 +901,7 @@ EXTERN_C const IID IID_IBitmapData;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBitmapData * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1027,32 +916,25 @@ EXTERN_C const IID IID_IBitmapData;
         DECLSPEC_XFGVIRT(IBitmapData, CopyBytesTo)
         HRESULT ( STDMETHODCALLTYPE *CopyBytesTo )( 
             __RPC__in IBitmapData * This,
-            /* [annotation][in] */ 
-            _In_  unsigned int sourceOffsetInBytes,
-            /* [annotation][in] */ 
-            _In_  unsigned int maxBytesToCopy,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(maxBytesToCopy)  byte *pvBytes,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *numberOfBytesCopied);
+            /* [in] */ unsigned int sourceOffsetInBytes,
+            /* [in] */ unsigned int maxBytesToCopy,
+            /* [size_is][out] */ __RPC__out_ecount_full(maxBytesToCopy) byte *pvBytes,
+            /* [out] */ __RPC__out unsigned int *numberOfBytesCopied);
         
         DECLSPEC_XFGVIRT(IBitmapData, GetStride)
         HRESULT ( STDMETHODCALLTYPE *GetStride )( 
             __RPC__in IBitmapData * This,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pStride);
+            /* [out] */ __RPC__out unsigned int *pStride);
         
         DECLSPEC_XFGVIRT(IBitmapData, GetBitmapDescription)
         HRESULT ( STDMETHODCALLTYPE *GetBitmapDescription )( 
             __RPC__in IBitmapData * This,
-            /* [annotation][out] */ 
-            _Out_  BitmapDescription *pBitmapDescription);
+            /* [out] */ __RPC__out BitmapDescription *pBitmapDescription);
         
         DECLSPEC_XFGVIRT(IBitmapData, GetSourceBitmapDescription)
         HRESULT ( STDMETHODCALLTYPE *GetSourceBitmapDescription )( 
             __RPC__in IBitmapData * This,
-            /* [annotation][out] */ 
-            _Out_  BitmapDescription *pBitmapDescription);
+            /* [out] */ __RPC__out BitmapDescription *pBitmapDescription);
         
         END_INTERFACE
     } IBitmapDataVtbl;
@@ -1116,40 +998,26 @@ EXTERN_C const IID IID_IVisualTreeService2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPropertyIndex( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle object,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR propertyName,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pPropertyIndex) = 0;
+            /* [in] */ InstanceHandle object,
+            /* [in] */ __RPC__in LPCWSTR propertyName,
+            /* [out] */ __RPC__out unsigned int *pPropertyIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle object,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex,
-            /* [annotation][out] */ 
-            _Out_  InstanceHandle *pValue) = 0;
+            /* [in] */ InstanceHandle object,
+            /* [in] */ unsigned int propertyIndex,
+            /* [out] */ __RPC__out InstanceHandle *pValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReplaceResource( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceDictionary,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle key,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle newValue) = 0;
+            /* [in] */ InstanceHandle resourceDictionary,
+            /* [in] */ InstanceHandle key,
+            /* [in] */ InstanceHandle newValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RenderTargetBitmap( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle handle,
-            /* [annotation][in] */ 
-            _In_  RenderTargetBitmapOptions options,
-            /* [annotation][in] */ 
-            _In_  unsigned int maxPixelWidth,
-            /* [annotation][in] */ 
-            _In_  unsigned int maxPixelHeight,
-            /* [annotation][out] */ 
-            _Out_  IBitmapData **ppBitmapData) = 0;
+            /* [in] */ InstanceHandle handle,
+            /* [in] */ RenderTargetBitmapOptions options,
+            /* [in] */ unsigned int maxPixelWidth,
+            /* [in] */ unsigned int maxPixelHeight,
+            /* [out] */ __RPC__deref_out_opt IBitmapData **ppBitmapData) = 0;
         
     };
     
@@ -1163,8 +1031,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1179,152 +1046,109 @@ EXTERN_C const IID IID_IVisualTreeService2;
         DECLSPEC_XFGVIRT(IVisualTreeService, AdviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *AdviseVisualTreeChange )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  IVisualTreeServiceCallback *pCallback);
+            /* [in] */ __RPC__in_opt IVisualTreeServiceCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, UnadviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *UnadviseVisualTreeChange )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  IVisualTreeServiceCallback *pCallback);
+            /* [in] */ __RPC__in_opt IVisualTreeServiceCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetEnums)
         HRESULT ( STDMETHODCALLTYPE *GetEnums )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pCount)  EnumType **ppEnums);
+            /* [out] */ __RPC__out unsigned int *pCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pCount) EnumType **ppEnums);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR typeName,
-            /* [annotation][in] */ 
-            _In_  BSTR value,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  InstanceHandle *pInstanceHandle);
+            /* [in] */ __RPC__in BSTR typeName,
+            /* [in] */ __RPC__in BSTR value,
+            /* [retval][out] */ __RPC__out InstanceHandle *pInstanceHandle);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetPropertyValuesChain)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyValuesChain )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pSourceCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pSourceCount)  PropertyChainSource **ppPropertySources,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pPropertyCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pPropertyCount)  PropertyChainValue **ppPropertyValues);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [out] */ __RPC__out unsigned int *pSourceCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pSourceCount) PropertyChainSource **ppPropertySources,
+            /* [out] */ __RPC__out unsigned int *pPropertyCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pPropertyCount) PropertyChainValue **ppPropertyValues);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle value,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ InstanceHandle value,
+            /* [in] */ unsigned int propertyIndex);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, ClearProperty)
         HRESULT ( STDMETHODCALLTYPE *ClearProperty )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ unsigned int propertyIndex);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionCount)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionCount )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pCollectionSize);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [out] */ __RPC__out unsigned int *pCollectionSize);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionElements)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionElements )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  unsigned int startIndex,
-            /* [annotation][out][in] */ 
-            _Inout_  unsigned int *pElementCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pElementCount)  CollectionElementValue **ppElementValues);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ unsigned int startIndex,
+            /* [out][in] */ __RPC__inout unsigned int *pElementCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pElementCount) CollectionElementValue **ppElementValues);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, AddChild)
         HRESULT ( STDMETHODCALLTYPE *AddChild )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle child,
-            /* [annotation][in] */ 
-            _In_  unsigned int index);
+            /* [in] */ InstanceHandle parent,
+            /* [in] */ InstanceHandle child,
+            /* [in] */ unsigned int index);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, RemoveChild)
         HRESULT ( STDMETHODCALLTYPE *RemoveChild )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent,
-            /* [annotation][in] */ 
-            _In_  unsigned int index);
+            /* [in] */ InstanceHandle parent,
+            /* [in] */ unsigned int index);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, ClearChildren)
         HRESULT ( STDMETHODCALLTYPE *ClearChildren )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent);
+            /* [in] */ InstanceHandle parent);
         
         DECLSPEC_XFGVIRT(IVisualTreeService2, GetPropertyIndex)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyIndex )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle object,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR propertyName,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pPropertyIndex);
+            /* [in] */ InstanceHandle object,
+            /* [in] */ __RPC__in LPCWSTR propertyName,
+            /* [out] */ __RPC__out unsigned int *pPropertyIndex);
         
         DECLSPEC_XFGVIRT(IVisualTreeService2, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle object,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex,
-            /* [annotation][out] */ 
-            _Out_  InstanceHandle *pValue);
+            /* [in] */ InstanceHandle object,
+            /* [in] */ unsigned int propertyIndex,
+            /* [out] */ __RPC__out InstanceHandle *pValue);
         
         DECLSPEC_XFGVIRT(IVisualTreeService2, ReplaceResource)
         HRESULT ( STDMETHODCALLTYPE *ReplaceResource )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceDictionary,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle key,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle newValue);
+            /* [in] */ InstanceHandle resourceDictionary,
+            /* [in] */ InstanceHandle key,
+            /* [in] */ InstanceHandle newValue);
         
         DECLSPEC_XFGVIRT(IVisualTreeService2, RenderTargetBitmap)
         HRESULT ( STDMETHODCALLTYPE *RenderTargetBitmap )( 
             __RPC__in IVisualTreeService2 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle handle,
-            /* [annotation][in] */ 
-            _In_  RenderTargetBitmapOptions options,
-            /* [annotation][in] */ 
-            _In_  unsigned int maxPixelWidth,
-            /* [annotation][in] */ 
-            _In_  unsigned int maxPixelHeight,
-            /* [annotation][out] */ 
-            _Out_  IBitmapData **ppBitmapData);
+            /* [in] */ InstanceHandle handle,
+            /* [in] */ RenderTargetBitmapOptions options,
+            /* [in] */ unsigned int maxPixelWidth,
+            /* [in] */ unsigned int maxPixelHeight,
+            /* [out] */ __RPC__deref_out_opt IBitmapData **ppBitmapData);
         
         END_INTERFACE
     } IVisualTreeService2Vtbl;
@@ -1425,38 +1249,25 @@ EXTERN_C const IID IID_IVisualTreeService3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ResolveResource( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceContext,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR resourceName,
-            /* [annotation][in] */ 
-            _In_  ResourceType resourceType,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex) = 0;
+            /* [in] */ InstanceHandle resourceContext,
+            /* [in] */ __RPC__in LPCWSTR resourceName,
+            /* [in] */ ResourceType resourceType,
+            /* [in] */ unsigned int propertyIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDictionaryItem( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle dictionaryHandle,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR resourceName,
-            /* [annotation][in] */ 
-            _In_  BOOL resourceIsImplicitStyle,
-            /* [annotation][out] */ 
-            _Out_  InstanceHandle *resourceHandle) = 0;
+            /* [in] */ InstanceHandle dictionaryHandle,
+            /* [in] */ __RPC__in LPCWSTR resourceName,
+            /* [in] */ BOOL resourceIsImplicitStyle,
+            /* [out] */ __RPC__out InstanceHandle *resourceHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddDictionaryItem( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle dictionaryHandle,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceKey,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceHandle) = 0;
+            /* [in] */ InstanceHandle dictionaryHandle,
+            /* [in] */ InstanceHandle resourceKey,
+            /* [in] */ InstanceHandle resourceHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveDictionaryItem( 
-            /* [annotation][in] */ 
-            _In_  InstanceHandle dictionaryHandle,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceKey) = 0;
+            /* [in] */ InstanceHandle dictionaryHandle,
+            /* [in] */ InstanceHandle resourceKey) = 0;
         
     };
     
@@ -1470,8 +1281,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1486,194 +1296,138 @@ EXTERN_C const IID IID_IVisualTreeService3;
         DECLSPEC_XFGVIRT(IVisualTreeService, AdviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *AdviseVisualTreeChange )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  IVisualTreeServiceCallback *pCallback);
+            /* [in] */ __RPC__in_opt IVisualTreeServiceCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, UnadviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *UnadviseVisualTreeChange )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  IVisualTreeServiceCallback *pCallback);
+            /* [in] */ __RPC__in_opt IVisualTreeServiceCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetEnums)
         HRESULT ( STDMETHODCALLTYPE *GetEnums )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pCount)  EnumType **ppEnums);
+            /* [out] */ __RPC__out unsigned int *pCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pCount) EnumType **ppEnums);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR typeName,
-            /* [annotation][in] */ 
-            _In_  BSTR value,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  InstanceHandle *pInstanceHandle);
+            /* [in] */ __RPC__in BSTR typeName,
+            /* [in] */ __RPC__in BSTR value,
+            /* [retval][out] */ __RPC__out InstanceHandle *pInstanceHandle);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetPropertyValuesChain)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyValuesChain )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pSourceCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pSourceCount)  PropertyChainSource **ppPropertySources,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pPropertyCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pPropertyCount)  PropertyChainValue **ppPropertyValues);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [out] */ __RPC__out unsigned int *pSourceCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pSourceCount) PropertyChainSource **ppPropertySources,
+            /* [out] */ __RPC__out unsigned int *pPropertyCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pPropertyCount) PropertyChainValue **ppPropertyValues);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle value,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ InstanceHandle value,
+            /* [in] */ unsigned int propertyIndex);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, ClearProperty)
         HRESULT ( STDMETHODCALLTYPE *ClearProperty )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ unsigned int propertyIndex);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionCount)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionCount )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pCollectionSize);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [out] */ __RPC__out unsigned int *pCollectionSize);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionElements)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionElements )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle instanceHandle,
-            /* [annotation][in] */ 
-            _In_  unsigned int startIndex,
-            /* [annotation][out][in] */ 
-            _Inout_  unsigned int *pElementCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pElementCount)  CollectionElementValue **ppElementValues);
+            /* [in] */ InstanceHandle instanceHandle,
+            /* [in] */ unsigned int startIndex,
+            /* [out][in] */ __RPC__inout unsigned int *pElementCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pElementCount) CollectionElementValue **ppElementValues);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, AddChild)
         HRESULT ( STDMETHODCALLTYPE *AddChild )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle child,
-            /* [annotation][in] */ 
-            _In_  unsigned int index);
+            /* [in] */ InstanceHandle parent,
+            /* [in] */ InstanceHandle child,
+            /* [in] */ unsigned int index);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, RemoveChild)
         HRESULT ( STDMETHODCALLTYPE *RemoveChild )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent,
-            /* [annotation][in] */ 
-            _In_  unsigned int index);
+            /* [in] */ InstanceHandle parent,
+            /* [in] */ unsigned int index);
         
         DECLSPEC_XFGVIRT(IVisualTreeService, ClearChildren)
         HRESULT ( STDMETHODCALLTYPE *ClearChildren )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle parent);
+            /* [in] */ InstanceHandle parent);
         
         DECLSPEC_XFGVIRT(IVisualTreeService2, GetPropertyIndex)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyIndex )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle object,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR propertyName,
-            /* [annotation][out] */ 
-            _Out_  unsigned int *pPropertyIndex);
+            /* [in] */ InstanceHandle object,
+            /* [in] */ __RPC__in LPCWSTR propertyName,
+            /* [out] */ __RPC__out unsigned int *pPropertyIndex);
         
         DECLSPEC_XFGVIRT(IVisualTreeService2, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle object,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex,
-            /* [annotation][out] */ 
-            _Out_  InstanceHandle *pValue);
+            /* [in] */ InstanceHandle object,
+            /* [in] */ unsigned int propertyIndex,
+            /* [out] */ __RPC__out InstanceHandle *pValue);
         
         DECLSPEC_XFGVIRT(IVisualTreeService2, ReplaceResource)
         HRESULT ( STDMETHODCALLTYPE *ReplaceResource )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceDictionary,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle key,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle newValue);
+            /* [in] */ InstanceHandle resourceDictionary,
+            /* [in] */ InstanceHandle key,
+            /* [in] */ InstanceHandle newValue);
         
         DECLSPEC_XFGVIRT(IVisualTreeService2, RenderTargetBitmap)
         HRESULT ( STDMETHODCALLTYPE *RenderTargetBitmap )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle handle,
-            /* [annotation][in] */ 
-            _In_  RenderTargetBitmapOptions options,
-            /* [annotation][in] */ 
-            _In_  unsigned int maxPixelWidth,
-            /* [annotation][in] */ 
-            _In_  unsigned int maxPixelHeight,
-            /* [annotation][out] */ 
-            _Out_  IBitmapData **ppBitmapData);
+            /* [in] */ InstanceHandle handle,
+            /* [in] */ RenderTargetBitmapOptions options,
+            /* [in] */ unsigned int maxPixelWidth,
+            /* [in] */ unsigned int maxPixelHeight,
+            /* [out] */ __RPC__deref_out_opt IBitmapData **ppBitmapData);
         
         DECLSPEC_XFGVIRT(IVisualTreeService3, ResolveResource)
         HRESULT ( STDMETHODCALLTYPE *ResolveResource )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceContext,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR resourceName,
-            /* [annotation][in] */ 
-            _In_  ResourceType resourceType,
-            /* [annotation][in] */ 
-            _In_  unsigned int propertyIndex);
+            /* [in] */ InstanceHandle resourceContext,
+            /* [in] */ __RPC__in LPCWSTR resourceName,
+            /* [in] */ ResourceType resourceType,
+            /* [in] */ unsigned int propertyIndex);
         
         DECLSPEC_XFGVIRT(IVisualTreeService3, GetDictionaryItem)
         HRESULT ( STDMETHODCALLTYPE *GetDictionaryItem )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle dictionaryHandle,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR resourceName,
-            /* [annotation][in] */ 
-            _In_  BOOL resourceIsImplicitStyle,
-            /* [annotation][out] */ 
-            _Out_  InstanceHandle *resourceHandle);
+            /* [in] */ InstanceHandle dictionaryHandle,
+            /* [in] */ __RPC__in LPCWSTR resourceName,
+            /* [in] */ BOOL resourceIsImplicitStyle,
+            /* [out] */ __RPC__out InstanceHandle *resourceHandle);
         
         DECLSPEC_XFGVIRT(IVisualTreeService3, AddDictionaryItem)
         HRESULT ( STDMETHODCALLTYPE *AddDictionaryItem )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle dictionaryHandle,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceKey,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceHandle);
+            /* [in] */ InstanceHandle dictionaryHandle,
+            /* [in] */ InstanceHandle resourceKey,
+            /* [in] */ InstanceHandle resourceHandle);
         
         DECLSPEC_XFGVIRT(IVisualTreeService3, RemoveDictionaryItem)
         HRESULT ( STDMETHODCALLTYPE *RemoveDictionaryItem )( 
             __RPC__in IVisualTreeService3 * This,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle dictionaryHandle,
-            /* [annotation][in] */ 
-            _In_  InstanceHandle resourceKey);
+            /* [in] */ InstanceHandle dictionaryHandle,
+            /* [in] */ InstanceHandle resourceKey);
         
         END_INTERFACE
     } IVisualTreeService3Vtbl;

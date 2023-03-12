@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -521,34 +521,26 @@ EXTERN_C const IID IID_IBDA_NetworkProvider;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE PutSignalSource( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulSignalSource) = 0;
+            /* [in] */ ULONG ulSignalSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignalSource( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulSignalSource) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulSignalSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNetworkType( 
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidNetworkType) = 0;
+            /* [out][in] */ __RPC__inout GUID *pguidNetworkType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutTuningSpace( 
-            /* [annotation][in] */ 
-            _In_  REFGUID guidTuningSpace) = 0;
+            /* [in] */ __RPC__in REFGUID guidTuningSpace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTuningSpace( 
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidTuingSpace) = 0;
+            /* [out][in] */ __RPC__inout GUID *pguidTuingSpace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterDeviceFilter( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkFilterControl,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *ppvRegisitrationContext) = 0;
+            /* [in] */ __RPC__in_opt IUnknown *pUnkFilterControl,
+            /* [out][in] */ __RPC__inout ULONG *ppvRegisitrationContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnRegisterDeviceFilter( 
-            /* [annotation][in] */ 
-            _In_  ULONG pvRegistrationContext) = 0;
+            /* [in] */ ULONG pvRegistrationContext) = 0;
         
     };
     
@@ -562,8 +554,7 @@ EXTERN_C const IID IID_IBDA_NetworkProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_NetworkProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -578,46 +569,38 @@ EXTERN_C const IID IID_IBDA_NetworkProvider;
         DECLSPEC_XFGVIRT(IBDA_NetworkProvider, PutSignalSource)
         HRESULT ( STDMETHODCALLTYPE *PutSignalSource )( 
             __RPC__in IBDA_NetworkProvider * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulSignalSource);
+            /* [in] */ ULONG ulSignalSource);
         
         DECLSPEC_XFGVIRT(IBDA_NetworkProvider, GetSignalSource)
         HRESULT ( STDMETHODCALLTYPE *GetSignalSource )( 
             __RPC__in IBDA_NetworkProvider * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulSignalSource);
+            /* [out][in] */ __RPC__inout ULONG *pulSignalSource);
         
         DECLSPEC_XFGVIRT(IBDA_NetworkProvider, GetNetworkType)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkType )( 
             __RPC__in IBDA_NetworkProvider * This,
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidNetworkType);
+            /* [out][in] */ __RPC__inout GUID *pguidNetworkType);
         
         DECLSPEC_XFGVIRT(IBDA_NetworkProvider, PutTuningSpace)
         HRESULT ( STDMETHODCALLTYPE *PutTuningSpace )( 
             __RPC__in IBDA_NetworkProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFGUID guidTuningSpace);
+            /* [in] */ __RPC__in REFGUID guidTuningSpace);
         
         DECLSPEC_XFGVIRT(IBDA_NetworkProvider, GetTuningSpace)
         HRESULT ( STDMETHODCALLTYPE *GetTuningSpace )( 
             __RPC__in IBDA_NetworkProvider * This,
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidTuingSpace);
+            /* [out][in] */ __RPC__inout GUID *pguidTuingSpace);
         
         DECLSPEC_XFGVIRT(IBDA_NetworkProvider, RegisterDeviceFilter)
         HRESULT ( STDMETHODCALLTYPE *RegisterDeviceFilter )( 
             __RPC__in IBDA_NetworkProvider * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkFilterControl,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *ppvRegisitrationContext);
+            /* [in] */ __RPC__in_opt IUnknown *pUnkFilterControl,
+            /* [out][in] */ __RPC__inout ULONG *ppvRegisitrationContext);
         
         DECLSPEC_XFGVIRT(IBDA_NetworkProvider, UnRegisterDeviceFilter)
         HRESULT ( STDMETHODCALLTYPE *UnRegisterDeviceFilter )( 
             __RPC__in IBDA_NetworkProvider * This,
-            /* [annotation][in] */ 
-            _In_  ULONG pvRegistrationContext);
+            /* [in] */ ULONG pvRegistrationContext);
         
         END_INTERFACE
     } IBDA_NetworkProviderVtbl;
@@ -690,28 +673,21 @@ EXTERN_C const IID IID_IBDA_EthernetFilter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMulticastListSize( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutMulticastList( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbAddresses,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbAddresses)  BYTE pAddressList[  ]) = 0;
+            /* [in] */ ULONG ulcbAddresses,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbAddresses) BYTE pAddressList[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMulticastList( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(*pulcbAddresses)  BYTE pAddressList[  ]) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(*pulcbAddresses) BYTE pAddressList[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutMulticastMode( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulModeMask) = 0;
+            /* [in] */ ULONG ulModeMask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMulticastMode( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulModeMask) = 0;
+            /* [out] */ __RPC__out ULONG *pulModeMask) = 0;
         
     };
     
@@ -725,8 +701,7 @@ EXTERN_C const IID IID_IBDA_EthernetFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_EthernetFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -741,36 +716,29 @@ EXTERN_C const IID IID_IBDA_EthernetFilter;
         DECLSPEC_XFGVIRT(IBDA_EthernetFilter, GetMulticastListSize)
         HRESULT ( STDMETHODCALLTYPE *GetMulticastListSize )( 
             __RPC__in IBDA_EthernetFilter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses);
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses);
         
         DECLSPEC_XFGVIRT(IBDA_EthernetFilter, PutMulticastList)
         HRESULT ( STDMETHODCALLTYPE *PutMulticastList )( 
             __RPC__in IBDA_EthernetFilter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbAddresses,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbAddresses)  BYTE pAddressList[  ]);
+            /* [in] */ ULONG ulcbAddresses,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbAddresses) BYTE pAddressList[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_EthernetFilter, GetMulticastList)
         HRESULT ( STDMETHODCALLTYPE *GetMulticastList )( 
             __RPC__in IBDA_EthernetFilter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(*pulcbAddresses)  BYTE pAddressList[  ]);
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(*pulcbAddresses) BYTE pAddressList[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_EthernetFilter, PutMulticastMode)
         HRESULT ( STDMETHODCALLTYPE *PutMulticastMode )( 
             __RPC__in IBDA_EthernetFilter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulModeMask);
+            /* [in] */ ULONG ulModeMask);
         
         DECLSPEC_XFGVIRT(IBDA_EthernetFilter, GetMulticastMode)
         HRESULT ( STDMETHODCALLTYPE *GetMulticastMode )( 
             __RPC__in IBDA_EthernetFilter * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulModeMask);
+            /* [out] */ __RPC__out ULONG *pulModeMask);
         
         END_INTERFACE
     } IBDA_EthernetFilterVtbl;
@@ -837,28 +805,21 @@ EXTERN_C const IID IID_IBDA_IPV4Filter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMulticastListSize( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutMulticastList( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbAddresses,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbAddresses)  BYTE pAddressList[  ]) = 0;
+            /* [in] */ ULONG ulcbAddresses,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbAddresses) BYTE pAddressList[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMulticastList( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pulcbAddresses)  BYTE pAddressList[  ]) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pulcbAddresses) BYTE pAddressList[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutMulticastMode( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulModeMask) = 0;
+            /* [in] */ ULONG ulModeMask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMulticastMode( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulModeMask) = 0;
+            /* [out] */ __RPC__out ULONG *pulModeMask) = 0;
         
     };
     
@@ -872,8 +833,7 @@ EXTERN_C const IID IID_IBDA_IPV4Filter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_IPV4Filter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -888,36 +848,29 @@ EXTERN_C const IID IID_IBDA_IPV4Filter;
         DECLSPEC_XFGVIRT(IBDA_IPV4Filter, GetMulticastListSize)
         HRESULT ( STDMETHODCALLTYPE *GetMulticastListSize )( 
             __RPC__in IBDA_IPV4Filter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses);
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses);
         
         DECLSPEC_XFGVIRT(IBDA_IPV4Filter, PutMulticastList)
         HRESULT ( STDMETHODCALLTYPE *PutMulticastList )( 
             __RPC__in IBDA_IPV4Filter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbAddresses,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbAddresses)  BYTE pAddressList[  ]);
+            /* [in] */ ULONG ulcbAddresses,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbAddresses) BYTE pAddressList[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_IPV4Filter, GetMulticastList)
         HRESULT ( STDMETHODCALLTYPE *GetMulticastList )( 
             __RPC__in IBDA_IPV4Filter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pulcbAddresses)  BYTE pAddressList[  ]);
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pulcbAddresses) BYTE pAddressList[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_IPV4Filter, PutMulticastMode)
         HRESULT ( STDMETHODCALLTYPE *PutMulticastMode )( 
             __RPC__in IBDA_IPV4Filter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulModeMask);
+            /* [in] */ ULONG ulModeMask);
         
         DECLSPEC_XFGVIRT(IBDA_IPV4Filter, GetMulticastMode)
         HRESULT ( STDMETHODCALLTYPE *GetMulticastMode )( 
             __RPC__in IBDA_IPV4Filter * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulModeMask);
+            /* [out] */ __RPC__out ULONG *pulModeMask);
         
         END_INTERFACE
     } IBDA_IPV4FilterVtbl;
@@ -984,28 +937,21 @@ EXTERN_C const IID IID_IBDA_IPV6Filter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMulticastListSize( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutMulticastList( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbAddresses,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbAddresses)  BYTE pAddressList[  ]) = 0;
+            /* [in] */ ULONG ulcbAddresses,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbAddresses) BYTE pAddressList[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMulticastList( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pulcbAddresses)  BYTE pAddressList[  ]) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pulcbAddresses) BYTE pAddressList[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutMulticastMode( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulModeMask) = 0;
+            /* [in] */ ULONG ulModeMask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMulticastMode( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulModeMask) = 0;
+            /* [out] */ __RPC__out ULONG *pulModeMask) = 0;
         
     };
     
@@ -1019,8 +965,7 @@ EXTERN_C const IID IID_IBDA_IPV6Filter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_IPV6Filter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1035,36 +980,29 @@ EXTERN_C const IID IID_IBDA_IPV6Filter;
         DECLSPEC_XFGVIRT(IBDA_IPV6Filter, GetMulticastListSize)
         HRESULT ( STDMETHODCALLTYPE *GetMulticastListSize )( 
             __RPC__in IBDA_IPV6Filter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses);
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses);
         
         DECLSPEC_XFGVIRT(IBDA_IPV6Filter, PutMulticastList)
         HRESULT ( STDMETHODCALLTYPE *PutMulticastList )( 
             __RPC__in IBDA_IPV6Filter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbAddresses,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbAddresses)  BYTE pAddressList[  ]);
+            /* [in] */ ULONG ulcbAddresses,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbAddresses) BYTE pAddressList[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_IPV6Filter, GetMulticastList)
         HRESULT ( STDMETHODCALLTYPE *GetMulticastList )( 
             __RPC__in IBDA_IPV6Filter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pulcbAddresses)  BYTE pAddressList[  ]);
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pulcbAddresses) BYTE pAddressList[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_IPV6Filter, PutMulticastMode)
         HRESULT ( STDMETHODCALLTYPE *PutMulticastMode )( 
             __RPC__in IBDA_IPV6Filter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulModeMask);
+            /* [in] */ ULONG ulModeMask);
         
         DECLSPEC_XFGVIRT(IBDA_IPV6Filter, GetMulticastMode)
         HRESULT ( STDMETHODCALLTYPE *GetMulticastMode )( 
             __RPC__in IBDA_IPV6Filter * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulModeMask);
+            /* [out] */ __RPC__out ULONG *pulModeMask);
         
         END_INTERFACE
     } IBDA_IPV6FilterVtbl;
@@ -1137,8 +1075,7 @@ EXTERN_C const IID IID_IBDA_DeviceControl;
         virtual HRESULT STDMETHODCALLTYPE CommitChanges( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChangeState( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pState) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pState) = 0;
         
     };
     
@@ -1152,8 +1089,7 @@ EXTERN_C const IID IID_IBDA_DeviceControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_DeviceControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1180,8 +1116,7 @@ EXTERN_C const IID IID_IBDA_DeviceControl;
         DECLSPEC_XFGVIRT(IBDA_DeviceControl, GetChangeState)
         HRESULT ( STDMETHODCALLTYPE *GetChangeState )( 
             __RPC__in IBDA_DeviceControl * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pState);
+            /* [out][in] */ __RPC__inout ULONG *pState);
         
         END_INTERFACE
     } IBDA_DeviceControlVtbl;
@@ -1245,16 +1180,13 @@ EXTERN_C const IID IID_IBDA_PinControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPinID( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulPinID) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulPinID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPinType( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulPinType) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulPinType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegistrationContext( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulRegistrationCtx) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulRegistrationCtx) = 0;
         
     };
     
@@ -1268,8 +1200,7 @@ EXTERN_C const IID IID_IBDA_PinControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_PinControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1284,20 +1215,17 @@ EXTERN_C const IID IID_IBDA_PinControl;
         DECLSPEC_XFGVIRT(IBDA_PinControl, GetPinID)
         HRESULT ( STDMETHODCALLTYPE *GetPinID )( 
             __RPC__in IBDA_PinControl * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulPinID);
+            /* [out][in] */ __RPC__inout ULONG *pulPinID);
         
         DECLSPEC_XFGVIRT(IBDA_PinControl, GetPinType)
         HRESULT ( STDMETHODCALLTYPE *GetPinType )( 
             __RPC__in IBDA_PinControl * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulPinType);
+            /* [out][in] */ __RPC__inout ULONG *pulPinType);
         
         DECLSPEC_XFGVIRT(IBDA_PinControl, RegistrationContext)
         HRESULT ( STDMETHODCALLTYPE *RegistrationContext )( 
             __RPC__in IBDA_PinControl * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulRegistrationCtx);
+            /* [out][in] */ __RPC__inout ULONG *pulRegistrationCtx);
         
         END_INTERFACE
     } IBDA_PinControlVtbl;
@@ -1358,28 +1286,22 @@ EXTERN_C const IID IID_IBDA_SignalProperties;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE PutNetworkType( 
-            /* [annotation][in] */ 
-            _In_  REFGUID guidNetworkType) = 0;
+            /* [in] */ __RPC__in REFGUID guidNetworkType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNetworkType( 
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidNetworkType) = 0;
+            /* [out][in] */ __RPC__inout GUID *pguidNetworkType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutSignalSource( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulSignalSource) = 0;
+            /* [in] */ ULONG ulSignalSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignalSource( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulSignalSource) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulSignalSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PutTuningSpace( 
-            /* [annotation][in] */ 
-            _In_  REFGUID guidTuningSpace) = 0;
+            /* [in] */ __RPC__in REFGUID guidTuningSpace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTuningSpace( 
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidTuingSpace) = 0;
+            /* [out][in] */ __RPC__inout GUID *pguidTuingSpace) = 0;
         
     };
     
@@ -1393,8 +1315,7 @@ EXTERN_C const IID IID_IBDA_SignalProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_SignalProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1409,38 +1330,32 @@ EXTERN_C const IID IID_IBDA_SignalProperties;
         DECLSPEC_XFGVIRT(IBDA_SignalProperties, PutNetworkType)
         HRESULT ( STDMETHODCALLTYPE *PutNetworkType )( 
             __RPC__in IBDA_SignalProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFGUID guidNetworkType);
+            /* [in] */ __RPC__in REFGUID guidNetworkType);
         
         DECLSPEC_XFGVIRT(IBDA_SignalProperties, GetNetworkType)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkType )( 
             __RPC__in IBDA_SignalProperties * This,
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidNetworkType);
+            /* [out][in] */ __RPC__inout GUID *pguidNetworkType);
         
         DECLSPEC_XFGVIRT(IBDA_SignalProperties, PutSignalSource)
         HRESULT ( STDMETHODCALLTYPE *PutSignalSource )( 
             __RPC__in IBDA_SignalProperties * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulSignalSource);
+            /* [in] */ ULONG ulSignalSource);
         
         DECLSPEC_XFGVIRT(IBDA_SignalProperties, GetSignalSource)
         HRESULT ( STDMETHODCALLTYPE *GetSignalSource )( 
             __RPC__in IBDA_SignalProperties * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulSignalSource);
+            /* [out][in] */ __RPC__inout ULONG *pulSignalSource);
         
         DECLSPEC_XFGVIRT(IBDA_SignalProperties, PutTuningSpace)
         HRESULT ( STDMETHODCALLTYPE *PutTuningSpace )( 
             __RPC__in IBDA_SignalProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFGUID guidTuningSpace);
+            /* [in] */ __RPC__in REFGUID guidTuningSpace);
         
         DECLSPEC_XFGVIRT(IBDA_SignalProperties, GetTuningSpace)
         HRESULT ( STDMETHODCALLTYPE *GetTuningSpace )( 
             __RPC__in IBDA_SignalProperties * This,
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidTuingSpace);
+            /* [out][in] */ __RPC__inout GUID *pguidTuingSpace);
         
         END_INTERFACE
     } IBDA_SignalPropertiesVtbl;
@@ -1510,44 +1425,34 @@ EXTERN_C const IID IID_IBDA_SignalStatistics;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE put_SignalStrength( 
-            /* [annotation][in] */ 
-            _In_  LONG lDbStrength) = 0;
+            /* [in] */ LONG lDbStrength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_SignalStrength( 
-            /* [annotation][out][in] */ 
-            _Inout_  LONG *plDbStrength) = 0;
+            /* [out][in] */ __RPC__inout LONG *plDbStrength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_SignalQuality( 
-            /* [annotation][in] */ 
-            _In_  LONG lPercentQuality) = 0;
+            /* [in] */ LONG lPercentQuality) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_SignalQuality( 
-            /* [annotation][out][in] */ 
-            _Inout_  LONG *plPercentQuality) = 0;
+            /* [out][in] */ __RPC__inout LONG *plPercentQuality) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_SignalPresent( 
-            /* [annotation][in] */ 
-            _In_  BOOLEAN fPresent) = 0;
+            /* [in] */ BOOLEAN fPresent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_SignalPresent( 
-            /* [annotation][out][in] */ 
-            _Inout_  BOOLEAN *pfPresent) = 0;
+            /* [out][in] */ __RPC__inout BOOLEAN *pfPresent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_SignalLocked( 
-            /* [annotation][in] */ 
-            _In_  BOOLEAN fLocked) = 0;
+            /* [in] */ BOOLEAN fLocked) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_SignalLocked( 
-            /* [annotation][out][in] */ 
-            _Inout_  BOOLEAN *pfLocked) = 0;
+            /* [out][in] */ __RPC__inout BOOLEAN *pfLocked) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_SampleTime( 
-            /* [annotation][in] */ 
-            _In_  LONG lmsSampleTime) = 0;
+            /* [in] */ LONG lmsSampleTime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_SampleTime( 
-            /* [annotation][out][in] */ 
-            _Inout_  LONG *plmsSampleTime) = 0;
+            /* [out][in] */ __RPC__inout LONG *plmsSampleTime) = 0;
         
     };
     
@@ -1561,8 +1466,7 @@ EXTERN_C const IID IID_IBDA_SignalStatistics;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1577,62 +1481,52 @@ EXTERN_C const IID IID_IBDA_SignalStatistics;
         DECLSPEC_XFGVIRT(IBDA_SignalStatistics, put_SignalStrength)
         HRESULT ( STDMETHODCALLTYPE *put_SignalStrength )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][in] */ 
-            _In_  LONG lDbStrength);
+            /* [in] */ LONG lDbStrength);
         
         DECLSPEC_XFGVIRT(IBDA_SignalStatistics, get_SignalStrength)
         HRESULT ( STDMETHODCALLTYPE *get_SignalStrength )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][out][in] */ 
-            _Inout_  LONG *plDbStrength);
+            /* [out][in] */ __RPC__inout LONG *plDbStrength);
         
         DECLSPEC_XFGVIRT(IBDA_SignalStatistics, put_SignalQuality)
         HRESULT ( STDMETHODCALLTYPE *put_SignalQuality )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][in] */ 
-            _In_  LONG lPercentQuality);
+            /* [in] */ LONG lPercentQuality);
         
         DECLSPEC_XFGVIRT(IBDA_SignalStatistics, get_SignalQuality)
         HRESULT ( STDMETHODCALLTYPE *get_SignalQuality )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][out][in] */ 
-            _Inout_  LONG *plPercentQuality);
+            /* [out][in] */ __RPC__inout LONG *plPercentQuality);
         
         DECLSPEC_XFGVIRT(IBDA_SignalStatistics, put_SignalPresent)
         HRESULT ( STDMETHODCALLTYPE *put_SignalPresent )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][in] */ 
-            _In_  BOOLEAN fPresent);
+            /* [in] */ BOOLEAN fPresent);
         
         DECLSPEC_XFGVIRT(IBDA_SignalStatistics, get_SignalPresent)
         HRESULT ( STDMETHODCALLTYPE *get_SignalPresent )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BOOLEAN *pfPresent);
+            /* [out][in] */ __RPC__inout BOOLEAN *pfPresent);
         
         DECLSPEC_XFGVIRT(IBDA_SignalStatistics, put_SignalLocked)
         HRESULT ( STDMETHODCALLTYPE *put_SignalLocked )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][in] */ 
-            _In_  BOOLEAN fLocked);
+            /* [in] */ BOOLEAN fLocked);
         
         DECLSPEC_XFGVIRT(IBDA_SignalStatistics, get_SignalLocked)
         HRESULT ( STDMETHODCALLTYPE *get_SignalLocked )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BOOLEAN *pfLocked);
+            /* [out][in] */ __RPC__inout BOOLEAN *pfLocked);
         
         DECLSPEC_XFGVIRT(IBDA_SignalStatistics, put_SampleTime)
         HRESULT ( STDMETHODCALLTYPE *put_SampleTime )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][in] */ 
-            _In_  LONG lmsSampleTime);
+            /* [in] */ LONG lmsSampleTime);
         
         DECLSPEC_XFGVIRT(IBDA_SignalStatistics, get_SampleTime)
         HRESULT ( STDMETHODCALLTYPE *get_SampleTime )( 
             __RPC__in IBDA_SignalStatistics * This,
-            /* [annotation][out][in] */ 
-            _Inout_  LONG *plmsSampleTime);
+            /* [out][in] */ __RPC__inout LONG *plmsSampleTime);
         
         END_INTERFACE
     } IBDA_SignalStatisticsVtbl;
@@ -1714,79 +1608,55 @@ EXTERN_C const IID IID_IBDA_Topology;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNodeTypes( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcNodeTypes,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcNodeTypesMax,
+            /* [out][in] */ __RPC__inout ULONG *pulcNodeTypes,
+            /* [in] */ ULONG ulcNodeTypesMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcNodeTypesMax) ULONG rgulNodeTypes[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNodeDescriptors( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *ulcNodeDescriptors,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcNodeDescriptorsMax,
+            /* [out][in] */ __RPC__inout ULONG *ulcNodeDescriptors,
+            /* [in] */ ULONG ulcNodeDescriptorsMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcNodeDescriptorsMax) BDANODE_DESCRIPTOR rgNodeDescriptors[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNodeInterfaces( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulNodeType,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcInterfaces,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcInterfacesMax,
+            /* [in] */ ULONG ulNodeType,
+            /* [out][in] */ __RPC__inout ULONG *pulcInterfaces,
+            /* [in] */ ULONG ulcInterfacesMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcInterfacesMax) GUID rgguidInterfaces[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPinTypes( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcPinTypes,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcPinTypesMax,
+            /* [out][in] */ __RPC__inout ULONG *pulcPinTypes,
+            /* [in] */ ULONG ulcPinTypesMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcPinTypesMax) ULONG rgulPinTypes[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTemplateConnections( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcConnections,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcConnectionsMax,
+            /* [out][in] */ __RPC__inout ULONG *pulcConnections,
+            /* [in] */ ULONG ulcConnectionsMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcConnectionsMax) BDA_TEMPLATE_CONNECTION rgConnections[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePin( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulPinType,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulPinId) = 0;
+            /* [in] */ ULONG ulPinType,
+            /* [out][in] */ __RPC__inout ULONG *pulPinId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeletePin( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulPinId) = 0;
+            /* [in] */ ULONG ulPinId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMediaType( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulPinId,
-            /* [annotation][in] */ 
-            _In_  AM_MEDIA_TYPE *pMediaType) = 0;
+            /* [in] */ ULONG ulPinId,
+            /* [in] */ __RPC__in AM_MEDIA_TYPE *pMediaType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMedium( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulPinId,
-            /* [annotation][in] */ 
-            _In_  REGPINMEDIUM *pMedium) = 0;
+            /* [in] */ ULONG ulPinId,
+            /* [in] */ __RPC__in REGPINMEDIUM *pMedium) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateTopology( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulInputPinId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulOutputPinId) = 0;
+            /* [in] */ ULONG ulInputPinId,
+            /* [in] */ ULONG ulOutputPinId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetControlNode( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulInputPinId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulOutputPinId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNodeType,
-            /* [annotation][out][in] */ 
-            _Inout_  IUnknown **ppControlNode) = 0;
+            /* [in] */ ULONG ulInputPinId,
+            /* [in] */ ULONG ulOutputPinId,
+            /* [in] */ ULONG ulNodeType,
+            /* [out][in] */ __RPC__deref_inout_opt IUnknown **ppControlNode) = 0;
         
     };
     
@@ -1800,8 +1670,7 @@ EXTERN_C const IID IID_IBDA_Topology;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1816,99 +1685,75 @@ EXTERN_C const IID IID_IBDA_Topology;
         DECLSPEC_XFGVIRT(IBDA_Topology, GetNodeTypes)
         HRESULT ( STDMETHODCALLTYPE *GetNodeTypes )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcNodeTypes,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcNodeTypesMax,
+            /* [out][in] */ __RPC__inout ULONG *pulcNodeTypes,
+            /* [in] */ ULONG ulcNodeTypesMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcNodeTypesMax) ULONG rgulNodeTypes[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_Topology, GetNodeDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetNodeDescriptors )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *ulcNodeDescriptors,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcNodeDescriptorsMax,
+            /* [out][in] */ __RPC__inout ULONG *ulcNodeDescriptors,
+            /* [in] */ ULONG ulcNodeDescriptorsMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcNodeDescriptorsMax) BDANODE_DESCRIPTOR rgNodeDescriptors[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_Topology, GetNodeInterfaces)
         HRESULT ( STDMETHODCALLTYPE *GetNodeInterfaces )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNodeType,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcInterfaces,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcInterfacesMax,
+            /* [in] */ ULONG ulNodeType,
+            /* [out][in] */ __RPC__inout ULONG *pulcInterfaces,
+            /* [in] */ ULONG ulcInterfacesMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcInterfacesMax) GUID rgguidInterfaces[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_Topology, GetPinTypes)
         HRESULT ( STDMETHODCALLTYPE *GetPinTypes )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcPinTypes,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcPinTypesMax,
+            /* [out][in] */ __RPC__inout ULONG *pulcPinTypes,
+            /* [in] */ ULONG ulcPinTypesMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcPinTypesMax) ULONG rgulPinTypes[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_Topology, GetTemplateConnections)
         HRESULT ( STDMETHODCALLTYPE *GetTemplateConnections )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcConnections,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcConnectionsMax,
+            /* [out][in] */ __RPC__inout ULONG *pulcConnections,
+            /* [in] */ ULONG ulcConnectionsMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcConnectionsMax) BDA_TEMPLATE_CONNECTION rgConnections[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_Topology, CreatePin)
         HRESULT ( STDMETHODCALLTYPE *CreatePin )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulPinType,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulPinId);
+            /* [in] */ ULONG ulPinType,
+            /* [out][in] */ __RPC__inout ULONG *pulPinId);
         
         DECLSPEC_XFGVIRT(IBDA_Topology, DeletePin)
         HRESULT ( STDMETHODCALLTYPE *DeletePin )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulPinId);
+            /* [in] */ ULONG ulPinId);
         
         DECLSPEC_XFGVIRT(IBDA_Topology, SetMediaType)
         HRESULT ( STDMETHODCALLTYPE *SetMediaType )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulPinId,
-            /* [annotation][in] */ 
-            _In_  AM_MEDIA_TYPE *pMediaType);
+            /* [in] */ ULONG ulPinId,
+            /* [in] */ __RPC__in AM_MEDIA_TYPE *pMediaType);
         
         DECLSPEC_XFGVIRT(IBDA_Topology, SetMedium)
         HRESULT ( STDMETHODCALLTYPE *SetMedium )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulPinId,
-            /* [annotation][in] */ 
-            _In_  REGPINMEDIUM *pMedium);
+            /* [in] */ ULONG ulPinId,
+            /* [in] */ __RPC__in REGPINMEDIUM *pMedium);
         
         DECLSPEC_XFGVIRT(IBDA_Topology, CreateTopology)
         HRESULT ( STDMETHODCALLTYPE *CreateTopology )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInputPinId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulOutputPinId);
+            /* [in] */ ULONG ulInputPinId,
+            /* [in] */ ULONG ulOutputPinId);
         
         DECLSPEC_XFGVIRT(IBDA_Topology, GetControlNode)
         HRESULT ( STDMETHODCALLTYPE *GetControlNode )( 
             __RPC__in IBDA_Topology * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInputPinId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulOutputPinId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNodeType,
-            /* [annotation][out][in] */ 
-            _Inout_  IUnknown **ppControlNode);
+            /* [in] */ ULONG ulInputPinId,
+            /* [in] */ ULONG ulOutputPinId,
+            /* [in] */ ULONG ulNodeType,
+            /* [out][in] */ __RPC__deref_inout_opt IUnknown **ppControlNode);
         
         END_INTERFACE
     } IBDA_TopologyVtbl;
@@ -2008,8 +1853,7 @@ EXTERN_C const IID IID_IBDA_VoidTransform;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_VoidTransform * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2100,8 +1944,7 @@ EXTERN_C const IID IID_IBDA_NullTransform;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_NullTransform * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2177,52 +2020,40 @@ EXTERN_C const IID IID_IBDA_FrequencyFilter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE put_Autotune( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulTransponder) = 0;
+            /* [in] */ ULONG ulTransponder) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Autotune( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulTransponder) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulTransponder) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Frequency( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulFrequency) = 0;
+            /* [in] */ ULONG ulFrequency) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Frequency( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulFrequency) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulFrequency) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Polarity( 
-            /* [annotation][in] */ 
-            _In_  Polarisation Polarity) = 0;
+            /* [in] */ Polarisation Polarity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Polarity( 
-            /* [annotation][out][in] */ 
-            _Inout_  Polarisation *pPolarity) = 0;
+            /* [out][in] */ __RPC__inout Polarisation *pPolarity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Range( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulRange) = 0;
+            /* [in] */ ULONG ulRange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Range( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulRange) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulRange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Bandwidth( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulBandwidth) = 0;
+            /* [in] */ ULONG ulBandwidth) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Bandwidth( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulBandwidth) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulBandwidth) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_FrequencyMultiplier( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulMultiplier) = 0;
+            /* [in] */ ULONG ulMultiplier) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_FrequencyMultiplier( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulMultiplier) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulMultiplier) = 0;
         
     };
     
@@ -2236,8 +2067,7 @@ EXTERN_C const IID IID_IBDA_FrequencyFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2252,74 +2082,62 @@ EXTERN_C const IID IID_IBDA_FrequencyFilter;
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, put_Autotune)
         HRESULT ( STDMETHODCALLTYPE *put_Autotune )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulTransponder);
+            /* [in] */ ULONG ulTransponder);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, get_Autotune)
         HRESULT ( STDMETHODCALLTYPE *get_Autotune )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulTransponder);
+            /* [out][in] */ __RPC__inout ULONG *pulTransponder);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, put_Frequency)
         HRESULT ( STDMETHODCALLTYPE *put_Frequency )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulFrequency);
+            /* [in] */ ULONG ulFrequency);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, get_Frequency)
         HRESULT ( STDMETHODCALLTYPE *get_Frequency )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulFrequency);
+            /* [out][in] */ __RPC__inout ULONG *pulFrequency);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, put_Polarity)
         HRESULT ( STDMETHODCALLTYPE *put_Polarity )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][in] */ 
-            _In_  Polarisation Polarity);
+            /* [in] */ Polarisation Polarity);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, get_Polarity)
         HRESULT ( STDMETHODCALLTYPE *get_Polarity )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  Polarisation *pPolarity);
+            /* [out][in] */ __RPC__inout Polarisation *pPolarity);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, put_Range)
         HRESULT ( STDMETHODCALLTYPE *put_Range )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulRange);
+            /* [in] */ ULONG ulRange);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, get_Range)
         HRESULT ( STDMETHODCALLTYPE *get_Range )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulRange);
+            /* [out][in] */ __RPC__inout ULONG *pulRange);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, put_Bandwidth)
         HRESULT ( STDMETHODCALLTYPE *put_Bandwidth )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulBandwidth);
+            /* [in] */ ULONG ulBandwidth);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, get_Bandwidth)
         HRESULT ( STDMETHODCALLTYPE *get_Bandwidth )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulBandwidth);
+            /* [out][in] */ __RPC__inout ULONG *pulBandwidth);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, put_FrequencyMultiplier)
         HRESULT ( STDMETHODCALLTYPE *put_FrequencyMultiplier )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulMultiplier);
+            /* [in] */ ULONG ulMultiplier);
         
         DECLSPEC_XFGVIRT(IBDA_FrequencyFilter, get_FrequencyMultiplier)
         HRESULT ( STDMETHODCALLTYPE *get_FrequencyMultiplier )( 
             __RPC__in IBDA_FrequencyFilter * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulMultiplier);
+            /* [out][in] */ __RPC__inout ULONG *pulMultiplier);
         
         END_INTERFACE
     } IBDA_FrequencyFilterVtbl;
@@ -2407,28 +2225,22 @@ EXTERN_C const IID IID_IBDA_LNBInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE put_LocalOscilatorFrequencyLowBand( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulLOFLow) = 0;
+            /* [in] */ ULONG ulLOFLow) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_LocalOscilatorFrequencyLowBand( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulLOFLow) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulLOFLow) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_LocalOscilatorFrequencyHighBand( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulLOFHigh) = 0;
+            /* [in] */ ULONG ulLOFHigh) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_LocalOscilatorFrequencyHighBand( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulLOFHigh) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulLOFHigh) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_HighLowSwitchFrequency( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulSwitchFrequency) = 0;
+            /* [in] */ ULONG ulSwitchFrequency) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_HighLowSwitchFrequency( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulSwitchFrequency) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulSwitchFrequency) = 0;
         
     };
     
@@ -2442,8 +2254,7 @@ EXTERN_C const IID IID_IBDA_LNBInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_LNBInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2458,38 +2269,32 @@ EXTERN_C const IID IID_IBDA_LNBInfo;
         DECLSPEC_XFGVIRT(IBDA_LNBInfo, put_LocalOscilatorFrequencyLowBand)
         HRESULT ( STDMETHODCALLTYPE *put_LocalOscilatorFrequencyLowBand )( 
             __RPC__in IBDA_LNBInfo * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulLOFLow);
+            /* [in] */ ULONG ulLOFLow);
         
         DECLSPEC_XFGVIRT(IBDA_LNBInfo, get_LocalOscilatorFrequencyLowBand)
         HRESULT ( STDMETHODCALLTYPE *get_LocalOscilatorFrequencyLowBand )( 
             __RPC__in IBDA_LNBInfo * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulLOFLow);
+            /* [out][in] */ __RPC__inout ULONG *pulLOFLow);
         
         DECLSPEC_XFGVIRT(IBDA_LNBInfo, put_LocalOscilatorFrequencyHighBand)
         HRESULT ( STDMETHODCALLTYPE *put_LocalOscilatorFrequencyHighBand )( 
             __RPC__in IBDA_LNBInfo * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulLOFHigh);
+            /* [in] */ ULONG ulLOFHigh);
         
         DECLSPEC_XFGVIRT(IBDA_LNBInfo, get_LocalOscilatorFrequencyHighBand)
         HRESULT ( STDMETHODCALLTYPE *get_LocalOscilatorFrequencyHighBand )( 
             __RPC__in IBDA_LNBInfo * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulLOFHigh);
+            /* [out][in] */ __RPC__inout ULONG *pulLOFHigh);
         
         DECLSPEC_XFGVIRT(IBDA_LNBInfo, put_HighLowSwitchFrequency)
         HRESULT ( STDMETHODCALLTYPE *put_HighLowSwitchFrequency )( 
             __RPC__in IBDA_LNBInfo * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulSwitchFrequency);
+            /* [in] */ ULONG ulSwitchFrequency);
         
         DECLSPEC_XFGVIRT(IBDA_LNBInfo, get_HighLowSwitchFrequency)
         HRESULT ( STDMETHODCALLTYPE *get_HighLowSwitchFrequency )( 
             __RPC__in IBDA_LNBInfo * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulSwitchFrequency);
+            /* [out][in] */ __RPC__inout ULONG *pulSwitchFrequency);
         
         END_INTERFACE
     } IBDA_LNBInfoVtbl;
@@ -2559,36 +2364,26 @@ EXTERN_C const IID IID_IBDA_DiseqCommand;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE put_EnableDiseqCommands( 
-            /* [annotation][in] */ 
-            _In_  BOOLEAN bEnable) = 0;
+            /* [in] */ BOOLEAN bEnable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DiseqLNBSource( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulLNBSource) = 0;
+            /* [in] */ ULONG ulLNBSource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DiseqUseToneBurst( 
-            /* [annotation][in] */ 
-            _In_  BOOLEAN bUseToneBurst) = 0;
+            /* [in] */ BOOLEAN bUseToneBurst) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DiseqRepeats( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulRepeats) = 0;
+            /* [in] */ ULONG ulRepeats) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DiseqSendCommand( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulRequestId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbCommandLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbCommandLen)  BYTE *pbCommand) = 0;
+            /* [in] */ ULONG ulRequestId,
+            /* [in] */ ULONG ulcbCommandLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbCommandLen) BYTE *pbCommand) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_DiseqResponse( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulRequestId,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbResponseLen,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(*pulcbResponseLen)  BYTE pbResponse[  ]) = 0;
+            /* [in] */ ULONG ulRequestId,
+            /* [out][in] */ __RPC__inout ULONG *pulcbResponseLen,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(*pulcbResponseLen) BYTE pbResponse[  ]) = 0;
         
     };
     
@@ -2602,8 +2397,7 @@ EXTERN_C const IID IID_IBDA_DiseqCommand;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_DiseqCommand * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2618,46 +2412,36 @@ EXTERN_C const IID IID_IBDA_DiseqCommand;
         DECLSPEC_XFGVIRT(IBDA_DiseqCommand, put_EnableDiseqCommands)
         HRESULT ( STDMETHODCALLTYPE *put_EnableDiseqCommands )( 
             __RPC__in IBDA_DiseqCommand * This,
-            /* [annotation][in] */ 
-            _In_  BOOLEAN bEnable);
+            /* [in] */ BOOLEAN bEnable);
         
         DECLSPEC_XFGVIRT(IBDA_DiseqCommand, put_DiseqLNBSource)
         HRESULT ( STDMETHODCALLTYPE *put_DiseqLNBSource )( 
             __RPC__in IBDA_DiseqCommand * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulLNBSource);
+            /* [in] */ ULONG ulLNBSource);
         
         DECLSPEC_XFGVIRT(IBDA_DiseqCommand, put_DiseqUseToneBurst)
         HRESULT ( STDMETHODCALLTYPE *put_DiseqUseToneBurst )( 
             __RPC__in IBDA_DiseqCommand * This,
-            /* [annotation][in] */ 
-            _In_  BOOLEAN bUseToneBurst);
+            /* [in] */ BOOLEAN bUseToneBurst);
         
         DECLSPEC_XFGVIRT(IBDA_DiseqCommand, put_DiseqRepeats)
         HRESULT ( STDMETHODCALLTYPE *put_DiseqRepeats )( 
             __RPC__in IBDA_DiseqCommand * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulRepeats);
+            /* [in] */ ULONG ulRepeats);
         
         DECLSPEC_XFGVIRT(IBDA_DiseqCommand, put_DiseqSendCommand)
         HRESULT ( STDMETHODCALLTYPE *put_DiseqSendCommand )( 
             __RPC__in IBDA_DiseqCommand * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulRequestId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbCommandLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbCommandLen)  BYTE *pbCommand);
+            /* [in] */ ULONG ulRequestId,
+            /* [in] */ ULONG ulcbCommandLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbCommandLen) BYTE *pbCommand);
         
         DECLSPEC_XFGVIRT(IBDA_DiseqCommand, get_DiseqResponse)
         HRESULT ( STDMETHODCALLTYPE *get_DiseqResponse )( 
             __RPC__in IBDA_DiseqCommand * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulRequestId,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbResponseLen,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(*pulcbResponseLen)  BYTE pbResponse[  ]);
+            /* [in] */ ULONG ulRequestId,
+            /* [out][in] */ __RPC__inout ULONG *pulcbResponseLen,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(*pulcbResponseLen) BYTE pbResponse[  ]);
         
         END_INTERFACE
     } IBDA_DiseqCommandVtbl;
@@ -2740,8 +2524,7 @@ EXTERN_C const IID IID_IBDA_AutoDemodulate;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_AutoDemodulate * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2810,24 +2593,17 @@ EXTERN_C const IID IID_IBDA_AutoDemodulateEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE get_SupportedDeviceNodeTypes( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulcDeviceNodeTypesMax,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulcDeviceNodeTypes,
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidDeviceNodeTypes) = 0;
+            /* [in] */ ULONG ulcDeviceNodeTypesMax,
+            /* [out] */ __RPC__out ULONG *pulcDeviceNodeTypes,
+            /* [out][in] */ __RPC__inout GUID *pguidDeviceNodeTypes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_SupportedVideoFormats( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulAMTunerModeType,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulAnalogVideoStandard) = 0;
+            /* [out] */ __RPC__out ULONG *pulAMTunerModeType,
+            /* [out] */ __RPC__out ULONG *pulAnalogVideoStandard) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_AuxInputCount( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulCompositeCount,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulSvideoCount) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulCompositeCount,
+            /* [out][in] */ __RPC__inout ULONG *pulSvideoCount) = 0;
         
     };
     
@@ -2841,8 +2617,7 @@ EXTERN_C const IID IID_IBDA_AutoDemodulateEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_AutoDemodulateEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2861,28 +2636,21 @@ EXTERN_C const IID IID_IBDA_AutoDemodulateEx;
         DECLSPEC_XFGVIRT(IBDA_AutoDemodulateEx, get_SupportedDeviceNodeTypes)
         HRESULT ( STDMETHODCALLTYPE *get_SupportedDeviceNodeTypes )( 
             __RPC__in IBDA_AutoDemodulateEx * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcDeviceNodeTypesMax,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulcDeviceNodeTypes,
-            /* [annotation][out][in] */ 
-            _Inout_  GUID *pguidDeviceNodeTypes);
+            /* [in] */ ULONG ulcDeviceNodeTypesMax,
+            /* [out] */ __RPC__out ULONG *pulcDeviceNodeTypes,
+            /* [out][in] */ __RPC__inout GUID *pguidDeviceNodeTypes);
         
         DECLSPEC_XFGVIRT(IBDA_AutoDemodulateEx, get_SupportedVideoFormats)
         HRESULT ( STDMETHODCALLTYPE *get_SupportedVideoFormats )( 
             __RPC__in IBDA_AutoDemodulateEx * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulAMTunerModeType,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulAnalogVideoStandard);
+            /* [out] */ __RPC__out ULONG *pulAMTunerModeType,
+            /* [out] */ __RPC__out ULONG *pulAnalogVideoStandard);
         
         DECLSPEC_XFGVIRT(IBDA_AutoDemodulateEx, get_AuxInputCount)
         HRESULT ( STDMETHODCALLTYPE *get_AuxInputCount )( 
             __RPC__in IBDA_AutoDemodulateEx * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulCompositeCount,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulSvideoCount);
+            /* [out][in] */ __RPC__inout ULONG *pulCompositeCount,
+            /* [out][in] */ __RPC__inout ULONG *pulSvideoCount);
         
         END_INTERFACE
     } IBDA_AutoDemodulateExVtbl;
@@ -2947,60 +2715,46 @@ EXTERN_C const IID IID_IBDA_DigitalDemodulator;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE put_ModulationType( 
-            /* [annotation][in] */ 
-            _In_  ModulationType *pModulationType) = 0;
+            /* [in] */ __RPC__in ModulationType *pModulationType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_ModulationType( 
-            /* [annotation][out][in] */ 
-            _Inout_  ModulationType *pModulationType) = 0;
+            /* [out][in] */ __RPC__inout ModulationType *pModulationType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_InnerFECMethod( 
-            /* [annotation][in] */ 
-            _In_  FECMethod *pFECMethod) = 0;
+            /* [in] */ __RPC__in FECMethod *pFECMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_InnerFECMethod( 
-            /* [annotation][out][in] */ 
-            _Inout_  FECMethod *pFECMethod) = 0;
+            /* [out][in] */ __RPC__inout FECMethod *pFECMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_InnerFECRate( 
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate *pFECRate) = 0;
+            /* [in] */ __RPC__in BinaryConvolutionCodeRate *pFECRate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_InnerFECRate( 
-            /* [annotation][out][in] */ 
-            _Inout_  BinaryConvolutionCodeRate *pFECRate) = 0;
+            /* [out][in] */ __RPC__inout BinaryConvolutionCodeRate *pFECRate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_OuterFECMethod( 
-            /* [annotation][in] */ 
-            _In_  FECMethod *pFECMethod) = 0;
+            /* [in] */ __RPC__in FECMethod *pFECMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_OuterFECMethod( 
-            /* [annotation][out][in] */ 
-            _Inout_  FECMethod *pFECMethod) = 0;
+            /* [out][in] */ __RPC__inout FECMethod *pFECMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_OuterFECRate( 
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate *pFECRate) = 0;
+            /* [in] */ __RPC__in BinaryConvolutionCodeRate *pFECRate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_OuterFECRate( 
-            /* [annotation][out][in] */ 
-            _Inout_  BinaryConvolutionCodeRate *pFECRate) = 0;
+            /* [out][in] */ __RPC__inout BinaryConvolutionCodeRate *pFECRate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_SymbolRate( 
-            /* [annotation][in] */ 
-            _In_  ULONG *pSymbolRate) = 0;
+            /* [in] */ __RPC__in ULONG *pSymbolRate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_SymbolRate( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pSymbolRate) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pSymbolRate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_SpectralInversion( 
-            /* [annotation][in] */ 
-            _In_  SpectralInversion *pSpectralInversion) = 0;
+            /* [in] */ __RPC__in SpectralInversion *pSpectralInversion) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_SpectralInversion( 
-            /* [annotation][out][in] */ 
-            _Inout_  SpectralInversion *pSpectralInversion) = 0;
+            /* [out][in] */ __RPC__inout SpectralInversion *pSpectralInversion) = 0;
         
     };
     
@@ -3014,8 +2768,7 @@ EXTERN_C const IID IID_IBDA_DigitalDemodulator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3030,86 +2783,72 @@ EXTERN_C const IID IID_IBDA_DigitalDemodulator;
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_ModulationType)
         HRESULT ( STDMETHODCALLTYPE *put_ModulationType )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType *pModulationType);
+            /* [in] */ __RPC__in ModulationType *pModulationType);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_ModulationType)
         HRESULT ( STDMETHODCALLTYPE *get_ModulationType )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ModulationType *pModulationType);
+            /* [out][in] */ __RPC__inout ModulationType *pModulationType);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_InnerFECMethod)
         HRESULT ( STDMETHODCALLTYPE *put_InnerFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod *pFECMethod);
+            /* [in] */ __RPC__in FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_InnerFECMethod)
         HRESULT ( STDMETHODCALLTYPE *get_InnerFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][out][in] */ 
-            _Inout_  FECMethod *pFECMethod);
+            /* [out][in] */ __RPC__inout FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_InnerFECRate)
         HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate *pFECRate);
+            /* [in] */ __RPC__in BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_InnerFECRate)
         HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BinaryConvolutionCodeRate *pFECRate);
+            /* [out][in] */ __RPC__inout BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_OuterFECMethod)
         HRESULT ( STDMETHODCALLTYPE *put_OuterFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod *pFECMethod);
+            /* [in] */ __RPC__in FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_OuterFECMethod)
         HRESULT ( STDMETHODCALLTYPE *get_OuterFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][out][in] */ 
-            _Inout_  FECMethod *pFECMethod);
+            /* [out][in] */ __RPC__inout FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_OuterFECRate)
         HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate *pFECRate);
+            /* [in] */ __RPC__in BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_OuterFECRate)
         HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BinaryConvolutionCodeRate *pFECRate);
+            /* [out][in] */ __RPC__inout BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_SymbolRate)
         HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][in] */ 
-            _In_  ULONG *pSymbolRate);
+            /* [in] */ __RPC__in ULONG *pSymbolRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_SymbolRate)
         HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pSymbolRate);
+            /* [out][in] */ __RPC__inout ULONG *pSymbolRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_SpectralInversion)
         HRESULT ( STDMETHODCALLTYPE *put_SpectralInversion )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][in] */ 
-            _In_  SpectralInversion *pSpectralInversion);
+            /* [in] */ __RPC__in SpectralInversion *pSpectralInversion);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_SpectralInversion)
         HRESULT ( STDMETHODCALLTYPE *get_SpectralInversion )( 
             __RPC__in IBDA_DigitalDemodulator * This,
-            /* [annotation][out][in] */ 
-            _Inout_  SpectralInversion *pSpectralInversion);
+            /* [out][in] */ __RPC__inout SpectralInversion *pSpectralInversion);
         
         END_INTERFACE
     } IBDA_DigitalDemodulatorVtbl;
@@ -3203,36 +2942,28 @@ EXTERN_C const IID IID_IBDA_DigitalDemodulator2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE put_GuardInterval( 
-            /* [annotation][in] */ 
-            _In_  GuardInterval *pGuardInterval) = 0;
+            /* [in] */ __RPC__in GuardInterval *pGuardInterval) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_GuardInterval( 
-            /* [annotation][out][in] */ 
-            _Inout_  GuardInterval *pGuardInterval) = 0;
+            /* [out][in] */ __RPC__inout GuardInterval *pGuardInterval) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_TransmissionMode( 
-            /* [annotation][in] */ 
-            _In_  TransmissionMode *pTransmissionMode) = 0;
+            /* [in] */ __RPC__in TransmissionMode *pTransmissionMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_TransmissionMode( 
-            /* [annotation][out][in] */ 
-            _Inout_  TransmissionMode *pTransmissionMode) = 0;
+            /* [out][in] */ __RPC__inout TransmissionMode *pTransmissionMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_RollOff( 
-            /* [annotation][in] */ 
-            _In_  RollOff *pRollOff) = 0;
+            /* [in] */ __RPC__in RollOff *pRollOff) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_RollOff( 
-            /* [annotation][out][in] */ 
-            _Inout_  RollOff *pRollOff) = 0;
+            /* [out][in] */ __RPC__inout RollOff *pRollOff) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Pilot( 
-            /* [annotation][in] */ 
-            _In_  Pilot *pPilot) = 0;
+            /* [in] */ __RPC__in Pilot *pPilot) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Pilot( 
-            /* [annotation][out][in] */ 
-            _Inout_  Pilot *pPilot) = 0;
+            /* [out][in] */ __RPC__inout Pilot *pPilot) = 0;
         
     };
     
@@ -3246,8 +2977,7 @@ EXTERN_C const IID IID_IBDA_DigitalDemodulator2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3262,134 +2992,112 @@ EXTERN_C const IID IID_IBDA_DigitalDemodulator2;
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_ModulationType)
         HRESULT ( STDMETHODCALLTYPE *put_ModulationType )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType *pModulationType);
+            /* [in] */ __RPC__in ModulationType *pModulationType);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_ModulationType)
         HRESULT ( STDMETHODCALLTYPE *get_ModulationType )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ModulationType *pModulationType);
+            /* [out][in] */ __RPC__inout ModulationType *pModulationType);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_InnerFECMethod)
         HRESULT ( STDMETHODCALLTYPE *put_InnerFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod *pFECMethod);
+            /* [in] */ __RPC__in FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_InnerFECMethod)
         HRESULT ( STDMETHODCALLTYPE *get_InnerFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  FECMethod *pFECMethod);
+            /* [out][in] */ __RPC__inout FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_InnerFECRate)
         HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate *pFECRate);
+            /* [in] */ __RPC__in BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_InnerFECRate)
         HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BinaryConvolutionCodeRate *pFECRate);
+            /* [out][in] */ __RPC__inout BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_OuterFECMethod)
         HRESULT ( STDMETHODCALLTYPE *put_OuterFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod *pFECMethod);
+            /* [in] */ __RPC__in FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_OuterFECMethod)
         HRESULT ( STDMETHODCALLTYPE *get_OuterFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  FECMethod *pFECMethod);
+            /* [out][in] */ __RPC__inout FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_OuterFECRate)
         HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate *pFECRate);
+            /* [in] */ __RPC__in BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_OuterFECRate)
         HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BinaryConvolutionCodeRate *pFECRate);
+            /* [out][in] */ __RPC__inout BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_SymbolRate)
         HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG *pSymbolRate);
+            /* [in] */ __RPC__in ULONG *pSymbolRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_SymbolRate)
         HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pSymbolRate);
+            /* [out][in] */ __RPC__inout ULONG *pSymbolRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_SpectralInversion)
         HRESULT ( STDMETHODCALLTYPE *put_SpectralInversion )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  SpectralInversion *pSpectralInversion);
+            /* [in] */ __RPC__in SpectralInversion *pSpectralInversion);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_SpectralInversion)
         HRESULT ( STDMETHODCALLTYPE *get_SpectralInversion )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  SpectralInversion *pSpectralInversion);
+            /* [out][in] */ __RPC__inout SpectralInversion *pSpectralInversion);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, put_GuardInterval)
         HRESULT ( STDMETHODCALLTYPE *put_GuardInterval )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  GuardInterval *pGuardInterval);
+            /* [in] */ __RPC__in GuardInterval *pGuardInterval);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, get_GuardInterval)
         HRESULT ( STDMETHODCALLTYPE *get_GuardInterval )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  GuardInterval *pGuardInterval);
+            /* [out][in] */ __RPC__inout GuardInterval *pGuardInterval);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, put_TransmissionMode)
         HRESULT ( STDMETHODCALLTYPE *put_TransmissionMode )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  TransmissionMode *pTransmissionMode);
+            /* [in] */ __RPC__in TransmissionMode *pTransmissionMode);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, get_TransmissionMode)
         HRESULT ( STDMETHODCALLTYPE *get_TransmissionMode )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  TransmissionMode *pTransmissionMode);
+            /* [out][in] */ __RPC__inout TransmissionMode *pTransmissionMode);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, put_RollOff)
         HRESULT ( STDMETHODCALLTYPE *put_RollOff )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  RollOff *pRollOff);
+            /* [in] */ __RPC__in RollOff *pRollOff);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, get_RollOff)
         HRESULT ( STDMETHODCALLTYPE *get_RollOff )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  RollOff *pRollOff);
+            /* [out][in] */ __RPC__inout RollOff *pRollOff);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, put_Pilot)
         HRESULT ( STDMETHODCALLTYPE *put_Pilot )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][in] */ 
-            _In_  Pilot *pPilot);
+            /* [in] */ __RPC__in Pilot *pPilot);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, get_Pilot)
         HRESULT ( STDMETHODCALLTYPE *get_Pilot )( 
             __RPC__in IBDA_DigitalDemodulator2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  Pilot *pPilot);
+            /* [out][in] */ __RPC__inout Pilot *pPilot);
         
         END_INTERFACE
     } IBDA_DigitalDemodulator2Vtbl;
@@ -3508,20 +3216,16 @@ EXTERN_C const IID IID_IBDA_DigitalDemodulator3;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE put_SignalTimeouts( 
-            /* [annotation][in] */ 
-            _In_  BDA_SIGNAL_TIMEOUTS *pSignalTimeouts) = 0;
+            /* [in] */ __RPC__in BDA_SIGNAL_TIMEOUTS *pSignalTimeouts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_SignalTimeouts( 
-            /* [annotation][out][in] */ 
-            _Inout_  BDA_SIGNAL_TIMEOUTS *pSignalTimeouts) = 0;
+            /* [out][in] */ __RPC__inout BDA_SIGNAL_TIMEOUTS *pSignalTimeouts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_PLPNumber( 
-            /* [annotation][in] */ 
-            _In_  ULONG *pPLPNumber) = 0;
+            /* [in] */ __RPC__in ULONG *pPLPNumber) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_PLPNumber( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pPLPNumber) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pPLPNumber) = 0;
         
     };
     
@@ -3535,8 +3239,7 @@ EXTERN_C const IID IID_IBDA_DigitalDemodulator3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3551,158 +3254,132 @@ EXTERN_C const IID IID_IBDA_DigitalDemodulator3;
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_ModulationType)
         HRESULT ( STDMETHODCALLTYPE *put_ModulationType )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  ModulationType *pModulationType);
+            /* [in] */ __RPC__in ModulationType *pModulationType);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_ModulationType)
         HRESULT ( STDMETHODCALLTYPE *get_ModulationType )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ModulationType *pModulationType);
+            /* [out][in] */ __RPC__inout ModulationType *pModulationType);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_InnerFECMethod)
         HRESULT ( STDMETHODCALLTYPE *put_InnerFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod *pFECMethod);
+            /* [in] */ __RPC__in FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_InnerFECMethod)
         HRESULT ( STDMETHODCALLTYPE *get_InnerFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  FECMethod *pFECMethod);
+            /* [out][in] */ __RPC__inout FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_InnerFECRate)
         HRESULT ( STDMETHODCALLTYPE *put_InnerFECRate )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate *pFECRate);
+            /* [in] */ __RPC__in BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_InnerFECRate)
         HRESULT ( STDMETHODCALLTYPE *get_InnerFECRate )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BinaryConvolutionCodeRate *pFECRate);
+            /* [out][in] */ __RPC__inout BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_OuterFECMethod)
         HRESULT ( STDMETHODCALLTYPE *put_OuterFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  FECMethod *pFECMethod);
+            /* [in] */ __RPC__in FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_OuterFECMethod)
         HRESULT ( STDMETHODCALLTYPE *get_OuterFECMethod )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  FECMethod *pFECMethod);
+            /* [out][in] */ __RPC__inout FECMethod *pFECMethod);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_OuterFECRate)
         HRESULT ( STDMETHODCALLTYPE *put_OuterFECRate )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  BinaryConvolutionCodeRate *pFECRate);
+            /* [in] */ __RPC__in BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_OuterFECRate)
         HRESULT ( STDMETHODCALLTYPE *get_OuterFECRate )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BinaryConvolutionCodeRate *pFECRate);
+            /* [out][in] */ __RPC__inout BinaryConvolutionCodeRate *pFECRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_SymbolRate)
         HRESULT ( STDMETHODCALLTYPE *put_SymbolRate )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG *pSymbolRate);
+            /* [in] */ __RPC__in ULONG *pSymbolRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_SymbolRate)
         HRESULT ( STDMETHODCALLTYPE *get_SymbolRate )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pSymbolRate);
+            /* [out][in] */ __RPC__inout ULONG *pSymbolRate);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, put_SpectralInversion)
         HRESULT ( STDMETHODCALLTYPE *put_SpectralInversion )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  SpectralInversion *pSpectralInversion);
+            /* [in] */ __RPC__in SpectralInversion *pSpectralInversion);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator, get_SpectralInversion)
         HRESULT ( STDMETHODCALLTYPE *get_SpectralInversion )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  SpectralInversion *pSpectralInversion);
+            /* [out][in] */ __RPC__inout SpectralInversion *pSpectralInversion);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, put_GuardInterval)
         HRESULT ( STDMETHODCALLTYPE *put_GuardInterval )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  GuardInterval *pGuardInterval);
+            /* [in] */ __RPC__in GuardInterval *pGuardInterval);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, get_GuardInterval)
         HRESULT ( STDMETHODCALLTYPE *get_GuardInterval )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  GuardInterval *pGuardInterval);
+            /* [out][in] */ __RPC__inout GuardInterval *pGuardInterval);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, put_TransmissionMode)
         HRESULT ( STDMETHODCALLTYPE *put_TransmissionMode )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  TransmissionMode *pTransmissionMode);
+            /* [in] */ __RPC__in TransmissionMode *pTransmissionMode);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, get_TransmissionMode)
         HRESULT ( STDMETHODCALLTYPE *get_TransmissionMode )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  TransmissionMode *pTransmissionMode);
+            /* [out][in] */ __RPC__inout TransmissionMode *pTransmissionMode);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, put_RollOff)
         HRESULT ( STDMETHODCALLTYPE *put_RollOff )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  RollOff *pRollOff);
+            /* [in] */ __RPC__in RollOff *pRollOff);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, get_RollOff)
         HRESULT ( STDMETHODCALLTYPE *get_RollOff )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  RollOff *pRollOff);
+            /* [out][in] */ __RPC__inout RollOff *pRollOff);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, put_Pilot)
         HRESULT ( STDMETHODCALLTYPE *put_Pilot )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  Pilot *pPilot);
+            /* [in] */ __RPC__in Pilot *pPilot);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator2, get_Pilot)
         HRESULT ( STDMETHODCALLTYPE *get_Pilot )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  Pilot *pPilot);
+            /* [out][in] */ __RPC__inout Pilot *pPilot);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator3, put_SignalTimeouts)
         HRESULT ( STDMETHODCALLTYPE *put_SignalTimeouts )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  BDA_SIGNAL_TIMEOUTS *pSignalTimeouts);
+            /* [in] */ __RPC__in BDA_SIGNAL_TIMEOUTS *pSignalTimeouts);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator3, get_SignalTimeouts)
         HRESULT ( STDMETHODCALLTYPE *get_SignalTimeouts )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BDA_SIGNAL_TIMEOUTS *pSignalTimeouts);
+            /* [out][in] */ __RPC__inout BDA_SIGNAL_TIMEOUTS *pSignalTimeouts);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator3, put_PLPNumber)
         HRESULT ( STDMETHODCALLTYPE *put_PLPNumber )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG *pPLPNumber);
+            /* [in] */ __RPC__in ULONG *pPLPNumber);
         
         DECLSPEC_XFGVIRT(IBDA_DigitalDemodulator3, get_PLPNumber)
         HRESULT ( STDMETHODCALLTYPE *get_PLPNumber )( 
             __RPC__in IBDA_DigitalDemodulator3 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pPLPNumber);
+            /* [out][in] */ __RPC__inout ULONG *pPLPNumber);
         
         END_INTERFACE
     } IBDA_DigitalDemodulator3Vtbl;
@@ -3850,12 +3527,10 @@ EXTERN_C const IID IID_ICCSubStreamFiltering;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_SubstreamTypes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pTypes) = 0;
+            /* [retval][out] */ __RPC__out long *pTypes) = 0;
         
         virtual /* [helpstring][propput] */ HRESULT STDMETHODCALLTYPE put_SubstreamTypes( 
-            /* [annotation][in] */ 
-            _In_  long Types) = 0;
+            /* [in] */ long Types) = 0;
         
     };
     
@@ -3869,8 +3544,7 @@ EXTERN_C const IID IID_ICCSubStreamFiltering;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICCSubStreamFiltering * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3885,14 +3559,12 @@ EXTERN_C const IID IID_ICCSubStreamFiltering;
         DECLSPEC_XFGVIRT(ICCSubStreamFiltering, get_SubstreamTypes)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubstreamTypes )( 
             __RPC__in ICCSubStreamFiltering * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pTypes);
+            /* [retval][out] */ __RPC__out long *pTypes);
         
         DECLSPEC_XFGVIRT(ICCSubStreamFiltering, put_SubstreamTypes)
         /* [helpstring][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SubstreamTypes )( 
             __RPC__in ICCSubStreamFiltering * This,
-            /* [annotation][in] */ 
-            _In_  long Types);
+            /* [in] */ long Types);
         
         END_INTERFACE
     } ICCSubStreamFilteringVtbl;
@@ -3950,16 +3622,12 @@ EXTERN_C const IID IID_IBDA_IPSinkControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMulticastList( 
-            /* [annotation][out][in] */ 
-            _Inout_  unsigned long *pulcbSize,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE **pbBuffer) = 0;
+            /* [out][in] */ __RPC__inout unsigned long *pulcbSize,
+            /* [out][in] */ __RPC__deref_inout_opt BYTE **pbBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAdapterIPAddress( 
-            /* [annotation][out][in] */ 
-            _Inout_  unsigned long *pulcbSize,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE **pbBuffer) = 0;
+            /* [out][in] */ __RPC__inout unsigned long *pulcbSize,
+            /* [out][in] */ __RPC__deref_inout_opt BYTE **pbBuffer) = 0;
         
     };
     
@@ -3973,8 +3641,7 @@ EXTERN_C const IID IID_IBDA_IPSinkControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_IPSinkControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3989,18 +3656,14 @@ EXTERN_C const IID IID_IBDA_IPSinkControl;
         DECLSPEC_XFGVIRT(IBDA_IPSinkControl, GetMulticastList)
         HRESULT ( STDMETHODCALLTYPE *GetMulticastList )( 
             __RPC__in IBDA_IPSinkControl * This,
-            /* [annotation][out][in] */ 
-            _Inout_  unsigned long *pulcbSize,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE **pbBuffer);
+            /* [out][in] */ __RPC__inout unsigned long *pulcbSize,
+            /* [out][in] */ __RPC__deref_inout_opt BYTE **pbBuffer);
         
         DECLSPEC_XFGVIRT(IBDA_IPSinkControl, GetAdapterIPAddress)
         HRESULT ( STDMETHODCALLTYPE *GetAdapterIPAddress )( 
             __RPC__in IBDA_IPSinkControl * This,
-            /* [annotation][out][in] */ 
-            _Inout_  unsigned long *pulcbSize,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE **pbBuffer);
+            /* [out][in] */ __RPC__inout unsigned long *pulcbSize,
+            /* [out][in] */ __RPC__deref_inout_opt BYTE **pbBuffer);
         
         END_INTERFACE
     } IBDA_IPSinkControlVtbl;
@@ -4058,18 +3721,14 @@ EXTERN_C const IID IID_IBDA_IPSinkInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE get_MulticastList( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pulcbAddresses)  BYTE **ppbAddressList) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pulcbAddresses) BYTE **ppbAddressList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_AdapterIPAddress( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrBuffer) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_AdapterDescription( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrBuffer) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrBuffer) = 0;
         
     };
     
@@ -4083,8 +3742,7 @@ EXTERN_C const IID IID_IBDA_IPSinkInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_IPSinkInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4099,22 +3757,18 @@ EXTERN_C const IID IID_IBDA_IPSinkInfo;
         DECLSPEC_XFGVIRT(IBDA_IPSinkInfo, get_MulticastList)
         HRESULT ( STDMETHODCALLTYPE *get_MulticastList )( 
             __RPC__in IBDA_IPSinkInfo * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbAddresses,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pulcbAddresses)  BYTE **ppbAddressList);
+            /* [out][in] */ __RPC__inout ULONG *pulcbAddresses,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pulcbAddresses) BYTE **ppbAddressList);
         
         DECLSPEC_XFGVIRT(IBDA_IPSinkInfo, get_AdapterIPAddress)
         HRESULT ( STDMETHODCALLTYPE *get_AdapterIPAddress )( 
             __RPC__in IBDA_IPSinkInfo * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrBuffer);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrBuffer);
         
         DECLSPEC_XFGVIRT(IBDA_IPSinkInfo, get_AdapterDescription)
         HRESULT ( STDMETHODCALLTYPE *get_AdapterDescription )( 
             __RPC__in IBDA_IPSinkInfo * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrBuffer);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrBuffer);
         
         END_INTERFACE
     } IBDA_IPSinkInfoVtbl;
@@ -4175,21 +3829,17 @@ EXTERN_C const IID IID_IEnumPIDMap;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest,
+            /* [in] */ ULONG cRequest,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(cRequest) PID_MAP *pPIDMap,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReceived) = 0;
+            /* [out] */ __RPC__out ULONG *pcReceived) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG cRecords) = 0;
+            /* [in] */ ULONG cRecords) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumPIDMap **ppIEnumPIDMap) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumPIDMap **ppIEnumPIDMap) = 0;
         
     };
     
@@ -4203,8 +3853,7 @@ EXTERN_C const IID IID_IEnumPIDMap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumPIDMap * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4219,17 +3868,14 @@ EXTERN_C const IID IID_IEnumPIDMap;
         DECLSPEC_XFGVIRT(IEnumPIDMap, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumPIDMap * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cRequest,
+            /* [in] */ ULONG cRequest,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(cRequest) PID_MAP *pPIDMap,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcReceived);
+            /* [out] */ __RPC__out ULONG *pcReceived);
         
         DECLSPEC_XFGVIRT(IEnumPIDMap, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumPIDMap * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cRecords);
+            /* [in] */ ULONG cRecords);
         
         DECLSPEC_XFGVIRT(IEnumPIDMap, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -4238,8 +3884,7 @@ EXTERN_C const IID IID_IEnumPIDMap;
         DECLSPEC_XFGVIRT(IEnumPIDMap, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumPIDMap * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumPIDMap **ppIEnumPIDMap);
+            /* [out] */ __RPC__deref_out_opt IEnumPIDMap **ppIEnumPIDMap);
         
         END_INTERFACE
     } IEnumPIDMapVtbl;
@@ -4303,22 +3948,16 @@ EXTERN_C const IID IID_IMPEG2PIDMap;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE MapPID( 
-            /* [annotation][in] */ 
-            _In_  ULONG culPID,
-            /* [annotation][in] */ 
-            _In_  ULONG *pulPID,
-            /* [annotation][in] */ 
-            _In_  MEDIA_SAMPLE_CONTENT MediaSampleContent) = 0;
+            /* [in] */ ULONG culPID,
+            /* [in] */ __RPC__in ULONG *pulPID,
+            /* [in] */ MEDIA_SAMPLE_CONTENT MediaSampleContent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnmapPID( 
-            /* [annotation][in] */ 
-            _In_  ULONG culPID,
-            /* [annotation][in] */ 
-            _In_  ULONG *pulPID) = 0;
+            /* [in] */ ULONG culPID,
+            /* [in] */ __RPC__in ULONG *pulPID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumPIDMap( 
-            /* [annotation][out] */ 
-            _Out_  IEnumPIDMap **pIEnumPIDMap) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumPIDMap **pIEnumPIDMap) = 0;
         
     };
     
@@ -4332,8 +3971,7 @@ EXTERN_C const IID IID_IMPEG2PIDMap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMPEG2PIDMap * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4348,26 +3986,20 @@ EXTERN_C const IID IID_IMPEG2PIDMap;
         DECLSPEC_XFGVIRT(IMPEG2PIDMap, MapPID)
         HRESULT ( STDMETHODCALLTYPE *MapPID )( 
             __RPC__in IMPEG2PIDMap * This,
-            /* [annotation][in] */ 
-            _In_  ULONG culPID,
-            /* [annotation][in] */ 
-            _In_  ULONG *pulPID,
-            /* [annotation][in] */ 
-            _In_  MEDIA_SAMPLE_CONTENT MediaSampleContent);
+            /* [in] */ ULONG culPID,
+            /* [in] */ __RPC__in ULONG *pulPID,
+            /* [in] */ MEDIA_SAMPLE_CONTENT MediaSampleContent);
         
         DECLSPEC_XFGVIRT(IMPEG2PIDMap, UnmapPID)
         HRESULT ( STDMETHODCALLTYPE *UnmapPID )( 
             __RPC__in IMPEG2PIDMap * This,
-            /* [annotation][in] */ 
-            _In_  ULONG culPID,
-            /* [annotation][in] */ 
-            _In_  ULONG *pulPID);
+            /* [in] */ ULONG culPID,
+            /* [in] */ __RPC__in ULONG *pulPID);
         
         DECLSPEC_XFGVIRT(IMPEG2PIDMap, EnumPIDMap)
         HRESULT ( STDMETHODCALLTYPE *EnumPIDMap )( 
             __RPC__in IMPEG2PIDMap * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumPIDMap **pIEnumPIDMap);
+            /* [out] */ __RPC__deref_out_opt IEnumPIDMap **pIEnumPIDMap);
         
         END_INTERFACE
     } IMPEG2PIDMapVtbl;
@@ -4428,38 +4060,27 @@ EXTERN_C const IID IID_IFrequencyMap;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_FrequencyMapping( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *ulCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *ulCount)  ULONG **ppulList) = 0;
+            /* [out] */ __RPC__out ULONG *ulCount,
+            /* [size_is][size_is][out] */ __RPC__out_ecount_full(1) ULONG **ppulList) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE put_FrequencyMapping( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  ULONG pList[  ]) = 0;
+            /* [in] */ ULONG ulCount,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) ULONG pList[  ]) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_CountryCode( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulCountryCode) = 0;
+            /* [out] */ __RPC__out ULONG *pulCountryCode) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE put_CountryCode( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCountryCode) = 0;
+            /* [in] */ ULONG ulCountryCode) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_DefaultFrequencyMapping( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCountryCode,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *pulCount)  ULONG **ppulList) = 0;
+            /* [in] */ ULONG ulCountryCode,
+            /* [out] */ __RPC__out ULONG *pulCount,
+            /* [size_is][size_is][out] */ __RPC__out_ecount_full(1) ULONG **ppulList) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_CountryCodeList( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *pulCount)  ULONG **ppulList) = 0;
+            /* [out] */ __RPC__out ULONG *pulCount,
+            /* [size_is][size_is][out] */ __RPC__out_ecount_full(1) ULONG **ppulList) = 0;
         
     };
     
@@ -4473,8 +4094,7 @@ EXTERN_C const IID IID_IFrequencyMap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFrequencyMap * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4489,48 +4109,37 @@ EXTERN_C const IID IID_IFrequencyMap;
         DECLSPEC_XFGVIRT(IFrequencyMap, get_FrequencyMapping)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_FrequencyMapping )( 
             __RPC__in IFrequencyMap * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *ulCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *ulCount)  ULONG **ppulList);
+            /* [out] */ __RPC__out ULONG *ulCount,
+            /* [size_is][size_is][out] */ __RPC__out_ecount_full(1) ULONG **ppulList);
         
         DECLSPEC_XFGVIRT(IFrequencyMap, put_FrequencyMapping)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *put_FrequencyMapping )( 
             __RPC__in IFrequencyMap * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  ULONG pList[  ]);
+            /* [in] */ ULONG ulCount,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) ULONG pList[  ]);
         
         DECLSPEC_XFGVIRT(IFrequencyMap, get_CountryCode)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_CountryCode )( 
             __RPC__in IFrequencyMap * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulCountryCode);
+            /* [out] */ __RPC__out ULONG *pulCountryCode);
         
         DECLSPEC_XFGVIRT(IFrequencyMap, put_CountryCode)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *put_CountryCode )( 
             __RPC__in IFrequencyMap * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCountryCode);
+            /* [in] */ ULONG ulCountryCode);
         
         DECLSPEC_XFGVIRT(IFrequencyMap, get_DefaultFrequencyMapping)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultFrequencyMapping )( 
             __RPC__in IFrequencyMap * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCountryCode,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *pulCount)  ULONG **ppulList);
+            /* [in] */ ULONG ulCountryCode,
+            /* [out] */ __RPC__out ULONG *pulCount,
+            /* [size_is][size_is][out] */ __RPC__out_ecount_full(1) ULONG **ppulList);
         
         DECLSPEC_XFGVIRT(IFrequencyMap, get_CountryCodeList)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_CountryCodeList )( 
             __RPC__in IFrequencyMap * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(1 *pulCount)  ULONG **ppulList);
+            /* [out] */ __RPC__out ULONG *pulCount,
+            /* [size_is][size_is][out] */ __RPC__out_ecount_full(1) ULONG **ppulList);
         
         END_INTERFACE
     } IFrequencyMapVtbl;
@@ -4600,10 +4209,8 @@ EXTERN_C const IID IID_IBDA_EasMessage;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_EasMessage( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulEventID,
-            /* [annotation][out][in] */ 
-            _Inout_  IUnknown **ppEASObject) = 0;
+            /* [in] */ ULONG ulEventID,
+            /* [out][in] */ __RPC__deref_inout_opt IUnknown **ppEASObject) = 0;
         
     };
     
@@ -4617,8 +4224,7 @@ EXTERN_C const IID IID_IBDA_EasMessage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_EasMessage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4633,10 +4239,8 @@ EXTERN_C const IID IID_IBDA_EasMessage;
         DECLSPEC_XFGVIRT(IBDA_EasMessage, get_EasMessage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_EasMessage )( 
             __RPC__in IBDA_EasMessage * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulEventID,
-            /* [annotation][out][in] */ 
-            _Inout_  IUnknown **ppEASObject);
+            /* [in] */ ULONG ulEventID,
+            /* [out][in] */ __RPC__deref_inout_opt IUnknown **ppEASObject);
         
         END_INTERFACE
     } IBDA_EasMessageVtbl;
@@ -4700,8 +4304,7 @@ EXTERN_C const IID IID_IBDA_TransportStreamInfo;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_PatTableTickCount( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pPatTickCount) = 0;
+            /* [out] */ __RPC__out ULONG *pPatTickCount) = 0;
         
     };
     
@@ -4715,8 +4318,7 @@ EXTERN_C const IID IID_IBDA_TransportStreamInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_TransportStreamInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4731,8 +4333,7 @@ EXTERN_C const IID IID_IBDA_TransportStreamInfo;
         DECLSPEC_XFGVIRT(IBDA_TransportStreamInfo, get_PatTableTickCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_PatTableTickCount )( 
             __RPC__in IBDA_TransportStreamInfo * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pPatTickCount);
+            /* [out] */ __RPC__out ULONG *pPatTickCount);
         
         END_INTERFACE
     } IBDA_TransportStreamInfoVtbl;
@@ -4796,71 +4397,48 @@ EXTERN_C const IID IID_IBDA_ConditionalAccess;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_SmartCardStatus( 
-            /* [annotation][out] */ 
-            _Out_  SmartCardStatusType *pCardStatus,
-            /* [annotation][out] */ 
-            _Out_  SmartCardAssociationType *pCardAssociation,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrCardError,
-            /* [annotation][out] */ 
-            _Out_  VARIANT_BOOL *pfOOBLocked) = 0;
+            /* [out] */ __RPC__out SmartCardStatusType *pCardStatus,
+            /* [out] */ __RPC__out SmartCardAssociationType *pCardAssociation,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrCardError,
+            /* [out] */ __RPC__out VARIANT_BOOL *pfOOBLocked) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_SmartCardInfo( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrCardName,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrCardManufacturer,
-            /* [annotation][out] */ 
-            _Out_  VARIANT_BOOL *pfDaylightSavings,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbyRatingRegion,
-            /* [annotation][out] */ 
-            _Out_  LONG *plTimeZoneOffsetMinutes,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrLanguage,
-            /* [annotation][out] */ 
-            _Out_  EALocationCodeType *pEALocationCode) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrCardName,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrCardManufacturer,
+            /* [out] */ __RPC__out VARIANT_BOOL *pfDaylightSavings,
+            /* [out] */ __RPC__out BYTE *pbyRatingRegion,
+            /* [out] */ __RPC__out LONG *plTimeZoneOffsetMinutes,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrLanguage,
+            /* [out] */ __RPC__out EALocationCodeType *pEALocationCode) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_SmartCardApplications( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcApplications,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcApplicationsMax,
+            /* [out][in] */ __RPC__inout ULONG *pulcApplications,
+            /* [in] */ ULONG ulcApplicationsMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcApplicationsMax) SmartCardApplication rgApplications[  ]) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE get_Entitlement( 
-            /* [annotation][in] */ 
-            _In_  USHORT usVirtualChannel,
-            /* [annotation][out] */ 
-            _Out_  EntitlementType *pEntitlement) = 0;
+            /* [in] */ USHORT usVirtualChannel,
+            /* [out] */ __RPC__out EntitlementType *pEntitlement) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE TuneByChannel( 
-            /* [annotation][in] */ 
-            _In_  USHORT usVirtualChannel) = 0;
+            /* [in] */ USHORT usVirtualChannel) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetProgram( 
-            /* [annotation][in] */ 
-            _In_  USHORT usProgramNumber) = 0;
+            /* [in] */ USHORT usProgramNumber) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AddProgram( 
-            /* [annotation][in] */ 
-            _In_  USHORT usProgramNumber) = 0;
+            /* [in] */ USHORT usProgramNumber) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RemoveProgram( 
-            /* [annotation][in] */ 
-            _In_  USHORT usProgramNumber) = 0;
+            /* [in] */ USHORT usProgramNumber) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetModuleUI( 
-            /* [annotation][in] */ 
-            _In_  BYTE byDialogNumber,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrURL) = 0;
+            /* [in] */ BYTE byDialogNumber,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrURL) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE InformUIClosed( 
-            /* [annotation][in] */ 
-            _In_  BYTE byDialogNumber,
-            /* [annotation][in] */ 
-            _In_  UICloseReasonType CloseReason) = 0;
+            /* [in] */ BYTE byDialogNumber,
+            /* [in] */ UICloseReasonType CloseReason) = 0;
         
     };
     
@@ -4874,8 +4452,7 @@ EXTERN_C const IID IID_IBDA_ConditionalAccess;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4890,89 +4467,66 @@ EXTERN_C const IID IID_IBDA_ConditionalAccess;
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccess, get_SmartCardStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_SmartCardStatus )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][out] */ 
-            _Out_  SmartCardStatusType *pCardStatus,
-            /* [annotation][out] */ 
-            _Out_  SmartCardAssociationType *pCardAssociation,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrCardError,
-            /* [annotation][out] */ 
-            _Out_  VARIANT_BOOL *pfOOBLocked);
+            /* [out] */ __RPC__out SmartCardStatusType *pCardStatus,
+            /* [out] */ __RPC__out SmartCardAssociationType *pCardAssociation,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrCardError,
+            /* [out] */ __RPC__out VARIANT_BOOL *pfOOBLocked);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccess, get_SmartCardInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_SmartCardInfo )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrCardName,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrCardManufacturer,
-            /* [annotation][out] */ 
-            _Out_  VARIANT_BOOL *pfDaylightSavings,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbyRatingRegion,
-            /* [annotation][out] */ 
-            _Out_  LONG *plTimeZoneOffsetMinutes,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrLanguage,
-            /* [annotation][out] */ 
-            _Out_  EALocationCodeType *pEALocationCode);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrCardName,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrCardManufacturer,
+            /* [out] */ __RPC__out VARIANT_BOOL *pfDaylightSavings,
+            /* [out] */ __RPC__out BYTE *pbyRatingRegion,
+            /* [out] */ __RPC__out LONG *plTimeZoneOffsetMinutes,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrLanguage,
+            /* [out] */ __RPC__out EALocationCodeType *pEALocationCode);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccess, get_SmartCardApplications)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_SmartCardApplications )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcApplications,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcApplicationsMax,
+            /* [out][in] */ __RPC__inout ULONG *pulcApplications,
+            /* [in] */ ULONG ulcApplicationsMax,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(ulcApplicationsMax) SmartCardApplication rgApplications[  ]);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccess, get_Entitlement)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_Entitlement )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][in] */ 
-            _In_  USHORT usVirtualChannel,
-            /* [annotation][out] */ 
-            _Out_  EntitlementType *pEntitlement);
+            /* [in] */ USHORT usVirtualChannel,
+            /* [out] */ __RPC__out EntitlementType *pEntitlement);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccess, TuneByChannel)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TuneByChannel )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][in] */ 
-            _In_  USHORT usVirtualChannel);
+            /* [in] */ USHORT usVirtualChannel);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccess, SetProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetProgram )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][in] */ 
-            _In_  USHORT usProgramNumber);
+            /* [in] */ USHORT usProgramNumber);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccess, AddProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddProgram )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][in] */ 
-            _In_  USHORT usProgramNumber);
+            /* [in] */ USHORT usProgramNumber);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccess, RemoveProgram)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveProgram )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][in] */ 
-            _In_  USHORT usProgramNumber);
+            /* [in] */ USHORT usProgramNumber);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccess, GetModuleUI)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetModuleUI )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][in] */ 
-            _In_  BYTE byDialogNumber,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrURL);
+            /* [in] */ BYTE byDialogNumber,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrURL);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccess, InformUIClosed)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *InformUIClosed )( 
             __RPC__in IBDA_ConditionalAccess * This,
-            /* [annotation][in] */ 
-            _In_  BYTE byDialogNumber,
-            /* [annotation][in] */ 
-            _In_  UICloseReasonType CloseReason);
+            /* [in] */ BYTE byDialogNumber,
+            /* [in] */ UICloseReasonType CloseReason);
         
         END_INTERFACE
     } IBDA_ConditionalAccessVtbl;
@@ -5074,8 +4628,7 @@ EXTERN_C const IID IID_IBDA_DiagnosticProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_DiagnosticProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5090,20 +4643,15 @@ EXTERN_C const IID IID_IBDA_DiagnosticProperties;
         DECLSPEC_XFGVIRT(IPropertyBag, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             IBDA_DiagnosticProperties * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pszPropName,
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *pVar,
-            /* [annotation][unique][in] */ 
-            _In_  IErrorLog *pErrorLog);
+            /* [in] */ LPCOLESTR pszPropName,
+            /* [out][in] */ VARIANT *pVar,
+            /* [unique][in] */ IErrorLog *pErrorLog);
         
         DECLSPEC_XFGVIRT(IPropertyBag, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in IBDA_DiagnosticProperties * This,
-            /* [annotation][in] */ 
-            _In_  LPCOLESTR pszPropName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pVar);
+            /* [in] */ __RPC__in LPCOLESTR pszPropName,
+            /* [in] */ __RPC__in VARIANT *pVar);
         
         END_INTERFACE
     } IBDA_DiagnosticPropertiesVtbl;
@@ -5171,10 +4719,8 @@ EXTERN_C const IID IID_IBDA_DRM;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDRMPairingStatus( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatus,
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phError) = 0;
+            /* [out] */ __RPC__out DWORD *pdwStatus,
+            /* [out] */ __RPC__out HRESULT *phError) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PerformDRMPairing( 
             BOOL fSync) = 0;
@@ -5191,8 +4737,7 @@ EXTERN_C const IID IID_IBDA_DRM;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_DRM * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5207,10 +4752,8 @@ EXTERN_C const IID IID_IBDA_DRM;
         DECLSPEC_XFGVIRT(IBDA_DRM, GetDRMPairingStatus)
         HRESULT ( STDMETHODCALLTYPE *GetDRMPairingStatus )( 
             __RPC__in IBDA_DRM * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatus,
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phError);
+            /* [out] */ __RPC__out DWORD *pdwStatus,
+            /* [out] */ __RPC__out HRESULT *phError);
         
         DECLSPEC_XFGVIRT(IBDA_DRM, PerformDRMPairing)
         HRESULT ( STDMETHODCALLTYPE *PerformDRMPairing )( 
@@ -5282,30 +4825,20 @@ EXTERN_C const IID IID_IBDA_NameValueService;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetValueNameByIndex( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulIndex,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ ULONG ulIndex,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetValue( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrValue) = 0;
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrValue) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetValue( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogRequest,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValue,
-            /* [annotation][in] */ 
-            _In_  ULONG ulReserved) = 0;
+            /* [in] */ ULONG ulDialogRequest,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrValue,
+            /* [in] */ ULONG ulReserved) = 0;
         
     };
     
@@ -5319,8 +4852,7 @@ EXTERN_C const IID IID_IBDA_NameValueService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_NameValueService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5335,34 +4867,24 @@ EXTERN_C const IID IID_IBDA_NameValueService;
         DECLSPEC_XFGVIRT(IBDA_NameValueService, GetValueNameByIndex)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetValueNameByIndex )( 
             __RPC__in IBDA_NameValueService * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulIndex,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ ULONG ulIndex,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IBDA_NameValueService, GetValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IBDA_NameValueService * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrValue);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrValue);
         
         DECLSPEC_XFGVIRT(IBDA_NameValueService, SetValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IBDA_NameValueService * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogRequest,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValue,
-            /* [annotation][in] */ 
-            _In_  ULONG ulReserved);
+            /* [in] */ ULONG ulDialogRequest,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrValue,
+            /* [in] */ ULONG ulReserved);
         
         END_INTERFACE
     } IBDA_NameValueServiceVtbl;
@@ -5432,48 +4954,31 @@ EXTERN_C const IID IID_IBDA_ConditionalAccessEx;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CheckEntitlementToken( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogRequest,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][in] */ 
-            _In_  BDA_CONDITIONALACCESS_REQUESTTYPE RequestType,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbEntitlementTokenLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbEntitlementTokenLen)  BYTE *pbEntitlementToken,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulDescrambleStatus) = 0;
+            /* [in] */ ULONG ulDialogRequest,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [in] */ BDA_CONDITIONALACCESS_REQUESTTYPE RequestType,
+            /* [in] */ ULONG ulcbEntitlementTokenLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbEntitlementTokenLen) BYTE *pbEntitlementToken,
+            /* [out] */ __RPC__out ULONG *pulDescrambleStatus) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetCaptureToken( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbCaptureTokenLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbCaptureTokenLen)  BYTE *pbCaptureToken) = 0;
+            /* [in] */ ULONG ulcbCaptureTokenLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbCaptureTokenLen) BYTE *pbCaptureToken) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE OpenBroadcastMmi( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogRequest,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][in] */ 
-            _In_  ULONG EventId) = 0;
+            /* [in] */ ULONG ulDialogRequest,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [in] */ ULONG EventId) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CloseMmiDialog( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogRequest,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogNumber,
-            /* [annotation][in] */ 
-            _In_  BDA_CONDITIONALACCESS_MMICLOSEREASON ReasonCode,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulSessionResult) = 0;
+            /* [in] */ ULONG ulDialogRequest,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [in] */ ULONG ulDialogNumber,
+            /* [in] */ BDA_CONDITIONALACCESS_MMICLOSEREASON ReasonCode,
+            /* [out] */ __RPC__out ULONG *pulSessionResult) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CreateDialogRequestNumber( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulDialogRequestNumber) = 0;
+            /* [out] */ __RPC__out ULONG *pulDialogRequestNumber) = 0;
         
     };
     
@@ -5487,8 +4992,7 @@ EXTERN_C const IID IID_IBDA_ConditionalAccessEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_ConditionalAccessEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5503,56 +5007,39 @@ EXTERN_C const IID IID_IBDA_ConditionalAccessEx;
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccessEx, CheckEntitlementToken)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CheckEntitlementToken )( 
             __RPC__in IBDA_ConditionalAccessEx * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogRequest,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][in] */ 
-            _In_  BDA_CONDITIONALACCESS_REQUESTTYPE RequestType,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbEntitlementTokenLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbEntitlementTokenLen)  BYTE *pbEntitlementToken,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulDescrambleStatus);
+            /* [in] */ ULONG ulDialogRequest,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [in] */ BDA_CONDITIONALACCESS_REQUESTTYPE RequestType,
+            /* [in] */ ULONG ulcbEntitlementTokenLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbEntitlementTokenLen) BYTE *pbEntitlementToken,
+            /* [out] */ __RPC__out ULONG *pulDescrambleStatus);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccessEx, SetCaptureToken)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetCaptureToken )( 
             __RPC__in IBDA_ConditionalAccessEx * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbCaptureTokenLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbCaptureTokenLen)  BYTE *pbCaptureToken);
+            /* [in] */ ULONG ulcbCaptureTokenLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbCaptureTokenLen) BYTE *pbCaptureToken);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccessEx, OpenBroadcastMmi)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OpenBroadcastMmi )( 
             __RPC__in IBDA_ConditionalAccessEx * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogRequest,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][in] */ 
-            _In_  ULONG EventId);
+            /* [in] */ ULONG ulDialogRequest,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [in] */ ULONG EventId);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccessEx, CloseMmiDialog)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CloseMmiDialog )( 
             __RPC__in IBDA_ConditionalAccessEx * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogRequest,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogNumber,
-            /* [annotation][in] */ 
-            _In_  BDA_CONDITIONALACCESS_MMICLOSEREASON ReasonCode,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulSessionResult);
+            /* [in] */ ULONG ulDialogRequest,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [in] */ ULONG ulDialogNumber,
+            /* [in] */ BDA_CONDITIONALACCESS_MMICLOSEREASON ReasonCode,
+            /* [out] */ __RPC__out ULONG *pulSessionResult);
         
         DECLSPEC_XFGVIRT(IBDA_ConditionalAccessEx, CreateDialogRequestNumber)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateDialogRequestNumber )( 
             __RPC__in IBDA_ConditionalAccessEx * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulDialogRequestNumber);
+            /* [out] */ __RPC__out ULONG *pulDialogRequestNumber);
         
         END_INTERFACE
     } IBDA_ConditionalAccessExVtbl;
@@ -5628,12 +5115,9 @@ EXTERN_C const IID IID_IBDA_ISDBConditionalAccess;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetIsdbCasRequest( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulRequestId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbRequestBufferLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbRequestBufferLen)  BYTE *pbRequestBuffer) = 0;
+            /* [in] */ ULONG ulRequestId,
+            /* [in] */ ULONG ulcbRequestBufferLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbRequestBufferLen) BYTE *pbRequestBuffer) = 0;
         
     };
     
@@ -5647,8 +5131,7 @@ EXTERN_C const IID IID_IBDA_ISDBConditionalAccess;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_ISDBConditionalAccess * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5663,12 +5146,9 @@ EXTERN_C const IID IID_IBDA_ISDBConditionalAccess;
         DECLSPEC_XFGVIRT(IBDA_ISDBConditionalAccess, SetIsdbCasRequest)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetIsdbCasRequest )( 
             __RPC__in IBDA_ISDBConditionalAccess * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulRequestId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbRequestBufferLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbRequestBufferLen)  BYTE *pbRequestBuffer);
+            /* [in] */ ULONG ulRequestId,
+            /* [in] */ ULONG ulcbRequestBufferLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbRequestBufferLen) BYTE *pbRequestBuffer);
         
         END_INTERFACE
     } IBDA_ISDBConditionalAccessVtbl;
@@ -5732,10 +5212,8 @@ EXTERN_C const IID IID_IBDA_EventingService;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CompleteEvent( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulEventID,
-            /* [annotation][in] */ 
-            _In_  ULONG ulEventResult) = 0;
+            /* [in] */ ULONG ulEventID,
+            /* [in] */ ULONG ulEventResult) = 0;
         
     };
     
@@ -5749,8 +5227,7 @@ EXTERN_C const IID IID_IBDA_EventingService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_EventingService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5765,10 +5242,8 @@ EXTERN_C const IID IID_IBDA_EventingService;
         DECLSPEC_XFGVIRT(IBDA_EventingService, CompleteEvent)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CompleteEvent )( 
             __RPC__in IBDA_EventingService * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulEventID,
-            /* [annotation][in] */ 
-            _In_  ULONG ulEventResult);
+            /* [in] */ ULONG ulEventID,
+            /* [in] */ ULONG ulEventResult);
         
         END_INTERFACE
     } IBDA_EventingServiceVtbl;
@@ -5832,22 +5307,15 @@ EXTERN_C const IID IID_IBDA_AUX;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryCapabilities( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwNumAuxInputsBSTR) = 0;
+            /* [out] */ __RPC__out DWORD *pdwNumAuxInputsBSTR) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE EnumCapability( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *dwInputID,
-            /* [annotation][out] */ 
-            _Out_  GUID *pConnectorType,
-            /* [annotation][out] */ 
-            _Out_  DWORD *ConnTypeNum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *NumVideoStds,
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *AnalogStds) = 0;
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ __RPC__out DWORD *dwInputID,
+            /* [out] */ __RPC__out GUID *pConnectorType,
+            /* [out] */ __RPC__out DWORD *ConnTypeNum,
+            /* [out] */ __RPC__out DWORD *NumVideoStds,
+            /* [out] */ __RPC__out ULONGLONG *AnalogStds) = 0;
         
     };
     
@@ -5861,8 +5329,7 @@ EXTERN_C const IID IID_IBDA_AUX;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_AUX * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5877,24 +5344,17 @@ EXTERN_C const IID IID_IBDA_AUX;
         DECLSPEC_XFGVIRT(IBDA_AUX, QueryCapabilities)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryCapabilities )( 
             __RPC__in IBDA_AUX * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwNumAuxInputsBSTR);
+            /* [out] */ __RPC__out DWORD *pdwNumAuxInputsBSTR);
         
         DECLSPEC_XFGVIRT(IBDA_AUX, EnumCapability)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumCapability )( 
             __RPC__in IBDA_AUX * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *dwInputID,
-            /* [annotation][out] */ 
-            _Out_  GUID *pConnectorType,
-            /* [annotation][out] */ 
-            _Out_  DWORD *ConnTypeNum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *NumVideoStds,
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *AnalogStds);
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ __RPC__out DWORD *dwInputID,
+            /* [out] */ __RPC__out GUID *pConnectorType,
+            /* [out] */ __RPC__out DWORD *ConnTypeNum,
+            /* [out] */ __RPC__out DWORD *NumVideoStds,
+            /* [out] */ __RPC__out ULONGLONG *AnalogStds);
         
         END_INTERFACE
     } IBDA_AUXVtbl;
@@ -5965,98 +5425,56 @@ EXTERN_C const IID IID_IBDA_Encoder;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE QueryCapabilities( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *NumAudioFmts,
-            /* [annotation][out] */ 
-            _Out_  DWORD *NumVideoFmts) = 0;
+            /* [out] */ __RPC__out DWORD *NumAudioFmts,
+            /* [out] */ __RPC__out DWORD *NumVideoFmts) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE EnumAudioCapability( 
-            /* [annotation][in] */ 
-            _In_  DWORD FmtIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *MethodID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AlgorithmType,
-            /* [annotation][out] */ 
-            _Out_  DWORD *SamplingRate,
-            /* [annotation][out] */ 
-            _Out_  DWORD *BitDepth,
-            /* [annotation][out] */ 
-            _Out_  DWORD *NumChannels) = 0;
+            /* [in] */ DWORD FmtIndex,
+            /* [out] */ __RPC__out DWORD *MethodID,
+            /* [out] */ __RPC__out DWORD *AlgorithmType,
+            /* [out] */ __RPC__out DWORD *SamplingRate,
+            /* [out] */ __RPC__out DWORD *BitDepth,
+            /* [out] */ __RPC__out DWORD *NumChannels) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE EnumVideoCapability( 
-            /* [annotation][in] */ 
-            _In_  DWORD FmtIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *MethodID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AlgorithmType,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VerticalSize,
-            /* [annotation][out] */ 
-            _Out_  DWORD *HorizontalSize,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AspectRatio,
-            /* [annotation][out] */ 
-            _Out_  DWORD *FrameRateCode,
-            /* [annotation][out] */ 
-            _Out_  DWORD *ProgressiveSequence) = 0;
+            /* [in] */ DWORD FmtIndex,
+            /* [out] */ __RPC__out DWORD *MethodID,
+            /* [out] */ __RPC__out DWORD *AlgorithmType,
+            /* [out] */ __RPC__out DWORD *VerticalSize,
+            /* [out] */ __RPC__out DWORD *HorizontalSize,
+            /* [out] */ __RPC__out DWORD *AspectRatio,
+            /* [out] */ __RPC__out DWORD *FrameRateCode,
+            /* [out] */ __RPC__out DWORD *ProgressiveSequence) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetParameters( 
-            /* [annotation][in] */ 
-            _In_  DWORD AudioBitrateMode,
-            /* [annotation][in] */ 
-            _In_  DWORD AudioBitrate,
-            /* [annotation][in] */ 
-            _In_  DWORD AudioMethodID,
-            /* [annotation][in] */ 
-            _In_  DWORD AudioProgram,
-            /* [annotation][in] */ 
-            _In_  DWORD VideoBitrateMode,
-            /* [annotation][in] */ 
-            _In_  DWORD VideoBitrate,
-            /* [annotation][in] */ 
-            _In_  DWORD VideoMethodID) = 0;
+            /* [in] */ DWORD AudioBitrateMode,
+            /* [in] */ DWORD AudioBitrate,
+            /* [in] */ DWORD AudioMethodID,
+            /* [in] */ DWORD AudioProgram,
+            /* [in] */ DWORD VideoBitrateMode,
+            /* [in] */ DWORD VideoBitrate,
+            /* [in] */ DWORD VideoMethodID) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetState( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioBitrateMax,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioBitrateMin,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioBitrateMode,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioBitrateStepping,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioBitrate,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioMethodID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AvailableAudioPrograms,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioProgram,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoBitrateMax,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoBitrateMin,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoBitrateMode,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoBitrate,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoBitrateStepping,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoMethodID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *SignalSourceID,
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *SignalFormat,
-            /* [annotation][out] */ 
-            _Out_  BOOL *SignalLock,
-            /* [annotation][out] */ 
-            _Out_  LONG *SignalLevel,
-            /* [annotation][out] */ 
-            _Out_  DWORD *SignalToNoiseRatio) = 0;
+            /* [out] */ __RPC__out DWORD *AudioBitrateMax,
+            /* [out] */ __RPC__out DWORD *AudioBitrateMin,
+            /* [out] */ __RPC__out DWORD *AudioBitrateMode,
+            /* [out] */ __RPC__out DWORD *AudioBitrateStepping,
+            /* [out] */ __RPC__out DWORD *AudioBitrate,
+            /* [out] */ __RPC__out DWORD *AudioMethodID,
+            /* [out] */ __RPC__out DWORD *AvailableAudioPrograms,
+            /* [out] */ __RPC__out DWORD *AudioProgram,
+            /* [out] */ __RPC__out DWORD *VideoBitrateMax,
+            /* [out] */ __RPC__out DWORD *VideoBitrateMin,
+            /* [out] */ __RPC__out DWORD *VideoBitrateMode,
+            /* [out] */ __RPC__out DWORD *VideoBitrate,
+            /* [out] */ __RPC__out DWORD *VideoBitrateStepping,
+            /* [out] */ __RPC__out DWORD *VideoMethodID,
+            /* [out] */ __RPC__out DWORD *SignalSourceID,
+            /* [out] */ __RPC__out ULONGLONG *SignalFormat,
+            /* [out] */ __RPC__out BOOL *SignalLock,
+            /* [out] */ __RPC__out LONG *SignalLevel,
+            /* [out] */ __RPC__out DWORD *SignalToNoiseRatio) = 0;
         
     };
     
@@ -6070,8 +5488,7 @@ EXTERN_C const IID IID_IBDA_Encoder;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_Encoder * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6086,106 +5503,64 @@ EXTERN_C const IID IID_IBDA_Encoder;
         DECLSPEC_XFGVIRT(IBDA_Encoder, QueryCapabilities)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryCapabilities )( 
             __RPC__in IBDA_Encoder * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *NumAudioFmts,
-            /* [annotation][out] */ 
-            _Out_  DWORD *NumVideoFmts);
+            /* [out] */ __RPC__out DWORD *NumAudioFmts,
+            /* [out] */ __RPC__out DWORD *NumVideoFmts);
         
         DECLSPEC_XFGVIRT(IBDA_Encoder, EnumAudioCapability)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumAudioCapability )( 
             __RPC__in IBDA_Encoder * This,
-            /* [annotation][in] */ 
-            _In_  DWORD FmtIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *MethodID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AlgorithmType,
-            /* [annotation][out] */ 
-            _Out_  DWORD *SamplingRate,
-            /* [annotation][out] */ 
-            _Out_  DWORD *BitDepth,
-            /* [annotation][out] */ 
-            _Out_  DWORD *NumChannels);
+            /* [in] */ DWORD FmtIndex,
+            /* [out] */ __RPC__out DWORD *MethodID,
+            /* [out] */ __RPC__out DWORD *AlgorithmType,
+            /* [out] */ __RPC__out DWORD *SamplingRate,
+            /* [out] */ __RPC__out DWORD *BitDepth,
+            /* [out] */ __RPC__out DWORD *NumChannels);
         
         DECLSPEC_XFGVIRT(IBDA_Encoder, EnumVideoCapability)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumVideoCapability )( 
             __RPC__in IBDA_Encoder * This,
-            /* [annotation][in] */ 
-            _In_  DWORD FmtIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *MethodID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AlgorithmType,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VerticalSize,
-            /* [annotation][out] */ 
-            _Out_  DWORD *HorizontalSize,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AspectRatio,
-            /* [annotation][out] */ 
-            _Out_  DWORD *FrameRateCode,
-            /* [annotation][out] */ 
-            _Out_  DWORD *ProgressiveSequence);
+            /* [in] */ DWORD FmtIndex,
+            /* [out] */ __RPC__out DWORD *MethodID,
+            /* [out] */ __RPC__out DWORD *AlgorithmType,
+            /* [out] */ __RPC__out DWORD *VerticalSize,
+            /* [out] */ __RPC__out DWORD *HorizontalSize,
+            /* [out] */ __RPC__out DWORD *AspectRatio,
+            /* [out] */ __RPC__out DWORD *FrameRateCode,
+            /* [out] */ __RPC__out DWORD *ProgressiveSequence);
         
         DECLSPEC_XFGVIRT(IBDA_Encoder, SetParameters)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetParameters )( 
             __RPC__in IBDA_Encoder * This,
-            /* [annotation][in] */ 
-            _In_  DWORD AudioBitrateMode,
-            /* [annotation][in] */ 
-            _In_  DWORD AudioBitrate,
-            /* [annotation][in] */ 
-            _In_  DWORD AudioMethodID,
-            /* [annotation][in] */ 
-            _In_  DWORD AudioProgram,
-            /* [annotation][in] */ 
-            _In_  DWORD VideoBitrateMode,
-            /* [annotation][in] */ 
-            _In_  DWORD VideoBitrate,
-            /* [annotation][in] */ 
-            _In_  DWORD VideoMethodID);
+            /* [in] */ DWORD AudioBitrateMode,
+            /* [in] */ DWORD AudioBitrate,
+            /* [in] */ DWORD AudioMethodID,
+            /* [in] */ DWORD AudioProgram,
+            /* [in] */ DWORD VideoBitrateMode,
+            /* [in] */ DWORD VideoBitrate,
+            /* [in] */ DWORD VideoMethodID);
         
         DECLSPEC_XFGVIRT(IBDA_Encoder, GetState)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetState )( 
             __RPC__in IBDA_Encoder * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioBitrateMax,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioBitrateMin,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioBitrateMode,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioBitrateStepping,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioBitrate,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioMethodID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AvailableAudioPrograms,
-            /* [annotation][out] */ 
-            _Out_  DWORD *AudioProgram,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoBitrateMax,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoBitrateMin,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoBitrateMode,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoBitrate,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoBitrateStepping,
-            /* [annotation][out] */ 
-            _Out_  DWORD *VideoMethodID,
-            /* [annotation][out] */ 
-            _Out_  DWORD *SignalSourceID,
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *SignalFormat,
-            /* [annotation][out] */ 
-            _Out_  BOOL *SignalLock,
-            /* [annotation][out] */ 
-            _Out_  LONG *SignalLevel,
-            /* [annotation][out] */ 
-            _Out_  DWORD *SignalToNoiseRatio);
+            /* [out] */ __RPC__out DWORD *AudioBitrateMax,
+            /* [out] */ __RPC__out DWORD *AudioBitrateMin,
+            /* [out] */ __RPC__out DWORD *AudioBitrateMode,
+            /* [out] */ __RPC__out DWORD *AudioBitrateStepping,
+            /* [out] */ __RPC__out DWORD *AudioBitrate,
+            /* [out] */ __RPC__out DWORD *AudioMethodID,
+            /* [out] */ __RPC__out DWORD *AvailableAudioPrograms,
+            /* [out] */ __RPC__out DWORD *AudioProgram,
+            /* [out] */ __RPC__out DWORD *VideoBitrateMax,
+            /* [out] */ __RPC__out DWORD *VideoBitrateMin,
+            /* [out] */ __RPC__out DWORD *VideoBitrateMode,
+            /* [out] */ __RPC__out DWORD *VideoBitrate,
+            /* [out] */ __RPC__out DWORD *VideoBitrateStepping,
+            /* [out] */ __RPC__out DWORD *VideoMethodID,
+            /* [out] */ __RPC__out DWORD *SignalSourceID,
+            /* [out] */ __RPC__out ULONGLONG *SignalFormat,
+            /* [out] */ __RPC__out BOOL *SignalLock,
+            /* [out] */ __RPC__out LONG *SignalLevel,
+            /* [out] */ __RPC__out DWORD *SignalToNoiseRatio);
         
         END_INTERFACE
     } IBDA_EncoderVtbl;
@@ -6275,54 +5650,36 @@ EXTERN_C const IID IID_IBDA_FDC;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *CurrentBitrate,
-            /* [annotation][out] */ 
-            _Out_  BOOL *CarrierLock,
-            /* [annotation][out] */ 
-            _Out_  DWORD *CurrentFrequency,
-            /* [annotation][out] */ 
-            _Out_  BOOL *CurrentSpectrumInversion,
-            /* [annotation][out] */ 
-            _Out_  BSTR *CurrentPIDList,
-            /* [annotation][out] */ 
-            _Out_  BSTR *CurrentTIDList,
-            /* [annotation][out] */ 
-            _Out_  BOOL *Overflow) = 0;
+            /* [out] */ __RPC__out DWORD *CurrentBitrate,
+            /* [out] */ __RPC__out BOOL *CarrierLock,
+            /* [out] */ __RPC__out DWORD *CurrentFrequency,
+            /* [out] */ __RPC__out BOOL *CurrentSpectrumInversion,
+            /* [out] */ __RPC__deref_out_opt BSTR *CurrentPIDList,
+            /* [out] */ __RPC__deref_out_opt BSTR *CurrentTIDList,
+            /* [out] */ __RPC__out BOOL *Overflow) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RequestTables( 
-            /* [annotation][in] */ 
-            _In_  BSTR TableIDs) = 0;
+            /* [in] */ __RPC__in BSTR TableIDs) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AddPid( 
-            /* [annotation][in] */ 
-            _In_  BSTR PidsToAdd,
-            /* [annotation][out] */ 
-            _Out_  DWORD *RemainingFilterEntries) = 0;
+            /* [in] */ __RPC__in BSTR PidsToAdd,
+            /* [out] */ __RPC__out DWORD *RemainingFilterEntries) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RemovePid( 
-            /* [annotation][in] */ 
-            _In_  BSTR PidsToRemove) = 0;
+            /* [in] */ __RPC__in BSTR PidsToRemove) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AddTid( 
-            /* [annotation][in] */ 
-            _In_  BSTR TidsToAdd,
-            /* [annotation][out] */ 
-            _Out_  BSTR *CurrentTidList) = 0;
+            /* [in] */ __RPC__in BSTR TidsToAdd,
+            /* [out] */ __RPC__deref_out_opt BSTR *CurrentTidList) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RemoveTid( 
-            /* [annotation][in] */ 
-            _In_  BSTR TidsToRemove) = 0;
+            /* [in] */ __RPC__in BSTR TidsToRemove) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTableSection( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *Pid,
-            /* [annotation][in] */ 
-            _In_  DWORD MaxBufferSize,
-            /* [annotation][out] */ 
-            _Out_  DWORD *ActualSize,
-            /* [annotation][out] */ 
-            _Out_  BYTE *SecBuffer) = 0;
+            /* [out] */ __RPC__out DWORD *Pid,
+            /* [in] */ DWORD MaxBufferSize,
+            /* [out] */ __RPC__out DWORD *ActualSize,
+            /* [out] */ __RPC__out BYTE *SecBuffer) = 0;
         
     };
     
@@ -6336,8 +5693,7 @@ EXTERN_C const IID IID_IBDA_FDC;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_FDC * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6352,66 +5708,48 @@ EXTERN_C const IID IID_IBDA_FDC;
         DECLSPEC_XFGVIRT(IBDA_FDC, GetStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IBDA_FDC * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *CurrentBitrate,
-            /* [annotation][out] */ 
-            _Out_  BOOL *CarrierLock,
-            /* [annotation][out] */ 
-            _Out_  DWORD *CurrentFrequency,
-            /* [annotation][out] */ 
-            _Out_  BOOL *CurrentSpectrumInversion,
-            /* [annotation][out] */ 
-            _Out_  BSTR *CurrentPIDList,
-            /* [annotation][out] */ 
-            _Out_  BSTR *CurrentTIDList,
-            /* [annotation][out] */ 
-            _Out_  BOOL *Overflow);
+            /* [out] */ __RPC__out DWORD *CurrentBitrate,
+            /* [out] */ __RPC__out BOOL *CarrierLock,
+            /* [out] */ __RPC__out DWORD *CurrentFrequency,
+            /* [out] */ __RPC__out BOOL *CurrentSpectrumInversion,
+            /* [out] */ __RPC__deref_out_opt BSTR *CurrentPIDList,
+            /* [out] */ __RPC__deref_out_opt BSTR *CurrentTIDList,
+            /* [out] */ __RPC__out BOOL *Overflow);
         
         DECLSPEC_XFGVIRT(IBDA_FDC, RequestTables)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RequestTables )( 
             __RPC__in IBDA_FDC * This,
-            /* [annotation][in] */ 
-            _In_  BSTR TableIDs);
+            /* [in] */ __RPC__in BSTR TableIDs);
         
         DECLSPEC_XFGVIRT(IBDA_FDC, AddPid)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddPid )( 
             __RPC__in IBDA_FDC * This,
-            /* [annotation][in] */ 
-            _In_  BSTR PidsToAdd,
-            /* [annotation][out] */ 
-            _Out_  DWORD *RemainingFilterEntries);
+            /* [in] */ __RPC__in BSTR PidsToAdd,
+            /* [out] */ __RPC__out DWORD *RemainingFilterEntries);
         
         DECLSPEC_XFGVIRT(IBDA_FDC, RemovePid)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemovePid )( 
             __RPC__in IBDA_FDC * This,
-            /* [annotation][in] */ 
-            _In_  BSTR PidsToRemove);
+            /* [in] */ __RPC__in BSTR PidsToRemove);
         
         DECLSPEC_XFGVIRT(IBDA_FDC, AddTid)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddTid )( 
             __RPC__in IBDA_FDC * This,
-            /* [annotation][in] */ 
-            _In_  BSTR TidsToAdd,
-            /* [annotation][out] */ 
-            _Out_  BSTR *CurrentTidList);
+            /* [in] */ __RPC__in BSTR TidsToAdd,
+            /* [out] */ __RPC__deref_out_opt BSTR *CurrentTidList);
         
         DECLSPEC_XFGVIRT(IBDA_FDC, RemoveTid)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveTid )( 
             __RPC__in IBDA_FDC * This,
-            /* [annotation][in] */ 
-            _In_  BSTR TidsToRemove);
+            /* [in] */ __RPC__in BSTR TidsToRemove);
         
         DECLSPEC_XFGVIRT(IBDA_FDC, GetTableSection)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTableSection )( 
             __RPC__in IBDA_FDC * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *Pid,
-            /* [annotation][in] */ 
-            _In_  DWORD MaxBufferSize,
-            /* [annotation][out] */ 
-            _Out_  DWORD *ActualSize,
-            /* [annotation][out] */ 
-            _Out_  BYTE *SecBuffer);
+            /* [out] */ __RPC__out DWORD *Pid,
+            /* [in] */ DWORD MaxBufferSize,
+            /* [out] */ __RPC__out DWORD *ActualSize,
+            /* [out] */ __RPC__out BYTE *SecBuffer);
         
         END_INTERFACE
     } IBDA_FDCVtbl;
@@ -6484,36 +5822,26 @@ EXTERN_C const IID IID_IBDA_GuideDataDeliveryService;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetGuideDataType( 
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidDataType) = 0;
+            /* [out] */ __RPC__out GUID *pguidDataType) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetGuideData( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbBufferLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuffer,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulGuideDataPercentageProgress) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulcbBufferLen,
+            /* [out] */ __RPC__out BYTE *pbBuffer,
+            /* [out] */ __RPC__out ULONG *pulGuideDataPercentageProgress) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RequestGuideDataUpdate( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTuneXmlFromServiceIdx( 
-            /* [annotation][in] */ 
-            _In_  ULONG64 ul64ServiceIdx,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrTuneXml) = 0;
+            /* [in] */ ULONG64 ul64ServiceIdx,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrTuneXml) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetServices( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbBufferLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuffer) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulcbBufferLen,
+            /* [out] */ __RPC__out BYTE *pbBuffer) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetServiceInfoFromTuneXml( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTuneXml,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrServiceDescription) = 0;
+            /* [in] */ __RPC__in BSTR bstrTuneXml,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrServiceDescription) = 0;
         
     };
     
@@ -6527,8 +5855,7 @@ EXTERN_C const IID IID_IBDA_GuideDataDeliveryService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_GuideDataDeliveryService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6543,18 +5870,14 @@ EXTERN_C const IID IID_IBDA_GuideDataDeliveryService;
         DECLSPEC_XFGVIRT(IBDA_GuideDataDeliveryService, GetGuideDataType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetGuideDataType )( 
             __RPC__in IBDA_GuideDataDeliveryService * This,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidDataType);
+            /* [out] */ __RPC__out GUID *pguidDataType);
         
         DECLSPEC_XFGVIRT(IBDA_GuideDataDeliveryService, GetGuideData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetGuideData )( 
             __RPC__in IBDA_GuideDataDeliveryService * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbBufferLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuffer,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulGuideDataPercentageProgress);
+            /* [out][in] */ __RPC__inout ULONG *pulcbBufferLen,
+            /* [out] */ __RPC__out BYTE *pbBuffer,
+            /* [out] */ __RPC__out ULONG *pulGuideDataPercentageProgress);
         
         DECLSPEC_XFGVIRT(IBDA_GuideDataDeliveryService, RequestGuideDataUpdate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RequestGuideDataUpdate )( 
@@ -6563,26 +5886,20 @@ EXTERN_C const IID IID_IBDA_GuideDataDeliveryService;
         DECLSPEC_XFGVIRT(IBDA_GuideDataDeliveryService, GetTuneXmlFromServiceIdx)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTuneXmlFromServiceIdx )( 
             __RPC__in IBDA_GuideDataDeliveryService * This,
-            /* [annotation][in] */ 
-            _In_  ULONG64 ul64ServiceIdx,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrTuneXml);
+            /* [in] */ ULONG64 ul64ServiceIdx,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrTuneXml);
         
         DECLSPEC_XFGVIRT(IBDA_GuideDataDeliveryService, GetServices)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetServices )( 
             __RPC__in IBDA_GuideDataDeliveryService * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbBufferLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuffer);
+            /* [out][in] */ __RPC__inout ULONG *pulcbBufferLen,
+            /* [out] */ __RPC__out BYTE *pbBuffer);
         
         DECLSPEC_XFGVIRT(IBDA_GuideDataDeliveryService, GetServiceInfoFromTuneXml)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetServiceInfoFromTuneXml )( 
             __RPC__in IBDA_GuideDataDeliveryService * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTuneXml,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrServiceDescription);
+            /* [in] */ __RPC__in BSTR bstrTuneXml,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrServiceDescription);
         
         END_INTERFACE
     } IBDA_GuideDataDeliveryServiceVtbl;
@@ -6663,14 +5980,11 @@ EXTERN_C const IID IID_IBDA_DRMService;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetDRM( 
-            /* [annotation][in] */ 
-            _In_  GUID *puuidNewDrm) = 0;
+            /* [in] */ __RPC__in GUID *puuidNewDrm) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDRMStatus( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDrmUuidList,
-            /* [annotation][out] */ 
-            _Out_  GUID *DrmUuid) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDrmUuidList,
+            /* [out] */ __RPC__out GUID *DrmUuid) = 0;
         
     };
     
@@ -6684,8 +5998,7 @@ EXTERN_C const IID IID_IBDA_DRMService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_DRMService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6700,16 +6013,13 @@ EXTERN_C const IID IID_IBDA_DRMService;
         DECLSPEC_XFGVIRT(IBDA_DRMService, SetDRM)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetDRM )( 
             __RPC__in IBDA_DRMService * This,
-            /* [annotation][in] */ 
-            _In_  GUID *puuidNewDrm);
+            /* [in] */ __RPC__in GUID *puuidNewDrm);
         
         DECLSPEC_XFGVIRT(IBDA_DRMService, GetDRMStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDRMStatus )( 
             __RPC__in IBDA_DRMService * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDrmUuidList,
-            /* [annotation][out] */ 
-            _Out_  GUID *DrmUuid);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDrmUuidList,
+            /* [out] */ __RPC__out GUID *DrmUuid);
         
         END_INTERFACE
     } IBDA_DRMServiceVtbl;
@@ -6776,80 +6086,50 @@ EXTERN_C const IID IID_IBDA_WMDRMSession;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *MaxCaptureToken,
-            /* [annotation][out] */ 
-            _Out_  ULONG *MaxStreamingPid,
-            /* [annotation][out] */ 
-            _Out_  ULONG *MaxLicense,
-            /* [annotation][out] */ 
-            _Out_  ULONG *MinSecurityLevel,
-            /* [annotation][out] */ 
-            _Out_  ULONG *RevInfoSequenceNumber,
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *RevInfoIssuedTime,
-            /* [annotation][out] */ 
-            _Out_  ULONG *RevInfoTTL,
-            /* [annotation][out] */ 
-            _Out_  ULONG *RevListVersion,
-            /* [annotation][out] */ 
-            _Out_  ULONG *ulState) = 0;
+            /* [out] */ __RPC__out ULONG *MaxCaptureToken,
+            /* [out] */ __RPC__out ULONG *MaxStreamingPid,
+            /* [out] */ __RPC__out ULONG *MaxLicense,
+            /* [out] */ __RPC__out ULONG *MinSecurityLevel,
+            /* [out] */ __RPC__out ULONG *RevInfoSequenceNumber,
+            /* [out] */ __RPC__out ULONGLONG *RevInfoIssuedTime,
+            /* [out] */ __RPC__out ULONG *RevInfoTTL,
+            /* [out] */ __RPC__out ULONG *RevListVersion,
+            /* [out] */ __RPC__out ULONG *ulState) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetRevInfo( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulRevInfoLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulRevInfoLen)  BYTE *pbRevInfo) = 0;
+            /* [in] */ ULONG ulRevInfoLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulRevInfoLen) BYTE *pbRevInfo) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetCrl( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCrlLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCrlLen)  BYTE *pbCrlLen) = 0;
+            /* [in] */ ULONG ulCrlLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCrlLen) BYTE *pbCrlLen) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE TransactMessage( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbRequest,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbRequest)  BYTE *pbRequest,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbResponse,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbResponse) = 0;
+            /* [in] */ ULONG ulcbRequest,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbRequest) BYTE *pbRequest,
+            /* [out][in] */ __RPC__inout ULONG *pulcbResponse,
+            /* [out][in] */ __RPC__inout BYTE *pbResponse) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetLicense( 
-            /* [annotation][in] */ 
-            _In_  GUID *uuidKey,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulPackageLen,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbPackage) = 0;
+            /* [in] */ __RPC__in GUID *uuidKey,
+            /* [out][in] */ __RPC__inout ULONG *pulPackageLen,
+            /* [out][in] */ __RPC__inout BYTE *pbPackage) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ReissueLicense( 
-            /* [annotation][in] */ 
-            _In_  GUID *uuidKey) = 0;
+            /* [in] */ __RPC__in GUID *uuidKey) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RenewLicense( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulInXmrLicenseLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulInXmrLicenseLen)  BYTE *pbInXmrLicense,
-            /* [annotation][in] */ 
-            _In_  ULONG ulEntitlementTokenLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulEntitlementTokenLen)  BYTE *pbEntitlementToken,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulDescrambleStatus,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulOutXmrLicenseLen,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbOutXmrLicense) = 0;
+            /* [in] */ ULONG ulInXmrLicenseLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulInXmrLicenseLen) BYTE *pbInXmrLicense,
+            /* [in] */ ULONG ulEntitlementTokenLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulEntitlementTokenLen) BYTE *pbEntitlementToken,
+            /* [out] */ __RPC__out ULONG *pulDescrambleStatus,
+            /* [out][in] */ __RPC__inout ULONG *pulOutXmrLicenseLen,
+            /* [out][in] */ __RPC__inout BYTE *pbOutXmrLicense) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetKeyInfo( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulKeyInfoLen,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbKeyInfo) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulKeyInfoLen,
+            /* [out][in] */ __RPC__inout BYTE *pbKeyInfo) = 0;
         
     };
     
@@ -6863,8 +6143,7 @@ EXTERN_C const IID IID_IBDA_WMDRMSession;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_WMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6879,94 +6158,64 @@ EXTERN_C const IID IID_IBDA_WMDRMSession;
         DECLSPEC_XFGVIRT(IBDA_WMDRMSession, GetStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IBDA_WMDRMSession * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *MaxCaptureToken,
-            /* [annotation][out] */ 
-            _Out_  ULONG *MaxStreamingPid,
-            /* [annotation][out] */ 
-            _Out_  ULONG *MaxLicense,
-            /* [annotation][out] */ 
-            _Out_  ULONG *MinSecurityLevel,
-            /* [annotation][out] */ 
-            _Out_  ULONG *RevInfoSequenceNumber,
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *RevInfoIssuedTime,
-            /* [annotation][out] */ 
-            _Out_  ULONG *RevInfoTTL,
-            /* [annotation][out] */ 
-            _Out_  ULONG *RevListVersion,
-            /* [annotation][out] */ 
-            _Out_  ULONG *ulState);
+            /* [out] */ __RPC__out ULONG *MaxCaptureToken,
+            /* [out] */ __RPC__out ULONG *MaxStreamingPid,
+            /* [out] */ __RPC__out ULONG *MaxLicense,
+            /* [out] */ __RPC__out ULONG *MinSecurityLevel,
+            /* [out] */ __RPC__out ULONG *RevInfoSequenceNumber,
+            /* [out] */ __RPC__out ULONGLONG *RevInfoIssuedTime,
+            /* [out] */ __RPC__out ULONG *RevInfoTTL,
+            /* [out] */ __RPC__out ULONG *RevListVersion,
+            /* [out] */ __RPC__out ULONG *ulState);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMSession, SetRevInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetRevInfo )( 
             __RPC__in IBDA_WMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulRevInfoLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulRevInfoLen)  BYTE *pbRevInfo);
+            /* [in] */ ULONG ulRevInfoLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulRevInfoLen) BYTE *pbRevInfo);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMSession, SetCrl)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetCrl )( 
             __RPC__in IBDA_WMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCrlLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCrlLen)  BYTE *pbCrlLen);
+            /* [in] */ ULONG ulCrlLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCrlLen) BYTE *pbCrlLen);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMSession, TransactMessage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *TransactMessage )( 
             __RPC__in IBDA_WMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulcbRequest,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulcbRequest)  BYTE *pbRequest,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulcbResponse,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbResponse);
+            /* [in] */ ULONG ulcbRequest,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulcbRequest) BYTE *pbRequest,
+            /* [out][in] */ __RPC__inout ULONG *pulcbResponse,
+            /* [out][in] */ __RPC__inout BYTE *pbResponse);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMSession, GetLicense)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLicense )( 
             __RPC__in IBDA_WMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  GUID *uuidKey,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulPackageLen,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbPackage);
+            /* [in] */ __RPC__in GUID *uuidKey,
+            /* [out][in] */ __RPC__inout ULONG *pulPackageLen,
+            /* [out][in] */ __RPC__inout BYTE *pbPackage);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMSession, ReissueLicense)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReissueLicense )( 
             __RPC__in IBDA_WMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  GUID *uuidKey);
+            /* [in] */ __RPC__in GUID *uuidKey);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMSession, RenewLicense)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RenewLicense )( 
             __RPC__in IBDA_WMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInXmrLicenseLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulInXmrLicenseLen)  BYTE *pbInXmrLicense,
-            /* [annotation][in] */ 
-            _In_  ULONG ulEntitlementTokenLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulEntitlementTokenLen)  BYTE *pbEntitlementToken,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulDescrambleStatus,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulOutXmrLicenseLen,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbOutXmrLicense);
+            /* [in] */ ULONG ulInXmrLicenseLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulInXmrLicenseLen) BYTE *pbInXmrLicense,
+            /* [in] */ ULONG ulEntitlementTokenLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulEntitlementTokenLen) BYTE *pbEntitlementToken,
+            /* [out] */ __RPC__out ULONG *pulDescrambleStatus,
+            /* [out][in] */ __RPC__inout ULONG *pulOutXmrLicenseLen,
+            /* [out][in] */ __RPC__inout BYTE *pbOutXmrLicense);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMSession, GetKeyInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetKeyInfo )( 
             __RPC__in IBDA_WMDRMSession * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulKeyInfoLen,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbKeyInfo);
+            /* [out][in] */ __RPC__inout ULONG *pulKeyInfoLen,
+            /* [out][in] */ __RPC__inout BYTE *pbKeyInfo);
         
         END_INTERFACE
     } IBDA_WMDRMSessionVtbl;
@@ -7051,48 +6300,32 @@ EXTERN_C const IID IID_IBDA_WMDRMTuner;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE PurchaseEntitlement( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogRequest,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][in] */ 
-            _In_  ULONG ulPurchaseTokenLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulPurchaseTokenLen)  BYTE *pbPurchaseToken,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulDescrambleStatus,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulCaptureTokenLen,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbCaptureToken) = 0;
+            /* [in] */ ULONG ulDialogRequest,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [in] */ ULONG ulPurchaseTokenLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulPurchaseTokenLen) BYTE *pbPurchaseToken,
+            /* [out] */ __RPC__out ULONG *pulDescrambleStatus,
+            /* [out][in] */ __RPC__inout ULONG *pulCaptureTokenLen,
+            /* [out][in] */ __RPC__inout BYTE *pbCaptureToken) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE CancelCaptureToken( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCaptureTokenLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCaptureTokenLen)  BYTE *pbCaptureToken) = 0;
+            /* [in] */ ULONG ulCaptureTokenLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCaptureTokenLen) BYTE *pbCaptureToken) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetPidProtection( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulPid,
-            /* [annotation][in] */ 
-            _In_  GUID *uuidKey) = 0;
+            /* [in] */ ULONG ulPid,
+            /* [in] */ __RPC__in GUID *uuidKey) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPidProtection( 
-            /* [annotation][in] */ 
-            _In_  ULONG pulPid,
-            /* [annotation][out] */ 
-            _Out_  GUID *uuidKey) = 0;
+            /* [in] */ ULONG pulPid,
+            /* [out] */ __RPC__out GUID *uuidKey) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetSyncValue( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulSyncValue) = 0;
+            /* [in] */ ULONG ulSyncValue) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetStartCodeProfile( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulStartCodeProfileLen,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbStartCodeProfile) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulStartCodeProfileLen,
+            /* [out][in] */ __RPC__inout BYTE *pbStartCodeProfile) = 0;
         
     };
     
@@ -7106,8 +6339,7 @@ EXTERN_C const IID IID_IBDA_WMDRMTuner;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_WMDRMTuner * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7122,58 +6354,42 @@ EXTERN_C const IID IID_IBDA_WMDRMTuner;
         DECLSPEC_XFGVIRT(IBDA_WMDRMTuner, PurchaseEntitlement)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *PurchaseEntitlement )( 
             __RPC__in IBDA_WMDRMTuner * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDialogRequest,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLanguage,
-            /* [annotation][in] */ 
-            _In_  ULONG ulPurchaseTokenLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulPurchaseTokenLen)  BYTE *pbPurchaseToken,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulDescrambleStatus,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulCaptureTokenLen,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbCaptureToken);
+            /* [in] */ ULONG ulDialogRequest,
+            /* [in] */ __RPC__in BSTR bstrLanguage,
+            /* [in] */ ULONG ulPurchaseTokenLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulPurchaseTokenLen) BYTE *pbPurchaseToken,
+            /* [out] */ __RPC__out ULONG *pulDescrambleStatus,
+            /* [out][in] */ __RPC__inout ULONG *pulCaptureTokenLen,
+            /* [out][in] */ __RPC__inout BYTE *pbCaptureToken);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMTuner, CancelCaptureToken)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CancelCaptureToken )( 
             __RPC__in IBDA_WMDRMTuner * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCaptureTokenLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCaptureTokenLen)  BYTE *pbCaptureToken);
+            /* [in] */ ULONG ulCaptureTokenLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCaptureTokenLen) BYTE *pbCaptureToken);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMTuner, SetPidProtection)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetPidProtection )( 
             __RPC__in IBDA_WMDRMTuner * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulPid,
-            /* [annotation][in] */ 
-            _In_  GUID *uuidKey);
+            /* [in] */ ULONG ulPid,
+            /* [in] */ __RPC__in GUID *uuidKey);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMTuner, GetPidProtection)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPidProtection )( 
             __RPC__in IBDA_WMDRMTuner * This,
-            /* [annotation][in] */ 
-            _In_  ULONG pulPid,
-            /* [annotation][out] */ 
-            _Out_  GUID *uuidKey);
+            /* [in] */ ULONG pulPid,
+            /* [out] */ __RPC__out GUID *uuidKey);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMTuner, SetSyncValue)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetSyncValue )( 
             __RPC__in IBDA_WMDRMTuner * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulSyncValue);
+            /* [in] */ ULONG ulSyncValue);
         
         DECLSPEC_XFGVIRT(IBDA_WMDRMTuner, GetStartCodeProfile)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStartCodeProfile )( 
             __RPC__in IBDA_WMDRMTuner * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulStartCodeProfileLen,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbStartCodeProfile);
+            /* [out][in] */ __RPC__inout ULONG *pulStartCodeProfileLen,
+            /* [out][in] */ __RPC__inout BYTE *pbStartCodeProfile);
         
         END_INTERFACE
     } IBDA_WMDRMTunerVtbl;
@@ -7252,18 +6468,14 @@ EXTERN_C const IID IID_IBDA_DRIDRMService;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetDRM( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNewDrm) = 0;
+            /* [in] */ __RPC__in BSTR bstrNewDrm) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDRMStatus( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDrmUuidList,
-            /* [annotation][out] */ 
-            _Out_  GUID *DrmUuid) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDrmUuidList,
+            /* [out] */ __RPC__out GUID *DrmUuid) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPairingStatus( 
-            /* [annotation][out][in] */ 
-            _Inout_  BDA_DrmPairingError *penumPairingStatus) = 0;
+            /* [out][in] */ __RPC__inout BDA_DrmPairingError *penumPairingStatus) = 0;
         
     };
     
@@ -7277,8 +6489,7 @@ EXTERN_C const IID IID_IBDA_DRIDRMService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_DRIDRMService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7293,22 +6504,18 @@ EXTERN_C const IID IID_IBDA_DRIDRMService;
         DECLSPEC_XFGVIRT(IBDA_DRIDRMService, SetDRM)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetDRM )( 
             __RPC__in IBDA_DRIDRMService * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNewDrm);
+            /* [in] */ __RPC__in BSTR bstrNewDrm);
         
         DECLSPEC_XFGVIRT(IBDA_DRIDRMService, GetDRMStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDRMStatus )( 
             __RPC__in IBDA_DRIDRMService * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDrmUuidList,
-            /* [annotation][out] */ 
-            _Out_  GUID *DrmUuid);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrDrmUuidList,
+            /* [out] */ __RPC__out GUID *DrmUuid);
         
         DECLSPEC_XFGVIRT(IBDA_DRIDRMService, GetPairingStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPairingStatus )( 
             __RPC__in IBDA_DRIDRMService * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BDA_DrmPairingError *penumPairingStatus);
+            /* [out][in] */ __RPC__inout BDA_DrmPairingError *penumPairingStatus);
         
         END_INTERFACE
     } IBDA_DRIDRMServiceVtbl;
@@ -7378,50 +6585,34 @@ EXTERN_C const IID IID_IBDA_DRIWMDRMSession;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AcknowledgeLicense( 
-            /* [annotation][in] */ 
-            _In_  HRESULT hrLicenseAck) = 0;
+            /* [in] */ HRESULT hrLicenseAck) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ProcessLicenseChallenge( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwcbLicenseMessage,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwcbLicenseMessage)  BYTE *pbLicenseMessage,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwcbLicenseResponse,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(* pdwcbLicenseResponse)  BYTE **ppbLicenseResponse) = 0;
+            /* [in] */ DWORD dwcbLicenseMessage,
+            /* [size_is][in] */ __RPC__in_ecount_full(dwcbLicenseMessage) BYTE *pbLicenseMessage,
+            /* [out][in] */ __RPC__inout DWORD *pdwcbLicenseResponse,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(*pdwcbLicenseResponse) BYTE **ppbLicenseResponse) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ProcessRegistrationChallenge( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwcbRegistrationMessage,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwcbRegistrationMessage)  BYTE *pbRegistrationMessage,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwcbRegistrationResponse,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE **ppbRegistrationResponse) = 0;
+            /* [in] */ DWORD dwcbRegistrationMessage,
+            /* [size_is][in] */ __RPC__in_ecount_full(dwcbRegistrationMessage) BYTE *pbRegistrationMessage,
+            /* [out][in] */ __RPC__inout DWORD *pdwcbRegistrationResponse,
+            /* [out][in] */ __RPC__deref_inout_opt BYTE **ppbRegistrationResponse) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetRevInfo( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRevInfoLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwRevInfoLen)  BYTE *pbRevInfo,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwResponse) = 0;
+            /* [in] */ DWORD dwRevInfoLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(dwRevInfoLen) BYTE *pbRevInfo,
+            /* [out][in] */ __RPC__inout DWORD *pdwResponse) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetCrl( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwCrlLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwCrlLen)  BYTE *pbCrlLen,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwResponse) = 0;
+            /* [in] */ DWORD dwCrlLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(dwCrlLen) BYTE *pbCrlLen,
+            /* [out][in] */ __RPC__inout DWORD *pdwResponse) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetHMSAssociationData( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetLastCardeaError( 
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwError) = 0;
+            /* [out][in] */ __RPC__inout DWORD *pdwError) = 0;
         
     };
     
@@ -7435,8 +6626,7 @@ EXTERN_C const IID IID_IBDA_DRIWMDRMSession;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_DRIWMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7451,52 +6641,37 @@ EXTERN_C const IID IID_IBDA_DRIWMDRMSession;
         DECLSPEC_XFGVIRT(IBDA_DRIWMDRMSession, AcknowledgeLicense)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AcknowledgeLicense )( 
             __RPC__in IBDA_DRIWMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrLicenseAck);
+            /* [in] */ HRESULT hrLicenseAck);
         
         DECLSPEC_XFGVIRT(IBDA_DRIWMDRMSession, ProcessLicenseChallenge)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ProcessLicenseChallenge )( 
             __RPC__in IBDA_DRIWMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwcbLicenseMessage,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwcbLicenseMessage)  BYTE *pbLicenseMessage,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwcbLicenseResponse,
-            /* [annotation][size_is][out][in] */ 
-            _Inout_updates_(* pdwcbLicenseResponse)  BYTE **ppbLicenseResponse);
+            /* [in] */ DWORD dwcbLicenseMessage,
+            /* [size_is][in] */ __RPC__in_ecount_full(dwcbLicenseMessage) BYTE *pbLicenseMessage,
+            /* [out][in] */ __RPC__inout DWORD *pdwcbLicenseResponse,
+            /* [size_is][out][in] */ __RPC__inout_ecount_full(*pdwcbLicenseResponse) BYTE **ppbLicenseResponse);
         
         DECLSPEC_XFGVIRT(IBDA_DRIWMDRMSession, ProcessRegistrationChallenge)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ProcessRegistrationChallenge )( 
             __RPC__in IBDA_DRIWMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwcbRegistrationMessage,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwcbRegistrationMessage)  BYTE *pbRegistrationMessage,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwcbRegistrationResponse,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE **ppbRegistrationResponse);
+            /* [in] */ DWORD dwcbRegistrationMessage,
+            /* [size_is][in] */ __RPC__in_ecount_full(dwcbRegistrationMessage) BYTE *pbRegistrationMessage,
+            /* [out][in] */ __RPC__inout DWORD *pdwcbRegistrationResponse,
+            /* [out][in] */ __RPC__deref_inout_opt BYTE **ppbRegistrationResponse);
         
         DECLSPEC_XFGVIRT(IBDA_DRIWMDRMSession, SetRevInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetRevInfo )( 
             __RPC__in IBDA_DRIWMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRevInfoLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwRevInfoLen)  BYTE *pbRevInfo,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwResponse);
+            /* [in] */ DWORD dwRevInfoLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(dwRevInfoLen) BYTE *pbRevInfo,
+            /* [out][in] */ __RPC__inout DWORD *pdwResponse);
         
         DECLSPEC_XFGVIRT(IBDA_DRIWMDRMSession, SetCrl)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetCrl )( 
             __RPC__in IBDA_DRIWMDRMSession * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCrlLen,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwCrlLen)  BYTE *pbCrlLen,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwResponse);
+            /* [in] */ DWORD dwCrlLen,
+            /* [size_is][in] */ __RPC__in_ecount_full(dwCrlLen) BYTE *pbCrlLen,
+            /* [out][in] */ __RPC__inout DWORD *pdwResponse);
         
         DECLSPEC_XFGVIRT(IBDA_DRIWMDRMSession, GetHMSAssociationData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetHMSAssociationData )( 
@@ -7505,8 +6680,7 @@ EXTERN_C const IID IID_IBDA_DRIWMDRMSession;
         DECLSPEC_XFGVIRT(IBDA_DRIWMDRMSession, GetLastCardeaError)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLastCardeaError )( 
             __RPC__in IBDA_DRIWMDRMSession * This,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwError);
+            /* [out][in] */ __RPC__inout DWORD *pdwError);
         
         END_INTERFACE
     } IBDA_DRIWMDRMSessionVtbl;
@@ -7588,16 +6762,12 @@ EXTERN_C const IID IID_IBDA_MUX;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetPidList( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulPidListCount,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulPidListCount)  BDA_MUX_PIDLISTITEM *pbPidListBuffer) = 0;
+            /* [in] */ ULONG ulPidListCount,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulPidListCount) BDA_MUX_PIDLISTITEM *pbPidListBuffer) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPidList( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulPidListCount,
-            /* [annotation][out][in] */ 
-            _Inout_  BDA_MUX_PIDLISTITEM *pbPidListBuffer) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulPidListCount,
+            /* [out][in] */ __RPC__inout BDA_MUX_PIDLISTITEM *pbPidListBuffer) = 0;
         
     };
     
@@ -7611,8 +6781,7 @@ EXTERN_C const IID IID_IBDA_MUX;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_MUX * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7627,18 +6796,14 @@ EXTERN_C const IID IID_IBDA_MUX;
         DECLSPEC_XFGVIRT(IBDA_MUX, SetPidList)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetPidList )( 
             __RPC__in IBDA_MUX * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulPidListCount,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulPidListCount)  BDA_MUX_PIDLISTITEM *pbPidListBuffer);
+            /* [in] */ ULONG ulPidListCount,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulPidListCount) BDA_MUX_PIDLISTITEM *pbPidListBuffer);
         
         DECLSPEC_XFGVIRT(IBDA_MUX, GetPidList)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPidList )( 
             __RPC__in IBDA_MUX * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulPidListCount,
-            /* [annotation][out][in] */ 
-            _Inout_  BDA_MUX_PIDLISTITEM *pbPidListBuffer);
+            /* [out][in] */ __RPC__inout ULONG *pulPidListCount,
+            /* [out][in] */ __RPC__inout BDA_MUX_PIDLISTITEM *pbPidListBuffer);
         
         END_INTERFACE
     } IBDA_MUXVtbl;
@@ -7705,14 +6870,11 @@ EXTERN_C const IID IID_IBDA_TransportStreamSelector;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetTSID( 
-            /* [annotation][in] */ 
-            _In_  USHORT usTSID) = 0;
+            /* [in] */ USHORT usTSID) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetTSInformation( 
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulTSInformationBufferLen,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pulTSInformationBufferLen)  BYTE *pbTSInformationBuffer) = 0;
+            /* [out][in] */ __RPC__inout ULONG *pulTSInformationBufferLen,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pulTSInformationBufferLen) BYTE *pbTSInformationBuffer) = 0;
         
     };
     
@@ -7726,8 +6888,7 @@ EXTERN_C const IID IID_IBDA_TransportStreamSelector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_TransportStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7742,16 +6903,13 @@ EXTERN_C const IID IID_IBDA_TransportStreamSelector;
         DECLSPEC_XFGVIRT(IBDA_TransportStreamSelector, SetTSID)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetTSID )( 
             __RPC__in IBDA_TransportStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  USHORT usTSID);
+            /* [in] */ USHORT usTSID);
         
         DECLSPEC_XFGVIRT(IBDA_TransportStreamSelector, GetTSInformation)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTSInformation )( 
             __RPC__in IBDA_TransportStreamSelector * This,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pulTSInformationBufferLen,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pulTSInformationBufferLen)  BYTE *pbTSInformationBuffer);
+            /* [out][in] */ __RPC__inout ULONG *pulTSInformationBufferLen,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pulTSInformationBufferLen) BYTE *pbTSInformationBuffer);
         
         END_INTERFACE
     } IBDA_TransportStreamSelectorVtbl;
@@ -7818,12 +6976,10 @@ EXTERN_C const IID IID_IBDA_UserActivityService;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetCurrentTunerUseReason( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwUseReason) = 0;
+            /* [in] */ DWORD dwUseReason) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetUserActivityInterval( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwActivityInterval) = 0;
+            /* [out] */ __RPC__out DWORD *pdwActivityInterval) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE UserActivityDetected( void) = 0;
         
@@ -7839,8 +6995,7 @@ EXTERN_C const IID IID_IBDA_UserActivityService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBDA_UserActivityService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7855,14 +7010,12 @@ EXTERN_C const IID IID_IBDA_UserActivityService;
         DECLSPEC_XFGVIRT(IBDA_UserActivityService, SetCurrentTunerUseReason)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetCurrentTunerUseReason )( 
             __RPC__in IBDA_UserActivityService * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwUseReason);
+            /* [in] */ DWORD dwUseReason);
         
         DECLSPEC_XFGVIRT(IBDA_UserActivityService, GetUserActivityInterval)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUserActivityInterval )( 
             __RPC__in IBDA_UserActivityService * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwActivityInterval);
+            /* [out] */ __RPC__out DWORD *pdwActivityInterval);
         
         DECLSPEC_XFGVIRT(IBDA_UserActivityService, UserActivityDetected)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UserActivityDetected )( 
@@ -7936,24 +7089,19 @@ EXTERN_C const IID IID_IESEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEventId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEventId) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwEventId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEventType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidEventType) = 0;
+            /* [retval][out] */ __RPC__out GUID *pguidEventType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCompletionStatus( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwResult) = 0;
+            /* [in] */ DWORD dwResult) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetData( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStringData( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData) = 0;
         
     };
     
@@ -7967,8 +7115,7 @@ EXTERN_C const IID IID_IESEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7983,32 +7130,27 @@ EXTERN_C const IID IID_IESEvent;
         DECLSPEC_XFGVIRT(IESEvent, GetEventId)
         HRESULT ( STDMETHODCALLTYPE *GetEventId )( 
             __RPC__in IESEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwEventId);
+            /* [retval][out] */ __RPC__out DWORD *pdwEventId);
         
         DECLSPEC_XFGVIRT(IESEvent, GetEventType)
         HRESULT ( STDMETHODCALLTYPE *GetEventType )( 
             __RPC__in IESEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GUID *pguidEventType);
+            /* [retval][out] */ __RPC__out GUID *pguidEventType);
         
         DECLSPEC_XFGVIRT(IESEvent, SetCompletionStatus)
         HRESULT ( STDMETHODCALLTYPE *SetCompletionStatus )( 
             __RPC__in IESEvent * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwResult);
+            /* [in] */ DWORD dwResult);
         
         DECLSPEC_XFGVIRT(IESEvent, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             __RPC__in IESEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pbData);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pbData);
         
         DECLSPEC_XFGVIRT(IESEvent, GetStringData)
         HRESULT ( STDMETHODCALLTYPE *GetStringData )( 
             __RPC__in IESEvent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrData);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrData);
         
         END_INTERFACE
     } IESEventVtbl;
@@ -8075,10 +7217,8 @@ EXTERN_C const IID IID_IESEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnESEventReceived( 
-            /* [annotation][in] */ 
-            _In_  GUID guidEventType,
-            /* [annotation][in] */ 
-            _In_  IESEvent *pESEvent) = 0;
+            /* [in] */ GUID guidEventType,
+            /* [in] */ __RPC__in_opt IESEvent *pESEvent) = 0;
         
     };
     
@@ -8092,8 +7232,7 @@ EXTERN_C const IID IID_IESEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IESEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8108,10 +7247,8 @@ EXTERN_C const IID IID_IESEvents;
         DECLSPEC_XFGVIRT(IESEvents, OnESEventReceived)
         HRESULT ( STDMETHODCALLTYPE *OnESEventReceived )( 
             __RPC__in IESEvents * This,
-            /* [annotation][in] */ 
-            _In_  GUID guidEventType,
-            /* [annotation][in] */ 
-            _In_  IESEvent *pESEvent);
+            /* [in] */ GUID guidEventType,
+            /* [in] */ __RPC__in_opt IESEvent *pESEvent);
         
         END_INTERFACE
     } IESEventsVtbl;
@@ -8166,8 +7303,7 @@ EXTERN_C const IID IID_IBroadcastEvent;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Fire( 
-            /* [annotation][in] */ 
-            _In_  GUID EventID) = 0;
+            /* [in] */ GUID EventID) = 0;
         
     };
     
@@ -8181,8 +7317,7 @@ EXTERN_C const IID IID_IBroadcastEvent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBroadcastEvent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8197,8 +7332,7 @@ EXTERN_C const IID IID_IBroadcastEvent;
         DECLSPEC_XFGVIRT(IBroadcastEvent, Fire)
         HRESULT ( STDMETHODCALLTYPE *Fire )( 
             __RPC__in IBroadcastEvent * This,
-            /* [annotation][in] */ 
-            _In_  GUID EventID);
+            /* [in] */ GUID EventID);
         
         END_INTERFACE
     } IBroadcastEventVtbl;
@@ -8253,16 +7387,11 @@ EXTERN_C const IID IID_IBroadcastEventEx;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE FireEx( 
-            /* [annotation][in] */ 
-            _In_  GUID EventID,
-            /* [annotation][in] */ 
-            _In_  ULONG Param1,
-            /* [annotation][in] */ 
-            _In_  ULONG Param2,
-            /* [annotation][in] */ 
-            _In_  ULONG Param3,
-            /* [annotation][in] */ 
-            _In_  ULONG Param4) = 0;
+            /* [in] */ GUID EventID,
+            /* [in] */ ULONG Param1,
+            /* [in] */ ULONG Param2,
+            /* [in] */ ULONG Param3,
+            /* [in] */ ULONG Param4) = 0;
         
     };
     
@@ -8276,8 +7405,7 @@ EXTERN_C const IID IID_IBroadcastEventEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBroadcastEventEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8292,22 +7420,16 @@ EXTERN_C const IID IID_IBroadcastEventEx;
         DECLSPEC_XFGVIRT(IBroadcastEvent, Fire)
         HRESULT ( STDMETHODCALLTYPE *Fire )( 
             __RPC__in IBroadcastEventEx * This,
-            /* [annotation][in] */ 
-            _In_  GUID EventID);
+            /* [in] */ GUID EventID);
         
         DECLSPEC_XFGVIRT(IBroadcastEventEx, FireEx)
         HRESULT ( STDMETHODCALLTYPE *FireEx )( 
             __RPC__in IBroadcastEventEx * This,
-            /* [annotation][in] */ 
-            _In_  GUID EventID,
-            /* [annotation][in] */ 
-            _In_  ULONG Param1,
-            /* [annotation][in] */ 
-            _In_  ULONG Param2,
-            /* [annotation][in] */ 
-            _In_  ULONG Param3,
-            /* [annotation][in] */ 
-            _In_  ULONG Param4);
+            /* [in] */ GUID EventID,
+            /* [in] */ ULONG Param1,
+            /* [in] */ ULONG Param2,
+            /* [in] */ ULONG Param3,
+            /* [in] */ ULONG Param4);
         
         END_INTERFACE
     } IBroadcastEventExVtbl;

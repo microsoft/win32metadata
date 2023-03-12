@@ -572,7 +572,6 @@ typedef enum _THERMAL_DEVICE_INTERFACE_FLAGS {
 #define IOCTL_SET_SYS_MESSAGE_INDICATOR     \
         CTL_CODE(FILE_DEVICE_BATTERY, 0x70, METHOD_BUFFERED, FILE_WRITE_ACCESS)
 
-
 //
 // ACPI Time device functions
 //
@@ -635,6 +634,37 @@ typedef struct _ACPI_REAL_TIME {
     UINT8 DayLight;       // DayLight : 0-1
     UINT8 Reserved1[3];   // Reserved: Must be 0
 } ACPI_REAL_TIME, *PACPI_REAL_TIME;
+
+//
+// ACPI Time and Alarm Device Capabilities
+//
+
+#define IOCTL_GET_ACPI_TIME_AND_ALARM_CAPABILITIES \
+        CTL_CODE(FILE_DEVICE_BATTERY, 0x87, METHOD_BUFFERED, FILE_READ_ACCESS)
+
+typedef enum _ACPI_TIME_RESOLUTION {
+    AcpiTimeResolutionMilliseconds = 0,
+    AcpiTimeResolutionSeconds,
+    AcpiTimeResolutionMax
+} ACPI_TIME_RESOLUTION, *PACPI_TIME_RESOLUTION;
+
+typedef struct _ACPI_TIME_AND_ALARM_CAPABILITIES {
+    BOOLEAN AcWakeSupported;
+    BOOLEAN DcWakeSupported;
+
+    BOOLEAN S4AcWakeSupported;
+    BOOLEAN S4DcWakeSupported;
+
+    BOOLEAN S5AcWakeSupported;
+    BOOLEAN S5DcWakeSupported;
+
+    BOOLEAN S4S5WakeStatusSupported;
+
+    ULONG DeepestWakeSystemState;
+
+    BOOLEAN RealTimeFeaturesSupported;
+    ACPI_TIME_RESOLUTION RealTimeResolution;
+} ACPI_TIME_AND_ALARM_CAPABILITIES, *PACPI_TIME_AND_ALARM_CAPABILITIES;
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

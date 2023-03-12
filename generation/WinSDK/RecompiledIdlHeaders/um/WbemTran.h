@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -277,8 +277,7 @@ EXTERN_C const IID IID_IWbemTransport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemTransport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -347,44 +346,28 @@ EXTERN_C const IID IID_IWbemLevel1Login;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EstablishPosition( 
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszLocaleList,
-            /* [annotation][in] */ 
-            _In_  DWORD dwNumLocales,
-            /* [annotation][out] */ 
-            _Out_  DWORD *reserved) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszLocaleList,
+            /* [in] */ DWORD dwNumLocales,
+            /* [out] */ __RPC__out DWORD *reserved) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestChallenge( 
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszNetworkResource,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszUser,
-            /* [annotation][out] */ 
-            _Out_  WBEM_128BITS Nonce) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszNetworkResource,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszUser,
+            /* [out] */ __RPC__out WBEM_128BITS Nonce) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WBEMLogin( 
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszPreferredLocale,
-            /* [annotation][unique][in] */ 
-            _In_  WBEM_128BITS AccessToken,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][out] */ 
-            _Out_  IWbemServices **ppNamespace) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszPreferredLocale,
+            /* [unique][in] */ __RPC__in_opt WBEM_128BITS AccessToken,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IWbemContext *pCtx,
+            /* [out] */ __RPC__deref_out_opt IWbemServices **ppNamespace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NTLMLogin( 
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszNetworkResource,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszPreferredLocale,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][out] */ 
-            _Out_  IWbemServices **ppNamespace) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszNetworkResource,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszPreferredLocale,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IWbemContext *pCtx,
+            /* [out] */ __RPC__deref_out_opt IWbemServices **ppNamespace) = 0;
         
     };
     
@@ -398,8 +381,7 @@ EXTERN_C const IID IID_IWbemLevel1Login;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWbemLevel1Login * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -414,50 +396,34 @@ EXTERN_C const IID IID_IWbemLevel1Login;
         DECLSPEC_XFGVIRT(IWbemLevel1Login, EstablishPosition)
         HRESULT ( STDMETHODCALLTYPE *EstablishPosition )( 
             __RPC__in IWbemLevel1Login * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszLocaleList,
-            /* [annotation][in] */ 
-            _In_  DWORD dwNumLocales,
-            /* [annotation][out] */ 
-            _Out_  DWORD *reserved);
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszLocaleList,
+            /* [in] */ DWORD dwNumLocales,
+            /* [out] */ __RPC__out DWORD *reserved);
         
         DECLSPEC_XFGVIRT(IWbemLevel1Login, RequestChallenge)
         HRESULT ( STDMETHODCALLTYPE *RequestChallenge )( 
             __RPC__in IWbemLevel1Login * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszNetworkResource,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszUser,
-            /* [annotation][out] */ 
-            _Out_  WBEM_128BITS Nonce);
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszNetworkResource,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszUser,
+            /* [out] */ __RPC__out WBEM_128BITS Nonce);
         
         DECLSPEC_XFGVIRT(IWbemLevel1Login, WBEMLogin)
         HRESULT ( STDMETHODCALLTYPE *WBEMLogin )( 
             __RPC__in IWbemLevel1Login * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszPreferredLocale,
-            /* [annotation][unique][in] */ 
-            _In_  WBEM_128BITS AccessToken,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][out] */ 
-            _Out_  IWbemServices **ppNamespace);
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszPreferredLocale,
+            /* [unique][in] */ __RPC__in_opt WBEM_128BITS AccessToken,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IWbemContext *pCtx,
+            /* [out] */ __RPC__deref_out_opt IWbemServices **ppNamespace);
         
         DECLSPEC_XFGVIRT(IWbemLevel1Login, NTLMLogin)
         HRESULT ( STDMETHODCALLTYPE *NTLMLogin )( 
             __RPC__in IWbemLevel1Login * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszNetworkResource,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszPreferredLocale,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][out] */ 
-            _Out_  IWbemServices **ppNamespace);
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszNetworkResource,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszPreferredLocale,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IWbemContext *pCtx,
+            /* [out] */ __RPC__deref_out_opt IWbemServices **ppNamespace);
         
         END_INTERFACE
     } IWbemLevel1LoginVtbl;
@@ -521,18 +487,12 @@ EXTERN_C const IID IID_IWbemConnectorLogin;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ConnectorLogin( 
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszNetworkResource,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszPreferredLocale,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **pInterface) = 0;
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszNetworkResource,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszPreferredLocale,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IWbemContext *pCtx,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **pInterface) = 0;
         
     };
     
@@ -546,8 +506,7 @@ EXTERN_C const IID IID_IWbemConnectorLogin;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWbemConnectorLogin * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -562,18 +521,12 @@ EXTERN_C const IID IID_IWbemConnectorLogin;
         DECLSPEC_XFGVIRT(IWbemConnectorLogin, ConnectorLogin)
         HRESULT ( STDMETHODCALLTYPE *ConnectorLogin )( 
             __RPC__in IWbemConnectorLogin * This,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszNetworkResource,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPWSTR wszPreferredLocale,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **pInterface);
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszNetworkResource,
+            /* [string][unique][in] */ __RPC__in_opt_string LPWSTR wszPreferredLocale,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IWbemContext *pCtx,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **pInterface);
         
         END_INTERFACE
     } IWbemConnectorLoginVtbl;
@@ -649,8 +602,7 @@ EXTERN_C const IID IID_IWbemAddressResolution;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemAddressResolution * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -751,28 +703,17 @@ EXTERN_C const IID IID_IWbemClientTransport;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ConnectServer( 
-            /* [annotation][in] */ 
-            _In_  BSTR strAddressType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBinaryAddressLength,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwBinaryAddressLength)  BYTE *abBinaryAddress,
-            /* [annotation][in] */ 
-            _In_  BSTR strNetworkResource,
-            /* [annotation][in] */ 
-            _In_  BSTR strUser,
-            /* [annotation][in] */ 
-            _In_  BSTR strPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocale,
-            /* [annotation][in] */ 
-            _In_  long lSecurityFlags,
-            /* [annotation][in] */ 
-            _In_  BSTR strAuthority,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][out] */ 
-            _Out_  IWbemServices **ppNamespace) = 0;
+            /* [in] */ BSTR strAddressType,
+            /* [in] */ DWORD dwBinaryAddressLength,
+            /* [size_is][in] */ BYTE *abBinaryAddress,
+            /* [in] */ BSTR strNetworkResource,
+            /* [in] */ BSTR strUser,
+            /* [in] */ BSTR strPassword,
+            /* [in] */ BSTR strLocale,
+            /* [in] */ long lSecurityFlags,
+            /* [in] */ BSTR strAuthority,
+            /* [in] */ IWbemContext *pCtx,
+            /* [out] */ IWbemServices **ppNamespace) = 0;
         
     };
     
@@ -786,8 +727,7 @@ EXTERN_C const IID IID_IWbemClientTransport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemClientTransport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -802,28 +742,17 @@ EXTERN_C const IID IID_IWbemClientTransport;
         DECLSPEC_XFGVIRT(IWbemClientTransport, ConnectServer)
         HRESULT ( STDMETHODCALLTYPE *ConnectServer )( 
             IWbemClientTransport * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strAddressType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBinaryAddressLength,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwBinaryAddressLength)  BYTE *abBinaryAddress,
-            /* [annotation][in] */ 
-            _In_  BSTR strNetworkResource,
-            /* [annotation][in] */ 
-            _In_  BSTR strUser,
-            /* [annotation][in] */ 
-            _In_  BSTR strPassword,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocale,
-            /* [annotation][in] */ 
-            _In_  long lSecurityFlags,
-            /* [annotation][in] */ 
-            _In_  BSTR strAuthority,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][out] */ 
-            _Out_  IWbemServices **ppNamespace);
+            /* [in] */ BSTR strAddressType,
+            /* [in] */ DWORD dwBinaryAddressLength,
+            /* [size_is][in] */ BYTE *abBinaryAddress,
+            /* [in] */ BSTR strNetworkResource,
+            /* [in] */ BSTR strUser,
+            /* [in] */ BSTR strPassword,
+            /* [in] */ BSTR strLocale,
+            /* [in] */ long lSecurityFlags,
+            /* [in] */ BSTR strAuthority,
+            /* [in] */ IWbemContext *pCtx,
+            /* [out] */ IWbemServices **ppNamespace);
         
         END_INTERFACE
     } IWbemClientTransportVtbl;
@@ -878,60 +807,35 @@ EXTERN_C const IID IID_IWbemClientConnectionTransport;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Open( 
-            /* [annotation][in] */ 
-            _In_  BSTR strAddressType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBinaryAddressLength,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwBinaryAddressLength)  BYTE *abBinaryAddress,
-            /* [annotation][in] */ 
-            _In_  const BSTR strObject,
-            /* [annotation][in] */ 
-            _In_  const BSTR strUser,
-            /* [annotation][in] */ 
-            _In_  const BSTR strPassword,
-            /* [annotation][in] */ 
-            _In_  const BSTR strLocale,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **pInterface,
-            /* [annotation][out] */ 
-            _Out_  IWbemCallResult **pCallRes) = 0;
+            /* [in] */ BSTR strAddressType,
+            /* [in] */ DWORD dwBinaryAddressLength,
+            /* [size_is][in] */ BYTE *abBinaryAddress,
+            /* [in] */ const BSTR strObject,
+            /* [in] */ const BSTR strUser,
+            /* [in] */ const BSTR strPassword,
+            /* [in] */ const BSTR strLocale,
+            /* [in] */ long lFlags,
+            /* [in] */ IWbemContext *pCtx,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **pInterface,
+            /* [out] */ IWbemCallResult **pCallRes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OpenAsync( 
-            /* [annotation][in] */ 
-            _In_  BSTR strAddressType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBinaryAddressLength,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwBinaryAddressLength)  BYTE *abBinaryAddress,
-            /* [annotation][in] */ 
-            _In_  const BSTR strObject,
-            /* [annotation][in] */ 
-            _In_  const BSTR strUser,
-            /* [annotation][in] */ 
-            _In_  const BSTR strPassword,
-            /* [annotation][in] */ 
-            _In_  const BSTR strLocale,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][in] */ 
-            _In_  IWbemObjectSink *pResponseHandler) = 0;
+            /* [in] */ BSTR strAddressType,
+            /* [in] */ DWORD dwBinaryAddressLength,
+            /* [size_is][in] */ BYTE *abBinaryAddress,
+            /* [in] */ const BSTR strObject,
+            /* [in] */ const BSTR strUser,
+            /* [in] */ const BSTR strPassword,
+            /* [in] */ const BSTR strLocale,
+            /* [in] */ long lFlags,
+            /* [in] */ IWbemContext *pCtx,
+            /* [in] */ REFIID riid,
+            /* [in] */ IWbemObjectSink *pResponseHandler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Cancel( 
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemObjectSink *pHandler) = 0;
+            /* [in] */ long lFlags,
+            /* [in] */ IWbemObjectSink *pHandler) = 0;
         
     };
     
@@ -945,8 +849,7 @@ EXTERN_C const IID IID_IWbemClientConnectionTransport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemClientConnectionTransport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -961,64 +864,39 @@ EXTERN_C const IID IID_IWbemClientConnectionTransport;
         DECLSPEC_XFGVIRT(IWbemClientConnectionTransport, Open)
         HRESULT ( STDMETHODCALLTYPE *Open )( 
             IWbemClientConnectionTransport * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strAddressType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBinaryAddressLength,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwBinaryAddressLength)  BYTE *abBinaryAddress,
-            /* [annotation][in] */ 
-            _In_  const BSTR strObject,
-            /* [annotation][in] */ 
-            _In_  const BSTR strUser,
-            /* [annotation][in] */ 
-            _In_  const BSTR strPassword,
-            /* [annotation][in] */ 
-            _In_  const BSTR strLocale,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **pInterface,
-            /* [annotation][out] */ 
-            _Out_  IWbemCallResult **pCallRes);
+            /* [in] */ BSTR strAddressType,
+            /* [in] */ DWORD dwBinaryAddressLength,
+            /* [size_is][in] */ BYTE *abBinaryAddress,
+            /* [in] */ const BSTR strObject,
+            /* [in] */ const BSTR strUser,
+            /* [in] */ const BSTR strPassword,
+            /* [in] */ const BSTR strLocale,
+            /* [in] */ long lFlags,
+            /* [in] */ IWbemContext *pCtx,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **pInterface,
+            /* [out] */ IWbemCallResult **pCallRes);
         
         DECLSPEC_XFGVIRT(IWbemClientConnectionTransport, OpenAsync)
         HRESULT ( STDMETHODCALLTYPE *OpenAsync )( 
             IWbemClientConnectionTransport * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strAddressType,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBinaryAddressLength,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(dwBinaryAddressLength)  BYTE *abBinaryAddress,
-            /* [annotation][in] */ 
-            _In_  const BSTR strObject,
-            /* [annotation][in] */ 
-            _In_  const BSTR strUser,
-            /* [annotation][in] */ 
-            _In_  const BSTR strPassword,
-            /* [annotation][in] */ 
-            _In_  const BSTR strLocale,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemContext *pCtx,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][in] */ 
-            _In_  IWbemObjectSink *pResponseHandler);
+            /* [in] */ BSTR strAddressType,
+            /* [in] */ DWORD dwBinaryAddressLength,
+            /* [size_is][in] */ BYTE *abBinaryAddress,
+            /* [in] */ const BSTR strObject,
+            /* [in] */ const BSTR strUser,
+            /* [in] */ const BSTR strPassword,
+            /* [in] */ const BSTR strLocale,
+            /* [in] */ long lFlags,
+            /* [in] */ IWbemContext *pCtx,
+            /* [in] */ REFIID riid,
+            /* [in] */ IWbemObjectSink *pResponseHandler);
         
         DECLSPEC_XFGVIRT(IWbemClientConnectionTransport, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             IWbemClientConnectionTransport * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IWbemObjectSink *pHandler);
+            /* [in] */ long lFlags,
+            /* [in] */ IWbemObjectSink *pHandler);
         
         END_INTERFACE
     } IWbemClientConnectionTransportVtbl;
@@ -1123,8 +1001,7 @@ EXTERN_C const IID IID_IWbemConstructClassObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWbemConstructClassObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         

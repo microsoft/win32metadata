@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -34,7 +34,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -371,6 +371,7 @@ enum _ATTRIBUTEID
         IAS_ATTRIBUTE_SERVER_IPv6_ADDRESS	= ( IAS_ATTRIBUTE_SERVER_IP_ADDRESS + 1 ) ,
         IAS_ATTRIBUTE_RADIUS_USERNAME_ENCODING_ASCII	= ( IAS_ATTRIBUTE_SERVER_IPv6_ADDRESS + 1 ) ,
         MS_ATTRIBUTE_RAS_ROUTING_DOMAIN_ID	= 8172,
+        MS_ATTRIBUTE_AZURE_POLICY_ID	= 8173,
         IAS_ATTRIBUTE_CERTIFICATE_THUMBPRINT	= 8250,
         RAS_ATTRIBUTE_ENCRYPTION_TYPE	= ( 0xffffffff - 89 ) ,
         RAS_ATTRIBUTE_ENCRYPTION_POLICY	= ( RAS_ATTRIBUTE_ENCRYPTION_TYPE + 1 ) ,
@@ -823,48 +824,35 @@ EXTERN_C const IID IID_ISdoMachine;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Attach( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrComputerName) = 0;
+            /* [in] */ __RPC__in BSTR bstrComputerName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDictionarySDO( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppDictionarySDO) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppDictionarySDO) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetServiceSDO( 
-            /* [annotation][in] */ 
-            _In_  IASDATASTORE eDataStore,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrServiceName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppServiceSDO) = 0;
+            /* [in] */ IASDATASTORE eDataStore,
+            /* [in] */ __RPC__in BSTR bstrServiceName,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppServiceSDO) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetUserSDO( 
-            /* [annotation][in] */ 
-            _In_  IASDATASTORE eDataStore,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppUserSDO) = 0;
+            /* [in] */ IASDATASTORE eDataStore,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUserSDO) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetOSType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IASOSTYPE *eOSType) = 0;
+            /* [retval][out] */ __RPC__out IASOSTYPE *eOSType) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDomainType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IASDOMAINTYPE *eDomainType) = 0;
+            /* [retval][out] */ __RPC__out IASDOMAINTYPE *eDomainType) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsDirectoryAvailable( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *boolDirectoryAvailable) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *boolDirectoryAvailable) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetAttachedComputer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrComputerName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrComputerName) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE GetSDOSchema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppSDOSchema) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppSDOSchema) = 0;
         
     };
     
@@ -878,8 +866,7 @@ EXTERN_C const IID IID_ISdoMachine;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -894,31 +881,23 @@ EXTERN_C const IID IID_ISdoMachine;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -943,64 +922,51 @@ EXTERN_C const IID IID_ISdoMachine;
         DECLSPEC_XFGVIRT(ISdoMachine, Attach)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Attach )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrComputerName);
+            /* [in] */ __RPC__in BSTR bstrComputerName);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetDictionarySDO)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDictionarySDO )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppDictionarySDO);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppDictionarySDO);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetServiceSDO)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetServiceSDO )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][in] */ 
-            _In_  IASDATASTORE eDataStore,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrServiceName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppServiceSDO);
+            /* [in] */ IASDATASTORE eDataStore,
+            /* [in] */ __RPC__in BSTR bstrServiceName,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppServiceSDO);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetUserSDO)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetUserSDO )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][in] */ 
-            _In_  IASDATASTORE eDataStore,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppUserSDO);
+            /* [in] */ IASDATASTORE eDataStore,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUserSDO);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetOSType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetOSType )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IASOSTYPE *eOSType);
+            /* [retval][out] */ __RPC__out IASOSTYPE *eOSType);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetDomainType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDomainType )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IASDOMAINTYPE *eDomainType);
+            /* [retval][out] */ __RPC__out IASDOMAINTYPE *eDomainType);
         
         DECLSPEC_XFGVIRT(ISdoMachine, IsDirectoryAvailable)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsDirectoryAvailable )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *boolDirectoryAvailable);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *boolDirectoryAvailable);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetAttachedComputer)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetAttachedComputer )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrComputerName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrComputerName);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetSDOSchema)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetSDOSchema )( 
             __RPC__in ISdoMachine * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppSDOSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppSDOSchema);
         
         END_INTERFACE
     } ISdoMachineVtbl;
@@ -1092,22 +1058,16 @@ EXTERN_C const IID IID_ISdoMachine2;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetTemplatesSDO( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrServiceName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppTemplatesSDO) = 0;
+            /* [in] */ __RPC__in BSTR bstrServiceName,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppTemplatesSDO) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnableTemplates( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SyncConfigAgainstTemplates( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrServiceName,
-            /* [annotation][out][in] */ 
-            _Inout_  IUnknown **ppConfigRoot,
-            /* [annotation][out][in] */ 
-            _Inout_  IUnknown **ppTemplatesRoot,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bForcedSync) = 0;
+            /* [in] */ __RPC__in BSTR bstrServiceName,
+            /* [out][in] */ __RPC__deref_inout_opt IUnknown **ppConfigRoot,
+            /* [out][in] */ __RPC__deref_inout_opt IUnknown **ppTemplatesRoot,
+            /* [in] */ VARIANT_BOOL bForcedSync) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ImportRemoteTemplates( 
             __RPC__in_opt IUnknown *pLocalTemplatesRoot,
@@ -1127,8 +1087,7 @@ EXTERN_C const IID IID_ISdoMachine2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1143,31 +1102,23 @@ EXTERN_C const IID IID_ISdoMachine2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1192,72 +1143,57 @@ EXTERN_C const IID IID_ISdoMachine2;
         DECLSPEC_XFGVIRT(ISdoMachine, Attach)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Attach )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrComputerName);
+            /* [in] */ __RPC__in BSTR bstrComputerName);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetDictionarySDO)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDictionarySDO )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppDictionarySDO);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppDictionarySDO);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetServiceSDO)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetServiceSDO )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][in] */ 
-            _In_  IASDATASTORE eDataStore,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrServiceName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppServiceSDO);
+            /* [in] */ IASDATASTORE eDataStore,
+            /* [in] */ __RPC__in BSTR bstrServiceName,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppServiceSDO);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetUserSDO)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetUserSDO )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][in] */ 
-            _In_  IASDATASTORE eDataStore,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppUserSDO);
+            /* [in] */ IASDATASTORE eDataStore,
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUserSDO);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetOSType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetOSType )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IASOSTYPE *eOSType);
+            /* [retval][out] */ __RPC__out IASOSTYPE *eOSType);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetDomainType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDomainType )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IASDOMAINTYPE *eDomainType);
+            /* [retval][out] */ __RPC__out IASDOMAINTYPE *eDomainType);
         
         DECLSPEC_XFGVIRT(ISdoMachine, IsDirectoryAvailable)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsDirectoryAvailable )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *boolDirectoryAvailable);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *boolDirectoryAvailable);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetAttachedComputer)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetAttachedComputer )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrComputerName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrComputerName);
         
         DECLSPEC_XFGVIRT(ISdoMachine, GetSDOSchema)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetSDOSchema )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppSDOSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppSDOSchema);
         
         DECLSPEC_XFGVIRT(ISdoMachine2, GetTemplatesSDO)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetTemplatesSDO )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrServiceName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppTemplatesSDO);
+            /* [in] */ __RPC__in BSTR bstrServiceName,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppTemplatesSDO);
         
         DECLSPEC_XFGVIRT(ISdoMachine2, EnableTemplates)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnableTemplates )( 
@@ -1266,14 +1202,10 @@ EXTERN_C const IID IID_ISdoMachine2;
         DECLSPEC_XFGVIRT(ISdoMachine2, SyncConfigAgainstTemplates)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SyncConfigAgainstTemplates )( 
             __RPC__in ISdoMachine2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrServiceName,
-            /* [annotation][out][in] */ 
-            _Inout_  IUnknown **ppConfigRoot,
-            /* [annotation][out][in] */ 
-            _Inout_  IUnknown **ppTemplatesRoot,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bForcedSync);
+            /* [in] */ __RPC__in BSTR bstrServiceName,
+            /* [out][in] */ __RPC__deref_inout_opt IUnknown **ppConfigRoot,
+            /* [out][in] */ __RPC__deref_inout_opt IUnknown **ppTemplatesRoot,
+            /* [in] */ VARIANT_BOOL bForcedSync);
         
         DECLSPEC_XFGVIRT(ISdoMachine2, ImportRemoteTemplates)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ImportRemoteTemplates )( 
@@ -1395,8 +1327,7 @@ EXTERN_C const IID IID_ISdoServiceControl;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE StopService( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetServiceStatus( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *status) = 0;
+            /* [retval][out] */ __RPC__out LONG *status) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ResetService( void) = 0;
         
@@ -1412,8 +1343,7 @@ EXTERN_C const IID IID_ISdoServiceControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISdoServiceControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1428,31 +1358,23 @@ EXTERN_C const IID IID_ISdoServiceControl;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISdoServiceControl * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISdoServiceControl * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISdoServiceControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1485,8 +1407,7 @@ EXTERN_C const IID IID_ISdoServiceControl;
         DECLSPEC_XFGVIRT(ISdoServiceControl, GetServiceStatus)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetServiceStatus )( 
             __RPC__in ISdoServiceControl * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *status);
+            /* [retval][out] */ __RPC__out LONG *status);
         
         DECLSPEC_XFGVIRT(ISdoServiceControl, ResetService)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ResetService )( 
@@ -1567,34 +1488,26 @@ EXTERN_C const IID IID_ISdo;
     {
     public:
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE GetPropertyInfo( 
-            /* [annotation][in] */ 
-            _In_  LONG Id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppPropertyInfo) = 0;
+            /* [in] */ LONG Id,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppPropertyInfo) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [annotation][in] */ 
-            _In_  LONG Id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [in] */ LONG Id,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE PutProperty( 
-            /* [annotation][in] */ 
-            _In_  LONG Id,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pValue) = 0;
+            /* [in] */ LONG Id,
+            /* [in] */ __RPC__in VARIANT *pValue) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ResetProperty( 
-            /* [annotation][in] */ 
-            _In_  LONG Id) = 0;
+            /* [in] */ LONG Id) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Apply( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Restore( void) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppEnumVARIANT) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppEnumVARIANT) = 0;
         
     };
     
@@ -1608,8 +1521,7 @@ EXTERN_C const IID IID_ISdo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISdo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1624,31 +1536,23 @@ EXTERN_C const IID IID_ISdo;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISdo * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISdo * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISdo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1673,32 +1577,25 @@ EXTERN_C const IID IID_ISdo;
         DECLSPEC_XFGVIRT(ISdo, GetPropertyInfo)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyInfo )( 
             __RPC__in ISdo * This,
-            /* [annotation][in] */ 
-            _In_  LONG Id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppPropertyInfo);
+            /* [in] */ LONG Id,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppPropertyInfo);
         
         DECLSPEC_XFGVIRT(ISdo, GetProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in ISdo * This,
-            /* [annotation][in] */ 
-            _In_  LONG Id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [in] */ LONG Id,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(ISdo, PutProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PutProperty )( 
             __RPC__in ISdo * This,
-            /* [annotation][in] */ 
-            _In_  LONG Id,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pValue);
+            /* [in] */ LONG Id,
+            /* [in] */ __RPC__in VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(ISdo, ResetProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ResetProperty )( 
             __RPC__in ISdo * This,
-            /* [annotation][in] */ 
-            _In_  LONG Id);
+            /* [in] */ LONG Id);
         
         DECLSPEC_XFGVIRT(ISdo, Apply)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Apply )( 
@@ -1711,8 +1608,7 @@ EXTERN_C const IID IID_ISdo;
         DECLSPEC_XFGVIRT(ISdo, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISdo * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppEnumVARIANT);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppEnumVARIANT);
         
         END_INTERFACE
     } ISdoVtbl;
@@ -1798,38 +1694,29 @@ EXTERN_C const IID IID_ISdoCollection;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pCount) = 0;
+            /* [retval][out] */ __RPC__out long *pCount) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][out][in] */ 
-            _Inout_  IDispatch **ppItem) = 0;
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [out][in] */ __RPC__deref_inout_opt IDispatch **ppItem) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *pItem) = 0;
+            /* [in] */ __RPC__in_opt IDispatch *pItem) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RemoveAll( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Reload( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsNameUnique( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool) = 0;
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT *Name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **pItem) = 0;
+            /* [in] */ __RPC__in VARIANT *Name,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **pItem) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppEnumVARIANT) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppEnumVARIANT) = 0;
         
     };
     
@@ -1843,8 +1730,7 @@ EXTERN_C const IID IID_ISdoCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISdoCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1859,31 +1745,23 @@ EXTERN_C const IID IID_ISdoCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISdoCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISdoCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISdoCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1908,22 +1786,18 @@ EXTERN_C const IID IID_ISdoCollection;
         DECLSPEC_XFGVIRT(ISdoCollection, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISdoCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pCount);
+            /* [retval][out] */ __RPC__out long *pCount);
         
         DECLSPEC_XFGVIRT(ISdoCollection, Add)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ISdoCollection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][out][in] */ 
-            _Inout_  IDispatch **ppItem);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [out][in] */ __RPC__deref_inout_opt IDispatch **ppItem);
         
         DECLSPEC_XFGVIRT(ISdoCollection, Remove)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ISdoCollection * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pItem);
+            /* [in] */ __RPC__in_opt IDispatch *pItem);
         
         DECLSPEC_XFGVIRT(ISdoCollection, RemoveAll)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RemoveAll )( 
@@ -1936,24 +1810,19 @@ EXTERN_C const IID IID_ISdoCollection;
         DECLSPEC_XFGVIRT(ISdoCollection, IsNameUnique)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsNameUnique )( 
             __RPC__in ISdoCollection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(ISdoCollection, Item)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in ISdoCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT *Name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **pItem);
+            /* [in] */ __RPC__in VARIANT *Name,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **pItem);
         
         DECLSPEC_XFGVIRT(ISdoCollection, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISdoCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppEnumVARIANT);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppEnumVARIANT);
         
         END_INTERFACE
     } ISdoCollectionVtbl;
@@ -2042,26 +1911,18 @@ EXTERN_C const IID IID_ITemplateSdo;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddToCollection( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pCollection,
-            /* [annotation][out][in] */ 
-            _Inout_  IDispatch **ppItem) = 0;
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in_opt IDispatch *pCollection,
+            /* [out][in] */ __RPC__deref_inout_opt IDispatch **ppItem) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddToSdo( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pSdoTarget,
-            /* [annotation][out][in] */ 
-            _Inout_  IDispatch **ppItem) = 0;
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in_opt IDispatch *pSdoTarget,
+            /* [out][in] */ __RPC__deref_inout_opt IDispatch **ppItem) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddToSdoAsProperty( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *pSdoTarget,
-            /* [annotation][in] */ 
-            _In_  LONG id) = 0;
+            /* [in] */ __RPC__in_opt IDispatch *pSdoTarget,
+            /* [in] */ LONG id) = 0;
         
     };
     
@@ -2075,8 +1936,7 @@ EXTERN_C const IID IID_ITemplateSdo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2091,31 +1951,23 @@ EXTERN_C const IID IID_ITemplateSdo;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2140,32 +1992,25 @@ EXTERN_C const IID IID_ITemplateSdo;
         DECLSPEC_XFGVIRT(ISdo, GetPropertyInfo)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyInfo )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][in] */ 
-            _In_  LONG Id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppPropertyInfo);
+            /* [in] */ LONG Id,
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppPropertyInfo);
         
         DECLSPEC_XFGVIRT(ISdo, GetProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][in] */ 
-            _In_  LONG Id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [in] */ LONG Id,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(ISdo, PutProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PutProperty )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][in] */ 
-            _In_  LONG Id,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pValue);
+            /* [in] */ LONG Id,
+            /* [in] */ __RPC__in VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(ISdo, ResetProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ResetProperty )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][in] */ 
-            _In_  LONG Id);
+            /* [in] */ LONG Id);
         
         DECLSPEC_XFGVIRT(ISdo, Apply)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Apply )( 
@@ -2178,36 +2023,27 @@ EXTERN_C const IID IID_ITemplateSdo;
         DECLSPEC_XFGVIRT(ISdo, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppEnumVARIANT);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppEnumVARIANT);
         
         DECLSPEC_XFGVIRT(ITemplateSdo, AddToCollection)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddToCollection )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pCollection,
-            /* [annotation][out][in] */ 
-            _Inout_  IDispatch **ppItem);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in_opt IDispatch *pCollection,
+            /* [out][in] */ __RPC__deref_inout_opt IDispatch **ppItem);
         
         DECLSPEC_XFGVIRT(ITemplateSdo, AddToSdo)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddToSdo )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pSdoTarget,
-            /* [annotation][out][in] */ 
-            _Inout_  IDispatch **ppItem);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in_opt IDispatch *pSdoTarget,
+            /* [out][in] */ __RPC__deref_inout_opt IDispatch **ppItem);
         
         DECLSPEC_XFGVIRT(ITemplateSdo, AddToSdoAsProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddToSdoAsProperty )( 
             __RPC__in ITemplateSdo * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pSdoTarget,
-            /* [annotation][in] */ 
-            _In_  LONG id);
+            /* [in] */ __RPC__in_opt IDispatch *pSdoTarget,
+            /* [in] */ LONG id);
         
         END_INTERFACE
     } ITemplateSdoVtbl;
@@ -2303,38 +2139,26 @@ EXTERN_C const IID IID_ISdoDictionaryOld;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumAttributes( 
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *Id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValues) = 0;
+            /* [out][in] */ __RPC__inout VARIANT *Id,
+            /* [retval][out] */ __RPC__out VARIANT *pValues) = 0;
         
         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE GetAttributeInfo( 
-            /* [annotation][in] */ 
-            _In_  ATTRIBUTEID Id,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pInfoIDs,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pInfoValues) = 0;
+            /* [in] */ ATTRIBUTEID Id,
+            /* [in] */ __RPC__in VARIANT *pInfoIDs,
+            /* [retval][out] */ __RPC__out VARIANT *pInfoValues) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnumAttributeValues( 
-            /* [annotation][in] */ 
-            _In_  ATTRIBUTEID Id,
-            /* [annotation][out] */ 
-            _Out_  VARIANT *pValueIds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValuesDesc) = 0;
+            /* [in] */ ATTRIBUTEID Id,
+            /* [out] */ __RPC__out VARIANT *pValueIds,
+            /* [retval][out] */ __RPC__out VARIANT *pValuesDesc) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateAttribute( 
-            /* [annotation][in] */ 
-            _In_  ATTRIBUTEID Id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppAttributeObject) = 0;
+            /* [in] */ ATTRIBUTEID Id,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppAttributeObject) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetAttributeID( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAttributeName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ATTRIBUTEID *pId) = 0;
+            /* [in] */ __RPC__in BSTR bstrAttributeName,
+            /* [retval][out] */ __RPC__out ATTRIBUTEID *pId) = 0;
         
     };
     
@@ -2348,8 +2172,7 @@ EXTERN_C const IID IID_ISdoDictionaryOld;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISdoDictionaryOld * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2364,31 +2187,23 @@ EXTERN_C const IID IID_ISdoDictionaryOld;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISdoDictionaryOld * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISdoDictionaryOld * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISdoDictionaryOld * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2413,46 +2228,34 @@ EXTERN_C const IID IID_ISdoDictionaryOld;
         DECLSPEC_XFGVIRT(ISdoDictionaryOld, EnumAttributes)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumAttributes )( 
             __RPC__in ISdoDictionaryOld * This,
-            /* [annotation][out][in] */ 
-            _Inout_  VARIANT *Id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValues);
+            /* [out][in] */ __RPC__inout VARIANT *Id,
+            /* [retval][out] */ __RPC__out VARIANT *pValues);
         
         DECLSPEC_XFGVIRT(ISdoDictionaryOld, GetAttributeInfo)
         /* [hidden][id] */ HRESULT ( STDMETHODCALLTYPE *GetAttributeInfo )( 
             __RPC__in ISdoDictionaryOld * This,
-            /* [annotation][in] */ 
-            _In_  ATTRIBUTEID Id,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pInfoIDs,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pInfoValues);
+            /* [in] */ ATTRIBUTEID Id,
+            /* [in] */ __RPC__in VARIANT *pInfoIDs,
+            /* [retval][out] */ __RPC__out VARIANT *pInfoValues);
         
         DECLSPEC_XFGVIRT(ISdoDictionaryOld, EnumAttributeValues)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumAttributeValues )( 
             __RPC__in ISdoDictionaryOld * This,
-            /* [annotation][in] */ 
-            _In_  ATTRIBUTEID Id,
-            /* [annotation][out] */ 
-            _Out_  VARIANT *pValueIds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValuesDesc);
+            /* [in] */ ATTRIBUTEID Id,
+            /* [out] */ __RPC__out VARIANT *pValueIds,
+            /* [retval][out] */ __RPC__out VARIANT *pValuesDesc);
         
         DECLSPEC_XFGVIRT(ISdoDictionaryOld, CreateAttribute)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateAttribute )( 
             __RPC__in ISdoDictionaryOld * This,
-            /* [annotation][in] */ 
-            _In_  ATTRIBUTEID Id,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppAttributeObject);
+            /* [in] */ ATTRIBUTEID Id,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppAttributeObject);
         
         DECLSPEC_XFGVIRT(ISdoDictionaryOld, GetAttributeID)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetAttributeID )( 
             __RPC__in ISdoDictionaryOld * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAttributeName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ATTRIBUTEID *pId);
+            /* [in] */ __RPC__in BSTR bstrAttributeName,
+            /* [retval][out] */ __RPC__out ATTRIBUTEID *pId);
         
         END_INTERFACE
     } ISdoDictionaryOldVtbl;

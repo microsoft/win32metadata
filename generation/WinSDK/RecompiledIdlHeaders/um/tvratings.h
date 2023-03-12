@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -124,16 +124,11 @@ EXTERN_C const IID IID_IXDSToRat;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Init( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ParseXDSBytePair( 
-            /* [annotation][in] */ 
-            _In_  BYTE byte1,
-            /* [annotation][in] */ 
-            _In_  BYTE byte2,
-            /* [annotation][out] */ 
-            _Out_  EnTvRat_System *pEnSystem,
-            /* [annotation][out] */ 
-            _Out_  EnTvRat_GenericLevel *pEnLevel,
-            /* [annotation][out] */ 
-            _Out_  LONG *plBfEnAttributes) = 0;
+            /* [in] */ BYTE byte1,
+            /* [in] */ BYTE byte2,
+            /* [out] */ __RPC__out EnTvRat_System *pEnSystem,
+            /* [out] */ __RPC__out EnTvRat_GenericLevel *pEnLevel,
+            /* [out] */ __RPC__out LONG *plBfEnAttributes) = 0;
         
     };
     
@@ -147,8 +142,7 @@ EXTERN_C const IID IID_IXDSToRat;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXDSToRat * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -163,31 +157,23 @@ EXTERN_C const IID IID_IXDSToRat;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IXDSToRat * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IXDSToRat * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IXDSToRat * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -216,16 +202,11 @@ EXTERN_C const IID IID_IXDSToRat;
         DECLSPEC_XFGVIRT(IXDSToRat, ParseXDSBytePair)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ParseXDSBytePair )( 
             __RPC__in IXDSToRat * This,
-            /* [annotation][in] */ 
-            _In_  BYTE byte1,
-            /* [annotation][in] */ 
-            _In_  BYTE byte2,
-            /* [annotation][out] */ 
-            _Out_  EnTvRat_System *pEnSystem,
-            /* [annotation][out] */ 
-            _Out_  EnTvRat_GenericLevel *pEnLevel,
-            /* [annotation][out] */ 
-            _Out_  LONG *plBfEnAttributes);
+            /* [in] */ BYTE byte1,
+            /* [in] */ BYTE byte2,
+            /* [out] */ __RPC__out EnTvRat_System *pEnSystem,
+            /* [out] */ __RPC__out EnTvRat_GenericLevel *pEnLevel,
+            /* [out] */ __RPC__out LONG *plBfEnAttributes);
         
         END_INTERFACE
     } IXDSToRatVtbl;
@@ -296,56 +277,36 @@ EXTERN_C const IID IID_IEvalRat;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BlockedRatingAttributes( 
-            /* [annotation][in] */ 
-            _In_  EnTvRat_System enSystem,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_GenericLevel enLevel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plbfAttrs) = 0;
+            /* [in] */ EnTvRat_System enSystem,
+            /* [in] */ EnTvRat_GenericLevel enLevel,
+            /* [retval][out] */ __RPC__out LONG *plbfAttrs) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_BlockedRatingAttributes( 
-            /* [annotation][in] */ 
-            _In_  EnTvRat_System enSystem,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_GenericLevel enLevel,
-            /* [annotation][in] */ 
-            _In_  LONG lbfAttrs) = 0;
+            /* [in] */ EnTvRat_System enSystem,
+            /* [in] */ EnTvRat_GenericLevel enLevel,
+            /* [in] */ LONG lbfAttrs) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BlockUnRated( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfBlockUnRatedShows) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pfBlockUnRatedShows) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_BlockUnRated( 
-            /* [annotation][in] */ 
-            _In_  BOOL fBlockUnRatedShows) = 0;
+            /* [in] */ BOOL fBlockUnRatedShows) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE MostRestrictiveRating( 
-            /* [annotation][in] */ 
-            _In_  EnTvRat_System enSystem1,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_GenericLevel enEnLevel1,
-            /* [annotation][in] */ 
-            _In_  LONG lbfEnAttr1,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_System enSystem2,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_GenericLevel enEnLevel2,
-            /* [annotation][in] */ 
-            _In_  LONG lbfEnAttr2,
-            /* [annotation][out] */ 
-            _Out_  EnTvRat_System *penSystem,
-            /* [annotation][out] */ 
-            _Out_  EnTvRat_GenericLevel *penEnLevel,
-            /* [annotation][out] */ 
-            _Out_  LONG *plbfEnAttr) = 0;
+            /* [in] */ EnTvRat_System enSystem1,
+            /* [in] */ EnTvRat_GenericLevel enEnLevel1,
+            /* [in] */ LONG lbfEnAttr1,
+            /* [in] */ EnTvRat_System enSystem2,
+            /* [in] */ EnTvRat_GenericLevel enEnLevel2,
+            /* [in] */ LONG lbfEnAttr2,
+            /* [out] */ __RPC__out EnTvRat_System *penSystem,
+            /* [out] */ __RPC__out EnTvRat_GenericLevel *penEnLevel,
+            /* [out] */ __RPC__out LONG *plbfEnAttr) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE TestRating( 
-            /* [annotation][in] */ 
-            _In_  EnTvRat_System enShowSystem,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_GenericLevel enShowLevel,
-            /* [annotation][in] */ 
-            _In_  LONG lbfEnShowAttributes) = 0;
+            /* [in] */ EnTvRat_System enShowSystem,
+            /* [in] */ EnTvRat_GenericLevel enShowLevel,
+            /* [in] */ LONG lbfEnShowAttributes) = 0;
         
     };
     
@@ -359,8 +320,7 @@ EXTERN_C const IID IID_IEvalRat;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEvalRat * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -375,31 +335,23 @@ EXTERN_C const IID IID_IEvalRat;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IEvalRat * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IEvalRat * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IEvalRat * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -424,66 +376,46 @@ EXTERN_C const IID IID_IEvalRat;
         DECLSPEC_XFGVIRT(IEvalRat, get_BlockedRatingAttributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockedRatingAttributes )( 
             __RPC__in IEvalRat * This,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_System enSystem,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_GenericLevel enLevel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plbfAttrs);
+            /* [in] */ EnTvRat_System enSystem,
+            /* [in] */ EnTvRat_GenericLevel enLevel,
+            /* [retval][out] */ __RPC__out LONG *plbfAttrs);
         
         DECLSPEC_XFGVIRT(IEvalRat, put_BlockedRatingAttributes)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BlockedRatingAttributes )( 
             __RPC__in IEvalRat * This,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_System enSystem,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_GenericLevel enLevel,
-            /* [annotation][in] */ 
-            _In_  LONG lbfAttrs);
+            /* [in] */ EnTvRat_System enSystem,
+            /* [in] */ EnTvRat_GenericLevel enLevel,
+            /* [in] */ LONG lbfAttrs);
         
         DECLSPEC_XFGVIRT(IEvalRat, get_BlockUnRated)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockUnRated )( 
             __RPC__in IEvalRat * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfBlockUnRatedShows);
+            /* [retval][out] */ __RPC__out BOOL *pfBlockUnRatedShows);
         
         DECLSPEC_XFGVIRT(IEvalRat, put_BlockUnRated)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BlockUnRated )( 
             __RPC__in IEvalRat * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fBlockUnRatedShows);
+            /* [in] */ BOOL fBlockUnRatedShows);
         
         DECLSPEC_XFGVIRT(IEvalRat, MostRestrictiveRating)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MostRestrictiveRating )( 
             __RPC__in IEvalRat * This,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_System enSystem1,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_GenericLevel enEnLevel1,
-            /* [annotation][in] */ 
-            _In_  LONG lbfEnAttr1,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_System enSystem2,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_GenericLevel enEnLevel2,
-            /* [annotation][in] */ 
-            _In_  LONG lbfEnAttr2,
-            /* [annotation][out] */ 
-            _Out_  EnTvRat_System *penSystem,
-            /* [annotation][out] */ 
-            _Out_  EnTvRat_GenericLevel *penEnLevel,
-            /* [annotation][out] */ 
-            _Out_  LONG *plbfEnAttr);
+            /* [in] */ EnTvRat_System enSystem1,
+            /* [in] */ EnTvRat_GenericLevel enEnLevel1,
+            /* [in] */ LONG lbfEnAttr1,
+            /* [in] */ EnTvRat_System enSystem2,
+            /* [in] */ EnTvRat_GenericLevel enEnLevel2,
+            /* [in] */ LONG lbfEnAttr2,
+            /* [out] */ __RPC__out EnTvRat_System *penSystem,
+            /* [out] */ __RPC__out EnTvRat_GenericLevel *penEnLevel,
+            /* [out] */ __RPC__out LONG *plbfEnAttr);
         
         DECLSPEC_XFGVIRT(IEvalRat, TestRating)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *TestRating )( 
             __RPC__in IEvalRat * This,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_System enShowSystem,
-            /* [annotation][in] */ 
-            _In_  EnTvRat_GenericLevel enShowLevel,
-            /* [annotation][in] */ 
-            _In_  LONG lbfEnShowAttributes);
+            /* [in] */ EnTvRat_System enShowSystem,
+            /* [in] */ EnTvRat_GenericLevel enShowLevel,
+            /* [in] */ LONG lbfEnShowAttributes);
         
         END_INTERFACE
     } IEvalRatVtbl;

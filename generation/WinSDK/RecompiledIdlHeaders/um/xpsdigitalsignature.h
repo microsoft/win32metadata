@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -34,7 +34,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -202,72 +202,55 @@ EXTERN_C const IID IID_IXpsSigningOptions;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSignatureId( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *signatureId) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *signatureId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSignatureId( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR signatureId) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR signatureId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignatureMethod( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *signatureMethod) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *signatureMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSignatureMethod( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR signatureMethod) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR signatureMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDigestMethod( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *digestMethod) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *digestMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDigestMethod( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR digestMethod) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR digestMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignaturePartName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **signaturePartName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **signaturePartName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSignaturePartName( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *signaturePartName) = 0;
+            /* [in] */ __RPC__in_opt IOpcPartUri *signaturePartName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPolicy( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIGN_POLICY *policy) = 0;
+            /* [retval][out] */ __RPC__out XPS_SIGN_POLICY *policy) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPolicy( 
-            /* [annotation][in] */ 
-            _In_  XPS_SIGN_POLICY policy) = 0;
+            /* [in] */ XPS_SIGN_POLICY policy) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSigningTimeFormat( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  OPC_SIGNATURE_TIME_FORMAT *timeFormat) = 0;
+            /* [retval][out] */ __RPC__out OPC_SIGNATURE_TIME_FORMAT *timeFormat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSigningTimeFormat( 
-            /* [annotation][in] */ 
-            _In_  OPC_SIGNATURE_TIME_FORMAT timeFormat) = 0;
+            /* [in] */ OPC_SIGNATURE_TIME_FORMAT timeFormat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCustomObjects( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcSignatureCustomObjectSet **customObjectSet) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IOpcSignatureCustomObjectSet **customObjectSet) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCustomReferences( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcSignatureReferenceSet **customReferenceSet) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IOpcSignatureReferenceSet **customReferenceSet) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCertificateSet( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcCertificateSet **certificateSet) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IOpcCertificateSet **certificateSet) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIGN_FLAGS *flags) = 0;
+            /* [retval][out] */ __RPC__out XPS_SIGN_FLAGS *flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFlags( 
-            /* [annotation][in] */ 
-            _In_  XPS_SIGN_FLAGS flags) = 0;
+            /* [in] */ XPS_SIGN_FLAGS flags) = 0;
         
     };
     
@@ -281,8 +264,7 @@ EXTERN_C const IID IID_IXpsSigningOptions;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -297,104 +279,87 @@ EXTERN_C const IID IID_IXpsSigningOptions;
         DECLSPEC_XFGVIRT(IXpsSigningOptions, GetSignatureId)
         HRESULT ( STDMETHODCALLTYPE *GetSignatureId )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *signatureId);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *signatureId);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, SetSignatureId)
         HRESULT ( STDMETHODCALLTYPE *SetSignatureId )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR signatureId);
+            /* [string][in] */ __RPC__in_string LPCWSTR signatureId);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, GetSignatureMethod)
         HRESULT ( STDMETHODCALLTYPE *GetSignatureMethod )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *signatureMethod);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *signatureMethod);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, SetSignatureMethod)
         HRESULT ( STDMETHODCALLTYPE *SetSignatureMethod )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR signatureMethod);
+            /* [string][in] */ __RPC__in_string LPCWSTR signatureMethod);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, GetDigestMethod)
         HRESULT ( STDMETHODCALLTYPE *GetDigestMethod )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *digestMethod);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *digestMethod);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, SetDigestMethod)
         HRESULT ( STDMETHODCALLTYPE *SetDigestMethod )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR digestMethod);
+            /* [string][in] */ __RPC__in_string LPCWSTR digestMethod);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, GetSignaturePartName)
         HRESULT ( STDMETHODCALLTYPE *GetSignaturePartName )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **signaturePartName);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **signaturePartName);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, SetSignaturePartName)
         HRESULT ( STDMETHODCALLTYPE *SetSignaturePartName )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *signaturePartName);
+            /* [in] */ __RPC__in_opt IOpcPartUri *signaturePartName);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, GetPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetPolicy )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIGN_POLICY *policy);
+            /* [retval][out] */ __RPC__out XPS_SIGN_POLICY *policy);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, SetPolicy)
         HRESULT ( STDMETHODCALLTYPE *SetPolicy )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][in] */ 
-            _In_  XPS_SIGN_POLICY policy);
+            /* [in] */ XPS_SIGN_POLICY policy);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, GetSigningTimeFormat)
         HRESULT ( STDMETHODCALLTYPE *GetSigningTimeFormat )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  OPC_SIGNATURE_TIME_FORMAT *timeFormat);
+            /* [retval][out] */ __RPC__out OPC_SIGNATURE_TIME_FORMAT *timeFormat);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, SetSigningTimeFormat)
         HRESULT ( STDMETHODCALLTYPE *SetSigningTimeFormat )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][in] */ 
-            _In_  OPC_SIGNATURE_TIME_FORMAT timeFormat);
+            /* [in] */ OPC_SIGNATURE_TIME_FORMAT timeFormat);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, GetCustomObjects)
         HRESULT ( STDMETHODCALLTYPE *GetCustomObjects )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcSignatureCustomObjectSet **customObjectSet);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcSignatureCustomObjectSet **customObjectSet);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, GetCustomReferences)
         HRESULT ( STDMETHODCALLTYPE *GetCustomReferences )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcSignatureReferenceSet **customReferenceSet);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcSignatureReferenceSet **customReferenceSet);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, GetCertificateSet)
         HRESULT ( STDMETHODCALLTYPE *GetCertificateSet )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcCertificateSet **certificateSet);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcCertificateSet **certificateSet);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIGN_FLAGS *flags);
+            /* [retval][out] */ __RPC__out XPS_SIGN_FLAGS *flags);
         
         DECLSPEC_XFGVIRT(IXpsSigningOptions, SetFlags)
         HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             __RPC__in IXpsSigningOptions * This,
-            /* [annotation][in] */ 
-            _In_  XPS_SIGN_FLAGS flags);
+            /* [in] */ XPS_SIGN_FLAGS flags);
         
         END_INTERFACE
     } IXpsSigningOptionsVtbl;
@@ -497,14 +462,11 @@ EXTERN_C const IID IID_IXpsSignatureCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignature **signature) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignature **signature) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
             UINT32 index) = 0;
@@ -521,8 +483,7 @@ EXTERN_C const IID IID_IXpsSignatureCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsSignatureCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -537,16 +498,13 @@ EXTERN_C const IID IID_IXpsSignatureCollection;
         DECLSPEC_XFGVIRT(IXpsSignatureCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsSignatureCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsSignatureCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsSignatureCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignature **signature);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignature **signature);
         
         DECLSPEC_XFGVIRT(IXpsSignatureCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
@@ -612,60 +570,44 @@ EXTERN_C const IID IID_IXpsSignature;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSignatureId( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *sigId) = 0;
+            /* [retval][string][out] */ LPWSTR *sigId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignatureValue( 
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*count)  UINT8 **signatureHashValue,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *count) = 0;
+            /* [size_is][size_is][out] */ UINT8 **signatureHashValue,
+            /* [out] */ UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCertificateEnumerator( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcCertificateEnumerator **certificateEnumerator) = 0;
+            /* [retval][out] */ IOpcCertificateEnumerator **certificateEnumerator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSigningTime( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *sigDateTimeString) = 0;
+            /* [retval][string][out] */ LPWSTR *sigDateTimeString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSigningTimeFormat( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  OPC_SIGNATURE_TIME_FORMAT *timeFormat) = 0;
+            /* [retval][out] */ OPC_SIGNATURE_TIME_FORMAT *timeFormat) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignaturePartName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **signaturePartName) = 0;
+            /* [retval][out] */ IOpcPartUri **signaturePartName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Verify( 
-            /* [annotation][in] */ 
-            _In_  const CERT_CONTEXT *x509Certificate,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIGNATURE_STATUS *sigStatus) = 0;
+            /* [in] */ const CERT_CONTEXT *x509Certificate,
+            /* [retval][out] */ XPS_SIGNATURE_STATUS *sigStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPolicy( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIGN_POLICY *policy) = 0;
+            /* [retval][out] */ XPS_SIGN_POLICY *policy) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCustomObjectEnumerator( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcSignatureCustomObjectEnumerator **customObjectEnumerator) = 0;
+            /* [retval][out] */ IOpcSignatureCustomObjectEnumerator **customObjectEnumerator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCustomReferenceEnumerator( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcSignatureReferenceEnumerator **customReferenceEnumerator) = 0;
+            /* [retval][out] */ IOpcSignatureReferenceEnumerator **customReferenceEnumerator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignatureXml( 
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*count)  UINT8 **signatureXml,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *count) = 0;
+            /* [size_is][size_is][out] */ UINT8 **signatureXml,
+            /* [out] */ UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSignatureXml( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(count)  const UINT8 *signatureXml,
-            /* [annotation][in] */ 
-            _In_  UINT32 count) = 0;
+            /* [size_is][in] */ const UINT8 *signatureXml,
+            /* [in] */ UINT32 count) = 0;
         
     };
     
@@ -679,8 +621,7 @@ EXTERN_C const IID IID_IXpsSignature;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsSignature * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -695,82 +636,66 @@ EXTERN_C const IID IID_IXpsSignature;
         DECLSPEC_XFGVIRT(IXpsSignature, GetSignatureId)
         HRESULT ( STDMETHODCALLTYPE *GetSignatureId )( 
             IXpsSignature * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *sigId);
+            /* [retval][string][out] */ LPWSTR *sigId);
         
         DECLSPEC_XFGVIRT(IXpsSignature, GetSignatureValue)
         HRESULT ( STDMETHODCALLTYPE *GetSignatureValue )( 
             IXpsSignature * This,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*count)  UINT8 **signatureHashValue,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *count);
+            /* [size_is][size_is][out] */ UINT8 **signatureHashValue,
+            /* [out] */ UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsSignature, GetCertificateEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetCertificateEnumerator )( 
             IXpsSignature * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcCertificateEnumerator **certificateEnumerator);
+            /* [retval][out] */ IOpcCertificateEnumerator **certificateEnumerator);
         
         DECLSPEC_XFGVIRT(IXpsSignature, GetSigningTime)
         HRESULT ( STDMETHODCALLTYPE *GetSigningTime )( 
             IXpsSignature * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *sigDateTimeString);
+            /* [retval][string][out] */ LPWSTR *sigDateTimeString);
         
         DECLSPEC_XFGVIRT(IXpsSignature, GetSigningTimeFormat)
         HRESULT ( STDMETHODCALLTYPE *GetSigningTimeFormat )( 
             IXpsSignature * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  OPC_SIGNATURE_TIME_FORMAT *timeFormat);
+            /* [retval][out] */ OPC_SIGNATURE_TIME_FORMAT *timeFormat);
         
         DECLSPEC_XFGVIRT(IXpsSignature, GetSignaturePartName)
         HRESULT ( STDMETHODCALLTYPE *GetSignaturePartName )( 
             IXpsSignature * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **signaturePartName);
+            /* [retval][out] */ IOpcPartUri **signaturePartName);
         
         DECLSPEC_XFGVIRT(IXpsSignature, Verify)
         HRESULT ( STDMETHODCALLTYPE *Verify )( 
             IXpsSignature * This,
-            /* [annotation][in] */ 
-            _In_  const CERT_CONTEXT *x509Certificate,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIGNATURE_STATUS *sigStatus);
+            /* [in] */ const CERT_CONTEXT *x509Certificate,
+            /* [retval][out] */ XPS_SIGNATURE_STATUS *sigStatus);
         
         DECLSPEC_XFGVIRT(IXpsSignature, GetPolicy)
         HRESULT ( STDMETHODCALLTYPE *GetPolicy )( 
             IXpsSignature * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIGN_POLICY *policy);
+            /* [retval][out] */ XPS_SIGN_POLICY *policy);
         
         DECLSPEC_XFGVIRT(IXpsSignature, GetCustomObjectEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetCustomObjectEnumerator )( 
             IXpsSignature * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcSignatureCustomObjectEnumerator **customObjectEnumerator);
+            /* [retval][out] */ IOpcSignatureCustomObjectEnumerator **customObjectEnumerator);
         
         DECLSPEC_XFGVIRT(IXpsSignature, GetCustomReferenceEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetCustomReferenceEnumerator )( 
             IXpsSignature * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcSignatureReferenceEnumerator **customReferenceEnumerator);
+            /* [retval][out] */ IOpcSignatureReferenceEnumerator **customReferenceEnumerator);
         
         DECLSPEC_XFGVIRT(IXpsSignature, GetSignatureXml)
         HRESULT ( STDMETHODCALLTYPE *GetSignatureXml )( 
             IXpsSignature * This,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*count)  UINT8 **signatureXml,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *count);
+            /* [size_is][size_is][out] */ UINT8 **signatureXml,
+            /* [out] */ UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsSignature, SetSignatureXml)
         HRESULT ( STDMETHODCALLTYPE *SetSignatureXml )( 
             IXpsSignature * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(count)  const UINT8 *signatureXml,
-            /* [annotation][in] */ 
-            _In_  UINT32 count);
+            /* [size_is][in] */ const UINT8 *signatureXml,
+            /* [in] */ UINT32 count);
         
         END_INTERFACE
     } IXpsSignatureVtbl;
@@ -858,14 +783,11 @@ EXTERN_C const IID IID_IXpsSignatureBlockCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureBlock **signatureBlock) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignatureBlock **signatureBlock) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
             UINT32 index) = 0;
@@ -882,8 +804,7 @@ EXTERN_C const IID IID_IXpsSignatureBlockCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsSignatureBlockCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -898,16 +819,13 @@ EXTERN_C const IID IID_IXpsSignatureBlockCollection;
         DECLSPEC_XFGVIRT(IXpsSignatureBlockCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsSignatureBlockCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsSignatureBlockCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsSignatureBlockCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureBlock **signatureBlock);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignatureBlock **signatureBlock);
         
         DECLSPEC_XFGVIRT(IXpsSignatureBlockCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
@@ -973,26 +891,20 @@ EXTERN_C const IID IID_IXpsSignatureBlock;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRequests( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureRequestCollection **requests) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignatureRequestCollection **requests) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPartName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDocumentIndex( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *fixedDocumentIndex) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *fixedDocumentIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDocumentName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **fixedDocumentName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **fixedDocumentName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateRequest( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR requestId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureRequest **signatureRequest) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR requestId,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignatureRequest **signatureRequest) = 0;
         
     };
     
@@ -1006,8 +918,7 @@ EXTERN_C const IID IID_IXpsSignatureBlock;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsSignatureBlock * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1022,34 +933,28 @@ EXTERN_C const IID IID_IXpsSignatureBlock;
         DECLSPEC_XFGVIRT(IXpsSignatureBlock, GetRequests)
         HRESULT ( STDMETHODCALLTYPE *GetRequests )( 
             __RPC__in IXpsSignatureBlock * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureRequestCollection **requests);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignatureRequestCollection **requests);
         
         DECLSPEC_XFGVIRT(IXpsSignatureBlock, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsSignatureBlock * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partName);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partName);
         
         DECLSPEC_XFGVIRT(IXpsSignatureBlock, GetDocumentIndex)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentIndex )( 
             __RPC__in IXpsSignatureBlock * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *fixedDocumentIndex);
+            /* [retval][out] */ __RPC__out UINT32 *fixedDocumentIndex);
         
         DECLSPEC_XFGVIRT(IXpsSignatureBlock, GetDocumentName)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentName )( 
             __RPC__in IXpsSignatureBlock * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **fixedDocumentName);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **fixedDocumentName);
         
         DECLSPEC_XFGVIRT(IXpsSignatureBlock, CreateRequest)
         HRESULT ( STDMETHODCALLTYPE *CreateRequest )( 
             __RPC__in IXpsSignatureBlock * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR requestId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureRequest **signatureRequest);
+            /* [string][in] */ __RPC__in_string LPCWSTR requestId,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignatureRequest **signatureRequest);
         
         END_INTERFACE
     } IXpsSignatureBlockVtbl;
@@ -1116,18 +1021,14 @@ EXTERN_C const IID IID_IXpsSignatureRequestCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureRequest **signatureRequest) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignatureRequest **signatureRequest) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
     };
     
@@ -1141,8 +1042,7 @@ EXTERN_C const IID IID_IXpsSignatureRequestCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsSignatureRequestCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1157,22 +1057,18 @@ EXTERN_C const IID IID_IXpsSignatureRequestCollection;
         DECLSPEC_XFGVIRT(IXpsSignatureRequestCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsSignatureRequestCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequestCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsSignatureRequestCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureRequest **signatureRequest);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignatureRequest **signatureRequest);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequestCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsSignatureRequestCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         END_INTERFACE
     } IXpsSignatureRequestCollectionVtbl;
@@ -1233,62 +1129,45 @@ EXTERN_C const IID IID_IXpsSignatureRequest;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetIntent( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *intent) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *intent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIntent( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR intent) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR intent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRequestedSigner( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *signerName) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *signerName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRequestedSigner( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR signerName) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR signerName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRequestSignByDate( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *dateString) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *dateString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRequestSignByDate( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR dateString) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR dateString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSigningLocale( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *place) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *place) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSigningLocale( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR place) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR place) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSpotLocation( 
-            /* [annotation][out] */ 
-            _Out_  INT32 *pageIndex,
-            /* [annotation][out] */ 
-            _Out_  IOpcPartUri **pagePartName,
-            /* [annotation][out] */ 
-            _Out_  float *x,
-            /* [annotation][out] */ 
-            _Out_  float *y) = 0;
+            /* [out] */ __RPC__out INT32 *pageIndex,
+            /* [out] */ __RPC__deref_out_opt IOpcPartUri **pagePartName,
+            /* [out] */ __RPC__out float *x,
+            /* [out] */ __RPC__out float *y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSpotLocation( 
-            /* [annotation][in] */ 
-            _In_  INT32 pageIndex,
-            /* [annotation][in] */ 
-            _In_  float x,
-            /* [annotation][in] */ 
-            _In_  float y) = 0;
+            /* [in] */ INT32 pageIndex,
+            /* [in] */ float x,
+            /* [in] */ float y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRequestId( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *requestId) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *requestId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignature( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignature **signature) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignature **signature) = 0;
         
     };
     
@@ -1302,8 +1181,7 @@ EXTERN_C const IID IID_IXpsSignatureRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1318,84 +1196,67 @@ EXTERN_C const IID IID_IXpsSignatureRequest;
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, GetIntent)
         HRESULT ( STDMETHODCALLTYPE *GetIntent )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *intent);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *intent);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, SetIntent)
         HRESULT ( STDMETHODCALLTYPE *SetIntent )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR intent);
+            /* [string][in] */ __RPC__in_string LPCWSTR intent);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, GetRequestedSigner)
         HRESULT ( STDMETHODCALLTYPE *GetRequestedSigner )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *signerName);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *signerName);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, SetRequestedSigner)
         HRESULT ( STDMETHODCALLTYPE *SetRequestedSigner )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR signerName);
+            /* [string][in] */ __RPC__in_string LPCWSTR signerName);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, GetRequestSignByDate)
         HRESULT ( STDMETHODCALLTYPE *GetRequestSignByDate )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *dateString);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *dateString);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, SetRequestSignByDate)
         HRESULT ( STDMETHODCALLTYPE *SetRequestSignByDate )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR dateString);
+            /* [string][in] */ __RPC__in_string LPCWSTR dateString);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, GetSigningLocale)
         HRESULT ( STDMETHODCALLTYPE *GetSigningLocale )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *place);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *place);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, SetSigningLocale)
         HRESULT ( STDMETHODCALLTYPE *SetSigningLocale )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR place);
+            /* [string][in] */ __RPC__in_string LPCWSTR place);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, GetSpotLocation)
         HRESULT ( STDMETHODCALLTYPE *GetSpotLocation )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][out] */ 
-            _Out_  INT32 *pageIndex,
-            /* [annotation][out] */ 
-            _Out_  IOpcPartUri **pagePartName,
-            /* [annotation][out] */ 
-            _Out_  float *x,
-            /* [annotation][out] */ 
-            _Out_  float *y);
+            /* [out] */ __RPC__out INT32 *pageIndex,
+            /* [out] */ __RPC__deref_out_opt IOpcPartUri **pagePartName,
+            /* [out] */ __RPC__out float *x,
+            /* [out] */ __RPC__out float *y);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, SetSpotLocation)
         HRESULT ( STDMETHODCALLTYPE *SetSpotLocation )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][in] */ 
-            _In_  INT32 pageIndex,
-            /* [annotation][in] */ 
-            _In_  float x,
-            /* [annotation][in] */ 
-            _In_  float y);
+            /* [in] */ INT32 pageIndex,
+            /* [in] */ float x,
+            /* [in] */ float y);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, GetRequestId)
         HRESULT ( STDMETHODCALLTYPE *GetRequestId )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *requestId);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *requestId);
         
         DECLSPEC_XFGVIRT(IXpsSignatureRequest, GetSignature)
         HRESULT ( STDMETHODCALLTYPE *GetSignature )( 
             __RPC__in IXpsSignatureRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignature **signature);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsSignature **signature);
         
         END_INTERFACE
     } IXpsSignatureRequestVtbl;
@@ -1483,60 +1344,43 @@ EXTERN_C const IID IID_IXpsSignatureManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE LoadPackageFile( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName) = 0;
+            /* [string][in] */ LPCWSTR fileName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LoadPackageStream( 
-            /* [annotation][in] */ 
-            _In_  IStream *stream) = 0;
+            /* [in] */ IStream *stream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Sign( 
-            /* [annotation][in] */ 
-            _In_  IXpsSigningOptions *signOptions,
-            /* [annotation][in] */ 
-            _In_  const CERT_CONTEXT *x509Certificate,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignature **signature) = 0;
+            /* [in] */ IXpsSigningOptions *signOptions,
+            /* [in] */ const CERT_CONTEXT *x509Certificate,
+            /* [retval][out] */ IXpsSignature **signature) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignatureOriginPartName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **signatureOriginPartName) = 0;
+            /* [retval][out] */ IOpcPartUri **signatureOriginPartName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSignatureOriginPartName( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *signatureOriginPartName) = 0;
+            /* [in] */ IOpcPartUri *signatureOriginPartName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignatures( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureCollection **signatures) = 0;
+            /* [retval][out] */ IXpsSignatureCollection **signatures) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddSignatureBlock( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][in] */ 
-            _In_  UINT32 fixedDocumentIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureBlock **signatureBlock) = 0;
+            /* [in] */ IOpcPartUri *partName,
+            /* [in] */ UINT32 fixedDocumentIndex,
+            /* [retval][out] */ IXpsSignatureBlock **signatureBlock) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignatureBlocks( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureBlockCollection **signatureBlocks) = 0;
+            /* [retval][out] */ IXpsSignatureBlockCollection **signatureBlocks) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateSigningOptions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSigningOptions **signingOptions) = 0;
+            /* [retval][out] */ IXpsSigningOptions **signingOptions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SavePackageToFile( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes) = 0;
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SavePackageToStream( 
-            /* [annotation][in] */ 
-            _In_  IStream *stream) = 0;
+            /* [in] */ IStream *stream) = 0;
         
     };
     
@@ -1550,8 +1394,7 @@ EXTERN_C const IID IID_IXpsSignatureManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsSignatureManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1566,80 +1409,63 @@ EXTERN_C const IID IID_IXpsSignatureManager;
         DECLSPEC_XFGVIRT(IXpsSignatureManager, LoadPackageFile)
         HRESULT ( STDMETHODCALLTYPE *LoadPackageFile )( 
             IXpsSignatureManager * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName);
+            /* [string][in] */ LPCWSTR fileName);
         
         DECLSPEC_XFGVIRT(IXpsSignatureManager, LoadPackageStream)
         HRESULT ( STDMETHODCALLTYPE *LoadPackageStream )( 
             IXpsSignatureManager * This,
-            /* [annotation][in] */ 
-            _In_  IStream *stream);
+            /* [in] */ IStream *stream);
         
         DECLSPEC_XFGVIRT(IXpsSignatureManager, Sign)
         HRESULT ( STDMETHODCALLTYPE *Sign )( 
             IXpsSignatureManager * This,
-            /* [annotation][in] */ 
-            _In_  IXpsSigningOptions *signOptions,
-            /* [annotation][in] */ 
-            _In_  const CERT_CONTEXT *x509Certificate,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignature **signature);
+            /* [in] */ IXpsSigningOptions *signOptions,
+            /* [in] */ const CERT_CONTEXT *x509Certificate,
+            /* [retval][out] */ IXpsSignature **signature);
         
         DECLSPEC_XFGVIRT(IXpsSignatureManager, GetSignatureOriginPartName)
         HRESULT ( STDMETHODCALLTYPE *GetSignatureOriginPartName )( 
             IXpsSignatureManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **signatureOriginPartName);
+            /* [retval][out] */ IOpcPartUri **signatureOriginPartName);
         
         DECLSPEC_XFGVIRT(IXpsSignatureManager, SetSignatureOriginPartName)
         HRESULT ( STDMETHODCALLTYPE *SetSignatureOriginPartName )( 
             IXpsSignatureManager * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *signatureOriginPartName);
+            /* [in] */ IOpcPartUri *signatureOriginPartName);
         
         DECLSPEC_XFGVIRT(IXpsSignatureManager, GetSignatures)
         HRESULT ( STDMETHODCALLTYPE *GetSignatures )( 
             IXpsSignatureManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureCollection **signatures);
+            /* [retval][out] */ IXpsSignatureCollection **signatures);
         
         DECLSPEC_XFGVIRT(IXpsSignatureManager, AddSignatureBlock)
         HRESULT ( STDMETHODCALLTYPE *AddSignatureBlock )( 
             IXpsSignatureManager * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][in] */ 
-            _In_  UINT32 fixedDocumentIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureBlock **signatureBlock);
+            /* [in] */ IOpcPartUri *partName,
+            /* [in] */ UINT32 fixedDocumentIndex,
+            /* [retval][out] */ IXpsSignatureBlock **signatureBlock);
         
         DECLSPEC_XFGVIRT(IXpsSignatureManager, GetSignatureBlocks)
         HRESULT ( STDMETHODCALLTYPE *GetSignatureBlocks )( 
             IXpsSignatureManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSignatureBlockCollection **signatureBlocks);
+            /* [retval][out] */ IXpsSignatureBlockCollection **signatureBlocks);
         
         DECLSPEC_XFGVIRT(IXpsSignatureManager, CreateSigningOptions)
         HRESULT ( STDMETHODCALLTYPE *CreateSigningOptions )( 
             IXpsSignatureManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsSigningOptions **signingOptions);
+            /* [retval][out] */ IXpsSigningOptions **signingOptions);
         
         DECLSPEC_XFGVIRT(IXpsSignatureManager, SavePackageToFile)
         HRESULT ( STDMETHODCALLTYPE *SavePackageToFile )( 
             IXpsSignatureManager * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes);
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes);
         
         DECLSPEC_XFGVIRT(IXpsSignatureManager, SavePackageToStream)
         HRESULT ( STDMETHODCALLTYPE *SavePackageToStream )( 
             IXpsSignatureManager * This,
-            /* [annotation][in] */ 
-            _In_  IStream *stream);
+            /* [in] */ IStream *stream);
         
         END_INTERFACE
     } IXpsSignatureManagerVtbl;

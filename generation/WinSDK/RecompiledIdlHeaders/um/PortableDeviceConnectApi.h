@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -30,15 +30,15 @@
 #include "ole2.h"
 #endif /*COM_NO_WINDOWS_H*/
 
-#ifndef __portabledeviceconnectapi_h__
-#define __portabledeviceconnectapi_h__
+#ifndef __PortableDeviceConnectApi_h__
+#define __PortableDeviceConnectApi_h__
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -90,7 +90,7 @@ extern "C"{
 #endif 
 
 
-/* interface __MIDL_itf_portabledeviceconnectapi_0000_0000 */
+/* interface __MIDL_itf_PortableDeviceConnectApi_0000_0000 */
 /* [local] */ 
 
 #include <winapifamily.h>
@@ -109,8 +109,8 @@ DEFINE_DEVPROPKEY(DEVPKEY_MTPBTH_IsConnected,            0xea1237fa, 0x589d, 0x4
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_portabledeviceconnectapi_0000_0000_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_portabledeviceconnectapi_0000_0000_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_PortableDeviceConnectApi_0000_0000_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_PortableDeviceConnectApi_0000_0000_v0_0_s_ifspec;
 
 #ifndef __IEnumPortableDeviceConnectors_INTERFACE_DEFINED__
 #define __IEnumPortableDeviceConnectors_INTERFACE_DEFINED__
@@ -128,22 +128,17 @@ EXTERN_C const IID IID_IEnumPortableDeviceConnectors;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  UINT32 cRequested,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequested,*pcFetched)  IPortableDeviceConnector **pConnectors,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  UINT32 *pcFetched) = 0;
+            /* [in] */ UINT32 cRequested,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRequested, *pcFetched) IPortableDeviceConnector **pConnectors,
+            /* [unique][out][in] */ __RPC__inout_opt UINT32 *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  UINT32 cConnectors) = 0;
+            /* [in] */ UINT32 cConnectors) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumPortableDeviceConnectors **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumPortableDeviceConnectors **ppEnum) = 0;
         
     };
     
@@ -157,8 +152,7 @@ EXTERN_C const IID IID_IEnumPortableDeviceConnectors;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumPortableDeviceConnectors * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -173,18 +167,14 @@ EXTERN_C const IID IID_IEnumPortableDeviceConnectors;
         DECLSPEC_XFGVIRT(IEnumPortableDeviceConnectors, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumPortableDeviceConnectors * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 cRequested,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(cRequested,*pcFetched)  IPortableDeviceConnector **pConnectors,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  UINT32 *pcFetched);
+            /* [in] */ UINT32 cRequested,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(cRequested, *pcFetched) IPortableDeviceConnector **pConnectors,
+            /* [unique][out][in] */ __RPC__inout_opt UINT32 *pcFetched);
         
         DECLSPEC_XFGVIRT(IEnumPortableDeviceConnectors, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumPortableDeviceConnectors * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 cConnectors);
+            /* [in] */ UINT32 cConnectors);
         
         DECLSPEC_XFGVIRT(IEnumPortableDeviceConnectors, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -193,8 +183,7 @@ EXTERN_C const IID IID_IEnumPortableDeviceConnectors;
         DECLSPEC_XFGVIRT(IEnumPortableDeviceConnectors, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumPortableDeviceConnectors * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumPortableDeviceConnectors **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumPortableDeviceConnectors **ppEnum);
         
         END_INTERFACE
     } IEnumPortableDeviceConnectorsVtbl;
@@ -258,40 +247,28 @@ EXTERN_C const IID IID_IPortableDeviceConnector;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Connect( 
-            /* [annotation][in] */ 
-            _In_  IConnectionRequestCallback *pCallback) = 0;
+            /* [in] */ __RPC__in_opt IConnectionRequestCallback *pCallback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Disconnect( 
-            /* [annotation][in] */ 
-            _In_  IConnectionRequestCallback *pCallback) = 0;
+            /* [in] */ __RPC__in_opt IConnectionRequestCallback *pCallback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Cancel( 
-            /* [annotation][in] */ 
-            _In_  IConnectionRequestCallback *pCallback) = 0;
+            /* [in] */ __RPC__in_opt IConnectionRequestCallback *pCallback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [annotation][in] */ 
-            _In_  const DEVPROPKEY *pPropertyKey,
-            /* [annotation][out] */ 
-            _Out_  DEVPROPTYPE *pPropertyType,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcbData)  BYTE **ppData,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcbData) = 0;
+            /* [in] */ __RPC__in const DEVPROPKEY *pPropertyKey,
+            /* [out] */ __RPC__out DEVPROPTYPE *pPropertyType,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbData) BYTE **ppData,
+            /* [out] */ __RPC__out UINT32 *pcbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProperty( 
-            /* [annotation][in] */ 
-            _In_  const DEVPROPKEY *pPropertyKey,
-            /* [annotation][in] */ 
-            _In_  DEVPROPTYPE PropertyType,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbData)  const BYTE *pData,
-            /* [annotation][in] */ 
-            _In_  UINT32 cbData) = 0;
+            /* [in] */ __RPC__in const DEVPROPKEY *pPropertyKey,
+            /* [in] */ DEVPROPTYPE PropertyType,
+            /* [size_is][in] */ __RPC__in_ecount_full(cbData) const BYTE *pData,
+            /* [in] */ UINT32 cbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPnPID( 
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszPnPID) = 0;
+            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwszPnPID) = 0;
         
     };
     
@@ -305,8 +282,7 @@ EXTERN_C const IID IID_IPortableDeviceConnector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPortableDeviceConnector * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -321,50 +297,38 @@ EXTERN_C const IID IID_IPortableDeviceConnector;
         DECLSPEC_XFGVIRT(IPortableDeviceConnector, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IPortableDeviceConnector * This,
-            /* [annotation][in] */ 
-            _In_  IConnectionRequestCallback *pCallback);
+            /* [in] */ __RPC__in_opt IConnectionRequestCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IPortableDeviceConnector, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IPortableDeviceConnector * This,
-            /* [annotation][in] */ 
-            _In_  IConnectionRequestCallback *pCallback);
+            /* [in] */ __RPC__in_opt IConnectionRequestCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IPortableDeviceConnector, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in IPortableDeviceConnector * This,
-            /* [annotation][in] */ 
-            _In_  IConnectionRequestCallback *pCallback);
+            /* [in] */ __RPC__in_opt IConnectionRequestCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IPortableDeviceConnector, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IPortableDeviceConnector * This,
-            /* [annotation][in] */ 
-            _In_  const DEVPROPKEY *pPropertyKey,
-            /* [annotation][out] */ 
-            _Out_  DEVPROPTYPE *pPropertyType,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcbData)  BYTE **ppData,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcbData);
+            /* [in] */ __RPC__in const DEVPROPKEY *pPropertyKey,
+            /* [out] */ __RPC__out DEVPROPTYPE *pPropertyType,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbData) BYTE **ppData,
+            /* [out] */ __RPC__out UINT32 *pcbData);
         
         DECLSPEC_XFGVIRT(IPortableDeviceConnector, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IPortableDeviceConnector * This,
-            /* [annotation][in] */ 
-            _In_  const DEVPROPKEY *pPropertyKey,
-            /* [annotation][in] */ 
-            _In_  DEVPROPTYPE PropertyType,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbData)  const BYTE *pData,
-            /* [annotation][in] */ 
-            _In_  UINT32 cbData);
+            /* [in] */ __RPC__in const DEVPROPKEY *pPropertyKey,
+            /* [in] */ DEVPROPTYPE PropertyType,
+            /* [size_is][in] */ __RPC__in_ecount_full(cbData) const BYTE *pData,
+            /* [in] */ UINT32 cbData);
         
         DECLSPEC_XFGVIRT(IPortableDeviceConnector, GetPnPID)
         HRESULT ( STDMETHODCALLTYPE *GetPnPID )( 
             __RPC__in IPortableDeviceConnector * This,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *ppwszPnPID);
+            /* [out] */ __RPC__deref_out_opt LPWSTR *ppwszPnPID);
         
         END_INTERFACE
     } IPortableDeviceConnectorVtbl;
@@ -434,8 +398,7 @@ EXTERN_C const IID IID_IConnectionRequestCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnComplete( 
-            /* [annotation][in] */ 
-            _In_  HRESULT hrStatus) = 0;
+            /* [in] */ HRESULT hrStatus) = 0;
         
     };
     
@@ -449,8 +412,7 @@ EXTERN_C const IID IID_IConnectionRequestCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IConnectionRequestCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -465,8 +427,7 @@ EXTERN_C const IID IID_IConnectionRequestCallback;
         DECLSPEC_XFGVIRT(IConnectionRequestCallback, OnComplete)
         HRESULT ( STDMETHODCALLTYPE *OnComplete )( 
             __RPC__in IConnectionRequestCallback * This,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrStatus);
+            /* [in] */ HRESULT hrStatus);
         
         END_INTERFACE
     } IConnectionRequestCallbackVtbl;
@@ -524,15 +485,15 @@ EnumBthMtpConnectors;
 #endif
 #endif /* __PortableDeviceConnectApiLib_LIBRARY_DEFINED__ */
 
-/* interface __MIDL_itf_portabledeviceconnectapi_0000_0004 */
+/* interface __MIDL_itf_PortableDeviceConnectApi_0000_0004 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_portabledeviceconnectapi_0000_0004_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_portabledeviceconnectapi_0000_0004_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_PortableDeviceConnectApi_0000_0004_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_PortableDeviceConnectApi_0000_0004_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

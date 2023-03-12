@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -74,8 +74,8 @@ extern "C"{
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_tssbx_0000_0000_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_tssbx_0000_0000_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_tssbx_0000_0000_ClientIfHandle;
+extern RPC_IF_HANDLE __MIDL_itf_tssbx_0000_0000_ServerIfHandle;
 
 #ifndef __IWTSSBPlugin_INTERFACE_DEFINED__
 #define __IWTSSBPlugin_INTERFACE_DEFINED__
@@ -197,54 +197,35 @@ EXTERN_C const IID IID_IWTSSBPlugin;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *PluginCapabilities) = 0;
+            /* [out] */ __RPC__out DWORD *PluginCapabilities) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE WTSSBX_MachineChangeNotification( 
-            /* [annotation][in] */ 
-            _In_  WTSSBX_NOTIFICATION_TYPE NotificationType,
-            /* [annotation][in] */ 
-            _In_  long MachineId,
-            /* [annotation][in] */ 
-            _In_  WTSSBX_MACHINE_INFO *pMachineInfo) = 0;
+            /* [in] */ WTSSBX_NOTIFICATION_TYPE NotificationType,
+            /* [in] */ long MachineId,
+            /* [in] */ __RPC__in WTSSBX_MACHINE_INFO *pMachineInfo) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE WTSSBX_SessionChangeNotification( 
-            /* [annotation][in] */ 
-            _In_  WTSSBX_NOTIFICATION_TYPE NotificationType,
-            /* [annotation][in] */ 
-            _In_  long MachineId,
-            /* [annotation][in] */ 
-            _In_  DWORD NumOfSessions,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(NumOfSessions)  WTSSBX_SESSION_INFO SessionInfo[  ]) = 0;
+            /* [in] */ WTSSBX_NOTIFICATION_TYPE NotificationType,
+            /* [in] */ long MachineId,
+            /* [in] */ DWORD NumOfSessions,
+            /* [size_is][in] */ __RPC__in_ecount_full(NumOfSessions) WTSSBX_SESSION_INFO SessionInfo[  ]) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE WTSSBX_GetMostSuitableServer( 
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *UserName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *DomainName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *ApplicationType,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *FarmName,
-            /* [annotation][out][in] */ 
-            _Inout_  long *pMachineId) = 0;
+            /* [string][in] */ __RPC__in_string WCHAR *UserName,
+            /* [string][in] */ __RPC__in_string WCHAR *DomainName,
+            /* [string][in] */ __RPC__in_string WCHAR *ApplicationType,
+            /* [string][in] */ __RPC__in_string WCHAR *FarmName,
+            /* [out][in] */ __RPC__inout long *pMachineId) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Terminated( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE WTSSBX_GetUserExternalSession( 
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *UserName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *DomainName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *ApplicationType,
-            /* [annotation][in] */ 
-            _In_  WTSSBX_IP_ADDRESS *RedirectorInternalIP,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pSessionId,
-            /* [annotation][out] */ 
-            _Out_  WTSSBX_MACHINE_CONNECT_INFO *pMachineConnectInfo) = 0;
+            /* [string][in] */ __RPC__in_string WCHAR *UserName,
+            /* [string][in] */ __RPC__in_string WCHAR *DomainName,
+            /* [string][in] */ __RPC__in_string WCHAR *ApplicationType,
+            /* [in] */ __RPC__in WTSSBX_IP_ADDRESS *RedirectorInternalIP,
+            /* [out] */ __RPC__out DWORD *pSessionId,
+            /* [out] */ __RPC__out WTSSBX_MACHINE_CONNECT_INFO *pMachineConnectInfo) = 0;
         
     };
     
@@ -258,8 +239,7 @@ EXTERN_C const IID IID_IWTSSBPlugin;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSSBPlugin * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -274,44 +254,31 @@ EXTERN_C const IID IID_IWTSSBPlugin;
         DECLSPEC_XFGVIRT(IWTSSBPlugin, Initialize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWTSSBPlugin * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *PluginCapabilities);
+            /* [out] */ __RPC__out DWORD *PluginCapabilities);
         
         DECLSPEC_XFGVIRT(IWTSSBPlugin, WTSSBX_MachineChangeNotification)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *WTSSBX_MachineChangeNotification )( 
             __RPC__in IWTSSBPlugin * This,
-            /* [annotation][in] */ 
-            _In_  WTSSBX_NOTIFICATION_TYPE NotificationType,
-            /* [annotation][in] */ 
-            _In_  long MachineId,
-            /* [annotation][in] */ 
-            _In_  WTSSBX_MACHINE_INFO *pMachineInfo);
+            /* [in] */ WTSSBX_NOTIFICATION_TYPE NotificationType,
+            /* [in] */ long MachineId,
+            /* [in] */ __RPC__in WTSSBX_MACHINE_INFO *pMachineInfo);
         
         DECLSPEC_XFGVIRT(IWTSSBPlugin, WTSSBX_SessionChangeNotification)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *WTSSBX_SessionChangeNotification )( 
             __RPC__in IWTSSBPlugin * This,
-            /* [annotation][in] */ 
-            _In_  WTSSBX_NOTIFICATION_TYPE NotificationType,
-            /* [annotation][in] */ 
-            _In_  long MachineId,
-            /* [annotation][in] */ 
-            _In_  DWORD NumOfSessions,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(NumOfSessions)  WTSSBX_SESSION_INFO SessionInfo[  ]);
+            /* [in] */ WTSSBX_NOTIFICATION_TYPE NotificationType,
+            /* [in] */ long MachineId,
+            /* [in] */ DWORD NumOfSessions,
+            /* [size_is][in] */ __RPC__in_ecount_full(NumOfSessions) WTSSBX_SESSION_INFO SessionInfo[  ]);
         
         DECLSPEC_XFGVIRT(IWTSSBPlugin, WTSSBX_GetMostSuitableServer)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *WTSSBX_GetMostSuitableServer )( 
             __RPC__in IWTSSBPlugin * This,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *UserName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *DomainName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *ApplicationType,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *FarmName,
-            /* [annotation][out][in] */ 
-            _Inout_  long *pMachineId);
+            /* [string][in] */ __RPC__in_string WCHAR *UserName,
+            /* [string][in] */ __RPC__in_string WCHAR *DomainName,
+            /* [string][in] */ __RPC__in_string WCHAR *ApplicationType,
+            /* [string][in] */ __RPC__in_string WCHAR *FarmName,
+            /* [out][in] */ __RPC__inout long *pMachineId);
         
         DECLSPEC_XFGVIRT(IWTSSBPlugin, Terminated)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Terminated )( 
@@ -320,18 +287,12 @@ EXTERN_C const IID IID_IWTSSBPlugin;
         DECLSPEC_XFGVIRT(IWTSSBPlugin, WTSSBX_GetUserExternalSession)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *WTSSBX_GetUserExternalSession )( 
             __RPC__in IWTSSBPlugin * This,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *UserName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *DomainName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *ApplicationType,
-            /* [annotation][in] */ 
-            _In_  WTSSBX_IP_ADDRESS *RedirectorInternalIP,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pSessionId,
-            /* [annotation][out] */ 
-            _Out_  WTSSBX_MACHINE_CONNECT_INFO *pMachineConnectInfo);
+            /* [string][in] */ __RPC__in_string WCHAR *UserName,
+            /* [string][in] */ __RPC__in_string WCHAR *DomainName,
+            /* [string][in] */ __RPC__in_string WCHAR *ApplicationType,
+            /* [in] */ __RPC__in WTSSBX_IP_ADDRESS *RedirectorInternalIP,
+            /* [out] */ __RPC__out DWORD *pSessionId,
+            /* [out] */ __RPC__out WTSSBX_MACHINE_CONNECT_INFO *pMachineConnectInfo);
         
         END_INTERFACE
     } IWTSSBPluginVtbl;
@@ -392,8 +353,8 @@ EXTERN_C const IID IID_IWTSSBPlugin;
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_tssbx_0000_0001_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_tssbx_0000_0001_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_tssbx_0000_0001_ClientIfHandle;
+extern RPC_IF_HANDLE __MIDL_itf_tssbx_0000_0001_ServerIfHandle;
 
 /* Additional Prototypes for ALL interfaces */
 

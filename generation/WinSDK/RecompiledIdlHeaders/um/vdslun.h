@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -34,7 +34,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -154,10 +154,10 @@ typedef struct _VDS_LUN_INFORMATION
     BYTE m_DeviceTypeModifier;
     BOOL m_bCommandQueueing;
     VDS_STORAGE_BUS_TYPE m_BusType;
-    /* [string] */ unsigned char *m_szVendorId;
-    /* [string] */ unsigned char *m_szProductId;
-    /* [string] */ unsigned char *m_szProductRevision;
-    /* [string] */ unsigned char *m_szSerialNumber;
+    /* [string] */ char *m_szVendorId;
+    /* [string] */ char *m_szProductId;
+    /* [string] */ char *m_szProductRevision;
+    /* [string] */ char *m_szSerialNumber;
     GUID m_diskSignature;
     VDS_STORAGE_DEVICE_ID_DESCRIPTOR m_deviceIdDescriptor;
     ULONG m_cInterconnects;

@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -246,28 +246,21 @@ EXTERN_C const IID IID_IWTSProtocolManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateListener( 
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszListenerName,
-            /* [annotation][out] */ 
-            _Out_  IWTSProtocolListener **pProtocolListener) = 0;
+            /* [string][in] */ __RPC__in_string WCHAR *wszListenerName,
+            /* [out] */ __RPC__deref_out_opt IWTSProtocolListener **pProtocolListener) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifyServiceStateChange( 
-            /* [annotation][in] */ 
-            _In_  WTS_SERVICE_STATE *pTSServiceStateChange) = 0;
+            /* [in] */ __RPC__in WTS_SERVICE_STATE *pTSServiceStateChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifySessionOfServiceStart( 
-            /* [annotation][in] */ 
-            _In_  WTS_SESSION_ID *SessionId) = 0;
+            /* [in] */ __RPC__in WTS_SESSION_ID *SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifySessionOfServiceStop( 
-            /* [annotation][in] */ 
-            _In_  WTS_SESSION_ID *SessionId) = 0;
+            /* [in] */ __RPC__in WTS_SESSION_ID *SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifySessionStateChange( 
-            /* [annotation][in] */ 
-            _In_  WTS_SESSION_ID *SessionId,
-            /* [annotation][in] */ 
-            _In_  ULONG EventId) = 0;
+            /* [in] */ __RPC__in WTS_SESSION_ID *SessionId,
+            /* [in] */ ULONG EventId) = 0;
         
     };
     
@@ -281,8 +274,7 @@ EXTERN_C const IID IID_IWTSProtocolManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -297,36 +289,29 @@ EXTERN_C const IID IID_IWTSProtocolManager;
         DECLSPEC_XFGVIRT(IWTSProtocolManager, CreateListener)
         HRESULT ( STDMETHODCALLTYPE *CreateListener )( 
             __RPC__in IWTSProtocolManager * This,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszListenerName,
-            /* [annotation][out] */ 
-            _Out_  IWTSProtocolListener **pProtocolListener);
+            /* [string][in] */ __RPC__in_string WCHAR *wszListenerName,
+            /* [out] */ __RPC__deref_out_opt IWTSProtocolListener **pProtocolListener);
         
         DECLSPEC_XFGVIRT(IWTSProtocolManager, NotifyServiceStateChange)
         HRESULT ( STDMETHODCALLTYPE *NotifyServiceStateChange )( 
             __RPC__in IWTSProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  WTS_SERVICE_STATE *pTSServiceStateChange);
+            /* [in] */ __RPC__in WTS_SERVICE_STATE *pTSServiceStateChange);
         
         DECLSPEC_XFGVIRT(IWTSProtocolManager, NotifySessionOfServiceStart)
         HRESULT ( STDMETHODCALLTYPE *NotifySessionOfServiceStart )( 
             __RPC__in IWTSProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  WTS_SESSION_ID *SessionId);
+            /* [in] */ __RPC__in WTS_SESSION_ID *SessionId);
         
         DECLSPEC_XFGVIRT(IWTSProtocolManager, NotifySessionOfServiceStop)
         HRESULT ( STDMETHODCALLTYPE *NotifySessionOfServiceStop )( 
             __RPC__in IWTSProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  WTS_SESSION_ID *SessionId);
+            /* [in] */ __RPC__in WTS_SESSION_ID *SessionId);
         
         DECLSPEC_XFGVIRT(IWTSProtocolManager, NotifySessionStateChange)
         HRESULT ( STDMETHODCALLTYPE *NotifySessionStateChange )( 
             __RPC__in IWTSProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  WTS_SESSION_ID *SessionId,
-            /* [annotation][in] */ 
-            _In_  ULONG EventId);
+            /* [in] */ __RPC__in WTS_SESSION_ID *SessionId,
+            /* [in] */ ULONG EventId);
         
         END_INTERFACE
     } IWTSProtocolManagerVtbl;
@@ -393,8 +378,7 @@ EXTERN_C const IID IID_IWTSProtocolListener;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StartListen( 
-            /* [annotation][in] */ 
-            _In_  IWTSProtocolListenerCallback *pCallback) = 0;
+            /* [in] */ __RPC__in_opt IWTSProtocolListenerCallback *pCallback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StopListen( void) = 0;
         
@@ -410,8 +394,7 @@ EXTERN_C const IID IID_IWTSProtocolListener;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSProtocolListener * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -426,8 +409,7 @@ EXTERN_C const IID IID_IWTSProtocolListener;
         DECLSPEC_XFGVIRT(IWTSProtocolListener, StartListen)
         HRESULT ( STDMETHODCALLTYPE *StartListen )( 
             __RPC__in IWTSProtocolListener * This,
-            /* [annotation][in] */ 
-            _In_  IWTSProtocolListenerCallback *pCallback);
+            /* [in] */ __RPC__in_opt IWTSProtocolListenerCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IWTSProtocolListener, StopListen)
         HRESULT ( STDMETHODCALLTYPE *StopListen )( 
@@ -489,10 +471,8 @@ EXTERN_C const IID IID_IWTSProtocolListenerCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnConnected( 
-            /* [annotation][in] */ 
-            _In_  IWTSProtocolConnection *pConnection,
-            /* [annotation][out] */ 
-            _Out_  IWTSProtocolConnectionCallback **pCallback) = 0;
+            /* [in] */ __RPC__in_opt IWTSProtocolConnection *pConnection,
+            /* [out] */ __RPC__deref_out_opt IWTSProtocolConnectionCallback **pCallback) = 0;
         
     };
     
@@ -506,8 +486,7 @@ EXTERN_C const IID IID_IWTSProtocolListenerCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSProtocolListenerCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -522,10 +501,8 @@ EXTERN_C const IID IID_IWTSProtocolListenerCallback;
         DECLSPEC_XFGVIRT(IWTSProtocolListenerCallback, OnConnected)
         HRESULT ( STDMETHODCALLTYPE *OnConnected )( 
             __RPC__in IWTSProtocolListenerCallback * This,
-            /* [annotation][in] */ 
-            _In_  IWTSProtocolConnection *pConnection,
-            /* [annotation][out] */ 
-            _Out_  IWTSProtocolConnectionCallback **pCallback);
+            /* [in] */ __RPC__in_opt IWTSProtocolConnection *pConnection,
+            /* [out] */ __RPC__deref_out_opt IWTSProtocolConnectionCallback **pCallback);
         
         END_INTERFACE
     } IWTSProtocolListenerCallbackVtbl;
@@ -580,130 +557,91 @@ EXTERN_C const IID IID_IWTSProtocolConnection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetLogonErrorRedirector( 
-            /* [annotation][out] */ 
-            _Out_  IWTSProtocolLogonErrorRedirector **ppLogonErrorRedir) = 0;
+            /* [out] */ __RPC__deref_out_opt IWTSProtocolLogonErrorRedirector **ppLogonErrorRedir) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SendPolicyData( 
-            /* [annotation][in] */ 
-            _In_  WTS_POLICY_DATA *pPolicyData) = 0;
+            /* [in] */ __RPC__in WTS_POLICY_DATA *pPolicyData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AcceptConnection( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetClientData( 
-            /* [annotation][out] */ 
-            _Out_  WTS_CLIENT_DATA *pClientData) = 0;
+            /* [out] */ __RPC__out WTS_CLIENT_DATA *pClientData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUserCredentials( 
-            /* [annotation][out] */ 
-            _Out_  WTS_USER_CREDENTIAL *pUserCreds) = 0;
+            /* [out] */ __RPC__out WTS_USER_CREDENTIAL *pUserCreds) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLicenseConnection( 
-            /* [annotation][out] */ 
-            _Out_  IWTSProtocolLicenseConnection **ppLicenseConnection) = 0;
+            /* [out] */ __RPC__deref_out_opt IWTSProtocolLicenseConnection **ppLicenseConnection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AuthenticateClientToSession( 
-            /* [annotation][out] */ 
-            _Out_  WTS_SESSION_ID *SessionId) = 0;
+            /* [out] */ __RPC__out WTS_SESSION_ID *SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifySessionId( 
-            /* [annotation][in] */ 
-            _In_  WTS_SESSION_ID *SessionId) = 0;
+            /* [in] */ __RPC__in WTS_SESSION_ID *SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProtocolHandles( 
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pKeyboardHandle,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pMouseHandle,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pBeepHandle,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pVideoHandle) = 0;
+            /* [out] */ __RPC__out HANDLE_PTR *pKeyboardHandle,
+            /* [out] */ __RPC__out HANDLE_PTR *pMouseHandle,
+            /* [out] */ __RPC__out HANDLE_PTR *pBeepHandle,
+            /* [out] */ __RPC__out HANDLE_PTR *pVideoHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConnectNotify( 
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId) = 0;
+            /* [in] */ ULONG SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsUserAllowedToLogon( 
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR UserToken,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pDomainName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pUserName) = 0;
+            /* [in] */ ULONG SessionId,
+            /* [in] */ HANDLE_PTR UserToken,
+            /* [string][in] */ __RPC__in_string WCHAR *pDomainName,
+            /* [string][in] */ __RPC__in_string WCHAR *pUserName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SessionArbitrationEnumeration( 
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR hUserToken,
-            /* [annotation][in] */ 
-            _In_  BOOL bSingleSessionPerUserEnabled,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pdwSessionIdentifierCount)  ULONG *pSessionIdArray,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pdwSessionIdentifierCount) = 0;
+            /* [in] */ HANDLE_PTR hUserToken,
+            /* [in] */ BOOL bSingleSessionPerUserEnabled,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pdwSessionIdentifierCount) ULONG *pSessionIdArray,
+            /* [out][in] */ __RPC__inout ULONG *pdwSessionIdentifierCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LogonNotify( 
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR hClientToken,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszUserName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszDomainName,
-            /* [annotation][in] */ 
-            _In_  WTS_SESSION_ID *SessionId) = 0;
+            /* [in] */ HANDLE_PTR hClientToken,
+            /* [string][in] */ __RPC__in_string WCHAR *wszUserName,
+            /* [string][in] */ __RPC__in_string WCHAR *wszDomainName,
+            /* [in] */ __RPC__in WTS_SESSION_ID *SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUserData( 
-            /* [annotation][in] */ 
-            _In_  WTS_POLICY_DATA *pPolicyData,
-            /* [annotation][out][in] */ 
-            _Inout_  WTS_USER_DATA *pClientData) = 0;
+            /* [in] */ __RPC__in WTS_POLICY_DATA *pPolicyData,
+            /* [out][in] */ __RPC__inout WTS_USER_DATA *pClientData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisconnectNotify( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProtocolStatus( 
-            /* [annotation][out] */ 
-            _Out_  WTS_PROTOCOL_STATUS *pProtocolStatus) = 0;
+            /* [out] */ __RPC__out WTS_PROTOCOL_STATUS *pProtocolStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastInputTime( 
-            /* [annotation][out] */ 
-            _Out_  ULONG64 *pLastInputTime) = 0;
+            /* [out] */ __RPC__out ULONG64 *pLastInputTime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetErrorInfo( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulError) = 0;
+            /* [in] */ ULONG ulError) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SendBeep( 
-            /* [annotation][in] */ 
-            _In_  ULONG Frequency,
-            /* [annotation][in] */ 
-            _In_  ULONG Duration) = 0;
+            /* [in] */ ULONG Frequency,
+            /* [in] */ ULONG Duration) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVirtualChannel( 
-            /* [annotation][string][in] */ 
-            _In_  CHAR *szEndpointName,
-            /* [annotation][in] */ 
-            _In_  BOOL bStatic,
-            /* [annotation][in] */ 
-            _In_  ULONG RequestedPriority,
-            /* [annotation][out] */ 
-            _Out_  ULONG_PTR *phChannel) = 0;
+            /* [string][in] */ __RPC__in_string CHAR *szEndpointName,
+            /* [in] */ BOOL bStatic,
+            /* [in] */ ULONG RequestedPriority,
+            /* [out] */ __RPC__out ULONG_PTR *phChannel) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryProperty( 
-            /* [annotation][in] */ 
-            _In_  GUID QueryType,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNumEntriesIn,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNumEntriesOut,
+            /* [in] */ GUID QueryType,
+            /* [in] */ ULONG ulNumEntriesIn,
+            /* [in] */ ULONG ulNumEntriesOut,
             /* [size_is][optional][in] */ __RPC__in_ecount_full(ulNumEntriesIn) PWTS_PROPERTY_VALUE pPropertyEntriesIn,
             /* [size_is][optional][out] */ __RPC__out_ecount_full(ulNumEntriesOut) PWTS_PROPERTY_VALUE pPropertyEntriesOut) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetShadowConnection( 
-            /* [annotation][out] */ 
-            _Out_  IWTSProtocolShadowConnection **ppShadowConnection) = 0;
+            /* [out] */ __RPC__deref_out_opt IWTSProtocolShadowConnection **ppShadowConnection) = 0;
         
     };
     
@@ -717,8 +655,7 @@ EXTERN_C const IID IID_IWTSProtocolConnection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -733,14 +670,12 @@ EXTERN_C const IID IID_IWTSProtocolConnection;
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, GetLogonErrorRedirector)
         HRESULT ( STDMETHODCALLTYPE *GetLogonErrorRedirector )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  IWTSProtocolLogonErrorRedirector **ppLogonErrorRedir);
+            /* [out] */ __RPC__deref_out_opt IWTSProtocolLogonErrorRedirector **ppLogonErrorRedir);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, SendPolicyData)
         HRESULT ( STDMETHODCALLTYPE *SendPolicyData )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  WTS_POLICY_DATA *pPolicyData);
+            /* [in] */ __RPC__in WTS_POLICY_DATA *pPolicyData);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, AcceptConnection)
         HRESULT ( STDMETHODCALLTYPE *AcceptConnection )( 
@@ -749,94 +684,70 @@ EXTERN_C const IID IID_IWTSProtocolConnection;
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, GetClientData)
         HRESULT ( STDMETHODCALLTYPE *GetClientData )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  WTS_CLIENT_DATA *pClientData);
+            /* [out] */ __RPC__out WTS_CLIENT_DATA *pClientData);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, GetUserCredentials)
         HRESULT ( STDMETHODCALLTYPE *GetUserCredentials )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  WTS_USER_CREDENTIAL *pUserCreds);
+            /* [out] */ __RPC__out WTS_USER_CREDENTIAL *pUserCreds);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, GetLicenseConnection)
         HRESULT ( STDMETHODCALLTYPE *GetLicenseConnection )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  IWTSProtocolLicenseConnection **ppLicenseConnection);
+            /* [out] */ __RPC__deref_out_opt IWTSProtocolLicenseConnection **ppLicenseConnection);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, AuthenticateClientToSession)
         HRESULT ( STDMETHODCALLTYPE *AuthenticateClientToSession )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  WTS_SESSION_ID *SessionId);
+            /* [out] */ __RPC__out WTS_SESSION_ID *SessionId);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, NotifySessionId)
         HRESULT ( STDMETHODCALLTYPE *NotifySessionId )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  WTS_SESSION_ID *SessionId);
+            /* [in] */ __RPC__in WTS_SESSION_ID *SessionId);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, GetProtocolHandles)
         HRESULT ( STDMETHODCALLTYPE *GetProtocolHandles )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pKeyboardHandle,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pMouseHandle,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pBeepHandle,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pVideoHandle);
+            /* [out] */ __RPC__out HANDLE_PTR *pKeyboardHandle,
+            /* [out] */ __RPC__out HANDLE_PTR *pMouseHandle,
+            /* [out] */ __RPC__out HANDLE_PTR *pBeepHandle,
+            /* [out] */ __RPC__out HANDLE_PTR *pVideoHandle);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, ConnectNotify)
         HRESULT ( STDMETHODCALLTYPE *ConnectNotify )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId);
+            /* [in] */ ULONG SessionId);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, IsUserAllowedToLogon)
         HRESULT ( STDMETHODCALLTYPE *IsUserAllowedToLogon )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR UserToken,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pDomainName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pUserName);
+            /* [in] */ ULONG SessionId,
+            /* [in] */ HANDLE_PTR UserToken,
+            /* [string][in] */ __RPC__in_string WCHAR *pDomainName,
+            /* [string][in] */ __RPC__in_string WCHAR *pUserName);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, SessionArbitrationEnumeration)
         HRESULT ( STDMETHODCALLTYPE *SessionArbitrationEnumeration )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR hUserToken,
-            /* [annotation][in] */ 
-            _In_  BOOL bSingleSessionPerUserEnabled,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pdwSessionIdentifierCount)  ULONG *pSessionIdArray,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pdwSessionIdentifierCount);
+            /* [in] */ HANDLE_PTR hUserToken,
+            /* [in] */ BOOL bSingleSessionPerUserEnabled,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pdwSessionIdentifierCount) ULONG *pSessionIdArray,
+            /* [out][in] */ __RPC__inout ULONG *pdwSessionIdentifierCount);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, LogonNotify)
         HRESULT ( STDMETHODCALLTYPE *LogonNotify )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR hClientToken,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszUserName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszDomainName,
-            /* [annotation][in] */ 
-            _In_  WTS_SESSION_ID *SessionId);
+            /* [in] */ HANDLE_PTR hClientToken,
+            /* [string][in] */ __RPC__in_string WCHAR *wszUserName,
+            /* [string][in] */ __RPC__in_string WCHAR *wszDomainName,
+            /* [in] */ __RPC__in WTS_SESSION_ID *SessionId);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, GetUserData)
         HRESULT ( STDMETHODCALLTYPE *GetUserData )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  WTS_POLICY_DATA *pPolicyData,
-            /* [annotation][out][in] */ 
-            _Inout_  WTS_USER_DATA *pClientData);
+            /* [in] */ __RPC__in WTS_POLICY_DATA *pPolicyData,
+            /* [out][in] */ __RPC__inout WTS_USER_DATA *pClientData);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, DisconnectNotify)
         HRESULT ( STDMETHODCALLTYPE *DisconnectNotify )( 
@@ -849,58 +760,45 @@ EXTERN_C const IID IID_IWTSProtocolConnection;
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, GetProtocolStatus)
         HRESULT ( STDMETHODCALLTYPE *GetProtocolStatus )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  WTS_PROTOCOL_STATUS *pProtocolStatus);
+            /* [out] */ __RPC__out WTS_PROTOCOL_STATUS *pProtocolStatus);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, GetLastInputTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastInputTime )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG64 *pLastInputTime);
+            /* [out] */ __RPC__out ULONG64 *pLastInputTime);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, SetErrorInfo)
         HRESULT ( STDMETHODCALLTYPE *SetErrorInfo )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulError);
+            /* [in] */ ULONG ulError);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, SendBeep)
         HRESULT ( STDMETHODCALLTYPE *SendBeep )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG Frequency,
-            /* [annotation][in] */ 
-            _In_  ULONG Duration);
+            /* [in] */ ULONG Frequency,
+            /* [in] */ ULONG Duration);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, CreateVirtualChannel)
         HRESULT ( STDMETHODCALLTYPE *CreateVirtualChannel )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][string][in] */ 
-            _In_  CHAR *szEndpointName,
-            /* [annotation][in] */ 
-            _In_  BOOL bStatic,
-            /* [annotation][in] */ 
-            _In_  ULONG RequestedPriority,
-            /* [annotation][out] */ 
-            _Out_  ULONG_PTR *phChannel);
+            /* [string][in] */ __RPC__in_string CHAR *szEndpointName,
+            /* [in] */ BOOL bStatic,
+            /* [in] */ ULONG RequestedPriority,
+            /* [out] */ __RPC__out ULONG_PTR *phChannel);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, QueryProperty)
         HRESULT ( STDMETHODCALLTYPE *QueryProperty )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  GUID QueryType,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNumEntriesIn,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNumEntriesOut,
+            /* [in] */ GUID QueryType,
+            /* [in] */ ULONG ulNumEntriesIn,
+            /* [in] */ ULONG ulNumEntriesOut,
             /* [size_is][optional][in] */ __RPC__in_ecount_full(ulNumEntriesIn) PWTS_PROPERTY_VALUE pPropertyEntriesIn,
             /* [size_is][optional][out] */ __RPC__out_ecount_full(ulNumEntriesOut) PWTS_PROPERTY_VALUE pPropertyEntriesOut);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnection, GetShadowConnection)
         HRESULT ( STDMETHODCALLTYPE *GetShadowConnection )( 
             __RPC__in IWTSProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  IWTSProtocolShadowConnection **ppShadowConnection);
+            /* [out] */ __RPC__deref_out_opt IWTSProtocolShadowConnection **ppShadowConnection);
         
         END_INTERFACE
     } IWTSProtocolConnectionVtbl;
@@ -1023,10 +921,8 @@ EXTERN_C const IID IID_IWTSProtocolConnectionCallback;
         virtual HRESULT STDMETHODCALLTYPE OnReady( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BrokenConnection( 
-            /* [annotation][in] */ 
-            _In_  ULONG Reason,
-            /* [annotation][in] */ 
-            _In_  ULONG Source) = 0;
+            /* [in] */ ULONG Reason,
+            /* [in] */ ULONG Source) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StopScreenUpdates( void) = 0;
         
@@ -1034,8 +930,7 @@ EXTERN_C const IID IID_IWTSProtocolConnectionCallback;
             /* [optional][in] */ __RPC__in WTS_SMALL_RECT *rect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisplayIOCtl( 
-            /* [annotation][in] */ 
-            _In_  WTS_DISPLAY_IOCTL *DisplayIOCtl) = 0;
+            /* [in] */ __RPC__in WTS_DISPLAY_IOCTL *DisplayIOCtl) = 0;
         
     };
     
@@ -1049,8 +944,7 @@ EXTERN_C const IID IID_IWTSProtocolConnectionCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSProtocolConnectionCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1069,10 +963,8 @@ EXTERN_C const IID IID_IWTSProtocolConnectionCallback;
         DECLSPEC_XFGVIRT(IWTSProtocolConnectionCallback, BrokenConnection)
         HRESULT ( STDMETHODCALLTYPE *BrokenConnection )( 
             __RPC__in IWTSProtocolConnectionCallback * This,
-            /* [annotation][in] */ 
-            _In_  ULONG Reason,
-            /* [annotation][in] */ 
-            _In_  ULONG Source);
+            /* [in] */ ULONG Reason,
+            /* [in] */ ULONG Source);
         
         DECLSPEC_XFGVIRT(IWTSProtocolConnectionCallback, StopScreenUpdates)
         HRESULT ( STDMETHODCALLTYPE *StopScreenUpdates )( 
@@ -1086,8 +978,7 @@ EXTERN_C const IID IID_IWTSProtocolConnectionCallback;
         DECLSPEC_XFGVIRT(IWTSProtocolConnectionCallback, DisplayIOCtl)
         HRESULT ( STDMETHODCALLTYPE *DisplayIOCtl )( 
             __RPC__in IWTSProtocolConnectionCallback * This,
-            /* [annotation][in] */ 
-            _In_  WTS_DISPLAY_IOCTL *DisplayIOCtl);
+            /* [in] */ __RPC__in WTS_DISPLAY_IOCTL *DisplayIOCtl);
         
         END_INTERFACE
     } IWTSProtocolConnectionCallbackVtbl;
@@ -1154,38 +1045,24 @@ EXTERN_C const IID IID_IWTSProtocolShadowConnection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Start( 
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pTargetServerName,
-            /* [annotation][in] */ 
-            _In_  DWORD TargetSessionId,
-            /* [annotation][in] */ 
-            _In_  BYTE HotKeyVk,
-            /* [annotation][in] */ 
-            _In_  USHORT HotkeyModifiers,
-            /* [annotation][in] */ 
-            _In_  IWTSProtocolShadowCallback *pShadowCallback) = 0;
+            /* [string][in] */ __RPC__in_string WCHAR *pTargetServerName,
+            /* [in] */ DWORD TargetSessionId,
+            /* [in] */ BYTE HotKeyVk,
+            /* [in] */ USHORT HotkeyModifiers,
+            /* [in] */ __RPC__in_opt IWTSProtocolShadowCallback *pShadowCallback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Stop( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DoTarget( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param1Size)  PBYTE pParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD Param1Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param2Size)  PBYTE pParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD Param2Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param3Size)  PBYTE pParam3,
-            /* [annotation][in] */ 
-            _In_  DWORD Param3Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param4Size)  PBYTE pParam4,
-            /* [annotation][in] */ 
-            _In_  DWORD Param4Size,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pClientName) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(Param1Size) PBYTE pParam1,
+            /* [in] */ DWORD Param1Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param2Size) PBYTE pParam2,
+            /* [in] */ DWORD Param2Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param3Size) PBYTE pParam3,
+            /* [in] */ DWORD Param3Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param4Size) PBYTE pParam4,
+            /* [in] */ DWORD Param4Size,
+            /* [string][in] */ __RPC__in_string WCHAR *pClientName) = 0;
         
     };
     
@@ -1199,8 +1076,7 @@ EXTERN_C const IID IID_IWTSProtocolShadowConnection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSProtocolShadowConnection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1215,16 +1091,11 @@ EXTERN_C const IID IID_IWTSProtocolShadowConnection;
         DECLSPEC_XFGVIRT(IWTSProtocolShadowConnection, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             __RPC__in IWTSProtocolShadowConnection * This,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pTargetServerName,
-            /* [annotation][in] */ 
-            _In_  DWORD TargetSessionId,
-            /* [annotation][in] */ 
-            _In_  BYTE HotKeyVk,
-            /* [annotation][in] */ 
-            _In_  USHORT HotkeyModifiers,
-            /* [annotation][in] */ 
-            _In_  IWTSProtocolShadowCallback *pShadowCallback);
+            /* [string][in] */ __RPC__in_string WCHAR *pTargetServerName,
+            /* [in] */ DWORD TargetSessionId,
+            /* [in] */ BYTE HotKeyVk,
+            /* [in] */ USHORT HotkeyModifiers,
+            /* [in] */ __RPC__in_opt IWTSProtocolShadowCallback *pShadowCallback);
         
         DECLSPEC_XFGVIRT(IWTSProtocolShadowConnection, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
@@ -1233,24 +1104,15 @@ EXTERN_C const IID IID_IWTSProtocolShadowConnection;
         DECLSPEC_XFGVIRT(IWTSProtocolShadowConnection, DoTarget)
         HRESULT ( STDMETHODCALLTYPE *DoTarget )( 
             __RPC__in IWTSProtocolShadowConnection * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param1Size)  PBYTE pParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD Param1Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param2Size)  PBYTE pParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD Param2Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param3Size)  PBYTE pParam3,
-            /* [annotation][in] */ 
-            _In_  DWORD Param3Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param4Size)  PBYTE pParam4,
-            /* [annotation][in] */ 
-            _In_  DWORD Param4Size,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pClientName);
+            /* [size_is][in] */ __RPC__in_ecount_full(Param1Size) PBYTE pParam1,
+            /* [in] */ DWORD Param1Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param2Size) PBYTE pParam2,
+            /* [in] */ DWORD Param2Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param3Size) PBYTE pParam3,
+            /* [in] */ DWORD Param3Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param4Size) PBYTE pParam4,
+            /* [in] */ DWORD Param4Size,
+            /* [string][in] */ __RPC__in_string WCHAR *pClientName);
         
         END_INTERFACE
     } IWTSProtocolShadowConnectionVtbl;
@@ -1314,26 +1176,16 @@ EXTERN_C const IID IID_IWTSProtocolShadowCallback;
         
         virtual HRESULT STDMETHODCALLTYPE InvokeTargetShadow( 
             /* [string][full][in] */ __RPC__in_opt_string WCHAR *pTargetServerName,
-            /* [annotation][in] */ 
-            _In_  ULONG TargetSessionId,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param1Size)  PBYTE pParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD Param1Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param2Size)  PBYTE pParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD Param2Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param3Size)  PBYTE pParam3,
-            /* [annotation][in] */ 
-            _In_  DWORD Param3Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param4Size)  PBYTE pParam4,
-            /* [annotation][in] */ 
-            _In_  DWORD Param4Size,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pClientName) = 0;
+            /* [in] */ ULONG TargetSessionId,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param1Size) PBYTE pParam1,
+            /* [in] */ DWORD Param1Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param2Size) PBYTE pParam2,
+            /* [in] */ DWORD Param2Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param3Size) PBYTE pParam3,
+            /* [in] */ DWORD Param3Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param4Size) PBYTE pParam4,
+            /* [in] */ DWORD Param4Size,
+            /* [string][in] */ __RPC__in_string WCHAR *pClientName) = 0;
         
     };
     
@@ -1347,8 +1199,7 @@ EXTERN_C const IID IID_IWTSProtocolShadowCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSProtocolShadowCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1368,26 +1219,16 @@ EXTERN_C const IID IID_IWTSProtocolShadowCallback;
         HRESULT ( STDMETHODCALLTYPE *InvokeTargetShadow )( 
             __RPC__in IWTSProtocolShadowCallback * This,
             /* [string][full][in] */ __RPC__in_opt_string WCHAR *pTargetServerName,
-            /* [annotation][in] */ 
-            _In_  ULONG TargetSessionId,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param1Size)  PBYTE pParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD Param1Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param2Size)  PBYTE pParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD Param2Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param3Size)  PBYTE pParam3,
-            /* [annotation][in] */ 
-            _In_  DWORD Param3Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param4Size)  PBYTE pParam4,
-            /* [annotation][in] */ 
-            _In_  DWORD Param4Size,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pClientName);
+            /* [in] */ ULONG TargetSessionId,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param1Size) PBYTE pParam1,
+            /* [in] */ DWORD Param1Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param2Size) PBYTE pParam2,
+            /* [in] */ DWORD Param2Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param3Size) PBYTE pParam3,
+            /* [in] */ DWORD Param3Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param4Size) PBYTE pParam4,
+            /* [in] */ DWORD Param4Size,
+            /* [string][in] */ __RPC__in_string WCHAR *pClientName);
         
         END_INTERFACE
     } IWTSProtocolShadowCallbackVtbl;
@@ -1445,30 +1286,21 @@ EXTERN_C const IID IID_IWTSProtocolLicenseConnection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RequestLicensingCapabilities( 
-            /* [annotation][out] */ 
-            _Out_  PWTS_LICENSE_CAPABILITIES ppLicenseCapabilities,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcbLicenseCapabilities) = 0;
+            /* [out] */ __RPC__out PWTS_LICENSE_CAPABILITIES ppLicenseCapabilities,
+            /* [out][in] */ __RPC__inout ULONG *pcbLicenseCapabilities) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SendClientLicense( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbClientLicense)  PBYTE pClientLicense,
-            /* [annotation][in] */ 
-            _In_  ULONG cbClientLicense) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(cbClientLicense) PBYTE pClientLicense,
+            /* [in] */ ULONG cbClientLicense) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestClientLicense( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Reserve2)  PBYTE Reserve1,
-            /* [annotation][in] */ 
-            _In_  ULONG Reserve2,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pcbClientLicense)  PBYTE ppClientLicense,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcbClientLicense) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(Reserve2) PBYTE Reserve1,
+            /* [in] */ ULONG Reserve2,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pcbClientLicense) PBYTE ppClientLicense,
+            /* [out][in] */ __RPC__inout ULONG *pcbClientLicense) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProtocolComplete( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulComplete) = 0;
+            /* [in] */ ULONG ulComplete) = 0;
         
     };
     
@@ -1482,8 +1314,7 @@ EXTERN_C const IID IID_IWTSProtocolLicenseConnection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSProtocolLicenseConnection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1498,36 +1329,27 @@ EXTERN_C const IID IID_IWTSProtocolLicenseConnection;
         DECLSPEC_XFGVIRT(IWTSProtocolLicenseConnection, RequestLicensingCapabilities)
         HRESULT ( STDMETHODCALLTYPE *RequestLicensingCapabilities )( 
             __RPC__in IWTSProtocolLicenseConnection * This,
-            /* [annotation][out] */ 
-            _Out_  PWTS_LICENSE_CAPABILITIES ppLicenseCapabilities,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcbLicenseCapabilities);
+            /* [out] */ __RPC__out PWTS_LICENSE_CAPABILITIES ppLicenseCapabilities,
+            /* [out][in] */ __RPC__inout ULONG *pcbLicenseCapabilities);
         
         DECLSPEC_XFGVIRT(IWTSProtocolLicenseConnection, SendClientLicense)
         HRESULT ( STDMETHODCALLTYPE *SendClientLicense )( 
             __RPC__in IWTSProtocolLicenseConnection * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbClientLicense)  PBYTE pClientLicense,
-            /* [annotation][in] */ 
-            _In_  ULONG cbClientLicense);
+            /* [size_is][in] */ __RPC__in_ecount_full(cbClientLicense) PBYTE pClientLicense,
+            /* [in] */ ULONG cbClientLicense);
         
         DECLSPEC_XFGVIRT(IWTSProtocolLicenseConnection, RequestClientLicense)
         HRESULT ( STDMETHODCALLTYPE *RequestClientLicense )( 
             __RPC__in IWTSProtocolLicenseConnection * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Reserve2)  PBYTE Reserve1,
-            /* [annotation][in] */ 
-            _In_  ULONG Reserve2,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pcbClientLicense)  PBYTE ppClientLicense,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcbClientLicense);
+            /* [size_is][in] */ __RPC__in_ecount_full(Reserve2) PBYTE Reserve1,
+            /* [in] */ ULONG Reserve2,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pcbClientLicense) PBYTE ppClientLicense,
+            /* [out][in] */ __RPC__inout ULONG *pcbClientLicense);
         
         DECLSPEC_XFGVIRT(IWTSProtocolLicenseConnection, ProtocolComplete)
         HRESULT ( STDMETHODCALLTYPE *ProtocolComplete )( 
             __RPC__in IWTSProtocolLicenseConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulComplete);
+            /* [in] */ ULONG ulComplete);
         
         END_INTERFACE
     } IWTSProtocolLicenseConnectionVtbl;
@@ -1593,34 +1415,22 @@ EXTERN_C const IID IID_IWTSProtocolLogonErrorRedirector;
         virtual HRESULT STDMETHODCALLTYPE OnBeginPainting( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RedirectStatus( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][out] */ 
-            _Out_  WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [out] */ __RPC__out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RedirectMessage( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszCaption,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][in] */ 
-            _In_  UINT uType,
-            /* [annotation][out] */ 
-            _Out_  WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR pszCaption,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [in] */ UINT uType,
+            /* [out] */ __RPC__out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RedirectLogonError( 
-            /* [annotation][in] */ 
-            _In_  LONG ntsStatus,
-            /* [annotation][in] */ 
-            _In_  LONG ntsSubstatus,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszCaption,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][in] */ 
-            _In_  UINT uType,
-            /* [annotation][out] */ 
-            _Out_  WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+            /* [in] */ LONG ntsStatus,
+            /* [in] */ LONG ntsSubstatus,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszCaption,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [in] */ UINT uType,
+            /* [out] */ __RPC__out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
         
     };
     
@@ -1634,8 +1444,7 @@ EXTERN_C const IID IID_IWTSProtocolLogonErrorRedirector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSProtocolLogonErrorRedirector * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1654,38 +1463,26 @@ EXTERN_C const IID IID_IWTSProtocolLogonErrorRedirector;
         DECLSPEC_XFGVIRT(IWTSProtocolLogonErrorRedirector, RedirectStatus)
         HRESULT ( STDMETHODCALLTYPE *RedirectStatus )( 
             __RPC__in IWTSProtocolLogonErrorRedirector * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][out] */ 
-            _Out_  WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [out] */ __RPC__out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
         
         DECLSPEC_XFGVIRT(IWTSProtocolLogonErrorRedirector, RedirectMessage)
         HRESULT ( STDMETHODCALLTYPE *RedirectMessage )( 
             __RPC__in IWTSProtocolLogonErrorRedirector * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszCaption,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][in] */ 
-            _In_  UINT uType,
-            /* [annotation][out] */ 
-            _Out_  WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
+            /* [string][in] */ __RPC__in_string LPCWSTR pszCaption,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [in] */ UINT uType,
+            /* [out] */ __RPC__out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
         
         DECLSPEC_XFGVIRT(IWTSProtocolLogonErrorRedirector, RedirectLogonError)
         HRESULT ( STDMETHODCALLTYPE *RedirectLogonError )( 
             __RPC__in IWTSProtocolLogonErrorRedirector * This,
-            /* [annotation][in] */ 
-            _In_  LONG ntsStatus,
-            /* [annotation][in] */ 
-            _In_  LONG ntsSubstatus,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszCaption,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][in] */ 
-            _In_  UINT uType,
-            /* [annotation][out] */ 
-            _Out_  WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
+            /* [in] */ LONG ntsStatus,
+            /* [in] */ LONG ntsSubstatus,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszCaption,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [in] */ UINT uType,
+            /* [out] */ __RPC__out WTS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
         
         END_INTERFACE
     } IWTSProtocolLogonErrorRedirectorVtbl;
@@ -1767,16 +1564,13 @@ EXTERN_C const IID IID_IWRdsProtocolSettings;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSettings( 
-            /* [annotation][in] */ 
-            _In_  WRDS_SETTING_TYPE WRdsSettingType,
-            /* [annotation][in] */ 
-            _In_  WRDS_SETTING_LEVEL WRdsSettingLevel,
+            /* [in] */ WRDS_SETTING_TYPE WRdsSettingType,
+            /* [in] */ WRDS_SETTING_LEVEL WRdsSettingLevel,
             /* [ref][out] */ __RPC__out PWRDS_SETTINGS pWRdsSettings) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE MergeSettings( 
             /* [ref][in] */ __RPC__in PWRDS_SETTINGS pWRdsSettings,
-            /* [annotation][in] */ 
-            _In_  WRDS_CONNECTION_SETTING_LEVEL WRdsConnectionSettingLevel,
+            /* [in] */ WRDS_CONNECTION_SETTING_LEVEL WRdsConnectionSettingLevel,
             /* [ref][out][in] */ __RPC__inout PWRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) = 0;
         
     };
@@ -1791,8 +1585,7 @@ EXTERN_C const IID IID_IWRdsProtocolSettings;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolSettings * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1807,18 +1600,15 @@ EXTERN_C const IID IID_IWRdsProtocolSettings;
         DECLSPEC_XFGVIRT(IWRdsProtocolSettings, GetSettings)
         HRESULT ( STDMETHODCALLTYPE *GetSettings )( 
             __RPC__in IWRdsProtocolSettings * This,
-            /* [annotation][in] */ 
-            _In_  WRDS_SETTING_TYPE WRdsSettingType,
-            /* [annotation][in] */ 
-            _In_  WRDS_SETTING_LEVEL WRdsSettingLevel,
+            /* [in] */ WRDS_SETTING_TYPE WRdsSettingType,
+            /* [in] */ WRDS_SETTING_LEVEL WRdsSettingLevel,
             /* [ref][out] */ __RPC__out PWRDS_SETTINGS pWRdsSettings);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolSettings, MergeSettings)
         HRESULT ( STDMETHODCALLTYPE *MergeSettings )( 
             __RPC__in IWRdsProtocolSettings * This,
             /* [ref][in] */ __RPC__in PWRDS_SETTINGS pWRdsSettings,
-            /* [annotation][in] */ 
-            _In_  WRDS_CONNECTION_SETTING_LEVEL WRdsConnectionSettingLevel,
+            /* [in] */ WRDS_CONNECTION_SETTING_LEVEL WRdsConnectionSettingLevel,
             /* [ref][out][in] */ __RPC__inout PWRDS_CONNECTION_SETTINGS pWRdsConnectionSettings);
         
         END_INTERFACE
@@ -1877,38 +1667,28 @@ EXTERN_C const IID IID_IWRdsProtocolManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  IWRdsProtocolSettings *pIWRdsSettings,
-            /* [annotation][in] */ 
-            _In_  PWRDS_SETTINGS pWRdsSettings) = 0;
+            /* [in] */ __RPC__in_opt IWRdsProtocolSettings *pIWRdsSettings,
+            /* [in] */ __RPC__in PWRDS_SETTINGS pWRdsSettings) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateListener( 
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszListenerName,
-            /* [annotation][out] */ 
-            _Out_  IWRdsProtocolListener **pProtocolListener) = 0;
+            /* [string][in] */ __RPC__in_string WCHAR *wszListenerName,
+            /* [out] */ __RPC__deref_out_opt IWRdsProtocolListener **pProtocolListener) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifyServiceStateChange( 
-            /* [annotation][in] */ 
-            _In_  WRDS_SERVICE_STATE *pTSServiceStateChange) = 0;
+            /* [in] */ __RPC__in WRDS_SERVICE_STATE *pTSServiceStateChange) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifySessionOfServiceStart( 
-            /* [annotation][in] */ 
-            _In_  WRDS_SESSION_ID *SessionId) = 0;
+            /* [in] */ __RPC__in WRDS_SESSION_ID *SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifySessionOfServiceStop( 
-            /* [annotation][in] */ 
-            _In_  WRDS_SESSION_ID *SessionId) = 0;
+            /* [in] */ __RPC__in WRDS_SESSION_ID *SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifySessionStateChange( 
-            /* [annotation][in] */ 
-            _In_  WRDS_SESSION_ID *SessionId,
-            /* [annotation][in] */ 
-            _In_  ULONG EventId) = 0;
+            /* [in] */ __RPC__in WRDS_SESSION_ID *SessionId,
+            /* [in] */ ULONG EventId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifySettingsChange( 
-            /* [annotation][in] */ 
-            _In_  PWRDS_SETTINGS pWRdsSettings) = 0;
+            /* [in] */ __RPC__in PWRDS_SETTINGS pWRdsSettings) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Uninitialize( void) = 0;
         
@@ -1924,8 +1704,7 @@ EXTERN_C const IID IID_IWRdsProtocolManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1940,50 +1719,40 @@ EXTERN_C const IID IID_IWRdsProtocolManager;
         DECLSPEC_XFGVIRT(IWRdsProtocolManager, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWRdsProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  IWRdsProtocolSettings *pIWRdsSettings,
-            /* [annotation][in] */ 
-            _In_  PWRDS_SETTINGS pWRdsSettings);
+            /* [in] */ __RPC__in_opt IWRdsProtocolSettings *pIWRdsSettings,
+            /* [in] */ __RPC__in PWRDS_SETTINGS pWRdsSettings);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolManager, CreateListener)
         HRESULT ( STDMETHODCALLTYPE *CreateListener )( 
             __RPC__in IWRdsProtocolManager * This,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszListenerName,
-            /* [annotation][out] */ 
-            _Out_  IWRdsProtocolListener **pProtocolListener);
+            /* [string][in] */ __RPC__in_string WCHAR *wszListenerName,
+            /* [out] */ __RPC__deref_out_opt IWRdsProtocolListener **pProtocolListener);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolManager, NotifyServiceStateChange)
         HRESULT ( STDMETHODCALLTYPE *NotifyServiceStateChange )( 
             __RPC__in IWRdsProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  WRDS_SERVICE_STATE *pTSServiceStateChange);
+            /* [in] */ __RPC__in WRDS_SERVICE_STATE *pTSServiceStateChange);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolManager, NotifySessionOfServiceStart)
         HRESULT ( STDMETHODCALLTYPE *NotifySessionOfServiceStart )( 
             __RPC__in IWRdsProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  WRDS_SESSION_ID *SessionId);
+            /* [in] */ __RPC__in WRDS_SESSION_ID *SessionId);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolManager, NotifySessionOfServiceStop)
         HRESULT ( STDMETHODCALLTYPE *NotifySessionOfServiceStop )( 
             __RPC__in IWRdsProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  WRDS_SESSION_ID *SessionId);
+            /* [in] */ __RPC__in WRDS_SESSION_ID *SessionId);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolManager, NotifySessionStateChange)
         HRESULT ( STDMETHODCALLTYPE *NotifySessionStateChange )( 
             __RPC__in IWRdsProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  WRDS_SESSION_ID *SessionId,
-            /* [annotation][in] */ 
-            _In_  ULONG EventId);
+            /* [in] */ __RPC__in WRDS_SESSION_ID *SessionId,
+            /* [in] */ ULONG EventId);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolManager, NotifySettingsChange)
         HRESULT ( STDMETHODCALLTYPE *NotifySettingsChange )( 
             __RPC__in IWRdsProtocolManager * This,
-            /* [annotation][in] */ 
-            _In_  PWRDS_SETTINGS pWRdsSettings);
+            /* [in] */ __RPC__in PWRDS_SETTINGS pWRdsSettings);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolManager, Uninitialize)
         HRESULT ( STDMETHODCALLTYPE *Uninitialize )( 
@@ -2063,13 +1832,11 @@ EXTERN_C const IID IID_IWRdsProtocolListener;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSettings( 
-            /* [annotation][in] */ 
-            _In_  WRDS_LISTENER_SETTING_LEVEL WRdsListenerSettingLevel,
+            /* [in] */ WRDS_LISTENER_SETTING_LEVEL WRdsListenerSettingLevel,
             /* [ref][out] */ __RPC__out PWRDS_LISTENER_SETTINGS pWRdsListenerSettings) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StartListen( 
-            /* [annotation][in] */ 
-            _In_  IWRdsProtocolListenerCallback *pCallback) = 0;
+            /* [in] */ __RPC__in_opt IWRdsProtocolListenerCallback *pCallback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StopListen( void) = 0;
         
@@ -2085,8 +1852,7 @@ EXTERN_C const IID IID_IWRdsProtocolListener;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolListener * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2101,15 +1867,13 @@ EXTERN_C const IID IID_IWRdsProtocolListener;
         DECLSPEC_XFGVIRT(IWRdsProtocolListener, GetSettings)
         HRESULT ( STDMETHODCALLTYPE *GetSettings )( 
             __RPC__in IWRdsProtocolListener * This,
-            /* [annotation][in] */ 
-            _In_  WRDS_LISTENER_SETTING_LEVEL WRdsListenerSettingLevel,
+            /* [in] */ WRDS_LISTENER_SETTING_LEVEL WRdsListenerSettingLevel,
             /* [ref][out] */ __RPC__out PWRDS_LISTENER_SETTINGS pWRdsListenerSettings);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolListener, StartListen)
         HRESULT ( STDMETHODCALLTYPE *StartListen )( 
             __RPC__in IWRdsProtocolListener * This,
-            /* [annotation][in] */ 
-            _In_  IWRdsProtocolListenerCallback *pCallback);
+            /* [in] */ __RPC__in_opt IWRdsProtocolListenerCallback *pCallback);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolListener, StopListen)
         HRESULT ( STDMETHODCALLTYPE *StopListen )( 
@@ -2174,12 +1938,9 @@ EXTERN_C const IID IID_IWRdsProtocolListenerCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnConnected( 
-            /* [annotation][in] */ 
-            _In_  IWRdsProtocolConnection *pConnection,
-            /* [annotation][in] */ 
-            _In_  PWRDS_CONNECTION_SETTINGS pWRdsConnectionSettings,
-            /* [annotation][out] */ 
-            _Out_  IWRdsProtocolConnectionCallback **pCallback) = 0;
+            /* [in] */ __RPC__in_opt IWRdsProtocolConnection *pConnection,
+            /* [in] */ __RPC__in PWRDS_CONNECTION_SETTINGS pWRdsConnectionSettings,
+            /* [out] */ __RPC__deref_out_opt IWRdsProtocolConnectionCallback **pCallback) = 0;
         
     };
     
@@ -2193,8 +1954,7 @@ EXTERN_C const IID IID_IWRdsProtocolListenerCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolListenerCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2209,12 +1969,9 @@ EXTERN_C const IID IID_IWRdsProtocolListenerCallback;
         DECLSPEC_XFGVIRT(IWRdsProtocolListenerCallback, OnConnected)
         HRESULT ( STDMETHODCALLTYPE *OnConnected )( 
             __RPC__in IWRdsProtocolListenerCallback * This,
-            /* [annotation][in] */ 
-            _In_  IWRdsProtocolConnection *pConnection,
-            /* [annotation][in] */ 
-            _In_  PWRDS_CONNECTION_SETTINGS pWRdsConnectionSettings,
-            /* [annotation][out] */ 
-            _Out_  IWRdsProtocolConnectionCallback **pCallback);
+            /* [in] */ __RPC__in_opt IWRdsProtocolConnection *pConnection,
+            /* [in] */ __RPC__in PWRDS_CONNECTION_SETTINGS pWRdsConnectionSettings,
+            /* [out] */ __RPC__deref_out_opt IWRdsProtocolConnectionCallback **pCallback);
         
         END_INTERFACE
     } IWRdsProtocolListenerCallbackVtbl;
@@ -2269,134 +2026,94 @@ EXTERN_C const IID IID_IWRdsProtocolConnection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetLogonErrorRedirector( 
-            /* [annotation][out] */ 
-            _Out_  IWRdsProtocolLogonErrorRedirector **ppLogonErrorRedir) = 0;
+            /* [out] */ __RPC__deref_out_opt IWRdsProtocolLogonErrorRedirector **ppLogonErrorRedir) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AcceptConnection( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetClientData( 
-            /* [annotation][out] */ 
-            _Out_  WRDS_CLIENT_DATA *pClientData) = 0;
+            /* [out] */ __RPC__out WRDS_CLIENT_DATA *pClientData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetClientMonitorData( 
-            /* [annotation][out] */ 
-            _Out_  UINT *pNumMonitors,
-            /* [annotation][out] */ 
-            _Out_  UINT *pPrimaryMonitor) = 0;
+            /* [out] */ __RPC__out UINT *pNumMonitors,
+            /* [out] */ __RPC__out UINT *pPrimaryMonitor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUserCredentials( 
-            /* [annotation][out] */ 
-            _Out_  WRDS_USER_CREDENTIAL *pUserCreds) = 0;
+            /* [out] */ __RPC__out WRDS_USER_CREDENTIAL *pUserCreds) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLicenseConnection( 
-            /* [annotation][out] */ 
-            _Out_  IWRdsProtocolLicenseConnection **ppLicenseConnection) = 0;
+            /* [out] */ __RPC__deref_out_opt IWRdsProtocolLicenseConnection **ppLicenseConnection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AuthenticateClientToSession( 
-            /* [annotation][out] */ 
-            _Out_  WRDS_SESSION_ID *SessionId) = 0;
+            /* [out] */ __RPC__out WRDS_SESSION_ID *SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifySessionId( 
-            /* [annotation][in] */ 
-            _In_  WRDS_SESSION_ID *SessionId,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR SessionHandle) = 0;
+            /* [in] */ __RPC__in WRDS_SESSION_ID *SessionId,
+            /* [in] */ HANDLE_PTR SessionHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputHandles( 
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pKeyboardHandle,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pMouseHandle,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pBeepHandle) = 0;
+            /* [out] */ __RPC__out HANDLE_PTR *pKeyboardHandle,
+            /* [out] */ __RPC__out HANDLE_PTR *pMouseHandle,
+            /* [out] */ __RPC__out HANDLE_PTR *pBeepHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVideoHandle( 
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pVideoHandle) = 0;
+            /* [out] */ __RPC__out HANDLE_PTR *pVideoHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConnectNotify( 
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId) = 0;
+            /* [in] */ ULONG SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsUserAllowedToLogon( 
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR UserToken,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pDomainName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pUserName) = 0;
+            /* [in] */ ULONG SessionId,
+            /* [in] */ HANDLE_PTR UserToken,
+            /* [string][in] */ __RPC__in_string WCHAR *pDomainName,
+            /* [string][in] */ __RPC__in_string WCHAR *pUserName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SessionArbitrationEnumeration( 
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR hUserToken,
-            /* [annotation][in] */ 
-            _In_  BOOL bSingleSessionPerUserEnabled,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pdwSessionIdentifierCount)  ULONG *pSessionIdArray,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pdwSessionIdentifierCount) = 0;
+            /* [in] */ HANDLE_PTR hUserToken,
+            /* [in] */ BOOL bSingleSessionPerUserEnabled,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pdwSessionIdentifierCount) ULONG *pSessionIdArray,
+            /* [out][in] */ __RPC__inout ULONG *pdwSessionIdentifierCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LogonNotify( 
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR hClientToken,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszUserName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszDomainName,
-            /* [annotation][in] */ 
-            _In_  WRDS_SESSION_ID *SessionId,
-            /* [annotation][out][in] */ 
-            _Inout_  PWRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) = 0;
+            /* [in] */ HANDLE_PTR hClientToken,
+            /* [string][in] */ __RPC__in_string WCHAR *wszUserName,
+            /* [string][in] */ __RPC__in_string WCHAR *wszDomainName,
+            /* [in] */ __RPC__in WRDS_SESSION_ID *SessionId,
+            /* [out][in] */ __RPC__inout PWRDS_CONNECTION_SETTINGS pWRdsConnectionSettings) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PreDisconnect( 
-            /* [annotation][in] */ 
-            _In_  ULONG DisconnectReason) = 0;
+            /* [in] */ ULONG DisconnectReason) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisconnectNotify( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProtocolStatus( 
-            /* [annotation][out] */ 
-            _Out_  WRDS_PROTOCOL_STATUS *pProtocolStatus) = 0;
+            /* [out] */ __RPC__out WRDS_PROTOCOL_STATUS *pProtocolStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastInputTime( 
-            /* [annotation][out] */ 
-            _Out_  ULONG64 *pLastInputTime) = 0;
+            /* [out] */ __RPC__out ULONG64 *pLastInputTime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetErrorInfo( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulError) = 0;
+            /* [in] */ ULONG ulError) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVirtualChannel( 
-            /* [annotation][string][in] */ 
-            _In_  CHAR *szEndpointName,
-            /* [annotation][in] */ 
-            _In_  BOOL bStatic,
-            /* [annotation][in] */ 
-            _In_  ULONG RequestedPriority,
-            /* [annotation][out] */ 
-            _Out_  ULONG_PTR *phChannel) = 0;
+            /* [string][in] */ __RPC__in_string CHAR *szEndpointName,
+            /* [in] */ BOOL bStatic,
+            /* [in] */ ULONG RequestedPriority,
+            /* [out] */ __RPC__out ULONG_PTR *phChannel) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryProperty( 
-            /* [annotation][in] */ 
-            _In_  GUID QueryType,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNumEntriesIn,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNumEntriesOut,
+            /* [in] */ GUID QueryType,
+            /* [in] */ ULONG ulNumEntriesIn,
+            /* [in] */ ULONG ulNumEntriesOut,
             /* [size_is][optional][in] */ __RPC__in_ecount_full(ulNumEntriesIn) PWRDS_PROPERTY_VALUE pPropertyEntriesIn,
             /* [size_is][optional][out] */ __RPC__out_ecount_full(ulNumEntriesOut) PWRDS_PROPERTY_VALUE pPropertyEntriesOut) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetShadowConnection( 
-            /* [annotation][out] */ 
-            _Out_  IWRdsProtocolShadowConnection **ppShadowConnection) = 0;
+            /* [out] */ __RPC__deref_out_opt IWRdsProtocolShadowConnection **ppShadowConnection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE NotifyCommandProcessCreated( 
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId) = 0;
+            /* [in] */ ULONG SessionId) = 0;
         
     };
     
@@ -2410,8 +2127,7 @@ EXTERN_C const IID IID_IWRdsProtocolConnection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2426,8 +2142,7 @@ EXTERN_C const IID IID_IWRdsProtocolConnection;
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, GetLogonErrorRedirector)
         HRESULT ( STDMETHODCALLTYPE *GetLogonErrorRedirector )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  IWRdsProtocolLogonErrorRedirector **ppLogonErrorRedir);
+            /* [out] */ __RPC__deref_out_opt IWRdsProtocolLogonErrorRedirector **ppLogonErrorRedir);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, AcceptConnection)
         HRESULT ( STDMETHODCALLTYPE *AcceptConnection )( 
@@ -2436,108 +2151,81 @@ EXTERN_C const IID IID_IWRdsProtocolConnection;
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, GetClientData)
         HRESULT ( STDMETHODCALLTYPE *GetClientData )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  WRDS_CLIENT_DATA *pClientData);
+            /* [out] */ __RPC__out WRDS_CLIENT_DATA *pClientData);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, GetClientMonitorData)
         HRESULT ( STDMETHODCALLTYPE *GetClientMonitorData )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pNumMonitors,
-            /* [annotation][out] */ 
-            _Out_  UINT *pPrimaryMonitor);
+            /* [out] */ __RPC__out UINT *pNumMonitors,
+            /* [out] */ __RPC__out UINT *pPrimaryMonitor);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, GetUserCredentials)
         HRESULT ( STDMETHODCALLTYPE *GetUserCredentials )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  WRDS_USER_CREDENTIAL *pUserCreds);
+            /* [out] */ __RPC__out WRDS_USER_CREDENTIAL *pUserCreds);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, GetLicenseConnection)
         HRESULT ( STDMETHODCALLTYPE *GetLicenseConnection )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  IWRdsProtocolLicenseConnection **ppLicenseConnection);
+            /* [out] */ __RPC__deref_out_opt IWRdsProtocolLicenseConnection **ppLicenseConnection);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, AuthenticateClientToSession)
         HRESULT ( STDMETHODCALLTYPE *AuthenticateClientToSession )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  WRDS_SESSION_ID *SessionId);
+            /* [out] */ __RPC__out WRDS_SESSION_ID *SessionId);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, NotifySessionId)
         HRESULT ( STDMETHODCALLTYPE *NotifySessionId )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  WRDS_SESSION_ID *SessionId,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR SessionHandle);
+            /* [in] */ __RPC__in WRDS_SESSION_ID *SessionId,
+            /* [in] */ HANDLE_PTR SessionHandle);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, GetInputHandles)
         HRESULT ( STDMETHODCALLTYPE *GetInputHandles )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pKeyboardHandle,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pMouseHandle,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pBeepHandle);
+            /* [out] */ __RPC__out HANDLE_PTR *pKeyboardHandle,
+            /* [out] */ __RPC__out HANDLE_PTR *pMouseHandle,
+            /* [out] */ __RPC__out HANDLE_PTR *pBeepHandle);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, GetVideoHandle)
         HRESULT ( STDMETHODCALLTYPE *GetVideoHandle )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  HANDLE_PTR *pVideoHandle);
+            /* [out] */ __RPC__out HANDLE_PTR *pVideoHandle);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, ConnectNotify)
         HRESULT ( STDMETHODCALLTYPE *ConnectNotify )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId);
+            /* [in] */ ULONG SessionId);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, IsUserAllowedToLogon)
         HRESULT ( STDMETHODCALLTYPE *IsUserAllowedToLogon )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR UserToken,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pDomainName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pUserName);
+            /* [in] */ ULONG SessionId,
+            /* [in] */ HANDLE_PTR UserToken,
+            /* [string][in] */ __RPC__in_string WCHAR *pDomainName,
+            /* [string][in] */ __RPC__in_string WCHAR *pUserName);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, SessionArbitrationEnumeration)
         HRESULT ( STDMETHODCALLTYPE *SessionArbitrationEnumeration )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR hUserToken,
-            /* [annotation][in] */ 
-            _In_  BOOL bSingleSessionPerUserEnabled,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pdwSessionIdentifierCount)  ULONG *pSessionIdArray,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pdwSessionIdentifierCount);
+            /* [in] */ HANDLE_PTR hUserToken,
+            /* [in] */ BOOL bSingleSessionPerUserEnabled,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pdwSessionIdentifierCount) ULONG *pSessionIdArray,
+            /* [out][in] */ __RPC__inout ULONG *pdwSessionIdentifierCount);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, LogonNotify)
         HRESULT ( STDMETHODCALLTYPE *LogonNotify )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR hClientToken,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszUserName,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *wszDomainName,
-            /* [annotation][in] */ 
-            _In_  WRDS_SESSION_ID *SessionId,
-            /* [annotation][out][in] */ 
-            _Inout_  PWRDS_CONNECTION_SETTINGS pWRdsConnectionSettings);
+            /* [in] */ HANDLE_PTR hClientToken,
+            /* [string][in] */ __RPC__in_string WCHAR *wszUserName,
+            /* [string][in] */ __RPC__in_string WCHAR *wszDomainName,
+            /* [in] */ __RPC__in WRDS_SESSION_ID *SessionId,
+            /* [out][in] */ __RPC__inout PWRDS_CONNECTION_SETTINGS pWRdsConnectionSettings);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, PreDisconnect)
         HRESULT ( STDMETHODCALLTYPE *PreDisconnect )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG DisconnectReason);
+            /* [in] */ ULONG DisconnectReason);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, DisconnectNotify)
         HRESULT ( STDMETHODCALLTYPE *DisconnectNotify )( 
@@ -2550,56 +2238,44 @@ EXTERN_C const IID IID_IWRdsProtocolConnection;
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, GetProtocolStatus)
         HRESULT ( STDMETHODCALLTYPE *GetProtocolStatus )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  WRDS_PROTOCOL_STATUS *pProtocolStatus);
+            /* [out] */ __RPC__out WRDS_PROTOCOL_STATUS *pProtocolStatus);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, GetLastInputTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastInputTime )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG64 *pLastInputTime);
+            /* [out] */ __RPC__out ULONG64 *pLastInputTime);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, SetErrorInfo)
         HRESULT ( STDMETHODCALLTYPE *SetErrorInfo )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulError);
+            /* [in] */ ULONG ulError);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, CreateVirtualChannel)
         HRESULT ( STDMETHODCALLTYPE *CreateVirtualChannel )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][string][in] */ 
-            _In_  CHAR *szEndpointName,
-            /* [annotation][in] */ 
-            _In_  BOOL bStatic,
-            /* [annotation][in] */ 
-            _In_  ULONG RequestedPriority,
-            /* [annotation][out] */ 
-            _Out_  ULONG_PTR *phChannel);
+            /* [string][in] */ __RPC__in_string CHAR *szEndpointName,
+            /* [in] */ BOOL bStatic,
+            /* [in] */ ULONG RequestedPriority,
+            /* [out] */ __RPC__out ULONG_PTR *phChannel);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, QueryProperty)
         HRESULT ( STDMETHODCALLTYPE *QueryProperty )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  GUID QueryType,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNumEntriesIn,
-            /* [annotation][in] */ 
-            _In_  ULONG ulNumEntriesOut,
+            /* [in] */ GUID QueryType,
+            /* [in] */ ULONG ulNumEntriesIn,
+            /* [in] */ ULONG ulNumEntriesOut,
             /* [size_is][optional][in] */ __RPC__in_ecount_full(ulNumEntriesIn) PWRDS_PROPERTY_VALUE pPropertyEntriesIn,
             /* [size_is][optional][out] */ __RPC__out_ecount_full(ulNumEntriesOut) PWRDS_PROPERTY_VALUE pPropertyEntriesOut);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, GetShadowConnection)
         HRESULT ( STDMETHODCALLTYPE *GetShadowConnection )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][out] */ 
-            _Out_  IWRdsProtocolShadowConnection **ppShadowConnection);
+            /* [out] */ __RPC__deref_out_opt IWRdsProtocolShadowConnection **ppShadowConnection);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnection, NotifyCommandProcessCreated)
         HRESULT ( STDMETHODCALLTYPE *NotifyCommandProcessCreated )( 
             __RPC__in IWRdsProtocolConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId);
+            /* [in] */ ULONG SessionId);
         
         END_INTERFACE
     } IWRdsProtocolConnectionVtbl;
@@ -2725,10 +2401,8 @@ EXTERN_C const IID IID_IWRdsProtocolConnectionCallback;
         virtual HRESULT STDMETHODCALLTYPE OnReady( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BrokenConnection( 
-            /* [annotation][in] */ 
-            _In_  ULONG Reason,
-            /* [annotation][in] */ 
-            _In_  ULONG Source) = 0;
+            /* [in] */ ULONG Reason,
+            /* [in] */ ULONG Source) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE StopScreenUpdates( void) = 0;
         
@@ -2736,8 +2410,7 @@ EXTERN_C const IID IID_IWRdsProtocolConnectionCallback;
             /* [optional][in] */ __RPC__in WRDS_SMALL_RECT *rect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConnectionId( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pConnectionId) = 0;
+            /* [out] */ __RPC__out ULONG *pConnectionId) = 0;
         
     };
     
@@ -2751,8 +2424,7 @@ EXTERN_C const IID IID_IWRdsProtocolConnectionCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolConnectionCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2771,10 +2443,8 @@ EXTERN_C const IID IID_IWRdsProtocolConnectionCallback;
         DECLSPEC_XFGVIRT(IWRdsProtocolConnectionCallback, BrokenConnection)
         HRESULT ( STDMETHODCALLTYPE *BrokenConnection )( 
             __RPC__in IWRdsProtocolConnectionCallback * This,
-            /* [annotation][in] */ 
-            _In_  ULONG Reason,
-            /* [annotation][in] */ 
-            _In_  ULONG Source);
+            /* [in] */ ULONG Reason,
+            /* [in] */ ULONG Source);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnectionCallback, StopScreenUpdates)
         HRESULT ( STDMETHODCALLTYPE *StopScreenUpdates )( 
@@ -2788,8 +2458,7 @@ EXTERN_C const IID IID_IWRdsProtocolConnectionCallback;
         DECLSPEC_XFGVIRT(IWRdsProtocolConnectionCallback, GetConnectionId)
         HRESULT ( STDMETHODCALLTYPE *GetConnectionId )( 
             __RPC__in IWRdsProtocolConnectionCallback * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pConnectionId);
+            /* [out] */ __RPC__out ULONG *pConnectionId);
         
         END_INTERFACE
     } IWRdsProtocolConnectionCallbackVtbl;
@@ -2856,38 +2525,24 @@ EXTERN_C const IID IID_IWRdsProtocolShadowConnection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Start( 
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pTargetServerName,
-            /* [annotation][in] */ 
-            _In_  DWORD TargetSessionId,
-            /* [annotation][in] */ 
-            _In_  BYTE HotKeyVk,
-            /* [annotation][in] */ 
-            _In_  USHORT HotkeyModifiers,
-            /* [annotation][in] */ 
-            _In_  IWRdsProtocolShadowCallback *pShadowCallback) = 0;
+            /* [string][in] */ __RPC__in_string WCHAR *pTargetServerName,
+            /* [in] */ DWORD TargetSessionId,
+            /* [in] */ BYTE HotKeyVk,
+            /* [in] */ USHORT HotkeyModifiers,
+            /* [in] */ __RPC__in_opt IWRdsProtocolShadowCallback *pShadowCallback) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Stop( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DoTarget( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param1Size)  PBYTE pParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD Param1Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param2Size)  PBYTE pParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD Param2Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param3Size)  PBYTE pParam3,
-            /* [annotation][in] */ 
-            _In_  DWORD Param3Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param4Size)  PBYTE pParam4,
-            /* [annotation][in] */ 
-            _In_  DWORD Param4Size,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pClientName) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(Param1Size) PBYTE pParam1,
+            /* [in] */ DWORD Param1Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param2Size) PBYTE pParam2,
+            /* [in] */ DWORD Param2Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param3Size) PBYTE pParam3,
+            /* [in] */ DWORD Param3Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param4Size) PBYTE pParam4,
+            /* [in] */ DWORD Param4Size,
+            /* [string][in] */ __RPC__in_string WCHAR *pClientName) = 0;
         
     };
     
@@ -2901,8 +2556,7 @@ EXTERN_C const IID IID_IWRdsProtocolShadowConnection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolShadowConnection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2917,16 +2571,11 @@ EXTERN_C const IID IID_IWRdsProtocolShadowConnection;
         DECLSPEC_XFGVIRT(IWRdsProtocolShadowConnection, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             __RPC__in IWRdsProtocolShadowConnection * This,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pTargetServerName,
-            /* [annotation][in] */ 
-            _In_  DWORD TargetSessionId,
-            /* [annotation][in] */ 
-            _In_  BYTE HotKeyVk,
-            /* [annotation][in] */ 
-            _In_  USHORT HotkeyModifiers,
-            /* [annotation][in] */ 
-            _In_  IWRdsProtocolShadowCallback *pShadowCallback);
+            /* [string][in] */ __RPC__in_string WCHAR *pTargetServerName,
+            /* [in] */ DWORD TargetSessionId,
+            /* [in] */ BYTE HotKeyVk,
+            /* [in] */ USHORT HotkeyModifiers,
+            /* [in] */ __RPC__in_opt IWRdsProtocolShadowCallback *pShadowCallback);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolShadowConnection, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
@@ -2935,24 +2584,15 @@ EXTERN_C const IID IID_IWRdsProtocolShadowConnection;
         DECLSPEC_XFGVIRT(IWRdsProtocolShadowConnection, DoTarget)
         HRESULT ( STDMETHODCALLTYPE *DoTarget )( 
             __RPC__in IWRdsProtocolShadowConnection * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param1Size)  PBYTE pParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD Param1Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param2Size)  PBYTE pParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD Param2Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param3Size)  PBYTE pParam3,
-            /* [annotation][in] */ 
-            _In_  DWORD Param3Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param4Size)  PBYTE pParam4,
-            /* [annotation][in] */ 
-            _In_  DWORD Param4Size,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pClientName);
+            /* [size_is][in] */ __RPC__in_ecount_full(Param1Size) PBYTE pParam1,
+            /* [in] */ DWORD Param1Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param2Size) PBYTE pParam2,
+            /* [in] */ DWORD Param2Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param3Size) PBYTE pParam3,
+            /* [in] */ DWORD Param3Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param4Size) PBYTE pParam4,
+            /* [in] */ DWORD Param4Size,
+            /* [string][in] */ __RPC__in_string WCHAR *pClientName);
         
         END_INTERFACE
     } IWRdsProtocolShadowConnectionVtbl;
@@ -3016,26 +2656,16 @@ EXTERN_C const IID IID_IWRdsProtocolShadowCallback;
         
         virtual HRESULT STDMETHODCALLTYPE InvokeTargetShadow( 
             /* [string][full][in] */ __RPC__in_opt_string WCHAR *pTargetServerName,
-            /* [annotation][in] */ 
-            _In_  ULONG TargetSessionId,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param1Size)  PBYTE pParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD Param1Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param2Size)  PBYTE pParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD Param2Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param3Size)  PBYTE pParam3,
-            /* [annotation][in] */ 
-            _In_  DWORD Param3Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param4Size)  PBYTE pParam4,
-            /* [annotation][in] */ 
-            _In_  DWORD Param4Size,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pClientName) = 0;
+            /* [in] */ ULONG TargetSessionId,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param1Size) PBYTE pParam1,
+            /* [in] */ DWORD Param1Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param2Size) PBYTE pParam2,
+            /* [in] */ DWORD Param2Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param3Size) PBYTE pParam3,
+            /* [in] */ DWORD Param3Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param4Size) PBYTE pParam4,
+            /* [in] */ DWORD Param4Size,
+            /* [string][in] */ __RPC__in_string WCHAR *pClientName) = 0;
         
     };
     
@@ -3049,8 +2679,7 @@ EXTERN_C const IID IID_IWRdsProtocolShadowCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolShadowCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3070,26 +2699,16 @@ EXTERN_C const IID IID_IWRdsProtocolShadowCallback;
         HRESULT ( STDMETHODCALLTYPE *InvokeTargetShadow )( 
             __RPC__in IWRdsProtocolShadowCallback * This,
             /* [string][full][in] */ __RPC__in_opt_string WCHAR *pTargetServerName,
-            /* [annotation][in] */ 
-            _In_  ULONG TargetSessionId,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param1Size)  PBYTE pParam1,
-            /* [annotation][in] */ 
-            _In_  DWORD Param1Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param2Size)  PBYTE pParam2,
-            /* [annotation][in] */ 
-            _In_  DWORD Param2Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param3Size)  PBYTE pParam3,
-            /* [annotation][in] */ 
-            _In_  DWORD Param3Size,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Param4Size)  PBYTE pParam4,
-            /* [annotation][in] */ 
-            _In_  DWORD Param4Size,
-            /* [annotation][string][in] */ 
-            _In_  WCHAR *pClientName);
+            /* [in] */ ULONG TargetSessionId,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param1Size) PBYTE pParam1,
+            /* [in] */ DWORD Param1Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param2Size) PBYTE pParam2,
+            /* [in] */ DWORD Param2Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param3Size) PBYTE pParam3,
+            /* [in] */ DWORD Param3Size,
+            /* [size_is][in] */ __RPC__in_ecount_full(Param4Size) PBYTE pParam4,
+            /* [in] */ DWORD Param4Size,
+            /* [string][in] */ __RPC__in_string WCHAR *pClientName);
         
         END_INTERFACE
     } IWRdsProtocolShadowCallbackVtbl;
@@ -3147,30 +2766,21 @@ EXTERN_C const IID IID_IWRdsProtocolLicenseConnection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RequestLicensingCapabilities( 
-            /* [annotation][out] */ 
-            _Out_  PWRDS_LICENSE_CAPABILITIES ppLicenseCapabilities,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcbLicenseCapabilities) = 0;
+            /* [out] */ __RPC__out PWRDS_LICENSE_CAPABILITIES ppLicenseCapabilities,
+            /* [out][in] */ __RPC__inout ULONG *pcbLicenseCapabilities) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SendClientLicense( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbClientLicense)  PBYTE pClientLicense,
-            /* [annotation][in] */ 
-            _In_  ULONG cbClientLicense) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(cbClientLicense) PBYTE pClientLicense,
+            /* [in] */ ULONG cbClientLicense) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RequestClientLicense( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Reserve2)  PBYTE Reserve1,
-            /* [annotation][in] */ 
-            _In_  ULONG Reserve2,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pcbClientLicense)  PBYTE ppClientLicense,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcbClientLicense) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(Reserve2) PBYTE Reserve1,
+            /* [in] */ ULONG Reserve2,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pcbClientLicense) PBYTE ppClientLicense,
+            /* [out][in] */ __RPC__inout ULONG *pcbClientLicense) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProtocolComplete( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulComplete) = 0;
+            /* [in] */ ULONG ulComplete) = 0;
         
     };
     
@@ -3184,8 +2794,7 @@ EXTERN_C const IID IID_IWRdsProtocolLicenseConnection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolLicenseConnection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3200,36 +2809,27 @@ EXTERN_C const IID IID_IWRdsProtocolLicenseConnection;
         DECLSPEC_XFGVIRT(IWRdsProtocolLicenseConnection, RequestLicensingCapabilities)
         HRESULT ( STDMETHODCALLTYPE *RequestLicensingCapabilities )( 
             __RPC__in IWRdsProtocolLicenseConnection * This,
-            /* [annotation][out] */ 
-            _Out_  PWRDS_LICENSE_CAPABILITIES ppLicenseCapabilities,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcbLicenseCapabilities);
+            /* [out] */ __RPC__out PWRDS_LICENSE_CAPABILITIES ppLicenseCapabilities,
+            /* [out][in] */ __RPC__inout ULONG *pcbLicenseCapabilities);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolLicenseConnection, SendClientLicense)
         HRESULT ( STDMETHODCALLTYPE *SendClientLicense )( 
             __RPC__in IWRdsProtocolLicenseConnection * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbClientLicense)  PBYTE pClientLicense,
-            /* [annotation][in] */ 
-            _In_  ULONG cbClientLicense);
+            /* [size_is][in] */ __RPC__in_ecount_full(cbClientLicense) PBYTE pClientLicense,
+            /* [in] */ ULONG cbClientLicense);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolLicenseConnection, RequestClientLicense)
         HRESULT ( STDMETHODCALLTYPE *RequestClientLicense )( 
             __RPC__in IWRdsProtocolLicenseConnection * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(Reserve2)  PBYTE Reserve1,
-            /* [annotation][in] */ 
-            _In_  ULONG Reserve2,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(*pcbClientLicense)  PBYTE ppClientLicense,
-            /* [annotation][out][in] */ 
-            _Inout_  ULONG *pcbClientLicense);
+            /* [size_is][in] */ __RPC__in_ecount_full(Reserve2) PBYTE Reserve1,
+            /* [in] */ ULONG Reserve2,
+            /* [size_is][out] */ __RPC__out_ecount_full(*pcbClientLicense) PBYTE ppClientLicense,
+            /* [out][in] */ __RPC__inout ULONG *pcbClientLicense);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolLicenseConnection, ProtocolComplete)
         HRESULT ( STDMETHODCALLTYPE *ProtocolComplete )( 
             __RPC__in IWRdsProtocolLicenseConnection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulComplete);
+            /* [in] */ ULONG ulComplete);
         
         END_INTERFACE
     } IWRdsProtocolLicenseConnectionVtbl;
@@ -3295,34 +2895,22 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
         virtual HRESULT STDMETHODCALLTYPE OnBeginPainting( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RedirectStatus( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][out] */ 
-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [out] */ __RPC__out WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RedirectMessage( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszCaption,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][in] */ 
-            _In_  UINT uType,
-            /* [annotation][out] */ 
-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR pszCaption,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [in] */ UINT uType,
+            /* [out] */ __RPC__out WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RedirectLogonError( 
-            /* [annotation][in] */ 
-            _In_  LONG ntsStatus,
-            /* [annotation][in] */ 
-            _In_  LONG ntsSubstatus,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszCaption,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][in] */ 
-            _In_  UINT uType,
-            /* [annotation][out] */ 
-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+            /* [in] */ LONG ntsStatus,
+            /* [in] */ LONG ntsSubstatus,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszCaption,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [in] */ UINT uType,
+            /* [out] */ __RPC__out WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
         
     };
     
@@ -3336,8 +2924,7 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolLogonErrorRedirector * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3356,38 +2943,26 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
         DECLSPEC_XFGVIRT(IWRdsProtocolLogonErrorRedirector, RedirectStatus)
         HRESULT ( STDMETHODCALLTYPE *RedirectStatus )( 
             __RPC__in IWRdsProtocolLogonErrorRedirector * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][out] */ 
-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [out] */ __RPC__out WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolLogonErrorRedirector, RedirectMessage)
         HRESULT ( STDMETHODCALLTYPE *RedirectMessage )( 
             __RPC__in IWRdsProtocolLogonErrorRedirector * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszCaption,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][in] */ 
-            _In_  UINT uType,
-            /* [annotation][out] */ 
-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
+            /* [string][in] */ __RPC__in_string LPCWSTR pszCaption,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [in] */ UINT uType,
+            /* [out] */ __RPC__out WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolLogonErrorRedirector, RedirectLogonError)
         HRESULT ( STDMETHODCALLTYPE *RedirectLogonError )( 
             __RPC__in IWRdsProtocolLogonErrorRedirector * This,
-            /* [annotation][in] */ 
-            _In_  LONG ntsStatus,
-            /* [annotation][in] */ 
-            _In_  LONG ntsSubstatus,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszCaption,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszMessage,
-            /* [annotation][in] */ 
-            _In_  UINT uType,
-            /* [annotation][out] */ 
-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
+            /* [in] */ LONG ntsStatus,
+            /* [in] */ LONG ntsSubstatus,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszCaption,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszMessage,
+            /* [in] */ UINT uType,
+            /* [out] */ __RPC__out WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse);
         
         END_INTERFACE
     } IWRdsProtocolLogonErrorRedirectorVtbl;
@@ -3460,24 +3035,18 @@ EXTERN_C const IID IID_IWRdsWddmIddProps;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetHardwareId( 
-            /* [annotation][size_is][string][in] */ 
-            _In_reads_(Count)  WCHAR *pDisplayDriverHardwareId,
-            /* [annotation][in] */ 
-            _In_  DWORD Count) = 0;
+            /* [size_is][string][in] */ __RPC__in_ecount_full_string(Count) WCHAR *pDisplayDriverHardwareId,
+            /* [in] */ DWORD Count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDriverLoad( 
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR DriverHandle) = 0;
+            /* [in] */ ULONG SessionId,
+            /* [in] */ HANDLE_PTR DriverHandle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDriverUnload( 
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId) = 0;
+            /* [in] */ ULONG SessionId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnableWddmIdd( 
-            /* [annotation][in] */ 
-            _In_  BOOL Enabled) = 0;
+            /* [in] */ BOOL Enabled) = 0;
         
     };
     
@@ -3491,8 +3060,7 @@ EXTERN_C const IID IID_IWRdsWddmIddProps;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsWddmIddProps * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3507,30 +3075,24 @@ EXTERN_C const IID IID_IWRdsWddmIddProps;
         DECLSPEC_XFGVIRT(IWRdsWddmIddProps, GetHardwareId)
         HRESULT ( STDMETHODCALLTYPE *GetHardwareId )( 
             __RPC__in IWRdsWddmIddProps * This,
-            /* [annotation][size_is][string][in] */ 
-            _In_reads_(Count)  WCHAR *pDisplayDriverHardwareId,
-            /* [annotation][in] */ 
-            _In_  DWORD Count);
+            /* [size_is][string][in] */ __RPC__in_ecount_full_string(Count) WCHAR *pDisplayDriverHardwareId,
+            /* [in] */ DWORD Count);
         
         DECLSPEC_XFGVIRT(IWRdsWddmIddProps, OnDriverLoad)
         HRESULT ( STDMETHODCALLTYPE *OnDriverLoad )( 
             __RPC__in IWRdsWddmIddProps * This,
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId,
-            /* [annotation][in] */ 
-            _In_  HANDLE_PTR DriverHandle);
+            /* [in] */ ULONG SessionId,
+            /* [in] */ HANDLE_PTR DriverHandle);
         
         DECLSPEC_XFGVIRT(IWRdsWddmIddProps, OnDriverUnload)
         HRESULT ( STDMETHODCALLTYPE *OnDriverUnload )( 
             __RPC__in IWRdsWddmIddProps * This,
-            /* [annotation][in] */ 
-            _In_  ULONG SessionId);
+            /* [in] */ ULONG SessionId);
         
         DECLSPEC_XFGVIRT(IWRdsWddmIddProps, EnableWddmIdd)
         HRESULT ( STDMETHODCALLTYPE *EnableWddmIdd )( 
             __RPC__in IWRdsWddmIddProps * This,
-            /* [annotation][in] */ 
-            _In_  BOOL Enabled);
+            /* [in] */ BOOL Enabled);
         
         END_INTERFACE
     } IWRdsWddmIddPropsVtbl;
@@ -3603,16 +3165,12 @@ EXTERN_C const IID IID_IWRdsProtocolConnectionSettings;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetConnectionSetting( 
-            /* [annotation][in] */ 
-            _In_  GUID PropertyID,
-            /* [annotation][in] */ 
-            _In_  PWTS_PROPERTY_VALUE pPropertyEntriesIn) = 0;
+            /* [in] */ GUID PropertyID,
+            /* [in] */ __RPC__in PWTS_PROPERTY_VALUE pPropertyEntriesIn) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConnectionSetting( 
-            /* [annotation][in] */ 
-            _In_  GUID PropertyID,
-            /* [annotation][out] */ 
-            _Out_  PWTS_PROPERTY_VALUE pPropertyEntriesOut) = 0;
+            /* [in] */ GUID PropertyID,
+            /* [out] */ __RPC__out PWTS_PROPERTY_VALUE pPropertyEntriesOut) = 0;
         
     };
     
@@ -3626,8 +3184,7 @@ EXTERN_C const IID IID_IWRdsProtocolConnectionSettings;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsProtocolConnectionSettings * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3642,18 +3199,14 @@ EXTERN_C const IID IID_IWRdsProtocolConnectionSettings;
         DECLSPEC_XFGVIRT(IWRdsProtocolConnectionSettings, SetConnectionSetting)
         HRESULT ( STDMETHODCALLTYPE *SetConnectionSetting )( 
             __RPC__in IWRdsProtocolConnectionSettings * This,
-            /* [annotation][in] */ 
-            _In_  GUID PropertyID,
-            /* [annotation][in] */ 
-            _In_  PWTS_PROPERTY_VALUE pPropertyEntriesIn);
+            /* [in] */ GUID PropertyID,
+            /* [in] */ __RPC__in PWTS_PROPERTY_VALUE pPropertyEntriesIn);
         
         DECLSPEC_XFGVIRT(IWRdsProtocolConnectionSettings, GetConnectionSetting)
         HRESULT ( STDMETHODCALLTYPE *GetConnectionSetting )( 
             __RPC__in IWRdsProtocolConnectionSettings * This,
-            /* [annotation][in] */ 
-            _In_  GUID PropertyID,
-            /* [annotation][out] */ 
-            _Out_  PWTS_PROPERTY_VALUE pPropertyEntriesOut);
+            /* [in] */ GUID PropertyID,
+            /* [out] */ __RPC__out PWTS_PROPERTY_VALUE pPropertyEntriesOut);
         
         END_INTERFACE
     } IWRdsProtocolConnectionSettingsVtbl;
@@ -3720,12 +3273,9 @@ EXTERN_C const IID IID_IWRdsEnhancedFastReconnectArbitrator;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSessionForEnhancedFastReconnect( 
-            /* [annotation][in] */ 
-            _In_  LONG *pSessionIdArray,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSessionCount,
-            /* [annotation][out] */ 
-            _Out_  LONG *pResultSessionId) = 0;
+            /* [in] */ __RPC__in LONG *pSessionIdArray,
+            /* [in] */ DWORD dwSessionCount,
+            /* [out] */ __RPC__out LONG *pResultSessionId) = 0;
         
     };
     
@@ -3739,8 +3289,7 @@ EXTERN_C const IID IID_IWRdsEnhancedFastReconnectArbitrator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWRdsEnhancedFastReconnectArbitrator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3755,12 +3304,9 @@ EXTERN_C const IID IID_IWRdsEnhancedFastReconnectArbitrator;
         DECLSPEC_XFGVIRT(IWRdsEnhancedFastReconnectArbitrator, GetSessionForEnhancedFastReconnect)
         HRESULT ( STDMETHODCALLTYPE *GetSessionForEnhancedFastReconnect )( 
             __RPC__in IWRdsEnhancedFastReconnectArbitrator * This,
-            /* [annotation][in] */ 
-            _In_  LONG *pSessionIdArray,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSessionCount,
-            /* [annotation][out] */ 
-            _Out_  LONG *pResultSessionId);
+            /* [in] */ __RPC__in LONG *pSessionIdArray,
+            /* [in] */ DWORD dwSessionCount,
+            /* [out] */ __RPC__out LONG *pResultSessionId);
         
         END_INTERFACE
     } IWRdsEnhancedFastReconnectArbitratorVtbl;

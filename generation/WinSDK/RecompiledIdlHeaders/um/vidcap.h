@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -131,24 +131,18 @@ EXTERN_C const IID IID_IKsTopologyInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE get_NumCategories( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwNumCategories) = 0;
+            /* [out] */ DWORD *pdwNumCategories) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Category( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  GUID *pCategory) = 0;
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ GUID *pCategory) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_NumConnections( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwNumConnections) = 0;
+            /* [out] */ DWORD *pdwNumConnections) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_ConnectionInfo( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  KSTOPOLOGY_CONNECTION *pConnectionInfo) = 0;
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ KSTOPOLOGY_CONNECTION *pConnectionInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_NodeName( 
             /* [in] */ DWORD dwNodeId,
@@ -159,22 +153,16 @@ EXTERN_C const IID IID_IKsTopologyInfo;
             _Out_  DWORD *pdwNameLen) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_NumNodes( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwNumNodes) = 0;
+            /* [out] */ DWORD *pdwNumNodes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_NodeType( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwNodeId,
-            /* [annotation][out] */ 
-            _Out_  GUID *pNodeType) = 0;
+            /* [in] */ DWORD dwNodeId,
+            /* [out] */ GUID *pNodeType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateNodeInstance( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwNodeId,
-            /* [annotation][in] */ 
-            _In_  REFIID iid,
-            /* [annotation][out] */ 
-            _Out_  void **ppvObject) = 0;
+            /* [in] */ DWORD dwNodeId,
+            /* [in] */ REFIID iid,
+            /* [out] */ void **ppvObject) = 0;
         
     };
     
@@ -188,8 +176,7 @@ EXTERN_C const IID IID_IKsTopologyInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IKsTopologyInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -204,30 +191,24 @@ EXTERN_C const IID IID_IKsTopologyInfo;
         DECLSPEC_XFGVIRT(IKsTopologyInfo, get_NumCategories)
         HRESULT ( STDMETHODCALLTYPE *get_NumCategories )( 
             IKsTopologyInfo * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwNumCategories);
+            /* [out] */ DWORD *pdwNumCategories);
         
         DECLSPEC_XFGVIRT(IKsTopologyInfo, get_Category)
         HRESULT ( STDMETHODCALLTYPE *get_Category )( 
             IKsTopologyInfo * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  GUID *pCategory);
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ GUID *pCategory);
         
         DECLSPEC_XFGVIRT(IKsTopologyInfo, get_NumConnections)
         HRESULT ( STDMETHODCALLTYPE *get_NumConnections )( 
             IKsTopologyInfo * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwNumConnections);
+            /* [out] */ DWORD *pdwNumConnections);
         
         DECLSPEC_XFGVIRT(IKsTopologyInfo, get_ConnectionInfo)
         HRESULT ( STDMETHODCALLTYPE *get_ConnectionInfo )( 
             IKsTopologyInfo * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  KSTOPOLOGY_CONNECTION *pConnectionInfo);
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ KSTOPOLOGY_CONNECTION *pConnectionInfo);
         
         DECLSPEC_XFGVIRT(IKsTopologyInfo, get_NodeName)
         HRESULT ( STDMETHODCALLTYPE *get_NodeName )( 
@@ -242,26 +223,20 @@ EXTERN_C const IID IID_IKsTopologyInfo;
         DECLSPEC_XFGVIRT(IKsTopologyInfo, get_NumNodes)
         HRESULT ( STDMETHODCALLTYPE *get_NumNodes )( 
             IKsTopologyInfo * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwNumNodes);
+            /* [out] */ DWORD *pdwNumNodes);
         
         DECLSPEC_XFGVIRT(IKsTopologyInfo, get_NodeType)
         HRESULT ( STDMETHODCALLTYPE *get_NodeType )( 
             IKsTopologyInfo * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwNodeId,
-            /* [annotation][out] */ 
-            _Out_  GUID *pNodeType);
+            /* [in] */ DWORD dwNodeId,
+            /* [out] */ GUID *pNodeType);
         
         DECLSPEC_XFGVIRT(IKsTopologyInfo, CreateNodeInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateNodeInstance )( 
             IKsTopologyInfo * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwNodeId,
-            /* [annotation][in] */ 
-            _In_  REFIID iid,
-            /* [annotation][out] */ 
-            _Out_  void **ppvObject);
+            /* [in] */ DWORD dwNodeId,
+            /* [in] */ REFIID iid,
+            /* [out] */ void **ppvObject);
         
         END_INTERFACE
     } IKsTopologyInfoVtbl;
@@ -337,16 +312,13 @@ EXTERN_C const IID IID_ISelector;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE get_NumSources( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwNumSources) = 0;
+            /* [out] */ DWORD *pdwNumSources) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_SourceNodeId( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwPinId) = 0;
+            /* [out] */ DWORD *pdwPinId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_SourceNodeId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwPinId) = 0;
+            /* [in] */ DWORD dwPinId) = 0;
         
     };
     
@@ -360,8 +332,7 @@ EXTERN_C const IID IID_ISelector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISelector * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -376,20 +347,17 @@ EXTERN_C const IID IID_ISelector;
         DECLSPEC_XFGVIRT(ISelector, get_NumSources)
         HRESULT ( STDMETHODCALLTYPE *get_NumSources )( 
             ISelector * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwNumSources);
+            /* [out] */ DWORD *pdwNumSources);
         
         DECLSPEC_XFGVIRT(ISelector, get_SourceNodeId)
         HRESULT ( STDMETHODCALLTYPE *get_SourceNodeId )( 
             ISelector * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwPinId);
+            /* [out] */ DWORD *pdwPinId);
         
         DECLSPEC_XFGVIRT(ISelector, put_SourceNodeId)
         HRESULT ( STDMETHODCALLTYPE *put_SourceNodeId )( 
             ISelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwPinId);
+            /* [in] */ DWORD dwPinId);
         
         END_INTERFACE
     } ISelectorVtbl;
@@ -450,404 +418,255 @@ EXTERN_C const IID IID_ICameraControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE get_Exposure( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Exposure( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Exposure( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Focus( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Focus( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Focus( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Iris( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Iris( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Iris( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Zoom( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Zoom( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Zoom( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_FocalLengths( 
-            /* [annotation][out] */ 
-            _Out_  long *plOcularFocalLength,
-            /* [annotation][out] */ 
-            _Out_  long *plObjectiveFocalLengthMin,
-            /* [annotation][out] */ 
-            _Out_  long *plObjectiveFocalLengthMax) = 0;
+            /* [out] */ long *plOcularFocalLength,
+            /* [out] */ long *plObjectiveFocalLengthMin,
+            /* [out] */ long *plObjectiveFocalLengthMax) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Pan( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Pan( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Pan( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Tilt( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Tilt( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Tilt( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_PanTilt( 
-            /* [annotation][out] */ 
-            _Out_  long *pPanValue,
-            /* [annotation][out] */ 
-            _Out_  long *pTiltValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pPanValue,
+            /* [out] */ long *pTiltValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_PanTilt( 
-            /* [annotation][in] */ 
-            _In_  long PanValue,
-            /* [annotation][in] */ 
-            _In_  long TiltValue,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long PanValue,
+            /* [in] */ long TiltValue,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Roll( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Roll( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Roll( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_ExposureRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_ExposureRelative( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_ExposureRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_FocusRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_FocusRelative( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_FocusRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_IrisRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_IrisRelative( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_IrisRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_ZoomRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_ZoomRelative( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_ZoomRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_PanRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_PanRelative( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_TiltRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_TiltRelative( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_TiltRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_PanTiltRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pPanValue,
-            /* [annotation][out] */ 
-            _Out_  long *pTiltValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pPanValue,
+            /* [out] */ long *pTiltValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_PanTiltRelative( 
-            /* [annotation][in] */ 
-            _In_  long PanValue,
-            /* [annotation][in] */ 
-            _In_  long TiltValue,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long PanValue,
+            /* [in] */ long TiltValue,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_PanRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_RollRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_RollRelative( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_RollRelative( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_ScanMode( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_ScanMode( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_PrivacyMode( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_PrivacyMode( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
     };
     
@@ -861,8 +680,7 @@ EXTERN_C const IID IID_ICameraControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -877,504 +695,355 @@ EXTERN_C const IID IID_ICameraControl;
         DECLSPEC_XFGVIRT(ICameraControl, get_Exposure)
         HRESULT ( STDMETHODCALLTYPE *get_Exposure )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_Exposure)
         HRESULT ( STDMETHODCALLTYPE *put_Exposure )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_Exposure)
         HRESULT ( STDMETHODCALLTYPE *getRange_Exposure )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_Focus)
         HRESULT ( STDMETHODCALLTYPE *get_Focus )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_Focus)
         HRESULT ( STDMETHODCALLTYPE *put_Focus )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_Focus)
         HRESULT ( STDMETHODCALLTYPE *getRange_Focus )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_Iris)
         HRESULT ( STDMETHODCALLTYPE *get_Iris )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_Iris)
         HRESULT ( STDMETHODCALLTYPE *put_Iris )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_Iris)
         HRESULT ( STDMETHODCALLTYPE *getRange_Iris )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_Zoom)
         HRESULT ( STDMETHODCALLTYPE *get_Zoom )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_Zoom)
         HRESULT ( STDMETHODCALLTYPE *put_Zoom )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_Zoom)
         HRESULT ( STDMETHODCALLTYPE *getRange_Zoom )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_FocalLengths)
         HRESULT ( STDMETHODCALLTYPE *get_FocalLengths )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *plOcularFocalLength,
-            /* [annotation][out] */ 
-            _Out_  long *plObjectiveFocalLengthMin,
-            /* [annotation][out] */ 
-            _Out_  long *plObjectiveFocalLengthMax);
+            /* [out] */ long *plOcularFocalLength,
+            /* [out] */ long *plObjectiveFocalLengthMin,
+            /* [out] */ long *plObjectiveFocalLengthMax);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_Pan)
         HRESULT ( STDMETHODCALLTYPE *get_Pan )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_Pan)
         HRESULT ( STDMETHODCALLTYPE *put_Pan )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_Pan)
         HRESULT ( STDMETHODCALLTYPE *getRange_Pan )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_Tilt)
         HRESULT ( STDMETHODCALLTYPE *get_Tilt )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_Tilt)
         HRESULT ( STDMETHODCALLTYPE *put_Tilt )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_Tilt)
         HRESULT ( STDMETHODCALLTYPE *getRange_Tilt )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_PanTilt)
         HRESULT ( STDMETHODCALLTYPE *get_PanTilt )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pPanValue,
-            /* [annotation][out] */ 
-            _Out_  long *pTiltValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pPanValue,
+            /* [out] */ long *pTiltValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_PanTilt)
         HRESULT ( STDMETHODCALLTYPE *put_PanTilt )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long PanValue,
-            /* [annotation][in] */ 
-            _In_  long TiltValue,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long PanValue,
+            /* [in] */ long TiltValue,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_Roll)
         HRESULT ( STDMETHODCALLTYPE *get_Roll )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_Roll)
         HRESULT ( STDMETHODCALLTYPE *put_Roll )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_Roll)
         HRESULT ( STDMETHODCALLTYPE *getRange_Roll )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_ExposureRelative)
         HRESULT ( STDMETHODCALLTYPE *get_ExposureRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_ExposureRelative)
         HRESULT ( STDMETHODCALLTYPE *put_ExposureRelative )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_ExposureRelative)
         HRESULT ( STDMETHODCALLTYPE *getRange_ExposureRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_FocusRelative)
         HRESULT ( STDMETHODCALLTYPE *get_FocusRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_FocusRelative)
         HRESULT ( STDMETHODCALLTYPE *put_FocusRelative )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_FocusRelative)
         HRESULT ( STDMETHODCALLTYPE *getRange_FocusRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_IrisRelative)
         HRESULT ( STDMETHODCALLTYPE *get_IrisRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_IrisRelative)
         HRESULT ( STDMETHODCALLTYPE *put_IrisRelative )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_IrisRelative)
         HRESULT ( STDMETHODCALLTYPE *getRange_IrisRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_ZoomRelative)
         HRESULT ( STDMETHODCALLTYPE *get_ZoomRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_ZoomRelative)
         HRESULT ( STDMETHODCALLTYPE *put_ZoomRelative )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_ZoomRelative)
         HRESULT ( STDMETHODCALLTYPE *getRange_ZoomRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_PanRelative)
         HRESULT ( STDMETHODCALLTYPE *get_PanRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_PanRelative)
         HRESULT ( STDMETHODCALLTYPE *put_PanRelative )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_TiltRelative)
         HRESULT ( STDMETHODCALLTYPE *get_TiltRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_TiltRelative)
         HRESULT ( STDMETHODCALLTYPE *put_TiltRelative )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_TiltRelative)
         HRESULT ( STDMETHODCALLTYPE *getRange_TiltRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_PanTiltRelative)
         HRESULT ( STDMETHODCALLTYPE *get_PanTiltRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pPanValue,
-            /* [annotation][out] */ 
-            _Out_  long *pTiltValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pPanValue,
+            /* [out] */ long *pTiltValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_PanTiltRelative)
         HRESULT ( STDMETHODCALLTYPE *put_PanTiltRelative )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long PanValue,
-            /* [annotation][in] */ 
-            _In_  long TiltValue,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long PanValue,
+            /* [in] */ long TiltValue,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_PanRelative)
         HRESULT ( STDMETHODCALLTYPE *getRange_PanRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_RollRelative)
         HRESULT ( STDMETHODCALLTYPE *get_RollRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_RollRelative)
         HRESULT ( STDMETHODCALLTYPE *put_RollRelative )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, getRange_RollRelative)
         HRESULT ( STDMETHODCALLTYPE *getRange_RollRelative )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_ScanMode)
         HRESULT ( STDMETHODCALLTYPE *get_ScanMode )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_ScanMode)
         HRESULT ( STDMETHODCALLTYPE *put_ScanMode )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(ICameraControl, get_PrivacyMode)
         HRESULT ( STDMETHODCALLTYPE *get_PrivacyMode )( 
             ICameraControl * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(ICameraControl, put_PrivacyMode)
         HRESULT ( STDMETHODCALLTYPE *put_PrivacyMode )( 
             ICameraControl * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         END_INTERFACE
     } ICameraControlVtbl;
@@ -1579,320 +1248,201 @@ EXTERN_C const IID IID_IVideoProcAmp;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE get_BacklightCompensation( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_BacklightCompensation( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_BacklightCompensation( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Brightness( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Brightness( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Brightness( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_ColorEnable( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_ColorEnable( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_ColorEnable( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Contrast( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Contrast( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Contrast( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Gamma( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Gamma( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Gamma( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Saturation( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Saturation( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Saturation( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Sharpness( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Sharpness( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Sharpness( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_WhiteBalance( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_WhiteBalance( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_WhiteBalance( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Gain( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Gain( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Gain( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_Hue( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_Hue( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_Hue( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_DigitalMultiplier( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DigitalMultiplier( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_DigitalMultiplier( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_PowerlineFrequency( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags) = 0;
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_PowerlineFrequency( 
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_PowerlineFrequency( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_WhiteBalanceComponent( 
-            /* [annotation][out] */ 
-            _Out_  long *pValue1,
-            /* [annotation][out] */ 
-            _Out_  long *pValue2,
-            /* [annotation][out][in] */ 
-            _Inout_  long *pFlags) = 0;
+            /* [out] */ long *pValue1,
+            /* [out] */ long *pValue2,
+            /* [out][in] */ long *pFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_WhiteBalanceComponent( 
-            /* [annotation][in] */ 
-            _In_  long Value1,
-            /* [annotation][in] */ 
-            _In_  long Value2,
-            /* [annotation][in] */ 
-            _In_  long Flags) = 0;
+            /* [in] */ long Value1,
+            /* [in] */ long Value2,
+            /* [in] */ long Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getRange_WhiteBalanceComponent( 
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out][in] */ 
-            _Inout_  long *pCapsFlag) = 0;
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out][in] */ long *pCapsFlag) = 0;
         
     };
     
@@ -1906,8 +1456,7 @@ EXTERN_C const IID IID_IVideoProcAmp;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1922,396 +1471,277 @@ EXTERN_C const IID IID_IVideoProcAmp;
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_BacklightCompensation)
         HRESULT ( STDMETHODCALLTYPE *get_BacklightCompensation )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_BacklightCompensation)
         HRESULT ( STDMETHODCALLTYPE *put_BacklightCompensation )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_BacklightCompensation)
         HRESULT ( STDMETHODCALLTYPE *getRange_BacklightCompensation )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_Brightness)
         HRESULT ( STDMETHODCALLTYPE *get_Brightness )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_Brightness)
         HRESULT ( STDMETHODCALLTYPE *put_Brightness )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_Brightness)
         HRESULT ( STDMETHODCALLTYPE *getRange_Brightness )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_ColorEnable)
         HRESULT ( STDMETHODCALLTYPE *get_ColorEnable )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_ColorEnable)
         HRESULT ( STDMETHODCALLTYPE *put_ColorEnable )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_ColorEnable)
         HRESULT ( STDMETHODCALLTYPE *getRange_ColorEnable )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_Contrast)
         HRESULT ( STDMETHODCALLTYPE *get_Contrast )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_Contrast)
         HRESULT ( STDMETHODCALLTYPE *put_Contrast )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_Contrast)
         HRESULT ( STDMETHODCALLTYPE *getRange_Contrast )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_Gamma)
         HRESULT ( STDMETHODCALLTYPE *get_Gamma )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_Gamma)
         HRESULT ( STDMETHODCALLTYPE *put_Gamma )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_Gamma)
         HRESULT ( STDMETHODCALLTYPE *getRange_Gamma )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_Saturation)
         HRESULT ( STDMETHODCALLTYPE *get_Saturation )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_Saturation)
         HRESULT ( STDMETHODCALLTYPE *put_Saturation )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_Saturation)
         HRESULT ( STDMETHODCALLTYPE *getRange_Saturation )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_Sharpness)
         HRESULT ( STDMETHODCALLTYPE *get_Sharpness )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_Sharpness)
         HRESULT ( STDMETHODCALLTYPE *put_Sharpness )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_Sharpness)
         HRESULT ( STDMETHODCALLTYPE *getRange_Sharpness )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_WhiteBalance)
         HRESULT ( STDMETHODCALLTYPE *get_WhiteBalance )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_WhiteBalance)
         HRESULT ( STDMETHODCALLTYPE *put_WhiteBalance )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_WhiteBalance)
         HRESULT ( STDMETHODCALLTYPE *getRange_WhiteBalance )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_Gain)
         HRESULT ( STDMETHODCALLTYPE *get_Gain )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_Gain)
         HRESULT ( STDMETHODCALLTYPE *put_Gain )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_Gain)
         HRESULT ( STDMETHODCALLTYPE *getRange_Gain )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_Hue)
         HRESULT ( STDMETHODCALLTYPE *get_Hue )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_Hue)
         HRESULT ( STDMETHODCALLTYPE *put_Hue )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_Hue)
         HRESULT ( STDMETHODCALLTYPE *getRange_Hue )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_DigitalMultiplier)
         HRESULT ( STDMETHODCALLTYPE *get_DigitalMultiplier )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_DigitalMultiplier)
         HRESULT ( STDMETHODCALLTYPE *put_DigitalMultiplier )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_DigitalMultiplier)
         HRESULT ( STDMETHODCALLTYPE *getRange_DigitalMultiplier )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_PowerlineFrequency)
         HRESULT ( STDMETHODCALLTYPE *get_PowerlineFrequency )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue,
-            /* [annotation][out] */ 
-            _Out_  long *pFlags);
+            /* [out] */ long *pValue,
+            /* [out] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_PowerlineFrequency)
         HRESULT ( STDMETHODCALLTYPE *put_PowerlineFrequency )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_PowerlineFrequency)
         HRESULT ( STDMETHODCALLTYPE *getRange_PowerlineFrequency )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out] */ 
-            _Out_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out] */ long *pCapsFlag);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, get_WhiteBalanceComponent)
         HRESULT ( STDMETHODCALLTYPE *get_WhiteBalanceComponent )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pValue1,
-            /* [annotation][out] */ 
-            _Out_  long *pValue2,
-            /* [annotation][out][in] */ 
-            _Inout_  long *pFlags);
+            /* [out] */ long *pValue1,
+            /* [out] */ long *pValue2,
+            /* [out][in] */ long *pFlags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, put_WhiteBalanceComponent)
         HRESULT ( STDMETHODCALLTYPE *put_WhiteBalanceComponent )( 
             IVideoProcAmp * This,
-            /* [annotation][in] */ 
-            _In_  long Value1,
-            /* [annotation][in] */ 
-            _In_  long Value2,
-            /* [annotation][in] */ 
-            _In_  long Flags);
+            /* [in] */ long Value1,
+            /* [in] */ long Value2,
+            /* [in] */ long Flags);
         
         DECLSPEC_XFGVIRT(IVideoProcAmp, getRange_WhiteBalanceComponent)
         HRESULT ( STDMETHODCALLTYPE *getRange_WhiteBalanceComponent )( 
             IVideoProcAmp * This,
-            /* [annotation][out] */ 
-            _Out_  long *pMin,
-            /* [annotation][out] */ 
-            _Out_  long *pMax,
-            /* [annotation][out] */ 
-            _Out_  long *pSteppingDelta,
-            /* [annotation][out] */ 
-            _Out_  long *pDefault,
-            /* [annotation][out][in] */ 
-            _Inout_  long *pCapsFlag);
+            /* [out] */ long *pMin,
+            /* [out] */ long *pMax,
+            /* [out] */ long *pSteppingDelta,
+            /* [out] */ long *pDefault,
+            /* [out][in] */ long *pCapsFlag);
         
         END_INTERFACE
     } IVideoProcAmpVtbl;
@@ -2480,12 +1910,10 @@ EXTERN_C const IID IID_IKsNodeControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE put_NodeId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwNodeId) = 0;
+            /* [in] */ DWORD dwNodeId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_KsControl( 
-            /* [annotation][in] */ 
-            _In_  PVOID pKsControl) = 0;
+            /* [in] */ PVOID pKsControl) = 0;
         
     };
     
@@ -2499,8 +1927,7 @@ EXTERN_C const IID IID_IKsNodeControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IKsNodeControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2515,14 +1942,12 @@ EXTERN_C const IID IID_IKsNodeControl;
         DECLSPEC_XFGVIRT(IKsNodeControl, put_NodeId)
         HRESULT ( STDMETHODCALLTYPE *put_NodeId )( 
             IKsNodeControl * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwNodeId);
+            /* [in] */ DWORD dwNodeId);
         
         DECLSPEC_XFGVIRT(IKsNodeControl, put_KsControl)
         HRESULT ( STDMETHODCALLTYPE *put_KsControl )( 
             IKsNodeControl * This,
-            /* [annotation][in] */ 
-            _In_  PVOID pKsControl);
+            /* [in] */ PVOID pKsControl);
         
         END_INTERFACE
     } IKsNodeControlVtbl;

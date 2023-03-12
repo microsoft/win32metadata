@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -153,40 +153,29 @@ EXTERN_C const IID IID_IMFASFContentInfo;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetHeaderSize( 
-            /* [annotation][in] */ 
-            _In_  IMFMediaBuffer *pIStartOfContent,
-            /* [annotation][out] */ 
-            _Out_  QWORD *cbHeaderSize) = 0;
+            /* [in] */ IMFMediaBuffer *pIStartOfContent,
+            /* [out] */ QWORD *cbHeaderSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ParseHeader( 
-            /* [annotation][in] */ 
-            _In_  IMFMediaBuffer *pIHeaderBuffer,
-            /* [annotation][in] */ 
-            _In_  QWORD cbOffsetWithinHeader) = 0;
+            /* [in] */ IMFMediaBuffer *pIHeaderBuffer,
+            /* [in] */ QWORD cbOffsetWithinHeader) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GenerateHeader( 
-            /* [annotation][out][in] */ 
-            _Inout_  IMFMediaBuffer *pIHeader,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcbHeader) = 0;
+            /* [out][in] */ IMFMediaBuffer *pIHeader,
+            /* [out] */ DWORD *pcbHeader) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProfile( 
-            /* [annotation][out] */ 
-            _Out_  IMFASFProfile **ppIProfile) = 0;
+            /* [out] */ IMFASFProfile **ppIProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProfile( 
-            /* [annotation][in] */ 
-            _In_  IMFASFProfile *pIProfile) = 0;
+            /* [in] */ IMFASFProfile *pIProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GeneratePresentationDescriptor( 
-            /* [annotation][out] */ 
-            _Out_  IMFPresentationDescriptor **ppIPresentationDescriptor) = 0;
+            /* [out] */ IMFPresentationDescriptor **ppIPresentationDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEncodingConfigurationPropertyStore( 
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  IPropertyStore **ppIStore) = 0;
+            /* [in] */ WORD wStreamNumber,
+            /* [out] */ IPropertyStore **ppIStore) = 0;
         
     };
     
@@ -200,8 +189,7 @@ EXTERN_C const IID IID_IMFASFContentInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFASFContentInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -216,52 +204,41 @@ EXTERN_C const IID IID_IMFASFContentInfo;
         DECLSPEC_XFGVIRT(IMFASFContentInfo, GetHeaderSize)
         HRESULT ( STDMETHODCALLTYPE *GetHeaderSize )( 
             IMFASFContentInfo * This,
-            /* [annotation][in] */ 
-            _In_  IMFMediaBuffer *pIStartOfContent,
-            /* [annotation][out] */ 
-            _Out_  QWORD *cbHeaderSize);
+            /* [in] */ IMFMediaBuffer *pIStartOfContent,
+            /* [out] */ QWORD *cbHeaderSize);
         
         DECLSPEC_XFGVIRT(IMFASFContentInfo, ParseHeader)
         HRESULT ( STDMETHODCALLTYPE *ParseHeader )( 
             IMFASFContentInfo * This,
-            /* [annotation][in] */ 
-            _In_  IMFMediaBuffer *pIHeaderBuffer,
-            /* [annotation][in] */ 
-            _In_  QWORD cbOffsetWithinHeader);
+            /* [in] */ IMFMediaBuffer *pIHeaderBuffer,
+            /* [in] */ QWORD cbOffsetWithinHeader);
         
         DECLSPEC_XFGVIRT(IMFASFContentInfo, GenerateHeader)
         HRESULT ( STDMETHODCALLTYPE *GenerateHeader )( 
             IMFASFContentInfo * This,
-            /* [annotation][out][in] */ 
-            _Inout_  IMFMediaBuffer *pIHeader,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcbHeader);
+            /* [out][in] */ IMFMediaBuffer *pIHeader,
+            /* [out] */ DWORD *pcbHeader);
         
         DECLSPEC_XFGVIRT(IMFASFContentInfo, GetProfile)
         HRESULT ( STDMETHODCALLTYPE *GetProfile )( 
             IMFASFContentInfo * This,
-            /* [annotation][out] */ 
-            _Out_  IMFASFProfile **ppIProfile);
+            /* [out] */ IMFASFProfile **ppIProfile);
         
         DECLSPEC_XFGVIRT(IMFASFContentInfo, SetProfile)
         HRESULT ( STDMETHODCALLTYPE *SetProfile )( 
             IMFASFContentInfo * This,
-            /* [annotation][in] */ 
-            _In_  IMFASFProfile *pIProfile);
+            /* [in] */ IMFASFProfile *pIProfile);
         
         DECLSPEC_XFGVIRT(IMFASFContentInfo, GeneratePresentationDescriptor)
         HRESULT ( STDMETHODCALLTYPE *GeneratePresentationDescriptor )( 
             IMFASFContentInfo * This,
-            /* [annotation][out] */ 
-            _Out_  IMFPresentationDescriptor **ppIPresentationDescriptor);
+            /* [out] */ IMFPresentationDescriptor **ppIPresentationDescriptor);
         
         DECLSPEC_XFGVIRT(IMFASFContentInfo, GetEncodingConfigurationPropertyStore)
         HRESULT ( STDMETHODCALLTYPE *GetEncodingConfigurationPropertyStore )( 
             IMFASFContentInfo * This,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  IPropertyStore **ppIStore);
+            /* [in] */ WORD wStreamNumber,
+            /* [out] */ IPropertyStore **ppIStore);
         
         END_INTERFACE
     } IMFASFContentInfoVtbl;
@@ -347,76 +324,56 @@ EXTERN_C const IID IID_IMFASFProfile;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStreamCount( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcStreams) = 0;
+            /* [out] */ DWORD *pcStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStream( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwStreamIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamConfig **ppIStream) = 0;
+            /* [in] */ DWORD dwStreamIndex,
+            /* [out] */ WORD *pwStreamNumber,
+            /* [out] */ IMFASFStreamConfig **ppIStream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamByNumber( 
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamConfig **ppIStream) = 0;
+            /* [in] */ WORD wStreamNumber,
+            /* [out] */ IMFASFStreamConfig **ppIStream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStream( 
-            /* [annotation][in] */ 
-            _In_  IMFASFStreamConfig *pIStream) = 0;
+            /* [in] */ IMFASFStreamConfig *pIStream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveStream( 
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber) = 0;
+            /* [in] */ WORD wStreamNumber) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateStream( 
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pIMediaType,
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamConfig **ppIStream) = 0;
+            /* [in] */ IMFMediaType *pIMediaType,
+            /* [out] */ IMFASFStreamConfig **ppIStream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMutualExclusionCount( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcMutexs) = 0;
+            /* [out] */ DWORD *pcMutexs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMutualExclusion( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwMutexIndex,
-            /* [annotation][out] */ 
-            _Out_  IMFASFMutualExclusion **ppIMutex) = 0;
+            /* [in] */ DWORD dwMutexIndex,
+            /* [out] */ IMFASFMutualExclusion **ppIMutex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddMutualExclusion( 
-            /* [annotation][in] */ 
-            _In_  IMFASFMutualExclusion *pIMutex) = 0;
+            /* [in] */ IMFASFMutualExclusion *pIMutex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveMutualExclusion( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwMutexIndex) = 0;
+            /* [in] */ DWORD dwMutexIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateMutualExclusion( 
-            /* [annotation][out] */ 
-            _Out_  IMFASFMutualExclusion **ppIMutex) = 0;
+            /* [out] */ IMFASFMutualExclusion **ppIMutex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamPrioritization( 
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamPrioritization **ppIStreamPrioritization) = 0;
+            /* [out] */ IMFASFStreamPrioritization **ppIStreamPrioritization) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddStreamPrioritization( 
-            /* [annotation][in] */ 
-            _In_  IMFASFStreamPrioritization *pIStreamPrioritization) = 0;
+            /* [in] */ IMFASFStreamPrioritization *pIStreamPrioritization) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveStreamPrioritization( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateStreamPrioritization( 
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamPrioritization **ppIStreamPrioritization) = 0;
+            /* [out] */ IMFASFStreamPrioritization **ppIStreamPrioritization) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IMFASFProfile **ppIProfile) = 0;
+            /* [out] */ IMFASFProfile **ppIProfile) = 0;
         
     };
     
@@ -430,8 +387,7 @@ EXTERN_C const IID IID_IMFASFProfile;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -453,66 +409,57 @@ EXTERN_C const IID IID_IMFASFProfile;
         HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  MF_ATTRIBUTE_TYPE *pType);
+            /* [out] */ MF_ATTRIBUTE_TYPE *pType);
         
         DECLSPEC_XFGVIRT(IMFAttributes, CompareItem)
         HRESULT ( STDMETHODCALLTYPE *CompareItem )( 
             IMFASFProfile * This,
             REFGUID guidKey,
             REFPROPVARIANT Value,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pbResult);
+            /* [out] */ BOOL *pbResult);
         
         DECLSPEC_XFGVIRT(IMFAttributes, Compare)
         HRESULT ( STDMETHODCALLTYPE *Compare )( 
             IMFASFProfile * This,
             IMFAttributes *pTheirs,
             MF_ATTRIBUTES_MATCH_TYPE MatchType,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pbResult);
+            /* [out] */ BOOL *pbResult);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetUINT32)
         HRESULT ( STDMETHODCALLTYPE *GetUINT32 )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *punValue);
+            /* [out] */ UINT32 *punValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetUINT64)
         HRESULT ( STDMETHODCALLTYPE *GetUINT64 )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  UINT64 *punValue);
+            /* [out] */ UINT64 *punValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetDouble)
         HRESULT ( STDMETHODCALLTYPE *GetDouble )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  double *pfValue);
+            /* [out] */ double *pfValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetGUID)
         HRESULT ( STDMETHODCALLTYPE *GetGUID )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidValue);
+            /* [out] */ GUID *pguidValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetStringLength)
         HRESULT ( STDMETHODCALLTYPE *GetStringLength )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcchLength);
+            /* [out] */ UINT32 *pcchLength);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetString)
         HRESULT ( STDMETHODCALLTYPE *GetString )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cchBufSize)  LPWSTR pwszValue,
+            /* [size_is][out] */ LPWSTR pwszValue,
             UINT32 cchBufSize,
             /* [full][out][in] */ UINT32 *pcchLength);
         
@@ -520,24 +467,20 @@ EXTERN_C const IID IID_IMFASFProfile;
         HRESULT ( STDMETHODCALLTYPE *GetAllocatedString )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcchLength + 1)  LPWSTR *ppwszValue,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcchLength);
+            /* [size_is][size_is][out] */ LPWSTR *ppwszValue,
+            /* [out] */ UINT32 *pcchLength);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetBlobSize)
         HRESULT ( STDMETHODCALLTYPE *GetBlobSize )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcbBlobSize);
+            /* [out] */ UINT32 *pcbBlobSize);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetBlob)
         HRESULT ( STDMETHODCALLTYPE *GetBlob )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cbBufSize)  UINT8 *pBuf,
+            /* [size_is][out] */ UINT8 *pBuf,
             UINT32 cbBufSize,
             /* [full][out][in] */ UINT32 *pcbBlobSize);
         
@@ -545,18 +488,15 @@ EXTERN_C const IID IID_IMFASFProfile;
         HRESULT ( STDMETHODCALLTYPE *GetAllocatedBlob )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcbSize)  UINT8 **ppBuf,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcbSize);
+            /* [size_is][size_is][out] */ UINT8 **ppBuf,
+            /* [out] */ UINT32 *pcbSize);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetUnknown)
         HRESULT ( STDMETHODCALLTYPE *GetUnknown )( 
             IMFASFProfile * This,
             REFGUID guidKey,
             REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  LPVOID *ppv);
+            /* [iid_is][out] */ LPVOID *ppv);
         
         DECLSPEC_XFGVIRT(IMFAttributes, SetItem)
         HRESULT ( STDMETHODCALLTYPE *SetItem )( 
@@ -601,23 +541,20 @@ EXTERN_C const IID IID_IMFASFProfile;
         HRESULT ( STDMETHODCALLTYPE *SetString )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR wszValue);
+            /* [string][in] */ LPCWSTR wszValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, SetBlob)
         HRESULT ( STDMETHODCALLTYPE *SetBlob )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbBufSize)  const UINT8 *pBuf,
+            /* [size_is][in] */ const UINT8 *pBuf,
             UINT32 cbBufSize);
         
         DECLSPEC_XFGVIRT(IMFAttributes, SetUnknown)
         HRESULT ( STDMETHODCALLTYPE *SetUnknown )( 
             IMFASFProfile * This,
             REFGUID guidKey,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnknown);
+            /* [in] */ IUnknown *pUnknown);
         
         DECLSPEC_XFGVIRT(IMFAttributes, LockStore)
         HRESULT ( STDMETHODCALLTYPE *LockStore )( 
@@ -630,110 +567,89 @@ EXTERN_C const IID IID_IMFASFProfile;
         DECLSPEC_XFGVIRT(IMFAttributes, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IMFASFProfile * This,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcItems);
+            /* [out] */ UINT32 *pcItems);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetItemByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetItemByIndex )( 
             IMFASFProfile * This,
             UINT32 unIndex,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidKey,
+            /* [out] */ GUID *pguidKey,
             /* [full][out][in] */ PROPVARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, CopyAllItems)
         HRESULT ( STDMETHODCALLTYPE *CopyAllItems )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  IMFAttributes *pDest);
+            /* [in] */ IMFAttributes *pDest);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, GetStreamCount)
         HRESULT ( STDMETHODCALLTYPE *GetStreamCount )( 
             IMFASFProfile * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcStreams);
+            /* [out] */ DWORD *pcStreams);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwStreamIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamConfig **ppIStream);
+            /* [in] */ DWORD dwStreamIndex,
+            /* [out] */ WORD *pwStreamNumber,
+            /* [out] */ IMFASFStreamConfig **ppIStream);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, GetStreamByNumber)
         HRESULT ( STDMETHODCALLTYPE *GetStreamByNumber )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamConfig **ppIStream);
+            /* [in] */ WORD wStreamNumber,
+            /* [out] */ IMFASFStreamConfig **ppIStream);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, SetStream)
         HRESULT ( STDMETHODCALLTYPE *SetStream )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  IMFASFStreamConfig *pIStream);
+            /* [in] */ IMFASFStreamConfig *pIStream);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, RemoveStream)
         HRESULT ( STDMETHODCALLTYPE *RemoveStream )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber);
+            /* [in] */ WORD wStreamNumber);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, CreateStream)
         HRESULT ( STDMETHODCALLTYPE *CreateStream )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pIMediaType,
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamConfig **ppIStream);
+            /* [in] */ IMFMediaType *pIMediaType,
+            /* [out] */ IMFASFStreamConfig **ppIStream);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, GetMutualExclusionCount)
         HRESULT ( STDMETHODCALLTYPE *GetMutualExclusionCount )( 
             IMFASFProfile * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcMutexs);
+            /* [out] */ DWORD *pcMutexs);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, GetMutualExclusion)
         HRESULT ( STDMETHODCALLTYPE *GetMutualExclusion )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMutexIndex,
-            /* [annotation][out] */ 
-            _Out_  IMFASFMutualExclusion **ppIMutex);
+            /* [in] */ DWORD dwMutexIndex,
+            /* [out] */ IMFASFMutualExclusion **ppIMutex);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, AddMutualExclusion)
         HRESULT ( STDMETHODCALLTYPE *AddMutualExclusion )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  IMFASFMutualExclusion *pIMutex);
+            /* [in] */ IMFASFMutualExclusion *pIMutex);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, RemoveMutualExclusion)
         HRESULT ( STDMETHODCALLTYPE *RemoveMutualExclusion )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMutexIndex);
+            /* [in] */ DWORD dwMutexIndex);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, CreateMutualExclusion)
         HRESULT ( STDMETHODCALLTYPE *CreateMutualExclusion )( 
             IMFASFProfile * This,
-            /* [annotation][out] */ 
-            _Out_  IMFASFMutualExclusion **ppIMutex);
+            /* [out] */ IMFASFMutualExclusion **ppIMutex);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, GetStreamPrioritization)
         HRESULT ( STDMETHODCALLTYPE *GetStreamPrioritization )( 
             IMFASFProfile * This,
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamPrioritization **ppIStreamPrioritization);
+            /* [out] */ IMFASFStreamPrioritization **ppIStreamPrioritization);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, AddStreamPrioritization)
         HRESULT ( STDMETHODCALLTYPE *AddStreamPrioritization )( 
             IMFASFProfile * This,
-            /* [annotation][in] */ 
-            _In_  IMFASFStreamPrioritization *pIStreamPrioritization);
+            /* [in] */ IMFASFStreamPrioritization *pIStreamPrioritization);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, RemoveStreamPrioritization)
         HRESULT ( STDMETHODCALLTYPE *RemoveStreamPrioritization )( 
@@ -742,14 +658,12 @@ EXTERN_C const IID IID_IMFASFProfile;
         DECLSPEC_XFGVIRT(IMFASFProfile, CreateStreamPrioritization)
         HRESULT ( STDMETHODCALLTYPE *CreateStreamPrioritization )( 
             IMFASFProfile * This,
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamPrioritization **ppIStreamPrioritization);
+            /* [out] */ IMFASFStreamPrioritization **ppIStreamPrioritization);
         
         DECLSPEC_XFGVIRT(IMFASFProfile, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IMFASFProfile * This,
-            /* [annotation][out] */ 
-            _Out_  IMFASFProfile **ppIProfile);
+            /* [out] */ IMFASFProfile **ppIProfile);
         
         END_INTERFACE
     } IMFASFProfileVtbl;
@@ -940,52 +854,39 @@ EXTERN_C const IID IID_IMFASFStreamConfig;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStreamType( 
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidStreamType) = 0;
+            /* [out] */ GUID *pguidStreamType) = 0;
         
         virtual WORD STDMETHODCALLTYPE GetStreamNumber( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStreamNumber( 
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNum) = 0;
+            /* [in] */ WORD wStreamNum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMediaType( 
-            /* [annotation][out] */ 
-            _Out_  IMFMediaType **ppIMediaType) = 0;
+            /* [out] */ IMFMediaType **ppIMediaType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMediaType( 
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pIMediaType) = 0;
+            /* [in] */ IMFMediaType *pIMediaType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPayloadExtensionCount( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pcPayloadExtensions) = 0;
+            /* [out] */ WORD *pcPayloadExtensions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPayloadExtension( 
-            /* [annotation][in] */ 
-            _In_  WORD wPayloadExtensionNumber,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidExtensionSystemID,
-            /* [annotation][out] */ 
-            _Out_  WORD *pcbExtensionDataSize,
+            /* [in] */ WORD wPayloadExtensionNumber,
+            /* [out] */ GUID *pguidExtensionSystemID,
+            /* [out] */ WORD *pcbExtensionDataSize,
             /* [size_is][optional][out] */ BYTE *pbExtensionSystemInfo,
             /* [optional][out][in] */ DWORD *pcbExtensionSystemInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddPayloadExtension( 
-            /* [annotation][in] */ 
-            _In_  GUID guidExtensionSystemID,
-            /* [annotation][in] */ 
-            _In_  WORD cbExtensionDataSize,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbExtensionSystemInfo)  BYTE *pbExtensionSystemInfo,
-            /* [annotation][in] */ 
-            _In_  DWORD cbExtensionSystemInfo) = 0;
+            /* [in] */ GUID guidExtensionSystemID,
+            /* [in] */ WORD cbExtensionDataSize,
+            /* [size_is][in] */ BYTE *pbExtensionSystemInfo,
+            /* [in] */ DWORD cbExtensionSystemInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAllPayloadExtensions( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamConfig **ppIStreamConfig) = 0;
+            /* [out] */ IMFASFStreamConfig **ppIStreamConfig) = 0;
         
     };
     
@@ -999,8 +900,7 @@ EXTERN_C const IID IID_IMFASFStreamConfig;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFASFStreamConfig * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1022,66 +922,57 @@ EXTERN_C const IID IID_IMFASFStreamConfig;
         HRESULT ( STDMETHODCALLTYPE *GetItemType )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  MF_ATTRIBUTE_TYPE *pType);
+            /* [out] */ MF_ATTRIBUTE_TYPE *pType);
         
         DECLSPEC_XFGVIRT(IMFAttributes, CompareItem)
         HRESULT ( STDMETHODCALLTYPE *CompareItem )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
             REFPROPVARIANT Value,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pbResult);
+            /* [out] */ BOOL *pbResult);
         
         DECLSPEC_XFGVIRT(IMFAttributes, Compare)
         HRESULT ( STDMETHODCALLTYPE *Compare )( 
             IMFASFStreamConfig * This,
             IMFAttributes *pTheirs,
             MF_ATTRIBUTES_MATCH_TYPE MatchType,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pbResult);
+            /* [out] */ BOOL *pbResult);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetUINT32)
         HRESULT ( STDMETHODCALLTYPE *GetUINT32 )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *punValue);
+            /* [out] */ UINT32 *punValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetUINT64)
         HRESULT ( STDMETHODCALLTYPE *GetUINT64 )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  UINT64 *punValue);
+            /* [out] */ UINT64 *punValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetDouble)
         HRESULT ( STDMETHODCALLTYPE *GetDouble )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  double *pfValue);
+            /* [out] */ double *pfValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetGUID)
         HRESULT ( STDMETHODCALLTYPE *GetGUID )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidValue);
+            /* [out] */ GUID *pguidValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetStringLength)
         HRESULT ( STDMETHODCALLTYPE *GetStringLength )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcchLength);
+            /* [out] */ UINT32 *pcchLength);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetString)
         HRESULT ( STDMETHODCALLTYPE *GetString )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cchBufSize)  LPWSTR pwszValue,
+            /* [size_is][out] */ LPWSTR pwszValue,
             UINT32 cchBufSize,
             /* [full][out][in] */ UINT32 *pcchLength);
         
@@ -1089,24 +980,20 @@ EXTERN_C const IID IID_IMFASFStreamConfig;
         HRESULT ( STDMETHODCALLTYPE *GetAllocatedString )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcchLength + 1)  LPWSTR *ppwszValue,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcchLength);
+            /* [size_is][size_is][out] */ LPWSTR *ppwszValue,
+            /* [out] */ UINT32 *pcchLength);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetBlobSize)
         HRESULT ( STDMETHODCALLTYPE *GetBlobSize )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcbBlobSize);
+            /* [out] */ UINT32 *pcbBlobSize);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetBlob)
         HRESULT ( STDMETHODCALLTYPE *GetBlob )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cbBufSize)  UINT8 *pBuf,
+            /* [size_is][out] */ UINT8 *pBuf,
             UINT32 cbBufSize,
             /* [full][out][in] */ UINT32 *pcbBlobSize);
         
@@ -1114,18 +1001,15 @@ EXTERN_C const IID IID_IMFASFStreamConfig;
         HRESULT ( STDMETHODCALLTYPE *GetAllocatedBlob )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcbSize)  UINT8 **ppBuf,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcbSize);
+            /* [size_is][size_is][out] */ UINT8 **ppBuf,
+            /* [out] */ UINT32 *pcbSize);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetUnknown)
         HRESULT ( STDMETHODCALLTYPE *GetUnknown )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
             REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  LPVOID *ppv);
+            /* [iid_is][out] */ LPVOID *ppv);
         
         DECLSPEC_XFGVIRT(IMFAttributes, SetItem)
         HRESULT ( STDMETHODCALLTYPE *SetItem )( 
@@ -1170,23 +1054,20 @@ EXTERN_C const IID IID_IMFASFStreamConfig;
         HRESULT ( STDMETHODCALLTYPE *SetString )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR wszValue);
+            /* [string][in] */ LPCWSTR wszValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, SetBlob)
         HRESULT ( STDMETHODCALLTYPE *SetBlob )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbBufSize)  const UINT8 *pBuf,
+            /* [size_is][in] */ const UINT8 *pBuf,
             UINT32 cbBufSize);
         
         DECLSPEC_XFGVIRT(IMFAttributes, SetUnknown)
         HRESULT ( STDMETHODCALLTYPE *SetUnknown )( 
             IMFASFStreamConfig * This,
             REFGUID guidKey,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnknown);
+            /* [in] */ IUnknown *pUnknown);
         
         DECLSPEC_XFGVIRT(IMFAttributes, LockStore)
         HRESULT ( STDMETHODCALLTYPE *LockStore )( 
@@ -1199,28 +1080,24 @@ EXTERN_C const IID IID_IMFASFStreamConfig;
         DECLSPEC_XFGVIRT(IMFAttributes, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IMFASFStreamConfig * This,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *pcItems);
+            /* [out] */ UINT32 *pcItems);
         
         DECLSPEC_XFGVIRT(IMFAttributes, GetItemByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetItemByIndex )( 
             IMFASFStreamConfig * This,
             UINT32 unIndex,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidKey,
+            /* [out] */ GUID *pguidKey,
             /* [full][out][in] */ PROPVARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IMFAttributes, CopyAllItems)
         HRESULT ( STDMETHODCALLTYPE *CopyAllItems )( 
             IMFASFStreamConfig * This,
-            /* [annotation][in] */ 
-            _In_  IMFAttributes *pDest);
+            /* [in] */ IMFAttributes *pDest);
         
         DECLSPEC_XFGVIRT(IMFASFStreamConfig, GetStreamType)
         HRESULT ( STDMETHODCALLTYPE *GetStreamType )( 
             IMFASFStreamConfig * This,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidStreamType);
+            /* [out] */ GUID *pguidStreamType);
         
         DECLSPEC_XFGVIRT(IMFASFStreamConfig, GetStreamNumber)
         WORD ( STDMETHODCALLTYPE *GetStreamNumber )( 
@@ -1229,50 +1106,39 @@ EXTERN_C const IID IID_IMFASFStreamConfig;
         DECLSPEC_XFGVIRT(IMFASFStreamConfig, SetStreamNumber)
         HRESULT ( STDMETHODCALLTYPE *SetStreamNumber )( 
             IMFASFStreamConfig * This,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNum);
+            /* [in] */ WORD wStreamNum);
         
         DECLSPEC_XFGVIRT(IMFASFStreamConfig, GetMediaType)
         HRESULT ( STDMETHODCALLTYPE *GetMediaType )( 
             IMFASFStreamConfig * This,
-            /* [annotation][out] */ 
-            _Out_  IMFMediaType **ppIMediaType);
+            /* [out] */ IMFMediaType **ppIMediaType);
         
         DECLSPEC_XFGVIRT(IMFASFStreamConfig, SetMediaType)
         HRESULT ( STDMETHODCALLTYPE *SetMediaType )( 
             IMFASFStreamConfig * This,
-            /* [annotation][in] */ 
-            _In_  IMFMediaType *pIMediaType);
+            /* [in] */ IMFMediaType *pIMediaType);
         
         DECLSPEC_XFGVIRT(IMFASFStreamConfig, GetPayloadExtensionCount)
         HRESULT ( STDMETHODCALLTYPE *GetPayloadExtensionCount )( 
             IMFASFStreamConfig * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pcPayloadExtensions);
+            /* [out] */ WORD *pcPayloadExtensions);
         
         DECLSPEC_XFGVIRT(IMFASFStreamConfig, GetPayloadExtension)
         HRESULT ( STDMETHODCALLTYPE *GetPayloadExtension )( 
             IMFASFStreamConfig * This,
-            /* [annotation][in] */ 
-            _In_  WORD wPayloadExtensionNumber,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidExtensionSystemID,
-            /* [annotation][out] */ 
-            _Out_  WORD *pcbExtensionDataSize,
+            /* [in] */ WORD wPayloadExtensionNumber,
+            /* [out] */ GUID *pguidExtensionSystemID,
+            /* [out] */ WORD *pcbExtensionDataSize,
             /* [size_is][optional][out] */ BYTE *pbExtensionSystemInfo,
             /* [optional][out][in] */ DWORD *pcbExtensionSystemInfo);
         
         DECLSPEC_XFGVIRT(IMFASFStreamConfig, AddPayloadExtension)
         HRESULT ( STDMETHODCALLTYPE *AddPayloadExtension )( 
             IMFASFStreamConfig * This,
-            /* [annotation][in] */ 
-            _In_  GUID guidExtensionSystemID,
-            /* [annotation][in] */ 
-            _In_  WORD cbExtensionDataSize,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbExtensionSystemInfo)  BYTE *pbExtensionSystemInfo,
-            /* [annotation][in] */ 
-            _In_  DWORD cbExtensionSystemInfo);
+            /* [in] */ GUID guidExtensionSystemID,
+            /* [in] */ WORD cbExtensionDataSize,
+            /* [size_is][in] */ BYTE *pbExtensionSystemInfo,
+            /* [in] */ DWORD cbExtensionSystemInfo);
         
         DECLSPEC_XFGVIRT(IMFASFStreamConfig, RemoveAllPayloadExtensions)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllPayloadExtensions )( 
@@ -1281,8 +1147,7 @@ EXTERN_C const IID IID_IMFASFStreamConfig;
         DECLSPEC_XFGVIRT(IMFASFStreamConfig, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IMFASFStreamConfig * This,
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamConfig **ppIStreamConfig);
+            /* [out] */ IMFASFStreamConfig **ppIStreamConfig);
         
         END_INTERFACE
     } IMFASFStreamConfigVtbl;
@@ -1455,48 +1320,35 @@ EXTERN_C const IID IID_IMFASFMutualExclusion;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetType( 
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidType) = 0;
+            /* [out] */ GUID *pguidType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetType( 
-            /* [annotation][in] */ 
-            _In_  REFGUID guidType) = 0;
+            /* [in] */ REFGUID guidType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCount( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwRecordCount) = 0;
+            /* [out] */ DWORD *pdwRecordCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamsForRecord( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordNumber,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamNumArray,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pcStreams) = 0;
+            /* [in] */ DWORD dwRecordNumber,
+            /* [out] */ WORD *pwStreamNumArray,
+            /* [out][in] */ DWORD *pcStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddStreamForRecord( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordNumber,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber) = 0;
+            /* [in] */ DWORD dwRecordNumber,
+            /* [in] */ WORD wStreamNumber) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveStreamFromRecord( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordNumber,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber) = 0;
+            /* [in] */ DWORD dwRecordNumber,
+            /* [in] */ WORD wStreamNumber) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveRecord( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordNumber) = 0;
+            /* [in] */ DWORD dwRecordNumber) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddRecord( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwRecordNumber) = 0;
+            /* [out] */ DWORD *pdwRecordNumber) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IMFASFMutualExclusion **ppIMutex) = 0;
+            /* [out] */ IMFASFMutualExclusion **ppIMutex) = 0;
         
     };
     
@@ -1510,8 +1362,7 @@ EXTERN_C const IID IID_IMFASFMutualExclusion;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFASFMutualExclusion * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1526,64 +1377,51 @@ EXTERN_C const IID IID_IMFASFMutualExclusion;
         DECLSPEC_XFGVIRT(IMFASFMutualExclusion, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             IMFASFMutualExclusion * This,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidType);
+            /* [out] */ GUID *pguidType);
         
         DECLSPEC_XFGVIRT(IMFASFMutualExclusion, SetType)
         HRESULT ( STDMETHODCALLTYPE *SetType )( 
             IMFASFMutualExclusion * This,
-            /* [annotation][in] */ 
-            _In_  REFGUID guidType);
+            /* [in] */ REFGUID guidType);
         
         DECLSPEC_XFGVIRT(IMFASFMutualExclusion, GetRecordCount)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCount )( 
             IMFASFMutualExclusion * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwRecordCount);
+            /* [out] */ DWORD *pdwRecordCount);
         
         DECLSPEC_XFGVIRT(IMFASFMutualExclusion, GetStreamsForRecord)
         HRESULT ( STDMETHODCALLTYPE *GetStreamsForRecord )( 
             IMFASFMutualExclusion * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordNumber,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamNumArray,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pcStreams);
+            /* [in] */ DWORD dwRecordNumber,
+            /* [out] */ WORD *pwStreamNumArray,
+            /* [out][in] */ DWORD *pcStreams);
         
         DECLSPEC_XFGVIRT(IMFASFMutualExclusion, AddStreamForRecord)
         HRESULT ( STDMETHODCALLTYPE *AddStreamForRecord )( 
             IMFASFMutualExclusion * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordNumber,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber);
+            /* [in] */ DWORD dwRecordNumber,
+            /* [in] */ WORD wStreamNumber);
         
         DECLSPEC_XFGVIRT(IMFASFMutualExclusion, RemoveStreamFromRecord)
         HRESULT ( STDMETHODCALLTYPE *RemoveStreamFromRecord )( 
             IMFASFMutualExclusion * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordNumber,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber);
+            /* [in] */ DWORD dwRecordNumber,
+            /* [in] */ WORD wStreamNumber);
         
         DECLSPEC_XFGVIRT(IMFASFMutualExclusion, RemoveRecord)
         HRESULT ( STDMETHODCALLTYPE *RemoveRecord )( 
             IMFASFMutualExclusion * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordNumber);
+            /* [in] */ DWORD dwRecordNumber);
         
         DECLSPEC_XFGVIRT(IMFASFMutualExclusion, AddRecord)
         HRESULT ( STDMETHODCALLTYPE *AddRecord )( 
             IMFASFMutualExclusion * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwRecordNumber);
+            /* [out] */ DWORD *pdwRecordNumber);
         
         DECLSPEC_XFGVIRT(IMFASFMutualExclusion, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IMFASFMutualExclusion * This,
-            /* [annotation][out] */ 
-            _Out_  IMFASFMutualExclusion **ppIMutex);
+            /* [out] */ IMFASFMutualExclusion **ppIMutex);
         
         END_INTERFACE
     } IMFASFMutualExclusionVtbl;
@@ -1662,30 +1500,22 @@ EXTERN_C const IID IID_IMFASFStreamPrioritization;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStreamCount( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStreamCount) = 0;
+            /* [out] */ DWORD *pdwStreamCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStream( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwStreamIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamFlags) = 0;
+            /* [in] */ DWORD dwStreamIndex,
+            /* [out] */ WORD *pwStreamNumber,
+            /* [out] */ WORD *pwStreamFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddStream( 
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamFlags) = 0;
+            /* [in] */ WORD wStreamNumber,
+            /* [in] */ WORD wStreamFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveStream( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwStreamIndex) = 0;
+            /* [in] */ DWORD dwStreamIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamPrioritization **ppIStreamPrioritization) = 0;
+            /* [out] */ IMFASFStreamPrioritization **ppIStreamPrioritization) = 0;
         
     };
     
@@ -1699,8 +1529,7 @@ EXTERN_C const IID IID_IMFASFStreamPrioritization;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFASFStreamPrioritization * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1715,38 +1544,30 @@ EXTERN_C const IID IID_IMFASFStreamPrioritization;
         DECLSPEC_XFGVIRT(IMFASFStreamPrioritization, GetStreamCount)
         HRESULT ( STDMETHODCALLTYPE *GetStreamCount )( 
             IMFASFStreamPrioritization * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStreamCount);
+            /* [out] */ DWORD *pdwStreamCount);
         
         DECLSPEC_XFGVIRT(IMFASFStreamPrioritization, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             IMFASFStreamPrioritization * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwStreamIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamFlags);
+            /* [in] */ DWORD dwStreamIndex,
+            /* [out] */ WORD *pwStreamNumber,
+            /* [out] */ WORD *pwStreamFlags);
         
         DECLSPEC_XFGVIRT(IMFASFStreamPrioritization, AddStream)
         HRESULT ( STDMETHODCALLTYPE *AddStream )( 
             IMFASFStreamPrioritization * This,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamFlags);
+            /* [in] */ WORD wStreamNumber,
+            /* [in] */ WORD wStreamFlags);
         
         DECLSPEC_XFGVIRT(IMFASFStreamPrioritization, RemoveStream)
         HRESULT ( STDMETHODCALLTYPE *RemoveStream )( 
             IMFASFStreamPrioritization * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwStreamIndex);
+            /* [in] */ DWORD dwStreamIndex);
         
         DECLSPEC_XFGVIRT(IMFASFStreamPrioritization, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IMFASFStreamPrioritization * This,
-            /* [annotation][out] */ 
-            _Out_  IMFASFStreamPrioritization **ppIStreamPrioritization);
+            /* [out] */ IMFASFStreamPrioritization **ppIStreamPrioritization);
         
         END_INTERFACE
     } IMFASFStreamPrioritizationVtbl;
@@ -1843,78 +1664,55 @@ EXTERN_C const IID IID_IMFASFIndexer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetFlags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ DWORD *pdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  IMFASFContentInfo *pIContentInfo) = 0;
+            /* [in] */ IMFASFContentInfo *pIContentInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIndexPosition( 
-            /* [annotation][in] */ 
-            _In_  IMFASFContentInfo *pIContentInfo,
-            /* [annotation][out] */ 
-            _Out_  QWORD *pcbIndexOffset) = 0;
+            /* [in] */ IMFASFContentInfo *pIContentInfo,
+            /* [out] */ QWORD *pcbIndexOffset) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIndexByteStreams( 
-            /* [annotation][in] */ 
-            _In_  IMFByteStream **ppIByteStreams,
-            /* [annotation][in] */ 
-            _In_  DWORD cByteStreams) = 0;
+            /* [in] */ IMFByteStream **ppIByteStreams,
+            /* [in] */ DWORD cByteStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIndexByteStreamCount( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcByteStreams) = 0;
+            /* [out] */ DWORD *pcByteStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIndexStatus( 
-            /* [annotation][in] */ 
-            _In_  ASF_INDEX_IDENTIFIER *pIndexIdentifier,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfIsIndexed,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbIndexDescriptor,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pcbIndexDescriptor) = 0;
+            /* [in] */ ASF_INDEX_IDENTIFIER *pIndexIdentifier,
+            /* [out] */ BOOL *pfIsIndexed,
+            /* [out] */ BYTE *pbIndexDescriptor,
+            /* [out][in] */ DWORD *pcbIndexDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIndexStatus( 
-            /* [annotation][in] */ 
-            _In_  BYTE *pbIndexDescriptor,
-            /* [annotation][in] */ 
-            _In_  DWORD cbIndexDescriptor,
-            /* [annotation][in] */ 
-            _In_  BOOL fGenerateIndex) = 0;
+            /* [in] */ BYTE *pbIndexDescriptor,
+            /* [in] */ DWORD cbIndexDescriptor,
+            /* [in] */ BOOL fGenerateIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSeekPositionForValue( 
-            /* [annotation][in] */ 
-            _In_  const PROPVARIANT *pvarValue,
-            /* [annotation][in] */ 
-            _In_  ASF_INDEX_IDENTIFIER *pIndexIdentifier,
-            /* [annotation][out] */ 
-            _Out_  QWORD *pcbOffsetWithinData,
+            /* [in] */ const PROPVARIANT *pvarValue,
+            /* [in] */ ASF_INDEX_IDENTIFIER *pIndexIdentifier,
+            /* [out] */ QWORD *pcbOffsetWithinData,
             /* [optional][out] */ MFTIME *phnsApproxTime,
             /* [optional][out] */ DWORD *pdwPayloadNumberOfStreamWithinPacket) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GenerateIndexEntries( 
-            /* [annotation][in] */ 
-            _In_  IMFSample *pIASFPacketSample) = 0;
+            /* [in] */ IMFSample *pIASFPacketSample) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CommitIndex( 
-            /* [annotation][in] */ 
-            _In_  IMFASFContentInfo *pIContentInfo) = 0;
+            /* [in] */ IMFASFContentInfo *pIContentInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIndexWriteSpace( 
-            /* [annotation][out] */ 
-            _Out_  QWORD *pcbIndexWriteSpace) = 0;
+            /* [out] */ QWORD *pcbIndexWriteSpace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompletedIndex( 
-            /* [annotation][in] */ 
-            _In_  IMFMediaBuffer *pIIndexBuffer,
-            /* [annotation][in] */ 
-            _In_  QWORD cbOffsetWithinIndex) = 0;
+            /* [in] */ IMFMediaBuffer *pIIndexBuffer,
+            /* [in] */ QWORD cbOffsetWithinIndex) = 0;
         
     };
     
@@ -1928,8 +1726,7 @@ EXTERN_C const IID IID_IMFASFIndexer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1944,102 +1741,79 @@ EXTERN_C const IID IID_IMFASFIndexer;
         DECLSPEC_XFGVIRT(IMFASFIndexer, SetFlags)
         HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IMFASFIndexer * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  IMFASFContentInfo *pIContentInfo);
+            /* [in] */ IMFASFContentInfo *pIContentInfo);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, GetIndexPosition)
         HRESULT ( STDMETHODCALLTYPE *GetIndexPosition )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  IMFASFContentInfo *pIContentInfo,
-            /* [annotation][out] */ 
-            _Out_  QWORD *pcbIndexOffset);
+            /* [in] */ IMFASFContentInfo *pIContentInfo,
+            /* [out] */ QWORD *pcbIndexOffset);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, SetIndexByteStreams)
         HRESULT ( STDMETHODCALLTYPE *SetIndexByteStreams )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  IMFByteStream **ppIByteStreams,
-            /* [annotation][in] */ 
-            _In_  DWORD cByteStreams);
+            /* [in] */ IMFByteStream **ppIByteStreams,
+            /* [in] */ DWORD cByteStreams);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, GetIndexByteStreamCount)
         HRESULT ( STDMETHODCALLTYPE *GetIndexByteStreamCount )( 
             IMFASFIndexer * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcByteStreams);
+            /* [out] */ DWORD *pcByteStreams);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, GetIndexStatus)
         HRESULT ( STDMETHODCALLTYPE *GetIndexStatus )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  ASF_INDEX_IDENTIFIER *pIndexIdentifier,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfIsIndexed,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbIndexDescriptor,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pcbIndexDescriptor);
+            /* [in] */ ASF_INDEX_IDENTIFIER *pIndexIdentifier,
+            /* [out] */ BOOL *pfIsIndexed,
+            /* [out] */ BYTE *pbIndexDescriptor,
+            /* [out][in] */ DWORD *pcbIndexDescriptor);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, SetIndexStatus)
         HRESULT ( STDMETHODCALLTYPE *SetIndexStatus )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  BYTE *pbIndexDescriptor,
-            /* [annotation][in] */ 
-            _In_  DWORD cbIndexDescriptor,
-            /* [annotation][in] */ 
-            _In_  BOOL fGenerateIndex);
+            /* [in] */ BYTE *pbIndexDescriptor,
+            /* [in] */ DWORD cbIndexDescriptor,
+            /* [in] */ BOOL fGenerateIndex);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, GetSeekPositionForValue)
         HRESULT ( STDMETHODCALLTYPE *GetSeekPositionForValue )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  const PROPVARIANT *pvarValue,
-            /* [annotation][in] */ 
-            _In_  ASF_INDEX_IDENTIFIER *pIndexIdentifier,
-            /* [annotation][out] */ 
-            _Out_  QWORD *pcbOffsetWithinData,
+            /* [in] */ const PROPVARIANT *pvarValue,
+            /* [in] */ ASF_INDEX_IDENTIFIER *pIndexIdentifier,
+            /* [out] */ QWORD *pcbOffsetWithinData,
             /* [optional][out] */ MFTIME *phnsApproxTime,
             /* [optional][out] */ DWORD *pdwPayloadNumberOfStreamWithinPacket);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, GenerateIndexEntries)
         HRESULT ( STDMETHODCALLTYPE *GenerateIndexEntries )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  IMFSample *pIASFPacketSample);
+            /* [in] */ IMFSample *pIASFPacketSample);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, CommitIndex)
         HRESULT ( STDMETHODCALLTYPE *CommitIndex )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  IMFASFContentInfo *pIContentInfo);
+            /* [in] */ IMFASFContentInfo *pIContentInfo);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, GetIndexWriteSpace)
         HRESULT ( STDMETHODCALLTYPE *GetIndexWriteSpace )( 
             IMFASFIndexer * This,
-            /* [annotation][out] */ 
-            _Out_  QWORD *pcbIndexWriteSpace);
+            /* [out] */ QWORD *pcbIndexWriteSpace);
         
         DECLSPEC_XFGVIRT(IMFASFIndexer, GetCompletedIndex)
         HRESULT ( STDMETHODCALLTYPE *GetCompletedIndex )( 
             IMFASFIndexer * This,
-            /* [annotation][in] */ 
-            _In_  IMFMediaBuffer *pIIndexBuffer,
-            /* [annotation][in] */ 
-            _In_  QWORD cbOffsetWithinIndex);
+            /* [in] */ IMFMediaBuffer *pIIndexBuffer,
+            /* [in] */ QWORD cbOffsetWithinIndex);
         
         END_INTERFACE
     } IMFASFIndexerVtbl;
@@ -2144,50 +1918,36 @@ EXTERN_C const IID IID_IMFASFSplitter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  IMFASFContentInfo *pIContentInfo) = 0;
+            /* [in] */ IMFASFContentInfo *pIContentInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFlags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ DWORD *pdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SelectStreams( 
-            /* [annotation][in] */ 
-            _In_  WORD *pwStreamNumbers,
-            /* [annotation][in] */ 
-            _In_  WORD wNumStreams) = 0;
+            /* [in] */ WORD *pwStreamNumbers,
+            /* [in] */ WORD wNumStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSelectedStreams( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamNumbers,
-            /* [annotation][out][in] */ 
-            _Inout_  WORD *pwNumStreams) = 0;
+            /* [out] */ WORD *pwStreamNumbers,
+            /* [out][in] */ WORD *pwNumStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ParseData( 
-            /* [annotation][in] */ 
-            _In_  IMFMediaBuffer *pIBuffer,
-            /* [annotation][in] */ 
-            _In_  DWORD cbBufferOffset,
-            /* [annotation][in] */ 
-            _In_  DWORD cbLength) = 0;
+            /* [in] */ IMFMediaBuffer *pIBuffer,
+            /* [in] */ DWORD cbBufferOffset,
+            /* [in] */ DWORD cbLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextSample( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatusFlags,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  IMFSample **ppISample) = 0;
+            /* [out] */ DWORD *pdwStatusFlags,
+            /* [out] */ WORD *pwStreamNumber,
+            /* [out] */ IMFSample **ppISample) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Flush( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastSendTime( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwLastSendTime) = 0;
+            /* [out] */ DWORD *pdwLastSendTime) = 0;
         
     };
     
@@ -2201,8 +1961,7 @@ EXTERN_C const IID IID_IMFASFSplitter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFASFSplitter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2217,56 +1976,43 @@ EXTERN_C const IID IID_IMFASFSplitter;
         DECLSPEC_XFGVIRT(IMFASFSplitter, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IMFASFSplitter * This,
-            /* [annotation][in] */ 
-            _In_  IMFASFContentInfo *pIContentInfo);
+            /* [in] */ IMFASFContentInfo *pIContentInfo);
         
         DECLSPEC_XFGVIRT(IMFASFSplitter, SetFlags)
         HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             IMFASFSplitter * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IMFASFSplitter, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IMFASFSplitter * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IMFASFSplitter, SelectStreams)
         HRESULT ( STDMETHODCALLTYPE *SelectStreams )( 
             IMFASFSplitter * This,
-            /* [annotation][in] */ 
-            _In_  WORD *pwStreamNumbers,
-            /* [annotation][in] */ 
-            _In_  WORD wNumStreams);
+            /* [in] */ WORD *pwStreamNumbers,
+            /* [in] */ WORD wNumStreams);
         
         DECLSPEC_XFGVIRT(IMFASFSplitter, GetSelectedStreams)
         HRESULT ( STDMETHODCALLTYPE *GetSelectedStreams )( 
             IMFASFSplitter * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamNumbers,
-            /* [annotation][out][in] */ 
-            _Inout_  WORD *pwNumStreams);
+            /* [out] */ WORD *pwStreamNumbers,
+            /* [out][in] */ WORD *pwNumStreams);
         
         DECLSPEC_XFGVIRT(IMFASFSplitter, ParseData)
         HRESULT ( STDMETHODCALLTYPE *ParseData )( 
             IMFASFSplitter * This,
-            /* [annotation][in] */ 
-            _In_  IMFMediaBuffer *pIBuffer,
-            /* [annotation][in] */ 
-            _In_  DWORD cbBufferOffset,
-            /* [annotation][in] */ 
-            _In_  DWORD cbLength);
+            /* [in] */ IMFMediaBuffer *pIBuffer,
+            /* [in] */ DWORD cbBufferOffset,
+            /* [in] */ DWORD cbLength);
         
         DECLSPEC_XFGVIRT(IMFASFSplitter, GetNextSample)
         HRESULT ( STDMETHODCALLTYPE *GetNextSample )( 
             IMFASFSplitter * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatusFlags,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  IMFSample **ppISample);
+            /* [out] */ DWORD *pdwStatusFlags,
+            /* [out] */ WORD *pwStreamNumber,
+            /* [out] */ IMFSample **ppISample);
         
         DECLSPEC_XFGVIRT(IMFASFSplitter, Flush)
         HRESULT ( STDMETHODCALLTYPE *Flush )( 
@@ -2275,8 +2021,7 @@ EXTERN_C const IID IID_IMFASFSplitter;
         DECLSPEC_XFGVIRT(IMFASFSplitter, GetLastSendTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastSendTime )( 
             IMFASFSplitter * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwLastSendTime);
+            /* [out] */ DWORD *pdwLastSendTime);
         
         END_INTERFACE
     } IMFASFSplitterVtbl;
@@ -2460,46 +2205,34 @@ EXTERN_C const IID IID_IMFASFMultiplexer;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  IMFASFContentInfo *pIContentInfo) = 0;
+            /* [in] */ IMFASFContentInfo *pIContentInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFlags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ DWORD *pdwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessSample( 
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber,
-            /* [annotation][in] */ 
-            _In_  IMFSample *pISample,
-            /* [annotation][in] */ 
-            _In_  LONGLONG hnsTimestampAdjust) = 0;
+            /* [in] */ WORD wStreamNumber,
+            /* [in] */ IMFSample *pISample,
+            /* [in] */ LONGLONG hnsTimestampAdjust) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextPacket( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatusFlags,
-            /* [annotation][out] */ 
-            _Out_  IMFSample **ppIPacket) = 0;
+            /* [out] */ DWORD *pdwStatusFlags,
+            /* [out] */ IMFSample **ppIPacket) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Flush( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE End( 
-            /* [annotation][out][in] */ 
-            _Inout_  IMFASFContentInfo *pIContentInfo) = 0;
+            /* [out][in] */ IMFASFContentInfo *pIContentInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatistics( 
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  ASF_MUX_STATISTICS *pMuxStats) = 0;
+            /* [in] */ WORD wStreamNumber,
+            /* [out] */ ASF_MUX_STATISTICS *pMuxStats) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSyncTolerance( 
-            /* [annotation][in] */ 
-            _In_  DWORD msSyncTolerance) = 0;
+            /* [in] */ DWORD msSyncTolerance) = 0;
         
     };
     
@@ -2513,8 +2246,7 @@ EXTERN_C const IID IID_IMFASFMultiplexer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFASFMultiplexer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2529,38 +2261,30 @@ EXTERN_C const IID IID_IMFASFMultiplexer;
         DECLSPEC_XFGVIRT(IMFASFMultiplexer, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IMFASFMultiplexer * This,
-            /* [annotation][in] */ 
-            _In_  IMFASFContentInfo *pIContentInfo);
+            /* [in] */ IMFASFContentInfo *pIContentInfo);
         
         DECLSPEC_XFGVIRT(IMFASFMultiplexer, SetFlags)
         HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             IMFASFMultiplexer * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IMFASFMultiplexer, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IMFASFMultiplexer * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IMFASFMultiplexer, ProcessSample)
         HRESULT ( STDMETHODCALLTYPE *ProcessSample )( 
             IMFASFMultiplexer * This,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber,
-            /* [annotation][in] */ 
-            _In_  IMFSample *pISample,
-            /* [annotation][in] */ 
-            _In_  LONGLONG hnsTimestampAdjust);
+            /* [in] */ WORD wStreamNumber,
+            /* [in] */ IMFSample *pISample,
+            /* [in] */ LONGLONG hnsTimestampAdjust);
         
         DECLSPEC_XFGVIRT(IMFASFMultiplexer, GetNextPacket)
         HRESULT ( STDMETHODCALLTYPE *GetNextPacket )( 
             IMFASFMultiplexer * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatusFlags,
-            /* [annotation][out] */ 
-            _Out_  IMFSample **ppIPacket);
+            /* [out] */ DWORD *pdwStatusFlags,
+            /* [out] */ IMFSample **ppIPacket);
         
         DECLSPEC_XFGVIRT(IMFASFMultiplexer, Flush)
         HRESULT ( STDMETHODCALLTYPE *Flush )( 
@@ -2569,22 +2293,18 @@ EXTERN_C const IID IID_IMFASFMultiplexer;
         DECLSPEC_XFGVIRT(IMFASFMultiplexer, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             IMFASFMultiplexer * This,
-            /* [annotation][out][in] */ 
-            _Inout_  IMFASFContentInfo *pIContentInfo);
+            /* [out][in] */ IMFASFContentInfo *pIContentInfo);
         
         DECLSPEC_XFGVIRT(IMFASFMultiplexer, GetStatistics)
         HRESULT ( STDMETHODCALLTYPE *GetStatistics )( 
             IMFASFMultiplexer * This,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNumber,
-            /* [annotation][out] */ 
-            _Out_  ASF_MUX_STATISTICS *pMuxStats);
+            /* [in] */ WORD wStreamNumber,
+            /* [out] */ ASF_MUX_STATISTICS *pMuxStats);
         
         DECLSPEC_XFGVIRT(IMFASFMultiplexer, SetSyncTolerance)
         HRESULT ( STDMETHODCALLTYPE *SetSyncTolerance )( 
             IMFASFMultiplexer * This,
-            /* [annotation][in] */ 
-            _In_  DWORD msSyncTolerance);
+            /* [in] */ DWORD msSyncTolerance);
         
         END_INTERFACE
     } IMFASFMultiplexerVtbl;
@@ -2695,88 +2415,60 @@ EXTERN_C const IID IID_IMFASFStreamSelector;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStreamCount( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcStreams) = 0;
+            /* [out] */ DWORD *pcStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputCount( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcOutputs) = 0;
+            /* [out] */ DWORD *pcOutputs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputStreamCount( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcStreams) = 0;
+            /* [in] */ DWORD dwOutputNum,
+            /* [out] */ DWORD *pcStreams) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputStreamNumbers( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][out] */ 
-            _Out_  WORD *rgwStreamNumbers) = 0;
+            /* [in] */ DWORD dwOutputNum,
+            /* [out] */ WORD *rgwStreamNumbers) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputFromStream( 
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwOutput) = 0;
+            /* [in] */ WORD wStreamNum,
+            /* [out] */ DWORD *pdwOutput) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputOverride( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][out] */ 
-            _Out_  ASF_SELECTION_STATUS *pSelection) = 0;
+            /* [in] */ DWORD dwOutputNum,
+            /* [out] */ ASF_SELECTION_STATUS *pSelection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOutputOverride( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][in] */ 
-            _In_  ASF_SELECTION_STATUS Selection) = 0;
+            /* [in] */ DWORD dwOutputNum,
+            /* [in] */ ASF_SELECTION_STATUS Selection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputMutexCount( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcMutexes) = 0;
+            /* [in] */ DWORD dwOutputNum,
+            /* [out] */ DWORD *pcMutexes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputMutex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMutexNum,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppMutex) = 0;
+            /* [in] */ DWORD dwOutputNum,
+            /* [in] */ DWORD dwMutexNum,
+            /* [out] */ IUnknown **ppMutex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOutputMutexSelection( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMutexNum,
-            /* [annotation][in] */ 
-            _In_  WORD wSelectedRecord) = 0;
+            /* [in] */ DWORD dwOutputNum,
+            /* [in] */ DWORD dwMutexNum,
+            /* [in] */ WORD wSelectedRecord) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBandwidthStepCount( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcStepCount) = 0;
+            /* [out] */ DWORD *pcStepCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBandwidthStep( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwStepNum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwBitrate,
-            /* [annotation][out] */ 
-            _Out_  WORD *rgwStreamNumbers,
-            /* [annotation][out] */ 
-            _Out_  ASF_SELECTION_STATUS *rgSelections) = 0;
+            /* [in] */ DWORD dwStepNum,
+            /* [out] */ DWORD *pdwBitrate,
+            /* [out] */ WORD *rgwStreamNumbers,
+            /* [out] */ ASF_SELECTION_STATUS *rgSelections) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BitrateToStepNumber( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwBitrate,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStepNum) = 0;
+            /* [in] */ DWORD dwBitrate,
+            /* [out] */ DWORD *pdwStepNum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStreamSelectorFlags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwStreamSelectorFlags) = 0;
+            /* [in] */ DWORD dwStreamSelectorFlags) = 0;
         
     };
     
@@ -2790,8 +2482,7 @@ EXTERN_C const IID IID_IMFASFStreamSelector;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2806,114 +2497,86 @@ EXTERN_C const IID IID_IMFASFStreamSelector;
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, GetStreamCount)
         HRESULT ( STDMETHODCALLTYPE *GetStreamCount )( 
             IMFASFStreamSelector * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcStreams);
+            /* [out] */ DWORD *pcStreams);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, GetOutputCount)
         HRESULT ( STDMETHODCALLTYPE *GetOutputCount )( 
             IMFASFStreamSelector * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcOutputs);
+            /* [out] */ DWORD *pcOutputs);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, GetOutputStreamCount)
         HRESULT ( STDMETHODCALLTYPE *GetOutputStreamCount )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcStreams);
+            /* [in] */ DWORD dwOutputNum,
+            /* [out] */ DWORD *pcStreams);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, GetOutputStreamNumbers)
         HRESULT ( STDMETHODCALLTYPE *GetOutputStreamNumbers )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][out] */ 
-            _Out_  WORD *rgwStreamNumbers);
+            /* [in] */ DWORD dwOutputNum,
+            /* [out] */ WORD *rgwStreamNumbers);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, GetOutputFromStream)
         HRESULT ( STDMETHODCALLTYPE *GetOutputFromStream )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  WORD wStreamNum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwOutput);
+            /* [in] */ WORD wStreamNum,
+            /* [out] */ DWORD *pdwOutput);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, GetOutputOverride)
         HRESULT ( STDMETHODCALLTYPE *GetOutputOverride )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][out] */ 
-            _Out_  ASF_SELECTION_STATUS *pSelection);
+            /* [in] */ DWORD dwOutputNum,
+            /* [out] */ ASF_SELECTION_STATUS *pSelection);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, SetOutputOverride)
         HRESULT ( STDMETHODCALLTYPE *SetOutputOverride )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][in] */ 
-            _In_  ASF_SELECTION_STATUS Selection);
+            /* [in] */ DWORD dwOutputNum,
+            /* [in] */ ASF_SELECTION_STATUS Selection);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, GetOutputMutexCount)
         HRESULT ( STDMETHODCALLTYPE *GetOutputMutexCount )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcMutexes);
+            /* [in] */ DWORD dwOutputNum,
+            /* [out] */ DWORD *pcMutexes);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, GetOutputMutex)
         HRESULT ( STDMETHODCALLTYPE *GetOutputMutex )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMutexNum,
-            /* [annotation][out] */ 
-            _Out_  IUnknown **ppMutex);
+            /* [in] */ DWORD dwOutputNum,
+            /* [in] */ DWORD dwMutexNum,
+            /* [out] */ IUnknown **ppMutex);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, SetOutputMutexSelection)
         HRESULT ( STDMETHODCALLTYPE *SetOutputMutexSelection )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOutputNum,
-            /* [annotation][in] */ 
-            _In_  DWORD dwMutexNum,
-            /* [annotation][in] */ 
-            _In_  WORD wSelectedRecord);
+            /* [in] */ DWORD dwOutputNum,
+            /* [in] */ DWORD dwMutexNum,
+            /* [in] */ WORD wSelectedRecord);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, GetBandwidthStepCount)
         HRESULT ( STDMETHODCALLTYPE *GetBandwidthStepCount )( 
             IMFASFStreamSelector * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcStepCount);
+            /* [out] */ DWORD *pcStepCount);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, GetBandwidthStep)
         HRESULT ( STDMETHODCALLTYPE *GetBandwidthStep )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwStepNum,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwBitrate,
-            /* [annotation][out] */ 
-            _Out_  WORD *rgwStreamNumbers,
-            /* [annotation][out] */ 
-            _Out_  ASF_SELECTION_STATUS *rgSelections);
+            /* [in] */ DWORD dwStepNum,
+            /* [out] */ DWORD *pdwBitrate,
+            /* [out] */ WORD *rgwStreamNumbers,
+            /* [out] */ ASF_SELECTION_STATUS *rgSelections);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, BitrateToStepNumber)
         HRESULT ( STDMETHODCALLTYPE *BitrateToStepNumber )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBitrate,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStepNum);
+            /* [in] */ DWORD dwBitrate,
+            /* [out] */ DWORD *pdwStepNum);
         
         DECLSPEC_XFGVIRT(IMFASFStreamSelector, SetStreamSelectorFlags)
         HRESULT ( STDMETHODCALLTYPE *SetStreamSelectorFlags )( 
             IMFASFStreamSelector * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwStreamSelectorFlags);
+            /* [in] */ DWORD dwStreamSelectorFlags);
         
         END_INTERFACE
     } IMFASFStreamSelectorVtbl;
@@ -3074,22 +2737,15 @@ EXTERN_C const IID IID_IMFDRMNetHelper;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ProcessLicenseRequest( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbLicenseRequest)  BYTE *pLicenseRequest,
-            /* [annotation][in] */ 
-            _In_  DWORD cbLicenseRequest,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcbLicenseResponse)  BYTE **ppLicenseResponse,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcbLicenseResponse,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrKID) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(cbLicenseRequest) BYTE *pLicenseRequest,
+            /* [in] */ DWORD cbLicenseRequest,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbLicenseResponse) BYTE **ppLicenseResponse,
+            /* [out] */ __RPC__out DWORD *pcbLicenseResponse,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrKID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetChainedLicenseResponse( 
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcbLicenseResponse)  BYTE **ppLicenseResponse,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcbLicenseResponse) = 0;
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbLicenseResponse) BYTE **ppLicenseResponse,
+            /* [out] */ __RPC__out DWORD *pcbLicenseResponse) = 0;
         
     };
     
@@ -3103,8 +2759,7 @@ EXTERN_C const IID IID_IMFDRMNetHelper;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMFDRMNetHelper * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3119,24 +2774,17 @@ EXTERN_C const IID IID_IMFDRMNetHelper;
         DECLSPEC_XFGVIRT(IMFDRMNetHelper, ProcessLicenseRequest)
         HRESULT ( STDMETHODCALLTYPE *ProcessLicenseRequest )( 
             __RPC__in IMFDRMNetHelper * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cbLicenseRequest)  BYTE *pLicenseRequest,
-            /* [annotation][in] */ 
-            _In_  DWORD cbLicenseRequest,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcbLicenseResponse)  BYTE **ppLicenseResponse,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcbLicenseResponse,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrKID);
+            /* [size_is][in] */ __RPC__in_ecount_full(cbLicenseRequest) BYTE *pLicenseRequest,
+            /* [in] */ DWORD cbLicenseRequest,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbLicenseResponse) BYTE **ppLicenseResponse,
+            /* [out] */ __RPC__out DWORD *pcbLicenseResponse,
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrKID);
         
         DECLSPEC_XFGVIRT(IMFDRMNetHelper, GetChainedLicenseResponse)
         HRESULT ( STDMETHODCALLTYPE *GetChainedLicenseResponse )( 
             __RPC__in IMFDRMNetHelper * This,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pcbLicenseResponse)  BYTE **ppLicenseResponse,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pcbLicenseResponse);
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcbLicenseResponse) BYTE **ppLicenseResponse,
+            /* [out] */ __RPC__out DWORD *pcbLicenseResponse);
         
         END_INTERFACE
     } IMFDRMNetHelperVtbl;

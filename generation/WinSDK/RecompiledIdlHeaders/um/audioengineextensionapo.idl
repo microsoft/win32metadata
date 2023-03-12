@@ -111,6 +111,16 @@ typedef enum APO_NOTIFICATION_TYPE
 
     // Audio system effects property change notifications for an endpoint.
     APO_NOTIFICATION_TYPE_SYSTEM_EFFECTS_PROPERTY_CHANGE = 3,
+
+    // Endpoint volume notifications for an endpoint that includes master and channel volume in dB.
+    APO_NOTIFICATION_TYPE_ENDPOINT_VOLUME2 = 4,
+    
+    // Orientation notifications for the device.
+    APO_NOTIFICATION_TYPE_DEVICE_ORIENTATION = 5,
+
+    // Microphone boost notifications
+    APO_NOTIFICATION_TYPE_MICROPHONE_BOOST = 6
+
 } APO_NOTIFICATION_TYPE;
 
 // When an endpoint volume changes, the OS will send an object with the following structure to the APOs that are interested in volume change notifications.
@@ -148,6 +158,90 @@ typedef struct AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION
     PROPERTYKEY propertyKey;
 } AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION;
 
+typedef struct AUDIO_VOLUME_NOTIFICATION_DATA2
+{
+    PAUDIO_VOLUME_NOTIFICATION_DATA notificationData;
+
+    // Specifies the current master volume level of the audio stream in dB.
+    float masterVolumeInDb;
+
+    // The minimum volume level of the endpoint in decibels. This value remains constant for the lifetime of
+    // audio device specified in AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR.
+    float volumeMinInDb;
+
+    // The maximum volume level of the endpoint in decibels. This value remains constant for the lifetime of
+    // the audio device specified in AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR.
+    float volumeMaxInDb;
+
+    // The volume increment in decibels. This increment remains constant for the lifetime 
+    // the audio device specified in AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR.
+    float volumeIncrementInDb;
+
+    // Current step in the volume range. Is a value in the range from 0 to stepCount-1, where 0 represents
+    // the minimum volume level and stepCount–1 represents the maximum level. Audio applications can call the
+    // IAudioEndpointVolume::VolumeStepUp and IAudioEndpointVolume::VolumeStepDown methods to increase or
+    // decrease the volume level by one interval.
+    UINT  step;
+
+    // The number of steps in the volume range. This number remains constant for the lifetime of
+    // the audio device specified in AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR.
+    UINT  stepCount;
+
+    // The first element in an array of channel volumes in dB. This element contains the current volume level
+    // of channel 0 in the audio stream. If the audio stream contains more than one channel, the volume 
+    // levels for the additional channels immediately follow the AUDIO_VOLUME_NOTIFICATION_DATA2 structure.
+    float channelVolumesInDb[ 1 ];
+} AUDIO_VOLUME_NOTIFICATION_DATA2, *PAUDIO_VOLUME_NOTIFICATION_DATA2;
+
+typedef struct AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2
+{
+    IMMDevice* endpoint;
+    PAUDIO_VOLUME_NOTIFICATION_DATA2 volume;
+} AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2;
+
+typedef enum DEVICE_ORIENTATION_TYPE
+{
+    DEVICE_NOT_ROTATED,
+    DEVICE_ROTATED_90_DEGREES_CLOCKWISE,
+    DEVICE_ROTATED_180_DEGREES_CLOCKWISE,
+    DEVICE_ROTATED_270_DEGREES_CLOCKWISE
+}DEVICE_ORIENTATION_TYPE;
+
+typedef struct AUDIO_MICROPHONE_BOOST_NOTIFICATION
+{
+    // Device associated with mic boost notification.
+    IMMDevice* endpoint;
+
+    // Context associated with the originator of the event. A client can use this method to keep track of
+    // control changes made by other processes and by the hardware. The functions IAudioVolumeLevel::SetLevel
+    // and IAudioMute::SetMute use the context. When this notification is recieved, a client can inspect the
+    // context GUID to discover whether it or another client is the source of the notification.
+    GUID eventContext; 
+    
+    // Indicates the presence of a "Microphone Boost" part (connector or subunit) of an audio capture device
+    // topology.
+    BOOL microphoneBoostEnabled;
+
+    // The volume level in decibels.
+    float levelInDb;
+
+    // The minimum volume level in decibels.
+    float levelMinInDb;
+
+    // The maximum volume level in decibels.
+    float levelMaxInDb;
+
+    // The stepping value between consecutive volume levels in the range levelMinInDb to levelMaxInDb
+    float levelStepInDb;
+
+    // Indicates if the IAudioMute interface is supported by the "Microphone Boost" part of the audio
+    // capture device topology.
+    BOOL muteSupported;
+
+    // The current state (enabled or disabled) of the mute control
+    BOOL mute;
+} AUDIO_MICROPHONE_BOOST_NOTIFICATION;
+
 // This structure is used to describe the type of notification that is sent from the OS to the APO using IAudioProcessingObjectNotifications::HandleNotification.
 typedef struct APO_NOTIFICATION
 {
@@ -162,6 +256,15 @@ typedef struct APO_NOTIFICATION
 
         // Used when type is AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION.
         AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION audioSystemEffectsPropertyChange;
+
+        // Used when type is APO_NOTIFICATION_TYPE_ENDPOINT_VOLUME2.
+        AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2 audioEndpointVolumeChange2;
+
+        // Used when type is APO_NOTIFICATION_TYPE_DEVICE_ORIENTATION.
+        DEVICE_ORIENTATION_TYPE deviceOrientation;
+
+        // Used when type is APO_NOTIFICATION_TYPE_MICROPHONE_BOOST.
+        AUDIO_MICROPHONE_BOOST_NOTIFICATION audioMicrophoneBoostChange;
     } DUMMYUNIONNAME;
 } APO_NOTIFICATION;
 
@@ -184,6 +287,12 @@ typedef struct AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR
     GUID       propertyStoreContext;
 } AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR;
 
+// Used to request microphone boost notifications.
+typedef struct AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR
+{
+    IMMDevice* device;
+} AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR;
+
 //
 // This is the structure provided by the APO to indicate the type of notification it is interested in.
 //
@@ -198,6 +307,8 @@ typedef struct APO_NOTIFICATION_DESCRIPTOR
         AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR audioEndpointPropertyChange;
         // Used for audio system effects property store notifications on a specific endpoint, property context pair.
         AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR audioSystemEffectsPropertyChange;
+        // Used for microphone boost notifications.
+        AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR audioMicrophoneBoost;
     } DUMMYUNIONNAME;
 } APO_NOTIFICATION_DESCRIPTOR;
 
@@ -218,7 +329,21 @@ interface IAudioProcessingObjectNotifications : IUnknown
 
     // This method is invoked by the OS to send notifications to the APO.
     void HandleNotification([in, annotation("_In_")] APO_NOTIFICATION* apoNotification);
-}
+};
+
+[
+    object,
+    uuid(ca2cfbde-a9d6-4eb0-bc95-c4d026b380f0),
+    local
+]
+interface IAudioProcessingObjectNotifications2 : IAudioProcessingObjectNotifications
+{
+    HRESULT GetApoNotificationRegistrationInfo2(
+        APO_NOTIFICATION_TYPE maxApoNotificationTypeSupported,
+        [out, annotation("_Out_writes_(count)")] APO_NOTIFICATION_DESCRIPTOR** apoNotifications,
+        [out, annotation("_Out_")] DWORD* count);
+};
+
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion

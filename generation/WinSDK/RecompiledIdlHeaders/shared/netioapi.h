@@ -425,7 +425,7 @@ typedef struct _MIB_IPINTERFACE_ROW {
     BOOLEAN AdvertiseDefaultRoute;
 
     NL_ROUTER_DISCOVERY_BEHAVIOR RouterDiscoveryBehavior;
-    ULONG DadTransmits;         // DupAddrDetectTransmits in RFC 2462.
+    ULONG DadTransmits;         // DupAddrDetectTransmits in RFC 4862.
     ULONG BaseReachableTime;
     ULONG RetransmitTime;
     ULONG PathMtuDiscoveryTimeout; // Path MTU discovery timeout (in ms).
@@ -3169,6 +3169,8 @@ Return Value:
 #define DNS_INTERFACE_SETTINGS_VERSION1           0x0001
 #define DNS_INTERFACE_SETTINGS_VERSION2           0x0002
 #define DNS_INTERFACE_SETTINGS_VERSION3           0x0003
+#define DNS_INTERFACE_SETTINGS_VERSION4           0x0004
+
 
 #define DNS_SETTING_IPV6                          0x0001
 #define DNS_SETTING_NAMESERVER                    0x0002
@@ -3184,12 +3186,15 @@ Return Value:
 #define DNS_SETTING_SUPPLEMENTAL_SEARCH_LIST      0x0800
 #define DNS_SETTING_DOH                           0x1000
 #define DNS_SETTING_DOH_PROFILE                   0x2000
+#define DNS_SETTING_ENCRYPTED_DNS_ADAPTER_FLAGS   0x4000
+#define DNS_SETTING_DDR                           0x8000
 
 #define DNS_ENABLE_DOH                            0x0001
 #define DNS_DOH_POLICY_NOT_CONFIGURED             0x0004
 #define DNS_DOH_POLICY_DISABLE                    0x0008
 #define DNS_DOH_POLICY_AUTO                       0x0010
 #define DNS_DOH_POLICY_REQUIRED                   0x0020
+#define DNS_ENABLE_DDR                            0x0040
 
 #define DNS_SERVER_PROPERTY_VERSION1              0x0001
 
@@ -3198,6 +3203,10 @@ Return Value:
 #define DNS_DOH_SERVER_SETTINGS_FALLBACK_TO_UDP   0x0004
 
 #define DNS_DOH_AUTO_UPGRADE_SERVER               0x0008
+#define DNS_DOH_SERVER_SETTINGS_ENABLE_DDR        0x0010
+
+#define DNS_DDR_ADAPTER_ENABLE_DOH                0x0001
+#define DNS_DDR_ADAPTER_ENABLE_UDP_FALLBACK       0x0002
 
 typedef struct _DNS_SETTINGS
 {
@@ -3298,6 +3307,27 @@ typedef struct _DNS_INTERFACE_SETTINGS3
     ULONG cProfileServerProperties;
     DNS_SERVER_PROPERTY *ProfileServerProperties;
 } DNS_INTERFACE_SETTINGS3;
+
+typedef struct _DNS_INTERFACE_SETTINGS4
+{
+    ULONG Version;
+    ULONG64 Flags;
+    PWSTR Domain;
+    PWSTR NameServer;
+    PWSTR SearchList;
+    ULONG RegistrationEnabled;
+    ULONG RegisterAdapterName;
+    ULONG EnableLLMNR;
+    ULONG QueryAdapterName;
+    PWSTR ProfileNameServer;
+    ULONG DisableUnconstrainedQueries;
+    PWSTR SupplementalSearchList;
+    ULONG cServerProperties;
+    DNS_SERVER_PROPERTY *ServerProperties;
+    ULONG cProfileServerProperties;
+    DNS_SERVER_PROPERTY *ProfileServerProperties;
+    ULONG EncryptedDnsAdapterFlags;
+} DNS_INTERFACE_SETTINGS4;
 
 NETIOAPI_API
 GetDnsSettings(

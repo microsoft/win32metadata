@@ -3,14 +3,15 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
+#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 475
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +39,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -171,6 +172,83 @@ typedef interface IDirectManipulationAutoScrollBehavior IDirectManipulationAutoS
 typedef interface IDirectManipulationDeferContactService IDirectManipulationDeferContactService;
 
 #endif 	/* __IDirectManipulationDeferContactService_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationSnapPointsInertiaBehavior_FWD_DEFINED__
+#define __IDirectManipulationSnapPointsInertiaBehavior_FWD_DEFINED__
+typedef interface IDirectManipulationSnapPointsInertiaBehavior IDirectManipulationSnapPointsInertiaBehavior;
+
+#endif 	/* __IDirectManipulationSnapPointsInertiaBehavior_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationContent2_FWD_DEFINED__
+#define __IDirectManipulationContent2_FWD_DEFINED__
+typedef interface IDirectManipulationContent2 IDirectManipulationContent2;
+
+#endif 	/* __IDirectManipulationContent2_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationViewport3_FWD_DEFINED__
+#define __IDirectManipulationViewport3_FWD_DEFINED__
+typedef interface IDirectManipulationViewport3 IDirectManipulationViewport3;
+
+#endif 	/* __IDirectManipulationViewport3_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationPrimaryContent2_FWD_DEFINED__
+#define __IDirectManipulationPrimaryContent2_FWD_DEFINED__
+typedef interface IDirectManipulationPrimaryContent2 IDirectManipulationPrimaryContent2;
+
+#endif 	/* __IDirectManipulationPrimaryContent2_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationParametricMotionBehavior_FWD_DEFINED__
+#define __IDirectManipulationParametricMotionBehavior_FWD_DEFINED__
+typedef interface IDirectManipulationParametricMotionBehavior IDirectManipulationParametricMotionBehavior;
+
+#endif 	/* __IDirectManipulationParametricMotionBehavior_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationParametricMotionCurve_FWD_DEFINED__
+#define __IDirectManipulationParametricMotionCurve_FWD_DEFINED__
+typedef interface IDirectManipulationParametricMotionCurve IDirectManipulationParametricMotionCurve;
+
+#endif 	/* __IDirectManipulationParametricMotionCurve_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationParametricRestPointList_FWD_DEFINED__
+#define __IDirectManipulationParametricRestPointList_FWD_DEFINED__
+typedef interface IDirectManipulationParametricRestPointList IDirectManipulationParametricRestPointList;
+
+#endif 	/* __IDirectManipulationParametricRestPointList_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationParametricRestPointBehavior_FWD_DEFINED__
+#define __IDirectManipulationParametricRestPointBehavior_FWD_DEFINED__
+typedef interface IDirectManipulationParametricRestPointBehavior IDirectManipulationParametricRestPointBehavior;
+
+#endif 	/* __IDirectManipulationParametricRestPointBehavior_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationCompositorPartner_FWD_DEFINED__
+#define __IDirectManipulationCompositorPartner_FWD_DEFINED__
+typedef interface IDirectManipulationCompositorPartner IDirectManipulationCompositorPartner;
+
+#endif 	/* __IDirectManipulationCompositorPartner_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationManagerPartner_FWD_DEFINED__
+#define __IDirectManipulationManagerPartner_FWD_DEFINED__
+typedef interface IDirectManipulationManagerPartner IDirectManipulationManagerPartner;
+
+#endif 	/* __IDirectManipulationManagerPartner_FWD_DEFINED__ */
+
+
+#ifndef __IDirectManipulationViewportPartner_FWD_DEFINED__
+#define __IDirectManipulationViewportPartner_FWD_DEFINED__
+typedef interface IDirectManipulationViewportPartner IDirectManipulationViewportPartner;
+
+#endif 	/* __IDirectManipulationViewportPartner_FWD_DEFINED__ */
 
 
 #ifndef __DirectManipulationViewport_FWD_DEFINED__
@@ -492,8 +570,7 @@ EXTERN_C const IID IID_IDirectManipulationManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -657,8 +734,7 @@ EXTERN_C const IID IID_IDirectManipulationManager2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationManager2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -836,8 +912,7 @@ EXTERN_C const IID IID_IDirectManipulationManager3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationManager3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1147,8 +1222,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationViewport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1499,8 +1573,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationViewport2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1885,8 +1958,7 @@ EXTERN_C const IID IID_IDirectManipulationViewportEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationViewportEventHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2038,8 +2110,7 @@ EXTERN_C const IID IID_IDirectManipulationContent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationContent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2254,8 +2325,7 @@ EXTERN_C const IID IID_IDirectManipulationPrimaryContent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationPrimaryContent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2456,8 +2526,7 @@ EXTERN_C const IID IID_IDirectManipulationDragDropEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationDragDropEventHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2570,8 +2639,7 @@ EXTERN_C const IID IID_IDirectManipulationDragDropBehavior;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationDragDropBehavior * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2688,8 +2756,7 @@ EXTERN_C const IID IID_IDirectManipulationInteractionEventHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationInteractionEventHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2781,8 +2848,7 @@ EXTERN_C const IID IID_IDirectManipulationFrameInfoProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationFrameInfoProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2888,8 +2954,7 @@ EXTERN_C const IID IID_IDirectManipulationCompositor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationCompositor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3012,8 +3077,7 @@ EXTERN_C const IID IID_IDirectManipulationCompositor2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationCompositor2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3144,8 +3208,7 @@ EXTERN_C const IID IID_IDirectManipulationUpdateHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationUpdateHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3241,8 +3304,7 @@ EXTERN_C const IID IID_IDirectManipulationUpdateManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationUpdateManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3368,8 +3430,7 @@ EXTERN_C const IID IID_IDirectManipulationAutoScrollBehavior;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationAutoScrollBehavior * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3467,8 +3528,7 @@ EXTERN_C const IID IID_IDirectManipulationDeferContactService;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationDeferContactService * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3549,8 +3609,8 @@ EXTERN_C const IID IID_IDirectManipulationDeferContactService;
 #endif // #if (NTDDI_VERSION > NTDDI_WIN8)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_directmanipulation_0000_0018_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_directmanipulation_0000_0018_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_directmanipulation_0000_0029_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_directmanipulation_0000_0029_v0_0_s_ifspec;
 
 
 #ifndef __DirectManipulation_LIBRARY_DEFINED__
@@ -3611,15 +3671,15 @@ DCompManipulationCompositor;
 #endif
 #endif /* __DirectManipulation_LIBRARY_DEFINED__ */
 
-/* interface __MIDL_itf_directmanipulation_0000_0019 */
+/* interface __MIDL_itf_directmanipulation_0000_0030 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_directmanipulation_0000_0019_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_directmanipulation_0000_0019_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_directmanipulation_0000_0030_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_directmanipulation_0000_0030_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 
@@ -3630,5 +3690,6 @@ extern RPC_IF_HANDLE __MIDL_itf_directmanipulation_0000_0019_v0_0_s_ifspec;
 #endif
 
 #endif
+
 
 

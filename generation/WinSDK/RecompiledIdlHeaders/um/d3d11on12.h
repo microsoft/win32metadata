@@ -1,16 +1,20 @@
+/*-------------------------------------------------------------------------------------
+ *
+ * Copyright (c) Microsoft Corporation
+ *
+ *-------------------------------------------------------------------------------------*/
 
 
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
-/* @@MIDL_FILE_HEADING(  ) */
+ /* File created by MIDL compiler version 8.01.0628 */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +42,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -69,8 +73,8 @@ typedef interface ID3D11On12Device2 ID3D11On12Device2;
 
 
 /* header files for imported files */
-#include "oaidl.h"
-#include "ocidl.h"
+#include "OAIdl.h"
+#include "OCIdl.h"
 #include "d3d11.h"
 #include "d3d12.h"
 
@@ -180,24 +184,18 @@ EXTERN_C const IID IID_ID3D11On12Device;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateWrappedResource( 
-            /* [annotation] */ 
             _In_  IUnknown *pResource12,
-            /* [annotation] */ 
             _In_  const D3D11_RESOURCE_FLAGS *pFlags11,
             D3D12_RESOURCE_STATES InState,
             D3D12_RESOURCE_STATES OutState,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_opt_  void **ppResource11) = 0;
         
         virtual void STDMETHODCALLTYPE ReleaseWrappedResources( 
-            /* [annotation] */ 
             _In_reads_( NumResources )  ID3D11Resource *const *ppResources,
             UINT NumResources) = 0;
         
         virtual void STDMETHODCALLTYPE AcquireWrappedResources( 
-            /* [annotation] */ 
             _In_reads_( NumResources )  ID3D11Resource *const *ppResources,
             UINT NumResources) = 0;
         
@@ -213,9 +211,7 @@ EXTERN_C const IID IID_ID3D11On12Device;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11On12Device * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -229,28 +225,22 @@ EXTERN_C const IID IID_ID3D11On12Device;
         DECLSPEC_XFGVIRT(ID3D11On12Device, CreateWrappedResource)
         HRESULT ( STDMETHODCALLTYPE *CreateWrappedResource )( 
             ID3D11On12Device * This,
-            /* [annotation] */ 
             _In_  IUnknown *pResource12,
-            /* [annotation] */ 
             _In_  const D3D11_RESOURCE_FLAGS *pFlags11,
             D3D12_RESOURCE_STATES InState,
             D3D12_RESOURCE_STATES OutState,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_opt_  void **ppResource11);
         
         DECLSPEC_XFGVIRT(ID3D11On12Device, ReleaseWrappedResources)
         void ( STDMETHODCALLTYPE *ReleaseWrappedResources )( 
             ID3D11On12Device * This,
-            /* [annotation] */ 
             _In_reads_( NumResources )  ID3D11Resource *const *ppResources,
             UINT NumResources);
         
         DECLSPEC_XFGVIRT(ID3D11On12Device, AcquireWrappedResources)
         void ( STDMETHODCALLTYPE *AcquireWrappedResources )( 
             ID3D11On12Device * This,
-            /* [annotation] */ 
             _In_reads_( NumResources )  ID3D11Resource *const *ppResources,
             UINT NumResources);
         
@@ -314,7 +304,6 @@ EXTERN_C const IID IID_ID3D11On12Device1;
     public:
         virtual HRESULT STDMETHODCALLTYPE GetD3D12Device( 
             REFIID riid,
-            /* [annotation] */ 
             _COM_Outptr_  void **ppvDevice) = 0;
         
     };
@@ -329,9 +318,7 @@ EXTERN_C const IID IID_ID3D11On12Device1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11On12Device1 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -345,28 +332,22 @@ EXTERN_C const IID IID_ID3D11On12Device1;
         DECLSPEC_XFGVIRT(ID3D11On12Device, CreateWrappedResource)
         HRESULT ( STDMETHODCALLTYPE *CreateWrappedResource )( 
             ID3D11On12Device1 * This,
-            /* [annotation] */ 
             _In_  IUnknown *pResource12,
-            /* [annotation] */ 
             _In_  const D3D11_RESOURCE_FLAGS *pFlags11,
             D3D12_RESOURCE_STATES InState,
             D3D12_RESOURCE_STATES OutState,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_opt_  void **ppResource11);
         
         DECLSPEC_XFGVIRT(ID3D11On12Device, ReleaseWrappedResources)
         void ( STDMETHODCALLTYPE *ReleaseWrappedResources )( 
             ID3D11On12Device1 * This,
-            /* [annotation] */ 
             _In_reads_( NumResources )  ID3D11Resource *const *ppResources,
             UINT NumResources);
         
         DECLSPEC_XFGVIRT(ID3D11On12Device, AcquireWrappedResources)
         void ( STDMETHODCALLTYPE *AcquireWrappedResources )( 
             ID3D11On12Device1 * This,
-            /* [annotation] */ 
             _In_reads_( NumResources )  ID3D11Resource *const *ppResources,
             UINT NumResources);
         
@@ -374,7 +355,6 @@ EXTERN_C const IID IID_ID3D11On12Device1;
         HRESULT ( STDMETHODCALLTYPE *GetD3D12Device )( 
             ID3D11On12Device1 * This,
             REFIID riid,
-            /* [annotation] */ 
             _COM_Outptr_  void **ppvDevice);
         
         END_INTERFACE
@@ -440,21 +420,15 @@ EXTERN_C const IID IID_ID3D11On12Device2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE UnwrapUnderlyingResource( 
-            /* [annotation] */ 
             _In_  ID3D11Resource *pResource11,
-            /* [annotation] */ 
             _In_  ID3D12CommandQueue *pCommandQueue,
             REFIID riid,
-            /* [annotation] */ 
             _COM_Outptr_  void **ppvResource12) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReturnUnderlyingResource( 
-            /* [annotation] */ 
             _In_  ID3D11Resource *pResource11,
             UINT NumSync,
-            /* [annotation] */ 
             _In_reads_(NumSync)   UINT64 *pSignalValues,
-            /* [annotation] */ 
             _In_reads_(NumSync)   ID3D12Fence **ppFences) = 0;
         
     };
@@ -469,9 +443,7 @@ EXTERN_C const IID IID_ID3D11On12Device2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11On12Device2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_  void **ppvObject);
         
         DECLSPEC_XFGVIRT(IUnknown, AddRef)
@@ -485,28 +457,22 @@ EXTERN_C const IID IID_ID3D11On12Device2;
         DECLSPEC_XFGVIRT(ID3D11On12Device, CreateWrappedResource)
         HRESULT ( STDMETHODCALLTYPE *CreateWrappedResource )( 
             ID3D11On12Device2 * This,
-            /* [annotation] */ 
             _In_  IUnknown *pResource12,
-            /* [annotation] */ 
             _In_  const D3D11_RESOURCE_FLAGS *pFlags11,
             D3D12_RESOURCE_STATES InState,
             D3D12_RESOURCE_STATES OutState,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
+            REFIID riid,
             _COM_Outptr_opt_  void **ppResource11);
         
         DECLSPEC_XFGVIRT(ID3D11On12Device, ReleaseWrappedResources)
         void ( STDMETHODCALLTYPE *ReleaseWrappedResources )( 
             ID3D11On12Device2 * This,
-            /* [annotation] */ 
             _In_reads_( NumResources )  ID3D11Resource *const *ppResources,
             UINT NumResources);
         
         DECLSPEC_XFGVIRT(ID3D11On12Device, AcquireWrappedResources)
         void ( STDMETHODCALLTYPE *AcquireWrappedResources )( 
             ID3D11On12Device2 * This,
-            /* [annotation] */ 
             _In_reads_( NumResources )  ID3D11Resource *const *ppResources,
             UINT NumResources);
         
@@ -514,29 +480,22 @@ EXTERN_C const IID IID_ID3D11On12Device2;
         HRESULT ( STDMETHODCALLTYPE *GetD3D12Device )( 
             ID3D11On12Device2 * This,
             REFIID riid,
-            /* [annotation] */ 
             _COM_Outptr_  void **ppvDevice);
         
         DECLSPEC_XFGVIRT(ID3D11On12Device2, UnwrapUnderlyingResource)
         HRESULT ( STDMETHODCALLTYPE *UnwrapUnderlyingResource )( 
             ID3D11On12Device2 * This,
-            /* [annotation] */ 
             _In_  ID3D11Resource *pResource11,
-            /* [annotation] */ 
             _In_  ID3D12CommandQueue *pCommandQueue,
             REFIID riid,
-            /* [annotation] */ 
             _COM_Outptr_  void **ppvResource12);
         
         DECLSPEC_XFGVIRT(ID3D11On12Device2, ReturnUnderlyingResource)
         HRESULT ( STDMETHODCALLTYPE *ReturnUnderlyingResource )( 
             ID3D11On12Device2 * This,
-            /* [annotation] */ 
             _In_  ID3D11Resource *pResource11,
             UINT NumSync,
-            /* [annotation] */ 
             _In_reads_(NumSync)   UINT64 *pSignalValues,
-            /* [annotation] */ 
             _In_reads_(NumSync)   ID3D12Fence **ppFences);
         
         END_INTERFACE

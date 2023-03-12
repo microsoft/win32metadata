@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -607,94 +607,69 @@ EXTERN_C const IID IID_IDvbSiParser;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkMpeg2Data) = 0;
+            /* [in] */ IUnknown *punkMpeg2Data) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPAT( 
-            /* [annotation][out] */ 
-            _Out_  IPAT **ppPAT) = 0;
+            /* [out] */ IPAT **ppPAT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCAT( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  ICAT **ppCAT) = 0;
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ ICAT **ppCAT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPMT( 
-            /* [annotation][in] */ 
-            _In_  PID pid,
+            /* [in] */ PID pid,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwProgramNumber,
-            /* [annotation][out] */ 
-            _Out_  IPMT **ppPMT) = 0;
+            /* [out] */ IPMT **ppPMT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTSDT( 
-            /* [annotation][out] */ 
-            _Out_  ITSDT **ppTSDT) = 0;
+            /* [out] */ ITSDT **ppTSDT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNIT( 
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwNetworkId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_NIT **ppNIT) = 0;
+            /* [out] */ IDVB_NIT **ppNIT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSDT( 
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwTransportStreamId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SDT **ppSDT) = 0;
+            /* [out] */ IDVB_SDT **ppSDT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEIT( 
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwServiceId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_EIT **ppEIT) = 0;
+            /* [out] */ IDVB_EIT **ppEIT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBAT( 
             /* [annotation][in] */ 
             _In_opt_  WORD *pwBouquetId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_BAT **ppBAT) = 0;
+            /* [out] */ IDVB_BAT **ppBAT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRST( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_RST **ppRST) = 0;
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_RST **ppRST) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetST( 
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_ST **ppST) = 0;
+            /* [in] */ PID pid,
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_ST **ppST) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTDT( 
-            /* [annotation][out] */ 
-            _Out_  IDVB_TDT **ppTDT) = 0;
+            /* [out] */ IDVB_TDT **ppTDT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTOT( 
-            /* [annotation][out] */ 
-            _Out_  IDVB_TOT **ppTOT) = 0;
+            /* [out] */ IDVB_TOT **ppTOT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDIT( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_DIT **ppDIT) = 0;
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_DIT **ppDIT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSIT( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SIT **ppSIT) = 0;
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_SIT **ppSIT) = 0;
         
     };
     
@@ -708,8 +683,7 @@ EXTERN_C const IID IID_IDvbSiParser;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -724,122 +698,97 @@ EXTERN_C const IID IID_IDvbSiParser;
         DECLSPEC_XFGVIRT(IDvbSiParser, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkMpeg2Data);
+            /* [in] */ IUnknown *punkMpeg2Data);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetPAT)
         HRESULT ( STDMETHODCALLTYPE *GetPAT )( 
             IDvbSiParser * This,
-            /* [annotation][out] */ 
-            _Out_  IPAT **ppPAT);
+            /* [out] */ IPAT **ppPAT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetCAT)
         HRESULT ( STDMETHODCALLTYPE *GetCAT )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  ICAT **ppCAT);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ ICAT **ppCAT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetPMT)
         HRESULT ( STDMETHODCALLTYPE *GetPMT )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  PID pid,
+            /* [in] */ PID pid,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwProgramNumber,
-            /* [annotation][out] */ 
-            _Out_  IPMT **ppPMT);
+            /* [out] */ IPMT **ppPMT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetTSDT)
         HRESULT ( STDMETHODCALLTYPE *GetTSDT )( 
             IDvbSiParser * This,
-            /* [annotation][out] */ 
-            _Out_  ITSDT **ppTSDT);
+            /* [out] */ ITSDT **ppTSDT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetNIT)
         HRESULT ( STDMETHODCALLTYPE *GetNIT )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwNetworkId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_NIT **ppNIT);
+            /* [out] */ IDVB_NIT **ppNIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetSDT)
         HRESULT ( STDMETHODCALLTYPE *GetSDT )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwTransportStreamId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SDT **ppSDT);
+            /* [out] */ IDVB_SDT **ppSDT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetEIT)
         HRESULT ( STDMETHODCALLTYPE *GetEIT )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwServiceId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_EIT **ppEIT);
+            /* [out] */ IDVB_EIT **ppEIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetBAT)
         HRESULT ( STDMETHODCALLTYPE *GetBAT )( 
             IDvbSiParser * This,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwBouquetId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_BAT **ppBAT);
+            /* [out] */ IDVB_BAT **ppBAT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetRST)
         HRESULT ( STDMETHODCALLTYPE *GetRST )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_RST **ppRST);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_RST **ppRST);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetST)
         HRESULT ( STDMETHODCALLTYPE *GetST )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_ST **ppST);
+            /* [in] */ PID pid,
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_ST **ppST);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetTDT)
         HRESULT ( STDMETHODCALLTYPE *GetTDT )( 
             IDvbSiParser * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_TDT **ppTDT);
+            /* [out] */ IDVB_TDT **ppTDT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetTOT)
         HRESULT ( STDMETHODCALLTYPE *GetTOT )( 
             IDvbSiParser * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_TOT **ppTOT);
+            /* [out] */ IDVB_TOT **ppTOT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetDIT)
         HRESULT ( STDMETHODCALLTYPE *GetDIT )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_DIT **ppDIT);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_DIT **ppDIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetSIT)
         HRESULT ( STDMETHODCALLTYPE *GetSIT )( 
             IDvbSiParser * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SIT **ppSIT);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_SIT **ppSIT);
         
         END_INTERFACE
     } IDvbSiParserVtbl;
@@ -936,14 +885,12 @@ EXTERN_C const IID IID_IDvbSiParser2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetEIT2( 
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwServiceId,
             /* [annotation][in] */ 
             _In_opt_  BYTE *pbSegment,
-            /* [annotation][out] */ 
-            _Out_  IDVB_EIT2 **ppEIT) = 0;
+            /* [out] */ IDVB_EIT2 **ppEIT) = 0;
         
     };
     
@@ -957,8 +904,7 @@ EXTERN_C const IID IID_IDvbSiParser2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -973,134 +919,107 @@ EXTERN_C const IID IID_IDvbSiParser2;
         DECLSPEC_XFGVIRT(IDvbSiParser, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkMpeg2Data);
+            /* [in] */ IUnknown *punkMpeg2Data);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetPAT)
         HRESULT ( STDMETHODCALLTYPE *GetPAT )( 
             IDvbSiParser2 * This,
-            /* [annotation][out] */ 
-            _Out_  IPAT **ppPAT);
+            /* [out] */ IPAT **ppPAT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetCAT)
         HRESULT ( STDMETHODCALLTYPE *GetCAT )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  ICAT **ppCAT);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ ICAT **ppCAT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetPMT)
         HRESULT ( STDMETHODCALLTYPE *GetPMT )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  PID pid,
+            /* [in] */ PID pid,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwProgramNumber,
-            /* [annotation][out] */ 
-            _Out_  IPMT **ppPMT);
+            /* [out] */ IPMT **ppPMT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetTSDT)
         HRESULT ( STDMETHODCALLTYPE *GetTSDT )( 
             IDvbSiParser2 * This,
-            /* [annotation][out] */ 
-            _Out_  ITSDT **ppTSDT);
+            /* [out] */ ITSDT **ppTSDT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetNIT)
         HRESULT ( STDMETHODCALLTYPE *GetNIT )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwNetworkId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_NIT **ppNIT);
+            /* [out] */ IDVB_NIT **ppNIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetSDT)
         HRESULT ( STDMETHODCALLTYPE *GetSDT )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwTransportStreamId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SDT **ppSDT);
+            /* [out] */ IDVB_SDT **ppSDT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetEIT)
         HRESULT ( STDMETHODCALLTYPE *GetEIT )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwServiceId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_EIT **ppEIT);
+            /* [out] */ IDVB_EIT **ppEIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetBAT)
         HRESULT ( STDMETHODCALLTYPE *GetBAT )( 
             IDvbSiParser2 * This,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwBouquetId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_BAT **ppBAT);
+            /* [out] */ IDVB_BAT **ppBAT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetRST)
         HRESULT ( STDMETHODCALLTYPE *GetRST )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_RST **ppRST);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_RST **ppRST);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetST)
         HRESULT ( STDMETHODCALLTYPE *GetST )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_ST **ppST);
+            /* [in] */ PID pid,
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_ST **ppST);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetTDT)
         HRESULT ( STDMETHODCALLTYPE *GetTDT )( 
             IDvbSiParser2 * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_TDT **ppTDT);
+            /* [out] */ IDVB_TDT **ppTDT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetTOT)
         HRESULT ( STDMETHODCALLTYPE *GetTOT )( 
             IDvbSiParser2 * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_TOT **ppTOT);
+            /* [out] */ IDVB_TOT **ppTOT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetDIT)
         HRESULT ( STDMETHODCALLTYPE *GetDIT )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_DIT **ppDIT);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_DIT **ppDIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetSIT)
         HRESULT ( STDMETHODCALLTYPE *GetSIT )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SIT **ppSIT);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_SIT **ppSIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser2, GetEIT2)
         HRESULT ( STDMETHODCALLTYPE *GetEIT2 )( 
             IDvbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwServiceId,
             /* [annotation][in] */ 
             _In_opt_  BYTE *pbSegment,
-            /* [annotation][out] */ 
-            _Out_  IDVB_EIT2 **ppEIT);
+            /* [out] */ IDVB_EIT2 **ppEIT);
         
         END_INTERFACE
     } IDvbSiParser2Vtbl;
@@ -1201,62 +1120,46 @@ EXTERN_C const IID IID_IIsdbSiParser2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSDT( 
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwTransportStreamId,
-            /* [annotation][out] */ 
-            _Out_  IISDB_SDT **ppSDT) = 0;
+            /* [out] */ IISDB_SDT **ppSDT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBIT( 
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwOriginalNetworkId,
-            /* [annotation][out] */ 
-            _Out_  IISDB_BIT **ppBIT) = 0;
+            /* [out] */ IISDB_BIT **ppBIT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNBIT( 
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwOriginalNetworkId,
-            /* [annotation][out] */ 
-            _Out_  IISDB_NBIT **ppNBIT) = 0;
+            /* [out] */ IISDB_NBIT **ppNBIT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLDT( 
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwOriginalServiceId,
-            /* [annotation][out] */ 
-            _Out_  IISDB_LDT **ppLDT) = 0;
+            /* [out] */ IISDB_LDT **ppLDT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSDTT( 
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwTableIdExt,
-            /* [annotation][out] */ 
-            _Out_  IISDB_SDTT **ppSDTT) = 0;
+            /* [out] */ IISDB_SDTT **ppSDTT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCDT( 
-            /* [annotation][in] */ 
-            _In_  TID tableId,
-            /* [annotation][in] */ 
-            _In_  BYTE bSectionNumber,
+            /* [in] */ TID tableId,
+            /* [in] */ BYTE bSectionNumber,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwDownloadDataId,
-            /* [annotation][out] */ 
-            _Out_  IISDB_CDT **ppCDT) = 0;
+            /* [out] */ IISDB_CDT **ppCDT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEMM( 
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  WORD wTableIdExt,
-            /* [annotation][out] */ 
-            _Out_  IISDB_EMM **ppEMM) = 0;
+            /* [in] */ PID pid,
+            /* [in] */ WORD wTableIdExt,
+            /* [out] */ IISDB_EMM **ppEMM) = 0;
         
     };
     
@@ -1270,8 +1173,7 @@ EXTERN_C const IID IID_IIsdbSiParser2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1286,206 +1188,163 @@ EXTERN_C const IID IID_IIsdbSiParser2;
         DECLSPEC_XFGVIRT(IDvbSiParser, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkMpeg2Data);
+            /* [in] */ IUnknown *punkMpeg2Data);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetPAT)
         HRESULT ( STDMETHODCALLTYPE *GetPAT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][out] */ 
-            _Out_  IPAT **ppPAT);
+            /* [out] */ IPAT **ppPAT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetCAT)
         HRESULT ( STDMETHODCALLTYPE *GetCAT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  ICAT **ppCAT);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ ICAT **ppCAT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetPMT)
         HRESULT ( STDMETHODCALLTYPE *GetPMT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  PID pid,
+            /* [in] */ PID pid,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwProgramNumber,
-            /* [annotation][out] */ 
-            _Out_  IPMT **ppPMT);
+            /* [out] */ IPMT **ppPMT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetTSDT)
         HRESULT ( STDMETHODCALLTYPE *GetTSDT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][out] */ 
-            _Out_  ITSDT **ppTSDT);
+            /* [out] */ ITSDT **ppTSDT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetNIT)
         HRESULT ( STDMETHODCALLTYPE *GetNIT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwNetworkId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_NIT **ppNIT);
+            /* [out] */ IDVB_NIT **ppNIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetSDT)
         HRESULT ( STDMETHODCALLTYPE *GetSDT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwTransportStreamId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SDT **ppSDT);
+            /* [out] */ IDVB_SDT **ppSDT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetEIT)
         HRESULT ( STDMETHODCALLTYPE *GetEIT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwServiceId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_EIT **ppEIT);
+            /* [out] */ IDVB_EIT **ppEIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetBAT)
         HRESULT ( STDMETHODCALLTYPE *GetBAT )( 
             IIsdbSiParser2 * This,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwBouquetId,
-            /* [annotation][out] */ 
-            _Out_  IDVB_BAT **ppBAT);
+            /* [out] */ IDVB_BAT **ppBAT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetRST)
         HRESULT ( STDMETHODCALLTYPE *GetRST )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_RST **ppRST);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_RST **ppRST);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetST)
         HRESULT ( STDMETHODCALLTYPE *GetST )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_ST **ppST);
+            /* [in] */ PID pid,
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_ST **ppST);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetTDT)
         HRESULT ( STDMETHODCALLTYPE *GetTDT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_TDT **ppTDT);
+            /* [out] */ IDVB_TDT **ppTDT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetTOT)
         HRESULT ( STDMETHODCALLTYPE *GetTOT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_TOT **ppTOT);
+            /* [out] */ IDVB_TOT **ppTOT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetDIT)
         HRESULT ( STDMETHODCALLTYPE *GetDIT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_DIT **ppDIT);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_DIT **ppDIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser, GetSIT)
         HRESULT ( STDMETHODCALLTYPE *GetSIT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SIT **ppSIT);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_SIT **ppSIT);
         
         DECLSPEC_XFGVIRT(IDvbSiParser2, GetEIT2)
         HRESULT ( STDMETHODCALLTYPE *GetEIT2 )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwServiceId,
             /* [annotation][in] */ 
             _In_opt_  BYTE *pbSegment,
-            /* [annotation][out] */ 
-            _Out_  IDVB_EIT2 **ppEIT);
+            /* [out] */ IDVB_EIT2 **ppEIT);
         
         DECLSPEC_XFGVIRT(IIsdbSiParser2, GetSDT)
         HRESULT ( STDMETHODCALLTYPE *GetSDT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwTransportStreamId,
-            /* [annotation][out] */ 
-            _Out_  IISDB_SDT **ppSDT);
+            /* [out] */ IISDB_SDT **ppSDT);
         
         DECLSPEC_XFGVIRT(IIsdbSiParser2, GetBIT)
         HRESULT ( STDMETHODCALLTYPE *GetBIT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwOriginalNetworkId,
-            /* [annotation][out] */ 
-            _Out_  IISDB_BIT **ppBIT);
+            /* [out] */ IISDB_BIT **ppBIT);
         
         DECLSPEC_XFGVIRT(IIsdbSiParser2, GetNBIT)
         HRESULT ( STDMETHODCALLTYPE *GetNBIT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwOriginalNetworkId,
-            /* [annotation][out] */ 
-            _Out_  IISDB_NBIT **ppNBIT);
+            /* [out] */ IISDB_NBIT **ppNBIT);
         
         DECLSPEC_XFGVIRT(IIsdbSiParser2, GetLDT)
         HRESULT ( STDMETHODCALLTYPE *GetLDT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwOriginalServiceId,
-            /* [annotation][out] */ 
-            _Out_  IISDB_LDT **ppLDT);
+            /* [out] */ IISDB_LDT **ppLDT);
         
         DECLSPEC_XFGVIRT(IIsdbSiParser2, GetSDTT)
         HRESULT ( STDMETHODCALLTYPE *GetSDTT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
+            /* [in] */ TID tableId,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwTableIdExt,
-            /* [annotation][out] */ 
-            _Out_  IISDB_SDTT **ppSDTT);
+            /* [out] */ IISDB_SDTT **ppSDTT);
         
         DECLSPEC_XFGVIRT(IIsdbSiParser2, GetCDT)
         HRESULT ( STDMETHODCALLTYPE *GetCDT )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  TID tableId,
-            /* [annotation][in] */ 
-            _In_  BYTE bSectionNumber,
+            /* [in] */ TID tableId,
+            /* [in] */ BYTE bSectionNumber,
             /* [annotation][in] */ 
             _In_opt_  WORD *pwDownloadDataId,
-            /* [annotation][out] */ 
-            _Out_  IISDB_CDT **ppCDT);
+            /* [out] */ IISDB_CDT **ppCDT);
         
         DECLSPEC_XFGVIRT(IIsdbSiParser2, GetEMM)
         HRESULT ( STDMETHODCALLTYPE *GetEMM )( 
             IIsdbSiParser2 * This,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  WORD wTableIdExt,
-            /* [annotation][out] */ 
-            _Out_  IISDB_EMM **ppEMM);
+            /* [in] */ PID pid,
+            /* [in] */ WORD wTableIdExt,
+            /* [out] */ IISDB_EMM **ppEMM);
         
         END_INTERFACE
     } IIsdbSiParser2Vtbl;
@@ -1608,94 +1467,68 @@ EXTERN_C const IID IID_IDVB_NIT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNetworkId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfTableDescriptors( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordTransportStreamId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordOriginalNetworkId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfDescriptors( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterForNextTable( 
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable) = 0;
+            /* [in] */ HANDLE hNextTableAvailable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextTable( 
-            /* [annotation][out] */ 
-            _Out_  IDVB_NIT **ppNIT) = 0;
+            /* [out] */ IDVB_NIT **ppNIT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterForWhenCurrent( 
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent) = 0;
+            /* [in] */ HANDLE hNextTableIsCurrent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertNextToCurrent( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionHash( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash) = 0;
+            /* [out] */ DWORD *pdwVersionHash) = 0;
         
     };
     
@@ -1709,8 +1542,7 @@ EXTERN_C const IID IID_IDVB_NIT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1725,116 +1557,91 @@ EXTERN_C const IID IID_IDVB_NIT;
         DECLSPEC_XFGVIRT(IDVB_NIT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IDVB_NIT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkId )( 
             IDVB_NIT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             IDVB_NIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDVB_NIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetRecordTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTransportStreamId )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetRecordOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordOriginalNetworkId )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable);
+            /* [in] */ HANDLE hNextTableAvailable);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             IDVB_NIT * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_NIT **ppNIT);
+            /* [out] */ IDVB_NIT **ppNIT);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             IDVB_NIT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent);
+            /* [in] */ HANDLE hNextTableIsCurrent);
         
         DECLSPEC_XFGVIRT(IDVB_NIT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
@@ -1843,8 +1650,7 @@ EXTERN_C const IID IID_IDVB_NIT;
         DECLSPEC_XFGVIRT(IDVB_NIT, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IDVB_NIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         END_INTERFACE
     } IDVB_NITVtbl;
@@ -1947,98 +1753,70 @@ EXTERN_C const IID IID_IDVB_SDT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransportStreamId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOriginalNetworkId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordServiceId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordEITScheduleFlag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordEITPresentFollowingFlag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordRunningStatus( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordFreeCAMode( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfDescriptors( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterForNextTable( 
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable) = 0;
+            /* [in] */ HANDLE hNextTableAvailable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextTable( 
-            /* [annotation][out] */ 
-            _Out_  IDVB_SDT **ppSDT) = 0;
+            /* [out] */ IDVB_SDT **ppSDT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterForWhenCurrent( 
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent) = 0;
+            /* [in] */ HANDLE hNextTableIsCurrent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertNextToCurrent( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionHash( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash) = 0;
+            /* [out] */ DWORD *pdwVersionHash) = 0;
         
     };
     
@@ -2052,8 +1830,7 @@ EXTERN_C const IID IID_IDVB_SDT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2068,122 +1845,95 @@ EXTERN_C const IID IID_IDVB_SDT;
         DECLSPEC_XFGVIRT(IDVB_SDT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IDVB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetTransportStreamId )( 
             IDVB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalNetworkId )( 
             IDVB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDVB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceId )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordEITScheduleFlag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEITScheduleFlag )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordEITPresentFollowingFlag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEITPresentFollowingFlag )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordRunningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRunningStatus )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordFreeCAMode)
         HRESULT ( STDMETHODCALLTYPE *GetRecordFreeCAMode )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable);
+            /* [in] */ HANDLE hNextTableAvailable);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             IDVB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SDT **ppSDT);
+            /* [out] */ IDVB_SDT **ppSDT);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             IDVB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent);
+            /* [in] */ HANDLE hNextTableIsCurrent);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
@@ -2192,8 +1942,7 @@ EXTERN_C const IID IID_IDVB_SDT;
         DECLSPEC_XFGVIRT(IDVB_SDT, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IDVB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         END_INTERFACE
     } IDVB_SDTVtbl;
@@ -2299,10 +2048,8 @@ EXTERN_C const IID IID_IISDB_SDT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRecordEITUserDefinedFlags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -2316,8 +2063,7 @@ EXTERN_C const IID IID_IISDB_SDT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2332,122 +2078,95 @@ EXTERN_C const IID IID_IISDB_SDT;
         DECLSPEC_XFGVIRT(IDVB_SDT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IISDB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetTransportStreamId )( 
             IISDB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalNetworkId )( 
             IISDB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IISDB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceId )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordEITScheduleFlag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEITScheduleFlag )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordEITPresentFollowingFlag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEITPresentFollowingFlag )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordRunningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRunningStatus )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordFreeCAMode)
         HRESULT ( STDMETHODCALLTYPE *GetRecordFreeCAMode )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable);
+            /* [in] */ HANDLE hNextTableAvailable);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             IISDB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SDT **ppSDT);
+            /* [out] */ IDVB_SDT **ppSDT);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent);
+            /* [in] */ HANDLE hNextTableIsCurrent);
         
         DECLSPEC_XFGVIRT(IDVB_SDT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
@@ -2456,16 +2175,13 @@ EXTERN_C const IID IID_IISDB_SDT;
         DECLSPEC_XFGVIRT(IDVB_SDT, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IISDB_SDT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         DECLSPEC_XFGVIRT(IISDB_SDT, GetRecordEITUserDefinedFlags)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEITUserDefinedFlags )( 
             IISDB_SDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IISDB_SDTVtbl;
@@ -2575,110 +2291,79 @@ EXTERN_C const IID IID_IDVB_EIT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransportStreamId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOriginalNetworkId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSegmentLastSectionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastTableId( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordEventId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordStartTime( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDuration( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DURATION *pmdVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ MPEG_DURATION *pmdVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordRunningStatus( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordFreeCAMode( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfDescriptors( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterForNextTable( 
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable) = 0;
+            /* [in] */ HANDLE hNextTableAvailable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextTable( 
-            /* [annotation][out] */ 
-            _Out_  IDVB_EIT **ppEIT) = 0;
+            /* [out] */ IDVB_EIT **ppEIT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterForWhenCurrent( 
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent) = 0;
+            /* [in] */ HANDLE hNextTableIsCurrent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertNextToCurrent( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionHash( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash) = 0;
+            /* [out] */ DWORD *pdwVersionHash) = 0;
         
     };
     
@@ -2692,8 +2377,7 @@ EXTERN_C const IID IID_IDVB_EIT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2708,140 +2392,110 @@ EXTERN_C const IID IID_IDVB_EIT;
         DECLSPEC_XFGVIRT(IDVB_EIT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IDVB_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetServiceId )( 
             IDVB_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetTransportStreamId )( 
             IDVB_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalNetworkId )( 
             IDVB_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetSegmentLastSectionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSegmentLastSectionNumber )( 
             IDVB_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetLastTableId)
         HRESULT ( STDMETHODCALLTYPE *GetLastTableId )( 
             IDVB_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDVB_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordEventId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEventId )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordStartTime)
         HRESULT ( STDMETHODCALLTYPE *GetRecordStartTime )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordDuration)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDuration )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DURATION *pmdVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ MPEG_DURATION *pmdVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordRunningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRunningStatus )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordFreeCAMode)
         HRESULT ( STDMETHODCALLTYPE *GetRecordFreeCAMode )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable);
+            /* [in] */ HANDLE hNextTableAvailable);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             IDVB_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_EIT **ppEIT);
+            /* [out] */ IDVB_EIT **ppEIT);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             IDVB_EIT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent);
+            /* [in] */ HANDLE hNextTableIsCurrent);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
@@ -2850,8 +2504,7 @@ EXTERN_C const IID IID_IDVB_EIT;
         DECLSPEC_XFGVIRT(IDVB_EIT, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IDVB_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         END_INTERFACE
     } IDVB_EITVtbl;
@@ -2966,16 +2619,12 @@ EXTERN_C const IID IID_IDVB_EIT2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSegmentInfo( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbTid,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbSegment) = 0;
+            /* [out] */ BYTE *pbTid,
+            /* [out] */ BYTE *pbSegment) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordSection( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -2989,8 +2638,7 @@ EXTERN_C const IID IID_IDVB_EIT2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3005,140 +2653,110 @@ EXTERN_C const IID IID_IDVB_EIT2;
         DECLSPEC_XFGVIRT(IDVB_EIT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IDVB_EIT2 * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetServiceId )( 
             IDVB_EIT2 * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetTransportStreamId )( 
             IDVB_EIT2 * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalNetworkId )( 
             IDVB_EIT2 * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetSegmentLastSectionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSegmentLastSectionNumber )( 
             IDVB_EIT2 * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetLastTableId)
         HRESULT ( STDMETHODCALLTYPE *GetLastTableId )( 
             IDVB_EIT2 * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDVB_EIT2 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordEventId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEventId )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordStartTime)
         HRESULT ( STDMETHODCALLTYPE *GetRecordStartTime )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordDuration)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDuration )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DURATION *pmdVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ MPEG_DURATION *pmdVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordRunningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRunningStatus )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordFreeCAMode)
         HRESULT ( STDMETHODCALLTYPE *GetRecordFreeCAMode )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable);
+            /* [in] */ HANDLE hNextTableAvailable);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             IDVB_EIT2 * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_EIT **ppEIT);
+            /* [out] */ IDVB_EIT **ppEIT);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent);
+            /* [in] */ HANDLE hNextTableIsCurrent);
         
         DECLSPEC_XFGVIRT(IDVB_EIT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
@@ -3147,24 +2765,19 @@ EXTERN_C const IID IID_IDVB_EIT2;
         DECLSPEC_XFGVIRT(IDVB_EIT, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IDVB_EIT2 * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         DECLSPEC_XFGVIRT(IDVB_EIT2, GetSegmentInfo)
         HRESULT ( STDMETHODCALLTYPE *GetSegmentInfo )( 
             IDVB_EIT2 * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbTid,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbSegment);
+            /* [out] */ BYTE *pbTid,
+            /* [out] */ BYTE *pbSegment);
         
         DECLSPEC_XFGVIRT(IDVB_EIT2, GetRecordSection)
         HRESULT ( STDMETHODCALLTYPE *GetRecordSection )( 
             IDVB_EIT2 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDVB_EIT2Vtbl;
@@ -3286,88 +2899,63 @@ EXTERN_C const IID IID_IDVB_BAT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBouquetId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfTableDescriptors( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][in] */ 
-            _In_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwIndex,
+            /* [in] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordTransportStreamId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordOriginalNetworkId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfDescriptors( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterForNextTable( 
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable) = 0;
+            /* [in] */ HANDLE hNextTableAvailable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextTable( 
-            /* [annotation][out] */ 
-            _Out_  IDVB_BAT **ppBAT) = 0;
+            /* [out] */ IDVB_BAT **ppBAT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterForWhenCurrent( 
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent) = 0;
+            /* [in] */ HANDLE hNextTableIsCurrent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertNextToCurrent( void) = 0;
         
@@ -3383,8 +2971,7 @@ EXTERN_C const IID IID_IDVB_BAT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3399,116 +2986,91 @@ EXTERN_C const IID IID_IDVB_BAT;
         DECLSPEC_XFGVIRT(IDVB_BAT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IDVB_BAT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetBouquetId)
         HRESULT ( STDMETHODCALLTYPE *GetBouquetId )( 
             IDVB_BAT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             IDVB_BAT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][in] */ 
-            _In_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwIndex,
+            /* [in] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDVB_BAT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetRecordTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTransportStreamId )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetRecordOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordOriginalNetworkId )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable);
+            /* [in] */ HANDLE hNextTableAvailable);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             IDVB_BAT * This,
-            /* [annotation][out] */ 
-            _Out_  IDVB_BAT **ppBAT);
+            /* [out] */ IDVB_BAT **ppBAT);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             IDVB_BAT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent);
+            /* [in] */ HANDLE hNextTableIsCurrent);
         
         DECLSPEC_XFGVIRT(IDVB_BAT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
@@ -3612,42 +3174,30 @@ EXTERN_C const IID IID_IDVB_RST;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList) = 0;
+            /* [in] */ ISectionList *pSectionList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordTransportStreamId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordOriginalNetworkId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordServiceId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordEventId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordRunningStatus( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -3661,8 +3211,7 @@ EXTERN_C const IID IID_IDVB_RST;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_RST * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3677,54 +3226,42 @@ EXTERN_C const IID IID_IDVB_RST;
         DECLSPEC_XFGVIRT(IDVB_RST, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_RST * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList);
+            /* [in] */ ISectionList *pSectionList);
         
         DECLSPEC_XFGVIRT(IDVB_RST, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDVB_RST * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_RST, GetRecordTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTransportStreamId )( 
             IDVB_RST * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_RST, GetRecordOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordOriginalNetworkId )( 
             IDVB_RST * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_RST, GetRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceId )( 
             IDVB_RST * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_RST, GetRecordEventId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEventId )( 
             IDVB_RST * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_RST, GetRecordRunningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRunningStatus )( 
             IDVB_RST * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDVB_RSTVtbl;
@@ -3797,16 +3334,13 @@ EXTERN_C const IID IID_IDVB_ST;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList) = 0;
+            /* [in] */ ISectionList *pSectionList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDataLength( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetData( 
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppData) = 0;
+            /* [out] */ BYTE **ppData) = 0;
         
     };
     
@@ -3820,8 +3354,7 @@ EXTERN_C const IID IID_IDVB_ST;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_ST * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3836,20 +3369,17 @@ EXTERN_C const IID IID_IDVB_ST;
         DECLSPEC_XFGVIRT(IDVB_ST, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_ST * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList);
+            /* [in] */ ISectionList *pSectionList);
         
         DECLSPEC_XFGVIRT(IDVB_ST, GetDataLength)
         HRESULT ( STDMETHODCALLTYPE *GetDataLength )( 
             IDVB_ST * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_ST, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             IDVB_ST * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppData);
+            /* [out] */ BYTE **ppData);
         
         END_INTERFACE
     } IDVB_STVtbl;
@@ -3910,12 +3440,10 @@ EXTERN_C const IID IID_IDVB_TDT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList) = 0;
+            /* [in] */ ISectionList *pSectionList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUTCTime( 
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal) = 0;
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal) = 0;
         
     };
     
@@ -3929,8 +3457,7 @@ EXTERN_C const IID IID_IDVB_TDT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_TDT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3945,14 +3472,12 @@ EXTERN_C const IID IID_IDVB_TDT;
         DECLSPEC_XFGVIRT(IDVB_TDT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_TDT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList);
+            /* [in] */ ISectionList *pSectionList);
         
         DECLSPEC_XFGVIRT(IDVB_TDT, GetUTCTime)
         HRESULT ( STDMETHODCALLTYPE *GetUTCTime )( 
             IDVB_TDT * This,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal);
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal);
         
         END_INTERFACE
     } IDVB_TDTVtbl;
@@ -4010,30 +3535,23 @@ EXTERN_C const IID IID_IDVB_TOT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList) = 0;
+            /* [in] */ ISectionList *pSectionList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUTCTime( 
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal) = 0;
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfTableDescriptors( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
     };
     
@@ -4047,8 +3565,7 @@ EXTERN_C const IID IID_IDVB_TOT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_TOT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4063,38 +3580,31 @@ EXTERN_C const IID IID_IDVB_TOT;
         DECLSPEC_XFGVIRT(IDVB_TOT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_TOT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList);
+            /* [in] */ ISectionList *pSectionList);
         
         DECLSPEC_XFGVIRT(IDVB_TOT, GetUTCTime)
         HRESULT ( STDMETHODCALLTYPE *GetUTCTime )( 
             IDVB_TOT * This,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal);
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal);
         
         DECLSPEC_XFGVIRT(IDVB_TOT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             IDVB_TOT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_TOT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             IDVB_TOT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_TOT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             IDVB_TOT * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         END_INTERFACE
     } IDVB_TOTVtbl;
@@ -4161,12 +3671,10 @@ EXTERN_C const IID IID_IDVB_DIT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList) = 0;
+            /* [in] */ ISectionList *pSectionList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransitionFlag( 
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal) = 0;
+            /* [out] */ BOOL *pfVal) = 0;
         
     };
     
@@ -4180,8 +3688,7 @@ EXTERN_C const IID IID_IDVB_DIT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_DIT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4196,14 +3703,12 @@ EXTERN_C const IID IID_IDVB_DIT;
         DECLSPEC_XFGVIRT(IDVB_DIT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_DIT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList);
+            /* [in] */ ISectionList *pSectionList);
         
         DECLSPEC_XFGVIRT(IDVB_DIT, GetTransitionFlag)
         HRESULT ( STDMETHODCALLTYPE *GetTransitionFlag )( 
             IDVB_DIT * This,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [out] */ BOOL *pfVal);
         
         END_INTERFACE
     } IDVB_DITVtbl;
@@ -4261,86 +3766,61 @@ EXTERN_C const IID IID_IDVB_SIT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfTableDescriptors( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordServiceId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordRunningStatus( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfDescriptors( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterForNextTable( 
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable) = 0;
+            /* [in] */ HANDLE hNextTableAvailable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNextTable( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SIT **ppSIT) = 0;
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_SIT **ppSIT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterForWhenCurrent( 
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent) = 0;
+            /* [in] */ HANDLE hNextTableIsCurrent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertNextToCurrent( void) = 0;
         
@@ -4356,8 +3836,7 @@ EXTERN_C const IID IID_IDVB_SIT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4372,112 +3851,87 @@ EXTERN_C const IID IID_IDVB_SIT;
         DECLSPEC_XFGVIRT(IDVB_SIT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IDVB_SIT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             IDVB_SIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDVB_SIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceId )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetRecordRunningStatus)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRunningStatus )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableAvailable);
+            /* [in] */ HANDLE hNextTableAvailable);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  IDVB_SIT **ppSIT);
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ IDVB_SIT **ppSIT);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             IDVB_SIT * This,
-            /* [annotation][in] */ 
-            _In_  HANDLE hNextTableIsCurrent);
+            /* [in] */ HANDLE hNextTableIsCurrent);
         
         DECLSPEC_XFGVIRT(IDVB_SIT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
@@ -4578,78 +4032,56 @@ EXTERN_C const IID IID_IISDB_BIT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOriginalNetworkId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBroadcastViewPropriety( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfTableDescriptors( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordBroadcasterId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfDescriptors( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionHash( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash) = 0;
+            /* [out] */ DWORD *pdwVersionHash) = 0;
         
     };
     
@@ -4663,8 +4095,7 @@ EXTERN_C const IID IID_IISDB_BIT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISDB_BIT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4679,102 +4110,80 @@ EXTERN_C const IID IID_IISDB_BIT;
         DECLSPEC_XFGVIRT(IISDB_BIT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IISDB_BIT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IISDB_BIT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalNetworkId )( 
             IISDB_BIT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetBroadcastViewPropriety)
         HRESULT ( STDMETHODCALLTYPE *GetBroadcastViewPropriety )( 
             IISDB_BIT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             IISDB_BIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             IISDB_BIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             IISDB_BIT * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IISDB_BIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetRecordBroadcasterId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordBroadcasterId )( 
             IISDB_BIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IISDB_BIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IISDB_BIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IISDB_BIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_BIT, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IISDB_BIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         END_INTERFACE
     } IISDB_BITVtbl;
@@ -4865,92 +4274,64 @@ EXTERN_C const IID IID_IISDB_NBIT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOriginalNetworkId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordInformationId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordInformationType( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptionBodyLocation( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordMessageSectionNumber( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordUserDefined( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordNumberOfKeys( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordKeys( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE **pbKeys) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE **pbKeys) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfDescriptors( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionHash( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash) = 0;
+            /* [out] */ DWORD *pdwVersionHash) = 0;
         
     };
     
@@ -4964,8 +4345,7 @@ EXTERN_C const IID IID_IISDB_NBIT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4980,120 +4360,92 @@ EXTERN_C const IID IID_IISDB_NBIT;
         DECLSPEC_XFGVIRT(IISDB_NBIT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IISDB_NBIT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalNetworkId )( 
             IISDB_NBIT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IISDB_NBIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetRecordInformationId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordInformationId )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetRecordInformationType)
         HRESULT ( STDMETHODCALLTYPE *GetRecordInformationType )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetRecordDescriptionBodyLocation)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptionBodyLocation )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetRecordMessageSectionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordMessageSectionNumber )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetRecordUserDefined)
         HRESULT ( STDMETHODCALLTYPE *GetRecordUserDefined )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetRecordNumberOfKeys)
         HRESULT ( STDMETHODCALLTYPE *GetRecordNumberOfKeys )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetRecordKeys)
         HRESULT ( STDMETHODCALLTYPE *GetRecordKeys )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE **pbKeys);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE **pbKeys);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IISDB_NBIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_NBIT, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IISDB_NBIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         END_INTERFACE
     } IISDB_NBITVtbl;
@@ -5190,64 +4542,46 @@ EXTERN_C const IID IID_IISDB_LDT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOriginalServiceId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransportStreamId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOriginalNetworkId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptionId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfDescriptors( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionHash( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash) = 0;
+            /* [out] */ DWORD *pdwVersionHash) = 0;
         
     };
     
@@ -5261,8 +4595,7 @@ EXTERN_C const IID IID_IISDB_LDT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISDB_LDT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5277,84 +4610,66 @@ EXTERN_C const IID IID_IISDB_LDT;
         DECLSPEC_XFGVIRT(IISDB_LDT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IISDB_LDT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IISDB_LDT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IISDB_LDT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_LDT, GetOriginalServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalServiceId )( 
             IISDB_LDT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_LDT, GetTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetTransportStreamId )( 
             IISDB_LDT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_LDT, GetOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalNetworkId )( 
             IISDB_LDT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_LDT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IISDB_LDT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_LDT, GetRecordDescriptionId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptionId )( 
             IISDB_LDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_LDT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IISDB_LDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_LDT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IISDB_LDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_LDT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IISDB_LDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_LDT, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IISDB_LDT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         END_INTERFACE
     } IISDB_LDTVtbl;
@@ -5439,120 +4754,83 @@ EXTERN_C const IID IID_IISDB_SDTT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableIdExt( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransportStreamId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOriginalNetworkId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordGroup( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordTargetVersion( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordNewVersion( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDownloadLevel( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordVersionIndicator( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordScheduleTimeShiftInformation( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfSchedules( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordStartTimeByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDurationByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DURATION *pmdVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ MPEG_DURATION *pmdVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfDescriptors( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionHash( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash) = 0;
+            /* [out] */ DWORD *pdwVersionHash) = 0;
         
     };
     
@@ -5566,8 +4844,7 @@ EXTERN_C const IID IID_IISDB_SDTT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5582,158 +4859,121 @@ EXTERN_C const IID IID_IISDB_SDTT;
         DECLSPEC_XFGVIRT(IISDB_SDTT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IISDB_SDTT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetTableIdExt)
         HRESULT ( STDMETHODCALLTYPE *GetTableIdExt )( 
             IISDB_SDTT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetTransportStreamId )( 
             IISDB_SDTT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalNetworkId )( 
             IISDB_SDTT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetServiceId )( 
             IISDB_SDTT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IISDB_SDTT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordGroup)
         HRESULT ( STDMETHODCALLTYPE *GetRecordGroup )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordTargetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTargetVersion )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordNewVersion)
         HRESULT ( STDMETHODCALLTYPE *GetRecordNewVersion )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordDownloadLevel)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDownloadLevel )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordVersionIndicator)
         HRESULT ( STDMETHODCALLTYPE *GetRecordVersionIndicator )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordScheduleTimeShiftInformation)
         HRESULT ( STDMETHODCALLTYPE *GetRecordScheduleTimeShiftInformation )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordCountOfSchedules)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfSchedules )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordStartTimeByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordStartTimeByIndex )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordDurationByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDurationByIndex )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DURATION *pmdVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ MPEG_DURATION *pmdVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IISDB_SDTT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_SDTT, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IISDB_SDTT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         END_INTERFACE
     } IISDB_SDTTVtbl;
@@ -5845,62 +5085,46 @@ EXTERN_C const IID IID_IISDB_CDT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData,
-            /* [annotation][in] */ 
-            _In_  BYTE bSectionNumber) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData,
+            /* [in] */ BYTE bSectionNumber) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDownloadDataId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSectionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOriginalNetworkId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDataType( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfTableDescriptors( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSizeOfDataModule( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDataModule( 
-            /* [annotation][out] */ 
-            _Out_  BYTE **pbData) = 0;
+            /* [out] */ BYTE **pbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionHash( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash) = 0;
+            /* [out] */ DWORD *pdwVersionHash) = 0;
         
     };
     
@@ -5914,8 +5138,7 @@ EXTERN_C const IID IID_IISDB_CDT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISDB_CDT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5930,84 +5153,68 @@ EXTERN_C const IID IID_IISDB_CDT;
         DECLSPEC_XFGVIRT(IISDB_CDT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IISDB_CDT * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData,
-            /* [annotation][in] */ 
-            _In_  BYTE bSectionNumber);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData,
+            /* [in] */ BYTE bSectionNumber);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IISDB_CDT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetDownloadDataId)
         HRESULT ( STDMETHODCALLTYPE *GetDownloadDataId )( 
             IISDB_CDT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetSectionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSectionNumber )( 
             IISDB_CDT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetOriginalNetworkId)
         HRESULT ( STDMETHODCALLTYPE *GetOriginalNetworkId )( 
             IISDB_CDT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetDataType)
         HRESULT ( STDMETHODCALLTYPE *GetDataType )( 
             IISDB_CDT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             IISDB_CDT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             IISDB_CDT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             IISDB_CDT * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
+            /* [in] */ BYTE bTag,
             /* [annotation][out][in] */ 
             _Inout_opt_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetSizeOfDataModule)
         HRESULT ( STDMETHODCALLTYPE *GetSizeOfDataModule )( 
             IISDB_CDT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetDataModule)
         HRESULT ( STDMETHODCALLTYPE *GetDataModule )( 
             IISDB_CDT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE **pbData);
+            /* [out] */ BYTE **pbData);
         
         DECLSPEC_XFGVIRT(IISDB_CDT, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IISDB_CDT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         END_INTERFACE
     } IISDB_CDTVtbl;
@@ -6095,24 +5302,18 @@ EXTERN_C const IID IID_IISDB_EMM;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData) = 0;
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableIdExtension( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDataBytes( 
-            /* [annotation][out][in] */ 
-            _Inout_  WORD *pwBufferLength,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuffer) = 0;
+            /* [out][in] */ WORD *pwBufferLength,
+            /* [out] */ BYTE *pbBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSharedEmmMessage( 
             WORD *pwLength,
@@ -6124,8 +5325,7 @@ EXTERN_C const IID IID_IISDB_EMM;
             BYTE **ppbMessage) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionHash( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash) = 0;
+            /* [out] */ DWORD *pdwVersionHash) = 0;
         
     };
     
@@ -6139,8 +5339,7 @@ EXTERN_C const IID IID_IISDB_EMM;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISDB_EMM * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6155,30 +5354,24 @@ EXTERN_C const IID IID_IISDB_EMM;
         DECLSPEC_XFGVIRT(IISDB_EMM, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IISDB_EMM * This,
-            /* [annotation][in] */ 
-            _In_  ISectionList *pSectionList,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMPEGData);
+            /* [in] */ ISectionList *pSectionList,
+            /* [in] */ IMpeg2Data *pMPEGData);
         
         DECLSPEC_XFGVIRT(IISDB_EMM, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IISDB_EMM * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IISDB_EMM, GetTableIdExtension)
         HRESULT ( STDMETHODCALLTYPE *GetTableIdExtension )( 
             IISDB_EMM * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IISDB_EMM, GetDataBytes)
         HRESULT ( STDMETHODCALLTYPE *GetDataBytes )( 
             IISDB_EMM * This,
-            /* [annotation][out][in] */ 
-            _Inout_  WORD *pwBufferLength,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuffer);
+            /* [out][in] */ WORD *pwBufferLength,
+            /* [out] */ BYTE *pbBuffer);
         
         DECLSPEC_XFGVIRT(IISDB_EMM, GetSharedEmmMessage)
         HRESULT ( STDMETHODCALLTYPE *GetSharedEmmMessage )( 
@@ -6196,8 +5389,7 @@ EXTERN_C const IID IID_IISDB_EMM;
         DECLSPEC_XFGVIRT(IISDB_EMM, GetVersionHash)
         HRESULT ( STDMETHODCALLTYPE *GetVersionHash )( 
             IISDB_EMM * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVersionHash);
+            /* [out] */ DWORD *pdwVersionHash);
         
         END_INTERFACE
     } IISDB_EMMVtbl;
@@ -6270,34 +5462,25 @@ EXTERN_C const IID IID_IDvbServiceAttributeDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordServiceId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordNumericSelectionFlag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BOOL *pfVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordVisibleServiceFlag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BOOL *pfVal) = 0;
         
     };
     
@@ -6311,8 +5494,7 @@ EXTERN_C const IID IID_IDvbServiceAttributeDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbServiceAttributeDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6327,44 +5509,35 @@ EXTERN_C const IID IID_IDvbServiceAttributeDescriptor;
         DECLSPEC_XFGVIRT(IDvbServiceAttributeDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbServiceAttributeDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceAttributeDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbServiceAttributeDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceAttributeDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbServiceAttributeDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceAttributeDescriptor, GetRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceId )( 
             IDvbServiceAttributeDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceAttributeDescriptor, GetRecordNumericSelectionFlag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordNumericSelectionFlag )( 
             IDvbServiceAttributeDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceAttributeDescriptor, GetRecordVisibleServiceFlag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordVisibleServiceFlag )( 
             IDvbServiceAttributeDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BOOL *pfVal);
         
         END_INTERFACE
     } IDvbServiceAttributeDescriptorVtbl;
@@ -6451,28 +5624,20 @@ EXTERN_C const IID IID_IDvbContentIdentifierDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCrid( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbType,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbLocation,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbLength,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pbLength)  BYTE **ppbBytes) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbType,
+            /* [out] */ BYTE *pbLocation,
+            /* [out] */ BYTE *pbLength,
+            /* [size_is][size_is][out] */ BYTE **ppbBytes) = 0;
         
     };
     
@@ -6486,8 +5651,7 @@ EXTERN_C const IID IID_IDvbContentIdentifierDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbContentIdentifierDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6502,34 +5666,26 @@ EXTERN_C const IID IID_IDvbContentIdentifierDescriptor;
         DECLSPEC_XFGVIRT(IDvbContentIdentifierDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbContentIdentifierDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbContentIdentifierDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbContentIdentifierDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbContentIdentifierDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbContentIdentifierDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbContentIdentifierDescriptor, GetRecordCrid)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCrid )( 
             IDvbContentIdentifierDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbType,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbLocation,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbLength,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pbLength)  BYTE **ppbBytes);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbType,
+            /* [out] */ BYTE *pbLocation,
+            /* [out] */ BYTE *pbLength,
+            /* [size_is][size_is][out] */ BYTE **ppbBytes);
         
         END_INTERFACE
     } IDvbContentIdentifierDescriptorVtbl;
@@ -6593,18 +5749,14 @@ EXTERN_C const IID IID_IDvbDefaultAuthorityDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDefaultAuthority( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbLength,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pbLength)  BYTE **ppbBytes) = 0;
+            /* [out] */ BYTE *pbLength,
+            /* [size_is][size_is][out] */ BYTE **ppbBytes) = 0;
         
     };
     
@@ -6618,8 +5770,7 @@ EXTERN_C const IID IID_IDvbDefaultAuthorityDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbDefaultAuthorityDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6634,22 +5785,18 @@ EXTERN_C const IID IID_IDvbDefaultAuthorityDescriptor;
         DECLSPEC_XFGVIRT(IDvbDefaultAuthorityDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbDefaultAuthorityDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbDefaultAuthorityDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbDefaultAuthorityDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbDefaultAuthorityDescriptor, GetDefaultAuthority)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultAuthority )( 
             IDvbDefaultAuthorityDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbLength,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*pbLength)  BYTE **ppbBytes);
+            /* [out] */ BYTE *pbLength,
+            /* [size_is][size_is][out] */ BYTE **ppbBytes);
         
         END_INTERFACE
     } IDvbDefaultAuthorityDescriptorVtbl;
@@ -6710,40 +5857,31 @@ EXTERN_C const IID IID_IDvbSatelliteDeliverySystemDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFrequency( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOrbitalPosition( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetWestEastFlag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPolarization( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetModulation( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSymbolRate( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFECInner( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -6757,8 +5895,7 @@ EXTERN_C const IID IID_IDvbSatelliteDeliverySystemDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbSatelliteDeliverySystemDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6773,56 +5910,47 @@ EXTERN_C const IID IID_IDvbSatelliteDeliverySystemDescriptor;
         DECLSPEC_XFGVIRT(IDvbSatelliteDeliverySystemDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbSatelliteDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbSatelliteDeliverySystemDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbSatelliteDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbSatelliteDeliverySystemDescriptor, GetFrequency)
         HRESULT ( STDMETHODCALLTYPE *GetFrequency )( 
             IDvbSatelliteDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDvbSatelliteDeliverySystemDescriptor, GetOrbitalPosition)
         HRESULT ( STDMETHODCALLTYPE *GetOrbitalPosition )( 
             IDvbSatelliteDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbSatelliteDeliverySystemDescriptor, GetWestEastFlag)
         HRESULT ( STDMETHODCALLTYPE *GetWestEastFlag )( 
             IDvbSatelliteDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbSatelliteDeliverySystemDescriptor, GetPolarization)
         HRESULT ( STDMETHODCALLTYPE *GetPolarization )( 
             IDvbSatelliteDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbSatelliteDeliverySystemDescriptor, GetModulation)
         HRESULT ( STDMETHODCALLTYPE *GetModulation )( 
             IDvbSatelliteDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbSatelliteDeliverySystemDescriptor, GetSymbolRate)
         HRESULT ( STDMETHODCALLTYPE *GetSymbolRate )( 
             IDvbSatelliteDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDvbSatelliteDeliverySystemDescriptor, GetFECInner)
         HRESULT ( STDMETHODCALLTYPE *GetFECInner )( 
             IDvbSatelliteDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDvbSatelliteDeliverySystemDescriptorVtbl;
@@ -6901,32 +6029,25 @@ EXTERN_C const IID IID_IDvbCableDeliverySystemDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFrequency( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFECOuter( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetModulation( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSymbolRate( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFECInner( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -6940,8 +6061,7 @@ EXTERN_C const IID IID_IDvbCableDeliverySystemDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbCableDeliverySystemDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6956,44 +6076,37 @@ EXTERN_C const IID IID_IDvbCableDeliverySystemDescriptor;
         DECLSPEC_XFGVIRT(IDvbCableDeliverySystemDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbCableDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbCableDeliverySystemDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbCableDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbCableDeliverySystemDescriptor, GetFrequency)
         HRESULT ( STDMETHODCALLTYPE *GetFrequency )( 
             IDvbCableDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDvbCableDeliverySystemDescriptor, GetFECOuter)
         HRESULT ( STDMETHODCALLTYPE *GetFECOuter )( 
             IDvbCableDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbCableDeliverySystemDescriptor, GetModulation)
         HRESULT ( STDMETHODCALLTYPE *GetModulation )( 
             IDvbCableDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbCableDeliverySystemDescriptor, GetSymbolRate)
         HRESULT ( STDMETHODCALLTYPE *GetSymbolRate )( 
             IDvbCableDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDvbCableDeliverySystemDescriptor, GetFECInner)
         HRESULT ( STDMETHODCALLTYPE *GetFECInner )( 
             IDvbCableDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDvbCableDeliverySystemDescriptorVtbl;
@@ -7066,48 +6179,37 @@ EXTERN_C const IID IID_IDvbTerrestrialDeliverySystemDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCentreFrequency( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBandwidth( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConstellation( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHierarchyInformation( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodeRateHPStream( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodeRateLPStream( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGuardInterval( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransmissionMode( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOtherFrequencyFlag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -7121,8 +6223,7 @@ EXTERN_C const IID IID_IDvbTerrestrialDeliverySystemDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7137,68 +6238,57 @@ EXTERN_C const IID IID_IDvbTerrestrialDeliverySystemDescriptor;
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetCentreFrequency)
         HRESULT ( STDMETHODCALLTYPE *GetCentreFrequency )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetBandwidth)
         HRESULT ( STDMETHODCALLTYPE *GetBandwidth )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetConstellation)
         HRESULT ( STDMETHODCALLTYPE *GetConstellation )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetHierarchyInformation)
         HRESULT ( STDMETHODCALLTYPE *GetHierarchyInformation )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetCodeRateHPStream)
         HRESULT ( STDMETHODCALLTYPE *GetCodeRateHPStream )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetCodeRateLPStream)
         HRESULT ( STDMETHODCALLTYPE *GetCodeRateLPStream )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetGuardInterval)
         HRESULT ( STDMETHODCALLTYPE *GetGuardInterval )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetTransmissionMode)
         HRESULT ( STDMETHODCALLTYPE *GetTransmissionMode )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrialDeliverySystemDescriptor, GetOtherFrequencyFlag)
         HRESULT ( STDMETHODCALLTYPE *GetOtherFrequencyFlag )( 
             IDvbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDvbTerrestrialDeliverySystemDescriptorVtbl;
@@ -7283,56 +6373,43 @@ EXTERN_C const IID IID_IDvbTerrestrial2DeliverySystemDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTagExtension( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCentreFrequency( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPLPId( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetT2SystemId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMultipleInputMode( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBandwidth( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGuardInterval( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransmissionMode( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCellId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOtherFrequencyFlag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTFSFlag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -7346,8 +6423,7 @@ EXTERN_C const IID IID_IDvbTerrestrial2DeliverySystemDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7362,80 +6438,67 @@ EXTERN_C const IID IID_IDvbTerrestrial2DeliverySystemDescriptor;
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetTagExtension)
         HRESULT ( STDMETHODCALLTYPE *GetTagExtension )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetCentreFrequency)
         HRESULT ( STDMETHODCALLTYPE *GetCentreFrequency )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetPLPId)
         HRESULT ( STDMETHODCALLTYPE *GetPLPId )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetT2SystemId)
         HRESULT ( STDMETHODCALLTYPE *GetT2SystemId )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetMultipleInputMode)
         HRESULT ( STDMETHODCALLTYPE *GetMultipleInputMode )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetBandwidth)
         HRESULT ( STDMETHODCALLTYPE *GetBandwidth )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetGuardInterval)
         HRESULT ( STDMETHODCALLTYPE *GetGuardInterval )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetTransmissionMode)
         HRESULT ( STDMETHODCALLTYPE *GetTransmissionMode )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetCellId)
         HRESULT ( STDMETHODCALLTYPE *GetCellId )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetOtherFrequencyFlag)
         HRESULT ( STDMETHODCALLTYPE *GetOtherFrequencyFlag )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTerrestrial2DeliverySystemDescriptor, GetTFSFlag)
         HRESULT ( STDMETHODCALLTYPE *GetTFSFlag )( 
             IDvbTerrestrial2DeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDvbTerrestrial2DeliverySystemDescriptorVtbl;
@@ -7526,26 +6589,20 @@ EXTERN_C const IID IID_IDvbFrequencyListDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCodingType( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCentreFrequency( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
     };
     
@@ -7559,8 +6616,7 @@ EXTERN_C const IID IID_IDvbFrequencyListDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbFrequencyListDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7575,34 +6631,28 @@ EXTERN_C const IID IID_IDvbFrequencyListDescriptor;
         DECLSPEC_XFGVIRT(IDvbFrequencyListDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbFrequencyListDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbFrequencyListDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbFrequencyListDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbFrequencyListDescriptor, GetCodingType)
         HRESULT ( STDMETHODCALLTYPE *GetCodingType )( 
             IDvbFrequencyListDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbFrequencyListDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbFrequencyListDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbFrequencyListDescriptor, GetRecordCentreFrequency)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCentreFrequency )( 
             IDvbFrequencyListDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         END_INTERFACE
     } IDvbFrequencyListDescriptorVtbl;
@@ -7669,16 +6719,13 @@ EXTERN_C const IID IID_IDvbPrivateDataSpecifierDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPrivateDataSpecifier( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
     };
     
@@ -7692,8 +6739,7 @@ EXTERN_C const IID IID_IDvbPrivateDataSpecifierDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbPrivateDataSpecifierDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7708,20 +6754,17 @@ EXTERN_C const IID IID_IDvbPrivateDataSpecifierDescriptor;
         DECLSPEC_XFGVIRT(IDvbPrivateDataSpecifierDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbPrivateDataSpecifierDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbPrivateDataSpecifierDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbPrivateDataSpecifierDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbPrivateDataSpecifierDescriptor, GetPrivateDataSpecifier)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateDataSpecifier )( 
             IDvbPrivateDataSpecifierDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         END_INTERFACE
     } IDvbPrivateDataSpecifierDescriptorVtbl;
@@ -7782,28 +6825,21 @@ EXTERN_C const IID IID_IDvbLogicalChannelDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordServiceId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordLogicalChannelNumber( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
     };
     
@@ -7817,8 +6853,7 @@ EXTERN_C const IID IID_IDvbLogicalChannelDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbLogicalChannelDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7833,36 +6868,29 @@ EXTERN_C const IID IID_IDvbLogicalChannelDescriptor;
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbLogicalChannelDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbLogicalChannelDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbLogicalChannelDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceId )( 
             IDvbLogicalChannelDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetRecordLogicalChannelNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordLogicalChannelNumber )( 
             IDvbLogicalChannelDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         END_INTERFACE
     } IDvbLogicalChannelDescriptorVtbl;
@@ -7929,10 +6957,8 @@ EXTERN_C const IID IID_IDvbLogicalChannelDescriptor2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetRecordLogicalChannelAndVisibility( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
     };
     
@@ -7946,8 +6972,7 @@ EXTERN_C const IID IID_IDvbLogicalChannelDescriptor2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbLogicalChannelDescriptor2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7962,44 +6987,35 @@ EXTERN_C const IID IID_IDvbLogicalChannelDescriptor2;
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbLogicalChannelDescriptor2 * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbLogicalChannelDescriptor2 * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbLogicalChannelDescriptor2 * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceId )( 
             IDvbLogicalChannelDescriptor2 * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetRecordLogicalChannelNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordLogicalChannelNumber )( 
             IDvbLogicalChannelDescriptor2 * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor2, GetRecordLogicalChannelAndVisibility)
         HRESULT ( STDMETHODCALLTYPE *GetRecordLogicalChannelAndVisibility )( 
             IDvbLogicalChannelDescriptor2 * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         END_INTERFACE
     } IDvbLogicalChannelDescriptor2Vtbl;
@@ -8070,58 +7086,40 @@ EXTERN_C const IID IID_IDvbLogicalChannel2Descriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCountOfLists( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetListId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bListIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetListNameW( 
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ BYTE bListIndex,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetListCountryCode( 
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
+            /* [in] */ BYTE bListIndex,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode) = 0;
+            _Out_writes_(4)  char *pszCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetListCountOfRecords( 
-            /* [annotation][in] */ 
-            _In_  BYTE bChannelListIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bChannelListIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetListRecordServiceId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bListIndex,
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetListRecordLogicalChannelNumber( 
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bListIndex,
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetListRecordLogicalChannelAndVisibility( 
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bListIndex,
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
     };
     
@@ -8135,8 +7133,7 @@ EXTERN_C const IID IID_IDvbLogicalChannel2Descriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8151,114 +7148,87 @@ EXTERN_C const IID IID_IDvbLogicalChannel2Descriptor;
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceId )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetRecordLogicalChannelNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordLogicalChannelNumber )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor2, GetRecordLogicalChannelAndVisibility)
         HRESULT ( STDMETHODCALLTYPE *GetRecordLogicalChannelAndVisibility )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannel2Descriptor, GetCountOfLists)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfLists )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannel2Descriptor, GetListId)
         HRESULT ( STDMETHODCALLTYPE *GetListId )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bListIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannel2Descriptor, GetListNameW)
         HRESULT ( STDMETHODCALLTYPE *GetListNameW )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ BYTE bListIndex,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannel2Descriptor, GetListCountryCode)
         HRESULT ( STDMETHODCALLTYPE *GetListCountryCode )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
+            /* [in] */ BYTE bListIndex,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode);
+            _Out_writes_(4)  char *pszCode);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannel2Descriptor, GetListCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetListCountOfRecords )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bChannelListIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bChannelListIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannel2Descriptor, GetListRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetListRecordServiceId )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bListIndex,
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannel2Descriptor, GetListRecordLogicalChannelNumber)
         HRESULT ( STDMETHODCALLTYPE *GetListRecordLogicalChannelNumber )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bListIndex,
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannel2Descriptor, GetListRecordLogicalChannelAndVisibility)
         HRESULT ( STDMETHODCALLTYPE *GetListRecordLogicalChannelAndVisibility )( 
             IDvbLogicalChannel2Descriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bListIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bListIndex,
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         END_INTERFACE
     } IDvbLogicalChannel2DescriptorVtbl;
@@ -8365,8 +7335,7 @@ EXTERN_C const IID IID_IDvbHDSimulcastLogicalChannelDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbHDSimulcastLogicalChannelDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8381,44 +7350,35 @@ EXTERN_C const IID IID_IDvbHDSimulcastLogicalChannelDescriptor;
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbHDSimulcastLogicalChannelDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbHDSimulcastLogicalChannelDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbHDSimulcastLogicalChannelDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceId )( 
             IDvbHDSimulcastLogicalChannelDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor, GetRecordLogicalChannelNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordLogicalChannelNumber )( 
             IDvbHDSimulcastLogicalChannelDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLogicalChannelDescriptor2, GetRecordLogicalChannelAndVisibility)
         HRESULT ( STDMETHODCALLTYPE *GetRecordLogicalChannelAndVisibility )( 
             IDvbHDSimulcastLogicalChannelDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         END_INTERFACE
     } IDvbHDSimulcastLogicalChannelDescriptorVtbl;
@@ -8490,22 +7450,17 @@ EXTERN_C const IID IID_IDvbDataBroadcastIDDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDataBroadcastID( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIDSelectorBytes( 
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out][in] */ BYTE *pbLen,
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -8519,8 +7474,7 @@ EXTERN_C const IID IID_IDvbDataBroadcastIDDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbDataBroadcastIDDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8535,28 +7489,23 @@ EXTERN_C const IID IID_IDvbDataBroadcastIDDescriptor;
         DECLSPEC_XFGVIRT(IDvbDataBroadcastIDDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbDataBroadcastIDDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastIDDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbDataBroadcastIDDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastIDDescriptor, GetDataBroadcastID)
         HRESULT ( STDMETHODCALLTYPE *GetDataBroadcastID )( 
             IDvbDataBroadcastIDDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastIDDescriptor, GetIDSelectorBytes)
         HRESULT ( STDMETHODCALLTYPE *GetIDSelectorBytes )( 
             IDvbDataBroadcastIDDescriptor * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out][in] */ BYTE *pbLen,
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDvbDataBroadcastIDDescriptorVtbl;
@@ -8620,44 +7569,33 @@ EXTERN_C const IID IID_IDvbDataBroadcastDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDataBroadcastID( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComponentTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSelectorLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSelectorBytes( 
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out][in] */ BYTE *pbLen,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLangID( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulVal) = 0;
+            /* [out] */ ULONG *pulVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out][in] */ BYTE *pbLen,
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -8671,8 +7609,7 @@ EXTERN_C const IID IID_IDvbDataBroadcastDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbDataBroadcastDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8687,60 +7624,49 @@ EXTERN_C const IID IID_IDvbDataBroadcastDescriptor;
         DECLSPEC_XFGVIRT(IDvbDataBroadcastDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbDataBroadcastDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbDataBroadcastDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastDescriptor, GetDataBroadcastID)
         HRESULT ( STDMETHODCALLTYPE *GetDataBroadcastID )( 
             IDvbDataBroadcastDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastDescriptor, GetComponentTag)
         HRESULT ( STDMETHODCALLTYPE *GetComponentTag )( 
             IDvbDataBroadcastDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastDescriptor, GetSelectorLength)
         HRESULT ( STDMETHODCALLTYPE *GetSelectorLength )( 
             IDvbDataBroadcastDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastDescriptor, GetSelectorBytes)
         HRESULT ( STDMETHODCALLTYPE *GetSelectorBytes )( 
             IDvbDataBroadcastDescriptor * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out][in] */ BYTE *pbLen,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastDescriptor, GetLangID)
         HRESULT ( STDMETHODCALLTYPE *GetLangID )( 
             IDvbDataBroadcastDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulVal);
+            /* [out] */ ULONG *pulVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastDescriptor, GetTextLength)
         HRESULT ( STDMETHODCALLTYPE *GetTextLength )( 
             IDvbDataBroadcastDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbDataBroadcastDescriptor, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             IDvbDataBroadcastDescriptor * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out][in] */ BYTE *pbLen,
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDvbDataBroadcastDescriptorVtbl;
@@ -8842,38 +7768,29 @@ EXTERN_C const IID IID_IDvbLinkageDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTSId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetONId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLinkageType( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPrivateDataLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPrivateData( 
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbData) = 0;
+            /* [out][in] */ BYTE *pbLen,
+            /* [out] */ BYTE *pbData) = 0;
         
     };
     
@@ -8887,8 +7804,7 @@ EXTERN_C const IID IID_IDvbLinkageDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbLinkageDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8903,52 +7819,43 @@ EXTERN_C const IID IID_IDvbLinkageDescriptor;
         DECLSPEC_XFGVIRT(IDvbLinkageDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbLinkageDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLinkageDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbLinkageDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLinkageDescriptor, GetTSId)
         HRESULT ( STDMETHODCALLTYPE *GetTSId )( 
             IDvbLinkageDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLinkageDescriptor, GetONId)
         HRESULT ( STDMETHODCALLTYPE *GetONId )( 
             IDvbLinkageDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLinkageDescriptor, GetServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetServiceId )( 
             IDvbLinkageDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbLinkageDescriptor, GetLinkageType)
         HRESULT ( STDMETHODCALLTYPE *GetLinkageType )( 
             IDvbLinkageDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLinkageDescriptor, GetPrivateDataLength)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateDataLength )( 
             IDvbLinkageDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbLinkageDescriptor, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             IDvbLinkageDescriptor * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbLen,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbData);
+            /* [out][in] */ BYTE *pbLen,
+            /* [out] */ BYTE *pbData);
         
         END_INTERFACE
     } IDvbLinkageDescriptorVtbl;
@@ -9024,40 +7931,29 @@ EXTERN_C const IID IID_IDvbTeletextDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordLangId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ ULONG *pulVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordTeletextType( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordMagazineNumber( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordPageNumber( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -9071,8 +7967,7 @@ EXTERN_C const IID IID_IDvbTeletextDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbTeletextDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9087,52 +7982,41 @@ EXTERN_C const IID IID_IDvbTeletextDescriptor;
         DECLSPEC_XFGVIRT(IDvbTeletextDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbTeletextDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTeletextDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbTeletextDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTeletextDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbTeletextDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTeletextDescriptor, GetRecordLangId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordLangId )( 
             IDvbTeletextDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ ULONG *pulVal);
         
         DECLSPEC_XFGVIRT(IDvbTeletextDescriptor, GetRecordTeletextType)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTeletextType )( 
             IDvbTeletextDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTeletextDescriptor, GetRecordMagazineNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordMagazineNumber )( 
             IDvbTeletextDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbTeletextDescriptor, GetRecordPageNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordPageNumber )( 
             IDvbTeletextDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDvbTeletextDescriptorVtbl;
@@ -9205,40 +8089,29 @@ EXTERN_C const IID IID_IDvbSubtitlingDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordLangId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ ULONG *pulVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordSubtitlingType( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCompositionPageID( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordAncillaryPageID( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
     };
     
@@ -9252,8 +8125,7 @@ EXTERN_C const IID IID_IDvbSubtitlingDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbSubtitlingDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9268,52 +8140,41 @@ EXTERN_C const IID IID_IDvbSubtitlingDescriptor;
         DECLSPEC_XFGVIRT(IDvbSubtitlingDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbSubtitlingDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbSubtitlingDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbSubtitlingDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbSubtitlingDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbSubtitlingDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbSubtitlingDescriptor, GetRecordLangId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordLangId )( 
             IDvbSubtitlingDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ ULONG *pulVal);
         
         DECLSPEC_XFGVIRT(IDvbSubtitlingDescriptor, GetRecordSubtitlingType)
         HRESULT ( STDMETHODCALLTYPE *GetRecordSubtitlingType )( 
             IDvbSubtitlingDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbSubtitlingDescriptor, GetRecordCompositionPageID)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCompositionPageID )( 
             IDvbSubtitlingDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbSubtitlingDescriptor, GetRecordAncillaryPageID)
         HRESULT ( STDMETHODCALLTYPE *GetRecordAncillaryPageID )( 
             IDvbSubtitlingDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         END_INTERFACE
     } IDvbSubtitlingDescriptorVtbl;
@@ -9386,20 +8247,17 @@ EXTERN_C const IID IID_IDvbServiceDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceType( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceProviderName( 
             /* [annotation][out] */ 
-            _Outptr_  unsigned char **pszName) = 0;
+            _Outptr_  char **pszName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceProviderNameW( 
             /* [annotation][out] */ 
@@ -9407,15 +8265,13 @@ EXTERN_C const IID IID_IDvbServiceDescriptor;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceName( 
             /* [annotation][out] */ 
-            _Outptr_  unsigned char **pszName) = 0;
+            _Outptr_  char **pszName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProcessedServiceName( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [out] */ BSTR *pbstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceNameEmphasized( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [out] */ BSTR *pbstrName) = 0;
         
     };
     
@@ -9429,8 +8285,7 @@ EXTERN_C const IID IID_IDvbServiceDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbServiceDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9445,26 +8300,23 @@ EXTERN_C const IID IID_IDvbServiceDescriptor;
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbServiceDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbServiceDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetServiceType)
         HRESULT ( STDMETHODCALLTYPE *GetServiceType )( 
             IDvbServiceDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetServiceProviderName)
         HRESULT ( STDMETHODCALLTYPE *GetServiceProviderName )( 
             IDvbServiceDescriptor * This,
             /* [annotation][out] */ 
-            _Outptr_  unsigned char **pszName);
+            _Outptr_  char **pszName);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetServiceProviderNameW)
         HRESULT ( STDMETHODCALLTYPE *GetServiceProviderNameW )( 
@@ -9476,19 +8328,17 @@ EXTERN_C const IID IID_IDvbServiceDescriptor;
         HRESULT ( STDMETHODCALLTYPE *GetServiceName )( 
             IDvbServiceDescriptor * This,
             /* [annotation][out] */ 
-            _Outptr_  unsigned char **pszName);
+            _Outptr_  char **pszName);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetProcessedServiceName)
         HRESULT ( STDMETHODCALLTYPE *GetProcessedServiceName )( 
             IDvbServiceDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [out] */ BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetServiceNameEmphasized)
         HRESULT ( STDMETHODCALLTYPE *GetServiceNameEmphasized )( 
             IDvbServiceDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [out] */ BSTR *pbstrName);
         
         END_INTERFACE
     } IDvbServiceDescriptorVtbl;
@@ -9564,16 +8414,12 @@ EXTERN_C const IID IID_IDvbServiceDescriptor2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetServiceProviderNameW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceNameW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
     };
     
@@ -9587,8 +8433,7 @@ EXTERN_C const IID IID_IDvbServiceDescriptor2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbServiceDescriptor2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9603,26 +8448,23 @@ EXTERN_C const IID IID_IDvbServiceDescriptor2;
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbServiceDescriptor2 * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbServiceDescriptor2 * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetServiceType)
         HRESULT ( STDMETHODCALLTYPE *GetServiceType )( 
             IDvbServiceDescriptor2 * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetServiceProviderName)
         HRESULT ( STDMETHODCALLTYPE *GetServiceProviderName )( 
             IDvbServiceDescriptor2 * This,
             /* [annotation][out] */ 
-            _Outptr_  unsigned char **pszName);
+            _Outptr_  char **pszName);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetServiceProviderNameW)
         HRESULT ( STDMETHODCALLTYPE *GetServiceProviderNameW )( 
@@ -9634,35 +8476,29 @@ EXTERN_C const IID IID_IDvbServiceDescriptor2;
         HRESULT ( STDMETHODCALLTYPE *GetServiceName )( 
             IDvbServiceDescriptor2 * This,
             /* [annotation][out] */ 
-            _Outptr_  unsigned char **pszName);
+            _Outptr_  char **pszName);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetProcessedServiceName)
         HRESULT ( STDMETHODCALLTYPE *GetProcessedServiceName )( 
             IDvbServiceDescriptor2 * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [out] */ BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor, GetServiceNameEmphasized)
         HRESULT ( STDMETHODCALLTYPE *GetServiceNameEmphasized )( 
             IDvbServiceDescriptor2 * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [out] */ BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor2, GetServiceProviderNameW)
         HRESULT ( STDMETHODCALLTYPE *GetServiceProviderNameW )( 
             IDvbServiceDescriptor2 * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDvbServiceDescriptor2, GetServiceNameW)
         HRESULT ( STDMETHODCALLTYPE *GetServiceNameW )( 
             IDvbServiceDescriptor2 * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         END_INTERFACE
     } IDvbServiceDescriptor2Vtbl;
@@ -9745,28 +8581,21 @@ EXTERN_C const IID IID_IDvbServiceListDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordServiceId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordServiceType( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -9780,8 +8609,7 @@ EXTERN_C const IID IID_IDvbServiceListDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbServiceListDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9796,36 +8624,29 @@ EXTERN_C const IID IID_IDvbServiceListDescriptor;
         DECLSPEC_XFGVIRT(IDvbServiceListDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbServiceListDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceListDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbServiceListDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceListDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbServiceListDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceListDescriptor, GetRecordServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceId )( 
             IDvbServiceListDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IDvbServiceListDescriptor, GetRecordServiceType)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceType )( 
             IDvbServiceListDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDvbServiceListDescriptorVtbl;
@@ -9892,38 +8713,27 @@ EXTERN_C const IID IID_IDvbMultilingualServiceNameDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordLangId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  ULONG *ulVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ ULONG *ulVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordServiceProviderNameW( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordServiceNameW( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
     };
     
@@ -9937,8 +8747,7 @@ EXTERN_C const IID IID_IDvbMultilingualServiceNameDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbMultilingualServiceNameDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9953,48 +8762,37 @@ EXTERN_C const IID IID_IDvbMultilingualServiceNameDescriptor;
         DECLSPEC_XFGVIRT(IDvbMultilingualServiceNameDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbMultilingualServiceNameDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbMultilingualServiceNameDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbMultilingualServiceNameDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbMultilingualServiceNameDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbMultilingualServiceNameDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbMultilingualServiceNameDescriptor, GetRecordLangId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordLangId )( 
             IDvbMultilingualServiceNameDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  ULONG *ulVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ ULONG *ulVal);
         
         DECLSPEC_XFGVIRT(IDvbMultilingualServiceNameDescriptor, GetRecordServiceProviderNameW)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceProviderNameW )( 
             IDvbMultilingualServiceNameDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDvbMultilingualServiceNameDescriptor, GetRecordServiceNameW)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceNameW )( 
             IDvbMultilingualServiceNameDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         END_INTERFACE
     } IDvbMultilingualServiceNameDescriptorVtbl;
@@ -10064,22 +8862,18 @@ EXTERN_C const IID IID_IDvbNetworkNameDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNetworkName( 
             /* [annotation][out] */ 
-            _Outptr_  unsigned char **pszName) = 0;
+            _Outptr_  char **pszName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNetworkNameW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
     };
     
@@ -10093,8 +8887,7 @@ EXTERN_C const IID IID_IDvbNetworkNameDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbNetworkNameDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10109,28 +8902,24 @@ EXTERN_C const IID IID_IDvbNetworkNameDescriptor;
         DECLSPEC_XFGVIRT(IDvbNetworkNameDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbNetworkNameDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbNetworkNameDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbNetworkNameDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbNetworkNameDescriptor, GetNetworkName)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkName )( 
             IDvbNetworkNameDescriptor * This,
             /* [annotation][out] */ 
-            _Outptr_  unsigned char **pszName);
+            _Outptr_  char **pszName);
         
         DECLSPEC_XFGVIRT(IDvbNetworkNameDescriptor, GetNetworkNameW)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkNameW )( 
             IDvbNetworkNameDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         END_INTERFACE
     } IDvbNetworkNameDescriptorVtbl;
@@ -10194,28 +8983,22 @@ EXTERN_C const IID IID_IDvbShortEventDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguageCode( 
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode) = 0;
+            _Out_writes_(4)  char *pszCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEventNameW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText) = 0;
         
     };
     
@@ -10229,8 +9012,7 @@ EXTERN_C const IID IID_IDvbShortEventDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbShortEventDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10245,36 +9027,30 @@ EXTERN_C const IID IID_IDvbShortEventDescriptor;
         DECLSPEC_XFGVIRT(IDvbShortEventDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbShortEventDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbShortEventDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbShortEventDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbShortEventDescriptor, GetLanguageCode)
         HRESULT ( STDMETHODCALLTYPE *GetLanguageCode )( 
             IDvbShortEventDescriptor * This,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode);
+            _Out_writes_(4)  char *pszCode);
         
         DECLSPEC_XFGVIRT(IDvbShortEventDescriptor, GetEventNameW)
         HRESULT ( STDMETHODCALLTYPE *GetEventNameW )( 
             IDvbShortEventDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IDvbShortEventDescriptor, GetTextW)
         HRESULT ( STDMETHODCALLTYPE *GetTextW )( 
             IDvbShortEventDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText);
         
         END_INTERFACE
     } IDvbShortEventDescriptorVtbl;
@@ -10341,70 +9117,49 @@ EXTERN_C const IID IID_IDvbExtendedEventDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescriptorNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastDescriptorNumber( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguageCode( 
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode) = 0;
+            _Out_writes_(4)  char *pszCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordItemW( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDesc,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrItem) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrDesc,
+            /* [out] */ BSTR *pbstrItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConcatenatedItemW( 
-            /* [annotation][in] */ 
-            _In_  IDvbExtendedEventDescriptor *pFollowingDescriptor,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDesc,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrItem) = 0;
+            /* [in] */ IDvbExtendedEventDescriptor *pFollowingDescriptor,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrDesc,
+            /* [out] */ BSTR *pbstrItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetConcatenatedTextW( 
-            /* [annotation][in] */ 
-            _In_  IDvbExtendedEventDescriptor *FollowingDescriptor,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText) = 0;
+            /* [in] */ IDvbExtendedEventDescriptor *FollowingDescriptor,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordItemRawBytes( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppbRawItem,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbItemLength) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE **ppbRawItem,
+            /* [out] */ BYTE *pbItemLength) = 0;
         
     };
     
@@ -10418,8 +9173,7 @@ EXTERN_C const IID IID_IDvbExtendedEventDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10434,90 +9188,69 @@ EXTERN_C const IID IID_IDvbExtendedEventDescriptor;
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetDescriptorNumber)
         HRESULT ( STDMETHODCALLTYPE *GetDescriptorNumber )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetLastDescriptorNumber)
         HRESULT ( STDMETHODCALLTYPE *GetLastDescriptorNumber )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetLanguageCode)
         HRESULT ( STDMETHODCALLTYPE *GetLanguageCode )( 
             IDvbExtendedEventDescriptor * This,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode);
+            _Out_writes_(4)  char *pszCode);
         
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetRecordItemW)
         HRESULT ( STDMETHODCALLTYPE *GetRecordItemW )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDesc,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrItem);
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrDesc,
+            /* [out] */ BSTR *pbstrItem);
         
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetConcatenatedItemW)
         HRESULT ( STDMETHODCALLTYPE *GetConcatenatedItemW )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  IDvbExtendedEventDescriptor *pFollowingDescriptor,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrDesc,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrItem);
+            /* [in] */ IDvbExtendedEventDescriptor *pFollowingDescriptor,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrDesc,
+            /* [out] */ BSTR *pbstrItem);
         
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetTextW)
         HRESULT ( STDMETHODCALLTYPE *GetTextW )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText);
         
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetConcatenatedTextW)
         HRESULT ( STDMETHODCALLTYPE *GetConcatenatedTextW )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  IDvbExtendedEventDescriptor *FollowingDescriptor,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText);
+            /* [in] */ IDvbExtendedEventDescriptor *FollowingDescriptor,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText);
         
         DECLSPEC_XFGVIRT(IDvbExtendedEventDescriptor, GetRecordItemRawBytes)
         HRESULT ( STDMETHODCALLTYPE *GetRecordItemRawBytes )( 
             IDvbExtendedEventDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppbRawItem,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbItemLength);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE **ppbRawItem,
+            /* [out] */ BYTE *pbItemLength);
         
         END_INTERFACE
     } IDvbExtendedEventDescriptorVtbl;
@@ -10602,34 +9335,27 @@ EXTERN_C const IID IID_IDvbComponentDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamContent( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComponentType( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComponentTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguageCode( 
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode) = 0;
+            _Out_writes_(4)  char *pszCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText) = 0;
         
     };
     
@@ -10643,8 +9369,7 @@ EXTERN_C const IID IID_IDvbComponentDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbComponentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10659,46 +9384,39 @@ EXTERN_C const IID IID_IDvbComponentDescriptor;
         DECLSPEC_XFGVIRT(IDvbComponentDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbComponentDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbComponentDescriptor, GetStreamContent)
         HRESULT ( STDMETHODCALLTYPE *GetStreamContent )( 
             IDvbComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbComponentDescriptor, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             IDvbComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbComponentDescriptor, GetComponentTag)
         HRESULT ( STDMETHODCALLTYPE *GetComponentTag )( 
             IDvbComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbComponentDescriptor, GetLanguageCode)
         HRESULT ( STDMETHODCALLTYPE *GetLanguageCode )( 
             IDvbComponentDescriptor * This,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode);
+            _Out_writes_(4)  char *pszCode);
         
         DECLSPEC_XFGVIRT(IDvbComponentDescriptor, GetTextW)
         HRESULT ( STDMETHODCALLTYPE *GetTextW )( 
             IDvbComponentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText);
         
         END_INTERFACE
     } IDvbComponentDescriptorVtbl;
@@ -10771,32 +9489,23 @@ EXTERN_C const IID IID_IDvbContentDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordContentNibbles( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbValLevel1,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbValLevel2) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbValLevel1,
+            /* [out] */ BYTE *pbValLevel2) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordUserNibbles( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal1,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal2) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal1,
+            /* [out] */ BYTE *pbVal2) = 0;
         
     };
     
@@ -10810,8 +9519,7 @@ EXTERN_C const IID IID_IDvbContentDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10826,40 +9534,31 @@ EXTERN_C const IID IID_IDvbContentDescriptor;
         DECLSPEC_XFGVIRT(IDvbContentDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbContentDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbContentDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbContentDescriptor, GetRecordContentNibbles)
         HRESULT ( STDMETHODCALLTYPE *GetRecordContentNibbles )( 
             IDvbContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbValLevel1,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbValLevel2);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbValLevel1,
+            /* [out] */ BYTE *pbValLevel2);
         
         DECLSPEC_XFGVIRT(IDvbContentDescriptor, GetRecordUserNibbles)
         HRESULT ( STDMETHODCALLTYPE *GetRecordUserNibbles )( 
             IDvbContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal1,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal2);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal1,
+            /* [out] */ BYTE *pbVal2);
         
         END_INTERFACE
     } IDvbContentDescriptorVtbl;
@@ -10926,24 +9625,19 @@ EXTERN_C const IID IID_IDvbParentalRatingDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordRating( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
+            /* [in] */ BYTE bRecordIndex,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCountryCode,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            _Out_writes_(4)  char *pszCountryCode,
+            /* [out] */ BYTE *pbVal) = 0;
         
     };
     
@@ -10957,8 +9651,7 @@ EXTERN_C const IID IID_IDvbParentalRatingDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDvbParentalRatingDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10973,30 +9666,25 @@ EXTERN_C const IID IID_IDvbParentalRatingDescriptor;
         DECLSPEC_XFGVIRT(IDvbParentalRatingDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDvbParentalRatingDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbParentalRatingDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IDvbParentalRatingDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbParentalRatingDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IDvbParentalRatingDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IDvbParentalRatingDescriptor, GetRecordRating)
         HRESULT ( STDMETHODCALLTYPE *GetRecordRating )( 
             IDvbParentalRatingDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
+            /* [in] */ BYTE bRecordIndex,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCountryCode,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            _Out_writes_(4)  char *pszCountryCode,
+            /* [out] */ BYTE *pbVal);
         
         END_INTERFACE
     } IDvbParentalRatingDescriptorVtbl;
@@ -11060,34 +9748,26 @@ EXTERN_C const IID IID_IIsdbTerrestrialDeliverySystemDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAreaCode( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGuardInterval( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransmissionMode( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordFrequency( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
     };
     
@@ -11101,8 +9781,7 @@ EXTERN_C const IID IID_IIsdbTerrestrialDeliverySystemDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11117,46 +9796,38 @@ EXTERN_C const IID IID_IIsdbTerrestrialDeliverySystemDescriptor;
         DECLSPEC_XFGVIRT(IIsdbTerrestrialDeliverySystemDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTerrestrialDeliverySystemDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTerrestrialDeliverySystemDescriptor, GetAreaCode)
         HRESULT ( STDMETHODCALLTYPE *GetAreaCode )( 
             IIsdbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbTerrestrialDeliverySystemDescriptor, GetGuardInterval)
         HRESULT ( STDMETHODCALLTYPE *GetGuardInterval )( 
             IIsdbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTerrestrialDeliverySystemDescriptor, GetTransmissionMode)
         HRESULT ( STDMETHODCALLTYPE *GetTransmissionMode )( 
             IIsdbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTerrestrialDeliverySystemDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IIsdbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTerrestrialDeliverySystemDescriptor, GetRecordFrequency)
         HRESULT ( STDMETHODCALLTYPE *GetRecordFrequency )( 
             IIsdbTerrestrialDeliverySystemDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         END_INTERFACE
     } IIsdbTerrestrialDeliverySystemDescriptorVtbl;
@@ -11229,46 +9900,33 @@ EXTERN_C const IID IID_IIsdbTSInformationDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRemoteControlKeyId( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTSNameW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordTransmissionTypeInfo( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordNumberOfServices( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordServiceIdByIndex( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bServiceIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pdwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ BYTE bServiceIndex,
+            /* [out] */ WORD *pdwVal) = 0;
         
     };
     
@@ -11282,8 +9940,7 @@ EXTERN_C const IID IID_IIsdbTSInformationDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbTSInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11298,60 +9955,47 @@ EXTERN_C const IID IID_IIsdbTSInformationDescriptor;
         DECLSPEC_XFGVIRT(IIsdbTSInformationDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbTSInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTSInformationDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbTSInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTSInformationDescriptor, GetRemoteControlKeyId)
         HRESULT ( STDMETHODCALLTYPE *GetRemoteControlKeyId )( 
             IIsdbTSInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTSInformationDescriptor, GetTSNameW)
         HRESULT ( STDMETHODCALLTYPE *GetTSNameW )( 
             IIsdbTSInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IIsdbTSInformationDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IIsdbTSInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTSInformationDescriptor, GetRecordTransmissionTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTransmissionTypeInfo )( 
             IIsdbTSInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTSInformationDescriptor, GetRecordNumberOfServices)
         HRESULT ( STDMETHODCALLTYPE *GetRecordNumberOfServices )( 
             IIsdbTSInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbTSInformationDescriptor, GetRecordServiceIdByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordServiceIdByIndex )( 
             IIsdbTSInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bServiceIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pdwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ BYTE bServiceIndex,
+            /* [out] */ WORD *pdwVal);
         
         END_INTERFACE
     } IIsdbTSInformationDescriptorVtbl;
@@ -11427,40 +10071,27 @@ EXTERN_C const IID IID_IIsdbDigitalCopyControlDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCopyControl( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbDigitalRecordingControlData,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbCopyControlType,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbAPSControlData,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbMaximumBitrate) = 0;
+            /* [out] */ BYTE *pbDigitalRecordingControlData,
+            /* [out] */ BYTE *pbCopyControlType,
+            /* [out] */ BYTE *pbAPSControlData,
+            /* [out] */ BYTE *pbMaximumBitrate) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCopyControl( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbComponentTag,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbDigitalRecordingControlData,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbCopyControlType,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbAPSControlData,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbMaximumBitrate) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbComponentTag,
+            /* [out] */ BYTE *pbDigitalRecordingControlData,
+            /* [out] */ BYTE *pbCopyControlType,
+            /* [out] */ BYTE *pbAPSControlData,
+            /* [out] */ BYTE *pbMaximumBitrate) = 0;
         
     };
     
@@ -11474,8 +10105,7 @@ EXTERN_C const IID IID_IIsdbDigitalCopyControlDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbDigitalCopyControlDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11490,48 +10120,35 @@ EXTERN_C const IID IID_IIsdbDigitalCopyControlDescriptor;
         DECLSPEC_XFGVIRT(IIsdbDigitalCopyControlDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbDigitalCopyControlDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDigitalCopyControlDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbDigitalCopyControlDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDigitalCopyControlDescriptor, GetCopyControl)
         HRESULT ( STDMETHODCALLTYPE *GetCopyControl )( 
             IIsdbDigitalCopyControlDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbDigitalRecordingControlData,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbCopyControlType,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbAPSControlData,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbMaximumBitrate);
+            /* [out] */ BYTE *pbDigitalRecordingControlData,
+            /* [out] */ BYTE *pbCopyControlType,
+            /* [out] */ BYTE *pbAPSControlData,
+            /* [out] */ BYTE *pbMaximumBitrate);
         
         DECLSPEC_XFGVIRT(IIsdbDigitalCopyControlDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IIsdbDigitalCopyControlDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDigitalCopyControlDescriptor, GetRecordCopyControl)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCopyControl )( 
             IIsdbDigitalCopyControlDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbComponentTag,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbDigitalRecordingControlData,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbCopyControlType,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbAPSControlData,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbMaximumBitrate);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbComponentTag,
+            /* [out] */ BYTE *pbDigitalRecordingControlData,
+            /* [out] */ BYTE *pbCopyControlType,
+            /* [out] */ BYTE *pbAPSControlData,
+            /* [out] */ BYTE *pbMaximumBitrate);
         
         END_INTERFACE
     } IIsdbDigitalCopyControlDescriptorVtbl;
@@ -11598,62 +10215,49 @@ EXTERN_C const IID IID_IIsdbAudioComponentDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamContent( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComponentType( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComponentTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamType( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSimulcastGroupTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetESMultiLingualFlag( 
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal) = 0;
+            /* [out] */ BOOL *pfVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMainComponentFlag( 
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal) = 0;
+            /* [out] */ BOOL *pfVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetQualityIndicator( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSamplingRate( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguageCode( 
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode) = 0;
+            _Out_writes_(4)  char *pszCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguageCode2( 
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode) = 0;
+            _Out_writes_(4)  char *pszCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText) = 0;
         
     };
     
@@ -11667,8 +10271,7 @@ EXTERN_C const IID IID_IIsdbAudioComponentDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11683,88 +10286,75 @@ EXTERN_C const IID IID_IIsdbAudioComponentDescriptor;
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetStreamContent)
         HRESULT ( STDMETHODCALLTYPE *GetStreamContent )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetComponentType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentType )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetComponentTag)
         HRESULT ( STDMETHODCALLTYPE *GetComponentTag )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetStreamType)
         HRESULT ( STDMETHODCALLTYPE *GetStreamType )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetSimulcastGroupTag)
         HRESULT ( STDMETHODCALLTYPE *GetSimulcastGroupTag )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetESMultiLingualFlag)
         HRESULT ( STDMETHODCALLTYPE *GetESMultiLingualFlag )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetMainComponentFlag)
         HRESULT ( STDMETHODCALLTYPE *GetMainComponentFlag )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfVal);
+            /* [out] */ BOOL *pfVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetQualityIndicator)
         HRESULT ( STDMETHODCALLTYPE *GetQualityIndicator )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetSamplingRate)
         HRESULT ( STDMETHODCALLTYPE *GetSamplingRate )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetLanguageCode)
         HRESULT ( STDMETHODCALLTYPE *GetLanguageCode )( 
             IIsdbAudioComponentDescriptor * This,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode);
+            _Out_writes_(4)  char *pszCode);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetLanguageCode2)
         HRESULT ( STDMETHODCALLTYPE *GetLanguageCode2 )( 
             IIsdbAudioComponentDescriptor * This,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode);
+            _Out_writes_(4)  char *pszCode);
         
         DECLSPEC_XFGVIRT(IIsdbAudioComponentDescriptor, GetTextW)
         HRESULT ( STDMETHODCALLTYPE *GetTextW )( 
             IIsdbAudioComponentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText);
         
         END_INTERFACE
     } IIsdbAudioComponentDescriptorVtbl;
@@ -11858,50 +10448,38 @@ EXTERN_C const IID IID_IIsdbDataContentDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDataComponentId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEntryComponent( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSelectorLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSelectorBytes( 
-            /* [annotation][in] */ 
-            _In_  BYTE bBufLength,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuf) = 0;
+            /* [in] */ BYTE bBufLength,
+            /* [out] */ BYTE *pbBuf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordComponentRef( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguageCode( 
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode) = 0;
+            _Out_writes_(4)  char *pszCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText) = 0;
         
     };
     
@@ -11915,8 +10493,7 @@ EXTERN_C const IID IID_IIsdbDataContentDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbDataContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11931,68 +10508,56 @@ EXTERN_C const IID IID_IIsdbDataContentDescriptor;
         DECLSPEC_XFGVIRT(IIsdbDataContentDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbDataContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDataContentDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbDataContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDataContentDescriptor, GetDataComponentId)
         HRESULT ( STDMETHODCALLTYPE *GetDataComponentId )( 
             IIsdbDataContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbDataContentDescriptor, GetEntryComponent)
         HRESULT ( STDMETHODCALLTYPE *GetEntryComponent )( 
             IIsdbDataContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDataContentDescriptor, GetSelectorLength)
         HRESULT ( STDMETHODCALLTYPE *GetSelectorLength )( 
             IIsdbDataContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDataContentDescriptor, GetSelectorBytes)
         HRESULT ( STDMETHODCALLTYPE *GetSelectorBytes )( 
             IIsdbDataContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bBufLength,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuf);
+            /* [in] */ BYTE bBufLength,
+            /* [out] */ BYTE *pbBuf);
         
         DECLSPEC_XFGVIRT(IIsdbDataContentDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IIsdbDataContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDataContentDescriptor, GetRecordComponentRef)
         HRESULT ( STDMETHODCALLTYPE *GetRecordComponentRef )( 
             IIsdbDataContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDataContentDescriptor, GetLanguageCode)
         HRESULT ( STDMETHODCALLTYPE *GetLanguageCode )( 
             IIsdbDataContentDescriptor * This,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *pszCode);
+            _Out_writes_(4)  char *pszCode);
         
         DECLSPEC_XFGVIRT(IIsdbDataContentDescriptor, GetTextW)
         HRESULT ( STDMETHODCALLTYPE *GetTextW )( 
             IIsdbDataContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText);
         
         END_INTERFACE
     } IIsdbDataContentDescriptorVtbl;
@@ -12074,46 +10639,34 @@ EXTERN_C const IID IID_IIsdbCAContractInformationDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCASystemId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCAUnitId( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordComponentTag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContractVerificationInfoLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContractVerificationInfo( 
-            /* [annotation][in] */ 
-            _In_  BYTE bBufLength,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuf) = 0;
+            /* [in] */ BYTE bBufLength,
+            /* [out] */ BYTE *pbBuf) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFeeNameW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
     };
     
@@ -12127,8 +10680,7 @@ EXTERN_C const IID IID_IIsdbCAContractInformationDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbCAContractInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12143,62 +10695,50 @@ EXTERN_C const IID IID_IIsdbCAContractInformationDescriptor;
         DECLSPEC_XFGVIRT(IIsdbCAContractInformationDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbCAContractInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAContractInformationDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbCAContractInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAContractInformationDescriptor, GetCASystemId)
         HRESULT ( STDMETHODCALLTYPE *GetCASystemId )( 
             IIsdbCAContractInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAContractInformationDescriptor, GetCAUnitId)
         HRESULT ( STDMETHODCALLTYPE *GetCAUnitId )( 
             IIsdbCAContractInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAContractInformationDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IIsdbCAContractInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAContractInformationDescriptor, GetRecordComponentTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordComponentTag )( 
             IIsdbCAContractInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAContractInformationDescriptor, GetContractVerificationInfoLength)
         HRESULT ( STDMETHODCALLTYPE *GetContractVerificationInfoLength )( 
             IIsdbCAContractInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAContractInformationDescriptor, GetContractVerificationInfo)
         HRESULT ( STDMETHODCALLTYPE *GetContractVerificationInfo )( 
             IIsdbCAContractInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bBufLength,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuf);
+            /* [in] */ BYTE bBufLength,
+            /* [out] */ BYTE *pbBuf);
         
         DECLSPEC_XFGVIRT(IIsdbCAContractInformationDescriptor, GetFeeNameW)
         HRESULT ( STDMETHODCALLTYPE *GetFeeNameW )( 
             IIsdbCAContractInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         END_INTERFACE
     } IIsdbCAContractInformationDescriptorVtbl;
@@ -12277,44 +10817,31 @@ EXTERN_C const IID IID_IIsdbEventGroupDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGroupType( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordEvent( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwServiceId,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwEventId) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwServiceId,
+            /* [out] */ WORD *pwEventId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRefRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRefRecordEvent( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwOriginalNetworkId,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwTransportStreamId,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwServiceId,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwEventId) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwOriginalNetworkId,
+            /* [out] */ WORD *pwTransportStreamId,
+            /* [out] */ WORD *pwServiceId,
+            /* [out] */ WORD *pwEventId) = 0;
         
     };
     
@@ -12328,8 +10855,7 @@ EXTERN_C const IID IID_IIsdbEventGroupDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbEventGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12344,56 +10870,43 @@ EXTERN_C const IID IID_IIsdbEventGroupDescriptor;
         DECLSPEC_XFGVIRT(IIsdbEventGroupDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbEventGroupDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbEventGroupDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbEventGroupDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbEventGroupDescriptor, GetGroupType)
         HRESULT ( STDMETHODCALLTYPE *GetGroupType )( 
             IIsdbEventGroupDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbEventGroupDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IIsdbEventGroupDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbEventGroupDescriptor, GetRecordEvent)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEvent )( 
             IIsdbEventGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwServiceId,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwEventId);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwServiceId,
+            /* [out] */ WORD *pwEventId);
         
         DECLSPEC_XFGVIRT(IIsdbEventGroupDescriptor, GetCountOfRefRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRefRecords )( 
             IIsdbEventGroupDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbEventGroupDescriptor, GetRefRecordEvent)
         HRESULT ( STDMETHODCALLTYPE *GetRefRecordEvent )( 
             IIsdbEventGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwOriginalNetworkId,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwTransportStreamId,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwServiceId,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwEventId);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwOriginalNetworkId,
+            /* [out] */ WORD *pwTransportStreamId,
+            /* [out] */ WORD *pwServiceId,
+            /* [out] */ WORD *pwEventId);
         
         END_INTERFACE
     } IIsdbEventGroupDescriptorVtbl;
@@ -12466,72 +10979,49 @@ EXTERN_C const IID IID_IIsdbComponentGroupDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComponentGroupType( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordGroupId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordNumberOfCAUnit( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCAUnitCAUnitId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bCAUnitIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ BYTE bCAUnitIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCAUnitNumberOfComponents( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bCAUnitIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ BYTE bCAUnitIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCAUnitComponentTag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bCAUnitIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bComponentIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ BYTE bCAUnitIndex,
+            /* [in] */ BYTE bComponentIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordTotalBitRate( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordTextW( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText) = 0;
         
     };
     
@@ -12545,8 +11035,7 @@ EXTERN_C const IID IID_IIsdbComponentGroupDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12561,92 +11050,69 @@ EXTERN_C const IID IID_IIsdbComponentGroupDescriptor;
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetComponentGroupType)
         HRESULT ( STDMETHODCALLTYPE *GetComponentGroupType )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetRecordGroupId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordGroupId )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetRecordNumberOfCAUnit)
         HRESULT ( STDMETHODCALLTYPE *GetRecordNumberOfCAUnit )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetRecordCAUnitCAUnitId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCAUnitCAUnitId )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bCAUnitIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ BYTE bCAUnitIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetRecordCAUnitNumberOfComponents)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCAUnitNumberOfComponents )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bCAUnitIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ BYTE bCAUnitIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetRecordCAUnitComponentTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCAUnitComponentTag )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bCAUnitIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bComponentIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ BYTE bCAUnitIndex,
+            /* [in] */ BYTE bComponentIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetRecordTotalBitRate)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTotalBitRate )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbComponentGroupDescriptor, GetRecordTextW)
         HRESULT ( STDMETHODCALLTYPE *GetRecordTextW )( 
             IIsdbComponentGroupDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText);
+            /* [in] */ BYTE bRecordIndex,
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrText);
         
         END_INTERFACE
     } IIsdbComponentGroupDescriptorVtbl;
@@ -12731,44 +11197,33 @@ EXTERN_C const IID IID_IIsdbSeriesDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSeriesId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRepeatLabel( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProgramPattern( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetExpireDate( 
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfValid,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal) = 0;
+            /* [out] */ BOOL *pfValid,
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEpisodeNumber( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastEpisodeNumber( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSeriesNameW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
     };
     
@@ -12782,8 +11237,7 @@ EXTERN_C const IID IID_IIsdbSeriesDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbSeriesDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12798,60 +11252,49 @@ EXTERN_C const IID IID_IIsdbSeriesDescriptor;
         DECLSPEC_XFGVIRT(IIsdbSeriesDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbSeriesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbSeriesDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbSeriesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbSeriesDescriptor, GetSeriesId)
         HRESULT ( STDMETHODCALLTYPE *GetSeriesId )( 
             IIsdbSeriesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbSeriesDescriptor, GetRepeatLabel)
         HRESULT ( STDMETHODCALLTYPE *GetRepeatLabel )( 
             IIsdbSeriesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbSeriesDescriptor, GetProgramPattern)
         HRESULT ( STDMETHODCALLTYPE *GetProgramPattern )( 
             IIsdbSeriesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbSeriesDescriptor, GetExpireDate)
         HRESULT ( STDMETHODCALLTYPE *GetExpireDate )( 
             IIsdbSeriesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfValid,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal);
+            /* [out] */ BOOL *pfValid,
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal);
         
         DECLSPEC_XFGVIRT(IIsdbSeriesDescriptor, GetEpisodeNumber)
         HRESULT ( STDMETHODCALLTYPE *GetEpisodeNumber )( 
             IIsdbSeriesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbSeriesDescriptor, GetLastEpisodeNumber)
         HRESULT ( STDMETHODCALLTYPE *GetLastEpisodeNumber )( 
             IIsdbSeriesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbSeriesDescriptor, GetSeriesNameW)
         HRESULT ( STDMETHODCALLTYPE *GetSeriesNameW )( 
             IIsdbSeriesDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         END_INTERFACE
     } IIsdbSeriesDescriptorVtbl;
@@ -12930,90 +11373,65 @@ EXTERN_C const IID IID_IIsdbDownloadContentDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFlags( 
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfReboot,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfAddOn,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCompatibility,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfModuleInfo,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfTextInfo) = 0;
+            /* [out] */ BOOL *pfReboot,
+            /* [out] */ BOOL *pfAddOn,
+            /* [out] */ BOOL *pfCompatibility,
+            /* [out] */ BOOL *pfModuleInfo,
+            /* [out] */ BOOL *pfTextInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComponentSize( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDownloadId( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTimeOutValueDII( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLeakRate( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetComponentTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompatiblityDescriptorLength( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwLength) = 0;
+            /* [out] */ WORD *pwLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompatiblityDescriptor( 
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppbData) = 0;
+            /* [out] */ BYTE **ppbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordModuleId( 
-            /* [annotation][in] */ 
-            _In_  WORD wRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ WORD wRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordModuleSize( 
-            /* [annotation][in] */ 
-            _In_  WORD wRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ WORD wRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordModuleInfoLength( 
-            /* [annotation][in] */ 
-            _In_  WORD wRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ WORD wRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordModuleInfo( 
-            /* [annotation][in] */ 
-            _In_  WORD wRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppbData) = 0;
+            /* [in] */ WORD wRecordIndex,
+            /* [out] */ BYTE **ppbData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextLanguageCode( 
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *szCode) = 0;
+            _Out_writes_(4)  char *szCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTextW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName) = 0;
         
     };
     
@@ -13027,8 +11445,7 @@ EXTERN_C const IID IID_IIsdbDownloadContentDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13043,122 +11460,97 @@ EXTERN_C const IID IID_IIsdbDownloadContentDescriptor;
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfReboot,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfAddOn,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfCompatibility,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfModuleInfo,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfTextInfo);
+            /* [out] */ BOOL *pfReboot,
+            /* [out] */ BOOL *pfAddOn,
+            /* [out] */ BOOL *pfCompatibility,
+            /* [out] */ BOOL *pfModuleInfo,
+            /* [out] */ BOOL *pfTextInfo);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetComponentSize)
         HRESULT ( STDMETHODCALLTYPE *GetComponentSize )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetDownloadId)
         HRESULT ( STDMETHODCALLTYPE *GetDownloadId )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetTimeOutValueDII)
         HRESULT ( STDMETHODCALLTYPE *GetTimeOutValueDII )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetLeakRate)
         HRESULT ( STDMETHODCALLTYPE *GetLeakRate )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetComponentTag)
         HRESULT ( STDMETHODCALLTYPE *GetComponentTag )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetCompatiblityDescriptorLength)
         HRESULT ( STDMETHODCALLTYPE *GetCompatiblityDescriptorLength )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwLength);
+            /* [out] */ WORD *pwLength);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetCompatiblityDescriptor)
         HRESULT ( STDMETHODCALLTYPE *GetCompatiblityDescriptor )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppbData);
+            /* [out] */ BYTE **ppbData);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetRecordModuleId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordModuleId )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  WORD wRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ WORD wRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetRecordModuleSize)
         HRESULT ( STDMETHODCALLTYPE *GetRecordModuleSize )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  WORD wRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ WORD wRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetRecordModuleInfoLength)
         HRESULT ( STDMETHODCALLTYPE *GetRecordModuleInfoLength )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  WORD wRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ WORD wRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetRecordModuleInfo)
         HRESULT ( STDMETHODCALLTYPE *GetRecordModuleInfo )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  WORD wRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppbData);
+            /* [in] */ WORD wRecordIndex,
+            /* [out] */ BYTE **ppbData);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetTextLanguageCode)
         HRESULT ( STDMETHODCALLTYPE *GetTextLanguageCode )( 
             IIsdbDownloadContentDescriptor * This,
             /* [annotation][out] */ 
-            _Out_writes_(4)  unsigned char *szCode);
+            _Out_writes_(4)  char *szCode);
         
         DECLSPEC_XFGVIRT(IIsdbDownloadContentDescriptor, GetTextW)
         HRESULT ( STDMETHODCALLTYPE *GetTextW )( 
             IIsdbDownloadContentDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrName);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrName);
         
         END_INTERFACE
     } IIsdbDownloadContentDescriptorVtbl;
@@ -13261,34 +11653,26 @@ EXTERN_C const IID IID_IIsdbLogoTransmissionDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLogoTransmissionType( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLogoId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLogoVersion( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDownloadDataId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLogoCharW( 
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrChar) = 0;
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrChar) = 0;
         
     };
     
@@ -13302,8 +11686,7 @@ EXTERN_C const IID IID_IIsdbLogoTransmissionDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbLogoTransmissionDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13318,46 +11701,38 @@ EXTERN_C const IID IID_IIsdbLogoTransmissionDescriptor;
         DECLSPEC_XFGVIRT(IIsdbLogoTransmissionDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbLogoTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbLogoTransmissionDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbLogoTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbLogoTransmissionDescriptor, GetLogoTransmissionType)
         HRESULT ( STDMETHODCALLTYPE *GetLogoTransmissionType )( 
             IIsdbLogoTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbLogoTransmissionDescriptor, GetLogoId)
         HRESULT ( STDMETHODCALLTYPE *GetLogoId )( 
             IIsdbLogoTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbLogoTransmissionDescriptor, GetLogoVersion)
         HRESULT ( STDMETHODCALLTYPE *GetLogoVersion )( 
             IIsdbLogoTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbLogoTransmissionDescriptor, GetDownloadDataId)
         HRESULT ( STDMETHODCALLTYPE *GetDownloadDataId )( 
             IIsdbLogoTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbLogoTransmissionDescriptor, GetLogoCharW)
         HRESULT ( STDMETHODCALLTYPE *GetLogoCharW )( 
             IIsdbLogoTransmissionDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  DVB_STRCONV_MODE convMode,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrChar);
+            /* [in] */ DVB_STRCONV_MODE convMode,
+            /* [out] */ BSTR *pbstrChar);
         
         END_INTERFACE
     } IIsdbLogoTransmissionDescriptorVtbl;
@@ -13430,44 +11805,32 @@ EXTERN_C const IID IID_IIsdbSIParameterDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetParameterVersion( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUpdateTime( 
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE *pVal) = 0;
+            /* [out] */ MPEG_DATE *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordNumberOfTable( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptionLength( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableDescriptionBytes( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbBufferLength,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuffer) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out][in] */ BYTE *pbBufferLength,
+            /* [out] */ BYTE *pbBuffer) = 0;
         
     };
     
@@ -13481,8 +11844,7 @@ EXTERN_C const IID IID_IIsdbSIParameterDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbSIParameterDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13497,58 +11859,46 @@ EXTERN_C const IID IID_IIsdbSIParameterDescriptor;
         DECLSPEC_XFGVIRT(IIsdbSIParameterDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbSIParameterDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbSIParameterDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbSIParameterDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbSIParameterDescriptor, GetParameterVersion)
         HRESULT ( STDMETHODCALLTYPE *GetParameterVersion )( 
             IIsdbSIParameterDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbSIParameterDescriptor, GetUpdateTime)
         HRESULT ( STDMETHODCALLTYPE *GetUpdateTime )( 
             IIsdbSIParameterDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE *pVal);
+            /* [out] */ MPEG_DATE *pVal);
         
         DECLSPEC_XFGVIRT(IIsdbSIParameterDescriptor, GetRecordNumberOfTable)
         HRESULT ( STDMETHODCALLTYPE *GetRecordNumberOfTable )( 
             IIsdbSIParameterDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbSIParameterDescriptor, GetTableId)
         HRESULT ( STDMETHODCALLTYPE *GetTableId )( 
             IIsdbSIParameterDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbSIParameterDescriptor, GetTableDescriptionLength)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptionLength )( 
             IIsdbSIParameterDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbSIParameterDescriptor, GetTableDescriptionBytes)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptionBytes )( 
             IIsdbSIParameterDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbBufferLength,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuffer);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out][in] */ BYTE *pbBufferLength,
+            /* [out] */ BYTE *pbBuffer);
         
         END_INTERFACE
     } IIsdbSIParameterDescriptorVtbl;
@@ -13624,42 +11974,30 @@ EXTERN_C const IID IID_IIsdbEmergencyInformationDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceId( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStartEndFlag( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignalLevel( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAreaCode( 
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD **ppwVal,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbNumAreaCodes) = 0;
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD **ppwVal,
+            /* [out] */ BYTE *pbNumAreaCodes) = 0;
         
     };
     
@@ -13673,8 +12011,7 @@ EXTERN_C const IID IID_IIsdbEmergencyInformationDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbEmergencyInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13689,54 +12026,42 @@ EXTERN_C const IID IID_IIsdbEmergencyInformationDescriptor;
         DECLSPEC_XFGVIRT(IIsdbEmergencyInformationDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbEmergencyInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbEmergencyInformationDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbEmergencyInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbEmergencyInformationDescriptor, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IIsdbEmergencyInformationDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbEmergencyInformationDescriptor, GetServiceId)
         HRESULT ( STDMETHODCALLTYPE *GetServiceId )( 
             IIsdbEmergencyInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbEmergencyInformationDescriptor, GetStartEndFlag)
         HRESULT ( STDMETHODCALLTYPE *GetStartEndFlag )( 
             IIsdbEmergencyInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pVal);
         
         DECLSPEC_XFGVIRT(IIsdbEmergencyInformationDescriptor, GetSignalLevel)
         HRESULT ( STDMETHODCALLTYPE *GetSignalLevel )( 
             IIsdbEmergencyInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbEmergencyInformationDescriptor, GetAreaCode)
         HRESULT ( STDMETHODCALLTYPE *GetAreaCode )( 
             IIsdbEmergencyInformationDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  BYTE bRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  WORD **ppwVal,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbNumAreaCodes);
+            /* [in] */ BYTE bRecordIndex,
+            /* [out] */ WORD **ppwVal,
+            /* [out] */ BYTE *pbNumAreaCodes);
         
         END_INTERFACE
     } IIsdbEmergencyInformationDescriptorVtbl;
@@ -13809,30 +12134,23 @@ EXTERN_C const IID IID_IIsdbCADescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCASystemId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetReservedBits( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCAPID( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPrivateDataBytes( 
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbBufferLength,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuffer) = 0;
+            /* [out][in] */ BYTE *pbBufferLength,
+            /* [out] */ BYTE *pbBuffer) = 0;
         
     };
     
@@ -13846,8 +12164,7 @@ EXTERN_C const IID IID_IIsdbCADescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbCADescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13862,40 +12179,33 @@ EXTERN_C const IID IID_IIsdbCADescriptor;
         DECLSPEC_XFGVIRT(IIsdbCADescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbCADescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCADescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbCADescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCADescriptor, GetCASystemId)
         HRESULT ( STDMETHODCALLTYPE *GetCASystemId )( 
             IIsdbCADescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbCADescriptor, GetReservedBits)
         HRESULT ( STDMETHODCALLTYPE *GetReservedBits )( 
             IIsdbCADescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCADescriptor, GetCAPID)
         HRESULT ( STDMETHODCALLTYPE *GetCAPID )( 
             IIsdbCADescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbCADescriptor, GetPrivateDataBytes)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateDataBytes )( 
             IIsdbCADescriptor * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbBufferLength,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbBuffer);
+            /* [out][in] */ BYTE *pbBufferLength,
+            /* [out] */ BYTE *pbBuffer);
         
         END_INTERFACE
     } IIsdbCADescriptorVtbl;
@@ -13965,30 +12275,23 @@ EXTERN_C const IID IID_IIsdbCAServiceDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCASystemId( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCABroadcasterGroupId( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMessageControl( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceIds( 
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbNumServiceIds,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwServiceIds) = 0;
+            /* [out][in] */ BYTE *pbNumServiceIds,
+            /* [out] */ WORD *pwServiceIds) = 0;
         
     };
     
@@ -14002,8 +12305,7 @@ EXTERN_C const IID IID_IIsdbCAServiceDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbCAServiceDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14018,40 +12320,33 @@ EXTERN_C const IID IID_IIsdbCAServiceDescriptor;
         DECLSPEC_XFGVIRT(IIsdbCAServiceDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbCAServiceDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAServiceDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbCAServiceDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAServiceDescriptor, GetCASystemId)
         HRESULT ( STDMETHODCALLTYPE *GetCASystemId )( 
             IIsdbCAServiceDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAServiceDescriptor, GetCABroadcasterGroupId)
         HRESULT ( STDMETHODCALLTYPE *GetCABroadcasterGroupId )( 
             IIsdbCAServiceDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAServiceDescriptor, GetMessageControl)
         HRESULT ( STDMETHODCALLTYPE *GetMessageControl )( 
             IIsdbCAServiceDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbCAServiceDescriptor, GetServiceIds)
         HRESULT ( STDMETHODCALLTYPE *GetServiceIds )( 
             IIsdbCAServiceDescriptor * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BYTE *pbNumServiceIds,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwServiceIds);
+            /* [out][in] */ BYTE *pbNumServiceIds,
+            /* [out] */ WORD *pwServiceIds);
         
         END_INTERFACE
     } IIsdbCAServiceDescriptorVtbl;
@@ -14121,28 +12416,22 @@ EXTERN_C const IID IID_IIsdbHierarchicalTransmissionDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFutureUse1( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetQualityLevel( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFutureUse2( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetReferencePid( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
     };
     
@@ -14156,8 +12445,7 @@ EXTERN_C const IID IID_IIsdbHierarchicalTransmissionDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsdbHierarchicalTransmissionDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14172,38 +12460,32 @@ EXTERN_C const IID IID_IIsdbHierarchicalTransmissionDescriptor;
         DECLSPEC_XFGVIRT(IIsdbHierarchicalTransmissionDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IIsdbHierarchicalTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbHierarchicalTransmissionDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IIsdbHierarchicalTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbHierarchicalTransmissionDescriptor, GetFutureUse1)
         HRESULT ( STDMETHODCALLTYPE *GetFutureUse1 )( 
             IIsdbHierarchicalTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbHierarchicalTransmissionDescriptor, GetQualityLevel)
         HRESULT ( STDMETHODCALLTYPE *GetQualityLevel )( 
             IIsdbHierarchicalTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbHierarchicalTransmissionDescriptor, GetFutureUse2)
         HRESULT ( STDMETHODCALLTYPE *GetFutureUse2 )( 
             IIsdbHierarchicalTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IIsdbHierarchicalTransmissionDescriptor, GetReferencePid)
         HRESULT ( STDMETHODCALLTYPE *GetReferencePid )( 
             IIsdbHierarchicalTransmissionDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         END_INTERFACE
     } IIsdbHierarchicalTransmissionDescriptorVtbl;
@@ -14287,24 +12569,17 @@ EXTERN_C const IID IID_IPBDASiParser;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *punk) = 0;
+            /* [in] */ IUnknown *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEIT( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwSize,
-            /* [annotation][in] */ 
-            _In_  BYTE *pBuffer,
-            /* [annotation][out] */ 
-            _Out_  IPBDA_EIT **ppEIT) = 0;
+            /* [in] */ DWORD dwSize,
+            /* [in] */ BYTE *pBuffer,
+            /* [out] */ IPBDA_EIT **ppEIT) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServices( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwSize,
-            /* [annotation][in] */ 
-            _In_  const BYTE *pBuffer,
-            /* [annotation][out] */ 
-            _Out_  IPBDA_Services **ppServices) = 0;
+            /* [in] */ DWORD dwSize,
+            /* [in] */ const BYTE *pBuffer,
+            /* [out] */ IPBDA_Services **ppServices) = 0;
         
     };
     
@@ -14318,8 +12593,7 @@ EXTERN_C const IID IID_IPBDASiParser;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPBDASiParser * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14334,28 +12608,21 @@ EXTERN_C const IID IID_IPBDASiParser;
         DECLSPEC_XFGVIRT(IPBDASiParser, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IPBDASiParser * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punk);
+            /* [in] */ IUnknown *punk);
         
         DECLSPEC_XFGVIRT(IPBDASiParser, GetEIT)
         HRESULT ( STDMETHODCALLTYPE *GetEIT )( 
             IPBDASiParser * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSize,
-            /* [annotation][in] */ 
-            _In_  BYTE *pBuffer,
-            /* [annotation][out] */ 
-            _Out_  IPBDA_EIT **ppEIT);
+            /* [in] */ DWORD dwSize,
+            /* [in] */ BYTE *pBuffer,
+            /* [out] */ IPBDA_EIT **ppEIT);
         
         DECLSPEC_XFGVIRT(IPBDASiParser, GetServices)
         HRESULT ( STDMETHODCALLTYPE *GetServices )( 
             IPBDASiParser * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSize,
-            /* [annotation][in] */ 
-            _In_  const BYTE *pBuffer,
-            /* [annotation][out] */ 
-            _Out_  IPBDA_Services **ppServices);
+            /* [in] */ DWORD dwSize,
+            /* [in] */ const BYTE *pBuffer,
+            /* [out] */ IPBDA_Services **ppServices);
         
         END_INTERFACE
     } IPBDASiParserVtbl;
@@ -14416,68 +12683,47 @@ EXTERN_C const IID IID_IPBDA_EIT;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  DWORD size,
-            /* [size_is][annotation][in] */ 
-            _In_  const BYTE *pBuffer) = 0;
+            /* [in] */ DWORD size,
+            /* [size_is][in] */ const BYTE *pBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTableId( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersionNumber( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetServiceIdx( 
-            /* [annotation][out] */ 
-            _Out_  ULONG64 *plwVal) = 0;
+            /* [out] */ ULONG64 *plwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordEventId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  ULONG64 *plwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ ULONG64 *plwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordStartTime( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDuration( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DURATION *pmdVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ MPEG_DURATION *pmdVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordCountOfDescriptors( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordDescriptorByTag( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
+            /* [out][in] */ DWORD *pdwCookie,
+            /* [out] */ IGenericDescriptor **ppDescriptor) = 0;
         
     };
     
@@ -14491,8 +12737,7 @@ EXTERN_C const IID IID_IPBDA_EIT;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPBDA_EIT * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14507,88 +12752,67 @@ EXTERN_C const IID IID_IPBDA_EIT;
         DECLSPEC_XFGVIRT(IPBDA_EIT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IPBDA_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD size,
-            /* [size_is][annotation][in] */ 
-            _In_  const BYTE *pBuffer);
+            /* [in] */ DWORD size,
+            /* [size_is][in] */ const BYTE *pBuffer);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetTableId)
         HRESULT ( STDMETHODCALLTYPE *GetTableId )( 
             IPBDA_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IPBDA_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetServiceIdx)
         HRESULT ( STDMETHODCALLTYPE *GetServiceIdx )( 
             IPBDA_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG64 *plwVal);
+            /* [out] */ ULONG64 *plwVal);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IPBDA_EIT * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetRecordEventId)
         HRESULT ( STDMETHODCALLTYPE *GetRecordEventId )( 
             IPBDA_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  ULONG64 *plwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ ULONG64 *plwVal);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetRecordStartTime)
         HRESULT ( STDMETHODCALLTYPE *GetRecordStartTime )( 
             IPBDA_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DATE_AND_TIME *pmdtVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ MPEG_DATE_AND_TIME *pmdtVal);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetRecordDuration)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDuration )( 
             IPBDA_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  MPEG_DURATION *pmdVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ MPEG_DURATION *pmdVal);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IPBDA_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IPBDA_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwIndex,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ DWORD dwIndex,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         DECLSPEC_XFGVIRT(IPBDA_EIT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IPBDA_EIT * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][in] */ 
-            _In_  BYTE bTag,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwCookie,
-            /* [annotation][out] */ 
-            _Out_  IGenericDescriptor **ppDescriptor);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [in] */ BYTE bTag,
+            /* [out][in] */ DWORD *pdwCookie,
+            /* [out] */ IGenericDescriptor **ppDescriptor);
         
         END_INTERFACE
     } IPBDA_EITVtbl;
@@ -14673,20 +12897,15 @@ EXTERN_C const IID IID_IPBDA_Services;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  DWORD size,
-            /* [size_is][annotation][in] */ 
-            _In_  BYTE *pBuffer) = 0;
+            /* [in] */ DWORD size,
+            /* [size_is][in] */ BYTE *pBuffer) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCountOfRecords( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal) = 0;
+            /* [out] */ DWORD *pdwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRecordByIndex( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  ULONG64 *pul64ServiceIdx) = 0;
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ ULONG64 *pul64ServiceIdx) = 0;
         
     };
     
@@ -14700,8 +12919,7 @@ EXTERN_C const IID IID_IPBDA_Services;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPBDA_Services * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14716,24 +12934,19 @@ EXTERN_C const IID IID_IPBDA_Services;
         DECLSPEC_XFGVIRT(IPBDA_Services, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IPBDA_Services * This,
-            /* [annotation][in] */ 
-            _In_  DWORD size,
-            /* [size_is][annotation][in] */ 
-            _In_  BYTE *pBuffer);
+            /* [in] */ DWORD size,
+            /* [size_is][in] */ BYTE *pBuffer);
         
         DECLSPEC_XFGVIRT(IPBDA_Services, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IPBDA_Services * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwVal);
+            /* [out] */ DWORD *pdwVal);
         
         DECLSPEC_XFGVIRT(IPBDA_Services, GetRecordByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordByIndex )( 
             IPBDA_Services * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRecordIndex,
-            /* [annotation][out] */ 
-            _Out_  ULONG64 *pul64ServiceIdx);
+            /* [in] */ DWORD dwRecordIndex,
+            /* [out] */ ULONG64 *pul64ServiceIdx);
         
         END_INTERFACE
     } IPBDA_ServicesVtbl;
@@ -14794,18 +13007,14 @@ EXTERN_C const IID IID_IPBDAEntitlementDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetToken( 
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppbTokenBuffer,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwTokenLength) = 0;
+            /* [out] */ BYTE **ppbTokenBuffer,
+            /* [out] */ DWORD *pdwTokenLength) = 0;
         
     };
     
@@ -14819,8 +13028,7 @@ EXTERN_C const IID IID_IPBDAEntitlementDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPBDAEntitlementDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14835,22 +13043,18 @@ EXTERN_C const IID IID_IPBDAEntitlementDescriptor;
         DECLSPEC_XFGVIRT(IPBDAEntitlementDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IPBDAEntitlementDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IPBDAEntitlementDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IPBDAEntitlementDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IPBDAEntitlementDescriptor, GetToken)
         HRESULT ( STDMETHODCALLTYPE *GetToken )( 
             IPBDAEntitlementDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppbTokenBuffer,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwTokenLength);
+            /* [out] */ BYTE **ppbTokenBuffer,
+            /* [out] */ DWORD *pdwTokenLength);
         
         END_INTERFACE
     } IPBDAEntitlementDescriptorVtbl;
@@ -14911,18 +13115,14 @@ EXTERN_C const IID IID_IPBDAAttributesDescriptor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTag( 
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal) = 0;
+            /* [out] */ BYTE *pbVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal) = 0;
+            /* [out] */ WORD *pwVal) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAttributePayload( 
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppbAttributeBuffer,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwAttributeLength) = 0;
+            /* [out] */ BYTE **ppbAttributeBuffer,
+            /* [out] */ DWORD *pdwAttributeLength) = 0;
         
     };
     
@@ -14936,8 +13136,7 @@ EXTERN_C const IID IID_IPBDAAttributesDescriptor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPBDAAttributesDescriptor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14952,22 +13151,18 @@ EXTERN_C const IID IID_IPBDAAttributesDescriptor;
         DECLSPEC_XFGVIRT(IPBDAAttributesDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IPBDAAttributesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE *pbVal);
+            /* [out] */ BYTE *pbVal);
         
         DECLSPEC_XFGVIRT(IPBDAAttributesDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IPBDAAttributesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pwVal);
+            /* [out] */ WORD *pwVal);
         
         DECLSPEC_XFGVIRT(IPBDAAttributesDescriptor, GetAttributePayload)
         HRESULT ( STDMETHODCALLTYPE *GetAttributePayload )( 
             IPBDAAttributesDescriptor * This,
-            /* [annotation][out] */ 
-            _Out_  BYTE **ppbAttributeBuffer,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwAttributeLength);
+            /* [out] */ BYTE **ppbAttributeBuffer,
+            /* [out] */ DWORD *pdwAttributeLength);
         
         END_INTERFACE
     } IPBDAAttributesDescriptorVtbl;

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -13784,7 +13784,7 @@ enum CERTENROLL_PROPERTYID
         XCN_CERT_CLR_DELETE_KEY_PROP_ID	= 125,
         XCN_CERT_NOT_BEFORE_FILETIME_PROP_ID	= 126,
         XCN_CERT_CERT_NOT_BEFORE_ENHKEY_USAGE_PROP_ID	= 127,
-        XCN_CERT_FIRST_RESERVED_PROP_ID	= 128,
+        XCN_CERT_FIRST_RESERVED_PROP_ID	= 129,
         XCN_CERT_LAST_RESERVED_PROP_ID	= 0x7fff,
         XCN_CERT_FIRST_USER_PROP_ID	= 0x8000,
         XCN_CERT_LAST_USER_PROP_ID	= 0xffff,

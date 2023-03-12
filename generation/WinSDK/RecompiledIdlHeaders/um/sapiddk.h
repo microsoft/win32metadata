@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -335,32 +335,21 @@ EXTERN_C const IID IID_ISpTokenUI;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE IsUISupported( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszTypeOfUI,
-            /* [annotation][in] */ 
-            _In_  void *pvExtraData,
-            /* [annotation][in] */ 
-            _In_  ULONG cbExtraData,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkObject,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfSupported) = 0;
+            /* [in] */ LPCWSTR pszTypeOfUI,
+            /* [in] */ void *pvExtraData,
+            /* [in] */ ULONG cbExtraData,
+            /* [in] */ IUnknown *punkObject,
+            /* [out] */ BOOL *pfSupported) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE DisplayUI( 
-            /* [annotation][in] */ 
-            _In_  HWND hwndParent,
+            /* [in] */ HWND hwndParent,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszTitle,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszTypeOfUI,
-            /* [annotation][in] */ 
-            _In_  void *pvExtraData,
-            /* [annotation][in] */ 
-            _In_  ULONG cbExtraData,
-            /* [annotation][in] */ 
-            _In_  ISpObjectToken *pToken,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkObject) = 0;
+            /* [in] */ LPCWSTR pszTypeOfUI,
+            /* [in] */ void *pvExtraData,
+            /* [in] */ ULONG cbExtraData,
+            /* [in] */ ISpObjectToken *pToken,
+            /* [in] */ IUnknown *punkObject) = 0;
         
     };
     
@@ -374,8 +363,7 @@ EXTERN_C const IID IID_ISpTokenUI;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpTokenUI * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -390,34 +378,23 @@ EXTERN_C const IID IID_ISpTokenUI;
         DECLSPEC_XFGVIRT(ISpTokenUI, IsUISupported)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsUISupported )( 
             ISpTokenUI * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszTypeOfUI,
-            /* [annotation][in] */ 
-            _In_  void *pvExtraData,
-            /* [annotation][in] */ 
-            _In_  ULONG cbExtraData,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkObject,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfSupported);
+            /* [in] */ LPCWSTR pszTypeOfUI,
+            /* [in] */ void *pvExtraData,
+            /* [in] */ ULONG cbExtraData,
+            /* [in] */ IUnknown *punkObject,
+            /* [out] */ BOOL *pfSupported);
         
         DECLSPEC_XFGVIRT(ISpTokenUI, DisplayUI)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DisplayUI )( 
             ISpTokenUI * This,
-            /* [annotation][in] */ 
-            _In_  HWND hwndParent,
+            /* [in] */ HWND hwndParent,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszTitle,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszTypeOfUI,
-            /* [annotation][in] */ 
-            _In_  void *pvExtraData,
-            /* [annotation][in] */ 
-            _In_  ULONG cbExtraData,
-            /* [annotation][in] */ 
-            _In_  ISpObjectToken *pToken,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punkObject);
+            /* [in] */ LPCWSTR pszTypeOfUI,
+            /* [in] */ void *pvExtraData,
+            /* [in] */ ULONG cbExtraData,
+            /* [in] */ ISpObjectToken *pToken,
+            /* [in] */ IUnknown *punkObject);
         
         END_INTERFACE
     } ISpTokenUIVtbl;
@@ -481,26 +458,19 @@ EXTERN_C const IID IID_ISpObjectTokenEnumBuilder;
             _In_opt_  LPCWSTR pszOptAttribs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddTokens( 
-            /* [annotation][in] */ 
-            _In_  ULONG cTokens,
-            /* [annotation][in] */ 
-            _In_  ISpObjectToken **pToken) = 0;
+            /* [in] */ ULONG cTokens,
+            /* [in] */ ISpObjectToken **pToken) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddTokensFromDataKey( 
-            /* [annotation][in] */ 
-            _In_  ISpDataKey *pDataKey,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszSubKey,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszCategoryId) = 0;
+            /* [in] */ ISpDataKey *pDataKey,
+            /* [in] */ LPCWSTR pszSubKey,
+            /* [in] */ LPCWSTR pszCategoryId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddTokensFromTokenEnum( 
-            /* [annotation][in] */ 
-            _In_  IEnumSpObjectTokens *pTokenEnum) = 0;
+            /* [in] */ IEnumSpObjectTokens *pTokenEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Sort( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszTokenIdToListFirst) = 0;
+            /* [in] */ LPCWSTR pszTokenIdToListFirst) = 0;
         
     };
     
@@ -514,8 +484,7 @@ EXTERN_C const IID IID_ISpObjectTokenEnumBuilder;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpObjectTokenEnumBuilder * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -530,18 +499,15 @@ EXTERN_C const IID IID_ISpObjectTokenEnumBuilder;
         DECLSPEC_XFGVIRT(IEnumSpObjectTokens, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             ISpObjectTokenEnumBuilder * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  ISpObjectToken **pelt,
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ ISpObjectToken **pelt,
             /* [out][annotation] */ 
             _Out_opt_  ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumSpObjectTokens, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             ISpObjectTokenEnumBuilder * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumSpObjectTokens, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -550,22 +516,18 @@ EXTERN_C const IID IID_ISpObjectTokenEnumBuilder;
         DECLSPEC_XFGVIRT(IEnumSpObjectTokens, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             ISpObjectTokenEnumBuilder * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumSpObjectTokens **ppEnum);
+            /* [out] */ IEnumSpObjectTokens **ppEnum);
         
         DECLSPEC_XFGVIRT(IEnumSpObjectTokens, Item)
         HRESULT ( STDMETHODCALLTYPE *Item )( 
             ISpObjectTokenEnumBuilder * This,
-            /* [annotation][in] */ 
-            _In_  ULONG Index,
-            /* [annotation][out] */ 
-            _Out_  ISpObjectToken **ppToken);
+            /* [in] */ ULONG Index,
+            /* [out] */ ISpObjectToken **ppToken);
         
         DECLSPEC_XFGVIRT(IEnumSpObjectTokens, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             ISpObjectTokenEnumBuilder * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pCount);
+            /* [out] */ ULONG *pCount);
         
         DECLSPEC_XFGVIRT(ISpObjectTokenEnumBuilder, SetAttribs)
         HRESULT ( STDMETHODCALLTYPE *SetAttribs )( 
@@ -578,32 +540,25 @@ EXTERN_C const IID IID_ISpObjectTokenEnumBuilder;
         DECLSPEC_XFGVIRT(ISpObjectTokenEnumBuilder, AddTokens)
         HRESULT ( STDMETHODCALLTYPE *AddTokens )( 
             ISpObjectTokenEnumBuilder * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cTokens,
-            /* [annotation][in] */ 
-            _In_  ISpObjectToken **pToken);
+            /* [in] */ ULONG cTokens,
+            /* [in] */ ISpObjectToken **pToken);
         
         DECLSPEC_XFGVIRT(ISpObjectTokenEnumBuilder, AddTokensFromDataKey)
         HRESULT ( STDMETHODCALLTYPE *AddTokensFromDataKey )( 
             ISpObjectTokenEnumBuilder * This,
-            /* [annotation][in] */ 
-            _In_  ISpDataKey *pDataKey,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszSubKey,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszCategoryId);
+            /* [in] */ ISpDataKey *pDataKey,
+            /* [in] */ LPCWSTR pszSubKey,
+            /* [in] */ LPCWSTR pszCategoryId);
         
         DECLSPEC_XFGVIRT(ISpObjectTokenEnumBuilder, AddTokensFromTokenEnum)
         HRESULT ( STDMETHODCALLTYPE *AddTokensFromTokenEnum )( 
             ISpObjectTokenEnumBuilder * This,
-            /* [annotation][in] */ 
-            _In_  IEnumSpObjectTokens *pTokenEnum);
+            /* [in] */ IEnumSpObjectTokens *pTokenEnum);
         
         DECLSPEC_XFGVIRT(ISpObjectTokenEnumBuilder, Sort)
         HRESULT ( STDMETHODCALLTYPE *Sort )( 
             ISpObjectTokenEnumBuilder * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszTokenIdToListFirst);
+            /* [in] */ LPCWSTR pszTokenIdToListFirst);
         
         END_INTERFACE
     } ISpObjectTokenEnumBuilderVtbl;
@@ -721,16 +676,12 @@ EXTERN_C const IID IID_ISpErrorLog;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddError( 
-            /* [annotation][in] */ 
-            _In_  const long lLineNumber,
-            /* [annotation][in] */ 
-            _In_  HRESULT hr,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszDescription,
+            /* [in] */ const long lLineNumber,
+            /* [in] */ HRESULT hr,
+            /* [in] */ LPCWSTR pszDescription,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszHelpFile,
-            /* [annotation][in] */ 
-            _In_  DWORD dwHelpContext) = 0;
+            /* [in] */ DWORD dwHelpContext) = 0;
         
     };
     
@@ -744,8 +695,7 @@ EXTERN_C const IID IID_ISpErrorLog;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpErrorLog * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -760,16 +710,12 @@ EXTERN_C const IID IID_ISpErrorLog;
         DECLSPEC_XFGVIRT(ISpErrorLog, AddError)
         HRESULT ( STDMETHODCALLTYPE *AddError )( 
             ISpErrorLog * This,
-            /* [annotation][in] */ 
-            _In_  const long lLineNumber,
-            /* [annotation][in] */ 
-            _In_  HRESULT hr,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszDescription,
+            /* [in] */ const long lLineNumber,
+            /* [in] */ HRESULT hr,
+            /* [in] */ LPCWSTR pszDescription,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszHelpFile,
-            /* [annotation][in] */ 
-            _In_  DWORD dwHelpContext);
+            /* [in] */ DWORD dwHelpContext);
         
         END_INTERFACE
     } ISpErrorLogVtbl;
@@ -824,18 +770,15 @@ EXTERN_C const IID IID_ISpGrammarCompiler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CompileStream( 
-            /* [annotation][in] */ 
-            _In_  IStream *pSource,
-            /* [annotation][out] */ 
-            _Out_  IStream *pDest,
+            /* [in] */ IStream *pSource,
+            /* [out] */ IStream *pDest,
             /* [in][annotation] */ 
             _In_opt_  IStream *pHeader,
             /* [in][annotation] */ 
             _In_opt_  IUnknown *pReserved,
             /* [in][annotation] */ 
             _In_opt_  ISpErrorLog *pErrorLog,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
     };
     
@@ -849,8 +792,7 @@ EXTERN_C const IID IID_ISpGrammarCompiler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpGrammarCompiler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -865,18 +807,15 @@ EXTERN_C const IID IID_ISpGrammarCompiler;
         DECLSPEC_XFGVIRT(ISpGrammarCompiler, CompileStream)
         HRESULT ( STDMETHODCALLTYPE *CompileStream )( 
             ISpGrammarCompiler * This,
-            /* [annotation][in] */ 
-            _In_  IStream *pSource,
-            /* [annotation][out] */ 
-            _Out_  IStream *pDest,
+            /* [in] */ IStream *pSource,
+            /* [out] */ IStream *pDest,
             /* [in][annotation] */ 
             _In_opt_  IStream *pHeader,
             /* [in][annotation] */ 
             _In_opt_  IUnknown *pReserved,
             /* [in][annotation] */ 
             _In_opt_  ISpErrorLog *pErrorLog,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         END_INTERFACE
     } ISpGrammarCompilerVtbl;
@@ -931,14 +870,11 @@ EXTERN_C const IID IID_ISpGramCompBackend;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetSaveObjects( 
-            /* [annotation][in] */ 
-            _In_  IStream *pStream,
-            /* [annotation][in] */ 
-            _In_  ISpErrorLog *pErrorLog) = 0;
+            /* [in] */ __RPC__in_opt IStream *pStream,
+            /* [in] */ __RPC__in_opt ISpErrorLog *pErrorLog) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitFromBinaryGrammar( 
-            /* [annotation][in] */ 
-            _In_  const SPBINARYGRAMMAR *pBinaryData) = 0;
+            /* [in] */ __RPC__in const SPBINARYGRAMMAR *pBinaryData) = 0;
         
     };
     
@@ -952,8 +888,7 @@ EXTERN_C const IID IID_ISpGramCompBackend;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -968,98 +903,73 @@ EXTERN_C const IID IID_ISpGramCompBackend;
         DECLSPEC_XFGVIRT(ISpGrammarBuilder, ResetGrammar)
         HRESULT ( STDMETHODCALLTYPE *ResetGrammar )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  WORD NewLanguage);
+            /* [in] */ WORD NewLanguage);
         
         DECLSPEC_XFGVIRT(ISpGrammarBuilder, GetRule)
         HRESULT ( STDMETHODCALLTYPE *GetRule )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszRuleName,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRuleId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL fCreateIfNotExist,
-            /* [annotation][out] */ 
-            _Out_  SPSTATEHANDLE *phInitialState);
+            /* [in] */ __RPC__in LPCWSTR pszRuleName,
+            /* [in] */ DWORD dwRuleId,
+            /* [in] */ DWORD dwAttributes,
+            /* [in] */ BOOL fCreateIfNotExist,
+            /* [out] */ __RPC__deref_out_opt SPSTATEHANDLE *phInitialState);
         
         DECLSPEC_XFGVIRT(ISpGrammarBuilder, ClearRule)
         HRESULT ( STDMETHODCALLTYPE *ClearRule )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hState);
+            /* [in] */ __RPC__in SPSTATEHANDLE hState);
         
         DECLSPEC_XFGVIRT(ISpGrammarBuilder, CreateNewState)
         HRESULT ( STDMETHODCALLTYPE *CreateNewState )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hState,
-            /* [annotation][out] */ 
-            _Out_  SPSTATEHANDLE *phState);
+            /* [in] */ __RPC__in SPSTATEHANDLE hState,
+            /* [out] */ __RPC__deref_out_opt SPSTATEHANDLE *phState);
         
         DECLSPEC_XFGVIRT(ISpGrammarBuilder, AddWordTransition)
         HRESULT ( STDMETHODCALLTYPE *AddWordTransition )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hFromState,
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hToState,
+            /* [in] */ __RPC__in SPSTATEHANDLE hFromState,
+            /* [in] */ __RPC__in SPSTATEHANDLE hToState,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR psz,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszSeparators,
-            /* [annotation][in] */ 
-            _In_  SPGRAMMARWORDTYPE eWordType,
-            /* [annotation][in] */ 
-            _In_  float Weight,
-            /* [annotation][in] */ 
-            _In_  const SPPROPERTYINFO *pPropInfo);
+            /* [in] */ SPGRAMMARWORDTYPE eWordType,
+            /* [in] */ float Weight,
+            /* [in] */ __RPC__in const SPPROPERTYINFO *pPropInfo);
         
         DECLSPEC_XFGVIRT(ISpGrammarBuilder, AddRuleTransition)
         HRESULT ( STDMETHODCALLTYPE *AddRuleTransition )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hFromState,
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hToState,
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  float Weight,
-            /* [annotation][in] */ 
-            _In_  const SPPROPERTYINFO *pPropInfo);
+            /* [in] */ __RPC__in SPSTATEHANDLE hFromState,
+            /* [in] */ __RPC__in SPSTATEHANDLE hToState,
+            /* [in] */ __RPC__in SPSTATEHANDLE hRule,
+            /* [in] */ float Weight,
+            /* [in] */ __RPC__in const SPPROPERTYINFO *pPropInfo);
         
         DECLSPEC_XFGVIRT(ISpGrammarBuilder, AddResource)
         HRESULT ( STDMETHODCALLTYPE *AddResource )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hRuleState,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszResourceName,
+            /* [in] */ __RPC__in SPSTATEHANDLE hRuleState,
+            /* [in] */ __RPC__in LPCWSTR pszResourceName,
             /* [in][annotation] */ 
             _In_opt_  LPCWSTR pszResourceValue);
         
         DECLSPEC_XFGVIRT(ISpGrammarBuilder, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwReserved);
+            /* [in] */ DWORD dwReserved);
         
         DECLSPEC_XFGVIRT(ISpGramCompBackend, SetSaveObjects)
         HRESULT ( STDMETHODCALLTYPE *SetSaveObjects )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  IStream *pStream,
-            /* [annotation][in] */ 
-            _In_  ISpErrorLog *pErrorLog);
+            /* [in] */ __RPC__in_opt IStream *pStream,
+            /* [in] */ __RPC__in_opt ISpErrorLog *pErrorLog);
         
         DECLSPEC_XFGVIRT(ISpGramCompBackend, InitFromBinaryGrammar)
         HRESULT ( STDMETHODCALLTYPE *InitFromBinaryGrammar )( 
             __RPC__in ISpGramCompBackend * This,
-            /* [annotation][in] */ 
-            _In_  const SPBINARYGRAMMAR *pBinaryData);
+            /* [in] */ __RPC__in const SPBINARYGRAMMAR *pBinaryData);
         
         END_INTERFACE
     } ISpGramCompBackendVtbl;
@@ -1146,8 +1056,7 @@ EXTERN_C const IID IID_ISpITNProcessor;
             _In_  LPWSTR pszCLSID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ITNPhrase( 
-            /* [annotation][in] */ 
-            _In_  ISpPhraseBuilder *pPhrase) = 0;
+            /* [in] */ ISpPhraseBuilder *pPhrase) = 0;
         
     };
     
@@ -1161,8 +1070,7 @@ EXTERN_C const IID IID_ISpITNProcessor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpITNProcessor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1183,8 +1091,7 @@ EXTERN_C const IID IID_ISpITNProcessor;
         DECLSPEC_XFGVIRT(ISpITNProcessor, ITNPhrase)
         HRESULT ( STDMETHODCALLTYPE *ITNPhrase )( 
             ISpITNProcessor * This,
-            /* [annotation][in] */ 
-            _In_  ISpPhraseBuilder *pPhrase);
+            /* [in] */ ISpPhraseBuilder *pPhrase);
         
         END_INTERFACE
     } ISpITNProcessorVtbl;
@@ -1242,40 +1149,28 @@ EXTERN_C const IID IID_ISpPhraseBuilder;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE InitFromPhrase( 
-            /* [annotation][in] */ 
-            _In_  const SPPHRASE *pPhrase) = 0;
+            /* [in] */ const SPPHRASE *pPhrase) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitFromSerializedPhrase( 
-            /* [annotation][in] */ 
-            _In_  const SPSERIALIZEDPHRASE *pPhrase) = 0;
+            /* [in] */ const SPSERIALIZEDPHRASE *pPhrase) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddElements( 
-            /* [annotation][in] */ 
-            _In_  ULONG cElements,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASEELEMENT *pElement) = 0;
+            /* [in] */ ULONG cElements,
+            /* [in] */ const SPPHRASEELEMENT *pElement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddRules( 
-            /* [annotation][in] */ 
-            _In_  const SPPHRASERULEHANDLE hParent,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASERULE *pRule,
-            /* [annotation][out] */ 
-            _Out_  SPPHRASERULEHANDLE *phNewRule) = 0;
+            /* [in] */ const SPPHRASERULEHANDLE hParent,
+            /* [in] */ const SPPHRASERULE *pRule,
+            /* [out] */ SPPHRASERULEHANDLE *phNewRule) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddProperties( 
-            /* [annotation][in] */ 
-            _In_  const SPPHRASEPROPERTYHANDLE hParent,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASEPROPERTY *pProperty,
-            /* [annotation][out] */ 
-            _Out_  SPPHRASEPROPERTYHANDLE *phNewProperty) = 0;
+            /* [in] */ const SPPHRASEPROPERTYHANDLE hParent,
+            /* [in] */ const SPPHRASEPROPERTY *pProperty,
+            /* [out] */ SPPHRASEPROPERTYHANDLE *phNewProperty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddReplacements( 
-            /* [annotation][in] */ 
-            _In_  ULONG cReplacements,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASEREPLACEMENT *pReplacements) = 0;
+            /* [in] */ ULONG cReplacements,
+            /* [in] */ const SPPHRASEREPLACEMENT *pReplacements) = 0;
         
     };
     
@@ -1289,8 +1184,7 @@ EXTERN_C const IID IID_ISpPhraseBuilder;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpPhraseBuilder * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1317,12 +1211,9 @@ EXTERN_C const IID IID_ISpPhraseBuilder;
         DECLSPEC_XFGVIRT(ISpPhrase, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             ISpPhraseBuilder * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulStart,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][in] */ 
-            _In_  BOOL fUseTextReplacements,
+            /* [in] */ ULONG ulStart,
+            /* [in] */ ULONG ulCount,
+            /* [in] */ BOOL fUseTextReplacements,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppszCoMemText,
             /* [optional][out][annotation] */ 
@@ -1331,56 +1222,43 @@ EXTERN_C const IID IID_ISpPhraseBuilder;
         DECLSPEC_XFGVIRT(ISpPhrase, Discard)
         HRESULT ( STDMETHODCALLTYPE *Discard )( 
             ISpPhraseBuilder * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwValueTypes);
+            /* [in] */ DWORD dwValueTypes);
         
         DECLSPEC_XFGVIRT(ISpPhraseBuilder, InitFromPhrase)
         HRESULT ( STDMETHODCALLTYPE *InitFromPhrase )( 
             ISpPhraseBuilder * This,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASE *pPhrase);
+            /* [in] */ const SPPHRASE *pPhrase);
         
         DECLSPEC_XFGVIRT(ISpPhraseBuilder, InitFromSerializedPhrase)
         HRESULT ( STDMETHODCALLTYPE *InitFromSerializedPhrase )( 
             ISpPhraseBuilder * This,
-            /* [annotation][in] */ 
-            _In_  const SPSERIALIZEDPHRASE *pPhrase);
+            /* [in] */ const SPSERIALIZEDPHRASE *pPhrase);
         
         DECLSPEC_XFGVIRT(ISpPhraseBuilder, AddElements)
         HRESULT ( STDMETHODCALLTYPE *AddElements )( 
             ISpPhraseBuilder * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cElements,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASEELEMENT *pElement);
+            /* [in] */ ULONG cElements,
+            /* [in] */ const SPPHRASEELEMENT *pElement);
         
         DECLSPEC_XFGVIRT(ISpPhraseBuilder, AddRules)
         HRESULT ( STDMETHODCALLTYPE *AddRules )( 
             ISpPhraseBuilder * This,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASERULEHANDLE hParent,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASERULE *pRule,
-            /* [annotation][out] */ 
-            _Out_  SPPHRASERULEHANDLE *phNewRule);
+            /* [in] */ const SPPHRASERULEHANDLE hParent,
+            /* [in] */ const SPPHRASERULE *pRule,
+            /* [out] */ SPPHRASERULEHANDLE *phNewRule);
         
         DECLSPEC_XFGVIRT(ISpPhraseBuilder, AddProperties)
         HRESULT ( STDMETHODCALLTYPE *AddProperties )( 
             ISpPhraseBuilder * This,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASEPROPERTYHANDLE hParent,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASEPROPERTY *pProperty,
-            /* [annotation][out] */ 
-            _Out_  SPPHRASEPROPERTYHANDLE *phNewProperty);
+            /* [in] */ const SPPHRASEPROPERTYHANDLE hParent,
+            /* [in] */ const SPPHRASEPROPERTY *pProperty,
+            /* [out] */ SPPHRASEPROPERTYHANDLE *phNewProperty);
         
         DECLSPEC_XFGVIRT(ISpPhraseBuilder, AddReplacements)
         HRESULT ( STDMETHODCALLTYPE *AddReplacements )( 
             ISpPhraseBuilder * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cReplacements,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASEREPLACEMENT *pReplacements);
+            /* [in] */ ULONG cReplacements,
+            /* [in] */ const SPPHRASEREPLACEMENT *pReplacements);
         
         END_INTERFACE
     } ISpPhraseBuilderVtbl;
@@ -1505,18 +1383,13 @@ EXTERN_C const IID IID_ISpThreadControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StartThread( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][out] */ 
-            _Out_  HWND *phwnd) = 0;
+            /* [in] */ DWORD dwFlags,
+            /* [out] */ HWND *phwnd) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WaitForThreadDone( 
-            /* [annotation][in] */ 
-            _In_  BOOL fForceStop,
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrThreadResult,
-            /* [annotation][in] */ 
-            _In_  ULONG msTimeOut) = 0;
+            /* [in] */ BOOL fForceStop,
+            /* [out] */ HRESULT *phrThreadResult,
+            /* [in] */ ULONG msTimeOut) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE TerminateThread( void) = 0;
         
@@ -1544,8 +1417,7 @@ EXTERN_C const IID IID_ISpThreadControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpThreadControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1564,20 +1436,15 @@ EXTERN_C const IID IID_ISpThreadControl;
         DECLSPEC_XFGVIRT(ISpThreadControl, StartThread)
         HRESULT ( STDMETHODCALLTYPE *StartThread )( 
             ISpThreadControl * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][out] */ 
-            _Out_  HWND *phwnd);
+            /* [in] */ DWORD dwFlags,
+            /* [out] */ HWND *phwnd);
         
         DECLSPEC_XFGVIRT(ISpThreadControl, WaitForThreadDone)
         HRESULT ( STDMETHODCALLTYPE *WaitForThreadDone )( 
             ISpThreadControl * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fForceStop,
-            /* [annotation][out] */ 
-            _Out_  HRESULT *phrThreadResult,
-            /* [annotation][in] */ 
-            _In_  ULONG msTimeOut);
+            /* [in] */ BOOL fForceStop,
+            /* [out] */ HRESULT *phrThreadResult,
+            /* [in] */ ULONG msTimeOut);
         
         DECLSPEC_XFGVIRT(ISpThreadControl, TerminateThread)
         HRESULT ( STDMETHODCALLTYPE *TerminateThread )( 
@@ -1704,56 +1571,38 @@ EXTERN_C const IID IID_ISpTaskManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetThreadPoolInfo( 
-            /* [annotation][in] */ 
-            _In_  const SPTMTHREADINFO *pPoolInfo) = 0;
+            /* [in] */ const SPTMTHREADINFO *pPoolInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetThreadPoolInfo( 
-            /* [annotation][out] */ 
-            _Out_  SPTMTHREADINFO *pPoolInfo) = 0;
+            /* [out] */ SPTMTHREADINFO *pPoolInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueueTask( 
-            /* [annotation][in] */ 
-            _In_  ISpTask *pTask,
-            /* [annotation][in] */ 
-            _In_  void *pvTaskData,
-            /* [annotation][in] */ 
-            _In_  HANDLE hCompEvent,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwGroupId,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pTaskID) = 0;
+            /* [in] */ ISpTask *pTask,
+            /* [in] */ void *pvTaskData,
+            /* [in] */ HANDLE hCompEvent,
+            /* [out][in] */ DWORD *pdwGroupId,
+            /* [out] */ DWORD *pTaskID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateReoccurringTask( 
-            /* [annotation][in] */ 
-            _In_  ISpTask *pTask,
-            /* [annotation][in] */ 
-            _In_  void *pvTaskData,
-            /* [annotation][in] */ 
-            _In_  HANDLE hCompEvent,
-            /* [annotation][out] */ 
-            _Out_  ISpNotifySink **ppTaskCtrl) = 0;
+            /* [in] */ ISpTask *pTask,
+            /* [in] */ void *pvTaskData,
+            /* [in] */ HANDLE hCompEvent,
+            /* [out] */ ISpNotifySink **ppTaskCtrl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateThreadControl( 
-            /* [annotation][in] */ 
-            _In_  ISpThreadTask *pTask,
-            /* [annotation][in] */ 
-            _In_  void *pvTaskData,
-            /* [annotation][in] */ 
-            _In_  long nPriority,
+            /* [in] */ ISpThreadTask *pTask,
+            /* [in] */ void *pvTaskData,
+            /* [in] */ long nPriority,
             /* [out][annotation] */ 
             _Outptr_  ISpThreadControl **ppTaskCtrl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE TerminateTask( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTaskId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulWaitPeriod) = 0;
+            /* [in] */ DWORD dwTaskId,
+            /* [in] */ ULONG ulWaitPeriod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE TerminateTaskGroup( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwGroupId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulWaitPeriod) = 0;
+            /* [in] */ DWORD dwGroupId,
+            /* [in] */ ULONG ulWaitPeriod) = 0;
         
     };
     
@@ -1767,8 +1616,7 @@ EXTERN_C const IID IID_ISpTaskManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpTaskManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1783,68 +1631,50 @@ EXTERN_C const IID IID_ISpTaskManager;
         DECLSPEC_XFGVIRT(ISpTaskManager, SetThreadPoolInfo)
         HRESULT ( STDMETHODCALLTYPE *SetThreadPoolInfo )( 
             ISpTaskManager * This,
-            /* [annotation][in] */ 
-            _In_  const SPTMTHREADINFO *pPoolInfo);
+            /* [in] */ const SPTMTHREADINFO *pPoolInfo);
         
         DECLSPEC_XFGVIRT(ISpTaskManager, GetThreadPoolInfo)
         HRESULT ( STDMETHODCALLTYPE *GetThreadPoolInfo )( 
             ISpTaskManager * This,
-            /* [annotation][out] */ 
-            _Out_  SPTMTHREADINFO *pPoolInfo);
+            /* [out] */ SPTMTHREADINFO *pPoolInfo);
         
         DECLSPEC_XFGVIRT(ISpTaskManager, QueueTask)
         HRESULT ( STDMETHODCALLTYPE *QueueTask )( 
             ISpTaskManager * This,
-            /* [annotation][in] */ 
-            _In_  ISpTask *pTask,
-            /* [annotation][in] */ 
-            _In_  void *pvTaskData,
-            /* [annotation][in] */ 
-            _In_  HANDLE hCompEvent,
-            /* [annotation][out][in] */ 
-            _Inout_  DWORD *pdwGroupId,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pTaskID);
+            /* [in] */ ISpTask *pTask,
+            /* [in] */ void *pvTaskData,
+            /* [in] */ HANDLE hCompEvent,
+            /* [out][in] */ DWORD *pdwGroupId,
+            /* [out] */ DWORD *pTaskID);
         
         DECLSPEC_XFGVIRT(ISpTaskManager, CreateReoccurringTask)
         HRESULT ( STDMETHODCALLTYPE *CreateReoccurringTask )( 
             ISpTaskManager * This,
-            /* [annotation][in] */ 
-            _In_  ISpTask *pTask,
-            /* [annotation][in] */ 
-            _In_  void *pvTaskData,
-            /* [annotation][in] */ 
-            _In_  HANDLE hCompEvent,
-            /* [annotation][out] */ 
-            _Out_  ISpNotifySink **ppTaskCtrl);
+            /* [in] */ ISpTask *pTask,
+            /* [in] */ void *pvTaskData,
+            /* [in] */ HANDLE hCompEvent,
+            /* [out] */ ISpNotifySink **ppTaskCtrl);
         
         DECLSPEC_XFGVIRT(ISpTaskManager, CreateThreadControl)
         HRESULT ( STDMETHODCALLTYPE *CreateThreadControl )( 
             ISpTaskManager * This,
-            /* [annotation][in] */ 
-            _In_  ISpThreadTask *pTask,
-            /* [annotation][in] */ 
-            _In_  void *pvTaskData,
-            /* [annotation][in] */ 
-            _In_  long nPriority,
+            /* [in] */ ISpThreadTask *pTask,
+            /* [in] */ void *pvTaskData,
+            /* [in] */ long nPriority,
             /* [out][annotation] */ 
             _Outptr_  ISpThreadControl **ppTaskCtrl);
         
         DECLSPEC_XFGVIRT(ISpTaskManager, TerminateTask)
         HRESULT ( STDMETHODCALLTYPE *TerminateTask )( 
             ISpTaskManager * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTaskId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulWaitPeriod);
+            /* [in] */ DWORD dwTaskId,
+            /* [in] */ ULONG ulWaitPeriod);
         
         DECLSPEC_XFGVIRT(ISpTaskManager, TerminateTaskGroup)
         HRESULT ( STDMETHODCALLTYPE *TerminateTaskGroup )( 
             ISpTaskManager * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwGroupId,
-            /* [annotation][in] */ 
-            _In_  ULONG ulWaitPeriod);
+            /* [in] */ DWORD dwGroupId,
+            /* [in] */ ULONG ulWaitPeriod);
         
         END_INTERFACE
     } ISpTaskManagerVtbl;
@@ -1943,30 +1773,22 @@ EXTERN_C const IID IID_ISpTTSEngineSite;
         virtual DWORD STDMETHODCALLTYPE GetActions( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Write( 
-            /* [annotation][in] */ 
-            _In_  const void *pBuff,
-            /* [annotation][in] */ 
-            _In_  ULONG cb,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbWritten) = 0;
+            /* [in] */ const void *pBuff,
+            /* [in] */ ULONG cb,
+            /* [out] */ ULONG *pcbWritten) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRate( 
-            /* [annotation][out] */ 
-            _Out_  long *pRateAdjust) = 0;
+            /* [out] */ long *pRateAdjust) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVolume( 
-            /* [annotation][out] */ 
-            _Out_  USHORT *pusVolume) = 0;
+            /* [out] */ USHORT *pusVolume) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSkipInfo( 
-            /* [annotation][out] */ 
-            _Out_  SPVSKIPTYPE *peType,
-            /* [annotation][out] */ 
-            _Out_  long *plNumItems) = 0;
+            /* [out] */ SPVSKIPTYPE *peType,
+            /* [out] */ long *plNumItems) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CompleteSkip( 
-            /* [annotation][in] */ 
-            _In_  long ulNumSkipped) = 0;
+            /* [in] */ long ulNumSkipped) = 0;
         
     };
     
@@ -1980,8 +1802,7 @@ EXTERN_C const IID IID_ISpTTSEngineSite;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpTTSEngineSite * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1996,16 +1817,13 @@ EXTERN_C const IID IID_ISpTTSEngineSite;
         DECLSPEC_XFGVIRT(ISpEventSink, AddEvents)
         HRESULT ( STDMETHODCALLTYPE *AddEvents )( 
             ISpTTSEngineSite * This,
-            /* [annotation][in] */ 
-            _In_  const SPEVENT *pEventArray,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount);
+            /* [in] */ const SPEVENT *pEventArray,
+            /* [in] */ ULONG ulCount);
         
         DECLSPEC_XFGVIRT(ISpEventSink, GetEventInterest)
         HRESULT ( STDMETHODCALLTYPE *GetEventInterest )( 
             ISpTTSEngineSite * This,
-            /* [annotation][out] */ 
-            _Out_  ULONGLONG *pullEventInterest);
+            /* [out] */ ULONGLONG *pullEventInterest);
         
         DECLSPEC_XFGVIRT(ISpTTSEngineSite, GetActions)
         DWORD ( STDMETHODCALLTYPE *GetActions )( 
@@ -2014,38 +1832,30 @@ EXTERN_C const IID IID_ISpTTSEngineSite;
         DECLSPEC_XFGVIRT(ISpTTSEngineSite, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             ISpTTSEngineSite * This,
-            /* [annotation][in] */ 
-            _In_  const void *pBuff,
-            /* [annotation][in] */ 
-            _In_  ULONG cb,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbWritten);
+            /* [in] */ const void *pBuff,
+            /* [in] */ ULONG cb,
+            /* [out] */ ULONG *pcbWritten);
         
         DECLSPEC_XFGVIRT(ISpTTSEngineSite, GetRate)
         HRESULT ( STDMETHODCALLTYPE *GetRate )( 
             ISpTTSEngineSite * This,
-            /* [annotation][out] */ 
-            _Out_  long *pRateAdjust);
+            /* [out] */ long *pRateAdjust);
         
         DECLSPEC_XFGVIRT(ISpTTSEngineSite, GetVolume)
         HRESULT ( STDMETHODCALLTYPE *GetVolume )( 
             ISpTTSEngineSite * This,
-            /* [annotation][out] */ 
-            _Out_  USHORT *pusVolume);
+            /* [out] */ USHORT *pusVolume);
         
         DECLSPEC_XFGVIRT(ISpTTSEngineSite, GetSkipInfo)
         HRESULT ( STDMETHODCALLTYPE *GetSkipInfo )( 
             ISpTTSEngineSite * This,
-            /* [annotation][out] */ 
-            _Out_  SPVSKIPTYPE *peType,
-            /* [annotation][out] */ 
-            _Out_  long *plNumItems);
+            /* [out] */ SPVSKIPTYPE *peType,
+            /* [out] */ long *plNumItems);
         
         DECLSPEC_XFGVIRT(ISpTTSEngineSite, CompleteSkip)
         HRESULT ( STDMETHODCALLTYPE *CompleteSkip )( 
             ISpTTSEngineSite * This,
-            /* [annotation][in] */ 
-            _In_  long ulNumSkipped);
+            /* [in] */ long ulNumSkipped);
         
         END_INTERFACE
     } ISpTTSEngineSiteVtbl;
@@ -2139,24 +1949,16 @@ EXTERN_C const IID IID_ISpTTSEngine;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Speak( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwSpeakFlags,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguidFormatId,
-            /* [annotation][in] */ 
-            _In_  const WAVEFORMATEX *pWaveFormatEx,
-            /* [annotation][in] */ 
-            _In_  const SPVTEXTFRAG *pTextFragList,
-            /* [annotation][in] */ 
-            _In_  ISpTTSEngineSite *pOutputSite) = 0;
+            /* [in] */ DWORD dwSpeakFlags,
+            /* [in] */ REFGUID rguidFormatId,
+            /* [in] */ const WAVEFORMATEX *pWaveFormatEx,
+            /* [in] */ const SPVTEXTFRAG *pTextFragList,
+            /* [in] */ ISpTTSEngineSite *pOutputSite) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOutputFormat( 
-            /* [annotation][in] */ 
-            _In_  const GUID *pTargetFmtId,
-            /* [annotation][in] */ 
-            _In_  const WAVEFORMATEX *pTargetWaveFormatEx,
-            /* [annotation][out] */ 
-            _Out_  GUID *pOutputFormatId,
+            /* [in] */ const GUID *pTargetFmtId,
+            /* [in] */ const WAVEFORMATEX *pTargetWaveFormatEx,
+            /* [out] */ GUID *pOutputFormatId,
             /* [out][annotation] */ 
             _Outptr_  WAVEFORMATEX **ppCoMemOutputWaveFormatEx) = 0;
         
@@ -2172,8 +1974,7 @@ EXTERN_C const IID IID_ISpTTSEngine;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpTTSEngine * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2188,26 +1989,18 @@ EXTERN_C const IID IID_ISpTTSEngine;
         DECLSPEC_XFGVIRT(ISpTTSEngine, Speak)
         HRESULT ( STDMETHODCALLTYPE *Speak )( 
             ISpTTSEngine * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSpeakFlags,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguidFormatId,
-            /* [annotation][in] */ 
-            _In_  const WAVEFORMATEX *pWaveFormatEx,
-            /* [annotation][in] */ 
-            _In_  const SPVTEXTFRAG *pTextFragList,
-            /* [annotation][in] */ 
-            _In_  ISpTTSEngineSite *pOutputSite);
+            /* [in] */ DWORD dwSpeakFlags,
+            /* [in] */ REFGUID rguidFormatId,
+            /* [in] */ const WAVEFORMATEX *pWaveFormatEx,
+            /* [in] */ const SPVTEXTFRAG *pTextFragList,
+            /* [in] */ ISpTTSEngineSite *pOutputSite);
         
         DECLSPEC_XFGVIRT(ISpTTSEngine, GetOutputFormat)
         HRESULT ( STDMETHODCALLTYPE *GetOutputFormat )( 
             ISpTTSEngine * This,
-            /* [annotation][in] */ 
-            _In_  const GUID *pTargetFmtId,
-            /* [annotation][in] */ 
-            _In_  const WAVEFORMATEX *pTargetWaveFormatEx,
-            /* [annotation][out] */ 
-            _Out_  GUID *pOutputFormatId,
+            /* [in] */ const GUID *pTargetFmtId,
+            /* [in] */ const WAVEFORMATEX *pTargetWaveFormatEx,
+            /* [out] */ GUID *pOutputFormatId,
             /* [out][annotation] */ 
             _Outptr_  WAVEFORMATEX **ppCoMemOutputWaveFormatEx);
         
@@ -2289,7 +2082,7 @@ typedef /* [restricted] */ struct SPTRANSITIONENTRY
     SPTRANSITIONID ID;
     SPSTATEHANDLE hNextState;
     BYTE Type;
-    unsigned char RequiredConfidence;
+    char RequiredConfidence;
     struct 
         {
         DWORD fHasProperty;
@@ -2360,16 +2153,13 @@ EXTERN_C const IID IID_ISpCFGInterpreterSite;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddTextReplacement( 
-            /* [annotation][in] */ 
-            _In_  SPPHRASEREPLACEMENT *pReplace) = 0;
+            /* [in] */ SPPHRASEREPLACEMENT *pReplace) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddProperty( 
-            /* [annotation][in] */ 
-            _In_  const SPPHRASEPROPERTY *pProperty) = 0;
+            /* [in] */ const SPPHRASEPROPERTY *pProperty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetResourceValue( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszResourceName,
+            /* [in] */ LPCWSTR pszResourceName,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppCoMemResource) = 0;
         
@@ -2385,8 +2175,7 @@ EXTERN_C const IID IID_ISpCFGInterpreterSite;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpCFGInterpreterSite * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2401,20 +2190,17 @@ EXTERN_C const IID IID_ISpCFGInterpreterSite;
         DECLSPEC_XFGVIRT(ISpCFGInterpreterSite, AddTextReplacement)
         HRESULT ( STDMETHODCALLTYPE *AddTextReplacement )( 
             ISpCFGInterpreterSite * This,
-            /* [annotation][in] */ 
-            _In_  SPPHRASEREPLACEMENT *pReplace);
+            /* [in] */ SPPHRASEREPLACEMENT *pReplace);
         
         DECLSPEC_XFGVIRT(ISpCFGInterpreterSite, AddProperty)
         HRESULT ( STDMETHODCALLTYPE *AddProperty )( 
             ISpCFGInterpreterSite * This,
-            /* [annotation][in] */ 
-            _In_  const SPPHRASEPROPERTY *pProperty);
+            /* [in] */ const SPPHRASEPROPERTY *pProperty);
         
         DECLSPEC_XFGVIRT(ISpCFGInterpreterSite, GetResourceValue)
         HRESULT ( STDMETHODCALLTYPE *GetResourceValue )( 
             ISpCFGInterpreterSite * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszResourceName,
+            /* [in] */ LPCWSTR pszResourceName,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppCoMemResource);
         
@@ -2477,20 +2263,14 @@ EXTERN_C const IID IID_ISpCFGInterpreter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE InitGrammar( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszGrammarName,
-            /* [annotation][in] */ 
-            _In_  const void **pvGrammarData) = 0;
+            /* [in] */ LPCWSTR pszGrammarName,
+            /* [in] */ const void **pvGrammarData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Interpret( 
-            /* [annotation][in] */ 
-            _In_  ISpPhraseBuilder *pPhrase,
-            /* [annotation][in] */ 
-            _In_  const ULONG ulFirstElement,
-            /* [annotation][in] */ 
-            _In_  const ULONG ulCountOfElements,
-            /* [annotation][in] */ 
-            _In_  ISpCFGInterpreterSite *pSite) = 0;
+            /* [in] */ ISpPhraseBuilder *pPhrase,
+            /* [in] */ const ULONG ulFirstElement,
+            /* [in] */ const ULONG ulCountOfElements,
+            /* [in] */ ISpCFGInterpreterSite *pSite) = 0;
         
     };
     
@@ -2504,8 +2284,7 @@ EXTERN_C const IID IID_ISpCFGInterpreter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpCFGInterpreter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2520,22 +2299,16 @@ EXTERN_C const IID IID_ISpCFGInterpreter;
         DECLSPEC_XFGVIRT(ISpCFGInterpreter, InitGrammar)
         HRESULT ( STDMETHODCALLTYPE *InitGrammar )( 
             ISpCFGInterpreter * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszGrammarName,
-            /* [annotation][in] */ 
-            _In_  const void **pvGrammarData);
+            /* [in] */ LPCWSTR pszGrammarName,
+            /* [in] */ const void **pvGrammarData);
         
         DECLSPEC_XFGVIRT(ISpCFGInterpreter, Interpret)
         HRESULT ( STDMETHODCALLTYPE *Interpret )( 
             ISpCFGInterpreter * This,
-            /* [annotation][in] */ 
-            _In_  ISpPhraseBuilder *pPhrase,
-            /* [annotation][in] */ 
-            _In_  const ULONG ulFirstElement,
-            /* [annotation][in] */ 
-            _In_  const ULONG ulCountOfElements,
-            /* [annotation][in] */ 
-            _In_  ISpCFGInterpreterSite *pSite);
+            /* [in] */ ISpPhraseBuilder *pPhrase,
+            /* [in] */ const ULONG ulFirstElement,
+            /* [in] */ const ULONG ulCountOfElements,
+            /* [in] */ ISpCFGInterpreterSite *pSite);
         
         END_INTERFACE
     } ISpCFGInterpreterVtbl;
@@ -2702,106 +2475,75 @@ EXTERN_C const IID IID_ISpSREngineSite;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Read( 
-            /* [annotation][in] */ 
-            _In_  void *pv,
-            /* [annotation][in] */ 
-            _In_  ULONG cb,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbRead) = 0;
+            /* [in] */ void *pv,
+            /* [in] */ ULONG cb,
+            /* [out] */ ULONG *pcbRead) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DataAvailable( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcb) = 0;
+            /* [out] */ ULONG *pcb) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBufferNotifySize( 
-            /* [annotation][in] */ 
-            _In_  ULONG cbSize) = 0;
+            /* [in] */ ULONG cbSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ParseFromTransitions( 
-            /* [annotation][in] */ 
-            _In_  const SPPARSEINFO *pParseInfo,
-            /* [annotation][out] */ 
-            _Out_  ISpPhraseBuilder **ppNewPhrase) = 0;
+            /* [in] */ const SPPARSEINFO *pParseInfo,
+            /* [out] */ ISpPhraseBuilder **ppNewPhrase) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Recognition( 
-            /* [annotation][in] */ 
-            _In_  const SPRECORESULTINFO *pResultInfo) = 0;
+            /* [in] */ const SPRECORESULTINFO *pResultInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddEvent( 
-            /* [annotation][in] */ 
-            _In_  const SPEVENT *pEvent,
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hSAPIRecoContext) = 0;
+            /* [in] */ const SPEVENT *pEvent,
+            /* [in] */ SPRECOCONTEXTHANDLE hSAPIRecoContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Synchronize( 
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullProcessedThruPos) = 0;
+            /* [in] */ ULONGLONG ullProcessedThruPos) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetWordInfo( 
-            /* [annotation][out][in] */ 
-            _Inout_  SPWORDENTRY *pWordEntry,
-            /* [annotation][in] */ 
-            _In_  SPWORDINFOOPT Options) = 0;
+            /* [out][in] */ SPWORDENTRY *pWordEntry,
+            /* [in] */ SPWORDINFOOPT Options) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetWordClientContext( 
-            /* [annotation][in] */ 
-            _In_  SPWORDHANDLE hWord,
-            /* [annotation][in] */ 
-            _In_  void *pvClientContext) = 0;
+            /* [in] */ SPWORDHANDLE hWord,
+            /* [in] */ void *pvClientContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRuleInfo( 
-            /* [annotation][out][in] */ 
-            _Inout_  SPRULEENTRY *pRuleEntry,
-            /* [annotation][in] */ 
-            _In_  SPRULEINFOOPT Options) = 0;
+            /* [out][in] */ SPRULEENTRY *pRuleEntry,
+            /* [in] */ SPRULEINFOOPT Options) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRuleClientContext( 
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  void *pvClientContext) = 0;
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ void *pvClientContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStateInfo( 
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hState,
-            /* [annotation][out] */ 
-            _Out_  SPSTATEINFO *pStateInfo) = 0;
+            /* [in] */ SPSTATEHANDLE hState,
+            /* [out] */ SPSTATEINFO *pStateInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetResource( 
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszResourceName,
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ LPCWSTR pszResourceName,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppCoMemResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransitionProperty( 
-            /* [annotation][in] */ 
-            _In_  SPTRANSITIONID ID,
+            /* [in] */ SPTRANSITIONID ID,
             /* [out][annotation] */ 
             _Outptr_  SPTRANSITIONPROPERTY **ppCoMemProperty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsAlternate( 
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hAltRule) = 0;
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ SPRULEHANDLE hAltRule) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMaxAlternates( 
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulNumAlts) = 0;
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [out] */ ULONG *pulNumAlts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContextMaxAlternates( 
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hContext,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulNumAlts) = 0;
+            /* [in] */ SPRECOCONTEXTHANDLE hContext,
+            /* [out] */ ULONG *pulNumAlts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateRecoPos( 
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullCurrentRecoPos) = 0;
+            /* [in] */ ULONGLONG ullCurrentRecoPos) = 0;
         
     };
     
@@ -2815,8 +2557,7 @@ EXTERN_C const IID IID_ISpSREngineSite;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2831,140 +2572,109 @@ EXTERN_C const IID IID_ISpSREngineSite;
         DECLSPEC_XFGVIRT(ISpSREngineSite, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  void *pv,
-            /* [annotation][in] */ 
-            _In_  ULONG cb,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbRead);
+            /* [in] */ void *pv,
+            /* [in] */ ULONG cb,
+            /* [out] */ ULONG *pcbRead);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, DataAvailable)
         HRESULT ( STDMETHODCALLTYPE *DataAvailable )( 
             ISpSREngineSite * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcb);
+            /* [out] */ ULONG *pcb);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, SetBufferNotifySize)
         HRESULT ( STDMETHODCALLTYPE *SetBufferNotifySize )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cbSize);
+            /* [in] */ ULONG cbSize);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, ParseFromTransitions)
         HRESULT ( STDMETHODCALLTYPE *ParseFromTransitions )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  const SPPARSEINFO *pParseInfo,
-            /* [annotation][out] */ 
-            _Out_  ISpPhraseBuilder **ppNewPhrase);
+            /* [in] */ const SPPARSEINFO *pParseInfo,
+            /* [out] */ ISpPhraseBuilder **ppNewPhrase);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, Recognition)
         HRESULT ( STDMETHODCALLTYPE *Recognition )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  const SPRECORESULTINFO *pResultInfo);
+            /* [in] */ const SPRECORESULTINFO *pResultInfo);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, AddEvent)
         HRESULT ( STDMETHODCALLTYPE *AddEvent )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  const SPEVENT *pEvent,
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hSAPIRecoContext);
+            /* [in] */ const SPEVENT *pEvent,
+            /* [in] */ SPRECOCONTEXTHANDLE hSAPIRecoContext);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, Synchronize)
         HRESULT ( STDMETHODCALLTYPE *Synchronize )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullProcessedThruPos);
+            /* [in] */ ULONGLONG ullProcessedThruPos);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetWordInfo)
         HRESULT ( STDMETHODCALLTYPE *GetWordInfo )( 
             ISpSREngineSite * This,
-            /* [annotation][out][in] */ 
-            _Inout_  SPWORDENTRY *pWordEntry,
-            /* [annotation][in] */ 
-            _In_  SPWORDINFOOPT Options);
+            /* [out][in] */ SPWORDENTRY *pWordEntry,
+            /* [in] */ SPWORDINFOOPT Options);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, SetWordClientContext)
         HRESULT ( STDMETHODCALLTYPE *SetWordClientContext )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  SPWORDHANDLE hWord,
-            /* [annotation][in] */ 
-            _In_  void *pvClientContext);
+            /* [in] */ SPWORDHANDLE hWord,
+            /* [in] */ void *pvClientContext);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetRuleInfo)
         HRESULT ( STDMETHODCALLTYPE *GetRuleInfo )( 
             ISpSREngineSite * This,
-            /* [annotation][out][in] */ 
-            _Inout_  SPRULEENTRY *pRuleEntry,
-            /* [annotation][in] */ 
-            _In_  SPRULEINFOOPT Options);
+            /* [out][in] */ SPRULEENTRY *pRuleEntry,
+            /* [in] */ SPRULEINFOOPT Options);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, SetRuleClientContext)
         HRESULT ( STDMETHODCALLTYPE *SetRuleClientContext )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  void *pvClientContext);
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ void *pvClientContext);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetStateInfo)
         HRESULT ( STDMETHODCALLTYPE *GetStateInfo )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hState,
-            /* [annotation][out] */ 
-            _Out_  SPSTATEINFO *pStateInfo);
+            /* [in] */ SPSTATEHANDLE hState,
+            /* [out] */ SPSTATEINFO *pStateInfo);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetResource)
         HRESULT ( STDMETHODCALLTYPE *GetResource )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszResourceName,
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ LPCWSTR pszResourceName,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppCoMemResource);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetTransitionProperty)
         HRESULT ( STDMETHODCALLTYPE *GetTransitionProperty )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  SPTRANSITIONID ID,
+            /* [in] */ SPTRANSITIONID ID,
             /* [out][annotation] */ 
             _Outptr_  SPTRANSITIONPROPERTY **ppCoMemProperty);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, IsAlternate)
         HRESULT ( STDMETHODCALLTYPE *IsAlternate )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hAltRule);
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ SPRULEHANDLE hAltRule);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetMaxAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetMaxAlternates )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulNumAlts);
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [out] */ ULONG *pulNumAlts);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetContextMaxAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetContextMaxAlternates )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hContext,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulNumAlts);
+            /* [in] */ SPRECOCONTEXTHANDLE hContext,
+            /* [out] */ ULONG *pulNumAlts);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, UpdateRecoPos)
         HRESULT ( STDMETHODCALLTYPE *UpdateRecoPos )( 
             ISpSREngineSite * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullCurrentRecoPos);
+            /* [in] */ ULONGLONG ullCurrentRecoPos);
         
         END_INTERFACE
     } ISpSREngineSiteVtbl;
@@ -3070,28 +2780,20 @@ EXTERN_C const IID IID_ISpSREngineSite2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddEventEx( 
-            /* [annotation][in] */ 
-            _In_  const SPEVENTEX *pEvent,
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hSAPIRecoContext) = 0;
+            /* [in] */ const SPEVENTEX *pEvent,
+            /* [in] */ SPRECOCONTEXTHANDLE hSAPIRecoContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateRecoPosEx( 
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullCurrentRecoPos,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullCurrentRecoTime) = 0;
+            /* [in] */ ULONGLONG ullCurrentRecoPos,
+            /* [in] */ ULONGLONG ullCurrentRecoTime) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRuleTransition( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulGrammarID,
-            /* [annotation][in] */ 
-            _In_  ULONG RuleIndex,
-            /* [annotation][out] */ 
-            _Out_  SPTRANSITIONENTRY *pTrans) = 0;
+            /* [in] */ ULONG ulGrammarID,
+            /* [in] */ ULONG RuleIndex,
+            /* [out] */ SPTRANSITIONENTRY *pTrans) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RecognitionEx( 
-            /* [annotation][in] */ 
-            _In_  const SPRECORESULTINFOEX *pResultInfo) = 0;
+            /* [in] */ const SPRECORESULTINFOEX *pResultInfo) = 0;
         
     };
     
@@ -3105,8 +2807,7 @@ EXTERN_C const IID IID_ISpSREngineSite2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3121,172 +2822,133 @@ EXTERN_C const IID IID_ISpSREngineSite2;
         DECLSPEC_XFGVIRT(ISpSREngineSite, Read)
         HRESULT ( STDMETHODCALLTYPE *Read )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pv,
-            /* [annotation][in] */ 
-            _In_  ULONG cb,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbRead);
+            /* [in] */ void *pv,
+            /* [in] */ ULONG cb,
+            /* [out] */ ULONG *pcbRead);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, DataAvailable)
         HRESULT ( STDMETHODCALLTYPE *DataAvailable )( 
             ISpSREngineSite2 * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcb);
+            /* [out] */ ULONG *pcb);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, SetBufferNotifySize)
         HRESULT ( STDMETHODCALLTYPE *SetBufferNotifySize )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cbSize);
+            /* [in] */ ULONG cbSize);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, ParseFromTransitions)
         HRESULT ( STDMETHODCALLTYPE *ParseFromTransitions )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  const SPPARSEINFO *pParseInfo,
-            /* [annotation][out] */ 
-            _Out_  ISpPhraseBuilder **ppNewPhrase);
+            /* [in] */ const SPPARSEINFO *pParseInfo,
+            /* [out] */ ISpPhraseBuilder **ppNewPhrase);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, Recognition)
         HRESULT ( STDMETHODCALLTYPE *Recognition )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  const SPRECORESULTINFO *pResultInfo);
+            /* [in] */ const SPRECORESULTINFO *pResultInfo);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, AddEvent)
         HRESULT ( STDMETHODCALLTYPE *AddEvent )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  const SPEVENT *pEvent,
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hSAPIRecoContext);
+            /* [in] */ const SPEVENT *pEvent,
+            /* [in] */ SPRECOCONTEXTHANDLE hSAPIRecoContext);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, Synchronize)
         HRESULT ( STDMETHODCALLTYPE *Synchronize )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullProcessedThruPos);
+            /* [in] */ ULONGLONG ullProcessedThruPos);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetWordInfo)
         HRESULT ( STDMETHODCALLTYPE *GetWordInfo )( 
             ISpSREngineSite2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  SPWORDENTRY *pWordEntry,
-            /* [annotation][in] */ 
-            _In_  SPWORDINFOOPT Options);
+            /* [out][in] */ SPWORDENTRY *pWordEntry,
+            /* [in] */ SPWORDINFOOPT Options);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, SetWordClientContext)
         HRESULT ( STDMETHODCALLTYPE *SetWordClientContext )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  SPWORDHANDLE hWord,
-            /* [annotation][in] */ 
-            _In_  void *pvClientContext);
+            /* [in] */ SPWORDHANDLE hWord,
+            /* [in] */ void *pvClientContext);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetRuleInfo)
         HRESULT ( STDMETHODCALLTYPE *GetRuleInfo )( 
             ISpSREngineSite2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  SPRULEENTRY *pRuleEntry,
-            /* [annotation][in] */ 
-            _In_  SPRULEINFOOPT Options);
+            /* [out][in] */ SPRULEENTRY *pRuleEntry,
+            /* [in] */ SPRULEINFOOPT Options);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, SetRuleClientContext)
         HRESULT ( STDMETHODCALLTYPE *SetRuleClientContext )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  void *pvClientContext);
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ void *pvClientContext);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetStateInfo)
         HRESULT ( STDMETHODCALLTYPE *GetStateInfo )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  SPSTATEHANDLE hState,
-            /* [annotation][out] */ 
-            _Out_  SPSTATEINFO *pStateInfo);
+            /* [in] */ SPSTATEHANDLE hState,
+            /* [out] */ SPSTATEINFO *pStateInfo);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetResource)
         HRESULT ( STDMETHODCALLTYPE *GetResource )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pszResourceName,
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ LPCWSTR pszResourceName,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppCoMemResource);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetTransitionProperty)
         HRESULT ( STDMETHODCALLTYPE *GetTransitionProperty )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  SPTRANSITIONID ID,
+            /* [in] */ SPTRANSITIONID ID,
             /* [out][annotation] */ 
             _Outptr_  SPTRANSITIONPROPERTY **ppCoMemProperty);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, IsAlternate)
         HRESULT ( STDMETHODCALLTYPE *IsAlternate )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hAltRule);
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ SPRULEHANDLE hAltRule);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetMaxAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetMaxAlternates )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulNumAlts);
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [out] */ ULONG *pulNumAlts);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, GetContextMaxAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetContextMaxAlternates )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hContext,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulNumAlts);
+            /* [in] */ SPRECOCONTEXTHANDLE hContext,
+            /* [out] */ ULONG *pulNumAlts);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite, UpdateRecoPos)
         HRESULT ( STDMETHODCALLTYPE *UpdateRecoPos )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullCurrentRecoPos);
+            /* [in] */ ULONGLONG ullCurrentRecoPos);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite2, AddEventEx)
         HRESULT ( STDMETHODCALLTYPE *AddEventEx )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  const SPEVENTEX *pEvent,
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hSAPIRecoContext);
+            /* [in] */ const SPEVENTEX *pEvent,
+            /* [in] */ SPRECOCONTEXTHANDLE hSAPIRecoContext);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite2, UpdateRecoPosEx)
         HRESULT ( STDMETHODCALLTYPE *UpdateRecoPosEx )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullCurrentRecoPos,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG ullCurrentRecoTime);
+            /* [in] */ ULONGLONG ullCurrentRecoPos,
+            /* [in] */ ULONGLONG ullCurrentRecoTime);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite2, GetRuleTransition)
         HRESULT ( STDMETHODCALLTYPE *GetRuleTransition )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulGrammarID,
-            /* [annotation][in] */ 
-            _In_  ULONG RuleIndex,
-            /* [annotation][out] */ 
-            _Out_  SPTRANSITIONENTRY *pTrans);
+            /* [in] */ ULONG ulGrammarID,
+            /* [in] */ ULONG RuleIndex,
+            /* [out] */ SPTRANSITIONENTRY *pTrans);
         
         DECLSPEC_XFGVIRT(ISpSREngineSite2, RecognitionEx)
         HRESULT ( STDMETHODCALLTYPE *RecognitionEx )( 
             ISpSREngineSite2 * This,
-            /* [annotation][in] */ 
-            _In_  const SPRECORESULTINFOEX *pResultInfo);
+            /* [in] */ const SPRECORESULTINFOEX *pResultInfo);
         
         END_INTERFACE
     } ISpSREngineSite2Vtbl;
@@ -3421,236 +3083,154 @@ EXTERN_C const IID IID_ISpSREngine;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetSite( 
-            /* [annotation][in] */ 
-            _In_  ISpSREngineSite *pSite) = 0;
+            /* [in] */ ISpSREngineSite *pSite) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputAudioFormat( 
-            /* [annotation][in] */ 
-            _In_  const GUID *pguidSourceFormatId,
-            /* [annotation][in] */ 
-            _In_  const WAVEFORMATEX *pSourceWaveFormatEx,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidDesiredFormatId,
+            /* [in] */ const GUID *pguidSourceFormatId,
+            /* [in] */ const WAVEFORMATEX *pSourceWaveFormatEx,
+            /* [out] */ GUID *pguidDesiredFormatId,
             /* [out][annotation] */ 
             _Outptr_  WAVEFORMATEX **ppCoMemDesiredWaveFormatEx) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RecognizeStream( 
-            /* [annotation][in] */ 
-            _In_  REFGUID rguidFmtId,
-            /* [annotation][in] */ 
-            _In_  const WAVEFORMATEX *pWaveFormatEx,
-            /* [annotation][in] */ 
-            _In_  HANDLE hRequestSync,
-            /* [annotation][in] */ 
-            _In_  HANDLE hDataAvailable,
-            /* [annotation][in] */ 
-            _In_  HANDLE hExit,
-            /* [annotation][in] */ 
-            _In_  BOOL fNewAudioStream,
-            /* [annotation][in] */ 
-            _In_  BOOL fRealTimeAudio,
-            /* [annotation][in] */ 
-            _In_  ISpObjectToken *pAudioObjectToken) = 0;
+            /* [in] */ REFGUID rguidFmtId,
+            /* [in] */ const WAVEFORMATEX *pWaveFormatEx,
+            /* [in] */ HANDLE hRequestSync,
+            /* [in] */ HANDLE hDataAvailable,
+            /* [in] */ HANDLE hExit,
+            /* [in] */ BOOL fNewAudioStream,
+            /* [in] */ BOOL fRealTimeAudio,
+            /* [in] */ ISpObjectToken *pAudioObjectToken) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRecoProfile( 
-            /* [annotation][in] */ 
-            _In_  ISpObjectToken *pProfile) = 0;
+            /* [in] */ ISpObjectToken *pProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnCreateGrammar( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineRecoContext,
-            /* [annotation][in] */ 
-            _In_  SPGRAMMARHANDLE hSAPIGrammar,
+            /* [in] */ void *pvEngineRecoContext,
+            /* [in] */ SPGRAMMARHANDLE hSAPIGrammar,
             /* [out][annotation] */ 
             _Outptr_  void **ppvEngineGrammarContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDeleteGrammar( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar) = 0;
+            /* [in] */ void *pvEngineGrammar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LoadProprietaryGrammar( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguidParam,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszStringParam,
-            /* [annotation][in] */ 
-            _In_  const void *pvDataParam,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDataSize,
-            /* [annotation][in] */ 
-            _In_  SPLOADOPTIONS Options) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ REFGUID rguidParam,
+            /* [string][in] */ LPCWSTR pszStringParam,
+            /* [in] */ const void *pvDataParam,
+            /* [in] */ ULONG ulDataSize,
+            /* [in] */ SPLOADOPTIONS Options) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnloadProprietaryGrammar( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar) = 0;
+            /* [in] */ void *pvEngineGrammar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProprietaryRuleState( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszName,
-            /* [annotation][in] */ 
-            _In_  void *pReserved,
-            /* [annotation][in] */ 
-            _In_  SPRULESTATE NewState,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcRulesChanged) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [string][in] */ LPCWSTR pszName,
+            /* [in] */ void *pReserved,
+            /* [in] */ SPRULESTATE NewState,
+            /* [out] */ ULONG *pcRulesChanged) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProprietaryRuleIdState( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRuleId,
-            /* [annotation][in] */ 
-            _In_  SPRULESTATE NewState) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ DWORD dwRuleId,
+            /* [in] */ SPRULESTATE NewState) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE LoadSLM( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszTopicName) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [string][in] */ LPCWSTR pszTopicName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnloadSLM( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar) = 0;
+            /* [in] */ void *pvEngineGrammar) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSLMState( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  SPRULESTATE NewState) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ SPRULESTATE NewState) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetWordSequenceData( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
+            /* [in] */ void *pvEngineGrammar,
             /* [in][annotation] */ 
             _In_reads_(cchText)  const WCHAR *pText,
-            /* [annotation][in] */ 
-            _In_  ULONG cchText,
-            /* [annotation][in] */ 
-            _In_  const SPTEXTSELECTIONINFO *pInfo) = 0;
+            /* [in] */ ULONG cchText,
+            /* [in] */ const SPTEXTSELECTIONINFO *pInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTextSelection( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  const SPTEXTSELECTIONINFO *pInfo) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ const SPTEXTSELECTIONINFO *pInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsPronounceable( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszWord,
-            /* [annotation][out] */ 
-            _Out_  SPWORDPRONOUNCEABLE *pWordPronounceable) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [string][in] */ LPCWSTR pszWord,
+            /* [out] */ SPWORDPRONOUNCEABLE *pWordPronounceable) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnCreateRecoContext( 
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hSAPIRecoContext,
-            /* [annotation][out] */ 
-            _Out_  void **ppvEngineContext) = 0;
+            /* [in] */ SPRECOCONTEXTHANDLE hSAPIRecoContext,
+            /* [out] */ void **ppvEngineContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDeleteRecoContext( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext) = 0;
+            /* [in] */ void *pvEngineContext) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PrivateCall( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][out][in] */ 
-            _Inout_  PVOID pCallFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCallFrameSize) = 0;
+            /* [in] */ void *pvEngineContext,
+            /* [out][in] */ PVOID pCallFrame,
+            /* [in] */ ULONG ulCallFrameSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAdaptationData( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
+            /* [in] */ void *pvEngineContext,
             /* [annotation] */ 
             _In_reads_(cch)  const WCHAR *pAdaptationData,
-            /* [annotation][in] */ 
-            _In_  const ULONG cch) = 0;
+            /* [in] */ const ULONG cch) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPropertyNum( 
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  const WCHAR *pName,
-            /* [annotation][in] */ 
-            _In_  LONG lValue) = 0;
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ const WCHAR *pName,
+            /* [in] */ LONG lValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyNum( 
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  const WCHAR *pName,
-            /* [annotation][out] */ 
-            _Out_  LONG *lValue) = 0;
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ const WCHAR *pName,
+            /* [out] */ LONG *lValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPropertyString( 
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pName,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pValue) = 0;
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ LPCWSTR pName,
+            /* [in] */ LPCWSTR pValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyString( 
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pName,
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ LPCWSTR pName,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppCoMemValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetGrammarState( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  SPGRAMMARSTATE eGrammarState) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ SPGRAMMARSTATE eGrammarState) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WordNotify( 
-            /* [annotation][in] */ 
-            _In_  SPCFGNOTIFY Action,
-            /* [annotation][in] */ 
-            _In_  ULONG cWords,
-            /* [annotation][in] */ 
-            _In_  const SPWORDENTRY *pWords) = 0;
+            /* [in] */ SPCFGNOTIFY Action,
+            /* [in] */ ULONG cWords,
+            /* [in] */ const SPWORDENTRY *pWords) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RuleNotify( 
-            /* [annotation][in] */ 
-            _In_  SPCFGNOTIFY Action,
-            /* [annotation][in] */ 
-            _In_  ULONG cRules,
-            /* [annotation][in] */ 
-            _In_  const SPRULEENTRY *pRules) = 0;
+            /* [in] */ SPCFGNOTIFY Action,
+            /* [in] */ ULONG cRules,
+            /* [in] */ const SPRULEENTRY *pRules) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PrivateCallEx( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][in] */ 
-            _In_  const void *pInCallFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInCallFrameSize,
-            /* [annotation][out] */ 
-            _Out_  void **ppvCoMemResponse,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulResponseSize) = 0;
+            /* [in] */ void *pvEngineContext,
+            /* [in] */ const void *pInCallFrame,
+            /* [in] */ ULONG ulInCallFrameSize,
+            /* [out] */ void **ppvCoMemResponse,
+            /* [out] */ ULONG *pulResponseSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContextState( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][in] */ 
-            _In_  SPCONTEXTSTATE eContextState) = 0;
+            /* [in] */ void *pvEngineContext,
+            /* [in] */ SPCONTEXTSTATE eContextState) = 0;
         
     };
     
@@ -3664,8 +3244,7 @@ EXTERN_C const IID IID_ISpSREngine;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3680,292 +3259,210 @@ EXTERN_C const IID IID_ISpSREngine;
         DECLSPEC_XFGVIRT(ISpSREngine, SetSite)
         HRESULT ( STDMETHODCALLTYPE *SetSite )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  ISpSREngineSite *pSite);
+            /* [in] */ ISpSREngineSite *pSite);
         
         DECLSPEC_XFGVIRT(ISpSREngine, GetInputAudioFormat)
         HRESULT ( STDMETHODCALLTYPE *GetInputAudioFormat )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  const GUID *pguidSourceFormatId,
-            /* [annotation][in] */ 
-            _In_  const WAVEFORMATEX *pSourceWaveFormatEx,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidDesiredFormatId,
+            /* [in] */ const GUID *pguidSourceFormatId,
+            /* [in] */ const WAVEFORMATEX *pSourceWaveFormatEx,
+            /* [out] */ GUID *pguidDesiredFormatId,
             /* [out][annotation] */ 
             _Outptr_  WAVEFORMATEX **ppCoMemDesiredWaveFormatEx);
         
         DECLSPEC_XFGVIRT(ISpSREngine, RecognizeStream)
         HRESULT ( STDMETHODCALLTYPE *RecognizeStream )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguidFmtId,
-            /* [annotation][in] */ 
-            _In_  const WAVEFORMATEX *pWaveFormatEx,
-            /* [annotation][in] */ 
-            _In_  HANDLE hRequestSync,
-            /* [annotation][in] */ 
-            _In_  HANDLE hDataAvailable,
-            /* [annotation][in] */ 
-            _In_  HANDLE hExit,
-            /* [annotation][in] */ 
-            _In_  BOOL fNewAudioStream,
-            /* [annotation][in] */ 
-            _In_  BOOL fRealTimeAudio,
-            /* [annotation][in] */ 
-            _In_  ISpObjectToken *pAudioObjectToken);
+            /* [in] */ REFGUID rguidFmtId,
+            /* [in] */ const WAVEFORMATEX *pWaveFormatEx,
+            /* [in] */ HANDLE hRequestSync,
+            /* [in] */ HANDLE hDataAvailable,
+            /* [in] */ HANDLE hExit,
+            /* [in] */ BOOL fNewAudioStream,
+            /* [in] */ BOOL fRealTimeAudio,
+            /* [in] */ ISpObjectToken *pAudioObjectToken);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetRecoProfile)
         HRESULT ( STDMETHODCALLTYPE *SetRecoProfile )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  ISpObjectToken *pProfile);
+            /* [in] */ ISpObjectToken *pProfile);
         
         DECLSPEC_XFGVIRT(ISpSREngine, OnCreateGrammar)
         HRESULT ( STDMETHODCALLTYPE *OnCreateGrammar )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineRecoContext,
-            /* [annotation][in] */ 
-            _In_  SPGRAMMARHANDLE hSAPIGrammar,
+            /* [in] */ void *pvEngineRecoContext,
+            /* [in] */ SPGRAMMARHANDLE hSAPIGrammar,
             /* [out][annotation] */ 
             _Outptr_  void **ppvEngineGrammarContext);
         
         DECLSPEC_XFGVIRT(ISpSREngine, OnDeleteGrammar)
         HRESULT ( STDMETHODCALLTYPE *OnDeleteGrammar )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar);
+            /* [in] */ void *pvEngineGrammar);
         
         DECLSPEC_XFGVIRT(ISpSREngine, LoadProprietaryGrammar)
         HRESULT ( STDMETHODCALLTYPE *LoadProprietaryGrammar )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguidParam,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszStringParam,
-            /* [annotation][in] */ 
-            _In_  const void *pvDataParam,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDataSize,
-            /* [annotation][in] */ 
-            _In_  SPLOADOPTIONS Options);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ REFGUID rguidParam,
+            /* [string][in] */ LPCWSTR pszStringParam,
+            /* [in] */ const void *pvDataParam,
+            /* [in] */ ULONG ulDataSize,
+            /* [in] */ SPLOADOPTIONS Options);
         
         DECLSPEC_XFGVIRT(ISpSREngine, UnloadProprietaryGrammar)
         HRESULT ( STDMETHODCALLTYPE *UnloadProprietaryGrammar )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar);
+            /* [in] */ void *pvEngineGrammar);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetProprietaryRuleState)
         HRESULT ( STDMETHODCALLTYPE *SetProprietaryRuleState )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszName,
-            /* [annotation][in] */ 
-            _In_  void *pReserved,
-            /* [annotation][in] */ 
-            _In_  SPRULESTATE NewState,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcRulesChanged);
+            /* [in] */ void *pvEngineGrammar,
+            /* [string][in] */ LPCWSTR pszName,
+            /* [in] */ void *pReserved,
+            /* [in] */ SPRULESTATE NewState,
+            /* [out] */ ULONG *pcRulesChanged);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetProprietaryRuleIdState)
         HRESULT ( STDMETHODCALLTYPE *SetProprietaryRuleIdState )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRuleId,
-            /* [annotation][in] */ 
-            _In_  SPRULESTATE NewState);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ DWORD dwRuleId,
+            /* [in] */ SPRULESTATE NewState);
         
         DECLSPEC_XFGVIRT(ISpSREngine, LoadSLM)
         HRESULT ( STDMETHODCALLTYPE *LoadSLM )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszTopicName);
+            /* [in] */ void *pvEngineGrammar,
+            /* [string][in] */ LPCWSTR pszTopicName);
         
         DECLSPEC_XFGVIRT(ISpSREngine, UnloadSLM)
         HRESULT ( STDMETHODCALLTYPE *UnloadSLM )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar);
+            /* [in] */ void *pvEngineGrammar);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetSLMState)
         HRESULT ( STDMETHODCALLTYPE *SetSLMState )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  SPRULESTATE NewState);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ SPRULESTATE NewState);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetWordSequenceData)
         HRESULT ( STDMETHODCALLTYPE *SetWordSequenceData )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
+            /* [in] */ void *pvEngineGrammar,
             /* [in][annotation] */ 
             _In_reads_(cchText)  const WCHAR *pText,
-            /* [annotation][in] */ 
-            _In_  ULONG cchText,
-            /* [annotation][in] */ 
-            _In_  const SPTEXTSELECTIONINFO *pInfo);
+            /* [in] */ ULONG cchText,
+            /* [in] */ const SPTEXTSELECTIONINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetTextSelection)
         HRESULT ( STDMETHODCALLTYPE *SetTextSelection )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  const SPTEXTSELECTIONINFO *pInfo);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ const SPTEXTSELECTIONINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ISpSREngine, IsPronounceable)
         HRESULT ( STDMETHODCALLTYPE *IsPronounceable )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszWord,
-            /* [annotation][out] */ 
-            _Out_  SPWORDPRONOUNCEABLE *pWordPronounceable);
+            /* [in] */ void *pvEngineGrammar,
+            /* [string][in] */ LPCWSTR pszWord,
+            /* [out] */ SPWORDPRONOUNCEABLE *pWordPronounceable);
         
         DECLSPEC_XFGVIRT(ISpSREngine, OnCreateRecoContext)
         HRESULT ( STDMETHODCALLTYPE *OnCreateRecoContext )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hSAPIRecoContext,
-            /* [annotation][out] */ 
-            _Out_  void **ppvEngineContext);
+            /* [in] */ SPRECOCONTEXTHANDLE hSAPIRecoContext,
+            /* [out] */ void **ppvEngineContext);
         
         DECLSPEC_XFGVIRT(ISpSREngine, OnDeleteRecoContext)
         HRESULT ( STDMETHODCALLTYPE *OnDeleteRecoContext )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext);
+            /* [in] */ void *pvEngineContext);
         
         DECLSPEC_XFGVIRT(ISpSREngine, PrivateCall)
         HRESULT ( STDMETHODCALLTYPE *PrivateCall )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][out][in] */ 
-            _Inout_  PVOID pCallFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCallFrameSize);
+            /* [in] */ void *pvEngineContext,
+            /* [out][in] */ PVOID pCallFrame,
+            /* [in] */ ULONG ulCallFrameSize);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetAdaptationData)
         HRESULT ( STDMETHODCALLTYPE *SetAdaptationData )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
+            /* [in] */ void *pvEngineContext,
             /* [annotation] */ 
             _In_reads_(cch)  const WCHAR *pAdaptationData,
-            /* [annotation][in] */ 
-            _In_  const ULONG cch);
+            /* [in] */ const ULONG cch);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetPropertyNum)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyNum )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  const WCHAR *pName,
-            /* [annotation][in] */ 
-            _In_  LONG lValue);
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ const WCHAR *pName,
+            /* [in] */ LONG lValue);
         
         DECLSPEC_XFGVIRT(ISpSREngine, GetPropertyNum)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyNum )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  const WCHAR *pName,
-            /* [annotation][out] */ 
-            _Out_  LONG *lValue);
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ const WCHAR *pName,
+            /* [out] */ LONG *lValue);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetPropertyString)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyString )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pName,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pValue);
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ LPCWSTR pName,
+            /* [in] */ LPCWSTR pValue);
         
         DECLSPEC_XFGVIRT(ISpSREngine, GetPropertyString)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyString )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pName,
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ LPCWSTR pName,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppCoMemValue);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetGrammarState)
         HRESULT ( STDMETHODCALLTYPE *SetGrammarState )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  SPGRAMMARSTATE eGrammarState);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ SPGRAMMARSTATE eGrammarState);
         
         DECLSPEC_XFGVIRT(ISpSREngine, WordNotify)
         HRESULT ( STDMETHODCALLTYPE *WordNotify )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  SPCFGNOTIFY Action,
-            /* [annotation][in] */ 
-            _In_  ULONG cWords,
-            /* [annotation][in] */ 
-            _In_  const SPWORDENTRY *pWords);
+            /* [in] */ SPCFGNOTIFY Action,
+            /* [in] */ ULONG cWords,
+            /* [in] */ const SPWORDENTRY *pWords);
         
         DECLSPEC_XFGVIRT(ISpSREngine, RuleNotify)
         HRESULT ( STDMETHODCALLTYPE *RuleNotify )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  SPCFGNOTIFY Action,
-            /* [annotation][in] */ 
-            _In_  ULONG cRules,
-            /* [annotation][in] */ 
-            _In_  const SPRULEENTRY *pRules);
+            /* [in] */ SPCFGNOTIFY Action,
+            /* [in] */ ULONG cRules,
+            /* [in] */ const SPRULEENTRY *pRules);
         
         DECLSPEC_XFGVIRT(ISpSREngine, PrivateCallEx)
         HRESULT ( STDMETHODCALLTYPE *PrivateCallEx )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][in] */ 
-            _In_  const void *pInCallFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInCallFrameSize,
-            /* [annotation][out] */ 
-            _Out_  void **ppvCoMemResponse,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulResponseSize);
+            /* [in] */ void *pvEngineContext,
+            /* [in] */ const void *pInCallFrame,
+            /* [in] */ ULONG ulInCallFrameSize,
+            /* [out] */ void **ppvCoMemResponse,
+            /* [out] */ ULONG *pulResponseSize);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetContextState)
         HRESULT ( STDMETHODCALLTYPE *SetContextState )( 
             ISpSREngine * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][in] */ 
-            _In_  SPCONTEXTSTATE eContextState);
+            /* [in] */ void *pvEngineContext,
+            /* [in] */ SPCONTEXTSTATE eContextState);
         
         END_INTERFACE
     } ISpSREngineVtbl;
@@ -4104,88 +3601,60 @@ EXTERN_C const IID IID_ISpSREngine2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE PrivateCallImmediate( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][in] */ 
-            _In_  const void *pInCallFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInCallFrameSize,
+            /* [in] */ void *pvEngineContext,
+            /* [in] */ const void *pInCallFrame,
+            /* [in] */ ULONG ulInCallFrameSize,
             /* [out][annotation] */ 
             _Outptr_  void **ppvCoMemResponse,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulResponseSize) = 0;
+            /* [out] */ ULONG *pulResponseSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAdaptationData2( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
+            /* [in] */ void *pvEngineContext,
             /* [in][annotation] */ 
             _In_reads_(cch)  const WCHAR *pAdaptationData,
-            /* [annotation][in] */ 
-            _In_  const ULONG cch,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pTopicName,
-            /* [annotation][in] */ 
-            _In_  SPADAPTATIONSETTINGS eSettings,
-            /* [annotation][in] */ 
-            _In_  SPADAPTATIONRELEVANCE eRelevance) = 0;
+            /* [in] */ const ULONG cch,
+            /* [in] */ LPCWSTR pTopicName,
+            /* [in] */ SPADAPTATIONSETTINGS eSettings,
+            /* [in] */ SPADAPTATIONRELEVANCE eRelevance) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetGrammarPrefix( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
+            /* [in] */ void *pvEngineGrammar,
             /* [string][in][annotation] */ 
             _In_opt_  LPCWSTR pszPrefix,
-            /* [annotation][in] */ 
-            _In_  BOOL fIsPrefixRequired) = 0;
+            /* [in] */ BOOL fIsPrefixRequired) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRulePriority( 
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  void *pvClientRuleContext,
-            /* [annotation][in] */ 
-            _In_  int nRulePriority) = 0;
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ void *pvClientRuleContext,
+            /* [in] */ int nRulePriority) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EmulateRecognition( 
-            /* [annotation][in] */ 
-            _In_  ISpPhrase *pPhrase,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCompareFlags) = 0;
+            /* [in] */ ISpPhrase *pPhrase,
+            /* [in] */ DWORD dwCompareFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSLMWeight( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  float flWeight) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ float flWeight) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRuleWeight( 
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  void *pvClientRuleContext,
-            /* [annotation][in] */ 
-            _In_  float flWeight) = 0;
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ void *pvClientRuleContext,
+            /* [in] */ float flWeight) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTrainingState( 
-            /* [annotation][in] */ 
-            _In_  BOOL fDoingTraining,
-            /* [annotation][in] */ 
-            _In_  BOOL fAdaptFromTrainingData) = 0;
+            /* [in] */ BOOL fDoingTraining,
+            /* [in] */ BOOL fAdaptFromTrainingData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ResetAcousticModelAdaptation( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnLoadCFG( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  const SPBINARYGRAMMAR *pGrammarData,
-            /* [annotation][in] */ 
-            _In_  ULONG ulGrammarID) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ const SPBINARYGRAMMAR *pGrammarData,
+            /* [in] */ ULONG ulGrammarID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnUnloadCFG( 
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  ULONG ulGrammarID) = 0;
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ ULONG ulGrammarID) = 0;
         
     };
     
@@ -4199,8 +3668,7 @@ EXTERN_C const IID IID_ISpSREngine2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4215,376 +3683,271 @@ EXTERN_C const IID IID_ISpSREngine2;
         DECLSPEC_XFGVIRT(ISpSREngine, SetSite)
         HRESULT ( STDMETHODCALLTYPE *SetSite )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  ISpSREngineSite *pSite);
+            /* [in] */ ISpSREngineSite *pSite);
         
         DECLSPEC_XFGVIRT(ISpSREngine, GetInputAudioFormat)
         HRESULT ( STDMETHODCALLTYPE *GetInputAudioFormat )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  const GUID *pguidSourceFormatId,
-            /* [annotation][in] */ 
-            _In_  const WAVEFORMATEX *pSourceWaveFormatEx,
-            /* [annotation][out] */ 
-            _Out_  GUID *pguidDesiredFormatId,
+            /* [in] */ const GUID *pguidSourceFormatId,
+            /* [in] */ const WAVEFORMATEX *pSourceWaveFormatEx,
+            /* [out] */ GUID *pguidDesiredFormatId,
             /* [out][annotation] */ 
             _Outptr_  WAVEFORMATEX **ppCoMemDesiredWaveFormatEx);
         
         DECLSPEC_XFGVIRT(ISpSREngine, RecognizeStream)
         HRESULT ( STDMETHODCALLTYPE *RecognizeStream )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguidFmtId,
-            /* [annotation][in] */ 
-            _In_  const WAVEFORMATEX *pWaveFormatEx,
-            /* [annotation][in] */ 
-            _In_  HANDLE hRequestSync,
-            /* [annotation][in] */ 
-            _In_  HANDLE hDataAvailable,
-            /* [annotation][in] */ 
-            _In_  HANDLE hExit,
-            /* [annotation][in] */ 
-            _In_  BOOL fNewAudioStream,
-            /* [annotation][in] */ 
-            _In_  BOOL fRealTimeAudio,
-            /* [annotation][in] */ 
-            _In_  ISpObjectToken *pAudioObjectToken);
+            /* [in] */ REFGUID rguidFmtId,
+            /* [in] */ const WAVEFORMATEX *pWaveFormatEx,
+            /* [in] */ HANDLE hRequestSync,
+            /* [in] */ HANDLE hDataAvailable,
+            /* [in] */ HANDLE hExit,
+            /* [in] */ BOOL fNewAudioStream,
+            /* [in] */ BOOL fRealTimeAudio,
+            /* [in] */ ISpObjectToken *pAudioObjectToken);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetRecoProfile)
         HRESULT ( STDMETHODCALLTYPE *SetRecoProfile )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  ISpObjectToken *pProfile);
+            /* [in] */ ISpObjectToken *pProfile);
         
         DECLSPEC_XFGVIRT(ISpSREngine, OnCreateGrammar)
         HRESULT ( STDMETHODCALLTYPE *OnCreateGrammar )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineRecoContext,
-            /* [annotation][in] */ 
-            _In_  SPGRAMMARHANDLE hSAPIGrammar,
+            /* [in] */ void *pvEngineRecoContext,
+            /* [in] */ SPGRAMMARHANDLE hSAPIGrammar,
             /* [out][annotation] */ 
             _Outptr_  void **ppvEngineGrammarContext);
         
         DECLSPEC_XFGVIRT(ISpSREngine, OnDeleteGrammar)
         HRESULT ( STDMETHODCALLTYPE *OnDeleteGrammar )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar);
+            /* [in] */ void *pvEngineGrammar);
         
         DECLSPEC_XFGVIRT(ISpSREngine, LoadProprietaryGrammar)
         HRESULT ( STDMETHODCALLTYPE *LoadProprietaryGrammar )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguidParam,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszStringParam,
-            /* [annotation][in] */ 
-            _In_  const void *pvDataParam,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDataSize,
-            /* [annotation][in] */ 
-            _In_  SPLOADOPTIONS Options);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ REFGUID rguidParam,
+            /* [string][in] */ LPCWSTR pszStringParam,
+            /* [in] */ const void *pvDataParam,
+            /* [in] */ ULONG ulDataSize,
+            /* [in] */ SPLOADOPTIONS Options);
         
         DECLSPEC_XFGVIRT(ISpSREngine, UnloadProprietaryGrammar)
         HRESULT ( STDMETHODCALLTYPE *UnloadProprietaryGrammar )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar);
+            /* [in] */ void *pvEngineGrammar);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetProprietaryRuleState)
         HRESULT ( STDMETHODCALLTYPE *SetProprietaryRuleState )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszName,
-            /* [annotation][in] */ 
-            _In_  void *pReserved,
-            /* [annotation][in] */ 
-            _In_  SPRULESTATE NewState,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcRulesChanged);
+            /* [in] */ void *pvEngineGrammar,
+            /* [string][in] */ LPCWSTR pszName,
+            /* [in] */ void *pReserved,
+            /* [in] */ SPRULESTATE NewState,
+            /* [out] */ ULONG *pcRulesChanged);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetProprietaryRuleIdState)
         HRESULT ( STDMETHODCALLTYPE *SetProprietaryRuleIdState )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  DWORD dwRuleId,
-            /* [annotation][in] */ 
-            _In_  SPRULESTATE NewState);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ DWORD dwRuleId,
+            /* [in] */ SPRULESTATE NewState);
         
         DECLSPEC_XFGVIRT(ISpSREngine, LoadSLM)
         HRESULT ( STDMETHODCALLTYPE *LoadSLM )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszTopicName);
+            /* [in] */ void *pvEngineGrammar,
+            /* [string][in] */ LPCWSTR pszTopicName);
         
         DECLSPEC_XFGVIRT(ISpSREngine, UnloadSLM)
         HRESULT ( STDMETHODCALLTYPE *UnloadSLM )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar);
+            /* [in] */ void *pvEngineGrammar);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetSLMState)
         HRESULT ( STDMETHODCALLTYPE *SetSLMState )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  SPRULESTATE NewState);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ SPRULESTATE NewState);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetWordSequenceData)
         HRESULT ( STDMETHODCALLTYPE *SetWordSequenceData )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
+            /* [in] */ void *pvEngineGrammar,
             /* [in][annotation] */ 
             _In_reads_(cchText)  const WCHAR *pText,
-            /* [annotation][in] */ 
-            _In_  ULONG cchText,
-            /* [annotation][in] */ 
-            _In_  const SPTEXTSELECTIONINFO *pInfo);
+            /* [in] */ ULONG cchText,
+            /* [in] */ const SPTEXTSELECTIONINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetTextSelection)
         HRESULT ( STDMETHODCALLTYPE *SetTextSelection )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  const SPTEXTSELECTIONINFO *pInfo);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ const SPTEXTSELECTIONINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ISpSREngine, IsPronounceable)
         HRESULT ( STDMETHODCALLTYPE *IsPronounceable )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszWord,
-            /* [annotation][out] */ 
-            _Out_  SPWORDPRONOUNCEABLE *pWordPronounceable);
+            /* [in] */ void *pvEngineGrammar,
+            /* [string][in] */ LPCWSTR pszWord,
+            /* [out] */ SPWORDPRONOUNCEABLE *pWordPronounceable);
         
         DECLSPEC_XFGVIRT(ISpSREngine, OnCreateRecoContext)
         HRESULT ( STDMETHODCALLTYPE *OnCreateRecoContext )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  SPRECOCONTEXTHANDLE hSAPIRecoContext,
-            /* [annotation][out] */ 
-            _Out_  void **ppvEngineContext);
+            /* [in] */ SPRECOCONTEXTHANDLE hSAPIRecoContext,
+            /* [out] */ void **ppvEngineContext);
         
         DECLSPEC_XFGVIRT(ISpSREngine, OnDeleteRecoContext)
         HRESULT ( STDMETHODCALLTYPE *OnDeleteRecoContext )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext);
+            /* [in] */ void *pvEngineContext);
         
         DECLSPEC_XFGVIRT(ISpSREngine, PrivateCall)
         HRESULT ( STDMETHODCALLTYPE *PrivateCall )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][out][in] */ 
-            _Inout_  PVOID pCallFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCallFrameSize);
+            /* [in] */ void *pvEngineContext,
+            /* [out][in] */ PVOID pCallFrame,
+            /* [in] */ ULONG ulCallFrameSize);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetAdaptationData)
         HRESULT ( STDMETHODCALLTYPE *SetAdaptationData )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
+            /* [in] */ void *pvEngineContext,
             /* [annotation] */ 
             _In_reads_(cch)  const WCHAR *pAdaptationData,
-            /* [annotation][in] */ 
-            _In_  const ULONG cch);
+            /* [in] */ const ULONG cch);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetPropertyNum)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyNum )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  const WCHAR *pName,
-            /* [annotation][in] */ 
-            _In_  LONG lValue);
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ const WCHAR *pName,
+            /* [in] */ LONG lValue);
         
         DECLSPEC_XFGVIRT(ISpSREngine, GetPropertyNum)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyNum )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  const WCHAR *pName,
-            /* [annotation][out] */ 
-            _Out_  LONG *lValue);
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ const WCHAR *pName,
+            /* [out] */ LONG *lValue);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetPropertyString)
         HRESULT ( STDMETHODCALLTYPE *SetPropertyString )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pName,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pValue);
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ LPCWSTR pName,
+            /* [in] */ LPCWSTR pValue);
         
         DECLSPEC_XFGVIRT(ISpSREngine, GetPropertyString)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyString )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  SPPROPSRC eSrc,
-            /* [annotation][in] */ 
-            _In_  void *pvSrcObj,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pName,
+            /* [in] */ SPPROPSRC eSrc,
+            /* [in] */ void *pvSrcObj,
+            /* [in] */ LPCWSTR pName,
             /* [out][annotation] */ 
             _Outptr_  LPWSTR *ppCoMemValue);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetGrammarState)
         HRESULT ( STDMETHODCALLTYPE *SetGrammarState )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  SPGRAMMARSTATE eGrammarState);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ SPGRAMMARSTATE eGrammarState);
         
         DECLSPEC_XFGVIRT(ISpSREngine, WordNotify)
         HRESULT ( STDMETHODCALLTYPE *WordNotify )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  SPCFGNOTIFY Action,
-            /* [annotation][in] */ 
-            _In_  ULONG cWords,
-            /* [annotation][in] */ 
-            _In_  const SPWORDENTRY *pWords);
+            /* [in] */ SPCFGNOTIFY Action,
+            /* [in] */ ULONG cWords,
+            /* [in] */ const SPWORDENTRY *pWords);
         
         DECLSPEC_XFGVIRT(ISpSREngine, RuleNotify)
         HRESULT ( STDMETHODCALLTYPE *RuleNotify )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  SPCFGNOTIFY Action,
-            /* [annotation][in] */ 
-            _In_  ULONG cRules,
-            /* [annotation][in] */ 
-            _In_  const SPRULEENTRY *pRules);
+            /* [in] */ SPCFGNOTIFY Action,
+            /* [in] */ ULONG cRules,
+            /* [in] */ const SPRULEENTRY *pRules);
         
         DECLSPEC_XFGVIRT(ISpSREngine, PrivateCallEx)
         HRESULT ( STDMETHODCALLTYPE *PrivateCallEx )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][in] */ 
-            _In_  const void *pInCallFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInCallFrameSize,
-            /* [annotation][out] */ 
-            _Out_  void **ppvCoMemResponse,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulResponseSize);
+            /* [in] */ void *pvEngineContext,
+            /* [in] */ const void *pInCallFrame,
+            /* [in] */ ULONG ulInCallFrameSize,
+            /* [out] */ void **ppvCoMemResponse,
+            /* [out] */ ULONG *pulResponseSize);
         
         DECLSPEC_XFGVIRT(ISpSREngine, SetContextState)
         HRESULT ( STDMETHODCALLTYPE *SetContextState )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][in] */ 
-            _In_  SPCONTEXTSTATE eContextState);
+            /* [in] */ void *pvEngineContext,
+            /* [in] */ SPCONTEXTSTATE eContextState);
         
         DECLSPEC_XFGVIRT(ISpSREngine2, PrivateCallImmediate)
         HRESULT ( STDMETHODCALLTYPE *PrivateCallImmediate )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
-            /* [annotation][in] */ 
-            _In_  const void *pInCallFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInCallFrameSize,
+            /* [in] */ void *pvEngineContext,
+            /* [in] */ const void *pInCallFrame,
+            /* [in] */ ULONG ulInCallFrameSize,
             /* [out][annotation] */ 
             _Outptr_  void **ppvCoMemResponse,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulResponseSize);
+            /* [out] */ ULONG *pulResponseSize);
         
         DECLSPEC_XFGVIRT(ISpSREngine2, SetAdaptationData2)
         HRESULT ( STDMETHODCALLTYPE *SetAdaptationData2 )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineContext,
+            /* [in] */ void *pvEngineContext,
             /* [in][annotation] */ 
             _In_reads_(cch)  const WCHAR *pAdaptationData,
-            /* [annotation][in] */ 
-            _In_  const ULONG cch,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pTopicName,
-            /* [annotation][in] */ 
-            _In_  SPADAPTATIONSETTINGS eSettings,
-            /* [annotation][in] */ 
-            _In_  SPADAPTATIONRELEVANCE eRelevance);
+            /* [in] */ const ULONG cch,
+            /* [in] */ LPCWSTR pTopicName,
+            /* [in] */ SPADAPTATIONSETTINGS eSettings,
+            /* [in] */ SPADAPTATIONRELEVANCE eRelevance);
         
         DECLSPEC_XFGVIRT(ISpSREngine2, SetGrammarPrefix)
         HRESULT ( STDMETHODCALLTYPE *SetGrammarPrefix )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
+            /* [in] */ void *pvEngineGrammar,
             /* [string][in][annotation] */ 
             _In_opt_  LPCWSTR pszPrefix,
-            /* [annotation][in] */ 
-            _In_  BOOL fIsPrefixRequired);
+            /* [in] */ BOOL fIsPrefixRequired);
         
         DECLSPEC_XFGVIRT(ISpSREngine2, SetRulePriority)
         HRESULT ( STDMETHODCALLTYPE *SetRulePriority )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  void *pvClientRuleContext,
-            /* [annotation][in] */ 
-            _In_  int nRulePriority);
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ void *pvClientRuleContext,
+            /* [in] */ int nRulePriority);
         
         DECLSPEC_XFGVIRT(ISpSREngine2, EmulateRecognition)
         HRESULT ( STDMETHODCALLTYPE *EmulateRecognition )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  ISpPhrase *pPhrase,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCompareFlags);
+            /* [in] */ ISpPhrase *pPhrase,
+            /* [in] */ DWORD dwCompareFlags);
         
         DECLSPEC_XFGVIRT(ISpSREngine2, SetSLMWeight)
         HRESULT ( STDMETHODCALLTYPE *SetSLMWeight )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  float flWeight);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ float flWeight);
         
         DECLSPEC_XFGVIRT(ISpSREngine2, SetRuleWeight)
         HRESULT ( STDMETHODCALLTYPE *SetRuleWeight )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  SPRULEHANDLE hRule,
-            /* [annotation][in] */ 
-            _In_  void *pvClientRuleContext,
-            /* [annotation][in] */ 
-            _In_  float flWeight);
+            /* [in] */ SPRULEHANDLE hRule,
+            /* [in] */ void *pvClientRuleContext,
+            /* [in] */ float flWeight);
         
         DECLSPEC_XFGVIRT(ISpSREngine2, SetTrainingState)
         HRESULT ( STDMETHODCALLTYPE *SetTrainingState )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fDoingTraining,
-            /* [annotation][in] */ 
-            _In_  BOOL fAdaptFromTrainingData);
+            /* [in] */ BOOL fDoingTraining,
+            /* [in] */ BOOL fAdaptFromTrainingData);
         
         DECLSPEC_XFGVIRT(ISpSREngine2, ResetAcousticModelAdaptation)
         HRESULT ( STDMETHODCALLTYPE *ResetAcousticModelAdaptation )( 
@@ -4593,20 +3956,15 @@ EXTERN_C const IID IID_ISpSREngine2;
         DECLSPEC_XFGVIRT(ISpSREngine2, OnLoadCFG)
         HRESULT ( STDMETHODCALLTYPE *OnLoadCFG )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  const SPBINARYGRAMMAR *pGrammarData,
-            /* [annotation][in] */ 
-            _In_  ULONG ulGrammarID);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ const SPBINARYGRAMMAR *pGrammarData,
+            /* [in] */ ULONG ulGrammarID);
         
         DECLSPEC_XFGVIRT(ISpSREngine2, OnUnloadCFG)
         HRESULT ( STDMETHODCALLTYPE *OnUnloadCFG )( 
             ISpSREngine2 * This,
-            /* [annotation][in] */ 
-            _In_  void *pvEngineGrammar,
-            /* [annotation][in] */ 
-            _In_  ULONG ulGrammarID);
+            /* [in] */ void *pvEngineGrammar,
+            /* [in] */ ULONG ulGrammarID);
         
         END_INTERFACE
     } ISpSREngine2Vtbl;
@@ -4798,22 +4156,15 @@ EXTERN_C const IID IID_ISpSRAlternates;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetAlternates( 
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALTREQUEST *pAltRequest,
-            /* [annotation][out] */ 
-            _Out_  SPPHRASEALT **ppAlts,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcAlts) = 0;
+            /* [in] */ SPPHRASEALTREQUEST *pAltRequest,
+            /* [out] */ SPPHRASEALT **ppAlts,
+            /* [out] */ ULONG *pcAlts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Commit( 
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALTREQUEST *pAltRequest,
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALT *pAlt,
-            /* [annotation][out] */ 
-            _Out_  void **ppvResultExtra,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbResultExtra) = 0;
+            /* [in] */ SPPHRASEALTREQUEST *pAltRequest,
+            /* [in] */ SPPHRASEALT *pAlt,
+            /* [out] */ void **ppvResultExtra,
+            /* [out] */ ULONG *pcbResultExtra) = 0;
         
     };
     
@@ -4827,8 +4178,7 @@ EXTERN_C const IID IID_ISpSRAlternates;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpSRAlternates * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4843,24 +4193,17 @@ EXTERN_C const IID IID_ISpSRAlternates;
         DECLSPEC_XFGVIRT(ISpSRAlternates, GetAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetAlternates )( 
             ISpSRAlternates * This,
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALTREQUEST *pAltRequest,
-            /* [annotation][out] */ 
-            _Out_  SPPHRASEALT **ppAlts,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcAlts);
+            /* [in] */ SPPHRASEALTREQUEST *pAltRequest,
+            /* [out] */ SPPHRASEALT **ppAlts,
+            /* [out] */ ULONG *pcAlts);
         
         DECLSPEC_XFGVIRT(ISpSRAlternates, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             ISpSRAlternates * This,
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALTREQUEST *pAltRequest,
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALT *pAlt,
-            /* [annotation][out] */ 
-            _Out_  void **ppvResultExtra,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbResultExtra);
+            /* [in] */ SPPHRASEALTREQUEST *pAltRequest,
+            /* [in] */ SPPHRASEALT *pAlt,
+            /* [out] */ void **ppvResultExtra,
+            /* [out] */ ULONG *pcbResultExtra);
         
         END_INTERFACE
     } ISpSRAlternatesVtbl;
@@ -4918,12 +4261,10 @@ EXTERN_C const IID IID_ISpSRAlternates2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CommitText( 
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALTREQUEST *pAltRequest,
+            /* [in] */ SPPHRASEALTREQUEST *pAltRequest,
             /* [annotation] */ 
             _In_opt_  LPCWSTR pcszNewText,
-            /* [annotation][in] */ 
-            _In_  SPCOMMITFLAGS commitFlags) = 0;
+            /* [in] */ SPCOMMITFLAGS commitFlags) = 0;
         
     };
     
@@ -4937,8 +4278,7 @@ EXTERN_C const IID IID_ISpSRAlternates2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpSRAlternates2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4953,34 +4293,25 @@ EXTERN_C const IID IID_ISpSRAlternates2;
         DECLSPEC_XFGVIRT(ISpSRAlternates, GetAlternates)
         HRESULT ( STDMETHODCALLTYPE *GetAlternates )( 
             ISpSRAlternates2 * This,
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALTREQUEST *pAltRequest,
-            /* [annotation][out] */ 
-            _Out_  SPPHRASEALT **ppAlts,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcAlts);
+            /* [in] */ SPPHRASEALTREQUEST *pAltRequest,
+            /* [out] */ SPPHRASEALT **ppAlts,
+            /* [out] */ ULONG *pcAlts);
         
         DECLSPEC_XFGVIRT(ISpSRAlternates, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             ISpSRAlternates2 * This,
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALTREQUEST *pAltRequest,
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALT *pAlt,
-            /* [annotation][out] */ 
-            _Out_  void **ppvResultExtra,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbResultExtra);
+            /* [in] */ SPPHRASEALTREQUEST *pAltRequest,
+            /* [in] */ SPPHRASEALT *pAlt,
+            /* [out] */ void **ppvResultExtra,
+            /* [out] */ ULONG *pcbResultExtra);
         
         DECLSPEC_XFGVIRT(ISpSRAlternates2, CommitText)
         HRESULT ( STDMETHODCALLTYPE *CommitText )( 
             ISpSRAlternates2 * This,
-            /* [annotation][in] */ 
-            _In_  SPPHRASEALTREQUEST *pAltRequest,
+            /* [in] */ SPPHRASEALTREQUEST *pAltRequest,
             /* [annotation] */ 
             _In_opt_  LPCWSTR pcszNewText,
-            /* [annotation][in] */ 
-            _In_  SPCOMMITFLAGS commitFlags);
+            /* [in] */ SPCOMMITFLAGS commitFlags);
         
         END_INTERFACE
     } ISpSRAlternates2Vtbl;
@@ -5044,14 +4375,12 @@ EXTERN_C const IID IID__ISpPrivateEngineCall;
         virtual HRESULT STDMETHODCALLTYPE CallEngine( 
             /* [out][in][annotation] */ 
             _Inout_updates_bytes_(ulCallFrameSize)  void *pCallFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCallFrameSize) = 0;
+            /* [in] */ ULONG ulCallFrameSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CallEngineEx( 
             /* [in][annotation] */ 
             _In_reads_bytes_(ulInFrameSize)  const void *pInFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInFrameSize,
+            /* [in] */ ULONG ulInFrameSize,
             /* [out][annotation] */ 
             _Outptr_result_buffer_maybenull_(*pulOutFrameSize)  void **ppCoMemOutFrame,
             /* [out][annotation] */ 
@@ -5069,8 +4398,7 @@ EXTERN_C const IID IID__ISpPrivateEngineCall;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             _ISpPrivateEngineCall * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5087,16 +4415,14 @@ EXTERN_C const IID IID__ISpPrivateEngineCall;
             _ISpPrivateEngineCall * This,
             /* [out][in][annotation] */ 
             _Inout_updates_bytes_(ulCallFrameSize)  void *pCallFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCallFrameSize);
+            /* [in] */ ULONG ulCallFrameSize);
         
         DECLSPEC_XFGVIRT(_ISpPrivateEngineCall, CallEngineEx)
         HRESULT ( STDMETHODCALLTYPE *CallEngineEx )( 
             _ISpPrivateEngineCall * This,
             /* [in][annotation] */ 
             _In_reads_bytes_(ulInFrameSize)  const void *pInFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInFrameSize,
+            /* [in] */ ULONG ulInFrameSize,
             /* [out][annotation] */ 
             _Outptr_result_buffer_maybenull_(*pulOutFrameSize)  void **ppCoMemOutFrame,
             /* [out][annotation] */ 
@@ -5160,8 +4486,7 @@ EXTERN_C const IID IID_ISpPrivateEngineCallEx;
         virtual HRESULT STDMETHODCALLTYPE CallEngineSynchronize( 
             /* [in][annotation] */ 
             _In_reads_bytes_(ulInFrameSize)  const void *pInFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInFrameSize,
+            /* [in] */ ULONG ulInFrameSize,
             /* [out][annotation] */ 
             _Outptr_result_bytebuffer_(*pulOutFrameSize)  void **ppCoMemOutFrame,
             /* [out][annotation] */ 
@@ -5170,8 +4495,7 @@ EXTERN_C const IID IID_ISpPrivateEngineCallEx;
         virtual HRESULT STDMETHODCALLTYPE CallEngineImmediate( 
             /* [in][annotation] */ 
             _In_reads_bytes_(ulInFrameSize)  const void *pInFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInFrameSize,
+            /* [in] */ ULONG ulInFrameSize,
             /* [out][annotation] */ 
             _Outptr_result_bytebuffer_(*pulOutFrameSize)  void **ppCoMemOutFrame,
             /* [out][annotation] */ 
@@ -5189,8 +4513,7 @@ EXTERN_C const IID IID_ISpPrivateEngineCallEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpPrivateEngineCallEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5207,8 +4530,7 @@ EXTERN_C const IID IID_ISpPrivateEngineCallEx;
             ISpPrivateEngineCallEx * This,
             /* [in][annotation] */ 
             _In_reads_bytes_(ulInFrameSize)  const void *pInFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInFrameSize,
+            /* [in] */ ULONG ulInFrameSize,
             /* [out][annotation] */ 
             _Outptr_result_bytebuffer_(*pulOutFrameSize)  void **ppCoMemOutFrame,
             /* [out][annotation] */ 
@@ -5219,8 +4541,7 @@ EXTERN_C const IID IID_ISpPrivateEngineCallEx;
             ISpPrivateEngineCallEx * This,
             /* [in][annotation] */ 
             _In_reads_bytes_(ulInFrameSize)  const void *pInFrame,
-            /* [annotation][in] */ 
-            _In_  ULONG ulInFrameSize,
+            /* [in] */ ULONG ulInFrameSize,
             /* [out][annotation] */ 
             _Outptr_result_bytebuffer_(*pulOutFrameSize)  void **ppCoMemOutFrame,
             /* [out][annotation] */ 

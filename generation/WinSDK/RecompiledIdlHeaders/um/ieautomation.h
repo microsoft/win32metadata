@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -134,26 +134,20 @@ EXTERN_C const IID IID_IEnumManagerFrames;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  HWND **ppWindows,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) HWND **ppWindows,
+            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Count( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcelt) = 0;
+            /* [out] */ __RPC__out ULONG *pcelt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumManagerFrames **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumManagerFrames **ppEnum) = 0;
         
     };
     
@@ -167,8 +161,7 @@ EXTERN_C const IID IID_IEnumManagerFrames;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumManagerFrames * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -183,24 +176,19 @@ EXTERN_C const IID IID_IEnumManagerFrames;
         DECLSPEC_XFGVIRT(IEnumManagerFrames, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumManagerFrames * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  HWND **ppWindows,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) HWND **ppWindows,
+            /* [out] */ __RPC__out ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumManagerFrames, Count)
         HRESULT ( STDMETHODCALLTYPE *Count )( 
             __RPC__in IEnumManagerFrames * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcelt);
+            /* [out] */ __RPC__out ULONG *pcelt);
         
         DECLSPEC_XFGVIRT(IEnumManagerFrames, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumManagerFrames * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumManagerFrames, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -209,8 +197,7 @@ EXTERN_C const IID IID_IEnumManagerFrames;
         DECLSPEC_XFGVIRT(IEnumManagerFrames, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumManagerFrames * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumManagerFrames **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumManagerFrames **ppEnum);
         
         END_INTERFACE
     } IEnumManagerFramesVtbl;
@@ -277,14 +264,10 @@ EXTERN_C const IID IID_IInternetExplorerManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateObject( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwConfig,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPCWSTR pszURL,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppv) = 0;
+            /* [in] */ DWORD dwConfig,
+            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszURL,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv) = 0;
         
     };
     
@@ -298,8 +281,7 @@ EXTERN_C const IID IID_IInternetExplorerManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInternetExplorerManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -314,14 +296,10 @@ EXTERN_C const IID IID_IInternetExplorerManager;
         DECLSPEC_XFGVIRT(IInternetExplorerManager, CreateObject)
         HRESULT ( STDMETHODCALLTYPE *CreateObject )( 
             __RPC__in IInternetExplorerManager * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwConfig,
-            /* [annotation][string][unique][in] */ 
-            _In_  LPCWSTR pszURL,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  void **ppv);
+            /* [in] */ DWORD dwConfig,
+            /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pszURL,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt void **ppv);
         
         END_INTERFACE
     } IInternetExplorerManagerVtbl;
@@ -376,8 +354,7 @@ EXTERN_C const IID IID_IInternetExplorerManager2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumFrameWindows( 
-            /* [annotation][out] */ 
-            _Out_  IEnumManagerFrames **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumManagerFrames **ppEnum) = 0;
         
     };
     
@@ -391,8 +368,7 @@ EXTERN_C const IID IID_IInternetExplorerManager2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInternetExplorerManager2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -407,8 +383,7 @@ EXTERN_C const IID IID_IInternetExplorerManager2;
         DECLSPEC_XFGVIRT(IInternetExplorerManager2, EnumFrameWindows)
         HRESULT ( STDMETHODCALLTYPE *EnumFrameWindows )( 
             __RPC__in IInternetExplorerManager2 * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumManagerFrames **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumManagerFrames **ppEnum);
         
         END_INTERFACE
     } IInternetExplorerManager2Vtbl;

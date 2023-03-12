@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -181,8 +181,7 @@ EXTERN_C const IID IID_IUnknown;
     public:
         BEGIN_INTERFACE
         virtual HRESULT STDMETHODCALLTYPE QueryInterface( 
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject) = 0;
         
@@ -203,8 +202,7 @@ EXTERN_C const IID IID_IUnknown;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IUnknown * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -247,8 +245,7 @@ EXTERN_C const IID IID_IUnknown;
 
 HRESULT STDMETHODCALLTYPE IUnknown_QueryInterface_Proxy( 
     IUnknown * This,
-    /* [annotation][in] */ 
-    _In_  REFIID riid,
+    /* [in] */ REFIID riid,
     /* [annotation][iid_is][out] */ 
     _COM_Outptr_  void **ppvObject);
 
@@ -315,8 +312,7 @@ EXTERN_C const IID IID_AsyncIUnknown;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Begin_QueryInterface( 
-            /* [annotation][in] */ 
-            _In_  REFIID riid) = 0;
+            /* [in] */ REFIID riid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Finish_QueryInterface( 
             /* [annotation][out] */ 
@@ -342,8 +338,7 @@ EXTERN_C const IID IID_AsyncIUnknown;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             AsyncIUnknown * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -358,8 +353,7 @@ EXTERN_C const IID IID_AsyncIUnknown;
         DECLSPEC_XFGVIRT(AsyncIUnknown, Begin_QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *Begin_QueryInterface )( 
             AsyncIUnknown * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid);
+            /* [in] */ REFIID riid);
         
         DECLSPEC_XFGVIRT(AsyncIUnknown, Finish_QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *Finish_QueryInterface )( 
@@ -473,8 +467,7 @@ EXTERN_C const IID IID_IClassFactory;
             _COM_Outptr_  void **ppvObject) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE LockServer( 
-            /* [annotation][in] */ 
-            _In_  BOOL fLock) = 0;
+            /* [in] */ BOOL fLock) = 0;
         
     };
     
@@ -488,8 +481,7 @@ EXTERN_C const IID IID_IClassFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IClassFactory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -514,8 +506,7 @@ EXTERN_C const IID IID_IClassFactory;
         DECLSPEC_XFGVIRT(IClassFactory, LockServer)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *LockServer )( 
             IClassFactory * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fLock);
+            /* [in] */ BOOL fLock);
         
         END_INTERFACE
     } IClassFactoryVtbl;
@@ -555,10 +546,8 @@ EXTERN_C const IID IID_IClassFactory;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IClassFactory_RemoteCreateInstance_Proxy( 
     __RPC__in IClassFactory * This,
-    /* [annotation][in] */ 
-    _In_  REFIID riid,
-    /* [annotation][iid_is][out] */ 
-    _COM_Outptr_  IUnknown **ppvObject);
+    /* [in] */ __RPC__in REFIID riid,
+    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
 
 
 void __RPC_STUB IClassFactory_RemoteCreateInstance_Stub(
@@ -570,8 +559,7 @@ void __RPC_STUB IClassFactory_RemoteCreateInstance_Stub(
 
 /* [call_as] */ HRESULT __stdcall IClassFactory_RemoteLockServer_Proxy( 
     __RPC__in IClassFactory * This,
-    /* [annotation][in] */ 
-    _In_  BOOL fLock);
+    /* [in] */ BOOL fLock);
 
 
 void __RPC_STUB IClassFactory_RemoteLockServer_Stub(
@@ -609,21 +597,17 @@ extern RPC_IF_HANDLE __MIDL_itf_unknwn_0000_0003_v0_0_s_ifspec;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IClassFactory_CreateInstance_Stub( 
     __RPC__in IClassFactory * This,
-    /* [annotation][in] */ 
-    _In_  REFIID riid,
-    /* [annotation][iid_is][out] */ 
-    _COM_Outptr_  IUnknown **ppvObject);
+    /* [in] */ __RPC__in REFIID riid,
+    /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IClassFactory_LockServer_Proxy( 
     IClassFactory * This,
-    /* [annotation][in] */ 
-    _In_  BOOL fLock);
+    /* [in] */ BOOL fLock);
 
 
 /* [call_as] */ HRESULT __stdcall IClassFactory_LockServer_Stub( 
     __RPC__in IClassFactory * This,
-    /* [annotation][in] */ 
-    _In_  BOOL fLock);
+    /* [in] */ BOOL fLock);
 
 
 

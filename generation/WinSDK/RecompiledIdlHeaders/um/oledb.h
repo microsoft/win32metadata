@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -3006,8 +3006,7 @@ EXTERN_C const IID IID_IAccessor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccessor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3235,8 +3234,7 @@ EXTERN_C const IID IID_IRowset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowset * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3397,8 +3395,7 @@ EXTERN_C const IID IID_IRowsetInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRowsetInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3611,8 +3608,7 @@ EXTERN_C const IID IID_IRowsetLocate;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetLocate * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3818,8 +3814,7 @@ EXTERN_C const IID IID_IRowsetResynch;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetResynch * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3943,8 +3938,7 @@ EXTERN_C const IID IID_IRowsetScroll;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetScroll * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4177,8 +4171,7 @@ EXTERN_C const IID IID_IChapteredRowset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IChapteredRowset * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4324,8 +4317,7 @@ EXTERN_C const IID IID_IRowsetFind;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetFind * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4463,8 +4455,7 @@ EXTERN_C const IID IID_IRowPosition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRowPosition * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4674,8 +4665,7 @@ EXTERN_C const IID IID_IRowPositionChange;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRowPositionChange * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4800,8 +4790,7 @@ EXTERN_C const IID IID_IViewRowset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IViewRowset * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4951,8 +4940,7 @@ EXTERN_C const IID IID_IViewChapter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IViewChapter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5102,8 +5090,7 @@ EXTERN_C const IID IID_IViewSort;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IViewSort * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5267,8 +5254,7 @@ EXTERN_C const IID IID_IViewFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IViewFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5423,8 +5409,7 @@ EXTERN_C const IID IID_IRowsetView;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRowsetView * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5579,8 +5564,7 @@ EXTERN_C const IID IID_IRowsetExactScroll;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetExactScroll * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5833,8 +5817,7 @@ EXTERN_C const IID IID_IRowsetChange;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetChange * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5997,8 +5980,7 @@ EXTERN_C const IID IID_IRowsetUpdate;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetUpdate * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6180,8 +6162,7 @@ EXTERN_C const IID IID_IRowsetIdentity;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRowsetIdentity * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6318,8 +6299,7 @@ EXTERN_C const IID IID_IRowsetNotify;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRowsetNotify * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6558,8 +6538,7 @@ EXTERN_C const IID IID_IRowsetIndex;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetIndex * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6698,8 +6677,7 @@ EXTERN_C const IID IID_ICommand;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICommand * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6888,8 +6866,7 @@ EXTERN_C const IID IID_IMultipleResults;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMultipleResults * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7032,8 +7009,7 @@ EXTERN_C const IID IID_IConvertType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IConvertType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7149,8 +7125,7 @@ EXTERN_C const IID IID_ICommandPrepare;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICommandPrepare * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7290,8 +7265,7 @@ EXTERN_C const IID IID_ICommandProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICommandProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7444,8 +7418,7 @@ EXTERN_C const IID IID_ICommandText;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICommandText * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7646,8 +7619,7 @@ EXTERN_C const IID IID_ICommandWithParameters;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICommandWithParameters * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7836,8 +7808,7 @@ EXTERN_C const IID IID_IColumnsRowset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IColumnsRowset * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8002,8 +7973,7 @@ EXTERN_C const IID IID_IColumnsInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IColumnsInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8154,8 +8124,7 @@ EXTERN_C const IID IID_IDBCreateCommand;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDBCreateCommand * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8276,8 +8245,7 @@ EXTERN_C const IID IID_IDBCreateSession;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDBCreateSession * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8429,8 +8397,7 @@ EXTERN_C const IID IID_ISourcesRowset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISourcesRowset * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8576,8 +8543,7 @@ EXTERN_C const IID IID_IDBProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDBProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8759,8 +8725,7 @@ EXTERN_C const IID IID_IDBInitialize;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDBInitialize * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8965,8 +8930,7 @@ EXTERN_C const IID IID_IDBInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDBInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9140,8 +9104,7 @@ EXTERN_C const IID IID_IDBDataSourceAdmin;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDBDataSourceAdmin * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9362,8 +9325,7 @@ EXTERN_C const IID IID_IDBAsynchNotify;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDBAsynchNotify * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9543,8 +9505,7 @@ EXTERN_C const IID IID_IDBAsynchStatus;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDBAsynchStatus * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9704,8 +9665,7 @@ EXTERN_C const IID IID_ISessionProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISessionProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9867,8 +9827,7 @@ EXTERN_C const IID IID_IIndexDefinition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIndexDefinition * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10055,8 +10014,7 @@ EXTERN_C const IID IID_ITableDefinition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITableDefinition * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10281,8 +10239,7 @@ EXTERN_C const IID IID_IOpenRowset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpenRowset * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10491,8 +10448,7 @@ EXTERN_C const IID IID_IDBSchemaRowset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDBSchemaRowset * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10676,8 +10632,7 @@ EXTERN_C const IID IID_IMDDataset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMDDataset * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10827,8 +10782,7 @@ EXTERN_C const IID IID_IMDFind;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMDFind * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10946,8 +10900,7 @@ EXTERN_C const IID IID_IMDRangeRowset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMDRangeRowset * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11059,8 +11012,7 @@ EXTERN_C const IID IID_IAlterTable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAlterTable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11175,8 +11127,7 @@ EXTERN_C const IID IID_IAlterIndex;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAlterIndex * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11278,8 +11229,7 @@ EXTERN_C const IID IID_IRowsetChapterMember;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetChapterMember * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11388,8 +11338,7 @@ EXTERN_C const IID IID_ICommandPersist;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICommandPersist * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11523,8 +11472,7 @@ EXTERN_C const IID IID_IRowsetRefresh;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetRefresh * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11640,8 +11588,7 @@ EXTERN_C const IID IID_IParentRowset;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IParentRowset * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11788,8 +11735,7 @@ EXTERN_C const IID IID_IErrorRecords;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IErrorRecords * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12053,8 +11999,7 @@ EXTERN_C const IID IID_IErrorLookup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IErrorLookup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12232,8 +12177,7 @@ EXTERN_C const IID IID_ISQLErrorInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISQLErrorInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12349,8 +12293,7 @@ EXTERN_C const IID IID_IGetDataSource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetDataSource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12472,8 +12415,7 @@ EXTERN_C const IID IID_ITransactionLocal;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionLocal * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12488,28 +12430,21 @@ EXTERN_C const IID IID_ITransactionLocal;
         DECLSPEC_XFGVIRT(ITransaction, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ITransactionLocal * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][in] */ 
-            _In_  DWORD grfTC,
-            /* [annotation][in] */ 
-            _In_  DWORD grfRM);
+            /* [in] */ BOOL fRetaining,
+            /* [in] */ DWORD grfTC,
+            /* [in] */ DWORD grfRM);
         
         DECLSPEC_XFGVIRT(ITransaction, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             __RPC__in ITransactionLocal * This,
-            /* [annotation][unique][in] */ 
-            _In_  BOID *pboidReason,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][in] */ 
-            _In_  BOOL fAsync);
+            /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
+            /* [in] */ BOOL fRetaining,
+            /* [in] */ BOOL fAsync);
         
         DECLSPEC_XFGVIRT(ITransaction, GetTransactionInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTransactionInfo )( 
             __RPC__in ITransactionLocal * This,
-            /* [annotation][out] */ 
-            _Out_  XACTTRANSINFO *pinfo);
+            /* [out] */ __RPC__out XACTTRANSINFO *pinfo);
         
         DECLSPEC_XFGVIRT(ITransactionLocal, GetOptionsObject)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetOptionsObject )( 
@@ -12658,8 +12593,7 @@ EXTERN_C const IID IID_ITransactionJoin;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionJoin * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12801,8 +12735,7 @@ EXTERN_C const IID IID_ITransactionObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12970,9 +12903,9 @@ typedef struct _OBJECTS_AND_NAME_W
 
 typedef struct _OBJECTS_AND_NAME_W *POBJECTS_AND_NAME_W;
 
-typedef OBJECTS_AND_NAME_W OBJECTS_AND_NAME_;
+typedef OBJECTS_AND_NAME_A OBJECTS_AND_NAME_;
 
-typedef POBJECTS_AND_NAME_W POBJECTS_AND_NAME_;
+typedef POBJECTS_AND_NAME_A POBJECTS_AND_NAME_;
 
 typedef struct _TRUSTEE_A
     {
@@ -13016,13 +12949,13 @@ typedef struct _TRUSTEE_W TRUSTEEW;
 
 typedef struct _TRUSTEE_W *PTRUSTEEW;
 
-typedef TRUSTEE_W TRUSTEE_;
+typedef TRUSTEE_A TRUSTEE_;
 
-typedef PTRUSTEE_W PTRUSTEE_;
+typedef PTRUSTEE_A PTRUSTEE_;
 
-typedef TRUSTEEW TRUSTEE;
+typedef TRUSTEEA TRUSTEE;
 
-typedef PTRUSTEEW PTRUSTEE;
+typedef PTRUSTEEA PTRUSTEE;
 
 typedef 
 enum _ACCESS_MODE
@@ -13064,13 +12997,13 @@ typedef struct _EXPLICIT_ACCESS_W EXPLICIT_ACCESSW;
 
 typedef struct _EXPLICIT_ACCESS_W *PEXPLICIT_ACCESSW;
 
-typedef EXPLICIT_ACCESS_W EXPLICIT_ACCESS_;
+typedef EXPLICIT_ACCESS_A EXPLICIT_ACCESS_;
 
-typedef PEXPLICIT_ACCESS_W PEXPLICIT_ACCESS_;
+typedef PEXPLICIT_ACCESS_A PEXPLICIT_ACCESS_;
 
-typedef EXPLICIT_ACCESSW EXPLICIT_ACCESS;
+typedef EXPLICIT_ACCESSA EXPLICIT_ACCESS;
 
-typedef PEXPLICIT_ACCESSW PEXPLICIT_ACCESS;
+typedef PEXPLICIT_ACCESSA PEXPLICIT_ACCESS;
 
 typedef ULONG ACCESS_RIGHTS;
 
@@ -13104,9 +13037,9 @@ typedef struct _ACTRL_ACCESS_ENTRYW
 
 typedef struct _ACTRL_ACCESS_ENTRYW *PACTRL_ACCESS_ENTRYW;
 
-typedef ACTRL_ACCESS_ENTRYW ACTRL_ACCESS_ENTRY;
+typedef ACTRL_ACCESS_ENTRYA ACTRL_ACCESS_ENTRY;
 
-typedef PACTRL_ACCESS_ENTRYW PACTRL_ACCESS_ENTRY;
+typedef PACTRL_ACCESS_ENTRYA PACTRL_ACCESS_ENTRY;
 
 typedef struct _ACTRL_ACCESS_ENTRY_LISTA
     {
@@ -13124,9 +13057,9 @@ typedef struct _ACTRL_ACCESS_ENTRY_LISTW
 
 typedef struct _ACTRL_ACCESS_ENTRY_LISTW *PACTRL_ACCESS_ENTRY_LISTW;
 
-typedef ACTRL_ACCESS_ENTRY_LISTW ACTRL_ACCESS_ENTRY_LIST;
+typedef ACTRL_ACCESS_ENTRY_LISTA ACTRL_ACCESS_ENTRY_LIST;
 
-typedef PACTRL_ACCESS_ENTRY_LISTW PACTRL_ACCESS_ENTRY_LIST;
+typedef PACTRL_ACCESS_ENTRY_LISTA PACTRL_ACCESS_ENTRY_LIST;
 
 typedef struct _ACTRL_PROPERTY_ENTRYA
     {
@@ -13146,9 +13079,9 @@ typedef struct _ACTRL_PROPERTY_ENTRYW
 
 typedef struct _ACTRL_PROPERTY_ENTRYW *PACTRL_PROPERTY_ENTRYW;
 
-typedef ACTRL_PROPERTY_ENTRYW ACTRL_PROPERTY_ENTRY;
+typedef ACTRL_PROPERTY_ENTRYA ACTRL_PROPERTY_ENTRY;
 
-typedef PACTRL_PROPERTY_ENTRYW PACTRL_PROPERTY_ENTRY;
+typedef PACTRL_PROPERTY_ENTRYA PACTRL_PROPERTY_ENTRY;
 
 typedef struct _ACTRL_ALISTA
     {
@@ -13174,13 +13107,13 @@ typedef struct _ACTRL_ALISTW ACTRL_AUDITW;
 
 typedef struct _ACTRL_ALISTW *PACTRL_AUDITW;
 
-typedef ACTRL_ACCESSW ACTRL_ACCESS;
+typedef ACTRL_ACCESSA ACTRL_ACCESS;
 
-typedef PACTRL_ACCESSW PACTRL_ACCESS;
+typedef PACTRL_ACCESSA PACTRL_ACCESS;
 
-typedef ACTRL_AUDITW ACTRL_AUDIT;
+typedef ACTRL_AUDITA ACTRL_AUDIT;
 
-typedef PACTRL_AUDITW PACTRL_AUDIT;
+typedef PACTRL_AUDITA PACTRL_AUDIT;
 
 typedef struct _TRUSTEE_ACCESSA
     {
@@ -13202,9 +13135,9 @@ typedef struct _TRUSTEE_ACCESSW
 
 typedef struct _TRUSTEE_ACCESSW *PTRUSTEE_ACCESSW;
 
-typedef TRUSTEE_ACCESSW TRUSTEE_ACCESS;
+typedef TRUSTEE_ACCESSA TRUSTEE_ACCESS;
 
-typedef PTRUSTEE_ACCESSW PTRUSTEE_ACCESS;
+typedef PTRUSTEE_ACCESSA PTRUSTEE_ACCESS;
 
 #pragma warning (push)
 #pragma warning (disable: 4201)
@@ -13238,9 +13171,9 @@ typedef struct _ACTRL_ACCESS_INFOW
 
 typedef struct _ACTRL_ACCESS_INFOW *PACTRL_ACCESS_INFOW;
 
-typedef ACTRL_ACCESS_INFOW ACTRL_ACCESS_INFO;
+typedef ACTRL_ACCESS_INFOA ACTRL_ACCESS_INFO;
 
-typedef PACTRL_ACCESS_INFOW PACTRL_ACCESS_INFO;
+typedef PACTRL_ACCESS_INFOA PACTRL_ACCESS_INFO;
 
 typedef struct _ACTRL_CONTROL_INFOA
     {
@@ -13258,9 +13191,9 @@ typedef struct _ACTRL_CONTROL_INFOW
 
 typedef struct _ACTRL_CONTROL_INFOW *PACTRL_CONTROL_INFOW;
 
-typedef ACTRL_CONTROL_INFOW ACTRL_CONTROL_INFO;
+typedef ACTRL_CONTROL_INFOA ACTRL_CONTROL_INFO;
 
-typedef PACTRL_CONTROL_INFOW PACTRL_CONTROL_INFO;
+typedef PACTRL_CONTROL_INFOA PACTRL_CONTROL_INFO;
 
 typedef 
 enum _PROGRESS_INVOKE_SETTING
@@ -13298,9 +13231,9 @@ typedef struct _INHERITED_FROMW
 
 typedef struct _INHERITED_FROMW *PINHERITED_FROMW;
 
-typedef INHERITED_FROMW INHERITED_FROM;
+typedef INHERITED_FROMA INHERITED_FROM;
 
-typedef PINHERITED_FROMW PINHERITED_FROM;
+typedef PINHERITED_FROMA PINHERITED_FROM;
 
 #pragma endregion
 #pragma warning(pop)
@@ -13363,8 +13296,7 @@ EXTERN_C const IID IID_ITrusteeAdmin;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITrusteeAdmin * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13522,8 +13454,7 @@ EXTERN_C const IID IID_ITrusteeGroupAdmin;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITrusteeGroupAdmin * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13680,8 +13611,7 @@ EXTERN_C const IID IID_IObjectAccessControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IObjectAccessControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13854,8 +13784,7 @@ EXTERN_C const IID IID_ISecurityInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISecurityInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13986,8 +13915,7 @@ EXTERN_C const IID IID_ITableCreation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITableCreation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14161,8 +14089,7 @@ EXTERN_C const IID IID_ITableDefinitionWithConstraints;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITableDefinitionWithConstraints * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14392,8 +14319,7 @@ EXTERN_C const IID IID_IRow;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRow * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14525,8 +14451,7 @@ EXTERN_C const IID IID_IRowChange;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowChange * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14632,8 +14557,7 @@ EXTERN_C const IID IID_IRowSchemaChange;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowSchemaChange * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14761,8 +14685,7 @@ EXTERN_C const IID IID_IGetRow;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGetRow * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14886,8 +14809,7 @@ EXTERN_C const IID IID_IBindResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBindResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15088,8 +15010,7 @@ EXTERN_C const IID IID_IScopedOperations;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IScopedOperations * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15379,8 +15300,7 @@ EXTERN_C const IID IID_ICreateRow;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICreateRow * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15515,8 +15435,7 @@ EXTERN_C const IID IID_IDBBinderProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDBBinderProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15664,8 +15583,7 @@ EXTERN_C const IID IID_IColumnsInfo2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IColumnsInfo2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15834,8 +15752,7 @@ EXTERN_C const IID IID_IRegisterProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRegisterProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15972,8 +15889,7 @@ EXTERN_C const IID IID_IGetSession;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetSession * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16072,8 +15988,7 @@ EXTERN_C const IID IID_IGetSourceRow;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetSourceRow * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16187,8 +16102,7 @@ EXTERN_C const IID IID_IRowsetCurrentIndex;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRowsetCurrentIndex * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16344,8 +16258,7 @@ EXTERN_C const IID IID_ICommandStream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICommandStream * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16461,8 +16374,7 @@ EXTERN_C const IID IID_IRowsetBookmark;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRowsetBookmark * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16633,6 +16545,7 @@ EXTERN_C const IID IID_IRowsetBookmark;
 extern RPC_IF_HANDLE __MIDL_itf_oledb_0000_0082_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_oledb_0000_0082_v0_0_s_ifspec;
 
+#ifdef OLEDBPROXY
 /* Additional Prototypes for ALL interfaces */
 
 unsigned long             __RPC_USER  BSTR_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in BSTR * ); 
@@ -18408,6 +18321,7 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
 
 
 
+#endif // OLEDBPROXY
 /* end of Additional Prototypes */
 
 #ifdef __cplusplus

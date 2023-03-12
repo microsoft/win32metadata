@@ -4528,6 +4528,96 @@ Notes:
 #define DAM_WATCHDOG_TIMEOUT             ((ULONG)0x000001EBL)
 
 //
+// MessageId: HANDLE_LIVE_DUMP
+//
+// MessageText:
+//
+//  HANDLE_LIVE_DUMP
+//
+#define HANDLE_LIVE_DUMP                 ((ULONG)0x000001ECL)
+
+//
+// MessageId: HANDLE_ERROR_ON_CRITICAL_THREAD
+//
+// MessageText:
+//
+//  HANDLE_ERROR_ON_CRITICAL_THREAD
+//
+#define HANDLE_ERROR_ON_CRITICAL_THREAD  ((ULONG)0x000001EDL)
+
+//
+// MessageId: MPSDRV_QUERY_USER
+//
+// MessageText:
+//
+//  MPSDRV_QUERY_USER
+//
+#define MPSDRV_QUERY_USER                ((ULONG)0x400001EEL)
+
+//
+// MessageId: VMBUS_LIVEDUMP
+//
+// MessageText:
+//
+//  VMBUS_LIVEDUMP
+//
+#define VMBUS_LIVEDUMP                   ((ULONG)0x400001EFL)
+
+//
+// MessageId: USB4_HARDWARE_VIOLATION
+//
+// MessageText:
+//
+//  USB4_HARDWARE_VIOLATION
+//
+#define USB4_HARDWARE_VIOLATION          ((ULONG)0x000001F0L)
+
+//
+// MessageId: KASAN_ENLIGHTENMENT_VIOLATION
+//
+// MessageText:
+//
+//  KASAN_ENLIGHTENMENT_VIOLATION
+//
+#define KASAN_ENLIGHTENMENT_VIOLATION    ((ULONG)0x000001F1L)
+
+//
+// MessageId: KASAN_ILLEGAL_ACCESS
+//
+// MessageText:
+//
+//  KASAN_ILLEGAL_ACCESS
+//
+#define KASAN_ILLEGAL_ACCESS             ((ULONG)0x000001F2L)
+
+//
+// MessageId: IORING
+//
+// MessageText:
+//
+//  IORING
+//
+#define IORING                           ((ULONG)0x000001F3L)
+
+//
+// MessageId: MDL_CACHE
+//
+// MessageText:
+//
+//  MDL_CACHE
+//
+#define MDL_CACHE                        ((ULONG)0x000001F4L)
+
+//
+// MessageId: MISALIGNED_POINTER_PARAMETER
+//
+// MessageText:
+//
+//  MISALIGNED_POINTER_PARAMETER
+//
+#define MISALIGNED_POINTER_PARAMETER     ((ULONG)0x000001F6L)
+
+//
 // MessageId: XBOX_VMCTRL_CS_TIMEOUT
 //
 // MessageText:
@@ -4634,6 +4724,24 @@ Notes:
 //  HYPERVISOR_ERROR
 //
 #define HYPERVISOR_ERROR                 ((ULONG)0x00020001L)
+
+//
+// MessageId: XBOX_MANUALLY_INITIATED_CRASH
+//
+// MessageText:
+//
+//  XBOX_MANUALLY_INITIATED_CRASH
+//
+#define XBOX_MANUALLY_INITIATED_CRASH    ((ULONG)0x00030006L)
+
+//
+// MessageId: MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP
+//
+// MessageText:
+//
+//  MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP
+//
+#define MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP ((ULONG)0x000021C8L)
 
 #define WINLOGON_FATAL_ERROR ((ULONG)0xC000021AL)
 #define MANUALLY_INITIATED_CRASH1 ((ULONG)0xDEADDEAD)

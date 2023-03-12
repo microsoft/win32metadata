@@ -100,6 +100,8 @@ namespace Windows
 
         typedef enum PackageContentGroupState PackageContentGroupState;
 
+        typedef enum PackageRelationship PackageRelationship;
+
         typedef enum PackageSignatureKind PackageSignatureKind;
 
         typedef enum PackageUpdateAvailability PackageUpdateAvailability;
@@ -136,6 +138,10 @@ namespace Windows
 
         interface IEnteredBackgroundEventArgs;
 
+        interface IFindRelatedPackagesOptions;
+
+        interface IFindRelatedPackagesOptionsFactory;
+
         interface IFullTrustProcessLaunchResult;
 
         interface IFullTrustProcessLauncherStatics;
@@ -164,6 +170,8 @@ namespace Windows
 
         interface IPackage8;
 
+        interface IPackage9;
+
         interface IPackageCatalog;
 
         interface IPackageCatalog2;
@@ -181,6 +189,8 @@ namespace Windows
         interface IPackageCatalogRemoveResourcePackagesResult;
 
         interface IPackageCatalogStatics;
+
+        interface IPackageCatalogStatics2;
 
         interface IPackageContentGroup;
 
@@ -233,6 +243,8 @@ namespace Windows
         runtimeclass DesignMode;
 
         runtimeclass EnteredBackgroundEventArgs;
+
+        runtimeclass FindRelatedPackagesOptions;
 
         runtimeclass FullTrustProcessLaunchResult;
 
@@ -440,6 +452,14 @@ namespace Windows
             Staged    = 3
         };
 
+        [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+        enum PackageRelationship
+        {
+            Dependencies = 0,
+            Dependents   = 1,
+            All          = 2
+        };
+
         [contract(Windows.Foundation.UniversalApiContract, 3.0)]
         enum PackageSignatureKind
         {
@@ -617,6 +637,31 @@ namespace Windows
             HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** value);
         }
 
+        [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+        [exclusiveto(Windows.ApplicationModel.FindRelatedPackagesOptions)]
+        [uuid(41DD7EEA-B335-521F-B96C-5EA07F5B7329)]
+        interface IFindRelatedPackagesOptions : IInspectable
+        {
+            [propget] HRESULT Relationship([out] [retval] Windows.ApplicationModel.PackageRelationship* value);
+            [propput] HRESULT Relationship([in] Windows.ApplicationModel.PackageRelationship value);
+            [propget] HRESULT IncludeFrameworks([out] [retval] boolean* value);
+            [propput] HRESULT IncludeFrameworks([in] boolean value);
+            [propget] HRESULT IncludeHostRuntimes([out] [retval] boolean* value);
+            [propput] HRESULT IncludeHostRuntimes([in] boolean value);
+            [propget] HRESULT IncludeOptionals([out] [retval] boolean* value);
+            [propput] HRESULT IncludeOptionals([in] boolean value);
+            [propget] HRESULT IncludeResources([out] [retval] boolean* value);
+            [propput] HRESULT IncludeResources([in] boolean value);
+        }
+
+        [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+        [exclusiveto(Windows.ApplicationModel.FindRelatedPackagesOptions)]
+        [uuid(D7D17254-A4FD-55C4-98CF-F2710B7D8BE2)]
+        interface IFindRelatedPackagesOptionsFactory : IInspectable
+        {
+            HRESULT CreateInstance([in] Windows.ApplicationModel.PackageRelationship Relationship, [out] [retval] Windows.ApplicationModel.FindRelatedPackagesOptions** value);
+        }
+
         [contract(Windows.ApplicationModel.FullTrustAppContract, 2.0)]
         [exclusiveto(Windows.ApplicationModel.FullTrustProcessLaunchResult)]
         [uuid(8917D888-EDFB-515F-8E22-5EBCEB69DFD9)]
@@ -765,6 +810,15 @@ namespace Windows
             [propget] HRESULT IsStub([out] [retval] boolean* value);
         }
 
+        [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+        [exclusiveto(Windows.ApplicationModel.Package)]
+        [uuid(D5AB224F-D7E1-49EC-90CE-720CDBD02E9C)]
+        interface IPackage9 : IInspectable
+        {
+            HRESULT FindRelatedPackages([in] Windows.ApplicationModel.FindRelatedPackagesOptions* options, [out] [retval] Windows.Foundation.Collections.IVector<Windows.ApplicationModel.Package*>** result);
+            [propget] HRESULT SourceUriSchemeName([out] [retval] HSTRING* value);
+        }
+
         [contract(Windows.Foundation.UniversalApiContract, 3.0)]
         [exclusiveto(Windows.ApplicationModel.PackageCatalog)]
         [uuid(230A3751-9DE3-4445-BE74-91FB325ABEFE)]
@@ -853,6 +907,13 @@ namespace Windows
         {
             HRESULT OpenForCurrentPackage([out] [retval] Windows.ApplicationModel.PackageCatalog** value);
             HRESULT OpenForCurrentUser([out] [retval] Windows.ApplicationModel.PackageCatalog** value);
+        }
+
+        [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+        [uuid(4C11C159-9A28-598C-B185-55E1899B2BE4)]
+        interface IPackageCatalogStatics2 : IInspectable
+        {
+            HRESULT OpenForPackage([in] Windows.ApplicationModel.Package* package, [out] [retval] Windows.ApplicationModel.PackageCatalog** result);
         }
 
         [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -1119,6 +1180,15 @@ namespace Windows
             [default] interface Windows.ApplicationModel.IEnteredBackgroundEventArgs;
         }
 
+        [activatable(Windows.ApplicationModel.IFindRelatedPackagesOptionsFactory, Windows.Foundation.UniversalApiContract, 15.0)]
+        [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+        [marshaling_behavior(agile)]
+        [threading(both)]
+        runtimeclass FindRelatedPackagesOptions
+        {
+            [default] interface Windows.ApplicationModel.IFindRelatedPackagesOptions;
+        }
+
         [contract(Windows.ApplicationModel.FullTrustAppContract, 2.0)]
         [marshaling_behavior(agile)]
         runtimeclass FullTrustProcessLaunchResult
@@ -1172,10 +1242,12 @@ namespace Windows
             [contract(Windows.Foundation.UniversalApiContract, 7.0)] interface Windows.ApplicationModel.IPackage6;
             [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.ApplicationModel.IPackage7;
             [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.ApplicationModel.IPackage8;
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.ApplicationModel.IPackage9;
         }
 
         [contract(Windows.Foundation.UniversalApiContract, 3.0)]
         [static(Windows.ApplicationModel.IPackageCatalogStatics, Windows.Foundation.UniversalApiContract, 3.0)]
+        [static(Windows.ApplicationModel.IPackageCatalogStatics2, Windows.Foundation.UniversalApiContract, 15.0)]
         runtimeclass PackageCatalog
         {
             [default] interface Windows.ApplicationModel.IPackageCatalog;

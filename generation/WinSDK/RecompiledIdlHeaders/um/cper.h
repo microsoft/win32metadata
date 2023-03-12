@@ -1741,8 +1741,8 @@ CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_SECTION, Data,                        
 //--------------------------------------------------------------- ERROR RECOVERY_INFO_SECTION
 
 typedef enum _WHEA_RECOVERY_TYPE {
-    WheaRecoveryTypeSrar = 1,
-    WheaRecoveryTypeSrao,
+    WheaRecoveryTypeActionRequired = 1,
+    WheaRecoveryTypeActionOptional,
     WheaRecoveryTypeMax
 } WHEA_RECOVERY_TYPE, *PWHEA_RECOVERY_TYPE;
 
@@ -1752,7 +1752,8 @@ typedef union _WHEA_RECOVERY_ACTION {
         ULONG TerminateProcess : 1;
         ULONG ForwardedToVm : 1;
         ULONG MarkPageBad : 1;
-        ULONG Reserved : 29;
+        ULONG PoisonNotPresent :1;
+        ULONG Reserved : 28;
     } DUMMYSTRUCTNAME;
 
     ULONG AsULONG;
@@ -1775,6 +1776,7 @@ typedef enum _WHEA_RECOVERY_FAILURE_REASON {
     WheaRecoveryFailureReasonStackOverflow,
     WheaRecoveryFailureReasonUnexpectedFailure,
     WheaRecoveryFailureReasonKernelWillPageFaultBCAtCurrentIrql,
+    WheaRecoveryFailureReasonFarNotValid,
     WheaRecoveryFailureReasonMax
 } WHEA_RECOVERY_FAILURE_REASON, *PWHEA_RECOVERY_FAILURE_REASON;
 
@@ -2106,6 +2108,41 @@ CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_CONTEXT_INFORMATION_HEADER, Version,  
 CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_CONTEXT_INFORMATION_HEADER, RegisterContextType,   2,    2);
 CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_CONTEXT_INFORMATION_HEADER, RegisterArraySize,     4,    4);
 CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_CONTEXT_INFORMATION_HEADER, RegisterArray,         8,    1);
+// ----------------------------------------------------------------- SEA Section
+
+typedef struct _WHEA_SEA_SECTION {
+    ULONG Esr;
+    ULONG64 Far;
+    ULONG64 Par;
+    BOOLEAN WasKernel;
+} WHEA_SEA_SECTION, *PWHEA_SEA_SECTION;
+
+typedef struct _WHEA_SEI_SECTION {
+    ULONG Esr;
+    ULONG64 Far;
+} WHEA_SEI_SECTION, *PWHEA_SEI_SECTION;
+
+typedef enum _WHEA_PCI_RECOVERY_SIGNAL {
+    WheaPciRecoverySignalUnknown = 0,
+    WheaPciRecoverySignalAer,
+    WheaPciRecoverySignalDpc
+}WHEA_PCI_RECOVERY_SIGNAL, *PWHEA_PCI_RECOVERY_SIGNAL;
+
+typedef enum _WHEA_PCI_RECOVERY_STATUS {
+    WheaPciREcoveryStatusUnknown = 0,
+    WheaPciRecoveryStatusNoError,
+    WheaPciRecoveryStatusLinkDisableTimeout,
+    WheaPciRecoveryStatusLinkEnableTimeout,
+    WheaPciRecoveryStatusRpBusyTimeout,
+    WheaPciRecoveryStatusComplexTree,
+    WheaPciRecoveryStatusBusNotFound,
+}WHEA_PCI_RECOVERY_STATUS,  *PWHEA_PCI_RECOVERY_STATUS;
+
+typedef struct _WHEA_PCI_RECOVERY_SECTION {
+    UINT8 SignalType;
+    BOOLEAN RecoveryAttempted;
+    UINT8 RecoveryStatus;
+} WHEA_PCI_RECOVERY_SECTION, *PWHEA_PCI_RECOVERY_SECTION;
 
 #include <poppack.h>
 

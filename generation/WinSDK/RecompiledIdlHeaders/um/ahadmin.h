@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -433,12 +433,9 @@ EXTERN_C const IID IID_IAppHostMethodExtension;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ProvideMethod( 
-            /* [annotation][in] */ 
-            _In_  IAppHostMethod *pMethod,
-            /* [annotation][in] */ 
-            _In_  IAppHostMethodInstance *pMethodInstance,
-            /* [annotation][in] */ 
-            _In_  IAppHostElement *pElement) = 0;
+            /* [in] */ __RPC__in_opt IAppHostMethod *pMethod,
+            /* [in] */ __RPC__in_opt IAppHostMethodInstance *pMethodInstance,
+            /* [in] */ __RPC__in_opt IAppHostElement *pElement) = 0;
         
     };
     
@@ -452,8 +449,7 @@ EXTERN_C const IID IID_IAppHostMethodExtension;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostMethodExtension * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -468,12 +464,9 @@ EXTERN_C const IID IID_IAppHostMethodExtension;
         DECLSPEC_XFGVIRT(IAppHostMethodExtension, ProvideMethod)
         HRESULT ( STDMETHODCALLTYPE *ProvideMethod )( 
             __RPC__in IAppHostMethodExtension * This,
-            /* [annotation][in] */ 
-            _In_  IAppHostMethod *pMethod,
-            /* [annotation][in] */ 
-            _In_  IAppHostMethodInstance *pMethodInstance,
-            /* [annotation][in] */ 
-            _In_  IAppHostElement *pElement);
+            /* [in] */ __RPC__in_opt IAppHostMethod *pMethod,
+            /* [in] */ __RPC__in_opt IAppHostMethodInstance *pMethodInstance,
+            /* [in] */ __RPC__in_opt IAppHostElement *pElement);
         
         END_INTERFACE
     } IAppHostMethodExtensionVtbl;
@@ -528,10 +521,8 @@ EXTERN_C const IID IID_IAppHostPropertyExtension;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ProvideGetProperty( 
-            /* [annotation][in] */ 
-            _In_  IAppHostElement *pElement,
-            /* [annotation][in] */ 
-            _In_  IAppHostProperty *pProperty) = 0;
+            /* [in] */ __RPC__in_opt IAppHostElement *pElement,
+            /* [in] */ __RPC__in_opt IAppHostProperty *pProperty) = 0;
         
     };
     
@@ -545,8 +536,7 @@ EXTERN_C const IID IID_IAppHostPropertyExtension;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostPropertyExtension * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -561,10 +551,8 @@ EXTERN_C const IID IID_IAppHostPropertyExtension;
         DECLSPEC_XFGVIRT(IAppHostPropertyExtension, ProvideGetProperty)
         HRESULT ( STDMETHODCALLTYPE *ProvideGetProperty )( 
             __RPC__in IAppHostPropertyExtension * This,
-            /* [annotation][in] */ 
-            _In_  IAppHostElement *pElement,
-            /* [annotation][in] */ 
-            _In_  IAppHostProperty *pProperty);
+            /* [in] */ __RPC__in_opt IAppHostElement *pElement,
+            /* [in] */ __RPC__in_opt IAppHostProperty *pProperty);
         
         END_INTERFACE
     } IAppHostPropertyExtensionVtbl;
@@ -619,8 +607,7 @@ EXTERN_C const IID IID_IAppHostElementExtension;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ProvideElement( 
-            /* [annotation][in] */ 
-            _In_  IAppHostElement *pNewElement) = 0;
+            /* [in] */ __RPC__in_opt IAppHostElement *pNewElement) = 0;
         
     };
     
@@ -634,8 +621,7 @@ EXTERN_C const IID IID_IAppHostElementExtension;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostElementExtension * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -650,8 +636,7 @@ EXTERN_C const IID IID_IAppHostElementExtension;
         DECLSPEC_XFGVIRT(IAppHostElementExtension, ProvideElement)
         HRESULT ( STDMETHODCALLTYPE *ProvideElement )( 
             __RPC__in IAppHostElementExtension * This,
-            /* [annotation][in] */ 
-            _In_  IAppHostElement *pNewElement);
+            /* [in] */ __RPC__in_opt IAppHostElement *pNewElement);
         
         END_INTERFACE
     } IAppHostElementExtensionVtbl;
@@ -706,34 +691,23 @@ EXTERN_C const IID IID_IAppHostMappingExtension;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSiteNameFromSiteId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwSiteId,
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  BSTR *pbstrSiteName) = 0;
+            /* [in] */ DWORD dwSiteId,
+            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *pbstrSiteName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSiteIdFromSiteName( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSiteName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwSiteId) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrSiteName,
+            /* [retval][out] */ __RPC__out DWORD *pdwSiteId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSiteElementFromSiteId( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwSiteId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppSiteElement) = 0;
+            /* [in] */ DWORD dwSiteId,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppSiteElement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE MapPath( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSiteName,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrVirtualPath,
-            /* [annotation][string][out] */ 
-            _Out_  BSTR *pbstrPhysicalPath,
-            /* [annotation][out] */ 
-            _Out_  IAppHostElement **ppVirtualDirectoryElement,
-            /* [annotation][out] */ 
-            _Out_  IAppHostElement **ppApplicationElement) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrSiteName,
+            /* [string][in] */ __RPC__in_string BSTR bstrVirtualPath,
+            /* [string][out] */ __RPC__deref_out_opt_string BSTR *pbstrPhysicalPath,
+            /* [out] */ __RPC__deref_out_opt IAppHostElement **ppVirtualDirectoryElement,
+            /* [out] */ __RPC__deref_out_opt IAppHostElement **ppApplicationElement) = 0;
         
     };
     
@@ -747,8 +721,7 @@ EXTERN_C const IID IID_IAppHostMappingExtension;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostMappingExtension * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -763,40 +736,29 @@ EXTERN_C const IID IID_IAppHostMappingExtension;
         DECLSPEC_XFGVIRT(IAppHostMappingExtension, GetSiteNameFromSiteId)
         HRESULT ( STDMETHODCALLTYPE *GetSiteNameFromSiteId )( 
             __RPC__in IAppHostMappingExtension * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSiteId,
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  BSTR *pbstrSiteName);
+            /* [in] */ DWORD dwSiteId,
+            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *pbstrSiteName);
         
         DECLSPEC_XFGVIRT(IAppHostMappingExtension, GetSiteIdFromSiteName)
         HRESULT ( STDMETHODCALLTYPE *GetSiteIdFromSiteName )( 
             __RPC__in IAppHostMappingExtension * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSiteName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwSiteId);
+            /* [string][in] */ __RPC__in_string BSTR bstrSiteName,
+            /* [retval][out] */ __RPC__out DWORD *pdwSiteId);
         
         DECLSPEC_XFGVIRT(IAppHostMappingExtension, GetSiteElementFromSiteId)
         HRESULT ( STDMETHODCALLTYPE *GetSiteElementFromSiteId )( 
             __RPC__in IAppHostMappingExtension * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwSiteId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppSiteElement);
+            /* [in] */ DWORD dwSiteId,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppSiteElement);
         
         DECLSPEC_XFGVIRT(IAppHostMappingExtension, MapPath)
         HRESULT ( STDMETHODCALLTYPE *MapPath )( 
             __RPC__in IAppHostMappingExtension * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSiteName,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrVirtualPath,
-            /* [annotation][string][out] */ 
-            _Out_  BSTR *pbstrPhysicalPath,
-            /* [annotation][out] */ 
-            _Out_  IAppHostElement **ppVirtualDirectoryElement,
-            /* [annotation][out] */ 
-            _Out_  IAppHostElement **ppApplicationElement);
+            /* [string][in] */ __RPC__in_string BSTR bstrSiteName,
+            /* [string][in] */ __RPC__in_string BSTR bstrVirtualPath,
+            /* [string][out] */ __RPC__deref_out_opt_string BSTR *pbstrPhysicalPath,
+            /* [out] */ __RPC__deref_out_opt IAppHostElement **ppVirtualDirectoryElement,
+            /* [out] */ __RPC__deref_out_opt IAppHostElement **ppApplicationElement);
         
         END_INTERFACE
     } IAppHostMappingExtensionVtbl;
@@ -860,14 +822,11 @@ EXTERN_C const IID IID_IAppHostChildElementCollection;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pcCount) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppElement) = 0;
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppElement) = 0;
         
     };
     
@@ -881,8 +840,7 @@ EXTERN_C const IID IID_IAppHostChildElementCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostChildElementCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -897,16 +855,13 @@ EXTERN_C const IID IID_IAppHostChildElementCollection;
         DECLSPEC_XFGVIRT(IAppHostChildElementCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostChildElementCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount);
+            /* [retval][out] */ __RPC__out DWORD *pcCount);
         
         DECLSPEC_XFGVIRT(IAppHostChildElementCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostChildElementCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppElement);
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppElement);
         
         END_INTERFACE
     } IAppHostChildElementCollectionVtbl;
@@ -964,14 +919,11 @@ EXTERN_C const IID IID_IAppHostPropertyCollection;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pcCount) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostProperty **ppProperty) = 0;
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostProperty **ppProperty) = 0;
         
     };
     
@@ -985,8 +937,7 @@ EXTERN_C const IID IID_IAppHostPropertyCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostPropertyCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1001,16 +952,13 @@ EXTERN_C const IID IID_IAppHostPropertyCollection;
         DECLSPEC_XFGVIRT(IAppHostPropertyCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostPropertyCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount);
+            /* [retval][out] */ __RPC__out DWORD *pcCount);
         
         DECLSPEC_XFGVIRT(IAppHostPropertyCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostPropertyCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostProperty **ppProperty);
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostProperty **ppProperty);
         
         END_INTERFACE
     } IAppHostPropertyCollectionVtbl;
@@ -1068,30 +1016,22 @@ EXTERN_C const IID IID_IAppHostConfigLocationCollection;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pcCount) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigLocation **ppLocation) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigLocation **ppLocation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddLocation( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrLocationPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigLocation **ppNewLocation) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrLocationPath,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigLocation **ppNewLocation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteLocation( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex) = 0;
+            /* [in] */ VARIANT cIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RenameLocation( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrLocationPath) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [string][in] */ __RPC__in_string BSTR bstrLocationPath) = 0;
         
     };
     
@@ -1105,8 +1045,7 @@ EXTERN_C const IID IID_IAppHostConfigLocationCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostConfigLocationCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1121,38 +1060,30 @@ EXTERN_C const IID IID_IAppHostConfigLocationCollection;
         DECLSPEC_XFGVIRT(IAppHostConfigLocationCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostConfigLocationCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount);
+            /* [retval][out] */ __RPC__out DWORD *pcCount);
         
         DECLSPEC_XFGVIRT(IAppHostConfigLocationCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostConfigLocationCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigLocation **ppLocation);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigLocation **ppLocation);
         
         DECLSPEC_XFGVIRT(IAppHostConfigLocationCollection, AddLocation)
         HRESULT ( STDMETHODCALLTYPE *AddLocation )( 
             __RPC__in IAppHostConfigLocationCollection * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrLocationPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigLocation **ppNewLocation);
+            /* [string][in] */ __RPC__in_string BSTR bstrLocationPath,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigLocation **ppNewLocation);
         
         DECLSPEC_XFGVIRT(IAppHostConfigLocationCollection, DeleteLocation)
         HRESULT ( STDMETHODCALLTYPE *DeleteLocation )( 
             __RPC__in IAppHostConfigLocationCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex);
+            /* [in] */ VARIANT cIndex);
         
         DECLSPEC_XFGVIRT(IAppHostConfigLocationCollection, RenameLocation)
         HRESULT ( STDMETHODCALLTYPE *RenameLocation )( 
             __RPC__in IAppHostConfigLocationCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrLocationPath);
+            /* [in] */ VARIANT varIndex,
+            /* [string][in] */ __RPC__in_string BSTR bstrLocationPath);
         
         END_INTERFACE
     } IAppHostConfigLocationCollectionVtbl;
@@ -1219,14 +1150,11 @@ EXTERN_C const IID IID_IAppHostMethodCollection;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pcCount) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostMethod **ppMethod) = 0;
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostMethod **ppMethod) = 0;
         
     };
     
@@ -1240,8 +1168,7 @@ EXTERN_C const IID IID_IAppHostMethodCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostMethodCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1256,16 +1183,13 @@ EXTERN_C const IID IID_IAppHostMethodCollection;
         DECLSPEC_XFGVIRT(IAppHostMethodCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostMethodCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount);
+            /* [retval][out] */ __RPC__out DWORD *pcCount);
         
         DECLSPEC_XFGVIRT(IAppHostMethodCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostMethodCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostMethod **ppMethod);
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostMethod **ppMethod);
         
         END_INTERFACE
     } IAppHostMethodCollectionVtbl;
@@ -1323,14 +1247,11 @@ EXTERN_C const IID IID_IAppHostElementSchemaCollection;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pcCount) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppElementSchema) = 0;
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppElementSchema) = 0;
         
     };
     
@@ -1344,8 +1265,7 @@ EXTERN_C const IID IID_IAppHostElementSchemaCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostElementSchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1360,16 +1280,13 @@ EXTERN_C const IID IID_IAppHostElementSchemaCollection;
         DECLSPEC_XFGVIRT(IAppHostElementSchemaCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostElementSchemaCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount);
+            /* [retval][out] */ __RPC__out DWORD *pcCount);
         
         DECLSPEC_XFGVIRT(IAppHostElementSchemaCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostElementSchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppElementSchema);
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppElementSchema);
         
         END_INTERFACE
     } IAppHostElementSchemaCollectionVtbl;
@@ -1427,14 +1344,11 @@ EXTERN_C const IID IID_IAppHostPropertySchemaCollection;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pcCount) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostPropertySchema **ppPropertySchema) = 0;
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostPropertySchema **ppPropertySchema) = 0;
         
     };
     
@@ -1448,8 +1362,7 @@ EXTERN_C const IID IID_IAppHostPropertySchemaCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostPropertySchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1464,16 +1377,13 @@ EXTERN_C const IID IID_IAppHostPropertySchemaCollection;
         DECLSPEC_XFGVIRT(IAppHostPropertySchemaCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostPropertySchemaCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount);
+            /* [retval][out] */ __RPC__out DWORD *pcCount);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchemaCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostPropertySchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostPropertySchema **ppPropertySchema);
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostPropertySchema **ppPropertySchema);
         
         END_INTERFACE
     } IAppHostPropertySchemaCollectionVtbl;
@@ -1531,14 +1441,11 @@ EXTERN_C const IID IID_IAppHostConstantValueCollection;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pcCount) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConstantValue **ppConstantValue) = 0;
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConstantValue **ppConstantValue) = 0;
         
     };
     
@@ -1552,8 +1459,7 @@ EXTERN_C const IID IID_IAppHostConstantValueCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostConstantValueCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1568,16 +1474,13 @@ EXTERN_C const IID IID_IAppHostConstantValueCollection;
         DECLSPEC_XFGVIRT(IAppHostConstantValueCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostConstantValueCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount);
+            /* [retval][out] */ __RPC__out DWORD *pcCount);
         
         DECLSPEC_XFGVIRT(IAppHostConstantValueCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostConstantValueCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConstantValue **ppConstantValue);
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConstantValue **ppConstantValue);
         
         END_INTERFACE
     } IAppHostConstantValueCollectionVtbl;
@@ -1635,12 +1538,10 @@ EXTERN_C const IID IID_IAppHostConstantValue;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwValue) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwValue) = 0;
         
     };
     
@@ -1654,8 +1555,7 @@ EXTERN_C const IID IID_IAppHostConstantValue;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostConstantValue * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1670,14 +1570,12 @@ EXTERN_C const IID IID_IAppHostConstantValue;
         DECLSPEC_XFGVIRT(IAppHostConstantValue, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAppHostConstantValue * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IAppHostConstantValue, get_Value)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in IAppHostConstantValue * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwValue);
+            /* [retval][out] */ __RPC__out DWORD *pdwValue);
         
         END_INTERFACE
     } IAppHostConstantValueVtbl;
@@ -1735,66 +1633,50 @@ EXTERN_C const IID IID_IAppHostPropertySchema;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrType) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrType) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DefaultValue( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pDefaultValue) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pDefaultValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsRequired( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsRequired) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsRequired) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsUniqueKey( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsUniqueKey) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsUniqueKey) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsCombinedKey( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsCombinedKey) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsCombinedKey) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsExpanded( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsExpanded) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsExpanded) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ValidationType( 
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  BSTR *pbstrValidationType) = 0;
+            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *pbstrValidationType) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ValidationParameter( 
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  BSTR *pbstrValidationParameter) = 0;
+            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *pbstrValidationParameter) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsCaseSensitive( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsCaseSensitive) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsCaseSensitive) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PossibleValues( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConstantValueCollection **ppValues) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConstantValueCollection **ppValues) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DoesAllowInfinite( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfAllowInfinite) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfAllowInfinite) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsEncrypted( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsEncrypted) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsEncrypted) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TimeSpanFormat( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrTimeSpanFormat) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTimeSpanFormat) = 0;
         
     };
     
@@ -1808,8 +1690,7 @@ EXTERN_C const IID IID_IAppHostPropertySchema;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1824,94 +1705,78 @@ EXTERN_C const IID IID_IAppHostPropertySchema;
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_Type)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrType);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrType);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_DefaultValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultValue )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pDefaultValue);
+            /* [retval][out] */ __RPC__out VARIANT *pDefaultValue);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_IsRequired)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsRequired )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsRequired);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsRequired);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_IsUniqueKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsUniqueKey )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsUniqueKey);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsUniqueKey);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_IsCombinedKey)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsCombinedKey )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsCombinedKey);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsCombinedKey);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_IsExpanded)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsExpanded )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsExpanded);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsExpanded);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_ValidationType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ValidationType )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  BSTR *pbstrValidationType);
+            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *pbstrValidationType);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_ValidationParameter)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ValidationParameter )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  BSTR *pbstrValidationParameter);
+            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *pbstrValidationParameter);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_IsCaseSensitive)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsCaseSensitive )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsCaseSensitive);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsCaseSensitive);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_PossibleValues)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PossibleValues )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConstantValueCollection **ppValues);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConstantValueCollection **ppValues);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_DoesAllowInfinite)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DoesAllowInfinite )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfAllowInfinite);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfAllowInfinite);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_IsEncrypted)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsEncrypted )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsEncrypted);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsEncrypted);
         
         DECLSPEC_XFGVIRT(IAppHostPropertySchema, get_TimeSpanFormat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TimeSpanFormat )( 
             __RPC__in IAppHostPropertySchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrTimeSpanFormat);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTimeSpanFormat);
         
         END_INTERFACE
     } IAppHostPropertySchemaVtbl;
@@ -2008,36 +1873,27 @@ EXTERN_C const IID IID_IAppHostCollectionSchema;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AddElementNames( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrElementName) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrElementName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAddElementSchema( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrElementName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppSchema) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrElementName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppSchema) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RemoveElementSchema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppSchema) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppSchema) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ClearElementSchema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppSchema) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppSchema) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsMergeAppend( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsMergeAppend) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsMergeAppend) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DoesAllowDuplicates( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfAllowDuplicates) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfAllowDuplicates) = 0;
         
     };
     
@@ -2051,8 +1907,7 @@ EXTERN_C const IID IID_IAppHostCollectionSchema;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostCollectionSchema * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2067,48 +1922,39 @@ EXTERN_C const IID IID_IAppHostCollectionSchema;
         DECLSPEC_XFGVIRT(IAppHostCollectionSchema, get_AddElementNames)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AddElementNames )( 
             __RPC__in IAppHostCollectionSchema * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrElementName);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrElementName);
         
         DECLSPEC_XFGVIRT(IAppHostCollectionSchema, GetAddElementSchema)
         HRESULT ( STDMETHODCALLTYPE *GetAddElementSchema )( 
             __RPC__in IAppHostCollectionSchema * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrElementName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppSchema);
+            /* [string][in] */ __RPC__in_string BSTR bstrElementName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppSchema);
         
         DECLSPEC_XFGVIRT(IAppHostCollectionSchema, get_RemoveElementSchema)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemoveElementSchema )( 
             __RPC__in IAppHostCollectionSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppSchema);
         
         DECLSPEC_XFGVIRT(IAppHostCollectionSchema, get_ClearElementSchema)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClearElementSchema )( 
             __RPC__in IAppHostCollectionSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppSchema);
         
         DECLSPEC_XFGVIRT(IAppHostCollectionSchema, get_IsMergeAppend)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsMergeAppend )( 
             __RPC__in IAppHostCollectionSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsMergeAppend);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsMergeAppend);
         
         DECLSPEC_XFGVIRT(IAppHostCollectionSchema, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IAppHostCollectionSchema * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IAppHostCollectionSchema, get_DoesAllowDuplicates)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DoesAllowDuplicates )( 
             __RPC__in IAppHostCollectionSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfAllowDuplicates);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfAllowDuplicates);
         
         END_INTERFACE
     } IAppHostCollectionSchemaVtbl;
@@ -2181,34 +2027,26 @@ EXTERN_C const IID IID_IAppHostElementSchema;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DoesAllowUnschematizedProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfAllowUnschematized) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfAllowUnschematized) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CollectionSchema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostCollectionSchema **ppCollectionSchema) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostCollectionSchema **ppCollectionSchema) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ChildElementSchemas( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchemaCollection **ppChildSchemas) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchemaCollection **ppChildSchemas) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PropertySchemas( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostPropertySchemaCollection **ppPropertySchemas) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostPropertySchemaCollection **ppPropertySchemas) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_IsCollectionDefault( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsCollectionDefault) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsCollectionDefault) = 0;
         
     };
     
@@ -2222,8 +2060,7 @@ EXTERN_C const IID IID_IAppHostElementSchema;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostElementSchema * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2238,46 +2075,38 @@ EXTERN_C const IID IID_IAppHostElementSchema;
         DECLSPEC_XFGVIRT(IAppHostElementSchema, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAppHostElementSchema * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IAppHostElementSchema, get_DoesAllowUnschematizedProperties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DoesAllowUnschematizedProperties )( 
             __RPC__in IAppHostElementSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfAllowUnschematized);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfAllowUnschematized);
         
         DECLSPEC_XFGVIRT(IAppHostElementSchema, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IAppHostElementSchema * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IAppHostElementSchema, get_CollectionSchema)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CollectionSchema )( 
             __RPC__in IAppHostElementSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostCollectionSchema **ppCollectionSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostCollectionSchema **ppCollectionSchema);
         
         DECLSPEC_XFGVIRT(IAppHostElementSchema, get_ChildElementSchemas)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChildElementSchemas )( 
             __RPC__in IAppHostElementSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchemaCollection **ppChildSchemas);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchemaCollection **ppChildSchemas);
         
         DECLSPEC_XFGVIRT(IAppHostElementSchema, get_PropertySchemas)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PropertySchemas )( 
             __RPC__in IAppHostElementSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostPropertySchemaCollection **ppPropertySchemas);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostPropertySchemaCollection **ppPropertySchemas);
         
         DECLSPEC_XFGVIRT(IAppHostElementSchema, get_IsCollectionDefault)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsCollectionDefault )( 
             __RPC__in IAppHostElementSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfIsCollectionDefault);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsCollectionDefault);
         
         END_INTERFACE
     } IAppHostElementSchemaVtbl;
@@ -2350,22 +2179,17 @@ EXTERN_C const IID IID_IAppHostMethodSchema;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InputSchema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppInputSchema) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppInputSchema) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_OutputSchema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppOutputSchema) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppOutputSchema) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
     };
     
@@ -2379,8 +2203,7 @@ EXTERN_C const IID IID_IAppHostMethodSchema;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostMethodSchema * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2395,28 +2218,23 @@ EXTERN_C const IID IID_IAppHostMethodSchema;
         DECLSPEC_XFGVIRT(IAppHostMethodSchema, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAppHostMethodSchema * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IAppHostMethodSchema, get_InputSchema)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InputSchema )( 
             __RPC__in IAppHostMethodSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppInputSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppInputSchema);
         
         DECLSPEC_XFGVIRT(IAppHostMethodSchema, get_OutputSchema)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutputSchema )( 
             __RPC__in IAppHostMethodSchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppOutputSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppOutputSchema);
         
         DECLSPEC_XFGVIRT(IAppHostMethodSchema, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IAppHostMethodSchema * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         END_INTERFACE
     } IAppHostMethodSchemaVtbl;
@@ -2480,26 +2298,20 @@ EXTERN_C const IID IID_IAppHostMethodInstance;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Input( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppInputElement) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppInputElement) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Output( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppOutputElement) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppOutputElement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Execute( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value) = 0;
         
     };
     
@@ -2513,8 +2325,7 @@ EXTERN_C const IID IID_IAppHostMethodInstance;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostMethodInstance * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2529,14 +2340,12 @@ EXTERN_C const IID IID_IAppHostMethodInstance;
         DECLSPEC_XFGVIRT(IAppHostMethodInstance, get_Input)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Input )( 
             __RPC__in IAppHostMethodInstance * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppInputElement);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppInputElement);
         
         DECLSPEC_XFGVIRT(IAppHostMethodInstance, get_Output)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Output )( 
             __RPC__in IAppHostMethodInstance * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppOutputElement);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppOutputElement);
         
         DECLSPEC_XFGVIRT(IAppHostMethodInstance, Execute)
         HRESULT ( STDMETHODCALLTYPE *Execute )( 
@@ -2545,18 +2354,14 @@ EXTERN_C const IID IID_IAppHostMethodInstance;
         DECLSPEC_XFGVIRT(IAppHostMethodInstance, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IAppHostMethodInstance * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IAppHostMethodInstance, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             __RPC__in IAppHostMethodInstance * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value);
         
         END_INTERFACE
     } IAppHostMethodInstanceVtbl;
@@ -2623,16 +2428,13 @@ EXTERN_C const IID IID_IAppHostMethod;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Schema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostMethodSchema **ppMethodSchema) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostMethodSchema **ppMethodSchema) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateInstance( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostMethodInstance **ppMethodInstance) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostMethodInstance **ppMethodInstance) = 0;
         
     };
     
@@ -2646,8 +2448,7 @@ EXTERN_C const IID IID_IAppHostMethod;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostMethod * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2662,20 +2463,17 @@ EXTERN_C const IID IID_IAppHostMethod;
         DECLSPEC_XFGVIRT(IAppHostMethod, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAppHostMethod * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IAppHostMethod, get_Schema)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Schema )( 
             __RPC__in IAppHostMethod * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostMethodSchema **ppMethodSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostMethodSchema **ppMethodSchema);
         
         DECLSPEC_XFGVIRT(IAppHostMethod, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IAppHostMethod * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostMethodInstance **ppMethodInstance);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostMethodInstance **ppMethodInstance);
         
         END_INTERFACE
     } IAppHostMethodVtbl;
@@ -2736,32 +2534,25 @@ EXTERN_C const IID IID_IAppHostConfigException;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_LineNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pcLineNumber) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pcLineNumber) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FileName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFileName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFileName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ConfigPath( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrConfigPath) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrConfigPath) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ErrorLine( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrErrorLine) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrErrorLine) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PreErrorLine( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrPreErrorLine) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPreErrorLine) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PostErrorLine( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrPostErrorLine) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPostErrorLine) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ErrorString( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrErrorString) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrErrorString) = 0;
         
     };
     
@@ -2775,8 +2566,7 @@ EXTERN_C const IID IID_IAppHostConfigException;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostConfigException * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2791,44 +2581,37 @@ EXTERN_C const IID IID_IAppHostConfigException;
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_LineNumber)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LineNumber )( 
             __RPC__in IAppHostConfigException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pcLineNumber);
+            /* [retval][out] */ __RPC__out ULONG *pcLineNumber);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_FileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileName )( 
             __RPC__in IAppHostConfigException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFileName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFileName);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_ConfigPath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConfigPath )( 
             __RPC__in IAppHostConfigException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrConfigPath);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrConfigPath);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_ErrorLine)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ErrorLine )( 
             __RPC__in IAppHostConfigException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrErrorLine);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrErrorLine);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_PreErrorLine)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreErrorLine )( 
             __RPC__in IAppHostConfigException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrPreErrorLine);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPreErrorLine);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_PostErrorLine)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PostErrorLine )( 
             __RPC__in IAppHostConfigException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrPostErrorLine);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPostErrorLine);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_ErrorString)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ErrorString )( 
             __RPC__in IAppHostConfigException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrErrorString);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrErrorString);
         
         END_INTERFACE
     } IAppHostConfigExceptionVtbl;
@@ -2901,16 +2684,13 @@ EXTERN_C const IID IID_IAppHostPropertyException;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_InvalidValue( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrValue) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ValidationFailureReason( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrValidationReason) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrValidationReason) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ValidationFailureParameters( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pParameterArray) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pParameterArray) = 0;
         
     };
     
@@ -2924,8 +2704,7 @@ EXTERN_C const IID IID_IAppHostPropertyException;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2940,62 +2719,52 @@ EXTERN_C const IID IID_IAppHostPropertyException;
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_LineNumber)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LineNumber )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pcLineNumber);
+            /* [retval][out] */ __RPC__out ULONG *pcLineNumber);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_FileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileName )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFileName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFileName);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_ConfigPath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConfigPath )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrConfigPath);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrConfigPath);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_ErrorLine)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ErrorLine )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrErrorLine);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrErrorLine);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_PreErrorLine)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreErrorLine )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrPreErrorLine);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPreErrorLine);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_PostErrorLine)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PostErrorLine )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrPostErrorLine);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPostErrorLine);
         
         DECLSPEC_XFGVIRT(IAppHostConfigException, get_ErrorString)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ErrorString )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrErrorString);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrErrorString);
         
         DECLSPEC_XFGVIRT(IAppHostPropertyException, get_InvalidValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_InvalidValue )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrValue);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrValue);
         
         DECLSPEC_XFGVIRT(IAppHostPropertyException, get_ValidationFailureReason)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ValidationFailureReason )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrValidationReason);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrValidationReason);
         
         DECLSPEC_XFGVIRT(IAppHostPropertyException, get_ValidationFailureParameters)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ValidationFailureParameters )( 
             __RPC__in IAppHostPropertyException * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SAFEARRAY * *pParameterArray);
+            /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *pParameterArray);
         
         END_INTERFACE
     } IAppHostPropertyExceptionVtbl;
@@ -3078,36 +2847,27 @@ EXTERN_C const IID IID_IAppHostElementCollection;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcElementCount) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pcElementCount) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppElement) = 0;
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppElement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddElement( 
-            /* [annotation][in] */ 
-            _In_  IAppHostElement *pElement,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  INT cPosition = -1) = 0;
+            /* [in] */ __RPC__in_opt IAppHostElement *pElement,
+            /* [defaultvalue][in] */ INT cPosition = -1) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteElement( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex) = 0;
+            /* [in] */ VARIANT cIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clear( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateNewElement( 
-            /* [annotation][defaultvalue][string][in] */ 
-            _In_  BSTR bstrElementName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppElement) = 0;
+            /* [defaultvalue][string][in] */ __RPC__in_string BSTR bstrElementName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppElement) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Schema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostCollectionSchema **ppSchema) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostCollectionSchema **ppSchema) = 0;
         
     };
     
@@ -3121,8 +2881,7 @@ EXTERN_C const IID IID_IAppHostElementCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostElementCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3137,30 +2896,24 @@ EXTERN_C const IID IID_IAppHostElementCollection;
         DECLSPEC_XFGVIRT(IAppHostElementCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostElementCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcElementCount);
+            /* [retval][out] */ __RPC__out DWORD *pcElementCount);
         
         DECLSPEC_XFGVIRT(IAppHostElementCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostElementCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppElement);
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppElement);
         
         DECLSPEC_XFGVIRT(IAppHostElementCollection, AddElement)
         HRESULT ( STDMETHODCALLTYPE *AddElement )( 
             __RPC__in IAppHostElementCollection * This,
-            /* [annotation][in] */ 
-            _In_  IAppHostElement *pElement,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  INT cPosition);
+            /* [in] */ __RPC__in_opt IAppHostElement *pElement,
+            /* [defaultvalue][in] */ INT cPosition);
         
         DECLSPEC_XFGVIRT(IAppHostElementCollection, DeleteElement)
         HRESULT ( STDMETHODCALLTYPE *DeleteElement )( 
             __RPC__in IAppHostElementCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex);
+            /* [in] */ VARIANT cIndex);
         
         DECLSPEC_XFGVIRT(IAppHostElementCollection, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
@@ -3169,16 +2922,13 @@ EXTERN_C const IID IID_IAppHostElementCollection;
         DECLSPEC_XFGVIRT(IAppHostElementCollection, CreateNewElement)
         HRESULT ( STDMETHODCALLTYPE *CreateNewElement )( 
             __RPC__in IAppHostElementCollection * This,
-            /* [annotation][defaultvalue][string][in] */ 
-            _In_  BSTR bstrElementName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppElement);
+            /* [defaultvalue][string][in] */ __RPC__in_string BSTR bstrElementName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppElement);
         
         DECLSPEC_XFGVIRT(IAppHostElementCollection, get_Schema)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Schema )( 
             __RPC__in IAppHostElementCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostCollectionSchema **ppSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostCollectionSchema **ppSchema);
         
         END_INTERFACE
     } IAppHostElementCollectionVtbl;
@@ -3251,54 +3001,40 @@ EXTERN_C const IID IID_IAppHostElement;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Collection( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementCollection **ppCollection) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementCollection **ppCollection) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Properties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostPropertyCollection **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostPropertyCollection **ppProperties) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ChildElements( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostChildElementCollection **ppElements) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostChildElementCollection **ppElements) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Schema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppSchema) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppSchema) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetElementByName( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSubName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppElement) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrSubName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppElement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPropertyByName( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSubName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostProperty **ppProperty) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrSubName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostProperty **ppProperty) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clear( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Methods( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostMethodCollection **ppMethods) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostMethodCollection **ppMethods) = 0;
         
     };
     
@@ -3312,8 +3048,7 @@ EXTERN_C const IID IID_IAppHostElement;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3328,64 +3063,51 @@ EXTERN_C const IID IID_IAppHostElement;
         DECLSPEC_XFGVIRT(IAppHostElement, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IAppHostElement, get_Collection)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Collection )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementCollection **ppCollection);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementCollection **ppCollection);
         
         DECLSPEC_XFGVIRT(IAppHostElement, get_Properties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostPropertyCollection **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostPropertyCollection **ppProperties);
         
         DECLSPEC_XFGVIRT(IAppHostElement, get_ChildElements)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChildElements )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostChildElementCollection **ppElements);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostChildElementCollection **ppElements);
         
         DECLSPEC_XFGVIRT(IAppHostElement, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IAppHostElement, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IAppHostElement, get_Schema)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Schema )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElementSchema **ppSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElementSchema **ppSchema);
         
         DECLSPEC_XFGVIRT(IAppHostElement, GetElementByName)
         HRESULT ( STDMETHODCALLTYPE *GetElementByName )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSubName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppElement);
+            /* [string][in] */ __RPC__in_string BSTR bstrSubName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppElement);
         
         DECLSPEC_XFGVIRT(IAppHostElement, GetPropertyByName)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyByName )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSubName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostProperty **ppProperty);
+            /* [string][in] */ __RPC__in_string BSTR bstrSubName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostProperty **ppProperty);
         
         DECLSPEC_XFGVIRT(IAppHostElement, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
@@ -3394,8 +3116,7 @@ EXTERN_C const IID IID_IAppHostElement;
         DECLSPEC_XFGVIRT(IAppHostElement, get_Methods)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Methods )( 
             __RPC__in IAppHostElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostMethodCollection **ppMethods);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostMethodCollection **ppMethods);
         
         END_INTERFACE
     } IAppHostElementVtbl;
@@ -3480,42 +3201,32 @@ EXTERN_C const IID IID_IAppHostProperty;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVariant) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pVariant) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_Value( 
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [in] */ VARIANT value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clear( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_StringValue( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrValue) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrValue) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Exception( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostPropertyException **ppException) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostPropertyException **ppException) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Schema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostPropertySchema **ppSchema) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostPropertySchema **ppSchema) = 0;
         
     };
     
@@ -3529,8 +3240,7 @@ EXTERN_C const IID IID_IAppHostProperty;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostProperty * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3545,20 +3255,17 @@ EXTERN_C const IID IID_IAppHostProperty;
         DECLSPEC_XFGVIRT(IAppHostProperty, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAppHostProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IAppHostProperty, get_Value)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in IAppHostProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVariant);
+            /* [retval][out] */ __RPC__out VARIANT *pVariant);
         
         DECLSPEC_XFGVIRT(IAppHostProperty, put_Value)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             __RPC__in IAppHostProperty * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IAppHostProperty, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
@@ -3567,36 +3274,29 @@ EXTERN_C const IID IID_IAppHostProperty;
         DECLSPEC_XFGVIRT(IAppHostProperty, get_StringValue)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_StringValue )( 
             __RPC__in IAppHostProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrValue);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrValue);
         
         DECLSPEC_XFGVIRT(IAppHostProperty, get_Exception)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Exception )( 
             __RPC__in IAppHostProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostPropertyException **ppException);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostPropertyException **ppException);
         
         DECLSPEC_XFGVIRT(IAppHostProperty, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IAppHostProperty * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IAppHostProperty, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             __RPC__in IAppHostProperty * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IAppHostProperty, get_Schema)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Schema )( 
             __RPC__in IAppHostProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostPropertySchema **ppSchema);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostPropertySchema **ppSchema);
         
         END_INTERFACE
     } IAppHostPropertyVtbl;
@@ -3675,28 +3375,21 @@ EXTERN_C const IID IID_IAppHostConfigLocation;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrLocationPath) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrLocationPath) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pcCount) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppSection) = 0;
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppSection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddConfigSection( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppAdminElement) = 0;
+            /* [in] */ __RPC__in BSTR bstrSectionName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppAdminElement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteConfigSection( 
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex) = 0;
+            /* [in] */ VARIANT cIndex) = 0;
         
     };
     
@@ -3710,8 +3403,7 @@ EXTERN_C const IID IID_IAppHostConfigLocation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostConfigLocation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3726,36 +3418,29 @@ EXTERN_C const IID IID_IAppHostConfigLocation;
         DECLSPEC_XFGVIRT(IAppHostConfigLocation, get_Path)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IAppHostConfigLocation * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrLocationPath);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrLocationPath);
         
         DECLSPEC_XFGVIRT(IAppHostConfigLocation, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostConfigLocation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pcCount);
+            /* [retval][out] */ __RPC__out DWORD *pcCount);
         
         DECLSPEC_XFGVIRT(IAppHostConfigLocation, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostConfigLocation * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppSection);
+            /* [in] */ VARIANT cIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppSection);
         
         DECLSPEC_XFGVIRT(IAppHostConfigLocation, AddConfigSection)
         HRESULT ( STDMETHODCALLTYPE *AddConfigSection )( 
             __RPC__in IAppHostConfigLocation * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppAdminElement);
+            /* [in] */ __RPC__in BSTR bstrSectionName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppAdminElement);
         
         DECLSPEC_XFGVIRT(IAppHostConfigLocation, DeleteConfigSection)
         HRESULT ( STDMETHODCALLTYPE *DeleteConfigSection )( 
             __RPC__in IAppHostConfigLocation * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT cIndex);
+            /* [in] */ VARIANT cIndex);
         
         END_INTERFACE
     } IAppHostConfigLocationVtbl;
@@ -3822,48 +3507,37 @@ EXTERN_C const IID IID_IAppHostSectionDefinition;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrType) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_Type( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrType) = 0;
+            /* [in] */ __RPC__in BSTR bstrType) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_OverrideModeDefault( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrOverrideModeDefault) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrOverrideModeDefault) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_OverrideModeDefault( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrOverrideModeDefault) = 0;
+            /* [in] */ __RPC__in BSTR bstrOverrideModeDefault) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AllowDefinition( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrAllowDefinition) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAllowDefinition) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_AllowDefinition( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAllowDefinition) = 0;
+            /* [in] */ __RPC__in BSTR bstrAllowDefinition) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AllowLocation( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrAllowLocation) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAllowLocation) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_AllowLocation( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAllowLocation) = 0;
+            /* [in] */ __RPC__in BSTR bstrAllowLocation) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RequirePermission( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfRequirePermission) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfRequirePermission) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RequirePermission( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL pfRequirePermission) = 0;
+            /* [in] */ VARIANT_BOOL pfRequirePermission) = 0;
         
     };
     
@@ -3877,8 +3551,7 @@ EXTERN_C const IID IID_IAppHostSectionDefinition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3893,68 +3566,57 @@ EXTERN_C const IID IID_IAppHostSectionDefinition;
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, get_Type)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, put_Type)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrType);
+            /* [in] */ __RPC__in BSTR bstrType);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, get_OverrideModeDefault)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OverrideModeDefault )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrOverrideModeDefault);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrOverrideModeDefault);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, put_OverrideModeDefault)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_OverrideModeDefault )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrOverrideModeDefault);
+            /* [in] */ __RPC__in BSTR bstrOverrideModeDefault);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, get_AllowDefinition)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowDefinition )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrAllowDefinition);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAllowDefinition);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, put_AllowDefinition)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowDefinition )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAllowDefinition);
+            /* [in] */ __RPC__in BSTR bstrAllowDefinition);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, get_AllowLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowLocation )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrAllowLocation);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAllowLocation);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, put_AllowLocation)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowLocation )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAllowLocation);
+            /* [in] */ __RPC__in BSTR bstrAllowLocation);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, get_RequirePermission)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequirePermission )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfRequirePermission);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfRequirePermission);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinition, put_RequirePermission)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequirePermission )( 
             __RPC__in IAppHostSectionDefinition * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL pfRequirePermission);
+            /* [in] */ VARIANT_BOOL pfRequirePermission);
         
         END_INTERFACE
     } IAppHostSectionDefinitionVtbl;
@@ -4039,24 +3701,18 @@ EXTERN_C const IID IID_IAppHostSectionDefinitionCollection;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pcCount) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pcCount) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionDefinition **ppConfigSection) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionDefinition **ppConfigSection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddSection( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionDefinition **ppConfigSection) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionDefinition **ppConfigSection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteSection( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -4070,8 +3726,7 @@ EXTERN_C const IID IID_IAppHostSectionDefinitionCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostSectionDefinitionCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4086,30 +3741,24 @@ EXTERN_C const IID IID_IAppHostSectionDefinitionCollection;
         DECLSPEC_XFGVIRT(IAppHostSectionDefinitionCollection, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostSectionDefinitionCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pcCount);
+            /* [retval][out] */ __RPC__out ULONG *pcCount);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinitionCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostSectionDefinitionCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionDefinition **ppConfigSection);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionDefinition **ppConfigSection);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinitionCollection, AddSection)
         HRESULT ( STDMETHODCALLTYPE *AddSection )( 
             __RPC__in IAppHostSectionDefinitionCollection * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionDefinition **ppConfigSection);
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionDefinition **ppConfigSection);
         
         DECLSPEC_XFGVIRT(IAppHostSectionDefinitionCollection, DeleteSection)
         HRESULT ( STDMETHODCALLTYPE *DeleteSection )( 
             __RPC__in IAppHostSectionDefinitionCollection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } IAppHostSectionDefinitionCollectionVtbl;
@@ -4173,40 +3822,30 @@ EXTERN_C const IID IID_IAppHostSectionGroup;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pcSectionGroup) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pcSectionGroup) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionGroup **ppSectionGroup) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionGroup **ppSectionGroup) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Sections( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionDefinitionCollection **ppSections) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionDefinitionCollection **ppSections) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddSectionGroup( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionGroupName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionGroup **ppSectionGroup) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionGroupName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionGroup **ppSectionGroup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteSectionGroup( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrType) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_Type( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrType) = 0;
+            /* [in] */ __RPC__in BSTR bstrType) = 0;
         
     };
     
@@ -4220,8 +3859,7 @@ EXTERN_C const IID IID_IAppHostSectionGroup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostSectionGroup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4236,54 +3874,44 @@ EXTERN_C const IID IID_IAppHostSectionGroup;
         DECLSPEC_XFGVIRT(IAppHostSectionGroup, get_Count)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IAppHostSectionGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pcSectionGroup);
+            /* [retval][out] */ __RPC__out ULONG *pcSectionGroup);
         
         DECLSPEC_XFGVIRT(IAppHostSectionGroup, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IAppHostSectionGroup * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionGroup **ppSectionGroup);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionGroup **ppSectionGroup);
         
         DECLSPEC_XFGVIRT(IAppHostSectionGroup, get_Sections)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Sections )( 
             __RPC__in IAppHostSectionGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionDefinitionCollection **ppSections);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionDefinitionCollection **ppSections);
         
         DECLSPEC_XFGVIRT(IAppHostSectionGroup, AddSectionGroup)
         HRESULT ( STDMETHODCALLTYPE *AddSectionGroup )( 
             __RPC__in IAppHostSectionGroup * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionGroupName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionGroup **ppSectionGroup);
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionGroupName,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionGroup **ppSectionGroup);
         
         DECLSPEC_XFGVIRT(IAppHostSectionGroup, DeleteSectionGroup)
         HRESULT ( STDMETHODCALLTYPE *DeleteSectionGroup )( 
             __RPC__in IAppHostSectionGroup * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         DECLSPEC_XFGVIRT(IAppHostSectionGroup, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAppHostSectionGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IAppHostSectionGroup, get_Type)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IAppHostSectionGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrType);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
         DECLSPEC_XFGVIRT(IAppHostSectionGroup, put_Type)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in IAppHostSectionGroup * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrType);
+            /* [in] */ __RPC__in BSTR bstrType);
         
         END_INTERFACE
     } IAppHostSectionGroupVtbl;
@@ -4359,42 +3987,31 @@ EXTERN_C const IID IID_IAppHostConfigFile;
     {
     public:
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ConfigPath( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrConfigPath) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrConfigPath) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FilePath( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrFilePath) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrFilePath) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Locations( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigLocationCollection **ppLocations) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigLocationCollection **ppLocations) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAdminSection( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppAdminSection) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionName,
+            /* [string][in] */ __RPC__in_string BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppAdminSection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ClearInvalidSections( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RootSectionGroup( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionGroup **ppSectionGroups) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionGroup **ppSectionGroups) = 0;
         
     };
     
@@ -4408,8 +4025,7 @@ EXTERN_C const IID IID_IAppHostConfigFile;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostConfigFile * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4424,46 +4040,36 @@ EXTERN_C const IID IID_IAppHostConfigFile;
         DECLSPEC_XFGVIRT(IAppHostConfigFile, get_ConfigPath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConfigPath )( 
             __RPC__in IAppHostConfigFile * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrConfigPath);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrConfigPath);
         
         DECLSPEC_XFGVIRT(IAppHostConfigFile, get_FilePath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FilePath )( 
             __RPC__in IAppHostConfigFile * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrFilePath);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrFilePath);
         
         DECLSPEC_XFGVIRT(IAppHostConfigFile, get_Locations)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Locations )( 
             __RPC__in IAppHostConfigFile * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigLocationCollection **ppLocations);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigLocationCollection **ppLocations);
         
         DECLSPEC_XFGVIRT(IAppHostConfigFile, GetAdminSection)
         HRESULT ( STDMETHODCALLTYPE *GetAdminSection )( 
             __RPC__in IAppHostConfigFile * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppAdminSection);
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionName,
+            /* [string][in] */ __RPC__in_string BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppAdminSection);
         
         DECLSPEC_XFGVIRT(IAppHostConfigFile, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IAppHostConfigFile * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IAppHostConfigFile, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             __RPC__in IAppHostConfigFile * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IAppHostConfigFile, ClearInvalidSections)
         HRESULT ( STDMETHODCALLTYPE *ClearInvalidSections )( 
@@ -4472,8 +4078,7 @@ EXTERN_C const IID IID_IAppHostConfigFile;
         DECLSPEC_XFGVIRT(IAppHostConfigFile, get_RootSectionGroup)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootSectionGroup )( 
             __RPC__in IAppHostConfigFile * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostSectionGroup **ppSectionGroups);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostSectionGroup **ppSectionGroups);
         
         END_INTERFACE
     } IAppHostConfigFileVtbl;
@@ -4549,12 +4154,9 @@ EXTERN_C const IID IID_IAppHostPathMapper;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE MapPath( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrConfigPath,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMappedPhysicalPath,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrNewPhysicalPath) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrConfigPath,
+            /* [string][in] */ __RPC__in_string BSTR bstrMappedPhysicalPath,
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrNewPhysicalPath) = 0;
         
     };
     
@@ -4568,8 +4170,7 @@ EXTERN_C const IID IID_IAppHostPathMapper;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostPathMapper * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4584,12 +4185,9 @@ EXTERN_C const IID IID_IAppHostPathMapper;
         DECLSPEC_XFGVIRT(IAppHostPathMapper, MapPath)
         HRESULT ( STDMETHODCALLTYPE *MapPath )( 
             __RPC__in IAppHostPathMapper * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrConfigPath,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMappedPhysicalPath,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  BSTR *pbstrNewPhysicalPath);
+            /* [string][in] */ __RPC__in_string BSTR bstrConfigPath,
+            /* [string][in] */ __RPC__in_string BSTR bstrMappedPhysicalPath,
+            /* [retval][string][out] */ __RPC__deref_out_opt_string BSTR *pbstrNewPhysicalPath);
         
         END_INTERFACE
     } IAppHostPathMapperVtbl;
@@ -4644,14 +4242,10 @@ EXTERN_C const IID IID_IAppHostPathMapper2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE MapPath( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrConfigPath,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMappedPhysicalPath,
-            /* [annotation][string][out] */ 
-            _Out_  BSTR *pbstrNewPhysicalPath,
-            /* [annotation][out] */ 
-            _Out_  HANDLE *phImpersonationToken) = 0;
+            /* [string][in] */ BSTR bstrConfigPath,
+            /* [string][in] */ BSTR bstrMappedPhysicalPath,
+            /* [string][out] */ BSTR *pbstrNewPhysicalPath,
+            /* [out] */ HANDLE *phImpersonationToken) = 0;
         
     };
     
@@ -4665,8 +4259,7 @@ EXTERN_C const IID IID_IAppHostPathMapper2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAppHostPathMapper2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4681,14 +4274,10 @@ EXTERN_C const IID IID_IAppHostPathMapper2;
         DECLSPEC_XFGVIRT(IAppHostPathMapper2, MapPath)
         HRESULT ( STDMETHODCALLTYPE *MapPath )( 
             IAppHostPathMapper2 * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrConfigPath,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMappedPhysicalPath,
-            /* [annotation][string][out] */ 
-            _Out_  BSTR *pbstrNewPhysicalPath,
-            /* [annotation][out] */ 
-            _Out_  HANDLE *phImpersonationToken);
+            /* [string][in] */ BSTR bstrConfigPath,
+            /* [string][in] */ BSTR bstrMappedPhysicalPath,
+            /* [string][out] */ BSTR *pbstrNewPhysicalPath,
+            /* [out] */ HANDLE *phImpersonationToken);
         
         END_INTERFACE
     } IAppHostPathMapper2Vtbl;
@@ -4743,10 +4332,8 @@ EXTERN_C const IID IID_IAppHostChangeHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnSectionChanges( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrConfigPath) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionName,
+            /* [string][in] */ __RPC__in_string BSTR bstrConfigPath) = 0;
         
     };
     
@@ -4760,8 +4347,7 @@ EXTERN_C const IID IID_IAppHostChangeHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostChangeHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4776,10 +4362,8 @@ EXTERN_C const IID IID_IAppHostChangeHandler;
         DECLSPEC_XFGVIRT(IAppHostChangeHandler, OnSectionChanges)
         HRESULT ( STDMETHODCALLTYPE *OnSectionChanges )( 
             __RPC__in IAppHostChangeHandler * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrConfigPath);
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionName,
+            /* [string][in] */ __RPC__in_string BSTR bstrConfigPath);
         
         END_INTERFACE
     } IAppHostChangeHandlerVtbl;
@@ -4834,28 +4418,20 @@ EXTERN_C const IID IID_IAppHostAdminManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetAdminSection( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppAdminSection) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionName,
+            /* [string][in] */ __RPC__in_string BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppAdminSection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMetadata( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ConfigManager( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigManager **ppConfigManager) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigManager **ppConfigManager) = 0;
         
     };
     
@@ -4869,8 +4445,7 @@ EXTERN_C const IID IID_IAppHostAdminManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostAdminManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4885,34 +4460,26 @@ EXTERN_C const IID IID_IAppHostAdminManager;
         DECLSPEC_XFGVIRT(IAppHostAdminManager, GetAdminSection)
         HRESULT ( STDMETHODCALLTYPE *GetAdminSection )( 
             __RPC__in IAppHostAdminManager * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppAdminSection);
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionName,
+            /* [string][in] */ __RPC__in_string BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppAdminSection);
         
         DECLSPEC_XFGVIRT(IAppHostAdminManager, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IAppHostAdminManager * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IAppHostAdminManager, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             __RPC__in IAppHostAdminManager * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IAppHostAdminManager, get_ConfigManager)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConfigManager )( 
             __RPC__in IAppHostAdminManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigManager **ppConfigManager);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigManager **ppConfigManager);
         
         END_INTERFACE
     } IAppHostAdminManagerVtbl;
@@ -4978,12 +4545,10 @@ EXTERN_C const IID IID_IAppHostWritableAdminManager;
         virtual HRESULT STDMETHODCALLTYPE CommitChanges( void) = 0;
         
         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CommitPath( 
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  BSTR *pbstrCommitPath) = 0;
+            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *pbstrCommitPath) = 0;
         
         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CommitPath( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrCommitPath) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrCommitPath) = 0;
         
     };
     
@@ -4997,8 +4562,7 @@ EXTERN_C const IID IID_IAppHostWritableAdminManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostWritableAdminManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5013,34 +4577,26 @@ EXTERN_C const IID IID_IAppHostWritableAdminManager;
         DECLSPEC_XFGVIRT(IAppHostAdminManager, GetAdminSection)
         HRESULT ( STDMETHODCALLTYPE *GetAdminSection )( 
             __RPC__in IAppHostWritableAdminManager * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrSectionName,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostElement **ppAdminSection);
+            /* [string][in] */ __RPC__in_string BSTR bstrSectionName,
+            /* [string][in] */ __RPC__in_string BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostElement **ppAdminSection);
         
         DECLSPEC_XFGVIRT(IAppHostAdminManager, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             __RPC__in IAppHostWritableAdminManager * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pValue);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [retval][out] */ __RPC__out VARIANT *pValue);
         
         DECLSPEC_XFGVIRT(IAppHostAdminManager, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             __RPC__in IAppHostWritableAdminManager * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrMetadataType,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [string][in] */ __RPC__in_string BSTR bstrMetadataType,
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IAppHostAdminManager, get_ConfigManager)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConfigManager )( 
             __RPC__in IAppHostWritableAdminManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigManager **ppConfigManager);
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigManager **ppConfigManager);
         
         DECLSPEC_XFGVIRT(IAppHostWritableAdminManager, CommitChanges)
         HRESULT ( STDMETHODCALLTYPE *CommitChanges )( 
@@ -5049,14 +4605,12 @@ EXTERN_C const IID IID_IAppHostWritableAdminManager;
         DECLSPEC_XFGVIRT(IAppHostWritableAdminManager, get_CommitPath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommitPath )( 
             __RPC__in IAppHostWritableAdminManager * This,
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  BSTR *pbstrCommitPath);
+            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *pbstrCommitPath);
         
         DECLSPEC_XFGVIRT(IAppHostWritableAdminManager, put_CommitPath)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CommitPath )( 
             __RPC__in IAppHostWritableAdminManager * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrCommitPath);
+            /* [string][in] */ __RPC__in_string BSTR bstrCommitPath);
         
         END_INTERFACE
     } IAppHostWritableAdminManagerVtbl;
@@ -5130,16 +4684,12 @@ EXTERN_C const IID IID_IAppHostConfigManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetConfigFile( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrConfigPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigFile **ppConfigFile) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrConfigPath,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigFile **ppConfigFile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUniqueConfigPath( 
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrConfigPath,
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUniquePath) = 0;
+            /* [string][in] */ __RPC__in_string BSTR bstrConfigPath,
+            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *pbstrUniquePath) = 0;
         
     };
     
@@ -5153,8 +4703,7 @@ EXTERN_C const IID IID_IAppHostConfigManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAppHostConfigManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5169,18 +4718,14 @@ EXTERN_C const IID IID_IAppHostConfigManager;
         DECLSPEC_XFGVIRT(IAppHostConfigManager, GetConfigFile)
         HRESULT ( STDMETHODCALLTYPE *GetConfigFile )( 
             __RPC__in IAppHostConfigManager * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrConfigPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IAppHostConfigFile **ppConfigFile);
+            /* [string][in] */ __RPC__in_string BSTR bstrConfigPath,
+            /* [retval][out] */ __RPC__deref_out_opt IAppHostConfigFile **ppConfigFile);
         
         DECLSPEC_XFGVIRT(IAppHostConfigManager, GetUniqueConfigPath)
         HRESULT ( STDMETHODCALLTYPE *GetUniqueConfigPath )( 
             __RPC__in IAppHostConfigManager * This,
-            /* [annotation][string][in] */ 
-            _In_  BSTR bstrConfigPath,
-            /* [annotation][string][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUniquePath);
+            /* [string][in] */ __RPC__in_string BSTR bstrConfigPath,
+            /* [string][retval][out] */ __RPC__deref_out_opt_string BSTR *pbstrUniquePath);
         
         END_INTERFACE
     } IAppHostConfigManagerVtbl;

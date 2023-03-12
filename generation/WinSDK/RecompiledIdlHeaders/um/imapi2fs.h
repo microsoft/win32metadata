@@ -3,14 +3,15 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
+#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 475
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +39,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -437,40 +438,31 @@ EXTERN_C const IID IID_IBootOptions;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BootImage( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Manufacturer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Manufacturer( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlatformId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  PlatformId *pVal) = 0;
+            /* [retval][out] */ __RPC__out PlatformId *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlatformId( 
-            /* [annotation][in] */ 
-            _In_  PlatformId newVal) = 0;
+            /* [in] */ PlatformId newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Emulation( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  EmulationType *pVal) = 0;
+            /* [retval][out] */ __RPC__out EmulationType *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Emulation( 
-            /* [annotation][in] */ 
-            _In_  EmulationType newVal) = 0;
+            /* [in] */ EmulationType newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ImageSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pVal) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AssignBootImage( 
-            /* [annotation][in] */ 
-            _In_  IStream *newVal) = 0;
+            /* [in] */ __RPC__in_opt IStream *newVal) = 0;
         
     };
     
@@ -484,8 +476,7 @@ EXTERN_C const IID IID_IBootOptions;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -500,31 +491,23 @@ EXTERN_C const IID IID_IBootOptions;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -549,56 +532,47 @@ EXTERN_C const IID IID_IBootOptions;
         DECLSPEC_XFGVIRT(IBootOptions, get_BootImage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BootImage )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **pVal);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **pVal);
         
         DECLSPEC_XFGVIRT(IBootOptions, get_Manufacturer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Manufacturer )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IBootOptions, put_Manufacturer)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Manufacturer )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IBootOptions, get_PlatformId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlatformId )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  PlatformId *pVal);
+            /* [retval][out] */ __RPC__out PlatformId *pVal);
         
         DECLSPEC_XFGVIRT(IBootOptions, put_PlatformId)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlatformId )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][in] */ 
-            _In_  PlatformId newVal);
+            /* [in] */ PlatformId newVal);
         
         DECLSPEC_XFGVIRT(IBootOptions, get_Emulation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Emulation )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  EmulationType *pVal);
+            /* [retval][out] */ __RPC__out EmulationType *pVal);
         
         DECLSPEC_XFGVIRT(IBootOptions, put_Emulation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Emulation )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][in] */ 
-            _In_  EmulationType newVal);
+            /* [in] */ EmulationType newVal);
         
         DECLSPEC_XFGVIRT(IBootOptions, get_ImageSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImageSize )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pVal);
+            /* [retval][out] */ __RPC__out ULONG *pVal);
         
         DECLSPEC_XFGVIRT(IBootOptions, AssignBootImage)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AssignBootImage )( 
             __RPC__in IBootOptions * This,
-            /* [annotation][in] */ 
-            _In_  IStream *newVal);
+            /* [in] */ __RPC__in_opt IStream *newVal);
         
         END_INTERFACE
     } IBootOptionsVtbl;
@@ -690,20 +664,16 @@ EXTERN_C const IID IID_IProgressItem;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *desc) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *desc) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FirstBlock( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *block) = 0;
+            /* [retval][out] */ __RPC__out ULONG *block) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastBlock( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *block) = 0;
+            /* [retval][out] */ __RPC__out ULONG *block) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BlockCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *blocks) = 0;
+            /* [retval][out] */ __RPC__out ULONG *blocks) = 0;
         
     };
     
@@ -717,8 +687,7 @@ EXTERN_C const IID IID_IProgressItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProgressItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -733,31 +702,23 @@ EXTERN_C const IID IID_IProgressItem;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IProgressItem * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IProgressItem * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IProgressItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -782,26 +743,22 @@ EXTERN_C const IID IID_IProgressItem;
         DECLSPEC_XFGVIRT(IProgressItem, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IProgressItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *desc);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *desc);
         
         DECLSPEC_XFGVIRT(IProgressItem, get_FirstBlock)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FirstBlock )( 
             __RPC__in IProgressItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *block);
+            /* [retval][out] */ __RPC__out ULONG *block);
         
         DECLSPEC_XFGVIRT(IProgressItem, get_LastBlock)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastBlock )( 
             __RPC__in IProgressItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *block);
+            /* [retval][out] */ __RPC__out ULONG *block);
         
         DECLSPEC_XFGVIRT(IProgressItem, get_BlockCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockCount )( 
             __RPC__in IProgressItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *blocks);
+            /* [retval][out] */ __RPC__out ULONG *blocks);
         
         END_INTERFACE
     } IProgressItemVtbl;
@@ -878,22 +835,17 @@ EXTERN_C const IID IID_IEnumProgressItems;
     {
     public:
         virtual /* [helpstring][local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(celt)  IProgressItem **rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [size_is][out] */ IProgressItem **rgelt,
+            /* [out] */ ULONG *pceltFetched) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumProgressItems **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumProgressItems **ppEnum) = 0;
         
     };
     
@@ -907,8 +859,7 @@ EXTERN_C const IID IID_IEnumProgressItems;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumProgressItems * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -923,18 +874,14 @@ EXTERN_C const IID IID_IEnumProgressItems;
         DECLSPEC_XFGVIRT(IEnumProgressItems, Next)
         /* [helpstring][local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumProgressItems * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(celt)  IProgressItem **rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [size_is][out] */ IProgressItem **rgelt,
+            /* [out] */ ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumProgressItems, Skip)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumProgressItems * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumProgressItems, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -943,8 +890,7 @@ EXTERN_C const IID IID_IEnumProgressItems;
         DECLSPEC_XFGVIRT(IEnumProgressItems, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumProgressItems * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumProgressItems **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumProgressItems **ppEnum);
         
         END_INTERFACE
     } IEnumProgressItemsVtbl;
@@ -991,10 +937,8 @@ EXTERN_C const IID IID_IEnumProgressItems;
 /* [helpstring][call_as] */ HRESULT STDMETHODCALLTYPE IEnumProgressItems_RemoteNext_Proxy( 
     __RPC__in IEnumProgressItems * This,
     /* [range][in] */ __RPC__in_range(1,0x7fffffff) ULONG celt,
-    /* [annotation][size_is][out] */ 
-    _Out_writes_(celt)  IProgressItem **rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [size_is][out] */ __RPC__out_ecount_full(celt) IProgressItem **rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumProgressItems_RemoteNext_Stub(
@@ -1024,34 +968,25 @@ EXTERN_C const IID IID_IProgressItems;
     {
     public:
         virtual /* [helpstring][restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **NewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **NewEnum) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  long Index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IProgressItem **item) = 0;
+            /* [in] */ long Index,
+            /* [retval][out] */ __RPC__deref_out_opt IProgressItem **item) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count) = 0;
+            /* [retval][out] */ __RPC__out long *Count) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ProgressItemFromBlock( 
-            /* [annotation][in] */ 
-            _In_  ULONG block,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IProgressItem **item) = 0;
+            /* [in] */ ULONG block,
+            /* [retval][out] */ __RPC__deref_out_opt IProgressItem **item) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ProgressItemFromDescription( 
-            /* [annotation][in] */ 
-            _In_  BSTR description,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IProgressItem **item) = 0;
+            /* [in] */ __RPC__in BSTR description,
+            /* [retval][out] */ __RPC__deref_out_opt IProgressItem **item) = 0;
         
         virtual /* [helpstring][restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get_EnumProgressItems( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumProgressItems **NewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumProgressItems **NewEnum) = 0;
         
     };
     
@@ -1065,8 +1000,7 @@ EXTERN_C const IID IID_IProgressItems;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProgressItems * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1081,31 +1015,23 @@ EXTERN_C const IID IID_IProgressItems;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IProgressItems * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IProgressItems * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IProgressItems * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1130,44 +1056,35 @@ EXTERN_C const IID IID_IProgressItems;
         DECLSPEC_XFGVIRT(IProgressItems, get__NewEnum)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IProgressItems * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **NewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **NewEnum);
         
         DECLSPEC_XFGVIRT(IProgressItems, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IProgressItems * This,
-            /* [annotation][in] */ 
-            _In_  long Index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IProgressItem **item);
+            /* [in] */ long Index,
+            /* [retval][out] */ __RPC__deref_out_opt IProgressItem **item);
         
         DECLSPEC_XFGVIRT(IProgressItems, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IProgressItems * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count);
+            /* [retval][out] */ __RPC__out long *Count);
         
         DECLSPEC_XFGVIRT(IProgressItems, ProgressItemFromBlock)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ProgressItemFromBlock )( 
             __RPC__in IProgressItems * This,
-            /* [annotation][in] */ 
-            _In_  ULONG block,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IProgressItem **item);
+            /* [in] */ ULONG block,
+            /* [retval][out] */ __RPC__deref_out_opt IProgressItem **item);
         
         DECLSPEC_XFGVIRT(IProgressItems, ProgressItemFromDescription)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ProgressItemFromDescription )( 
             __RPC__in IProgressItems * This,
-            /* [annotation][in] */ 
-            _In_  BSTR description,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IProgressItem **item);
+            /* [in] */ __RPC__in BSTR description,
+            /* [retval][out] */ __RPC__deref_out_opt IProgressItem **item);
         
         DECLSPEC_XFGVIRT(IProgressItems, get_EnumProgressItems)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumProgressItems )( 
             __RPC__in IProgressItems * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumProgressItems **NewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumProgressItems **NewEnum);
         
         END_INTERFACE
     } IProgressItemsVtbl;
@@ -1250,24 +1167,19 @@ EXTERN_C const IID IID_IFileSystemImageResult;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ImageStream( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProgressItems( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IProgressItems **pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IProgressItems **pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalBlocks( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal) = 0;
+            /* [retval][out] */ __RPC__out LONG *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BlockSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal) = 0;
+            /* [retval][out] */ __RPC__out LONG *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DiscId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
     };
     
@@ -1281,8 +1193,7 @@ EXTERN_C const IID IID_IFileSystemImageResult;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFileSystemImageResult * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1297,31 +1208,23 @@ EXTERN_C const IID IID_IFileSystemImageResult;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFileSystemImageResult * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFileSystemImageResult * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFileSystemImageResult * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1346,32 +1249,27 @@ EXTERN_C const IID IID_IFileSystemImageResult;
         DECLSPEC_XFGVIRT(IFileSystemImageResult, get_ImageStream)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImageStream )( 
             __RPC__in IFileSystemImageResult * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **pVal);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **pVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImageResult, get_ProgressItems)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgressItems )( 
             __RPC__in IFileSystemImageResult * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IProgressItems **pVal);
+            /* [retval][out] */ __RPC__deref_out_opt IProgressItems **pVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImageResult, get_TotalBlocks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalBlocks )( 
             __RPC__in IFileSystemImageResult * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal);
+            /* [retval][out] */ __RPC__out LONG *pVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImageResult, get_BlockSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockSize )( 
             __RPC__in IFileSystemImageResult * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal);
+            /* [retval][out] */ __RPC__out LONG *pVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImageResult, get_DiscId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiscId )( 
             __RPC__in IFileSystemImageResult * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         END_INTERFACE
     } IFileSystemImageResultVtbl;
@@ -1465,8 +1363,7 @@ EXTERN_C const IID IID_IFileSystemImageResult2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFileSystemImageResult2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1481,31 +1378,23 @@ EXTERN_C const IID IID_IFileSystemImageResult2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFileSystemImageResult2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFileSystemImageResult2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFileSystemImageResult2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1530,32 +1419,27 @@ EXTERN_C const IID IID_IFileSystemImageResult2;
         DECLSPEC_XFGVIRT(IFileSystemImageResult, get_ImageStream)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImageStream )( 
             __RPC__in IFileSystemImageResult2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **pVal);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **pVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImageResult, get_ProgressItems)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProgressItems )( 
             __RPC__in IFileSystemImageResult2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IProgressItems **pVal);
+            /* [retval][out] */ __RPC__deref_out_opt IProgressItems **pVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImageResult, get_TotalBlocks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalBlocks )( 
             __RPC__in IFileSystemImageResult2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal);
+            /* [retval][out] */ __RPC__out LONG *pVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImageResult, get_BlockSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockSize )( 
             __RPC__in IFileSystemImageResult2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal);
+            /* [retval][out] */ __RPC__out LONG *pVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImageResult, get_DiscId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiscId )( 
             __RPC__in IFileSystemImageResult2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImageResult2, get_ModifiedBlocks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ModifiedBlocks )( 
@@ -1644,56 +1528,42 @@ EXTERN_C const IID IID_IFsiItem;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FullPath( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CreationTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal) = 0;
+            /* [retval][out] */ __RPC__out DATE *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CreationTime( 
-            /* [annotation][in] */ 
-            _In_  DATE newVal) = 0;
+            /* [in] */ DATE newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastAccessedTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal) = 0;
+            /* [retval][out] */ __RPC__out DATE *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LastAccessedTime( 
-            /* [annotation][in] */ 
-            _In_  DATE newVal) = 0;
+            /* [in] */ DATE newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastModifiedTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal) = 0;
+            /* [retval][out] */ __RPC__out DATE *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LastModifiedTime( 
-            /* [annotation][in] */ 
-            _In_  DATE newVal) = 0;
+            /* [in] */ DATE newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IsHidden( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_IsHidden( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal) = 0;
+            /* [in] */ VARIANT_BOOL newVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE FileSystemName( 
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE FileSystemPath( 
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
     };
     
@@ -1707,8 +1577,7 @@ EXTERN_C const IID IID_IFsiItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1723,31 +1592,23 @@ EXTERN_C const IID IID_IFsiItem;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1772,78 +1633,64 @@ EXTERN_C const IID IID_IFsiItem;
         DECLSPEC_XFGVIRT(IFsiItem, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_FullPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FullPath )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_CreationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreationTime )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_CreationTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CreationTime )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_LastAccessedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastAccessedTime )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_LastAccessedTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LastAccessedTime )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_LastModifiedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastModifiedTime )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_LastModifiedTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LastModifiedTime )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_IsHidden)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsHidden )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_IsHidden)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsHidden )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, FileSystemName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FileSystemName )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, FileSystemPath)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FileSystemPath )( 
             __RPC__in IFsiItem * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         END_INTERFACE
     } IFsiItemVtbl;
@@ -1944,22 +1791,17 @@ EXTERN_C const IID IID_IEnumFsiItems;
     {
     public:
         virtual /* [helpstring][local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(celt)  IFsiItem **rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [size_is][out] */ IFsiItem **rgelt,
+            /* [out] */ ULONG *pceltFetched) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumFsiItems **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumFsiItems **ppEnum) = 0;
         
     };
     
@@ -1973,8 +1815,7 @@ EXTERN_C const IID IID_IEnumFsiItems;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumFsiItems * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1989,18 +1830,14 @@ EXTERN_C const IID IID_IEnumFsiItems;
         DECLSPEC_XFGVIRT(IEnumFsiItems, Next)
         /* [helpstring][local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumFsiItems * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(celt)  IFsiItem **rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [size_is][out] */ IFsiItem **rgelt,
+            /* [out] */ ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumFsiItems, Skip)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumFsiItems * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumFsiItems, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -2009,8 +1846,7 @@ EXTERN_C const IID IID_IEnumFsiItems;
         DECLSPEC_XFGVIRT(IEnumFsiItems, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumFsiItems * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumFsiItems **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumFsiItems **ppEnum);
         
         END_INTERFACE
     } IEnumFsiItemsVtbl;
@@ -2057,10 +1893,8 @@ EXTERN_C const IID IID_IEnumFsiItems;
 /* [helpstring][call_as] */ HRESULT STDMETHODCALLTYPE IEnumFsiItems_RemoteNext_Proxy( 
     __RPC__in IEnumFsiItems * This,
     /* [range][in] */ __RPC__in_range(0,0x7fffffff) ULONG celt,
-    /* [annotation][size_is][out] */ 
-    _Out_writes_(celt)  IFsiItem **rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [size_is][out] */ __RPC__out_ecount_full(celt) IFsiItem **rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumFsiItems_RemoteNext_Stub(
@@ -2090,24 +1924,19 @@ EXTERN_C const IID IID_IFsiFileItem;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DataSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONGLONG *pVal) = 0;
+            /* [retval][out] */ __RPC__out LONGLONG *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DataSize32BitLow( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal) = 0;
+            /* [retval][out] */ __RPC__out LONG *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DataSize32BitHigh( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal) = 0;
+            /* [retval][out] */ __RPC__out LONG *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Data( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Data( 
-            /* [annotation][in] */ 
-            _In_  IStream *newVal) = 0;
+            /* [in] */ __RPC__in_opt IStream *newVal) = 0;
         
     };
     
@@ -2121,8 +1950,7 @@ EXTERN_C const IID IID_IFsiFileItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2137,31 +1965,23 @@ EXTERN_C const IID IID_IFsiFileItem;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2186,108 +2006,89 @@ EXTERN_C const IID IID_IFsiFileItem;
         DECLSPEC_XFGVIRT(IFsiItem, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_FullPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FullPath )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_CreationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreationTime )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_CreationTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CreationTime )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_LastAccessedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastAccessedTime )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_LastAccessedTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LastAccessedTime )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_LastModifiedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastModifiedTime )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_LastModifiedTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LastModifiedTime )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_IsHidden)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsHidden )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_IsHidden)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsHidden )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, FileSystemName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FileSystemName )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, FileSystemPath)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FileSystemPath )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem, get_DataSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataSize )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONGLONG *pVal);
+            /* [retval][out] */ __RPC__out LONGLONG *pVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem, get_DataSize32BitLow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataSize32BitLow )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal);
+            /* [retval][out] */ __RPC__out LONG *pVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem, get_DataSize32BitHigh)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataSize32BitHigh )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal);
+            /* [retval][out] */ __RPC__out LONG *pVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem, get_Data)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Data )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **pVal);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **pVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem, put_Data)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Data )( 
             __RPC__in IFsiFileItem * This,
-            /* [annotation][in] */ 
-            _In_  IStream *newVal);
+            /* [in] */ __RPC__in_opt IStream *newVal);
         
         END_INTERFACE
     } IFsiFileItemVtbl;
@@ -2419,21 +2220,17 @@ EXTERN_C const IID IID_IFsiFileItem2;
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddStream( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  IStream *streamData) = 0;
+            /* [in] */ __RPC__in BSTR name,
+            /* [in] */ __RPC__in_opt IStream *streamData) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveStream( 
-            /* [annotation][in] */ 
-            _In_  BSTR name) = 0;
+            /* [in] */ __RPC__in BSTR name) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IsRealTime( 
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_IsRealTime( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal) = 0;
+            /* [in] */ VARIANT_BOOL newVal) = 0;
         
     };
     
@@ -2447,8 +2244,7 @@ EXTERN_C const IID IID_IFsiFileItem2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2463,31 +2259,23 @@ EXTERN_C const IID IID_IFsiFileItem2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2512,108 +2300,89 @@ EXTERN_C const IID IID_IFsiFileItem2;
         DECLSPEC_XFGVIRT(IFsiItem, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_FullPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FullPath )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_CreationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreationTime )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_CreationTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CreationTime )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_LastAccessedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastAccessedTime )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_LastAccessedTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LastAccessedTime )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_LastModifiedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastModifiedTime )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_LastModifiedTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LastModifiedTime )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_IsHidden)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsHidden )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_IsHidden)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsHidden )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, FileSystemName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FileSystemName )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, FileSystemPath)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FileSystemPath )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem, get_DataSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataSize )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONGLONG *pVal);
+            /* [retval][out] */ __RPC__out LONGLONG *pVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem, get_DataSize32BitLow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataSize32BitLow )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal);
+            /* [retval][out] */ __RPC__out LONG *pVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem, get_DataSize32BitHigh)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataSize32BitHigh )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pVal);
+            /* [retval][out] */ __RPC__out LONG *pVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem, get_Data)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Data )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **pVal);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **pVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem, put_Data)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Data )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *newVal);
+            /* [in] */ __RPC__in_opt IStream *newVal);
         
         DECLSPEC_XFGVIRT(IFsiFileItem2, get_FsiNamedStreams)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FsiNamedStreams )( 
@@ -2628,16 +2397,13 @@ EXTERN_C const IID IID_IFsiFileItem2;
         DECLSPEC_XFGVIRT(IFsiFileItem2, AddStream)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddStream )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  IStream *streamData);
+            /* [in] */ __RPC__in BSTR name,
+            /* [in] */ __RPC__in_opt IStream *streamData);
         
         DECLSPEC_XFGVIRT(IFsiFileItem2, RemoveStream)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveStream )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name);
+            /* [in] */ __RPC__in BSTR name);
         
         DECLSPEC_XFGVIRT(IFsiFileItem2, get_IsRealTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsRealTime )( 
@@ -2647,8 +2413,7 @@ EXTERN_C const IID IID_IFsiFileItem2;
         DECLSPEC_XFGVIRT(IFsiFileItem2, put_IsRealTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsRealTime )( 
             __RPC__in IFsiFileItem2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         END_INTERFACE
     } IFsiFileItem2Vtbl;
@@ -2787,8 +2552,7 @@ EXTERN_C const IID IID_IFsiNamedStreams;
             /* [retval][ref][out] */ __RPC__deref_out_opt IEnumVARIANT **NewEnum) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  LONG index,
+            /* [in] */ LONG index,
             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiFileItem2 **item) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
@@ -2809,8 +2573,7 @@ EXTERN_C const IID IID_IFsiNamedStreams;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsiNamedStreams * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2825,31 +2588,23 @@ EXTERN_C const IID IID_IFsiNamedStreams;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsiNamedStreams * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsiNamedStreams * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsiNamedStreams * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2879,8 +2634,7 @@ EXTERN_C const IID IID_IFsiNamedStreams;
         DECLSPEC_XFGVIRT(IFsiNamedStreams, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFsiNamedStreams * This,
-            /* [annotation][in] */ 
-            _In_  LONG index,
+            /* [in] */ LONG index,
             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiFileItem2 **item);
         
         DECLSPEC_XFGVIRT(IFsiNamedStreams, get_Count)
@@ -2968,50 +2722,37 @@ EXTERN_C const IID IID_IFsiDirectoryItem;
     {
     public:
         virtual /* [helpstring][restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **NewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **NewEnum) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsiItem **item) = 0;
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsiItem **item) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *Count) = 0;
+            /* [retval][out] */ __RPC__out LONG *Count) = 0;
         
         virtual /* [helpstring][restricted][hidden][id][propget] */ HRESULT STDMETHODCALLTYPE get_EnumFsiItems( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumFsiItems **NewEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumFsiItems **NewEnum) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddDirectory( 
-            /* [annotation][in] */ 
-            _In_  BSTR path) = 0;
+            /* [in] */ __RPC__in BSTR path) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddFile( 
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][in] */ 
-            _In_  IStream *fileData) = 0;
+            /* [in] */ __RPC__in BSTR path,
+            /* [in] */ __RPC__in_opt IStream *fileData) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddTree( 
-            /* [annotation][in] */ 
-            _In_  BSTR sourceDirectory,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL includeBaseDirectory) = 0;
+            /* [in] */ __RPC__in BSTR sourceDirectory,
+            /* [in] */ VARIANT_BOOL includeBaseDirectory) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][in] */ 
-            _In_  IFsiItem *item) = 0;
+            /* [in] */ __RPC__in_opt IFsiItem *item) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [annotation][in] */ 
-            _In_  BSTR path) = 0;
+            /* [in] */ __RPC__in BSTR path) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveTree( 
-            /* [annotation][in] */ 
-            _In_  BSTR path) = 0;
+            /* [in] */ __RPC__in BSTR path) = 0;
         
     };
     
@@ -3025,8 +2766,7 @@ EXTERN_C const IID IID_IFsiDirectoryItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3041,31 +2781,23 @@ EXTERN_C const IID IID_IFsiDirectoryItem;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3090,144 +2822,117 @@ EXTERN_C const IID IID_IFsiDirectoryItem;
         DECLSPEC_XFGVIRT(IFsiItem, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_FullPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FullPath )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_CreationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreationTime )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_CreationTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CreationTime )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_LastAccessedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastAccessedTime )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_LastAccessedTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LastAccessedTime )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_LastModifiedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastModifiedTime )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_LastModifiedTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LastModifiedTime )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_IsHidden)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsHidden )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_IsHidden)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsHidden )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, FileSystemName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FileSystemName )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, FileSystemPath)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FileSystemPath )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, get__NewEnum)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **NewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **NewEnum);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsiItem **item);
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsiItem **item);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *Count);
+            /* [retval][out] */ __RPC__out LONG *Count);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, get_EnumFsiItems)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumFsiItems )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumFsiItems **NewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumFsiItems **NewEnum);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, AddDirectory)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddDirectory )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path);
+            /* [in] */ __RPC__in BSTR path);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, AddFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddFile )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][in] */ 
-            _In_  IStream *fileData);
+            /* [in] */ __RPC__in BSTR path,
+            /* [in] */ __RPC__in_opt IStream *fileData);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, AddTree)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddTree )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  BSTR sourceDirectory,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL includeBaseDirectory);
+            /* [in] */ __RPC__in BSTR sourceDirectory,
+            /* [in] */ VARIANT_BOOL includeBaseDirectory);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  IFsiItem *item);
+            /* [in] */ __RPC__in_opt IFsiItem *item);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path);
+            /* [in] */ __RPC__in BSTR path);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, RemoveTree)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveTree )( 
             __RPC__in IFsiDirectoryItem * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path);
+            /* [in] */ __RPC__in BSTR path);
         
         END_INTERFACE
     } IFsiDirectoryItemVtbl;
@@ -3359,10 +3064,8 @@ EXTERN_C const IID IID_IFsiDirectoryItem2;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddTreeWithNamedStreams( 
-            /* [annotation][in] */ 
-            _In_  BSTR sourceDirectory,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL includeBaseDirectory) = 0;
+            /* [in] */ __RPC__in BSTR sourceDirectory,
+            /* [in] */ VARIANT_BOOL includeBaseDirectory) = 0;
         
     };
     
@@ -3376,8 +3079,7 @@ EXTERN_C const IID IID_IFsiDirectoryItem2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3392,31 +3094,23 @@ EXTERN_C const IID IID_IFsiDirectoryItem2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3441,152 +3135,123 @@ EXTERN_C const IID IID_IFsiDirectoryItem2;
         DECLSPEC_XFGVIRT(IFsiItem, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_FullPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FullPath )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_CreationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreationTime )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_CreationTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CreationTime )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_LastAccessedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastAccessedTime )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_LastAccessedTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LastAccessedTime )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_LastModifiedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastModifiedTime )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_LastModifiedTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LastModifiedTime )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  DATE newVal);
+            /* [in] */ DATE newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, get_IsHidden)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsHidden )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, put_IsHidden)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IsHidden )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, FileSystemName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FileSystemName )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiItem, FileSystemPath)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FileSystemPath )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, get__NewEnum)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **NewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **NewEnum);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IFsiItem **item);
+            /* [in] */ __RPC__in BSTR path,
+            /* [retval][out] */ __RPC__deref_out_opt IFsiItem **item);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *Count);
+            /* [retval][out] */ __RPC__out LONG *Count);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, get_EnumFsiItems)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumFsiItems )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumFsiItems **NewEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumFsiItems **NewEnum);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, AddDirectory)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddDirectory )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path);
+            /* [in] */ __RPC__in BSTR path);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, AddFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddFile )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path,
-            /* [annotation][in] */ 
-            _In_  IStream *fileData);
+            /* [in] */ __RPC__in BSTR path,
+            /* [in] */ __RPC__in_opt IStream *fileData);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, AddTree)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddTree )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR sourceDirectory,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL includeBaseDirectory);
+            /* [in] */ __RPC__in BSTR sourceDirectory,
+            /* [in] */ VARIANT_BOOL includeBaseDirectory);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  IFsiItem *item);
+            /* [in] */ __RPC__in_opt IFsiItem *item);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path);
+            /* [in] */ __RPC__in BSTR path);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem, RemoveTree)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveTree )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR path);
+            /* [in] */ __RPC__in BSTR path);
         
         DECLSPEC_XFGVIRT(IFsiDirectoryItem2, AddTreeWithNamedStreams)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddTreeWithNamedStreams )( 
             __RPC__in IFsiDirectoryItem2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR sourceDirectory,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL includeBaseDirectory);
+            /* [in] */ __RPC__in BSTR sourceDirectory,
+            /* [in] */ VARIANT_BOOL includeBaseDirectory);
         
         END_INTERFACE
     } IFsiDirectoryItem2Vtbl;
@@ -3728,19 +3393,16 @@ EXTERN_C const IID IID_IFileSystemImage;
             /* [retval][ref][out] */ __RPC__out LONG *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SessionStartBlock( 
-            /* [annotation][in] */ 
-            _In_  LONG newVal) = 0;
+            /* [in] */ LONG newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FreeMediaBlocks( 
             /* [retval][ref][out] */ __RPC__out LONG *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FreeMediaBlocks( 
-            /* [annotation][in] */ 
-            _In_  LONG newVal) = 0;
+            /* [in] */ LONG newVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetMaxMediaBlocksFromDevice( 
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder) = 0;
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UsedBlocks( 
             /* [retval][ref][out] */ __RPC__out LONG *pVal) = 0;
@@ -3749,8 +3411,7 @@ EXTERN_C const IID IID_IFileSystemImage;
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_VolumeName( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ImportedVolumeName( 
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
@@ -3759,8 +3420,7 @@ EXTERN_C const IID IID_IFileSystemImage;
             /* [retval][ref][out] */ __RPC__deref_out_opt IBootOptions **pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_BootImageOptions( 
-            /* [annotation][in] */ 
-            _In_  IBootOptions *newVal) = 0;
+            /* [in] */ __RPC__in_opt IBootOptions *newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileCount( 
             /* [retval][ref][out] */ __RPC__out LONG *pVal) = 0;
@@ -3772,8 +3432,7 @@ EXTERN_C const IID IID_IFileSystemImage;
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_WorkingDirectory( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ChangePoint( 
             /* [retval][ref][out] */ __RPC__out LONG *pVal) = 0;
@@ -3782,29 +3441,25 @@ EXTERN_C const IID IID_IFileSystemImage;
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StrictFileSystemCompliance( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal) = 0;
+            /* [in] */ VARIANT_BOOL newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UseRestrictedCharacterSet( 
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_UseRestrictedCharacterSet( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal) = 0;
+            /* [in] */ VARIANT_BOOL newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileSystemsToCreate( 
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FileSystemsToCreate( 
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems newVal) = 0;
+            /* [in] */ FsiFileSystems newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileSystemsSupported( 
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_UDFRevision( 
-            /* [annotation][in] */ 
-            _In_  LONG newVal) = 0;
+            /* [in] */ LONG newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UDFRevision( 
             /* [retval][ref][out] */ __RPC__out LONG *pVal) = 0;
@@ -3813,16 +3468,13 @@ EXTERN_C const IID IID_IFileSystemImage;
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ChooseImageDefaults( 
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder) = 0;
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ChooseImageDefaultsForMediaType( 
-            /* [annotation][in] */ 
-            _In_  IMAPI_MEDIA_PHYSICAL_TYPE value) = 0;
+            /* [in] */ IMAPI_MEDIA_PHYSICAL_TYPE value) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ISO9660InterchangeLevel( 
-            /* [annotation][in] */ 
-            _In_  LONG newVal) = 0;
+            /* [in] */ LONG newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ISO9660InterchangeLevel( 
             /* [retval][ref][out] */ __RPC__out LONG *pVal) = 0;
@@ -3834,44 +3486,37 @@ EXTERN_C const IID IID_IFileSystemImage;
             /* [retval][ref][out] */ __RPC__deref_out_opt IFileSystemImageResult **resultStream) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Exists( 
-            /* [annotation][in] */ 
-            _In_  BSTR fullPath,
+            /* [in] */ __RPC__in BSTR fullPath,
             /* [retval][ref][out] */ __RPC__out FsiItemType *itemType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CalculateDiscIdentifier( 
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *discIdentifier) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IdentifyFileSystemsOnDisc( 
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder,
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder,
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *fileSystems) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetDefaultFileSystemForImport( 
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystems,
+            /* [in] */ FsiFileSystems fileSystems,
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *importDefault) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportFileSystem( 
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *importedFileSystem) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportSpecificFileSystem( 
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystemToUse) = 0;
+            /* [in] */ FsiFileSystems fileSystemToUse) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RollbackToChangePoint( 
-            /* [annotation][in] */ 
-            _In_  LONG changePoint) = 0;
+            /* [in] */ LONG changePoint) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE LockInChangePoint( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateDirectoryItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
+            /* [in] */ __RPC__in BSTR name,
             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiDirectoryItem **newItem) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateFileItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
+            /* [in] */ __RPC__in BSTR name,
             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiFileItem **newItem) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeNameUDF( 
@@ -3887,15 +3532,13 @@ EXTERN_C const IID IID_IFileSystemImage;
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StageFiles( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal) = 0;
+            /* [in] */ VARIANT_BOOL newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MultisessionInterfaces( 
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MultisessionInterfaces( 
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * newVal) = 0;
+            /* [in] */ __RPC__in SAFEARRAY * newVal) = 0;
         
     };
     
@@ -3909,8 +3552,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3925,31 +3567,23 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3984,8 +3618,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_SessionStartBlock)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SessionStartBlock )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FreeMediaBlocks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeMediaBlocks )( 
@@ -3995,14 +3628,12 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_FreeMediaBlocks)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FreeMediaBlocks )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, SetMaxMediaBlocksFromDevice)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetMaxMediaBlocksFromDevice )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder);
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_UsedBlocks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsedBlocks )( 
@@ -4017,8 +3648,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_VolumeName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_VolumeName )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_ImportedVolumeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImportedVolumeName )( 
@@ -4033,8 +3663,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_BootImageOptions)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BootImageOptions )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  IBootOptions *newVal);
+            /* [in] */ __RPC__in_opt IBootOptions *newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FileCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileCount )( 
@@ -4054,8 +3683,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_WorkingDirectory)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_WorkingDirectory )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_ChangePoint)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChangePoint )( 
@@ -4070,8 +3698,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_StrictFileSystemCompliance)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StrictFileSystemCompliance )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_UseRestrictedCharacterSet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseRestrictedCharacterSet )( 
@@ -4081,8 +3708,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_UseRestrictedCharacterSet)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseRestrictedCharacterSet )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FileSystemsToCreate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSystemsToCreate )( 
@@ -4092,8 +3718,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_FileSystemsToCreate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileSystemsToCreate )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems newVal);
+            /* [in] */ FsiFileSystems newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FileSystemsSupported)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSystemsSupported )( 
@@ -4103,8 +3728,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_UDFRevision)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UDFRevision )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_UDFRevision)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UDFRevision )( 
@@ -4119,20 +3743,17 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, ChooseImageDefaults)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ChooseImageDefaults )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder);
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, ChooseImageDefaultsForMediaType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ChooseImageDefaultsForMediaType )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  IMAPI_MEDIA_PHYSICAL_TYPE value);
+            /* [in] */ IMAPI_MEDIA_PHYSICAL_TYPE value);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, put_ISO9660InterchangeLevel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ISO9660InterchangeLevel )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_ISO9660InterchangeLevel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ISO9660InterchangeLevel )( 
@@ -4152,8 +3773,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, Exists)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Exists )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  BSTR fullPath,
+            /* [in] */ __RPC__in BSTR fullPath,
             /* [retval][ref][out] */ __RPC__out FsiItemType *itemType);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, CalculateDiscIdentifier)
@@ -4164,15 +3784,13 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, IdentifyFileSystemsOnDisc)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IdentifyFileSystemsOnDisc )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder,
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder,
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *fileSystems);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, GetDefaultFileSystemForImport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDefaultFileSystemForImport )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystems,
+            /* [in] */ FsiFileSystems fileSystems,
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *importDefault);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, ImportFileSystem)
@@ -4183,14 +3801,12 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, ImportSpecificFileSystem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportSpecificFileSystem )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystemToUse);
+            /* [in] */ FsiFileSystems fileSystemToUse);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, RollbackToChangePoint)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RollbackToChangePoint )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  LONG changePoint);
+            /* [in] */ LONG changePoint);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, LockInChangePoint)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LockInChangePoint )( 
@@ -4199,15 +3815,13 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, CreateDirectoryItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateDirectoryItem )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
+            /* [in] */ __RPC__in BSTR name,
             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiDirectoryItem **newItem);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, CreateFileItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateFileItem )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
+            /* [in] */ __RPC__in BSTR name,
             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiFileItem **newItem);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_VolumeNameUDF)
@@ -4233,8 +3847,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_StageFiles)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StageFiles )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_MultisessionInterfaces)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MultisessionInterfaces )( 
@@ -4244,8 +3857,7 @@ EXTERN_C const IID IID_IFileSystemImage;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_MultisessionInterfaces)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MultisessionInterfaces )( 
             __RPC__in IFileSystemImage * This,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * newVal);
+            /* [in] */ __RPC__in SAFEARRAY * newVal);
         
         END_INTERFACE
     } IFileSystemImageVtbl;
@@ -4463,8 +4075,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_BootImageOptionsArray( 
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * newVal) = 0;
+            /* [in] */ __RPC__in SAFEARRAY * newVal) = 0;
         
     };
     
@@ -4478,8 +4089,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4494,31 +4104,23 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4553,8 +4155,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_SessionStartBlock)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SessionStartBlock )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FreeMediaBlocks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeMediaBlocks )( 
@@ -4564,14 +4165,12 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_FreeMediaBlocks)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FreeMediaBlocks )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, SetMaxMediaBlocksFromDevice)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetMaxMediaBlocksFromDevice )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder);
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_UsedBlocks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsedBlocks )( 
@@ -4586,8 +4185,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_VolumeName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_VolumeName )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_ImportedVolumeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImportedVolumeName )( 
@@ -4602,8 +4200,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_BootImageOptions)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BootImageOptions )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  IBootOptions *newVal);
+            /* [in] */ __RPC__in_opt IBootOptions *newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FileCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileCount )( 
@@ -4623,8 +4220,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_WorkingDirectory)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_WorkingDirectory )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_ChangePoint)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChangePoint )( 
@@ -4639,8 +4235,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_StrictFileSystemCompliance)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StrictFileSystemCompliance )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_UseRestrictedCharacterSet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseRestrictedCharacterSet )( 
@@ -4650,8 +4245,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_UseRestrictedCharacterSet)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseRestrictedCharacterSet )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FileSystemsToCreate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSystemsToCreate )( 
@@ -4661,8 +4255,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_FileSystemsToCreate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileSystemsToCreate )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems newVal);
+            /* [in] */ FsiFileSystems newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FileSystemsSupported)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSystemsSupported )( 
@@ -4672,8 +4265,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_UDFRevision)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UDFRevision )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_UDFRevision)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UDFRevision )( 
@@ -4688,20 +4280,17 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, ChooseImageDefaults)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ChooseImageDefaults )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder);
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, ChooseImageDefaultsForMediaType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ChooseImageDefaultsForMediaType )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  IMAPI_MEDIA_PHYSICAL_TYPE value);
+            /* [in] */ IMAPI_MEDIA_PHYSICAL_TYPE value);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, put_ISO9660InterchangeLevel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ISO9660InterchangeLevel )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_ISO9660InterchangeLevel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ISO9660InterchangeLevel )( 
@@ -4721,8 +4310,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, Exists)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Exists )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR fullPath,
+            /* [in] */ __RPC__in BSTR fullPath,
             /* [retval][ref][out] */ __RPC__out FsiItemType *itemType);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, CalculateDiscIdentifier)
@@ -4733,15 +4321,13 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, IdentifyFileSystemsOnDisc)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IdentifyFileSystemsOnDisc )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder,
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder,
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *fileSystems);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, GetDefaultFileSystemForImport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDefaultFileSystemForImport )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystems,
+            /* [in] */ FsiFileSystems fileSystems,
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *importDefault);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, ImportFileSystem)
@@ -4752,14 +4338,12 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, ImportSpecificFileSystem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportSpecificFileSystem )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystemToUse);
+            /* [in] */ FsiFileSystems fileSystemToUse);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, RollbackToChangePoint)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RollbackToChangePoint )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  LONG changePoint);
+            /* [in] */ LONG changePoint);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, LockInChangePoint)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LockInChangePoint )( 
@@ -4768,15 +4352,13 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, CreateDirectoryItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateDirectoryItem )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
+            /* [in] */ __RPC__in BSTR name,
             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiDirectoryItem **newItem);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, CreateFileItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateFileItem )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
+            /* [in] */ __RPC__in BSTR name,
             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiFileItem **newItem);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_VolumeNameUDF)
@@ -4802,8 +4384,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_StageFiles)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StageFiles )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_MultisessionInterfaces)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MultisessionInterfaces )( 
@@ -4813,8 +4394,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_MultisessionInterfaces)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MultisessionInterfaces )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * newVal);
+            /* [in] */ __RPC__in SAFEARRAY * newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage2, get_BootImageOptionsArray)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BootImageOptionsArray )( 
@@ -4824,8 +4404,7 @@ EXTERN_C const IID IID_IFileSystemImage2;
         DECLSPEC_XFGVIRT(IFileSystemImage2, put_BootImageOptionsArray)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BootImageOptionsArray )( 
             __RPC__in IFileSystemImage2 * This,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * newVal);
+            /* [in] */ __RPC__in SAFEARRAY * newVal);
         
         END_INTERFACE
     } IFileSystemImage2Vtbl;
@@ -5050,12 +4629,10 @@ EXTERN_C const IID IID_IFileSystemImage3;
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CreateRedundantUdfMetadataFiles( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal) = 0;
+            /* [in] */ VARIANT_BOOL newVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ProbeSpecificFileSystem( 
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystemToProbe,
+            /* [in] */ FsiFileSystems fileSystemToProbe,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *isAppendable) = 0;
         
     };
@@ -5070,8 +4647,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5086,31 +4662,23 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5145,8 +4713,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_SessionStartBlock)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SessionStartBlock )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FreeMediaBlocks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeMediaBlocks )( 
@@ -5156,14 +4723,12 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_FreeMediaBlocks)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FreeMediaBlocks )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, SetMaxMediaBlocksFromDevice)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetMaxMediaBlocksFromDevice )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder);
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_UsedBlocks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsedBlocks )( 
@@ -5178,8 +4743,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_VolumeName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_VolumeName )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_ImportedVolumeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImportedVolumeName )( 
@@ -5194,8 +4758,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_BootImageOptions)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BootImageOptions )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  IBootOptions *newVal);
+            /* [in] */ __RPC__in_opt IBootOptions *newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FileCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileCount )( 
@@ -5215,8 +4778,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_WorkingDirectory)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_WorkingDirectory )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_ChangePoint)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChangePoint )( 
@@ -5231,8 +4793,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_StrictFileSystemCompliance)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StrictFileSystemCompliance )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_UseRestrictedCharacterSet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseRestrictedCharacterSet )( 
@@ -5242,8 +4803,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_UseRestrictedCharacterSet)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseRestrictedCharacterSet )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FileSystemsToCreate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSystemsToCreate )( 
@@ -5253,8 +4813,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_FileSystemsToCreate)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileSystemsToCreate )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems newVal);
+            /* [in] */ FsiFileSystems newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_FileSystemsSupported)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSystemsSupported )( 
@@ -5264,8 +4823,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_UDFRevision)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UDFRevision )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_UDFRevision)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UDFRevision )( 
@@ -5280,20 +4838,17 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, ChooseImageDefaults)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ChooseImageDefaults )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder);
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, ChooseImageDefaultsForMediaType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ChooseImageDefaultsForMediaType )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  IMAPI_MEDIA_PHYSICAL_TYPE value);
+            /* [in] */ IMAPI_MEDIA_PHYSICAL_TYPE value);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, put_ISO9660InterchangeLevel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ISO9660InterchangeLevel )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  LONG newVal);
+            /* [in] */ LONG newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_ISO9660InterchangeLevel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ISO9660InterchangeLevel )( 
@@ -5313,8 +4868,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, Exists)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Exists )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR fullPath,
+            /* [in] */ __RPC__in BSTR fullPath,
             /* [retval][ref][out] */ __RPC__out FsiItemType *itemType);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, CalculateDiscIdentifier)
@@ -5325,15 +4879,13 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, IdentifyFileSystemsOnDisc)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IdentifyFileSystemsOnDisc )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  IDiscRecorder2 *discRecorder,
+            /* [in] */ __RPC__in_opt IDiscRecorder2 *discRecorder,
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *fileSystems);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, GetDefaultFileSystemForImport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDefaultFileSystemForImport )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystems,
+            /* [in] */ FsiFileSystems fileSystems,
             /* [retval][ref][out] */ __RPC__out FsiFileSystems *importDefault);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, ImportFileSystem)
@@ -5344,14 +4896,12 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, ImportSpecificFileSystem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ImportSpecificFileSystem )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystemToUse);
+            /* [in] */ FsiFileSystems fileSystemToUse);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, RollbackToChangePoint)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RollbackToChangePoint )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  LONG changePoint);
+            /* [in] */ LONG changePoint);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, LockInChangePoint)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LockInChangePoint )( 
@@ -5360,15 +4910,13 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, CreateDirectoryItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateDirectoryItem )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
+            /* [in] */ __RPC__in BSTR name,
             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiDirectoryItem **newItem);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, CreateFileItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateFileItem )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
+            /* [in] */ __RPC__in BSTR name,
             /* [retval][ref][out] */ __RPC__deref_out_opt IFsiFileItem **newItem);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_VolumeNameUDF)
@@ -5394,8 +4942,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_StageFiles)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StageFiles )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage, get_MultisessionInterfaces)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MultisessionInterfaces )( 
@@ -5405,8 +4952,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage, put_MultisessionInterfaces)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MultisessionInterfaces )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * newVal);
+            /* [in] */ __RPC__in SAFEARRAY * newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage2, get_BootImageOptionsArray)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BootImageOptionsArray )( 
@@ -5416,8 +4962,7 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage2, put_BootImageOptionsArray)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BootImageOptionsArray )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  SAFEARRAY * newVal);
+            /* [in] */ __RPC__in SAFEARRAY * newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage3, get_CreateRedundantUdfMetadataFiles)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreateRedundantUdfMetadataFiles )( 
@@ -5427,14 +4972,12 @@ EXTERN_C const IID IID_IFileSystemImage3;
         DECLSPEC_XFGVIRT(IFileSystemImage3, put_CreateRedundantUdfMetadataFiles)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CreateRedundantUdfMetadataFiles )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IFileSystemImage3, ProbeSpecificFileSystem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ProbeSpecificFileSystem )( 
             __RPC__in IFileSystemImage3 * This,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystemToProbe,
+            /* [in] */ FsiFileSystems fileSystemToProbe,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *isAppendable);
         
         END_INTERFACE
@@ -5676,14 +5219,10 @@ EXTERN_C const IID IID_DFileSystemImageEvents;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Update( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *object,
-            /* [annotation][in] */ 
-            _In_  BSTR currentFile,
-            /* [annotation][in] */ 
-            _In_  LONG copiedSectors,
-            /* [annotation][in] */ 
-            _In_  LONG totalSectors) = 0;
+            /* [in] */ __RPC__in_opt IDispatch *object,
+            /* [in] */ __RPC__in BSTR currentFile,
+            /* [in] */ LONG copiedSectors,
+            /* [in] */ LONG totalSectors) = 0;
         
     };
     
@@ -5697,8 +5236,7 @@ EXTERN_C const IID IID_DFileSystemImageEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DFileSystemImageEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5713,31 +5251,23 @@ EXTERN_C const IID IID_DFileSystemImageEvents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DFileSystemImageEvents * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DFileSystemImageEvents * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DFileSystemImageEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5762,14 +5292,10 @@ EXTERN_C const IID IID_DFileSystemImageEvents;
         DECLSPEC_XFGVIRT(DFileSystemImageEvents, Update)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in DFileSystemImageEvents * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *object,
-            /* [annotation][in] */ 
-            _In_  BSTR currentFile,
-            /* [annotation][in] */ 
-            _In_  LONG copiedSectors,
-            /* [annotation][in] */ 
-            _In_  LONG totalSectors);
+            /* [in] */ __RPC__in_opt IDispatch *object,
+            /* [in] */ __RPC__in BSTR currentFile,
+            /* [in] */ LONG copiedSectors,
+            /* [in] */ LONG totalSectors);
         
         END_INTERFACE
     } DFileSystemImageEventsVtbl;
@@ -5846,20 +5372,13 @@ EXTERN_C const IID IID_DFileSystemImageImportEvents;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UpdateImport( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *object,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][in] */ 
-            _In_  BSTR currentItem,
-            /* [annotation][in] */ 
-            _In_  LONG importedDirectoryItems,
-            /* [annotation][in] */ 
-            _In_  LONG totalDirectoryItems,
-            /* [annotation][in] */ 
-            _In_  LONG importedFileItems,
-            /* [annotation][in] */ 
-            _In_  LONG totalFileItems) = 0;
+            /* [in] */ __RPC__in_opt IDispatch *object,
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [in] */ __RPC__in BSTR currentItem,
+            /* [in] */ LONG importedDirectoryItems,
+            /* [in] */ LONG totalDirectoryItems,
+            /* [in] */ LONG importedFileItems,
+            /* [in] */ LONG totalFileItems) = 0;
         
     };
     
@@ -5873,8 +5392,7 @@ EXTERN_C const IID IID_DFileSystemImageImportEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DFileSystemImageImportEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5889,31 +5407,23 @@ EXTERN_C const IID IID_DFileSystemImageImportEvents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DFileSystemImageImportEvents * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DFileSystemImageImportEvents * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DFileSystemImageImportEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5938,20 +5448,13 @@ EXTERN_C const IID IID_DFileSystemImageImportEvents;
         DECLSPEC_XFGVIRT(DFileSystemImageImportEvents, UpdateImport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UpdateImport )( 
             __RPC__in DFileSystemImageImportEvents * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *object,
-            /* [annotation][in] */ 
-            _In_  FsiFileSystems fileSystem,
-            /* [annotation][in] */ 
-            _In_  BSTR currentItem,
-            /* [annotation][in] */ 
-            _In_  LONG importedDirectoryItems,
-            /* [annotation][in] */ 
-            _In_  LONG totalDirectoryItems,
-            /* [annotation][in] */ 
-            _In_  LONG importedFileItems,
-            /* [annotation][in] */ 
-            _In_  LONG totalFileItems);
+            /* [in] */ __RPC__in_opt IDispatch *object,
+            /* [in] */ FsiFileSystems fileSystem,
+            /* [in] */ __RPC__in BSTR currentItem,
+            /* [in] */ LONG importedDirectoryItems,
+            /* [in] */ LONG totalDirectoryItems,
+            /* [in] */ LONG importedFileItems,
+            /* [in] */ LONG totalFileItems);
         
         END_INTERFACE
     } DFileSystemImageImportEventsVtbl;
@@ -6022,16 +5525,13 @@ EXTERN_C const IID IID_IIsoImageManager;
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Stream( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **data) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **data) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetPath( 
-            /* [annotation][in] */ 
-            _In_  BSTR Val) = 0;
+            /* [in] */ __RPC__in BSTR Val) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetStream( 
-            /* [annotation][in] */ 
-            _In_  IStream *data) = 0;
+            /* [in] */ __RPC__in_opt IStream *data) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Validate( void) = 0;
         
@@ -6047,8 +5547,7 @@ EXTERN_C const IID IID_IIsoImageManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIsoImageManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6063,31 +5562,23 @@ EXTERN_C const IID IID_IIsoImageManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IIsoImageManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IIsoImageManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IIsoImageManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6117,20 +5608,17 @@ EXTERN_C const IID IID_IIsoImageManager;
         DECLSPEC_XFGVIRT(IIsoImageManager, get_Stream)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Stream )( 
             __RPC__in IIsoImageManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **data);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **data);
         
         DECLSPEC_XFGVIRT(IIsoImageManager, SetPath)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetPath )( 
             __RPC__in IIsoImageManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Val);
+            /* [in] */ __RPC__in BSTR Val);
         
         DECLSPEC_XFGVIRT(IIsoImageManager, SetStream)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetStream )( 
             __RPC__in IIsoImageManager * This,
-            /* [annotation][in] */ 
-            _In_  IStream *data);
+            /* [in] */ __RPC__in_opt IStream *data);
         
         DECLSPEC_XFGVIRT(IIsoImageManager, Validate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Validate )( 
@@ -6373,39 +5861,29 @@ void                      __RPC_USER  LPSAFEARRAY_UserFree64(     __RPC__in unsi
 
 /* [helpstring][local] */ HRESULT STDMETHODCALLTYPE IEnumProgressItems_Next_Proxy( 
     IEnumProgressItems * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][size_is][out] */ 
-    _Out_writes_(celt)  IProgressItem **rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [size_is][out] */ IProgressItem **rgelt,
+    /* [out] */ ULONG *pceltFetched);
 
 
 /* [helpstring][call_as] */ HRESULT STDMETHODCALLTYPE IEnumProgressItems_Next_Stub( 
     __RPC__in IEnumProgressItems * This,
     /* [range][in] */ __RPC__in_range(1,0x7fffffff) ULONG celt,
-    /* [annotation][size_is][out] */ 
-    _Out_writes_(celt)  IProgressItem **rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [size_is][out] */ __RPC__out_ecount_full(celt) IProgressItem **rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [helpstring][local] */ HRESULT STDMETHODCALLTYPE IEnumFsiItems_Next_Proxy( 
     IEnumFsiItems * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][size_is][out] */ 
-    _Out_writes_(celt)  IFsiItem **rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [size_is][out] */ IFsiItem **rgelt,
+    /* [out] */ ULONG *pceltFetched);
 
 
 /* [helpstring][call_as] */ HRESULT STDMETHODCALLTYPE IEnumFsiItems_Next_Stub( 
     __RPC__in IEnumFsiItems * This,
     /* [range][in] */ __RPC__in_range(0,0x7fffffff) ULONG celt,
-    /* [annotation][size_is][out] */ 
-    _Out_writes_(celt)  IFsiItem **rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [size_is][out] */ __RPC__out_ecount_full(celt) IFsiItem **rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 

@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -128,18 +128,15 @@ EXTERN_C const IID IID_IAMVideoAcceleratorNotify;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetUncompSurfacesInfo( 
-            /* [annotation][in] */ 
-            _In_  const GUID *pGuid,
+            /* [in] */ const GUID *pGuid,
             /* [annotation][out][in] */ 
             _Inout_  LPAMVAUncompBufferInfo pUncompBufferInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetUncompSurfacesInfo( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwActualUncompSurfacesAllocated) = 0;
+            /* [in] */ DWORD dwActualUncompSurfacesAllocated) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCreateVideoAcceleratorData( 
-            /* [annotation][in] */ 
-            _In_  const GUID *pGuid,
+            /* [in] */ const GUID *pGuid,
             /* [annotation][out] */ 
             _Out_  LPDWORD pdwSizeMiscData,
             /* [annotation][out] */ 
@@ -157,8 +154,7 @@ EXTERN_C const IID IID_IAMVideoAcceleratorNotify;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAMVideoAcceleratorNotify * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -173,22 +169,19 @@ EXTERN_C const IID IID_IAMVideoAcceleratorNotify;
         DECLSPEC_XFGVIRT(IAMVideoAcceleratorNotify, GetUncompSurfacesInfo)
         HRESULT ( STDMETHODCALLTYPE *GetUncompSurfacesInfo )( 
             IAMVideoAcceleratorNotify * This,
-            /* [annotation][in] */ 
-            _In_  const GUID *pGuid,
+            /* [in] */ const GUID *pGuid,
             /* [annotation][out][in] */ 
             _Inout_  LPAMVAUncompBufferInfo pUncompBufferInfo);
         
         DECLSPEC_XFGVIRT(IAMVideoAcceleratorNotify, SetUncompSurfacesInfo)
         HRESULT ( STDMETHODCALLTYPE *SetUncompSurfacesInfo )( 
             IAMVideoAcceleratorNotify * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwActualUncompSurfacesAllocated);
+            /* [in] */ DWORD dwActualUncompSurfacesAllocated);
         
         DECLSPEC_XFGVIRT(IAMVideoAcceleratorNotify, GetCreateVideoAcceleratorData)
         HRESULT ( STDMETHODCALLTYPE *GetCreateVideoAcceleratorData )( 
             IAMVideoAcceleratorNotify * This,
-            /* [annotation][in] */ 
-            _In_  const GUID *pGuid,
+            /* [in] */ const GUID *pGuid,
             /* [annotation][out] */ 
             _Out_  LPDWORD pdwSizeMiscData,
             /* [annotation][out] */ 
@@ -259,26 +252,21 @@ EXTERN_C const IID IID_IAMVideoAccelerator;
             _Out_writes_to_opt_(*pdwNumGuidsSupported, *pdwNumGuidsSupported)  LPGUID pGuidsSupported) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUncompFormatsSupported( 
-            /* [annotation][in] */ 
-            _In_  const GUID *pGuid,
+            /* [in] */ const GUID *pGuid,
             /* [annotation][out][in] */ 
             _Inout_  LPDWORD pdwNumFormatsSupported,
             /* [annotation][out][in] */ 
             _Out_writes_to_opt_(*pdwNumFormatsSupported, *pdwNumFormatsSupported)  LPDDPIXELFORMAT pFormatsSupported) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInternalMemInfo( 
-            /* [annotation][in] */ 
-            _In_  const GUID *pGuid,
-            /* [annotation][in] */ 
-            _In_  const AMVAUncompDataInfo *pamvaUncompDataInfo,
+            /* [in] */ const GUID *pGuid,
+            /* [in] */ const AMVAUncompDataInfo *pamvaUncompDataInfo,
             /* [annotation][out][in] */ 
             _Inout_  LPAMVAInternalMemInfo pamvaInternalMemInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCompBufferInfo( 
-            /* [annotation][in] */ 
-            _In_  const GUID *pGuid,
-            /* [annotation][in] */ 
-            _In_  const AMVAUncompDataInfo *pamvaUncompDataInfo,
+            /* [in] */ const GUID *pGuid,
+            /* [in] */ const AMVAUncompDataInfo *pamvaUncompDataInfo,
             /* [annotation][out][in] */ 
             _Inout_  LPDWORD pdwNumTypesCompBuffers,
             /* [annotation][out] */ 
@@ -291,60 +279,42 @@ EXTERN_C const IID IID_IAMVideoAccelerator;
             _Out_writes_to_opt_(*pdwNumTypesCompBuffers, *pdwNumTypesCompBuffers)  LPAMVACompBufferInfo pamvaCompBufferInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BeginFrame( 
-            /* [annotation][in] */ 
-            _In_  const AMVABeginFrameInfo *amvaBeginFrameInfo) = 0;
+            /* [in] */ const AMVABeginFrameInfo *amvaBeginFrameInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EndFrame( 
-            /* [annotation][in] */ 
-            _In_  const AMVAEndFrameInfo *pEndFrameInfo) = 0;
+            /* [in] */ const AMVAEndFrameInfo *pEndFrameInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBuffer( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTypeIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBufferIndex,
-            /* [annotation][in] */ 
-            _In_  BOOL bReadOnly,
+            /* [in] */ DWORD dwTypeIndex,
+            /* [in] */ DWORD dwBufferIndex,
+            /* [in] */ BOOL bReadOnly,
             /* [annotation][out] */ 
             _Out_  LPVOID *ppBuffer,
             /* [annotation][out] */ 
             _Out_  LONG *lpStride) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseBuffer( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTypeIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBufferIndex) = 0;
+            /* [in] */ DWORD dwTypeIndex,
+            /* [in] */ DWORD dwBufferIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Execute( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFunction,
-            /* [annotation][in] */ 
-            _In_  LPVOID lpPrivateInputData,
-            /* [annotation][in] */ 
-            _In_  DWORD cbPrivateInputData,
-            /* [annotation][in] */ 
-            _In_  LPVOID lpPrivateOutputDat,
-            /* [annotation][in] */ 
-            _In_  DWORD cbPrivateOutputData,
-            /* [annotation][in] */ 
-            _In_  DWORD dwNumBuffers,
+            /* [in] */ DWORD dwFunction,
+            /* [in] */ LPVOID lpPrivateInputData,
+            /* [in] */ DWORD cbPrivateInputData,
+            /* [in] */ LPVOID lpPrivateOutputDat,
+            /* [in] */ DWORD cbPrivateOutputData,
+            /* [in] */ DWORD dwNumBuffers,
             /* [annotation][in] */ 
             _In_reads_(dwNumBuffers)  const AMVABUFFERINFO *pamvaBufferInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE QueryRenderStatus( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwTypeIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBufferIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwTypeIndex,
+            /* [in] */ DWORD dwBufferIndex,
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DisplayFrame( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlipToIndex,
-            /* [annotation][in] */ 
-            _In_  IMediaSample *pMediaSample) = 0;
+            /* [in] */ DWORD dwFlipToIndex,
+            /* [in] */ IMediaSample *pMediaSample) = 0;
         
     };
     
@@ -358,8 +328,7 @@ EXTERN_C const IID IID_IAMVideoAccelerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -382,8 +351,7 @@ EXTERN_C const IID IID_IAMVideoAccelerator;
         DECLSPEC_XFGVIRT(IAMVideoAccelerator, GetUncompFormatsSupported)
         HRESULT ( STDMETHODCALLTYPE *GetUncompFormatsSupported )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  const GUID *pGuid,
+            /* [in] */ const GUID *pGuid,
             /* [annotation][out][in] */ 
             _Inout_  LPDWORD pdwNumFormatsSupported,
             /* [annotation][out][in] */ 
@@ -392,20 +360,16 @@ EXTERN_C const IID IID_IAMVideoAccelerator;
         DECLSPEC_XFGVIRT(IAMVideoAccelerator, GetInternalMemInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInternalMemInfo )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  const GUID *pGuid,
-            /* [annotation][in] */ 
-            _In_  const AMVAUncompDataInfo *pamvaUncompDataInfo,
+            /* [in] */ const GUID *pGuid,
+            /* [in] */ const AMVAUncompDataInfo *pamvaUncompDataInfo,
             /* [annotation][out][in] */ 
             _Inout_  LPAMVAInternalMemInfo pamvaInternalMemInfo);
         
         DECLSPEC_XFGVIRT(IAMVideoAccelerator, GetCompBufferInfo)
         HRESULT ( STDMETHODCALLTYPE *GetCompBufferInfo )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  const GUID *pGuid,
-            /* [annotation][in] */ 
-            _In_  const AMVAUncompDataInfo *pamvaUncompDataInfo,
+            /* [in] */ const GUID *pGuid,
+            /* [in] */ const AMVAUncompDataInfo *pamvaUncompDataInfo,
             /* [annotation][out][in] */ 
             _Inout_  LPDWORD pdwNumTypesCompBuffers,
             /* [annotation][out] */ 
@@ -422,24 +386,19 @@ EXTERN_C const IID IID_IAMVideoAccelerator;
         DECLSPEC_XFGVIRT(IAMVideoAccelerator, BeginFrame)
         HRESULT ( STDMETHODCALLTYPE *BeginFrame )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  const AMVABeginFrameInfo *amvaBeginFrameInfo);
+            /* [in] */ const AMVABeginFrameInfo *amvaBeginFrameInfo);
         
         DECLSPEC_XFGVIRT(IAMVideoAccelerator, EndFrame)
         HRESULT ( STDMETHODCALLTYPE *EndFrame )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  const AMVAEndFrameInfo *pEndFrameInfo);
+            /* [in] */ const AMVAEndFrameInfo *pEndFrameInfo);
         
         DECLSPEC_XFGVIRT(IAMVideoAccelerator, GetBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetBuffer )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTypeIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBufferIndex,
-            /* [annotation][in] */ 
-            _In_  BOOL bReadOnly,
+            /* [in] */ DWORD dwTypeIndex,
+            /* [in] */ DWORD dwBufferIndex,
+            /* [in] */ BOOL bReadOnly,
             /* [annotation][out] */ 
             _Out_  LPVOID *ppBuffer,
             /* [annotation][out] */ 
@@ -448,46 +407,33 @@ EXTERN_C const IID IID_IAMVideoAccelerator;
         DECLSPEC_XFGVIRT(IAMVideoAccelerator, ReleaseBuffer)
         HRESULT ( STDMETHODCALLTYPE *ReleaseBuffer )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTypeIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBufferIndex);
+            /* [in] */ DWORD dwTypeIndex,
+            /* [in] */ DWORD dwBufferIndex);
         
         DECLSPEC_XFGVIRT(IAMVideoAccelerator, Execute)
         HRESULT ( STDMETHODCALLTYPE *Execute )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFunction,
-            /* [annotation][in] */ 
-            _In_  LPVOID lpPrivateInputData,
-            /* [annotation][in] */ 
-            _In_  DWORD cbPrivateInputData,
-            /* [annotation][in] */ 
-            _In_  LPVOID lpPrivateOutputDat,
-            /* [annotation][in] */ 
-            _In_  DWORD cbPrivateOutputData,
-            /* [annotation][in] */ 
-            _In_  DWORD dwNumBuffers,
+            /* [in] */ DWORD dwFunction,
+            /* [in] */ LPVOID lpPrivateInputData,
+            /* [in] */ DWORD cbPrivateInputData,
+            /* [in] */ LPVOID lpPrivateOutputDat,
+            /* [in] */ DWORD cbPrivateOutputData,
+            /* [in] */ DWORD dwNumBuffers,
             /* [annotation][in] */ 
             _In_reads_(dwNumBuffers)  const AMVABUFFERINFO *pamvaBufferInfo);
         
         DECLSPEC_XFGVIRT(IAMVideoAccelerator, QueryRenderStatus)
         HRESULT ( STDMETHODCALLTYPE *QueryRenderStatus )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTypeIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBufferIndex,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwTypeIndex,
+            /* [in] */ DWORD dwBufferIndex,
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IAMVideoAccelerator, DisplayFrame)
         HRESULT ( STDMETHODCALLTYPE *DisplayFrame )( 
             IAMVideoAccelerator * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlipToIndex,
-            /* [annotation][in] */ 
-            _In_  IMediaSample *pMediaSample);
+            /* [in] */ DWORD dwFlipToIndex,
+            /* [in] */ IMediaSample *pMediaSample);
         
         END_INTERFACE
     } IAMVideoAcceleratorVtbl;

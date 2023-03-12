@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -156,8 +156,7 @@ EXTERN_C const IID IID_IReferenceTrackerTarget;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IReferenceTrackerTarget * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -276,8 +275,7 @@ EXTERN_C const IID IID_IReferenceTracker;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IReferenceTracker * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -415,8 +413,7 @@ EXTERN_C const IID IID_IReferenceTrackerManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IReferenceTrackerManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -525,8 +522,7 @@ EXTERN_C const IID IID_IFindReferenceTargetsCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFindReferenceTargetsCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -612,8 +608,7 @@ EXTERN_C const IID IID_IReferenceTrackerHost;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE DisconnectUnusedReferenceSources( 
-            /* [annotation][in] */ 
-            _In_  XAML_REFERENCETRACKER_DISCONNECT options) = 0;
+            /* [in] */ XAML_REFERENCETRACKER_DISCONNECT options) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ReleaseDisconnectedReferenceSources( void) = 0;
         
@@ -641,8 +636,7 @@ EXTERN_C const IID IID_IReferenceTrackerHost;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IReferenceTrackerHost * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -657,8 +651,7 @@ EXTERN_C const IID IID_IReferenceTrackerHost;
         DECLSPEC_XFGVIRT(IReferenceTrackerHost, DisconnectUnusedReferenceSources)
         HRESULT ( STDMETHODCALLTYPE *DisconnectUnusedReferenceSources )( 
             IReferenceTrackerHost * This,
-            /* [annotation][in] */ 
-            _In_  XAML_REFERENCETRACKER_DISCONNECT options);
+            /* [in] */ XAML_REFERENCETRACKER_DISCONNECT options);
         
         DECLSPEC_XFGVIRT(IReferenceTrackerHost, ReleaseDisconnectedReferenceSources)
         HRESULT ( STDMETHODCALLTYPE *ReleaseDisconnectedReferenceSources )( 
@@ -772,8 +765,7 @@ EXTERN_C const IID IID_IReferenceTrackerExtension;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IReferenceTrackerExtension * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -850,24 +842,18 @@ EXTERN_C const IID IID_ITrackerOwner;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateTrackerHandle( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TrackerHandle *returnValue) = 0;
+            /* [retval][out] */ TrackerHandle *returnValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DeleteTrackerHandle( 
-            /* [annotation][in] */ 
-            _In_  TrackerHandle handle) = 0;
+            /* [in] */ TrackerHandle handle) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTrackerValue( 
-            /* [annotation][in] */ 
-            _In_  TrackerHandle handle,
-            /* [annotation][in] */ 
-            _In_  IUnknown *value) = 0;
+            /* [in] */ TrackerHandle handle,
+            /* [in] */ IUnknown *value) = 0;
         
         virtual boolean STDMETHODCALLTYPE TryGetSafeTrackerValue( 
-            /* [annotation][in] */ 
-            _In_  TrackerHandle handle,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **returnValue) = 0;
+            /* [in] */ TrackerHandle handle,
+            /* [retval][out] */ IUnknown **returnValue) = 0;
         
     };
     
@@ -881,8 +867,7 @@ EXTERN_C const IID IID_ITrackerOwner;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITrackerOwner * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -897,30 +882,24 @@ EXTERN_C const IID IID_ITrackerOwner;
         DECLSPEC_XFGVIRT(ITrackerOwner, CreateTrackerHandle)
         HRESULT ( STDMETHODCALLTYPE *CreateTrackerHandle )( 
             ITrackerOwner * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  TrackerHandle *returnValue);
+            /* [retval][out] */ TrackerHandle *returnValue);
         
         DECLSPEC_XFGVIRT(ITrackerOwner, DeleteTrackerHandle)
         HRESULT ( STDMETHODCALLTYPE *DeleteTrackerHandle )( 
             ITrackerOwner * This,
-            /* [annotation][in] */ 
-            _In_  TrackerHandle handle);
+            /* [in] */ TrackerHandle handle);
         
         DECLSPEC_XFGVIRT(ITrackerOwner, SetTrackerValue)
         HRESULT ( STDMETHODCALLTYPE *SetTrackerValue )( 
             ITrackerOwner * This,
-            /* [annotation][in] */ 
-            _In_  TrackerHandle handle,
-            /* [annotation][in] */ 
-            _In_  IUnknown *value);
+            /* [in] */ TrackerHandle handle,
+            /* [in] */ IUnknown *value);
         
         DECLSPEC_XFGVIRT(ITrackerOwner, TryGetSafeTrackerValue)
         boolean ( STDMETHODCALLTYPE *TryGetSafeTrackerValue )( 
             ITrackerOwner * This,
-            /* [annotation][in] */ 
-            _In_  TrackerHandle handle,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **returnValue);
+            /* [in] */ TrackerHandle handle,
+            /* [retval][out] */ IUnknown **returnValue);
         
         END_INTERFACE
     } ITrackerOwnerVtbl;

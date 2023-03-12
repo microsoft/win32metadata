@@ -60,20 +60,20 @@
 
 // /ns_prefix optional state
 #if defined(MIDL_NS_PREFIX)
-#if defined(__cplusplus)
+#if defined(__cplusplus) && !defined(CINTERFACE)
 #define ABI_PARAMETER(x) ABI::x
 #define ABI_NAMESPACE_BEGIN namespace ABI {
 #define ABI_NAMESPACE_END }
-#else // !defined(__cplusplus)
+#else // !defined(__cplusplus) || defined(CINTERFACE)
 #define C_ABI_PARAMETER(x) ABI_CONCAT(__x_ABI_C, x)
 #endif // !defined(__cplusplus)
 #define C_IID(x) ABI_CONCAT(IID___x_ABI_C, x)
 #else
-#if defined(__cplusplus)
+#if defined(__cplusplus) && !defined(CINTERFACE)
 #define ABI_PARAMETER(x) x
 #define ABI_NAMESPACE_BEGIN 
 #define ABI_NAMESPACE_END 
-#else // !defined(__cplusplus)
+#else // !defined(__cplusplus) || defined(CINTERFACE)
 #define C_ABI_PARAMETER(x) ABI_CONCAT(__x_, x)
 #endif // !defined(__cplusplus)
 #define C_IID(x) ABI_CONCAT(IID___x_, x)

@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -667,8 +667,7 @@ EXTERN_C const IID IID_IWdsTransportCacheable;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Dirty( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbDirty) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbDirty) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Discard( void) = 0;
         
@@ -688,8 +687,7 @@ EXTERN_C const IID IID_IWdsTransportCacheable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportCacheable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -704,31 +702,23 @@ EXTERN_C const IID IID_IWdsTransportCacheable;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportCacheable * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportCacheable * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportCacheable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -753,8 +743,7 @@ EXTERN_C const IID IID_IWdsTransportCacheable;
         DECLSPEC_XFGVIRT(IWdsTransportCacheable, get_Dirty)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dirty )( 
             __RPC__in IWdsTransportCacheable * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbDirty);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbDirty);
         
         DECLSPEC_XFGVIRT(IWdsTransportCacheable, Discard)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Discard )( 
@@ -843,18 +832,14 @@ EXTERN_C const IID IID_IWdsTransportCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulCount) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulCount) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppVal) = 0;
+            /* [in] */ ULONG ulIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppVal) = 0;
         
     };
     
@@ -868,8 +853,7 @@ EXTERN_C const IID IID_IWdsTransportCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -884,31 +868,23 @@ EXTERN_C const IID IID_IWdsTransportCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -933,22 +909,18 @@ EXTERN_C const IID IID_IWdsTransportCollection;
         DECLSPEC_XFGVIRT(IWdsTransportCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IWdsTransportCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulCount);
+            /* [retval][out] */ __RPC__out ULONG *pulCount);
         
         DECLSPEC_XFGVIRT(IWdsTransportCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IWdsTransportCollection * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppVal);
+            /* [in] */ ULONG ulIndex,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppVal);
         
         DECLSPEC_XFGVIRT(IWdsTransportCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IWdsTransportCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppVal);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppVal);
         
         END_INTERFACE
     } IWdsTransportCollectionVtbl;
@@ -1022,10 +994,8 @@ EXTERN_C const IID IID_IWdsTransportManager;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetWdsTransportServer( 
-            /* [annotation][in] */ 
-            _In_  BSTR bszServerName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportServer **ppWdsTransportServer) = 0;
+            /* [in] */ __RPC__in BSTR bszServerName,
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportServer **ppWdsTransportServer) = 0;
         
     };
     
@@ -1039,8 +1009,7 @@ EXTERN_C const IID IID_IWdsTransportManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1055,31 +1024,23 @@ EXTERN_C const IID IID_IWdsTransportManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1104,10 +1065,8 @@ EXTERN_C const IID IID_IWdsTransportManager;
         DECLSPEC_XFGVIRT(IWdsTransportManager, GetWdsTransportServer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWdsTransportServer )( 
             __RPC__in IWdsTransportManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszServerName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportServer **ppWdsTransportServer);
+            /* [in] */ __RPC__in BSTR bszServerName,
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportServer **ppWdsTransportServer);
         
         END_INTERFACE
     } IWdsTransportManagerVtbl;
@@ -1175,24 +1134,19 @@ EXTERN_C const IID IID_IWdsTransportServer;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SetupManager( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportSetupManager **ppWdsTransportSetupManager) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportSetupManager **ppWdsTransportSetupManager) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ConfigurationManager( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportConfigurationManager **ppWdsTransportConfigurationManager) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportConfigurationManager **ppWdsTransportConfigurationManager) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NamespaceManager( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespaceManager **ppWdsTransportNamespaceManager) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespaceManager **ppWdsTransportNamespaceManager) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DisconnectClient( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulClientId,
+            /* [in] */ ULONG ulClientId,
             WDSTRANSPORT_DISCONNECT_TYPE DisconnectionType) = 0;
         
     };
@@ -1207,8 +1161,7 @@ EXTERN_C const IID IID_IWdsTransportServer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportServer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1223,31 +1176,23 @@ EXTERN_C const IID IID_IWdsTransportServer;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportServer * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportServer * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportServer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1272,32 +1217,27 @@ EXTERN_C const IID IID_IWdsTransportServer;
         DECLSPEC_XFGVIRT(IWdsTransportServer, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWdsTransportServer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportServer, get_SetupManager)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SetupManager )( 
             __RPC__in IWdsTransportServer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportSetupManager **ppWdsTransportSetupManager);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportSetupManager **ppWdsTransportSetupManager);
         
         DECLSPEC_XFGVIRT(IWdsTransportServer, get_ConfigurationManager)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConfigurationManager )( 
             __RPC__in IWdsTransportServer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportConfigurationManager **ppWdsTransportConfigurationManager);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportConfigurationManager **ppWdsTransportConfigurationManager);
         
         DECLSPEC_XFGVIRT(IWdsTransportServer, get_NamespaceManager)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NamespaceManager )( 
             __RPC__in IWdsTransportServer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespaceManager **ppWdsTransportNamespaceManager);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespaceManager **ppWdsTransportNamespaceManager);
         
         DECLSPEC_XFGVIRT(IWdsTransportServer, DisconnectClient)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisconnectClient )( 
             __RPC__in IWdsTransportServer * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulClientId,
+            /* [in] */ ULONG ulClientId,
             WDSTRANSPORT_DISCONNECT_TYPE DisconnectionType);
         
         END_INTERFACE
@@ -1378,8 +1318,7 @@ EXTERN_C const IID IID_IWdsTransportServer2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TftpManager( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportTftpManager **ppWdsTransportTftpManager) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportTftpManager **ppWdsTransportTftpManager) = 0;
         
     };
     
@@ -1393,8 +1332,7 @@ EXTERN_C const IID IID_IWdsTransportServer2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportServer2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1409,31 +1347,23 @@ EXTERN_C const IID IID_IWdsTransportServer2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportServer2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportServer2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportServer2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1458,39 +1388,33 @@ EXTERN_C const IID IID_IWdsTransportServer2;
         DECLSPEC_XFGVIRT(IWdsTransportServer, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWdsTransportServer2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportServer, get_SetupManager)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SetupManager )( 
             __RPC__in IWdsTransportServer2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportSetupManager **ppWdsTransportSetupManager);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportSetupManager **ppWdsTransportSetupManager);
         
         DECLSPEC_XFGVIRT(IWdsTransportServer, get_ConfigurationManager)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConfigurationManager )( 
             __RPC__in IWdsTransportServer2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportConfigurationManager **ppWdsTransportConfigurationManager);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportConfigurationManager **ppWdsTransportConfigurationManager);
         
         DECLSPEC_XFGVIRT(IWdsTransportServer, get_NamespaceManager)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NamespaceManager )( 
             __RPC__in IWdsTransportServer2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespaceManager **ppWdsTransportNamespaceManager);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespaceManager **ppWdsTransportNamespaceManager);
         
         DECLSPEC_XFGVIRT(IWdsTransportServer, DisconnectClient)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisconnectClient )( 
             __RPC__in IWdsTransportServer2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulClientId,
+            /* [in] */ ULONG ulClientId,
             WDSTRANSPORT_DISCONNECT_TYPE DisconnectionType);
         
         DECLSPEC_XFGVIRT(IWdsTransportServer2, get_TftpManager)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TftpManager )( 
             __RPC__in IWdsTransportServer2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportTftpManager **ppWdsTransportTftpManager);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportTftpManager **ppWdsTransportTftpManager);
         
         END_INTERFACE
     } IWdsTransportServer2Vtbl;
@@ -1574,30 +1498,22 @@ EXTERN_C const IID IID_IWdsTransportSetupManager;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Version( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONGLONG *pullVersion) = 0;
+            /* [retval][out] */ __RPC__out ULONGLONG *pullVersion) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InstalledFeatures( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulInstalledFeatures) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulInstalledFeatures) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Protocols( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulProtocols) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulProtocols) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RegisterContentProvider( 
-            /* [annotation][in] */ 
-            _In_  BSTR bszName,
-            /* [annotation][in] */ 
-            _In_  BSTR bszDescription,
-            /* [annotation][in] */ 
-            _In_  BSTR bszFilePath,
-            /* [annotation][in] */ 
-            _In_  BSTR bszInitializationRoutine) = 0;
+            /* [in] */ __RPC__in BSTR bszName,
+            /* [in] */ __RPC__in BSTR bszDescription,
+            /* [in] */ __RPC__in BSTR bszFilePath,
+            /* [in] */ __RPC__in BSTR bszInitializationRoutine) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeregisterContentProvider( 
-            /* [annotation][in] */ 
-            _In_  BSTR bszName) = 0;
+            /* [in] */ __RPC__in BSTR bszName) = 0;
         
     };
     
@@ -1611,8 +1527,7 @@ EXTERN_C const IID IID_IWdsTransportSetupManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportSetupManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1627,31 +1542,23 @@ EXTERN_C const IID IID_IWdsTransportSetupManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportSetupManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportSetupManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportSetupManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1676,38 +1583,30 @@ EXTERN_C const IID IID_IWdsTransportSetupManager;
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager, get_Version)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             __RPC__in IWdsTransportSetupManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONGLONG *pullVersion);
+            /* [retval][out] */ __RPC__out ULONGLONG *pullVersion);
         
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager, get_InstalledFeatures)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InstalledFeatures )( 
             __RPC__in IWdsTransportSetupManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulInstalledFeatures);
+            /* [retval][out] */ __RPC__out ULONG *pulInstalledFeatures);
         
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager, get_Protocols)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Protocols )( 
             __RPC__in IWdsTransportSetupManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulProtocols);
+            /* [retval][out] */ __RPC__out ULONG *pulProtocols);
         
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager, RegisterContentProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterContentProvider )( 
             __RPC__in IWdsTransportSetupManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszName,
-            /* [annotation][in] */ 
-            _In_  BSTR bszDescription,
-            /* [annotation][in] */ 
-            _In_  BSTR bszFilePath,
-            /* [annotation][in] */ 
-            _In_  BSTR bszInitializationRoutine);
+            /* [in] */ __RPC__in BSTR bszName,
+            /* [in] */ __RPC__in BSTR bszDescription,
+            /* [in] */ __RPC__in BSTR bszFilePath,
+            /* [in] */ __RPC__in BSTR bszInitializationRoutine);
         
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager, DeregisterContentProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeregisterContentProvider )( 
             __RPC__in IWdsTransportSetupManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszName);
+            /* [in] */ __RPC__in BSTR bszName);
         
         END_INTERFACE
     } IWdsTransportSetupManagerVtbl;
@@ -1787,12 +1686,10 @@ EXTERN_C const IID IID_IWdsTransportSetupManager2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TftpCapabilities( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulTftpCapabilities) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulTftpCapabilities) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ContentProviders( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppProviderCollection) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppProviderCollection) = 0;
         
     };
     
@@ -1806,8 +1703,7 @@ EXTERN_C const IID IID_IWdsTransportSetupManager2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1822,31 +1718,23 @@ EXTERN_C const IID IID_IWdsTransportSetupManager2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1871,50 +1759,40 @@ EXTERN_C const IID IID_IWdsTransportSetupManager2;
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager, get_Version)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONGLONG *pullVersion);
+            /* [retval][out] */ __RPC__out ULONGLONG *pullVersion);
         
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager, get_InstalledFeatures)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InstalledFeatures )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulInstalledFeatures);
+            /* [retval][out] */ __RPC__out ULONG *pulInstalledFeatures);
         
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager, get_Protocols)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Protocols )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulProtocols);
+            /* [retval][out] */ __RPC__out ULONG *pulProtocols);
         
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager, RegisterContentProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterContentProvider )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszName,
-            /* [annotation][in] */ 
-            _In_  BSTR bszDescription,
-            /* [annotation][in] */ 
-            _In_  BSTR bszFilePath,
-            /* [annotation][in] */ 
-            _In_  BSTR bszInitializationRoutine);
+            /* [in] */ __RPC__in BSTR bszName,
+            /* [in] */ __RPC__in BSTR bszDescription,
+            /* [in] */ __RPC__in BSTR bszFilePath,
+            /* [in] */ __RPC__in BSTR bszInitializationRoutine);
         
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager, DeregisterContentProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeregisterContentProvider )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszName);
+            /* [in] */ __RPC__in BSTR bszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager2, get_TftpCapabilities)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TftpCapabilities )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulTftpCapabilities);
+            /* [retval][out] */ __RPC__out ULONG *pulTftpCapabilities);
         
         DECLSPEC_XFGVIRT(IWdsTransportSetupManager2, get_ContentProviders)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentProviders )( 
             __RPC__in IWdsTransportSetupManager2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppProviderCollection);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppProviderCollection);
         
         END_INTERFACE
     } IWdsTransportSetupManager2Vtbl;
@@ -2001,18 +1879,14 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ServicePolicy( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportServicePolicy **ppWdsTransportServicePolicy) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportServicePolicy **ppWdsTransportServicePolicy) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DiagnosticsPolicy( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportDiagnosticsPolicy **ppWdsTransportDiagnosticsPolicy) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportDiagnosticsPolicy **ppWdsTransportDiagnosticsPolicy) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_WdsTransportServicesRunning( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bRealtimeStatus,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbServicesRunning) = 0;
+            /* [in] */ VARIANT_BOOL bRealtimeStatus,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbServicesRunning) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnableWdsTransportServices( void) = 0;
         
@@ -2025,8 +1899,7 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RestartWdsTransportServices( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifyWdsTransportServices( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_SERVICE_NOTIFICATION ServiceNotification) = 0;
+            /* [in] */ WDSTRANSPORT_SERVICE_NOTIFICATION ServiceNotification) = 0;
         
     };
     
@@ -2040,8 +1913,7 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportConfigurationManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2056,31 +1928,23 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportConfigurationManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportConfigurationManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportConfigurationManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2105,22 +1969,18 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager;
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager, get_ServicePolicy)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServicePolicy )( 
             __RPC__in IWdsTransportConfigurationManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportServicePolicy **ppWdsTransportServicePolicy);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportServicePolicy **ppWdsTransportServicePolicy);
         
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager, get_DiagnosticsPolicy)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiagnosticsPolicy )( 
             __RPC__in IWdsTransportConfigurationManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportDiagnosticsPolicy **ppWdsTransportDiagnosticsPolicy);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportDiagnosticsPolicy **ppWdsTransportDiagnosticsPolicy);
         
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager, get_WdsTransportServicesRunning)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WdsTransportServicesRunning )( 
             __RPC__in IWdsTransportConfigurationManager * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bRealtimeStatus,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbServicesRunning);
+            /* [in] */ VARIANT_BOOL bRealtimeStatus,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbServicesRunning);
         
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager, EnableWdsTransportServices)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnableWdsTransportServices )( 
@@ -2145,8 +2005,7 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager;
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager, NotifyWdsTransportServices)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NotifyWdsTransportServices )( 
             __RPC__in IWdsTransportConfigurationManager * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_SERVICE_NOTIFICATION ServiceNotification);
+            /* [in] */ WDSTRANSPORT_SERVICE_NOTIFICATION ServiceNotification);
         
         END_INTERFACE
     } IWdsTransportConfigurationManagerVtbl;
@@ -2238,8 +2097,7 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MulticastSessionPolicy( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportMulticastSessionPolicy **ppWdsTransportMulticastSessionPolicy) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportMulticastSessionPolicy **ppWdsTransportMulticastSessionPolicy) = 0;
         
     };
     
@@ -2253,8 +2111,7 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportConfigurationManager2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2269,31 +2126,23 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportConfigurationManager2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportConfigurationManager2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportConfigurationManager2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2318,22 +2167,18 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager2;
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager, get_ServicePolicy)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServicePolicy )( 
             __RPC__in IWdsTransportConfigurationManager2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportServicePolicy **ppWdsTransportServicePolicy);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportServicePolicy **ppWdsTransportServicePolicy);
         
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager, get_DiagnosticsPolicy)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiagnosticsPolicy )( 
             __RPC__in IWdsTransportConfigurationManager2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportDiagnosticsPolicy **ppWdsTransportDiagnosticsPolicy);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportDiagnosticsPolicy **ppWdsTransportDiagnosticsPolicy);
         
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager, get_WdsTransportServicesRunning)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WdsTransportServicesRunning )( 
             __RPC__in IWdsTransportConfigurationManager2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bRealtimeStatus,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbServicesRunning);
+            /* [in] */ VARIANT_BOOL bRealtimeStatus,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbServicesRunning);
         
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager, EnableWdsTransportServices)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnableWdsTransportServices )( 
@@ -2358,14 +2203,12 @@ EXTERN_C const IID IID_IWdsTransportConfigurationManager2;
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager, NotifyWdsTransportServices)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NotifyWdsTransportServices )( 
             __RPC__in IWdsTransportConfigurationManager2 * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_SERVICE_NOTIFICATION ServiceNotification);
+            /* [in] */ WDSTRANSPORT_SERVICE_NOTIFICATION ServiceNotification);
         
         DECLSPEC_XFGVIRT(IWdsTransportConfigurationManager2, get_MulticastSessionPolicy)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MulticastSessionPolicy )( 
             __RPC__in IWdsTransportConfigurationManager2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportMulticastSessionPolicy **ppWdsTransportMulticastSessionPolicy);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportMulticastSessionPolicy **ppWdsTransportMulticastSessionPolicy);
         
         END_INTERFACE
     } IWdsTransportConfigurationManager2Vtbl;
@@ -2461,32 +2304,21 @@ EXTERN_C const IID IID_IWdsTransportNamespaceManager;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateNamespace( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_NAMESPACE_TYPE NamespaceType,
-            /* [annotation][in] */ 
-            _In_  BSTR bszNamespaceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bszContentProvider,
-            /* [annotation][in] */ 
-            _In_  BSTR bszConfiguration,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespace) = 0;
+            /* [in] */ WDSTRANSPORT_NAMESPACE_TYPE NamespaceType,
+            /* [in] */ __RPC__in BSTR bszNamespaceName,
+            /* [in] */ __RPC__in BSTR bszContentProvider,
+            /* [in] */ __RPC__in BSTR bszConfiguration,
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespace) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RetrieveNamespace( 
-            /* [annotation][in] */ 
-            _In_  BSTR bszNamespaceName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespace) = 0;
+            /* [in] */ __RPC__in BSTR bszNamespaceName,
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespace) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RetrieveNamespaces( 
-            /* [annotation][in] */ 
-            _In_  BSTR bszContentProvider,
-            /* [annotation][in] */ 
-            _In_  BSTR bszNamespaceName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bIncludeTombstones,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportNamespaces) = 0;
+            /* [in] */ __RPC__in BSTR bszContentProvider,
+            /* [in] */ __RPC__in BSTR bszNamespaceName,
+            /* [in] */ VARIANT_BOOL bIncludeTombstones,
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportNamespaces) = 0;
         
     };
     
@@ -2500,8 +2332,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2516,31 +2347,23 @@ EXTERN_C const IID IID_IWdsTransportNamespaceManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportNamespaceManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2565,36 +2388,25 @@ EXTERN_C const IID IID_IWdsTransportNamespaceManager;
         DECLSPEC_XFGVIRT(IWdsTransportNamespaceManager, CreateNamespace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateNamespace )( 
             __RPC__in IWdsTransportNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_NAMESPACE_TYPE NamespaceType,
-            /* [annotation][in] */ 
-            _In_  BSTR bszNamespaceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bszContentProvider,
-            /* [annotation][in] */ 
-            _In_  BSTR bszConfiguration,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespace);
+            /* [in] */ WDSTRANSPORT_NAMESPACE_TYPE NamespaceType,
+            /* [in] */ __RPC__in BSTR bszNamespaceName,
+            /* [in] */ __RPC__in BSTR bszContentProvider,
+            /* [in] */ __RPC__in BSTR bszConfiguration,
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespace);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespaceManager, RetrieveNamespace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveNamespace )( 
             __RPC__in IWdsTransportNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszNamespaceName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespace);
+            /* [in] */ __RPC__in BSTR bszNamespaceName,
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespace);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespaceManager, RetrieveNamespaces)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveNamespaces )( 
             __RPC__in IWdsTransportNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszContentProvider,
-            /* [annotation][in] */ 
-            _In_  BSTR bszNamespaceName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bIncludeTombstones,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportNamespaces);
+            /* [in] */ __RPC__in BSTR bszContentProvider,
+            /* [in] */ __RPC__in BSTR bszNamespaceName,
+            /* [in] */ VARIANT_BOOL bIncludeTombstones,
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportNamespaces);
         
         END_INTERFACE
     } IWdsTransportNamespaceManagerVtbl;
@@ -2668,8 +2480,7 @@ EXTERN_C const IID IID_IWdsTransportTftpManager;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RetrieveTftpClients( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportTftpClients) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportTftpClients) = 0;
         
     };
     
@@ -2683,8 +2494,7 @@ EXTERN_C const IID IID_IWdsTransportTftpManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportTftpManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2699,31 +2509,23 @@ EXTERN_C const IID IID_IWdsTransportTftpManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportTftpManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportTftpManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportTftpManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2748,8 +2550,7 @@ EXTERN_C const IID IID_IWdsTransportTftpManager;
         DECLSPEC_XFGVIRT(IWdsTransportTftpManager, RetrieveTftpClients)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveTftpClients )( 
             __RPC__in IWdsTransportTftpManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportTftpClients);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportTftpClients);
         
         END_INTERFACE
     } IWdsTransportTftpManagerVtbl;
@@ -2817,64 +2618,46 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IpAddressSource( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE *pSourceType) = 0;
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE *pSourceType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_IpAddressSource( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE SourceType) = 0;
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE SourceType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StartIpAddress( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszStartIpAddress) = 0;
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszStartIpAddress) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StartIpAddress( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][in] */ 
-            _In_  BSTR bszStartIpAddress) = 0;
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [in] */ __RPC__in BSTR bszStartIpAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EndIpAddress( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszEndIpAddress) = 0;
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszEndIpAddress) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EndIpAddress( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][in] */ 
-            _In_  BSTR bszEndIpAddress) = 0;
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [in] */ __RPC__in BSTR bszEndIpAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StartPort( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulStartPort) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulStartPort) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StartPort( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulStartPort) = 0;
+            /* [in] */ ULONG ulStartPort) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EndPort( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulEndPort) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulEndPort) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EndPort( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulEndPort) = 0;
+            /* [in] */ ULONG ulEndPort) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetworkProfile( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_NETWORK_PROFILE_TYPE *pProfileType) = 0;
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_NETWORK_PROFILE_TYPE *pProfileType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_NetworkProfile( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_NETWORK_PROFILE_TYPE ProfileType) = 0;
+            /* [in] */ WDSTRANSPORT_NETWORK_PROFILE_TYPE ProfileType) = 0;
         
     };
     
@@ -2888,8 +2671,7 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2904,31 +2686,23 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2953,8 +2727,7 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy;
         DECLSPEC_XFGVIRT(IWdsTransportCacheable, get_Dirty)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dirty )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbDirty);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbDirty);
         
         DECLSPEC_XFGVIRT(IWdsTransportCacheable, Discard)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Discard )( 
@@ -2971,86 +2744,68 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy;
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_IpAddressSource)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IpAddressSource )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE *pSourceType);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE *pSourceType);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_IpAddressSource)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IpAddressSource )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE SourceType);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE SourceType);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_StartIpAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartIpAddress )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszStartIpAddress);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszStartIpAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_StartIpAddress)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartIpAddress )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][in] */ 
-            _In_  BSTR bszStartIpAddress);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [in] */ __RPC__in BSTR bszStartIpAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_EndIpAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EndIpAddress )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszEndIpAddress);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszEndIpAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_EndIpAddress)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EndIpAddress )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][in] */ 
-            _In_  BSTR bszEndIpAddress);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [in] */ __RPC__in BSTR bszEndIpAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_StartPort)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartPort )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulStartPort);
+            /* [retval][out] */ __RPC__out ULONG *pulStartPort);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_StartPort)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartPort )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulStartPort);
+            /* [in] */ ULONG ulStartPort);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_EndPort)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EndPort )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulEndPort);
+            /* [retval][out] */ __RPC__out ULONG *pulEndPort);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_EndPort)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EndPort )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulEndPort);
+            /* [in] */ ULONG ulEndPort);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_NetworkProfile)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkProfile )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_NETWORK_PROFILE_TYPE *pProfileType);
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_NETWORK_PROFILE_TYPE *pProfileType);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_NetworkProfile)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkProfile )( 
             __RPC__in IWdsTransportServicePolicy * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_NETWORK_PROFILE_TYPE ProfileType);
+            /* [in] */ WDSTRANSPORT_NETWORK_PROFILE_TYPE ProfileType);
         
         END_INTERFACE
     } IWdsTransportServicePolicyVtbl;
@@ -3164,28 +2919,22 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UdpPortPolicy( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_UDP_PORT_POLICY *pUdpPortPolicy) = 0;
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_UDP_PORT_POLICY *pUdpPortPolicy) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_UdpPortPolicy( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_UDP_PORT_POLICY UdpPortPolicy) = 0;
+            /* [in] */ WDSTRANSPORT_UDP_PORT_POLICY UdpPortPolicy) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TftpMaximumBlockSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulTftpMaximumBlockSize) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulTftpMaximumBlockSize) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TftpMaximumBlockSize( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulTftpMaximumBlockSize) = 0;
+            /* [in] */ ULONG ulTftpMaximumBlockSize) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EnableTftpVariableWindowExtension( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbEnableTftpVariableWindowExtension) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEnableTftpVariableWindowExtension) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EnableTftpVariableWindowExtension( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bEnableTftpVariableWindowExtension) = 0;
+            /* [in] */ VARIANT_BOOL bEnableTftpVariableWindowExtension) = 0;
         
     };
     
@@ -3199,8 +2948,7 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3215,31 +2963,23 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3264,8 +3004,7 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy2;
         DECLSPEC_XFGVIRT(IWdsTransportCacheable, get_Dirty)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dirty )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbDirty);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbDirty);
         
         DECLSPEC_XFGVIRT(IWdsTransportCacheable, Discard)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Discard )( 
@@ -3282,122 +3021,98 @@ EXTERN_C const IID IID_IWdsTransportServicePolicy2;
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_IpAddressSource)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IpAddressSource )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE *pSourceType);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE *pSourceType);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_IpAddressSource)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IpAddressSource )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE SourceType);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE SourceType);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_StartIpAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartIpAddress )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszStartIpAddress);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszStartIpAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_StartIpAddress)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartIpAddress )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][in] */ 
-            _In_  BSTR bszStartIpAddress);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [in] */ __RPC__in BSTR bszStartIpAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_EndIpAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EndIpAddress )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszEndIpAddress);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszEndIpAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_EndIpAddress)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EndIpAddress )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
-            /* [annotation][in] */ 
-            _In_  BSTR bszEndIpAddress);
+            /* [in] */ WDSTRANSPORT_IP_ADDRESS_TYPE AddressType,
+            /* [in] */ __RPC__in BSTR bszEndIpAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_StartPort)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartPort )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulStartPort);
+            /* [retval][out] */ __RPC__out ULONG *pulStartPort);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_StartPort)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartPort )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulStartPort);
+            /* [in] */ ULONG ulStartPort);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_EndPort)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EndPort )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulEndPort);
+            /* [retval][out] */ __RPC__out ULONG *pulEndPort);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_EndPort)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EndPort )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulEndPort);
+            /* [in] */ ULONG ulEndPort);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, get_NetworkProfile)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkProfile )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_NETWORK_PROFILE_TYPE *pProfileType);
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_NETWORK_PROFILE_TYPE *pProfileType);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy, put_NetworkProfile)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_NetworkProfile )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_NETWORK_PROFILE_TYPE ProfileType);
+            /* [in] */ WDSTRANSPORT_NETWORK_PROFILE_TYPE ProfileType);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy2, get_UdpPortPolicy)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UdpPortPolicy )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_UDP_PORT_POLICY *pUdpPortPolicy);
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_UDP_PORT_POLICY *pUdpPortPolicy);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy2, put_UdpPortPolicy)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UdpPortPolicy )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_UDP_PORT_POLICY UdpPortPolicy);
+            /* [in] */ WDSTRANSPORT_UDP_PORT_POLICY UdpPortPolicy);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy2, get_TftpMaximumBlockSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TftpMaximumBlockSize )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulTftpMaximumBlockSize);
+            /* [retval][out] */ __RPC__out ULONG *pulTftpMaximumBlockSize);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy2, put_TftpMaximumBlockSize)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TftpMaximumBlockSize )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulTftpMaximumBlockSize);
+            /* [in] */ ULONG ulTftpMaximumBlockSize);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy2, get_EnableTftpVariableWindowExtension)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableTftpVariableWindowExtension )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbEnableTftpVariableWindowExtension);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEnableTftpVariableWindowExtension);
         
         DECLSPEC_XFGVIRT(IWdsTransportServicePolicy2, put_EnableTftpVariableWindowExtension)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableTftpVariableWindowExtension )( 
             __RPC__in IWdsTransportServicePolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bEnableTftpVariableWindowExtension);
+            /* [in] */ VARIANT_BOOL bEnableTftpVariableWindowExtension);
         
         END_INTERFACE
     } IWdsTransportServicePolicy2Vtbl;
@@ -3530,20 +3245,16 @@ EXTERN_C const IID IID_IWdsTransportDiagnosticsPolicy;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEnabled) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bEnabled) = 0;
+            /* [in] */ VARIANT_BOOL bEnabled) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Components( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulComponents) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulComponents) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Components( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulComponents) = 0;
+            /* [in] */ ULONG ulComponents) = 0;
         
     };
     
@@ -3557,8 +3268,7 @@ EXTERN_C const IID IID_IWdsTransportDiagnosticsPolicy;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportDiagnosticsPolicy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3573,31 +3283,23 @@ EXTERN_C const IID IID_IWdsTransportDiagnosticsPolicy;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportDiagnosticsPolicy * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportDiagnosticsPolicy * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportDiagnosticsPolicy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3622,8 +3324,7 @@ EXTERN_C const IID IID_IWdsTransportDiagnosticsPolicy;
         DECLSPEC_XFGVIRT(IWdsTransportCacheable, get_Dirty)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dirty )( 
             __RPC__in IWdsTransportDiagnosticsPolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbDirty);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbDirty);
         
         DECLSPEC_XFGVIRT(IWdsTransportCacheable, Discard)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Discard )( 
@@ -3640,26 +3341,22 @@ EXTERN_C const IID IID_IWdsTransportDiagnosticsPolicy;
         DECLSPEC_XFGVIRT(IWdsTransportDiagnosticsPolicy, get_Enabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IWdsTransportDiagnosticsPolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEnabled);
         
         DECLSPEC_XFGVIRT(IWdsTransportDiagnosticsPolicy, put_Enabled)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IWdsTransportDiagnosticsPolicy * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bEnabled);
+            /* [in] */ VARIANT_BOOL bEnabled);
         
         DECLSPEC_XFGVIRT(IWdsTransportDiagnosticsPolicy, get_Components)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Components )( 
             __RPC__in IWdsTransportDiagnosticsPolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulComponents);
+            /* [retval][out] */ __RPC__out ULONG *pulComponents);
         
         DECLSPEC_XFGVIRT(IWdsTransportDiagnosticsPolicy, put_Components)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Components )( 
             __RPC__in IWdsTransportDiagnosticsPolicy * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulComponents);
+            /* [in] */ ULONG ulComponents);
         
         END_INTERFACE
     } IWdsTransportDiagnosticsPolicyVtbl;
@@ -3749,36 +3446,28 @@ EXTERN_C const IID IID_IWdsTransportMulticastSessionPolicy;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SlowClientHandling( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE *pSlowClientHandling) = 0;
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE *pSlowClientHandling) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SlowClientHandling( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE SlowClientHandling) = 0;
+            /* [in] */ WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE SlowClientHandling) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoDisconnectThreshold( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulThreshold) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulThreshold) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_AutoDisconnectThreshold( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulThreshold) = 0;
+            /* [in] */ ULONG ulThreshold) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MultistreamStreamCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulStreamCount) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulStreamCount) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MultistreamStreamCount( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulStreamCount) = 0;
+            /* [in] */ ULONG ulStreamCount) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SlowClientFallback( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbClientFallback) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbClientFallback) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SlowClientFallback( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bClientFallback) = 0;
+            /* [in] */ VARIANT_BOOL bClientFallback) = 0;
         
     };
     
@@ -3792,8 +3481,7 @@ EXTERN_C const IID IID_IWdsTransportMulticastSessionPolicy;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3808,31 +3496,23 @@ EXTERN_C const IID IID_IWdsTransportMulticastSessionPolicy;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3857,8 +3537,7 @@ EXTERN_C const IID IID_IWdsTransportMulticastSessionPolicy;
         DECLSPEC_XFGVIRT(IWdsTransportCacheable, get_Dirty)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dirty )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbDirty);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbDirty);
         
         DECLSPEC_XFGVIRT(IWdsTransportCacheable, Discard)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Discard )( 
@@ -3875,50 +3554,42 @@ EXTERN_C const IID IID_IWdsTransportMulticastSessionPolicy;
         DECLSPEC_XFGVIRT(IWdsTransportMulticastSessionPolicy, get_SlowClientHandling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SlowClientHandling )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE *pSlowClientHandling);
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE *pSlowClientHandling);
         
         DECLSPEC_XFGVIRT(IWdsTransportMulticastSessionPolicy, put_SlowClientHandling)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SlowClientHandling )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE SlowClientHandling);
+            /* [in] */ WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE SlowClientHandling);
         
         DECLSPEC_XFGVIRT(IWdsTransportMulticastSessionPolicy, get_AutoDisconnectThreshold)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoDisconnectThreshold )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulThreshold);
+            /* [retval][out] */ __RPC__out ULONG *pulThreshold);
         
         DECLSPEC_XFGVIRT(IWdsTransportMulticastSessionPolicy, put_AutoDisconnectThreshold)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoDisconnectThreshold )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulThreshold);
+            /* [in] */ ULONG ulThreshold);
         
         DECLSPEC_XFGVIRT(IWdsTransportMulticastSessionPolicy, get_MultistreamStreamCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MultistreamStreamCount )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulStreamCount);
+            /* [retval][out] */ __RPC__out ULONG *pulStreamCount);
         
         DECLSPEC_XFGVIRT(IWdsTransportMulticastSessionPolicy, put_MultistreamStreamCount)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MultistreamStreamCount )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulStreamCount);
+            /* [in] */ ULONG ulStreamCount);
         
         DECLSPEC_XFGVIRT(IWdsTransportMulticastSessionPolicy, get_SlowClientFallback)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SlowClientFallback )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbClientFallback);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbClientFallback);
         
         DECLSPEC_XFGVIRT(IWdsTransportMulticastSessionPolicy, put_SlowClientFallback)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SlowClientFallback )( 
             __RPC__in IWdsTransportMulticastSessionPolicy * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bClientFallback);
+            /* [in] */ VARIANT_BOOL bClientFallback);
         
         END_INTERFACE
     } IWdsTransportMulticastSessionPolicyVtbl;
@@ -4020,84 +3691,65 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_NAMESPACE_TYPE *pType) = 0;
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_NAMESPACE_TYPE *pType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulId) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [annotation][in] */ 
-            _In_  BSTR bszName) = 0;
+            /* [in] */ __RPC__in BSTR bszName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszFriendlyName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszFriendlyName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FriendlyName( 
-            /* [annotation][in] */ 
-            _In_  BSTR bszFriendlyName) = 0;
+            /* [in] */ __RPC__in BSTR bszFriendlyName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszDescription) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszDescription) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
-            /* [annotation][in] */ 
-            _In_  BSTR bszDescription) = 0;
+            /* [in] */ __RPC__in BSTR bszDescription) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ContentProvider( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszContentProvider) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszContentProvider) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ContentProvider( 
-            /* [annotation][in] */ 
-            _In_  BSTR bszContentProvider) = 0;
+            /* [in] */ __RPC__in BSTR bszContentProvider) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Configuration( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszConfiguration) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszConfiguration) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Configuration( 
-            /* [annotation][in] */ 
-            _In_  BSTR bszConfiguration) = 0;
+            /* [in] */ __RPC__in BSTR bszConfiguration) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Registered( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegistered) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegistered) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Tombstoned( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTombstoned) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTombstoned) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TombstoneTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pTombstoneTime) = 0;
+            /* [retval][out] */ __RPC__out DATE *pTombstoneTime) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TransmissionStarted( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTransmissionStarted) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTransmissionStarted) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Register( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Deregister( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bTerminateSessions) = 0;
+            /* [in] */ VARIANT_BOOL bTerminateSessions) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespaceClone) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespaceClone) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RetrieveContents( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportContents) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportContents) = 0;
         
     };
     
@@ -4111,8 +3763,7 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4127,31 +3778,23 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4176,98 +3819,82 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_NAMESPACE_TYPE *pType);
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_NAMESPACE_TYPE *pType);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId);
+            /* [retval][out] */ __RPC__out ULONG *pulId);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszName);
+            /* [in] */ __RPC__in BSTR bszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszFriendlyName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszFriendlyName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszFriendlyName);
+            /* [in] */ __RPC__in BSTR bszFriendlyName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszDescription);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszDescription);
+            /* [in] */ __RPC__in BSTR bszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_ContentProvider)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentProvider )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszContentProvider);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszContentProvider);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_ContentProvider)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContentProvider )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszContentProvider);
+            /* [in] */ __RPC__in BSTR bszContentProvider);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Configuration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Configuration )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszConfiguration);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszConfiguration);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Configuration)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Configuration )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszConfiguration);
+            /* [in] */ __RPC__in BSTR bszConfiguration);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Registered)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Registered )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegistered);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegistered);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Tombstoned)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tombstoned )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTombstoned);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTombstoned);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_TombstoneTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TombstoneTime )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pTombstoneTime);
+            /* [retval][out] */ __RPC__out DATE *pTombstoneTime);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_TransmissionStarted)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStarted )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTransmissionStarted);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTransmissionStarted);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Register)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Register )( 
@@ -4276,14 +3903,12 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Deregister)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Deregister )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bTerminateSessions);
+            /* [in] */ VARIANT_BOOL bTerminateSessions);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespaceClone);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespaceClone);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -4292,8 +3917,7 @@ EXTERN_C const IID IID_IWdsTransportNamespace;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, RetrieveContents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveContents )( 
             __RPC__in IWdsTransportNamespace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportContents);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportContents);
         
         END_INTERFACE
     } IWdsTransportNamespaceVtbl;
@@ -4432,8 +4056,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceAutoCast;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4448,31 +4071,23 @@ EXTERN_C const IID IID_IWdsTransportNamespaceAutoCast;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4497,98 +4112,82 @@ EXTERN_C const IID IID_IWdsTransportNamespaceAutoCast;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_NAMESPACE_TYPE *pType);
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_NAMESPACE_TYPE *pType);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId);
+            /* [retval][out] */ __RPC__out ULONG *pulId);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszName);
+            /* [in] */ __RPC__in BSTR bszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszFriendlyName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszFriendlyName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszFriendlyName);
+            /* [in] */ __RPC__in BSTR bszFriendlyName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszDescription);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszDescription);
+            /* [in] */ __RPC__in BSTR bszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_ContentProvider)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentProvider )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszContentProvider);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszContentProvider);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_ContentProvider)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContentProvider )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszContentProvider);
+            /* [in] */ __RPC__in BSTR bszContentProvider);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Configuration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Configuration )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszConfiguration);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszConfiguration);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Configuration)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Configuration )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszConfiguration);
+            /* [in] */ __RPC__in BSTR bszConfiguration);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Registered)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Registered )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegistered);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegistered);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Tombstoned)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tombstoned )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTombstoned);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTombstoned);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_TombstoneTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TombstoneTime )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pTombstoneTime);
+            /* [retval][out] */ __RPC__out DATE *pTombstoneTime);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_TransmissionStarted)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStarted )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTransmissionStarted);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTransmissionStarted);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Register)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Register )( 
@@ -4597,14 +4196,12 @@ EXTERN_C const IID IID_IWdsTransportNamespaceAutoCast;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Deregister)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Deregister )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bTerminateSessions);
+            /* [in] */ VARIANT_BOOL bTerminateSessions);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespaceClone);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespaceClone);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -4613,8 +4210,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceAutoCast;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, RetrieveContents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveContents )( 
             __RPC__in IWdsTransportNamespaceAutoCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportContents);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportContents);
         
         END_INTERFACE
     } IWdsTransportNamespaceAutoCastVtbl;
@@ -4756,8 +4352,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCast;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4772,31 +4367,23 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCast;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4821,98 +4408,82 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCast;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_NAMESPACE_TYPE *pType);
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_NAMESPACE_TYPE *pType);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId);
+            /* [retval][out] */ __RPC__out ULONG *pulId);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszName);
+            /* [in] */ __RPC__in BSTR bszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszFriendlyName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszFriendlyName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszFriendlyName);
+            /* [in] */ __RPC__in BSTR bszFriendlyName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszDescription);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszDescription);
+            /* [in] */ __RPC__in BSTR bszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_ContentProvider)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentProvider )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszContentProvider);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszContentProvider);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_ContentProvider)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContentProvider )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszContentProvider);
+            /* [in] */ __RPC__in BSTR bszContentProvider);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Configuration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Configuration )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszConfiguration);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszConfiguration);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Configuration)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Configuration )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszConfiguration);
+            /* [in] */ __RPC__in BSTR bszConfiguration);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Registered)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Registered )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegistered);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegistered);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Tombstoned)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tombstoned )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTombstoned);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTombstoned);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_TombstoneTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TombstoneTime )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pTombstoneTime);
+            /* [retval][out] */ __RPC__out DATE *pTombstoneTime);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_TransmissionStarted)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStarted )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTransmissionStarted);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTransmissionStarted);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Register)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Register )( 
@@ -4921,14 +4492,12 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCast;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Deregister)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Deregister )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bTerminateSessions);
+            /* [in] */ VARIANT_BOOL bTerminateSessions);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespaceClone);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespaceClone);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -4937,8 +4506,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCast;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, RetrieveContents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveContents )( 
             __RPC__in IWdsTransportNamespaceScheduledCast * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportContents);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportContents);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespaceScheduledCast, StartTransmission)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartTransmission )( 
@@ -5085,8 +4653,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastManualStart;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5101,31 +4668,23 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastManualStart;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5150,98 +4709,82 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastManualStart;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_NAMESPACE_TYPE *pType);
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_NAMESPACE_TYPE *pType);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId);
+            /* [retval][out] */ __RPC__out ULONG *pulId);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszName);
+            /* [in] */ __RPC__in BSTR bszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszFriendlyName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszFriendlyName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszFriendlyName);
+            /* [in] */ __RPC__in BSTR bszFriendlyName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszDescription);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszDescription);
+            /* [in] */ __RPC__in BSTR bszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_ContentProvider)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentProvider )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszContentProvider);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszContentProvider);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_ContentProvider)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContentProvider )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszContentProvider);
+            /* [in] */ __RPC__in BSTR bszContentProvider);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Configuration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Configuration )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszConfiguration);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszConfiguration);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Configuration)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Configuration )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszConfiguration);
+            /* [in] */ __RPC__in BSTR bszConfiguration);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Registered)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Registered )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegistered);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegistered);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Tombstoned)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tombstoned )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTombstoned);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTombstoned);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_TombstoneTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TombstoneTime )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pTombstoneTime);
+            /* [retval][out] */ __RPC__out DATE *pTombstoneTime);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_TransmissionStarted)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStarted )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTransmissionStarted);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTransmissionStarted);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Register)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Register )( 
@@ -5250,14 +4793,12 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastManualStart;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Deregister)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Deregister )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bTerminateSessions);
+            /* [in] */ VARIANT_BOOL bTerminateSessions);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespaceClone);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespaceClone);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -5266,8 +4807,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastManualStart;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, RetrieveContents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveContents )( 
             __RPC__in IWdsTransportNamespaceScheduledCastManualStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportContents);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportContents);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespaceScheduledCast, StartTransmission)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartTransmission )( 
@@ -5404,20 +4944,16 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastAutoStart;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MinimumClients( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulMinimumClients) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulMinimumClients) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MinimumClients( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulMinimumClients) = 0;
+            /* [in] */ ULONG ulMinimumClients) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StartTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pStartTime) = 0;
+            /* [retval][out] */ __RPC__out DATE *pStartTime) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_StartTime( 
-            /* [annotation][in] */ 
-            _In_  DATE StartTime) = 0;
+            /* [in] */ DATE StartTime) = 0;
         
     };
     
@@ -5431,8 +4967,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastAutoStart;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5447,31 +4982,23 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastAutoStart;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5496,98 +5023,82 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastAutoStart;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  WDSTRANSPORT_NAMESPACE_TYPE *pType);
+            /* [retval][out] */ __RPC__out WDSTRANSPORT_NAMESPACE_TYPE *pType);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId);
+            /* [retval][out] */ __RPC__out ULONG *pulId);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszName);
+            /* [in] */ __RPC__in BSTR bszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszFriendlyName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszFriendlyName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_FriendlyName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FriendlyName )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszFriendlyName);
+            /* [in] */ __RPC__in BSTR bszFriendlyName);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszDescription);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszDescription);
+            /* [in] */ __RPC__in BSTR bszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_ContentProvider)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContentProvider )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszContentProvider);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszContentProvider);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_ContentProvider)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContentProvider )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszContentProvider);
+            /* [in] */ __RPC__in BSTR bszContentProvider);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Configuration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Configuration )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszConfiguration);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszConfiguration);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, put_Configuration)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Configuration )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bszConfiguration);
+            /* [in] */ __RPC__in BSTR bszConfiguration);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Registered)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Registered )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegistered);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegistered);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_Tombstoned)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tombstoned )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTombstoned);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTombstoned);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_TombstoneTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TombstoneTime )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pTombstoneTime);
+            /* [retval][out] */ __RPC__out DATE *pTombstoneTime);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, get_TransmissionStarted)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStarted )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbTransmissionStarted);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbTransmissionStarted);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Register)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Register )( 
@@ -5596,14 +5107,12 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastAutoStart;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Deregister)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Deregister )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bTerminateSessions);
+            /* [in] */ VARIANT_BOOL bTerminateSessions);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespaceClone);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespaceClone);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -5612,8 +5121,7 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastAutoStart;
         DECLSPEC_XFGVIRT(IWdsTransportNamespace, RetrieveContents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveContents )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportContents);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportContents);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespaceScheduledCast, StartTransmission)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StartTransmission )( 
@@ -5622,26 +5130,22 @@ EXTERN_C const IID IID_IWdsTransportNamespaceScheduledCastAutoStart;
         DECLSPEC_XFGVIRT(IWdsTransportNamespaceScheduledCastAutoStart, get_MinimumClients)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinimumClients )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulMinimumClients);
+            /* [retval][out] */ __RPC__out ULONG *pulMinimumClients);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespaceScheduledCastAutoStart, put_MinimumClients)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinimumClients )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulMinimumClients);
+            /* [in] */ ULONG ulMinimumClients);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespaceScheduledCastAutoStart, get_StartTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartTime )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pStartTime);
+            /* [retval][out] */ __RPC__out DATE *pStartTime);
         
         DECLSPEC_XFGVIRT(IWdsTransportNamespaceScheduledCastAutoStart, put_StartTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartTime )( 
             __RPC__in IWdsTransportNamespaceScheduledCastAutoStart * This,
-            /* [annotation][in] */ 
-            _In_  DATE StartTime);
+            /* [in] */ DATE StartTime);
         
         END_INTERFACE
     } IWdsTransportNamespaceScheduledCastAutoStartVtbl;
@@ -5786,20 +5290,16 @@ EXTERN_C const IID IID_IWdsTransportContent;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Namespace( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespace) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespace) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulId) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RetrieveSessions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportSessions) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportSessions) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Terminate( void) = 0;
         
@@ -5815,8 +5315,7 @@ EXTERN_C const IID IID_IWdsTransportContent;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportContent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5831,31 +5330,23 @@ EXTERN_C const IID IID_IWdsTransportContent;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportContent * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportContent * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportContent * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5880,26 +5371,22 @@ EXTERN_C const IID IID_IWdsTransportContent;
         DECLSPEC_XFGVIRT(IWdsTransportContent, get_Namespace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Namespace )( 
             __RPC__in IWdsTransportContent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportNamespace **ppWdsTransportNamespace);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportNamespace **ppWdsTransportNamespace);
         
         DECLSPEC_XFGVIRT(IWdsTransportContent, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IWdsTransportContent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId);
+            /* [retval][out] */ __RPC__out ULONG *pulId);
         
         DECLSPEC_XFGVIRT(IWdsTransportContent, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWdsTransportContent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportContent, RetrieveSessions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveSessions )( 
             __RPC__in IWdsTransportContent * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportSessions);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportSessions);
         
         DECLSPEC_XFGVIRT(IWdsTransportContent, Terminate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Terminate )( 
@@ -5983,32 +5470,25 @@ EXTERN_C const IID IID_IWdsTransportSession;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Content( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportContent **ppWdsTransportContent) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportContent **ppWdsTransportContent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulId) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetworkInterfaceName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszNetworkInterfaceName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszNetworkInterfaceName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetworkInterfaceAddress( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszNetworkInterfaceAddress) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszNetworkInterfaceAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TransferRate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulTransferRate) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulTransferRate) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MasterClientId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulMasterClientId) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulMasterClientId) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RetrieveClients( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportClients) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportClients) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Terminate( void) = 0;
         
@@ -6024,8 +5504,7 @@ EXTERN_C const IID IID_IWdsTransportSession;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6040,31 +5519,23 @@ EXTERN_C const IID IID_IWdsTransportSession;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6089,44 +5560,37 @@ EXTERN_C const IID IID_IWdsTransportSession;
         DECLSPEC_XFGVIRT(IWdsTransportSession, get_Content)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Content )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportContent **ppWdsTransportContent);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportContent **ppWdsTransportContent);
         
         DECLSPEC_XFGVIRT(IWdsTransportSession, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId);
+            /* [retval][out] */ __RPC__out ULONG *pulId);
         
         DECLSPEC_XFGVIRT(IWdsTransportSession, get_NetworkInterfaceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkInterfaceName )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszNetworkInterfaceName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszNetworkInterfaceName);
         
         DECLSPEC_XFGVIRT(IWdsTransportSession, get_NetworkInterfaceAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkInterfaceAddress )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszNetworkInterfaceAddress);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszNetworkInterfaceAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportSession, get_TransferRate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransferRate )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulTransferRate);
+            /* [retval][out] */ __RPC__out ULONG *pulTransferRate);
         
         DECLSPEC_XFGVIRT(IWdsTransportSession, get_MasterClientId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MasterClientId )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulMasterClientId);
+            /* [retval][out] */ __RPC__out ULONG *pulMasterClientId);
         
         DECLSPEC_XFGVIRT(IWdsTransportSession, RetrieveClients)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveClients )( 
             __RPC__in IWdsTransportSession * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportCollection **ppWdsTransportClients);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportCollection **ppWdsTransportClients);
         
         DECLSPEC_XFGVIRT(IWdsTransportSession, Terminate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Terminate )( 
@@ -6219,52 +5683,40 @@ EXTERN_C const IID IID_IWdsTransportClient;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Session( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportSession **ppWdsTransportSession) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportSession **ppWdsTransportSession) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulId) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MacAddress( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszMacAddress) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszMacAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IpAddress( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszIpAddress) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszIpAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PercentCompletion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulPercentCompletion) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulPercentCompletion) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_JoinDuration( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulJoinDuration) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulJoinDuration) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CpuUtilization( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulCpuUtilization) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulCpuUtilization) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MemoryUtilization( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulMemoryUtilization) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulMemoryUtilization) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetworkUtilization( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulNetworkUtilization) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulNetworkUtilization) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserIdentity( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszUserIdentity) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszUserIdentity) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Disconnect( 
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_DISCONNECT_TYPE DisconnectionType) = 0;
+            /* [in] */ WDSTRANSPORT_DISCONNECT_TYPE DisconnectionType) = 0;
         
     };
     
@@ -6278,8 +5730,7 @@ EXTERN_C const IID IID_IWdsTransportClient;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6294,31 +5745,23 @@ EXTERN_C const IID IID_IWdsTransportClient;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6343,74 +5786,62 @@ EXTERN_C const IID IID_IWdsTransportClient;
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_Session)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Session )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IWdsTransportSession **ppWdsTransportSession);
+            /* [retval][out] */ __RPC__deref_out_opt IWdsTransportSession **ppWdsTransportSession);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulId);
+            /* [retval][out] */ __RPC__out ULONG *pulId);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_MacAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MacAddress )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszMacAddress);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszMacAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_IpAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IpAddress )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszIpAddress);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszIpAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_PercentCompletion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PercentCompletion )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulPercentCompletion);
+            /* [retval][out] */ __RPC__out ULONG *pulPercentCompletion);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_JoinDuration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_JoinDuration )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulJoinDuration);
+            /* [retval][out] */ __RPC__out ULONG *pulJoinDuration);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_CpuUtilization)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CpuUtilization )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulCpuUtilization);
+            /* [retval][out] */ __RPC__out ULONG *pulCpuUtilization);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_MemoryUtilization)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MemoryUtilization )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulMemoryUtilization);
+            /* [retval][out] */ __RPC__out ULONG *pulMemoryUtilization);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_NetworkUtilization)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkUtilization )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulNetworkUtilization);
+            /* [retval][out] */ __RPC__out ULONG *pulNetworkUtilization);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, get_UserIdentity)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserIdentity )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszUserIdentity);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszUserIdentity);
         
         DECLSPEC_XFGVIRT(IWdsTransportClient, Disconnect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IWdsTransportClient * This,
-            /* [annotation][in] */ 
-            _In_  WDSTRANSPORT_DISCONNECT_TYPE DisconnectionType);
+            /* [in] */ WDSTRANSPORT_DISCONNECT_TYPE DisconnectionType);
         
         END_INTERFACE
     } IWdsTransportClientVtbl;
@@ -6511,32 +5942,25 @@ EXTERN_C const IID IID_IWdsTransportTftpClient;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszFileName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszFileName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IpAddress( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszIpAddress) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszIpAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Timeout( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulTimeout) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulTimeout) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentFileOffset( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG64 *pul64CurrentOffset) = 0;
+            /* [retval][out] */ __RPC__out ULONG64 *pul64CurrentOffset) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG64 *pul64FileSize) = 0;
+            /* [retval][out] */ __RPC__out ULONG64 *pul64FileSize) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BlockSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulBlockSize) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulBlockSize) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_WindowSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulWindowSize) = 0;
+            /* [retval][out] */ __RPC__out ULONG *pulWindowSize) = 0;
         
     };
     
@@ -6550,8 +5974,7 @@ EXTERN_C const IID IID_IWdsTransportTftpClient;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6566,31 +5989,23 @@ EXTERN_C const IID IID_IWdsTransportTftpClient;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6615,44 +6030,37 @@ EXTERN_C const IID IID_IWdsTransportTftpClient;
         DECLSPEC_XFGVIRT(IWdsTransportTftpClient, get_FileName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileName )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszFileName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszFileName);
         
         DECLSPEC_XFGVIRT(IWdsTransportTftpClient, get_IpAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IpAddress )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszIpAddress);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszIpAddress);
         
         DECLSPEC_XFGVIRT(IWdsTransportTftpClient, get_Timeout)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timeout )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulTimeout);
+            /* [retval][out] */ __RPC__out ULONG *pulTimeout);
         
         DECLSPEC_XFGVIRT(IWdsTransportTftpClient, get_CurrentFileOffset)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFileOffset )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG64 *pul64CurrentOffset);
+            /* [retval][out] */ __RPC__out ULONG64 *pul64CurrentOffset);
         
         DECLSPEC_XFGVIRT(IWdsTransportTftpClient, get_FileSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSize )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG64 *pul64FileSize);
+            /* [retval][out] */ __RPC__out ULONG64 *pul64FileSize);
         
         DECLSPEC_XFGVIRT(IWdsTransportTftpClient, get_BlockSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockSize )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulBlockSize);
+            /* [retval][out] */ __RPC__out ULONG *pulBlockSize);
         
         DECLSPEC_XFGVIRT(IWdsTransportTftpClient, get_WindowSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowSize )( 
             __RPC__in IWdsTransportTftpClient * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG *pulWindowSize);
+            /* [retval][out] */ __RPC__out ULONG *pulWindowSize);
         
         END_INTERFACE
     } IWdsTransportTftpClientVtbl;
@@ -6738,20 +6146,16 @@ EXTERN_C const IID IID_IWdsTransportContentProvider;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszDescription) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszDescription) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FilePath( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszFilePath) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszFilePath) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InitializationRoutine( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszInitializationRoutine) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszInitializationRoutine) = 0;
         
     };
     
@@ -6765,8 +6169,7 @@ EXTERN_C const IID IID_IWdsTransportContentProvider;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWdsTransportContentProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6781,31 +6184,23 @@ EXTERN_C const IID IID_IWdsTransportContentProvider;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWdsTransportContentProvider * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWdsTransportContentProvider * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWdsTransportContentProvider * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6830,26 +6225,22 @@ EXTERN_C const IID IID_IWdsTransportContentProvider;
         DECLSPEC_XFGVIRT(IWdsTransportContentProvider, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWdsTransportContentProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszName);
         
         DECLSPEC_XFGVIRT(IWdsTransportContentProvider, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IWdsTransportContentProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszDescription);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszDescription);
         
         DECLSPEC_XFGVIRT(IWdsTransportContentProvider, get_FilePath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FilePath )( 
             __RPC__in IWdsTransportContentProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszFilePath);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszFilePath);
         
         DECLSPEC_XFGVIRT(IWdsTransportContentProvider, get_InitializationRoutine)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InitializationRoutine )( 
             __RPC__in IWdsTransportContentProvider * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbszInitializationRoutine);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbszInitializationRoutine);
         
         END_INTERFACE
     } IWdsTransportContentProviderVtbl;

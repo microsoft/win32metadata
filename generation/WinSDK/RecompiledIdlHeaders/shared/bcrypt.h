@@ -1037,8 +1037,8 @@ NTSTATUS
 WINAPI
 BCryptOpenAlgorithmProvider(
     _Out_       BCRYPT_ALG_HANDLE   *phAlgorithm,
-    _In_        LPCWSTR pszAlgId,
-    _In_opt_    LPCWSTR pszImplementation,
+    _In_z_      LPCWSTR pszAlgId,
+    _In_opt_z_  LPCWSTR pszImplementation,
     _In_        ULONG   dwFlags);
 
 
@@ -1085,7 +1085,7 @@ _Must_inspect_result_
 NTSTATUS
 WINAPI
 BCryptEnumProviders(
-    _In_    LPCWSTR pszAlgId,
+    _In_z_  LPCWSTR pszAlgId,
     _Out_   ULONG   *pImplCount,
     _Out_   BCRYPT_PROVIDER_NAME    **ppImplList,
     _In_    ULONG   dwFlags);
@@ -1101,7 +1101,7 @@ NTSTATUS
 WINAPI
 BCryptGetProperty(
     _In_                                        BCRYPT_HANDLE   hObject,
-    _In_                                        LPCWSTR pszProperty,
+    _In_z_                                      LPCWSTR pszProperty,
     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PUCHAR   pbOutput,
     _In_                                        ULONG   cbOutput,
     _Out_                                       ULONG   *pcbResult,
@@ -1113,7 +1113,7 @@ NTSTATUS
 WINAPI
 BCryptSetProperty(
     _Inout_                 BCRYPT_HANDLE   hObject,
-    _In_                    LPCWSTR pszProperty,
+    _In_z_                  LPCWSTR pszProperty,
     _In_reads_bytes_(cbInput)    PUCHAR   pbInput,
     _In_                    ULONG   cbInput,
     _In_                    ULONG   dwFlags);
@@ -1196,7 +1196,7 @@ WINAPI
 BCryptExportKey(
     _In_                                        BCRYPT_KEY_HANDLE   hKey,
     _In_opt_                                    BCRYPT_KEY_HANDLE   hExportKey,
-    _In_                                        LPCWSTR pszBlobType,
+    _In_z_                                      LPCWSTR pszBlobType,
     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PUCHAR   pbOutput,
     _In_                                        ULONG   cbOutput,
     _Out_                                       ULONG   *pcbResult,
@@ -1209,7 +1209,7 @@ WINAPI
 BCryptImportKey(
     _In_                                BCRYPT_ALG_HANDLE hAlgorithm,
     _In_opt_                            BCRYPT_KEY_HANDLE hImportKey,
-    _In_                                LPCWSTR pszBlobType,
+    _In_z_                              LPCWSTR pszBlobType,
     _Out_                               BCRYPT_KEY_HANDLE *phKey,
     _Out_writes_bytes_all_opt_(cbKeyObject)  PUCHAR   pbKeyObject,
     _In_                                ULONG   cbKeyObject,
@@ -1232,7 +1232,7 @@ WINAPI
 BCryptImportKeyPair(
     _In_                            BCRYPT_ALG_HANDLE hAlgorithm,
     _In_opt_                        BCRYPT_KEY_HANDLE hImportKey,
-    _In_                            LPCWSTR pszBlobType,
+    _In_z_                          LPCWSTR pszBlobType,
     _Out_                           BCRYPT_KEY_HANDLE *phKey,
     _In_reads_bytes_(cbInput)            PUCHAR   pbInput,
     _In_                            ULONG   cbInput,
@@ -1312,7 +1312,7 @@ NTSTATUS
 WINAPI
 BCryptDeriveKey(
     _In_        BCRYPT_SECRET_HANDLE hSharedSecret,
-    _In_        LPCWSTR              pwszKDF,
+    _In_z_      LPCWSTR              pwszKDF,
     _In_opt_    BCryptBufferDesc     *pParameterList,
     _Out_writes_bytes_to_opt_(cbDerivedKey, *pcbResult) PUCHAR pbDerivedKey,
     _In_        ULONG                cbDerivedKey,
@@ -1705,24 +1705,18 @@ _Must_inspect_result_
 NTSTATUS
 WINAPI
 BCryptQueryProviderRegistration(
-    _In_ LPCWSTR pszProvider,
+    _In_z_ LPCWSTR pszProvider,
     _In_ ULONG dwMode,
     _In_ ULONG dwInterface,
     _Inout_ ULONG* pcbBuffer,
-    _Inout_
-        _When_(_Old_(*ppBuffer) != NULL, _At_(*ppBuffer, _Out_writes_bytes_to_(*pcbBuffer, *pcbBuffer)))
-        _When_(_Old_(*ppBuffer) == NULL, _Outptr_result_bytebuffer_all_(*pcbBuffer))
-    PCRYPT_PROVIDER_REG *ppBuffer);
+    _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_PROVIDER_REG *ppBuffer);
 
 _Must_inspect_result_
 NTSTATUS
 WINAPI
 BCryptEnumRegisteredProviders(
     _Inout_ ULONG* pcbBuffer,
-    _Inout_
-        _When_(_Old_(*ppBuffer) != NULL, _At_(*ppBuffer, _Out_writes_bytes_to_(*pcbBuffer, *pcbBuffer)))
-        _When_(_Old_(*ppBuffer) == NULL, _Outptr_result_bytebuffer_all_(*pcbBuffer))
-    PCRYPT_PROVIDERS *ppBuffer);
+    _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_PROVIDERS *ppBuffer);
 
 //
 // Context Configuration Functions
@@ -1732,7 +1726,7 @@ NTSTATUS
 WINAPI
 BCryptCreateContext(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _In_opt_ PCRYPT_CONTEXT_CONFIG pConfig); // Optional
 
 _Must_inspect_result_
@@ -1740,7 +1734,7 @@ NTSTATUS
 WINAPI
 BCryptDeleteContext(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext);
+    _In_z_ LPCWSTR pszContext);
 
 _Must_inspect_result_
 NTSTATUS
@@ -1748,17 +1742,14 @@ WINAPI
 BCryptEnumContexts(
     _In_ ULONG dwTable,
     _Inout_ ULONG* pcbBuffer,
-    _Inout_
-        _When_(_Old_(*ppBuffer) != NULL, _At_(*ppBuffer, _Out_writes_bytes_to_(*pcbBuffer, *pcbBuffer)))
-        _When_(_Old_(*ppBuffer) == NULL, _Outptr_result_bytebuffer_all_(*pcbBuffer))
-    PCRYPT_CONTEXTS *ppBuffer);
+    _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXTS *ppBuffer);
 
 _Must_inspect_result_
 NTSTATUS
 WINAPI
 BCryptConfigureContext(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _In_ PCRYPT_CONTEXT_CONFIG pConfig);
 
 _Must_inspect_result_
@@ -1766,21 +1757,18 @@ NTSTATUS
 WINAPI
 BCryptQueryContextConfiguration(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _Inout_ ULONG* pcbBuffer,
-    _Inout_
-        _When_(_Old_(*ppBuffer) != NULL, _At_(*ppBuffer, _Out_writes_bytes_to_(*pcbBuffer, *pcbBuffer)))
-        _When_(_Old_(*ppBuffer) == NULL, _Outptr_result_bytebuffer_all_(*pcbBuffer))
-    PCRYPT_CONTEXT_CONFIG *ppBuffer);
+    _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_CONFIG *ppBuffer);
 
 _Must_inspect_result_
 NTSTATUS
 WINAPI
 BCryptAddContextFunction(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _In_ ULONG dwInterface,
-    _In_ LPCWSTR pszFunction,
+    _In_z_ LPCWSTR pszFunction,
     _In_ ULONG dwPosition);
 
 _Must_inspect_result_
@@ -1788,31 +1776,28 @@ NTSTATUS
 WINAPI
 BCryptRemoveContextFunction(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _In_ ULONG dwInterface,
-    _In_ LPCWSTR pszFunction);
+    _In_z_ LPCWSTR pszFunction);
 
 _Must_inspect_result_
 NTSTATUS
 WINAPI
 BCryptEnumContextFunctions(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _In_ ULONG dwInterface,
     _Inout_ ULONG* pcbBuffer,
-    _Inout_
-        _When_(_Old_(*ppBuffer) != NULL, _At_(*ppBuffer, _Out_writes_bytes_to_(*pcbBuffer, *pcbBuffer)))
-        _When_(_Old_(*ppBuffer) == NULL, _Outptr_result_bytebuffer_all_(*pcbBuffer))
-    PCRYPT_CONTEXT_FUNCTIONS *ppBuffer);
+    _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_FUNCTIONS *ppBuffer);
 
 _Must_inspect_result_
 NTSTATUS
 WINAPI
 BCryptConfigureContextFunction(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _In_ ULONG dwInterface,
-    _In_ LPCWSTR pszFunction,
+    _In_z_ LPCWSTR pszFunction,
     _In_ PCRYPT_CONTEXT_FUNCTION_CONFIG pConfig);
 
 _Must_inspect_result_
@@ -1820,14 +1805,11 @@ NTSTATUS
 WINAPI
 BCryptQueryContextFunctionConfiguration(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _In_ ULONG dwInterface,
-    _In_ LPCWSTR pszFunction,
+    _In_z_ LPCWSTR pszFunction,
     _Inout_ ULONG* pcbBuffer,
-    _Inout_
-        _When_(_Old_(*ppBuffer) != NULL, _At_(*ppBuffer, _Out_writes_bytes_to_(*pcbBuffer, *pcbBuffer)))
-        _When_(_Old_(*ppBuffer) == NULL, _Outptr_result_bytebuffer_all_(*pcbBuffer))
-    PCRYPT_CONTEXT_FUNCTION_CONFIG *ppBuffer);
+    _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_FUNCTION_CONFIG *ppBuffer);
 
 
 _Must_inspect_result_
@@ -1835,24 +1817,21 @@ NTSTATUS
 WINAPI
 BCryptEnumContextFunctionProviders(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _In_ ULONG dwInterface,
-    _In_ LPCWSTR pszFunction,
+    _In_z_ LPCWSTR pszFunction,
     _Inout_ ULONG* pcbBuffer,
-    _Inout_
-        _When_(_Old_(*ppBuffer) != NULL, _At_(*ppBuffer, _Out_writes_bytes_to_(*pcbBuffer, *pcbBuffer)))
-        _When_(_Old_(*ppBuffer) == NULL, _Outptr_result_bytebuffer_all_(*pcbBuffer))
-    PCRYPT_CONTEXT_FUNCTION_PROVIDERS *ppBuffer);
+    _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_FUNCTION_PROVIDERS *ppBuffer);
 
 _Must_inspect_result_
 NTSTATUS
 WINAPI
 BCryptSetContextFunctionProperty(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _In_ ULONG dwInterface,
-    _In_ LPCWSTR pszFunction,
-    _In_ LPCWSTR pszProperty,
+    _In_z_ LPCWSTR pszFunction,
+    _In_z_ LPCWSTR pszProperty,
     _In_ ULONG cbValue,
     _In_reads_bytes_opt_(cbValue) PUCHAR pbValue);
 
@@ -1861,15 +1840,12 @@ NTSTATUS
 WINAPI
 BCryptQueryContextFunctionProperty(
     _In_ ULONG dwTable,
-    _In_ LPCWSTR pszContext,
+    _In_z_ LPCWSTR pszContext,
     _In_ ULONG dwInterface,
-    _In_ LPCWSTR pszFunction,
-    _In_ LPCWSTR pszProperty,
+    _In_z_ LPCWSTR pszFunction,
+    _In_z_ LPCWSTR pszProperty,
     _Inout_ ULONG* pcbValue,
-    _Inout_
-        _When_(_Old_(*ppbValue) != NULL, _At_(*ppbValue, _Out_writes_bytes_to_(*pcbValue, *pcbValue)))
-        _When_(_Old_(*ppbValue) == NULL, _Outptr_result_bytebuffer_all_(*pcbValue))
-    PUCHAR *ppbValue);
+    _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PUCHAR *ppbValue);
 
 #endif //#ifndef KERNEL_MODE_CNG
 
@@ -1911,17 +1887,14 @@ BCryptUnregisterConfigChangeNotify(
 _Must_inspect_result_
 NTSTATUS WINAPI
 BCryptResolveProviders(
-    _In_opt_ LPCWSTR pszContext,
+    _In_opt_z_ LPCWSTR pszContext,
     _In_opt_ ULONG dwInterface,
-    _In_opt_ LPCWSTR pszFunction,
-    _In_opt_ LPCWSTR pszProvider,
+    _In_opt_z_ LPCWSTR pszFunction,
+    _In_opt_z_ LPCWSTR pszProvider,
     _In_ ULONG dwMode,
     _In_ ULONG dwFlags,
     _Inout_ ULONG* pcbBuffer,
-    _Inout_
-        _When_(_Old_(*ppBuffer) != NULL, _At_(*ppBuffer, _Out_writes_bytes_to_(*pcbBuffer, *pcbBuffer)))
-        _When_(_Old_(*ppBuffer) == NULL, _Outptr_result_bytebuffer_all_(*pcbBuffer))
-    PCRYPT_PROVIDER_REFS *ppBuffer);
+    _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_PROVIDER_REFS *ppBuffer);
 
 #endif /* WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM */
 #pragma endregion

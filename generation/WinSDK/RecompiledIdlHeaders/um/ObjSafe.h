@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -134,20 +134,14 @@ EXTERN_C const IID IID_IObjectSafety;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetInterfaceSafetyOptions( 
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwSupportedOptions,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwEnabledOptions) = 0;
+            /* [in] */ __RPC__in REFIID riid,
+            /* [out] */ __RPC__out DWORD *pdwSupportedOptions,
+            /* [out] */ __RPC__out DWORD *pdwEnabledOptions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetInterfaceSafetyOptions( 
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOptionSetMask,
-            /* [annotation][in] */ 
-            _In_  DWORD dwEnabledOptions) = 0;
+            /* [in] */ __RPC__in REFIID riid,
+            /* [in] */ DWORD dwOptionSetMask,
+            /* [in] */ DWORD dwEnabledOptions) = 0;
         
     };
     
@@ -161,8 +155,7 @@ EXTERN_C const IID IID_IObjectSafety;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IObjectSafety * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -177,22 +170,16 @@ EXTERN_C const IID IID_IObjectSafety;
         DECLSPEC_XFGVIRT(IObjectSafety, GetInterfaceSafetyOptions)
         HRESULT ( STDMETHODCALLTYPE *GetInterfaceSafetyOptions )( 
             __RPC__in IObjectSafety * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwSupportedOptions,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwEnabledOptions);
+            /* [in] */ __RPC__in REFIID riid,
+            /* [out] */ __RPC__out DWORD *pdwSupportedOptions,
+            /* [out] */ __RPC__out DWORD *pdwEnabledOptions);
         
         DECLSPEC_XFGVIRT(IObjectSafety, SetInterfaceSafetyOptions)
         HRESULT ( STDMETHODCALLTYPE *SetInterfaceSafetyOptions )( 
             __RPC__in IObjectSafety * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][in] */ 
-            _In_  DWORD dwOptionSetMask,
-            /* [annotation][in] */ 
-            _In_  DWORD dwEnabledOptions);
+            /* [in] */ __RPC__in REFIID riid,
+            /* [in] */ DWORD dwOptionSetMask,
+            /* [in] */ DWORD dwEnabledOptions);
         
         END_INTERFACE
     } IObjectSafetyVtbl;

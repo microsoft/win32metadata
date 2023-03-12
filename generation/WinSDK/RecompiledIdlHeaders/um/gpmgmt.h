@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -934,84 +934,56 @@ EXTERN_C const IID IID_IGPM;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetDomain( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrDomain,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrDomainController,
-            /* [annotation][in] */ 
-            _In_  long lDCFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMDomain **pIGPMDomain) = 0;
+            /* [in] */ __RPC__in BSTR bstrDomain,
+            /* [unique][in] */ __RPC__in_opt BSTR bstrDomainController,
+            /* [in] */ long lDCFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMDomain **pIGPMDomain) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetBackupDir( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMBackupDir **pIGPMBackupDir) = 0;
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMBackupDir **pIGPMBackupDir) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSitesContainer( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrForest,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrDomain,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrDomainController,
-            /* [annotation][in] */ 
-            _In_  long lDCFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSitesContainer **ppIGPMSitesContainer) = 0;
+            /* [in] */ __RPC__in BSTR bstrForest,
+            /* [unique][in] */ __RPC__in_opt BSTR bstrDomain,
+            /* [unique][in] */ __RPC__in_opt BSTR bstrDomainController,
+            /* [in] */ long lDCFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSitesContainer **ppIGPMSitesContainer) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetRSOP( 
-            /* [annotation][in] */ 
-            _In_  GPMRSOPMode gpmRSoPMode,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNamespace,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMRSOP **ppIGPMRSOP) = 0;
+            /* [in] */ GPMRSOPMode gpmRSoPMode,
+            /* [in] */ __RPC__in BSTR bstrNamespace,
+            /* [in] */ long lFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMRSOP **ppIGPMRSOP) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreatePermission( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTrustee,
-            /* [annotation][in] */ 
-            _In_  GPMPermissionType perm,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bInheritable,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMPermission **ppPerm) = 0;
+            /* [in] */ __RPC__in BSTR bstrTrustee,
+            /* [in] */ GPMPermissionType perm,
+            /* [in] */ VARIANT_BOOL bInheritable,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMPermission **ppPerm) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateSearchCriteria( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSearchCriteria **ppIGPMSearchCriteria) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSearchCriteria **ppIGPMSearchCriteria) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTrustee( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTrustee,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMTrustee **ppIGPMTrustee) = 0;
+            /* [in] */ __RPC__in BSTR bstrTrustee,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMTrustee **ppIGPMTrustee) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetClientSideExtensions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMCSECollection **ppIGPMCSECollection) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMCSECollection **ppIGPMCSECollection) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetConstants( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMConstants **ppIGPMConstants) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMConstants **ppIGPMConstants) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetMigrationTable( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMigrationTablePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMigrationTable **ppMigrationTable) = 0;
+            /* [in] */ __RPC__in BSTR bstrMigrationTablePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMigrationTable **ppMigrationTable) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateMigrationTable( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMigrationTable **ppMigrationTable) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMigrationTable **ppMigrationTable) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InitializeReporting( 
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrAdmPath) = 0;
+            /* [unique][in] */ __RPC__in_opt BSTR bstrAdmPath) = 0;
         
     };
     
@@ -1025,8 +997,7 @@ EXTERN_C const IID IID_IGPM;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPM * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1041,31 +1012,23 @@ EXTERN_C const IID IID_IGPM;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPM * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPM * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPM * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1090,106 +1053,78 @@ EXTERN_C const IID IID_IGPM;
         DECLSPEC_XFGVIRT(IGPM, GetDomain)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDomain )( 
             __RPC__in IGPM * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrDomain,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrDomainController,
-            /* [annotation][in] */ 
-            _In_  long lDCFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMDomain **pIGPMDomain);
+            /* [in] */ __RPC__in BSTR bstrDomain,
+            /* [unique][in] */ __RPC__in_opt BSTR bstrDomainController,
+            /* [in] */ long lDCFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMDomain **pIGPMDomain);
         
         DECLSPEC_XFGVIRT(IGPM, GetBackupDir)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetBackupDir )( 
             __RPC__in IGPM * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMBackupDir **pIGPMBackupDir);
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMBackupDir **pIGPMBackupDir);
         
         DECLSPEC_XFGVIRT(IGPM, GetSitesContainer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSitesContainer )( 
             __RPC__in IGPM * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrForest,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrDomain,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrDomainController,
-            /* [annotation][in] */ 
-            _In_  long lDCFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSitesContainer **ppIGPMSitesContainer);
+            /* [in] */ __RPC__in BSTR bstrForest,
+            /* [unique][in] */ __RPC__in_opt BSTR bstrDomain,
+            /* [unique][in] */ __RPC__in_opt BSTR bstrDomainController,
+            /* [in] */ long lDCFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSitesContainer **ppIGPMSitesContainer);
         
         DECLSPEC_XFGVIRT(IGPM, GetRSOP)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRSOP )( 
             __RPC__in IGPM * This,
-            /* [annotation][in] */ 
-            _In_  GPMRSOPMode gpmRSoPMode,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNamespace,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMRSOP **ppIGPMRSOP);
+            /* [in] */ GPMRSOPMode gpmRSoPMode,
+            /* [in] */ __RPC__in BSTR bstrNamespace,
+            /* [in] */ long lFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMRSOP **ppIGPMRSOP);
         
         DECLSPEC_XFGVIRT(IGPM, CreatePermission)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreatePermission )( 
             __RPC__in IGPM * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTrustee,
-            /* [annotation][in] */ 
-            _In_  GPMPermissionType perm,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bInheritable,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMPermission **ppPerm);
+            /* [in] */ __RPC__in BSTR bstrTrustee,
+            /* [in] */ GPMPermissionType perm,
+            /* [in] */ VARIANT_BOOL bInheritable,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMPermission **ppPerm);
         
         DECLSPEC_XFGVIRT(IGPM, CreateSearchCriteria)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateSearchCriteria )( 
             __RPC__in IGPM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSearchCriteria **ppIGPMSearchCriteria);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSearchCriteria **ppIGPMSearchCriteria);
         
         DECLSPEC_XFGVIRT(IGPM, CreateTrustee)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTrustee )( 
             __RPC__in IGPM * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTrustee,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMTrustee **ppIGPMTrustee);
+            /* [in] */ __RPC__in BSTR bstrTrustee,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMTrustee **ppIGPMTrustee);
         
         DECLSPEC_XFGVIRT(IGPM, GetClientSideExtensions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetClientSideExtensions )( 
             __RPC__in IGPM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMCSECollection **ppIGPMCSECollection);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMCSECollection **ppIGPMCSECollection);
         
         DECLSPEC_XFGVIRT(IGPM, GetConstants)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConstants )( 
             __RPC__in IGPM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMConstants **ppIGPMConstants);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMConstants **ppIGPMConstants);
         
         DECLSPEC_XFGVIRT(IGPM, GetMigrationTable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMigrationTable )( 
             __RPC__in IGPM * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMigrationTablePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMigrationTable **ppMigrationTable);
+            /* [in] */ __RPC__in BSTR bstrMigrationTablePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMigrationTable **ppMigrationTable);
         
         DECLSPEC_XFGVIRT(IGPM, CreateMigrationTable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateMigrationTable )( 
             __RPC__in IGPM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMigrationTable **ppMigrationTable);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMigrationTable **ppMigrationTable);
         
         DECLSPEC_XFGVIRT(IGPM, InitializeReporting)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InitializeReporting )( 
             __RPC__in IGPM * This,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrAdmPath);
+            /* [unique][in] */ __RPC__in_opt BSTR bstrAdmPath);
         
         END_INTERFACE
     } IGPMVtbl;
@@ -1290,62 +1225,44 @@ EXTERN_C const IID IID_IGPMDomain;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainController( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateGPO( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppNewGPO) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppNewGPO) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetGPO( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGuid,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppGPO) = 0;
+            /* [in] */ __RPC__in BSTR bstrGuid,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppGPO) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SearchGPOs( 
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPOCollection **ppIGPMGPOCollection) = 0;
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPOCollection **ppIGPMGPOCollection) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RestoreGPO( 
-            /* [annotation][in] */ 
-            _In_  IGPMBackup *pIGPMBackup,
-            /* [annotation][in] */ 
-            _In_  long lDCFlags,
+            /* [in] */ __RPC__in_opt IGPMBackup *pIGPMBackup,
+            /* [in] */ long lDCFlags,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSOM( 
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOM **ppSOM) = 0;
+            /* [unique][in] */ __RPC__in_opt BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOM **ppSOM) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SearchSOMs( 
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOMCollection **ppIGPMSOMCollection) = 0;
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOMCollection **ppIGPMSOMCollection) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetWMIFilter( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilter **ppWMIFilter) = 0;
+            /* [in] */ __RPC__in BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilter **ppWMIFilter) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SearchWMIFilters( 
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilterCollection **ppIGPMWMIFilterCollection) = 0;
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilterCollection **ppIGPMWMIFilterCollection) = 0;
         
     };
     
@@ -1359,8 +1276,7 @@ EXTERN_C const IID IID_IGPMDomain;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1375,31 +1291,23 @@ EXTERN_C const IID IID_IGPMDomain;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1424,80 +1332,62 @@ EXTERN_C const IID IID_IGPMDomain;
         DECLSPEC_XFGVIRT(IGPMDomain, get_DomainController)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainController )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMDomain, get_Domain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Domain )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMDomain, CreateGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateGPO )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppNewGPO);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppNewGPO);
         
         DECLSPEC_XFGVIRT(IGPMDomain, GetGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetGPO )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGuid,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppGPO);
+            /* [in] */ __RPC__in BSTR bstrGuid,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppGPO);
         
         DECLSPEC_XFGVIRT(IGPMDomain, SearchGPOs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchGPOs )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPOCollection **ppIGPMGPOCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPOCollection **ppIGPMGPOCollection);
         
         DECLSPEC_XFGVIRT(IGPMDomain, RestoreGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RestoreGPO )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][in] */ 
-            _In_  IGPMBackup *pIGPMBackup,
-            /* [annotation][in] */ 
-            _In_  long lDCFlags,
+            /* [in] */ __RPC__in_opt IGPMBackup *pIGPMBackup,
+            /* [in] */ long lDCFlags,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMDomain, GetSOM)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSOM )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOM **ppSOM);
+            /* [unique][in] */ __RPC__in_opt BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOM **ppSOM);
         
         DECLSPEC_XFGVIRT(IGPMDomain, SearchSOMs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchSOMs )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOMCollection **ppIGPMSOMCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOMCollection **ppIGPMSOMCollection);
         
         DECLSPEC_XFGVIRT(IGPMDomain, GetWMIFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWMIFilter )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilter **ppWMIFilter);
+            /* [in] */ __RPC__in BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilter **ppWMIFilter);
         
         DECLSPEC_XFGVIRT(IGPMDomain, SearchWMIFilters)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchWMIFilters )( 
             __RPC__in IGPMDomain * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilterCollection **ppIGPMWMIFilterCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilterCollection **ppIGPMWMIFilterCollection);
         
         END_INTERFACE
     } IGPMDomainVtbl;
@@ -1592,20 +1482,15 @@ EXTERN_C const IID IID_IGPMBackupDir;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupDirectory( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetBackup( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMBackup **ppBackup) = 0;
+            /* [in] */ __RPC__in BSTR bstrID,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMBackup **ppBackup) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SearchBackups( 
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMBackupCollection **ppIGPMBackupCollection) = 0;
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMBackupCollection **ppIGPMBackupCollection) = 0;
         
     };
     
@@ -1619,8 +1504,7 @@ EXTERN_C const IID IID_IGPMBackupDir;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMBackupDir * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1635,31 +1519,23 @@ EXTERN_C const IID IID_IGPMBackupDir;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMBackupDir * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMBackupDir * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMBackupDir * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1684,24 +1560,19 @@ EXTERN_C const IID IID_IGPMBackupDir;
         DECLSPEC_XFGVIRT(IGPMBackupDir, get_BackupDirectory)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BackupDirectory )( 
             __RPC__in IGPMBackupDir * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMBackupDir, GetBackup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetBackup )( 
             __RPC__in IGPMBackupDir * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMBackup **ppBackup);
+            /* [in] */ __RPC__in BSTR bstrID,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMBackup **ppBackup);
         
         DECLSPEC_XFGVIRT(IGPMBackupDir, SearchBackups)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchBackups )( 
             __RPC__in IGPMBackupDir * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMBackupCollection **ppIGPMBackupCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMBackupCollection **ppIGPMBackupCollection);
         
         END_INTERFACE
     } IGPMBackupDirVtbl;
@@ -1775,28 +1646,21 @@ EXTERN_C const IID IID_IGPMSitesContainer;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainController( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Forest( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSite( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSiteName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOM **ppSOM) = 0;
+            /* [in] */ __RPC__in BSTR bstrSiteName,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOM **ppSOM) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SearchSites( 
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOMCollection **ppIGPMSOMCollection) = 0;
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOMCollection **ppIGPMSOMCollection) = 0;
         
     };
     
@@ -1810,8 +1674,7 @@ EXTERN_C const IID IID_IGPMSitesContainer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMSitesContainer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1826,31 +1689,23 @@ EXTERN_C const IID IID_IGPMSitesContainer;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMSitesContainer * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMSitesContainer * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMSitesContainer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1875,36 +1730,29 @@ EXTERN_C const IID IID_IGPMSitesContainer;
         DECLSPEC_XFGVIRT(IGPMSitesContainer, get_DomainController)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainController )( 
             __RPC__in IGPMSitesContainer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSitesContainer, get_Domain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Domain )( 
             __RPC__in IGPMSitesContainer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSitesContainer, get_Forest)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Forest )( 
             __RPC__in IGPMSitesContainer * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSitesContainer, GetSite)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSite )( 
             __RPC__in IGPMSitesContainer * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSiteName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOM **ppSOM);
+            /* [in] */ __RPC__in BSTR bstrSiteName,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOM **ppSOM);
         
         DECLSPEC_XFGVIRT(IGPMSitesContainer, SearchSites)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchSites )( 
             __RPC__in IGPMSitesContainer * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOMCollection **ppIGPMSOMCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOMCollection **ppIGPMSOMCollection);
         
         END_INTERFACE
     } IGPMSitesContainerVtbl;
@@ -1984,12 +1832,9 @@ EXTERN_C const IID IID_IGPMSearchCriteria;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][in] */ 
-            _In_  GPMSearchProperty searchProperty,
-            /* [annotation][in] */ 
-            _In_  GPMSearchOperation searchOperation,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue) = 0;
+            /* [in] */ GPMSearchProperty searchProperty,
+            /* [in] */ GPMSearchOperation searchOperation,
+            /* [in] */ VARIANT varValue) = 0;
         
     };
     
@@ -2003,8 +1848,7 @@ EXTERN_C const IID IID_IGPMSearchCriteria;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMSearchCriteria * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2019,31 +1863,23 @@ EXTERN_C const IID IID_IGPMSearchCriteria;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMSearchCriteria * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMSearchCriteria * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMSearchCriteria * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2068,12 +1904,9 @@ EXTERN_C const IID IID_IGPMSearchCriteria;
         DECLSPEC_XFGVIRT(IGPMSearchCriteria, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IGPMSearchCriteria * This,
-            /* [annotation][in] */ 
-            _In_  GPMSearchProperty searchProperty,
-            /* [annotation][in] */ 
-            _In_  GPMSearchOperation searchOperation,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue);
+            /* [in] */ GPMSearchProperty searchProperty,
+            /* [in] */ GPMSearchOperation searchOperation,
+            /* [in] */ VARIANT varValue);
         
         END_INTERFACE
     } IGPMSearchCriteriaVtbl;
@@ -2141,24 +1974,19 @@ EXTERN_C const IID IID_IGPMTrustee;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrusteeSid( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrusteeName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrusteeDomain( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrusteeDSPath( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TrusteeType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *lVal) = 0;
+            /* [retval][out] */ __RPC__out long *lVal) = 0;
         
     };
     
@@ -2172,8 +2000,7 @@ EXTERN_C const IID IID_IGPMTrustee;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMTrustee * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2188,31 +2015,23 @@ EXTERN_C const IID IID_IGPMTrustee;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMTrustee * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMTrustee * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMTrustee * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2237,32 +2056,27 @@ EXTERN_C const IID IID_IGPMTrustee;
         DECLSPEC_XFGVIRT(IGPMTrustee, get_TrusteeSid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TrusteeSid )( 
             __RPC__in IGPMTrustee * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMTrustee, get_TrusteeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TrusteeName )( 
             __RPC__in IGPMTrustee * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMTrustee, get_TrusteeDomain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TrusteeDomain )( 
             __RPC__in IGPMTrustee * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMTrustee, get_TrusteeDSPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TrusteeDSPath )( 
             __RPC__in IGPMTrustee * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMTrustee, get_TrusteeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TrusteeType )( 
             __RPC__in IGPMTrustee * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *lVal);
+            /* [retval][out] */ __RPC__out long *lVal);
         
         END_INTERFACE
     } IGPMTrusteeVtbl;
@@ -2342,24 +2156,19 @@ EXTERN_C const IID IID_IGPMPermission;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Inherited( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Inheritable( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Denied( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Permission( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Trustee( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMTrustee **ppIGPMTrustee) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMTrustee **ppIGPMTrustee) = 0;
         
     };
     
@@ -2373,8 +2182,7 @@ EXTERN_C const IID IID_IGPMPermission;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMPermission * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2389,31 +2197,23 @@ EXTERN_C const IID IID_IGPMPermission;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMPermission * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMPermission * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMPermission * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2438,32 +2238,27 @@ EXTERN_C const IID IID_IGPMPermission;
         DECLSPEC_XFGVIRT(IGPMPermission, get_Inherited)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Inherited )( 
             __RPC__in IGPMPermission * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IGPMPermission, get_Inheritable)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Inheritable )( 
             __RPC__in IGPMPermission * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IGPMPermission, get_Denied)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Denied )( 
             __RPC__in IGPMPermission * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IGPMPermission, get_Permission)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Permission )( 
             __RPC__in IGPMPermission * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMPermission, get_Trustee)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Trustee )( 
             __RPC__in IGPMPermission * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMTrustee **ppIGPMTrustee);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMTrustee **ppIGPMTrustee);
         
         END_INTERFACE
     } IGPMPermissionVtbl;
@@ -2543,29 +2338,23 @@ EXTERN_C const IID IID_IGPMSecurityInfo;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppEnum) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppEnum) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][in] */ 
-            _In_  IGPMPermission *pPerm) = 0;
+            /* [in] */ __RPC__in_opt IGPMPermission *pPerm) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Remove( 
-            /* [annotation][in] */ 
-            _In_  IGPMPermission *pPerm) = 0;
+            /* [in] */ __RPC__in_opt IGPMPermission *pPerm) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveTrustee( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTrustee) = 0;
+            /* [in] */ __RPC__in BSTR bstrTrustee) = 0;
         
     };
     
@@ -2579,8 +2368,7 @@ EXTERN_C const IID IID_IGPMSecurityInfo;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMSecurityInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2595,31 +2383,23 @@ EXTERN_C const IID IID_IGPMSecurityInfo;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMSecurityInfo * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMSecurityInfo * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMSecurityInfo * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2644,39 +2424,33 @@ EXTERN_C const IID IID_IGPMSecurityInfo;
         DECLSPEC_XFGVIRT(IGPMSecurityInfo, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMSecurityInfo * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSecurityInfo, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMSecurityInfo * This,
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSecurityInfo, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMSecurityInfo * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppEnum);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppEnum);
         
         DECLSPEC_XFGVIRT(IGPMSecurityInfo, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IGPMSecurityInfo * This,
-            /* [annotation][in] */ 
-            _In_  IGPMPermission *pPerm);
+            /* [in] */ __RPC__in_opt IGPMPermission *pPerm);
         
         DECLSPEC_XFGVIRT(IGPMSecurityInfo, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IGPMSecurityInfo * This,
-            /* [annotation][in] */ 
-            _In_  IGPMPermission *pPerm);
+            /* [in] */ __RPC__in_opt IGPMPermission *pPerm);
         
         DECLSPEC_XFGVIRT(IGPMSecurityInfo, RemoveTrustee)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveTrustee )( 
             __RPC__in IGPMSecurityInfo * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTrustee);
+            /* [in] */ __RPC__in BSTR bstrTrustee);
         
         END_INTERFACE
     } IGPMSecurityInfoVtbl;
@@ -2759,50 +2533,38 @@ EXTERN_C const IID IID_IGPMBackup;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPOID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPODomain( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPODisplayName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Timestamp( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal) = 0;
+            /* [retval][out] */ __RPC__out DATE *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Comment( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupDir( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReport( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReportToFile( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
     };
     
@@ -2816,8 +2578,7 @@ EXTERN_C const IID IID_IGPMBackup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2832,31 +2593,23 @@ EXTERN_C const IID IID_IGPMBackup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2881,44 +2634,37 @@ EXTERN_C const IID IID_IGPMBackup;
         DECLSPEC_XFGVIRT(IGPMBackup, get_ID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ID )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMBackup, get_GPOID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GPOID )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMBackup, get_GPODomain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GPODomain )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMBackup, get_GPODisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GPODisplayName )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMBackup, get_Timestamp)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timestamp )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IGPMBackup, get_Comment)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Comment )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMBackup, get_BackupDir)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BackupDir )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMBackup, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -2927,22 +2673,17 @@ EXTERN_C const IID IID_IGPMBackup;
         DECLSPEC_XFGVIRT(IGPMBackup, GenerateReport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReport )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMBackup, GenerateReportToFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReportToFile )( 
             __RPC__in IGPMBackup * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         END_INTERFACE
     } IGPMBackupVtbl;
@@ -3037,17 +2778,14 @@ EXTERN_C const IID IID_IGPMBackupCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMBackup) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMBackup) = 0;
         
     };
     
@@ -3061,8 +2799,7 @@ EXTERN_C const IID IID_IGPMBackupCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMBackupCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3077,31 +2814,23 @@ EXTERN_C const IID IID_IGPMBackupCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMBackupCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMBackupCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMBackupCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3126,21 +2855,18 @@ EXTERN_C const IID IID_IGPMBackupCollection;
         DECLSPEC_XFGVIRT(IGPMBackupCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMBackupCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMBackupCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMBackupCollection * This,
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMBackupCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMBackupCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMBackup);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMBackup);
         
         END_INTERFACE
     } IGPMBackupCollectionVtbl;
@@ -3222,48 +2948,36 @@ EXTERN_C const IID IID_IGPMSOM;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPOInheritanceBlocked( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_GPOInheritanceBlocked( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal) = 0;
+            /* [in] */ VARIANT_BOOL newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateGPOLink( 
-            /* [annotation][in] */ 
-            _In_  long lLinkPos,
-            /* [annotation][in] */ 
-            _In_  IGPMGPO *pGPO,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPOLink **ppNewGPOLink) = 0;
+            /* [in] */ long lLinkPos,
+            /* [in] */ __RPC__in_opt IGPMGPO *pGPO,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPOLink **ppNewGPOLink) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetGPOLinks( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPOLinksCollection **ppGPOLinks) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPOLinksCollection **ppGPOLinks) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetInheritedGPOLinks( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPOLinksCollection **ppGPOLinks) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPOLinksCollection **ppGPOLinks) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSecurityInfo( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSecurityInfo **ppSecurityInfo) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSecurityInfo **ppSecurityInfo) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetSecurityInfo( 
-            /* [annotation][in] */ 
-            _In_  IGPMSecurityInfo *pSecurityInfo) = 0;
+            /* [in] */ __RPC__in_opt IGPMSecurityInfo *pSecurityInfo) = 0;
         
     };
     
@@ -3277,8 +2991,7 @@ EXTERN_C const IID IID_IGPMSOM;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3293,31 +3006,23 @@ EXTERN_C const IID IID_IGPMSOM;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3342,66 +3047,54 @@ EXTERN_C const IID IID_IGPMSOM;
         DECLSPEC_XFGVIRT(IGPMSOM, get_GPOInheritanceBlocked)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GPOInheritanceBlocked )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSOM, put_GPOInheritanceBlocked)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_GPOInheritanceBlocked )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IGPMSOM, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSOM, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSOM, CreateGPOLink)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateGPOLink )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][in] */ 
-            _In_  long lLinkPos,
-            /* [annotation][in] */ 
-            _In_  IGPMGPO *pGPO,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPOLink **ppNewGPOLink);
+            /* [in] */ long lLinkPos,
+            /* [in] */ __RPC__in_opt IGPMGPO *pGPO,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPOLink **ppNewGPOLink);
         
         DECLSPEC_XFGVIRT(IGPMSOM, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal);
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSOM, GetGPOLinks)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetGPOLinks )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPOLinksCollection **ppGPOLinks);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPOLinksCollection **ppGPOLinks);
         
         DECLSPEC_XFGVIRT(IGPMSOM, GetInheritedGPOLinks)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetInheritedGPOLinks )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPOLinksCollection **ppGPOLinks);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPOLinksCollection **ppGPOLinks);
         
         DECLSPEC_XFGVIRT(IGPMSOM, GetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityInfo )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSecurityInfo **ppSecurityInfo);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSecurityInfo **ppSecurityInfo);
         
         DECLSPEC_XFGVIRT(IGPMSOM, SetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityInfo )( 
             __RPC__in IGPMSOM * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSecurityInfo *pSecurityInfo);
+            /* [in] */ __RPC__in_opt IGPMSecurityInfo *pSecurityInfo);
         
         END_INTERFACE
     } IGPMSOMVtbl;
@@ -3496,17 +3189,14 @@ EXTERN_C const IID IID_IGPMSOMCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMSOM) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMSOM) = 0;
         
     };
     
@@ -3520,8 +3210,7 @@ EXTERN_C const IID IID_IGPMSOMCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMSOMCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3536,31 +3225,23 @@ EXTERN_C const IID IID_IGPMSOMCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMSOMCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMSOMCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMSOMCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3585,21 +3266,18 @@ EXTERN_C const IID IID_IGPMSOMCollection;
         DECLSPEC_XFGVIRT(IGPMSOMCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMSOMCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSOMCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMSOMCollection * This,
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMSOMCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMSOMCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMSOM);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMSOM);
         
         END_INTERFACE
     } IGPMSOMCollectionVtbl;
@@ -3673,36 +3351,28 @@ EXTERN_C const IID IID_IGPMWMIFilter;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetQueryList( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pQryList) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pQryList) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSecurityInfo( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSecurityInfo **ppSecurityInfo) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSecurityInfo **ppSecurityInfo) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetSecurityInfo( 
-            /* [annotation][in] */ 
-            _In_  IGPMSecurityInfo *pSecurityInfo) = 0;
+            /* [in] */ __RPC__in_opt IGPMSecurityInfo *pSecurityInfo) = 0;
         
     };
     
@@ -3716,8 +3386,7 @@ EXTERN_C const IID IID_IGPMWMIFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3732,31 +3401,23 @@ EXTERN_C const IID IID_IGPMWMIFilter;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3781,50 +3442,42 @@ EXTERN_C const IID IID_IGPMWMIFilter;
         DECLSPEC_XFGVIRT(IGPMWMIFilter, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMWMIFilter, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IGPMWMIFilter, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMWMIFilter, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IGPMWMIFilter, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMWMIFilter, GetQueryList)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetQueryList )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pQryList);
+            /* [retval][out] */ __RPC__out VARIANT *pQryList);
         
         DECLSPEC_XFGVIRT(IGPMWMIFilter, GetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityInfo )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSecurityInfo **ppSecurityInfo);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSecurityInfo **ppSecurityInfo);
         
         DECLSPEC_XFGVIRT(IGPMWMIFilter, SetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityInfo )( 
             __RPC__in IGPMWMIFilter * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSecurityInfo *pSecurityInfo);
+            /* [in] */ __RPC__in_opt IGPMSecurityInfo *pSecurityInfo);
         
         END_INTERFACE
     } IGPMWMIFilterVtbl;
@@ -3913,17 +3566,14 @@ EXTERN_C const IID IID_IGPMWMIFilterCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **pVal) = 0;
         
     };
     
@@ -3937,8 +3587,7 @@ EXTERN_C const IID IID_IGPMWMIFilterCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMWMIFilterCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3953,31 +3602,23 @@ EXTERN_C const IID IID_IGPMWMIFilterCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMWMIFilterCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMWMIFilterCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMWMIFilterCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4002,21 +3643,18 @@ EXTERN_C const IID IID_IGPMWMIFilterCollection;
         DECLSPEC_XFGVIRT(IGPMWMIFilterCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMWMIFilterCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMWMIFilterCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMWMIFilterCollection * This,
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMWMIFilterCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMWMIFilterCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **pVal);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **pVal);
         
         END_INTERFACE
     } IGPMWMIFilterCollectionVtbl;
@@ -4090,148 +3728,112 @@ EXTERN_C const IID IID_IGPMRSOP;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Mode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Namespace( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LoggingComputer( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal) = 0;
+            /* [in] */ __RPC__in BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LoggingComputer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LoggingUser( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal) = 0;
+            /* [in] */ __RPC__in BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LoggingUser( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_LoggingFlags( 
-            /* [annotation][in] */ 
-            _In_  long lVal) = 0;
+            /* [in] */ long lVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LoggingFlags( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *lVal) = 0;
+            /* [retval][out] */ __RPC__out long *lVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningFlags( 
-            /* [annotation][in] */ 
-            _In_  long lVal) = 0;
+            /* [in] */ long lVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningFlags( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *lVal) = 0;
+            /* [retval][out] */ __RPC__out long *lVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningDomainController( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal) = 0;
+            /* [in] */ __RPC__in BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningDomainController( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningSiteName( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal) = 0;
+            /* [in] */ __RPC__in BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningSiteName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningUser( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal) = 0;
+            /* [in] */ __RPC__in BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningUser( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningUserSOM( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal) = 0;
+            /* [in] */ __RPC__in BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningUserSOM( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningUserWMIFilters( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varVal) = 0;
+            /* [in] */ VARIANT varVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningUserWMIFilters( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *varVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningUserSecurityGroups( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varVal) = 0;
+            /* [in] */ VARIANT varVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningUserSecurityGroups( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *varVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningComputer( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal) = 0;
+            /* [in] */ __RPC__in BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningComputer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningComputerSOM( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal) = 0;
+            /* [in] */ __RPC__in BSTR bstrVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningComputerSOM( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningComputerWMIFilters( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varVal) = 0;
+            /* [in] */ VARIANT varVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningComputerWMIFilters( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *varVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PlanningComputerSecurityGroups( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varVal) = 0;
+            /* [in] */ VARIANT varVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PlanningComputerSecurityGroups( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *varVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE LoggingEnumerateUsers( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *varVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateQueryResults( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ReleaseQueryResults( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReport( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReportToFile( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
     };
     
@@ -4245,8 +3847,7 @@ EXTERN_C const IID IID_IGPMRSOP;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4261,31 +3862,23 @@ EXTERN_C const IID IID_IGPMRSOP;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4310,188 +3903,157 @@ EXTERN_C const IID IID_IGPMRSOP;
         DECLSPEC_XFGVIRT(IGPMRSOP, get_Mode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Mode )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal);
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_Namespace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Namespace )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_LoggingComputer)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LoggingComputer )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal);
+            /* [in] */ __RPC__in BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_LoggingComputer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LoggingComputer )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_LoggingUser)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LoggingUser )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal);
+            /* [in] */ __RPC__in BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_LoggingUser)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LoggingUser )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_LoggingFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LoggingFlags )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  long lVal);
+            /* [in] */ long lVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_LoggingFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LoggingFlags )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *lVal);
+            /* [retval][out] */ __RPC__out long *lVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningFlags )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  long lVal);
+            /* [in] */ long lVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningFlags )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *lVal);
+            /* [retval][out] */ __RPC__out long *lVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningDomainController)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningDomainController )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal);
+            /* [in] */ __RPC__in BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningDomainController)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningDomainController )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningSiteName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningSiteName )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal);
+            /* [in] */ __RPC__in BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningSiteName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningSiteName )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningUser)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningUser )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal);
+            /* [in] */ __RPC__in BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningUser)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningUser )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningUserSOM)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningUserSOM )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal);
+            /* [in] */ __RPC__in BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningUserSOM)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningUserSOM )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningUserWMIFilters)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningUserWMIFilters )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varVal);
+            /* [in] */ VARIANT varVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningUserWMIFilters)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningUserWMIFilters )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varVal);
+            /* [retval][out] */ __RPC__out VARIANT *varVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningUserSecurityGroups)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningUserSecurityGroups )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varVal);
+            /* [in] */ VARIANT varVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningUserSecurityGroups)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningUserSecurityGroups )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varVal);
+            /* [retval][out] */ __RPC__out VARIANT *varVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningComputer)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningComputer )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal);
+            /* [in] */ __RPC__in BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningComputer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningComputer )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningComputerSOM)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningComputerSOM )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrVal);
+            /* [in] */ __RPC__in BSTR bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningComputerSOM)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningComputerSOM )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningComputerWMIFilters)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningComputerWMIFilters )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varVal);
+            /* [in] */ VARIANT varVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningComputerWMIFilters)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningComputerWMIFilters )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varVal);
+            /* [retval][out] */ __RPC__out VARIANT *varVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, put_PlanningComputerSecurityGroups)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PlanningComputerSecurityGroups )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varVal);
+            /* [in] */ VARIANT varVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, get_PlanningComputerSecurityGroups)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlanningComputerSecurityGroups )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varVal);
+            /* [retval][out] */ __RPC__out VARIANT *varVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, LoggingEnumerateUsers)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LoggingEnumerateUsers )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varVal);
+            /* [retval][out] */ __RPC__out VARIANT *varVal);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, CreateQueryResults)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateQueryResults )( 
@@ -4504,22 +4066,17 @@ EXTERN_C const IID IID_IGPMRSOP;
         DECLSPEC_XFGVIRT(IGPMRSOP, GenerateReport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReport )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMRSOP, GenerateReportToFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReportToFile )( 
             __RPC__in IGPMRSOP * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         END_INTERFACE
     } IGPMRSOPVtbl;
@@ -4689,147 +4246,109 @@ EXTERN_C const IID IID_IGPMGPO;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CreationTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pDate) = 0;
+            /* [retval][out] */ __RPC__out DATE *pDate) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModificationTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pDate) = 0;
+            /* [retval][out] */ __RPC__out DATE *pDate) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserDSVersionNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ComputerDSVersionNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserSysvolVersionNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ComputerSysvolVersionNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetWMIFilter( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilter **ppIGPMWMIFilter) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilter **ppIGPMWMIFilter) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetWMIFilter( 
-            /* [annotation][in] */ 
-            _In_  IGPMWMIFilter *pIGPMWMIFilter) = 0;
+            /* [in] */ __RPC__in_opt IGPMWMIFilter *pIGPMWMIFilter) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetUserEnabled( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbEnabled) = 0;
+            /* [in] */ VARIANT_BOOL vbEnabled) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetComputerEnabled( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbEnabled) = 0;
+            /* [in] */ VARIANT_BOOL vbEnabled) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsUserEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsComputerEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSecurityInfo( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSecurityInfo **ppSecurityInfo) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSecurityInfo **ppSecurityInfo) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetSecurityInfo( 
-            /* [annotation][in] */ 
-            _In_  IGPMSecurityInfo *pSecurityInfo) = 0;
+            /* [in] */ __RPC__in_opt IGPMSecurityInfo *pSecurityInfo) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Backup( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrComment,
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [in] */ __RPC__in BSTR bstrComment,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Import( 
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IGPMBackup *pIGPMBackup,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IGPMBackup *pIGPMBackup,
             /* [optional][in] */ __RPC__in VARIANT *pvarMigrationTable,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReport( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReportToFile( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CopyTo( 
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IGPMDomain *pIGPMDomain,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IGPMDomain *pIGPMDomain,
             /* [optional][in] */ __RPC__in VARIANT *pvarNewDisplayName,
             /* [optional][in] */ __RPC__in VARIANT *pvarMigrationTable,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetSecurityDescriptor( 
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pSD) = 0;
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IDispatch *pSD) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSecurityDescriptor( 
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppSD) = 0;
+            /* [in] */ long lFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppSD) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsACLConsistent( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbConsistent) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbConsistent) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE MakeACLConsistent( void) = 0;
         
@@ -4845,8 +4364,7 @@ EXTERN_C const IID IID_IGPMGPO;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4861,31 +4379,23 @@ EXTERN_C const IID IID_IGPMGPO;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4910,116 +4420,97 @@ EXTERN_C const IID IID_IGPMGPO;
         DECLSPEC_XFGVIRT(IGPMGPO, get_DisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, put_DisplayName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayName )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ID )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_DomainName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainName )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_CreationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreationTime )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pDate);
+            /* [retval][out] */ __RPC__out DATE *pDate);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ModificationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ModificationTime )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pDate);
+            /* [retval][out] */ __RPC__out DATE *pDate);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_UserDSVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDSVersionNumber )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ComputerDSVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ComputerDSVersionNumber )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_UserSysvolVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSysvolVersionNumber )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ComputerSysvolVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ComputerSysvolVersionNumber )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GetWMIFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWMIFilter )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilter **ppIGPMWMIFilter);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilter **ppIGPMWMIFilter);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetWMIFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetWMIFilter )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  IGPMWMIFilter *pIGPMWMIFilter);
+            /* [in] */ __RPC__in_opt IGPMWMIFilter *pIGPMWMIFilter);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetUserEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetUserEnabled )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbEnabled);
+            /* [in] */ VARIANT_BOOL vbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetComputerEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetComputerEnabled )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbEnabled);
+            /* [in] */ VARIANT_BOOL vbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, IsUserEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsUserEnabled )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, IsComputerEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsComputerEnabled )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityInfo )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSecurityInfo **ppSecurityInfo);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSecurityInfo **ppSecurityInfo);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityInfo )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSecurityInfo *pSecurityInfo);
+            /* [in] */ __RPC__in_opt IGPMSecurityInfo *pSecurityInfo);
         
         DECLSPEC_XFGVIRT(IGPMGPO, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -5028,83 +4519,64 @@ EXTERN_C const IID IID_IGPMGPO;
         DECLSPEC_XFGVIRT(IGPMGPO, Backup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Backup )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrComment,
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [in] */ __RPC__in BSTR bstrComment,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, Import)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Import )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IGPMBackup *pIGPMBackup,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IGPMBackup *pIGPMBackup,
             /* [optional][in] */ __RPC__in VARIANT *pvarMigrationTable,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GenerateReport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReport )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GenerateReportToFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReportToFile )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, CopyTo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IGPMDomain *pIGPMDomain,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IGPMDomain *pIGPMDomain,
             /* [optional][in] */ __RPC__in VARIANT *pvarNewDisplayName,
             /* [optional][in] */ __RPC__in VARIANT *pvarMigrationTable,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetSecurityDescriptor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityDescriptor )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pSD);
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IDispatch *pSD);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GetSecurityDescriptor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityDescriptor )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppSD);
+            /* [in] */ long lFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppSD);
         
         DECLSPEC_XFGVIRT(IGPMGPO, IsACLConsistent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsACLConsistent )( 
             __RPC__in IGPMGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbConsistent);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbConsistent);
         
         DECLSPEC_XFGVIRT(IGPMGPO, MakeACLConsistent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MakeACLConsistent )( 
@@ -5260,18 +4732,14 @@ EXTERN_C const IID IID_IGPMGPOCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [in] */ long lIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMGPOs) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMGPOs) = 0;
         
     };
     
@@ -5285,8 +4753,7 @@ EXTERN_C const IID IID_IGPMGPOCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMGPOCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5301,31 +4768,23 @@ EXTERN_C const IID IID_IGPMGPOCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMGPOCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMGPOCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMGPOCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5350,22 +4809,18 @@ EXTERN_C const IID IID_IGPMGPOCollection;
         DECLSPEC_XFGVIRT(IGPMGPOCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMGPOCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMGPOCollection * This,
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [in] */ long lIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMGPOCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMGPOs);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMGPOs);
         
         END_INTERFACE
     } IGPMGPOCollectionVtbl;
@@ -5439,36 +4894,28 @@ EXTERN_C const IID IID_IGPMGPOLink;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPOID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GPODomain( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal) = 0;
+            /* [in] */ VARIANT_BOOL newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Enforced( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Enforced( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal) = 0;
+            /* [in] */ VARIANT_BOOL newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SOMLinkOrder( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *lVal) = 0;
+            /* [retval][out] */ __RPC__out long *lVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SOM( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOM **ppIGPMSOM) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOM **ppIGPMSOM) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
@@ -5484,8 +4931,7 @@ EXTERN_C const IID IID_IGPMGPOLink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5500,31 +4946,23 @@ EXTERN_C const IID IID_IGPMGPOLink;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5549,50 +4987,42 @@ EXTERN_C const IID IID_IGPMGPOLink;
         DECLSPEC_XFGVIRT(IGPMGPOLink, get_GPOID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GPOID )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOLink, get_GPODomain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GPODomain )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOLink, get_Enabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOLink, put_Enabled)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOLink, get_Enforced)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enforced )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pVal);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOLink, put_Enforced)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enforced )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL newVal);
+            /* [in] */ VARIANT_BOOL newVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOLink, get_SOMLinkOrder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SOMLinkOrder )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *lVal);
+            /* [retval][out] */ __RPC__out long *lVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOLink, get_SOM)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SOM )( 
             __RPC__in IGPMGPOLink * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOM **ppIGPMSOM);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOM **ppIGPMSOM);
         
         DECLSPEC_XFGVIRT(IGPMGPOLink, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -5688,18 +5118,14 @@ EXTERN_C const IID IID_IGPMGPOLinksCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [in] */ long lIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMLinks) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMLinks) = 0;
         
     };
     
@@ -5713,8 +5139,7 @@ EXTERN_C const IID IID_IGPMGPOLinksCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMGPOLinksCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5729,31 +5154,23 @@ EXTERN_C const IID IID_IGPMGPOLinksCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMGPOLinksCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMGPOLinksCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMGPOLinksCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5778,22 +5195,18 @@ EXTERN_C const IID IID_IGPMGPOLinksCollection;
         DECLSPEC_XFGVIRT(IGPMGPOLinksCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMGPOLinksCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOLinksCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMGPOLinksCollection * This,
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [in] */ long lIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPOLinksCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMGPOLinksCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMLinks);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMLinks);
         
         END_INTERFACE
     } IGPMGPOLinksCollectionVtbl;
@@ -5867,18 +5280,14 @@ EXTERN_C const IID IID_IGPMCSECollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [in] */ long lIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMCSEs) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMCSEs) = 0;
         
     };
     
@@ -5892,8 +5301,7 @@ EXTERN_C const IID IID_IGPMCSECollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMCSECollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5908,31 +5316,23 @@ EXTERN_C const IID IID_IGPMCSECollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMCSECollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMCSECollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMCSECollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5957,22 +5357,18 @@ EXTERN_C const IID IID_IGPMCSECollection;
         DECLSPEC_XFGVIRT(IGPMCSECollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMCSECollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMCSECollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMCSECollection * This,
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [in] */ long lIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMCSECollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMCSECollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMCSEs);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMCSEs);
         
         END_INTERFACE
     } IGPMCSECollectionVtbl;
@@ -6046,20 +5442,16 @@ EXTERN_C const IID IID_IGPMClientSideExtension;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsUserEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IsComputerEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled) = 0;
         
     };
     
@@ -6073,8 +5465,7 @@ EXTERN_C const IID IID_IGPMClientSideExtension;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMClientSideExtension * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6089,31 +5480,23 @@ EXTERN_C const IID IID_IGPMClientSideExtension;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMClientSideExtension * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMClientSideExtension * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMClientSideExtension * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6138,26 +5521,22 @@ EXTERN_C const IID IID_IGPMClientSideExtension;
         DECLSPEC_XFGVIRT(IGPMClientSideExtension, get_ID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ID )( 
             __RPC__in IGPMClientSideExtension * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMClientSideExtension, get_DisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             __RPC__in IGPMClientSideExtension * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMClientSideExtension, IsUserEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsUserEnabled )( 
             __RPC__in IGPMClientSideExtension * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMClientSideExtension, IsComputerEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsComputerEnabled )( 
             __RPC__in IGPMClientSideExtension * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled);
         
         END_INTERFACE
     } IGPMClientSideExtensionVtbl;
@@ -6247,8 +5626,7 @@ EXTERN_C const IID IID_IGPMAsyncCancel;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMAsyncCancel * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6263,31 +5641,23 @@ EXTERN_C const IID IID_IGPMAsyncCancel;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMAsyncCancel * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMAsyncCancel * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMAsyncCancel * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6379,16 +5749,11 @@ EXTERN_C const IID IID_IGPMAsyncProgress;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Status( 
-            /* [annotation][in] */ 
-            _In_  long lProgressNumerator,
-            /* [annotation][in] */ 
-            _In_  long lProgressDenominator,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrStatus,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pResult,
-            /* [annotation][in] */ 
-            _In_  IGPMStatusMsgCollection *ppIGPMStatusMsgCollection) = 0;
+            /* [in] */ long lProgressNumerator,
+            /* [in] */ long lProgressDenominator,
+            /* [in] */ HRESULT hrStatus,
+            /* [in] */ __RPC__in VARIANT *pResult,
+            /* [in] */ __RPC__in_opt IGPMStatusMsgCollection *ppIGPMStatusMsgCollection) = 0;
         
     };
     
@@ -6402,8 +5767,7 @@ EXTERN_C const IID IID_IGPMAsyncProgress;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMAsyncProgress * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6418,31 +5782,23 @@ EXTERN_C const IID IID_IGPMAsyncProgress;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMAsyncProgress * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMAsyncProgress * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMAsyncProgress * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6467,16 +5823,11 @@ EXTERN_C const IID IID_IGPMAsyncProgress;
         DECLSPEC_XFGVIRT(IGPMAsyncProgress, Status)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Status )( 
             __RPC__in IGPMAsyncProgress * This,
-            /* [annotation][in] */ 
-            _In_  long lProgressNumerator,
-            /* [annotation][in] */ 
-            _In_  long lProgressDenominator,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrStatus,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pResult,
-            /* [annotation][in] */ 
-            _In_  IGPMStatusMsgCollection *ppIGPMStatusMsgCollection);
+            /* [in] */ long lProgressNumerator,
+            /* [in] */ long lProgressDenominator,
+            /* [in] */ HRESULT hrStatus,
+            /* [in] */ __RPC__in VARIANT *pResult,
+            /* [in] */ __RPC__in_opt IGPMStatusMsgCollection *ppIGPMStatusMsgCollection);
         
         END_INTERFACE
     } IGPMAsyncProgressVtbl;
@@ -6544,18 +5895,14 @@ EXTERN_C const IID IID_IGPMStatusMsgCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [in] */ long lIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **pVal) = 0;
         
     };
     
@@ -6569,8 +5916,7 @@ EXTERN_C const IID IID_IGPMStatusMsgCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMStatusMsgCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6585,31 +5931,23 @@ EXTERN_C const IID IID_IGPMStatusMsgCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMStatusMsgCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMStatusMsgCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMStatusMsgCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6634,22 +5972,18 @@ EXTERN_C const IID IID_IGPMStatusMsgCollection;
         DECLSPEC_XFGVIRT(IGPMStatusMsgCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMStatusMsgCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStatusMsgCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMStatusMsgCollection * This,
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [in] */ long lIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStatusMsgCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMStatusMsgCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **pVal);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **pVal);
         
         END_INTERFACE
     } IGPMStatusMsgCollectionVtbl;
@@ -6723,24 +6057,20 @@ EXTERN_C const IID IID_IGPMStatusMessage;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ObjectPath( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ErrorCode( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExtensionName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SettingsName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OperationCode( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Message( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
     };
     
@@ -6754,8 +6084,7 @@ EXTERN_C const IID IID_IGPMStatusMessage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMStatusMessage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6770,31 +6099,23 @@ EXTERN_C const IID IID_IGPMStatusMessage;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMStatusMessage * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMStatusMessage * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMStatusMessage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6819,8 +6140,7 @@ EXTERN_C const IID IID_IGPMStatusMessage;
         DECLSPEC_XFGVIRT(IGPMStatusMessage, get_ObjectPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ObjectPath )( 
             __RPC__in IGPMStatusMessage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStatusMessage, ErrorCode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ErrorCode )( 
@@ -6829,14 +6149,12 @@ EXTERN_C const IID IID_IGPMStatusMessage;
         DECLSPEC_XFGVIRT(IGPMStatusMessage, get_ExtensionName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtensionName )( 
             __RPC__in IGPMStatusMessage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStatusMessage, get_SettingsName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SettingsName )( 
             __RPC__in IGPMStatusMessage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStatusMessage, OperationCode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OperationCode )( 
@@ -6845,8 +6163,7 @@ EXTERN_C const IID IID_IGPMStatusMessage;
         DECLSPEC_XFGVIRT(IGPMStatusMessage, get_Message)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Message )( 
             __RPC__in IGPMStatusMessage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         END_INTERFACE
     } IGPMStatusMessageVtbl;
@@ -6929,254 +6246,189 @@ EXTERN_C const IID IID_IGPMConstants;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermGPOApply( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermGPORead( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermGPOEdit( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermGPOEditSecurityAndDelete( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermGPOCustom( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermWMIFilterEdit( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermWMIFilterFullControl( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermWMIFilterCustom( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermSOMLink( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermSOMLogging( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermSOMPlanning( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermSOMGPOCreate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermSOMWMICreate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermSOMWMIFullControl( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyGPOPermissions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyGPOEffectivePermissions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyGPODisplayName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyGPOWMIFilter( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyGPOID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyGPOComputerExtensions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyGPOUserExtensions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertySOMLinks( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyGPODomain( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyBackupMostRecent( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchOpEquals( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchOpContains( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchOpNotContains( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchOpNotEquals( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UsePDC( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UseAnyDC( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DoNotUseW2KDC( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SOMSite( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SOMDomain( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SOMOU( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SecurityFlags( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbOwner,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbGroup,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbDACL,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbSACL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [in] */ VARIANT_BOOL vbOwner,
+            /* [in] */ VARIANT_BOOL vbGroup,
+            /* [in] */ VARIANT_BOOL vbDACL,
+            /* [in] */ VARIANT_BOOL vbSACL,
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DoNotValidateDC( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReportHTML( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMReportType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMReportType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReportXML( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMReportType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMReportType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RSOPModeUnknown( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RSOPModePlanning( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RSOPModeLogging( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EntryTypeUser( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EntryTypeComputer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EntryTypeLocalGroup( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EntryTypeGlobalGroup( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EntryTypeUniversalGroup( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EntryTypeUNCPath( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EntryTypeUnknown( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DestinationOptionSameAsSource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DestinationOptionNone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DestinationOptionByRelativeName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DestinationOptionSet( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MigrationTableOnly( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ProcessSecurity( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RsopLoggingNoComputer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RsopLoggingNoUser( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RsopPlanningAssumeSlowLink( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RsopPlanningLoopbackOption( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbMerge,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [in] */ VARIANT_BOOL vbMerge,
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RsopPlanningAssumeUserWQLFilterTrue( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RsopPlanningAssumeCompWQLFilterTrue( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
     };
     
@@ -7190,8 +6442,7 @@ EXTERN_C const IID IID_IGPMConstants;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7206,31 +6457,23 @@ EXTERN_C const IID IID_IGPMConstants;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7255,372 +6498,307 @@ EXTERN_C const IID IID_IGPMConstants;
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermGPOApply)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermGPOApply )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermGPORead)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermGPORead )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermGPOEdit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermGPOEdit )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermGPOEditSecurityAndDelete)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermGPOEditSecurityAndDelete )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermGPOCustom)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermGPOCustom )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermWMIFilterEdit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermWMIFilterEdit )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermWMIFilterFullControl)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermWMIFilterFullControl )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermWMIFilterCustom)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermWMIFilterCustom )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMLink)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMLink )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMLogging)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMLogging )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMPlanning)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMPlanning )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMGPOCreate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMGPOCreate )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMWMICreate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMWMICreate )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMWMIFullControl)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMWMIFullControl )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOPermissions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOPermissions )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOEffectivePermissions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOEffectivePermissions )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPODisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPODisplayName )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOWMIFilter)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOWMIFilter )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOID )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOComputerExtensions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOComputerExtensions )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOUserExtensions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOUserExtensions )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertySOMLinks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertySOMLinks )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPODomain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPODomain )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyBackupMostRecent)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyBackupMostRecent )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchOpEquals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchOpEquals )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchOpContains)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchOpContains )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchOpNotContains)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchOpNotContains )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchOpNotEquals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchOpNotEquals )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_UsePDC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsePDC )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_UseAnyDC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseAnyDC )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DoNotUseW2KDC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DoNotUseW2KDC )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SOMSite)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SOMSite )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal);
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SOMDomain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SOMDomain )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal);
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SOMOU)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SOMOU )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal);
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SecurityFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SecurityFlags )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbOwner,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbGroup,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbDACL,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbSACL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [in] */ VARIANT_BOOL vbOwner,
+            /* [in] */ VARIANT_BOOL vbGroup,
+            /* [in] */ VARIANT_BOOL vbDACL,
+            /* [in] */ VARIANT_BOOL vbSACL,
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DoNotValidateDC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DoNotValidateDC )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_ReportHTML)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportHTML )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMReportType *pVal);
+            /* [retval][out] */ __RPC__out GPMReportType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_ReportXML)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportXML )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMReportType *pVal);
+            /* [retval][out] */ __RPC__out GPMReportType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RSOPModeUnknown)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RSOPModeUnknown )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal);
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RSOPModePlanning)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RSOPModePlanning )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal);
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RSOPModeLogging)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RSOPModeLogging )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal);
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeUser)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeUser )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeComputer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeComputer )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeLocalGroup)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeLocalGroup )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeGlobalGroup)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeGlobalGroup )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeUniversalGroup)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeUniversalGroup )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeUNCPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeUNCPath )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeUnknown)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeUnknown )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DestinationOptionSameAsSource)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationOptionSameAsSource )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal);
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DestinationOptionNone)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationOptionNone )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal);
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DestinationOptionByRelativeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationOptionByRelativeName )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal);
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DestinationOptionSet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationOptionSet )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal);
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_MigrationTableOnly)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MigrationTableOnly )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_ProcessSecurity)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProcessSecurity )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopLoggingNoComputer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopLoggingNoComputer )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopLoggingNoUser)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopLoggingNoUser )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopPlanningAssumeSlowLink)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopPlanningAssumeSlowLink )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopPlanningLoopbackOption)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopPlanningLoopbackOption )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbMerge,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [in] */ VARIANT_BOOL vbMerge,
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopPlanningAssumeUserWQLFilterTrue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopPlanningAssumeUserWQLFilterTrue )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopPlanningAssumeCompWQLFilterTrue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopPlanningAssumeCompWQLFilterTrue )( 
             __RPC__in IGPMConstants * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         END_INTERFACE
     } IGPMConstantsVtbl;
@@ -7865,12 +7043,10 @@ EXTERN_C const IID IID_IGPMResult;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Status( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStatusMsgCollection **ppIGPMStatusMsgCollection) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStatusMsgCollection **ppIGPMStatusMsgCollection) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Result( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarResult) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OverallStatus( void) = 0;
         
@@ -7886,8 +7062,7 @@ EXTERN_C const IID IID_IGPMResult;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMResult * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7902,31 +7077,23 @@ EXTERN_C const IID IID_IGPMResult;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMResult * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMResult * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMResult * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7951,14 +7118,12 @@ EXTERN_C const IID IID_IGPMResult;
         DECLSPEC_XFGVIRT(IGPMResult, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IGPMResult * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStatusMsgCollection **ppIGPMStatusMsgCollection);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStatusMsgCollection **ppIGPMStatusMsgCollection);
         
         DECLSPEC_XFGVIRT(IGPMResult, get_Result)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Result )( 
             __RPC__in IGPMResult * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarResult);
+            /* [retval][out] */ __RPC__out VARIANT *pvarResult);
         
         DECLSPEC_XFGVIRT(IGPMResult, OverallStatus)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OverallStatus )( 
@@ -8036,18 +7201,14 @@ EXTERN_C const IID IID_IGPMMapEntryCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [in] */ long lIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **pVal) = 0;
         
     };
     
@@ -8061,8 +7222,7 @@ EXTERN_C const IID IID_IGPMMapEntryCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMMapEntryCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8077,31 +7237,23 @@ EXTERN_C const IID IID_IGPMMapEntryCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMMapEntryCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMMapEntryCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMMapEntryCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8126,22 +7278,18 @@ EXTERN_C const IID IID_IGPMMapEntryCollection;
         DECLSPEC_XFGVIRT(IGPMMapEntryCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMMapEntryCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMMapEntryCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMMapEntryCollection * This,
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [in] */ long lIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMMapEntryCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMMapEntryCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **pVal);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **pVal);
         
         END_INTERFACE
     } IGPMMapEntryCollectionVtbl;
@@ -8215,20 +7363,16 @@ EXTERN_C const IID IID_IGPMMapEntry;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Source( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrSource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSource) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Destination( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDestination) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDestination) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DestinationOption( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pgpmDestOption) = 0;
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pgpmDestOption) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EntryType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pgpmEntryType) = 0;
+            /* [retval][out] */ __RPC__out GPMEntryType *pgpmEntryType) = 0;
         
     };
     
@@ -8242,8 +7386,7 @@ EXTERN_C const IID IID_IGPMMapEntry;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMMapEntry * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8258,31 +7401,23 @@ EXTERN_C const IID IID_IGPMMapEntry;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMMapEntry * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMMapEntry * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMMapEntry * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8307,26 +7442,22 @@ EXTERN_C const IID IID_IGPMMapEntry;
         DECLSPEC_XFGVIRT(IGPMMapEntry, get_Source)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Source )( 
             __RPC__in IGPMMapEntry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrSource);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSource);
         
         DECLSPEC_XFGVIRT(IGPMMapEntry, get_Destination)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Destination )( 
             __RPC__in IGPMMapEntry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDestination);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDestination);
         
         DECLSPEC_XFGVIRT(IGPMMapEntry, get_DestinationOption)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationOption )( 
             __RPC__in IGPMMapEntry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pgpmDestOption);
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pgpmDestOption);
         
         DECLSPEC_XFGVIRT(IGPMMapEntry, get_EntryType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryType )( 
             __RPC__in IGPMMapEntry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pgpmEntryType);
+            /* [retval][out] */ __RPC__out GPMEntryType *pgpmEntryType);
         
         END_INTERFACE
     } IGPMMapEntryVtbl;
@@ -8403,48 +7534,35 @@ EXTERN_C const IID IID_IGPMMigrationTable;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Save( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMigrationTablePath) = 0;
+            /* [in] */ __RPC__in BSTR bstrMigrationTablePath) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  VARIANT var) = 0;
+            /* [in] */ long lFlags,
+            /* [in] */ VARIANT var) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddEntry( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSource,
-            /* [annotation][in] */ 
-            _In_  GPMEntryType gpmEntryType,
+            /* [in] */ __RPC__in BSTR bstrSource,
+            /* [in] */ GPMEntryType gpmEntryType,
             /* [optional][in] */ __RPC__in VARIANT *pvarDestination,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMapEntry **ppEntry) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMapEntry **ppEntry) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetEntry( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMapEntry **ppEntry) = 0;
+            /* [in] */ __RPC__in BSTR bstrSource,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMapEntry **ppEntry) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteEntry( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSource) = 0;
+            /* [in] */ __RPC__in BSTR bstrSource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UpdateDestination( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSource,
+            /* [in] */ __RPC__in BSTR bstrSource,
             /* [optional][in] */ __RPC__in VARIANT *pvarDestination,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMapEntry **ppEntry) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMapEntry **ppEntry) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Validate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetEntries( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMapEntryCollection **ppEntries) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMapEntryCollection **ppEntries) = 0;
         
     };
     
@@ -8458,8 +7576,7 @@ EXTERN_C const IID IID_IGPMMigrationTable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8474,31 +7591,23 @@ EXTERN_C const IID IID_IGPMMigrationTable;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8523,62 +7632,49 @@ EXTERN_C const IID IID_IGPMMigrationTable;
         DECLSPEC_XFGVIRT(IGPMMigrationTable, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMigrationTablePath);
+            /* [in] */ __RPC__in BSTR bstrMigrationTablePath);
         
         DECLSPEC_XFGVIRT(IGPMMigrationTable, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  VARIANT var);
+            /* [in] */ long lFlags,
+            /* [in] */ VARIANT var);
         
         DECLSPEC_XFGVIRT(IGPMMigrationTable, AddEntry)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddEntry )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSource,
-            /* [annotation][in] */ 
-            _In_  GPMEntryType gpmEntryType,
+            /* [in] */ __RPC__in BSTR bstrSource,
+            /* [in] */ GPMEntryType gpmEntryType,
             /* [optional][in] */ __RPC__in VARIANT *pvarDestination,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMapEntry **ppEntry);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMapEntry **ppEntry);
         
         DECLSPEC_XFGVIRT(IGPMMigrationTable, GetEntry)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetEntry )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMapEntry **ppEntry);
+            /* [in] */ __RPC__in BSTR bstrSource,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMapEntry **ppEntry);
         
         DECLSPEC_XFGVIRT(IGPMMigrationTable, DeleteEntry)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteEntry )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSource);
+            /* [in] */ __RPC__in BSTR bstrSource);
         
         DECLSPEC_XFGVIRT(IGPMMigrationTable, UpdateDestination)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UpdateDestination )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSource,
+            /* [in] */ __RPC__in BSTR bstrSource,
             /* [optional][in] */ __RPC__in VARIANT *pvarDestination,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMapEntry **ppEntry);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMapEntry **ppEntry);
         
         DECLSPEC_XFGVIRT(IGPMMigrationTable, Validate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Validate )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppResult);
         
         DECLSPEC_XFGVIRT(IGPMMigrationTable, GetEntries)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetEntries )( 
             __RPC__in IGPMMigrationTable * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMapEntryCollection **ppEntries);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMapEntryCollection **ppEntries);
         
         END_INTERFACE
     } IGPMMigrationTableVtbl;
@@ -8689,24 +7785,18 @@ EXTERN_C const IID IID_IGPMBackupDirEx;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupDir( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrBackupDir) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBackupDir) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMBackupType *pgpmBackupType) = 0;
+            /* [retval][out] */ __RPC__out GPMBackupType *pgpmBackupType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetBackup( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBackup) = 0;
+            /* [in] */ __RPC__in BSTR bstrID,
+            /* [retval][out] */ __RPC__out VARIANT *pvarBackup) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SearchBackups( 
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBackupCollection) = 0;
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__out VARIANT *pvarBackupCollection) = 0;
         
     };
     
@@ -8720,8 +7810,7 @@ EXTERN_C const IID IID_IGPMBackupDirEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMBackupDirEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8736,31 +7825,23 @@ EXTERN_C const IID IID_IGPMBackupDirEx;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMBackupDirEx * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMBackupDirEx * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMBackupDirEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8785,30 +7866,24 @@ EXTERN_C const IID IID_IGPMBackupDirEx;
         DECLSPEC_XFGVIRT(IGPMBackupDirEx, get_BackupDir)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BackupDir )( 
             __RPC__in IGPMBackupDirEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrBackupDir);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBackupDir);
         
         DECLSPEC_XFGVIRT(IGPMBackupDirEx, get_BackupType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BackupType )( 
             __RPC__in IGPMBackupDirEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMBackupType *pgpmBackupType);
+            /* [retval][out] */ __RPC__out GPMBackupType *pgpmBackupType);
         
         DECLSPEC_XFGVIRT(IGPMBackupDirEx, GetBackup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetBackup )( 
             __RPC__in IGPMBackupDirEx * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBackup);
+            /* [in] */ __RPC__in BSTR bstrID,
+            /* [retval][out] */ __RPC__out VARIANT *pvarBackup);
         
         DECLSPEC_XFGVIRT(IGPMBackupDirEx, SearchBackups)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchBackups )( 
             __RPC__in IGPMBackupDirEx * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBackupCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__out VARIANT *pvarBackupCollection);
         
         END_INTERFACE
     } IGPMBackupDirExVtbl;
@@ -8885,17 +7960,14 @@ EXTERN_C const IID IID_IGPMStarterGPOBackupCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMTmplBackup) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMTmplBackup) = 0;
         
     };
     
@@ -8909,8 +7981,7 @@ EXTERN_C const IID IID_IGPMStarterGPOBackupCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMStarterGPOBackupCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8925,31 +7996,23 @@ EXTERN_C const IID IID_IGPMStarterGPOBackupCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMStarterGPOBackupCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMStarterGPOBackupCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMStarterGPOBackupCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8974,21 +8037,18 @@ EXTERN_C const IID IID_IGPMStarterGPOBackupCollection;
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackupCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMStarterGPOBackupCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackupCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMStarterGPOBackupCollection * This,
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackupCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMStarterGPOBackupCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMTmplBackup);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMTmplBackup);
         
         END_INTERFACE
     } IGPMStarterGPOBackupCollectionVtbl;
@@ -9062,54 +8122,41 @@ EXTERN_C const IID IID_IGPMStarterGPOBackup;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupDir( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrBackupDir) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBackupDir) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Comment( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrComment) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrComment) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDisplayName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDisplayName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrTemplateDomain) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTemplateDomain) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StarterGPOID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrTemplateID) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTemplateID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrID) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Timestamp( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pTimestamp) = 0;
+            /* [retval][out] */ __RPC__out DATE *pTimestamp) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMStarterGPOType *pType) = 0;
+            /* [retval][out] */ __RPC__out GPMStarterGPOType *pType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReport( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReportToFile( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
     };
     
@@ -9123,8 +8170,7 @@ EXTERN_C const IID IID_IGPMStarterGPOBackup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9139,31 +8185,23 @@ EXTERN_C const IID IID_IGPMStarterGPOBackup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9188,50 +8226,42 @@ EXTERN_C const IID IID_IGPMStarterGPOBackup;
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, get_BackupDir)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BackupDir )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrBackupDir);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBackupDir);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, get_Comment)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Comment )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrComment);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrComment);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, get_DisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDisplayName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDisplayName);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, get_Domain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Domain )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrTemplateDomain);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTemplateDomain);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, get_StarterGPOID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StarterGPOID )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrTemplateID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTemplateID);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, get_ID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ID )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrID);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, get_Timestamp)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Timestamp )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pTimestamp);
+            /* [retval][out] */ __RPC__out DATE *pTimestamp);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMStarterGPOType *pType);
+            /* [retval][out] */ __RPC__out GPMStarterGPOType *pType);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -9240,22 +8270,17 @@ EXTERN_C const IID IID_IGPMStarterGPOBackup;
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, GenerateReport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReport )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOBackup, GenerateReportToFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReportToFile )( 
             __RPC__in IGPMStarterGPOBackup * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         END_INTERFACE
     } IGPMStarterGPOBackupVtbl;
@@ -9353,18 +8378,13 @@ EXTERN_C const IID IID_IGPM2;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetBackupDirEx( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][in] */ 
-            _In_  GPMBackupType backupDirType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMBackupDirEx **ppIGPMBackupDirEx) = 0;
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [in] */ GPMBackupType backupDirType,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMBackupDirEx **ppIGPMBackupDirEx) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InitializeReportingEx( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAdmPath,
-            /* [annotation][in] */ 
-            _In_  LONG reportingOptions) = 0;
+            /* [in] */ __RPC__in BSTR bstrAdmPath,
+            /* [in] */ LONG reportingOptions) = 0;
         
     };
     
@@ -9378,8 +8398,7 @@ EXTERN_C const IID IID_IGPM2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9394,31 +8413,23 @@ EXTERN_C const IID IID_IGPM2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9443,124 +8454,91 @@ EXTERN_C const IID IID_IGPM2;
         DECLSPEC_XFGVIRT(IGPM, GetDomain)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDomain )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrDomain,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrDomainController,
-            /* [annotation][in] */ 
-            _In_  long lDCFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMDomain **pIGPMDomain);
+            /* [in] */ __RPC__in BSTR bstrDomain,
+            /* [unique][in] */ __RPC__in_opt BSTR bstrDomainController,
+            /* [in] */ long lDCFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMDomain **pIGPMDomain);
         
         DECLSPEC_XFGVIRT(IGPM, GetBackupDir)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetBackupDir )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMBackupDir **pIGPMBackupDir);
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMBackupDir **pIGPMBackupDir);
         
         DECLSPEC_XFGVIRT(IGPM, GetSitesContainer)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSitesContainer )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrForest,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrDomain,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrDomainController,
-            /* [annotation][in] */ 
-            _In_  long lDCFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSitesContainer **ppIGPMSitesContainer);
+            /* [in] */ __RPC__in BSTR bstrForest,
+            /* [unique][in] */ __RPC__in_opt BSTR bstrDomain,
+            /* [unique][in] */ __RPC__in_opt BSTR bstrDomainController,
+            /* [in] */ long lDCFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSitesContainer **ppIGPMSitesContainer);
         
         DECLSPEC_XFGVIRT(IGPM, GetRSOP)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRSOP )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  GPMRSOPMode gpmRSoPMode,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNamespace,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMRSOP **ppIGPMRSOP);
+            /* [in] */ GPMRSOPMode gpmRSoPMode,
+            /* [in] */ __RPC__in BSTR bstrNamespace,
+            /* [in] */ long lFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMRSOP **ppIGPMRSOP);
         
         DECLSPEC_XFGVIRT(IGPM, CreatePermission)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreatePermission )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTrustee,
-            /* [annotation][in] */ 
-            _In_  GPMPermissionType perm,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bInheritable,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMPermission **ppPerm);
+            /* [in] */ __RPC__in BSTR bstrTrustee,
+            /* [in] */ GPMPermissionType perm,
+            /* [in] */ VARIANT_BOOL bInheritable,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMPermission **ppPerm);
         
         DECLSPEC_XFGVIRT(IGPM, CreateSearchCriteria)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateSearchCriteria )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSearchCriteria **ppIGPMSearchCriteria);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSearchCriteria **ppIGPMSearchCriteria);
         
         DECLSPEC_XFGVIRT(IGPM, CreateTrustee)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateTrustee )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTrustee,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMTrustee **ppIGPMTrustee);
+            /* [in] */ __RPC__in BSTR bstrTrustee,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMTrustee **ppIGPMTrustee);
         
         DECLSPEC_XFGVIRT(IGPM, GetClientSideExtensions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetClientSideExtensions )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMCSECollection **ppIGPMCSECollection);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMCSECollection **ppIGPMCSECollection);
         
         DECLSPEC_XFGVIRT(IGPM, GetConstants)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConstants )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMConstants **ppIGPMConstants);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMConstants **ppIGPMConstants);
         
         DECLSPEC_XFGVIRT(IGPM, GetMigrationTable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMigrationTable )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMigrationTablePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMigrationTable **ppMigrationTable);
+            /* [in] */ __RPC__in BSTR bstrMigrationTablePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMigrationTable **ppMigrationTable);
         
         DECLSPEC_XFGVIRT(IGPM, CreateMigrationTable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateMigrationTable )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMMigrationTable **ppMigrationTable);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMMigrationTable **ppMigrationTable);
         
         DECLSPEC_XFGVIRT(IGPM, InitializeReporting)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InitializeReporting )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrAdmPath);
+            /* [unique][in] */ __RPC__in_opt BSTR bstrAdmPath);
         
         DECLSPEC_XFGVIRT(IGPM2, GetBackupDirEx)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetBackupDirEx )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][in] */ 
-            _In_  GPMBackupType backupDirType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMBackupDirEx **ppIGPMBackupDirEx);
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [in] */ GPMBackupType backupDirType,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMBackupDirEx **ppIGPMBackupDirEx);
         
         DECLSPEC_XFGVIRT(IGPM2, InitializeReportingEx)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InitializeReportingEx )( 
             __RPC__in IGPM2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrAdmPath,
-            /* [annotation][in] */ 
-            _In_  LONG reportingOptions);
+            /* [in] */ __RPC__in BSTR bstrAdmPath,
+            /* [in] */ LONG reportingOptions);
         
         END_INTERFACE
     } IGPM2Vtbl;
@@ -9668,66 +8646,50 @@ EXTERN_C const IID IID_IGPMStarterGPO;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Author( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Product( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CreationTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal) = 0;
+            /* [retval][out] */ __RPC__out DATE *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModifiedTime( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal) = 0;
+            /* [retval][out] */ __RPC__out DATE *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMStarterGPOType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMStarterGPOType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ComputerVersion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  USHORT *pVal) = 0;
+            /* [retval][out] */ __RPC__out USHORT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserVersion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  USHORT *pVal) = 0;
+            /* [retval][out] */ __RPC__out USHORT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StarterGPOVersion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Save( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSaveFile,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bOverwrite,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bSaveAsSystem,
+            /* [in] */ __RPC__in BSTR bstrSaveFile,
+            /* [in] */ VARIANT_BOOL bOverwrite,
+            /* [in] */ VARIANT_BOOL bSaveAsSystem,
             /* [optional][in] */ __RPC__in VARIANT *bstrLanguage,
             /* [optional][in] */ __RPC__in VARIANT *bstrAuthor,
             /* [optional][in] */ __RPC__in VARIANT *bstrProduct,
@@ -9735,49 +8697,37 @@ EXTERN_C const IID IID_IGPMStarterGPO;
             /* [optional][in] */ __RPC__in VARIANT *bstrVersion,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Backup( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrComment,
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [in] */ __RPC__in BSTR bstrComment,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CopyTo( 
             /* [optional][in] */ __RPC__in VARIANT *pvarNewDisplayName,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReport( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReportToFile( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetSecurityInfo( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSecurityInfo **ppSecurityInfo) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSecurityInfo **ppSecurityInfo) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetSecurityInfo( 
-            /* [annotation][in] */ 
-            _In_  IGPMSecurityInfo *pSecurityInfo) = 0;
+            /* [in] */ __RPC__in_opt IGPMSecurityInfo *pSecurityInfo) = 0;
         
     };
     
@@ -9791,8 +8741,7 @@ EXTERN_C const IID IID_IGPMStarterGPO;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9807,31 +8756,23 @@ EXTERN_C const IID IID_IGPMStarterGPO;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9856,80 +8797,67 @@ EXTERN_C const IID IID_IGPMStarterGPO;
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_DisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, put_DisplayName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayName )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_Author)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Author )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_Product)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Product )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_CreationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreationTime )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_ID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ID )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_ModifiedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ModifiedTime )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pVal);
+            /* [retval][out] */ __RPC__out DATE *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMStarterGPOType *pVal);
+            /* [retval][out] */ __RPC__out GPMStarterGPOType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_ComputerVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ComputerVersion )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  USHORT *pVal);
+            /* [retval][out] */ __RPC__out USHORT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_UserVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserVersion )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  USHORT *pVal);
+            /* [retval][out] */ __RPC__out USHORT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, get_StarterGPOVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StarterGPOVersion )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -9938,12 +8866,9 @@ EXTERN_C const IID IID_IGPMStarterGPO;
         DECLSPEC_XFGVIRT(IGPMStarterGPO, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrSaveFile,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bOverwrite,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bSaveAsSystem,
+            /* [in] */ __RPC__in BSTR bstrSaveFile,
+            /* [in] */ VARIANT_BOOL bOverwrite,
+            /* [in] */ VARIANT_BOOL bSaveAsSystem,
             /* [optional][in] */ __RPC__in VARIANT *bstrLanguage,
             /* [optional][in] */ __RPC__in VARIANT *bstrAuthor,
             /* [optional][in] */ __RPC__in VARIANT *bstrProduct,
@@ -9951,20 +8876,16 @@ EXTERN_C const IID IID_IGPMStarterGPO;
             /* [optional][in] */ __RPC__in VARIANT *bstrVersion,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, Backup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Backup )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrComment,
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [in] */ __RPC__in BSTR bstrComment,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, CopyTo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
@@ -9972,40 +8893,32 @@ EXTERN_C const IID IID_IGPMStarterGPO;
             /* [optional][in] */ __RPC__in VARIANT *pvarNewDisplayName,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, GenerateReport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReport )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, GenerateReportToFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReportToFile )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, GetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityInfo )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSecurityInfo **ppSecurityInfo);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSecurityInfo **ppSecurityInfo);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPO, SetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityInfo )( 
             __RPC__in IGPMStarterGPO * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSecurityInfo *pSecurityInfo);
+            /* [in] */ __RPC__in_opt IGPMSecurityInfo *pSecurityInfo);
         
         END_INTERFACE
     } IGPMStarterGPOVtbl;
@@ -10133,17 +9046,14 @@ EXTERN_C const IID IID_IGPMStarterGPOCollection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal) = 0;
+            /* [retval][out] */ __RPC__out long *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMTemplates) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMTemplates) = 0;
         
     };
     
@@ -10157,8 +9067,7 @@ EXTERN_C const IID IID_IGPMStarterGPOCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMStarterGPOCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10173,31 +9082,23 @@ EXTERN_C const IID IID_IGPMStarterGPOCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMStarterGPOCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMStarterGPOCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMStarterGPOCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10222,21 +9123,18 @@ EXTERN_C const IID IID_IGPMStarterGPOCollection;
         DECLSPEC_XFGVIRT(IGPMStarterGPOCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IGPMStarterGPOCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOCollection, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IGPMStarterGPOCollection * This,
             long lIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVal);
+            /* [retval][out] */ __RPC__out VARIANT *pVal);
         
         DECLSPEC_XFGVIRT(IGPMStarterGPOCollection, get__NewEnum)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IGPMStarterGPOCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IEnumVARIANT **ppIGPMTemplates);
+            /* [retval][out] */ __RPC__deref_out_opt IEnumVARIANT **ppIGPMTemplates);
         
         END_INTERFACE
     } IGPMStarterGPOCollectionVtbl;
@@ -10310,44 +9208,32 @@ EXTERN_C const IID IID_IGPMDomain2;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateStarterGPO( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStarterGPO **ppnewTemplate) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStarterGPO **ppnewTemplate) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateGPOFromStarterGPO( 
-            /* [annotation][in] */ 
-            _In_  IGPMStarterGPO *pGPOTemplate,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppnewGPO) = 0;
+            /* [in] */ __RPC__in_opt IGPMStarterGPO *pGPOTemplate,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppnewGPO) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetStarterGPO( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGuid,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStarterGPO **ppTemplate) = 0;
+            /* [in] */ __RPC__in BSTR bstrGuid,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStarterGPO **ppTemplate) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SearchStarterGPOs( 
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStarterGPOCollection **ppIGPMTemplateCollection) = 0;
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStarterGPOCollection **ppIGPMTemplateCollection) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE LoadStarterGPO( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLoadFile,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bOverwrite,
+            /* [in] */ __RPC__in BSTR bstrLoadFile,
+            /* [in] */ VARIANT_BOOL bOverwrite,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RestoreStarterGPO( 
-            /* [annotation][in] */ 
-            _In_  IGPMStarterGPOBackup *pIGPMTmplBackup,
+            /* [in] */ __RPC__in_opt IGPMStarterGPOBackup *pIGPMTmplBackup,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
     };
     
@@ -10361,8 +9247,7 @@ EXTERN_C const IID IID_IGPMDomain2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10377,31 +9262,23 @@ EXTERN_C const IID IID_IGPMDomain2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10426,132 +9303,102 @@ EXTERN_C const IID IID_IGPMDomain2;
         DECLSPEC_XFGVIRT(IGPMDomain, get_DomainController)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainController )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMDomain, get_Domain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Domain )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMDomain, CreateGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateGPO )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppNewGPO);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppNewGPO);
         
         DECLSPEC_XFGVIRT(IGPMDomain, GetGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetGPO )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGuid,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppGPO);
+            /* [in] */ __RPC__in BSTR bstrGuid,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppGPO);
         
         DECLSPEC_XFGVIRT(IGPMDomain, SearchGPOs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchGPOs )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPOCollection **ppIGPMGPOCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPOCollection **ppIGPMGPOCollection);
         
         DECLSPEC_XFGVIRT(IGPMDomain, RestoreGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RestoreGPO )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMBackup *pIGPMBackup,
-            /* [annotation][in] */ 
-            _In_  long lDCFlags,
+            /* [in] */ __RPC__in_opt IGPMBackup *pIGPMBackup,
+            /* [in] */ long lDCFlags,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMDomain, GetSOM)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSOM )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOM **ppSOM);
+            /* [unique][in] */ __RPC__in_opt BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOM **ppSOM);
         
         DECLSPEC_XFGVIRT(IGPMDomain, SearchSOMs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchSOMs )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOMCollection **ppIGPMSOMCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOMCollection **ppIGPMSOMCollection);
         
         DECLSPEC_XFGVIRT(IGPMDomain, GetWMIFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWMIFilter )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilter **ppWMIFilter);
+            /* [in] */ __RPC__in BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilter **ppWMIFilter);
         
         DECLSPEC_XFGVIRT(IGPMDomain, SearchWMIFilters)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchWMIFilters )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilterCollection **ppIGPMWMIFilterCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilterCollection **ppIGPMWMIFilterCollection);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, CreateStarterGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateStarterGPO )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStarterGPO **ppnewTemplate);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStarterGPO **ppnewTemplate);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, CreateGPOFromStarterGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateGPOFromStarterGPO )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMStarterGPO *pGPOTemplate,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppnewGPO);
+            /* [in] */ __RPC__in_opt IGPMStarterGPO *pGPOTemplate,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppnewGPO);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, GetStarterGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetStarterGPO )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGuid,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStarterGPO **ppTemplate);
+            /* [in] */ __RPC__in BSTR bstrGuid,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStarterGPO **ppTemplate);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, SearchStarterGPOs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchStarterGPOs )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStarterGPOCollection **ppIGPMTemplateCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStarterGPOCollection **ppIGPMTemplateCollection);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, LoadStarterGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LoadStarterGPO )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLoadFile,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bOverwrite,
+            /* [in] */ __RPC__in BSTR bstrLoadFile,
+            /* [in] */ VARIANT_BOOL bOverwrite,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, RestoreStarterGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RestoreStarterGPO )( 
             __RPC__in IGPMDomain2 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMStarterGPOBackup *pIGPMTmplBackup,
+            /* [in] */ __RPC__in_opt IGPMStarterGPOBackup *pIGPMTmplBackup,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         END_INTERFACE
     } IGPMDomain2Vtbl;
@@ -10665,64 +9512,49 @@ EXTERN_C const IID IID_IGPMConstants2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupTypeGPO( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMBackupType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMBackupType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BackupTypeStarterGPO( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMBackupType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMBackupType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StarterGPOTypeSystem( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMStarterGPOType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMStarterGPOType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StarterGPOTypeCustom( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMStarterGPOType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMStarterGPOType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyStarterGPOPermissions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyStarterGPOEffectivePermissions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyStarterGPODisplayName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyStarterGPOID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SearchPropertyStarterGPODomain( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermStarterGPORead( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermStarterGPOEdit( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermStarterGPOFullControl( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PermStarterGPOCustom( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReportLegacy( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMReportingOptions *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMReportingOptions *pVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReportComments( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMReportingOptions *pVal) = 0;
+            /* [retval][out] */ __RPC__out GPMReportingOptions *pVal) = 0;
         
     };
     
@@ -10736,8 +9568,7 @@ EXTERN_C const IID IID_IGPMConstants2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10752,31 +9583,23 @@ EXTERN_C const IID IID_IGPMConstants2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10801,462 +9624,382 @@ EXTERN_C const IID IID_IGPMConstants2;
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermGPOApply)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermGPOApply )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermGPORead)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermGPORead )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermGPOEdit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermGPOEdit )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermGPOEditSecurityAndDelete)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermGPOEditSecurityAndDelete )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermGPOCustom)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermGPOCustom )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermWMIFilterEdit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermWMIFilterEdit )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermWMIFilterFullControl)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermWMIFilterFullControl )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermWMIFilterCustom)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermWMIFilterCustom )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMLink)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMLink )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMLogging)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMLogging )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMPlanning)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMPlanning )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMGPOCreate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMGPOCreate )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMWMICreate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMWMICreate )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_PermSOMWMIFullControl)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermSOMWMIFullControl )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOPermissions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOPermissions )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOEffectivePermissions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOEffectivePermissions )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPODisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPODisplayName )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOWMIFilter)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOWMIFilter )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOID )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOComputerExtensions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOComputerExtensions )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPOUserExtensions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPOUserExtensions )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertySOMLinks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertySOMLinks )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyGPODomain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyGPODomain )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchPropertyBackupMostRecent)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyBackupMostRecent )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchOpEquals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchOpEquals )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchOpContains)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchOpContains )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchOpNotContains)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchOpNotContains )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SearchOpNotEquals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchOpNotEquals )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchOperation *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchOperation *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_UsePDC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsePDC )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_UseAnyDC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseAnyDC )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DoNotUseW2KDC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DoNotUseW2KDC )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SOMSite)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SOMSite )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal);
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SOMDomain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SOMDomain )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal);
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SOMOU)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SOMOU )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSOMType *pVal);
+            /* [retval][out] */ __RPC__out GPMSOMType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_SecurityFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SecurityFlags )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbOwner,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbGroup,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbDACL,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbSACL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [in] */ VARIANT_BOOL vbOwner,
+            /* [in] */ VARIANT_BOOL vbGroup,
+            /* [in] */ VARIANT_BOOL vbDACL,
+            /* [in] */ VARIANT_BOOL vbSACL,
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DoNotValidateDC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DoNotValidateDC )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_ReportHTML)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportHTML )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMReportType *pVal);
+            /* [retval][out] */ __RPC__out GPMReportType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_ReportXML)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportXML )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMReportType *pVal);
+            /* [retval][out] */ __RPC__out GPMReportType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RSOPModeUnknown)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RSOPModeUnknown )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal);
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RSOPModePlanning)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RSOPModePlanning )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal);
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RSOPModeLogging)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RSOPModeLogging )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMRSOPMode *pVal);
+            /* [retval][out] */ __RPC__out GPMRSOPMode *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeUser)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeUser )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeComputer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeComputer )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeLocalGroup)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeLocalGroup )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeGlobalGroup)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeGlobalGroup )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeUniversalGroup)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeUniversalGroup )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeUNCPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeUNCPath )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_EntryTypeUnknown)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EntryTypeUnknown )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMEntryType *pVal);
+            /* [retval][out] */ __RPC__out GPMEntryType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DestinationOptionSameAsSource)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationOptionSameAsSource )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal);
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DestinationOptionNone)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationOptionNone )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal);
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DestinationOptionByRelativeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationOptionByRelativeName )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal);
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_DestinationOptionSet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationOptionSet )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMDestinationOption *pVal);
+            /* [retval][out] */ __RPC__out GPMDestinationOption *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_MigrationTableOnly)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MigrationTableOnly )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_ProcessSecurity)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProcessSecurity )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopLoggingNoComputer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopLoggingNoComputer )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopLoggingNoUser)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopLoggingNoUser )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopPlanningAssumeSlowLink)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopPlanningAssumeSlowLink )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopPlanningLoopbackOption)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopPlanningLoopbackOption )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbMerge,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [in] */ VARIANT_BOOL vbMerge,
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopPlanningAssumeUserWQLFilterTrue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopPlanningAssumeUserWQLFilterTrue )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants, get_RsopPlanningAssumeCompWQLFilterTrue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RsopPlanningAssumeCompWQLFilterTrue )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_BackupTypeGPO)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BackupTypeGPO )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMBackupType *pVal);
+            /* [retval][out] */ __RPC__out GPMBackupType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_BackupTypeStarterGPO)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BackupTypeStarterGPO )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMBackupType *pVal);
+            /* [retval][out] */ __RPC__out GPMBackupType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_StarterGPOTypeSystem)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StarterGPOTypeSystem )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMStarterGPOType *pVal);
+            /* [retval][out] */ __RPC__out GPMStarterGPOType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_StarterGPOTypeCustom)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StarterGPOTypeCustom )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMStarterGPOType *pVal);
+            /* [retval][out] */ __RPC__out GPMStarterGPOType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_SearchPropertyStarterGPOPermissions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyStarterGPOPermissions )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_SearchPropertyStarterGPOEffectivePermissions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyStarterGPOEffectivePermissions )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_SearchPropertyStarterGPODisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyStarterGPODisplayName )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_SearchPropertyStarterGPOID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyStarterGPOID )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_SearchPropertyStarterGPODomain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SearchPropertyStarterGPODomain )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMSearchProperty *pVal);
+            /* [retval][out] */ __RPC__out GPMSearchProperty *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_PermStarterGPORead)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermStarterGPORead )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_PermStarterGPOEdit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermStarterGPOEdit )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_PermStarterGPOFullControl)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermStarterGPOFullControl )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_PermStarterGPOCustom)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PermStarterGPOCustom )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMPermissionType *pVal);
+            /* [retval][out] */ __RPC__out GPMPermissionType *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_ReportLegacy)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportLegacy )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMReportingOptions *pVal);
+            /* [retval][out] */ __RPC__out GPMReportingOptions *pVal);
         
         DECLSPEC_XFGVIRT(IGPMConstants2, get_ReportComments)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportComments )( 
             __RPC__in IGPMConstants2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  GPMReportingOptions *pVal);
+            /* [retval][out] */ __RPC__out GPMReportingOptions *pVal);
         
         END_INTERFACE
     } IGPMConstants2Vtbl;
@@ -11547,12 +10290,10 @@ EXTERN_C const IID IID_IGPMGPO2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
     };
     
@@ -11566,8 +10307,7 @@ EXTERN_C const IID IID_IGPMGPO2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11582,31 +10322,23 @@ EXTERN_C const IID IID_IGPMGPO2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11631,116 +10363,97 @@ EXTERN_C const IID IID_IGPMGPO2;
         DECLSPEC_XFGVIRT(IGPMGPO, get_DisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, put_DisplayName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayName )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ID )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_DomainName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainName )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_CreationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreationTime )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pDate);
+            /* [retval][out] */ __RPC__out DATE *pDate);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ModificationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ModificationTime )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pDate);
+            /* [retval][out] */ __RPC__out DATE *pDate);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_UserDSVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDSVersionNumber )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ComputerDSVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ComputerDSVersionNumber )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_UserSysvolVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSysvolVersionNumber )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ComputerSysvolVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ComputerSysvolVersionNumber )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GetWMIFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWMIFilter )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilter **ppIGPMWMIFilter);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilter **ppIGPMWMIFilter);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetWMIFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetWMIFilter )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMWMIFilter *pIGPMWMIFilter);
+            /* [in] */ __RPC__in_opt IGPMWMIFilter *pIGPMWMIFilter);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetUserEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetUserEnabled )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbEnabled);
+            /* [in] */ VARIANT_BOOL vbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetComputerEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetComputerEnabled )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbEnabled);
+            /* [in] */ VARIANT_BOOL vbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, IsUserEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsUserEnabled )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, IsComputerEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsComputerEnabled )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityInfo )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSecurityInfo **ppSecurityInfo);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSecurityInfo **ppSecurityInfo);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityInfo )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSecurityInfo *pSecurityInfo);
+            /* [in] */ __RPC__in_opt IGPMSecurityInfo *pSecurityInfo);
         
         DECLSPEC_XFGVIRT(IGPMGPO, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -11749,83 +10462,64 @@ EXTERN_C const IID IID_IGPMGPO2;
         DECLSPEC_XFGVIRT(IGPMGPO, Backup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Backup )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrComment,
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [in] */ __RPC__in BSTR bstrComment,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, Import)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Import )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IGPMBackup *pIGPMBackup,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IGPMBackup *pIGPMBackup,
             /* [optional][in] */ __RPC__in VARIANT *pvarMigrationTable,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GenerateReport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReport )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GenerateReportToFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReportToFile )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, CopyTo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IGPMDomain *pIGPMDomain,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IGPMDomain *pIGPMDomain,
             /* [optional][in] */ __RPC__in VARIANT *pvarNewDisplayName,
             /* [optional][in] */ __RPC__in VARIANT *pvarMigrationTable,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetSecurityDescriptor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityDescriptor )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pSD);
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IDispatch *pSD);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GetSecurityDescriptor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityDescriptor )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppSD);
+            /* [in] */ long lFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppSD);
         
         DECLSPEC_XFGVIRT(IGPMGPO, IsACLConsistent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsACLConsistent )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbConsistent);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbConsistent);
         
         DECLSPEC_XFGVIRT(IGPMGPO, MakeACLConsistent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MakeACLConsistent )( 
@@ -11834,14 +10528,12 @@ EXTERN_C const IID IID_IGPMGPO2;
         DECLSPEC_XFGVIRT(IGPMGPO2, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO2, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IGPMGPO2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         END_INTERFACE
     } IGPMGPO2Vtbl;
@@ -12000,24 +10692,19 @@ EXTERN_C const IID IID_IGPMDomain3;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GenerateReport( 
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InfrastructureDC( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InfrastructureDC( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InfrastructureFlags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
     };
     
@@ -12031,8 +10718,7 @@ EXTERN_C const IID IID_IGPMDomain3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12047,31 +10733,23 @@ EXTERN_C const IID IID_IGPMDomain3;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12096,160 +10774,125 @@ EXTERN_C const IID IID_IGPMDomain3;
         DECLSPEC_XFGVIRT(IGPMDomain, get_DomainController)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainController )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMDomain, get_Domain)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Domain )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMDomain, CreateGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateGPO )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppNewGPO);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppNewGPO);
         
         DECLSPEC_XFGVIRT(IGPMDomain, GetGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetGPO )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGuid,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppGPO);
+            /* [in] */ __RPC__in BSTR bstrGuid,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppGPO);
         
         DECLSPEC_XFGVIRT(IGPMDomain, SearchGPOs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchGPOs )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPOCollection **ppIGPMGPOCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPOCollection **ppIGPMGPOCollection);
         
         DECLSPEC_XFGVIRT(IGPMDomain, RestoreGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RestoreGPO )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMBackup *pIGPMBackup,
-            /* [annotation][in] */ 
-            _In_  long lDCFlags,
+            /* [in] */ __RPC__in_opt IGPMBackup *pIGPMBackup,
+            /* [in] */ long lDCFlags,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMDomain, GetSOM)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSOM )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][unique][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOM **ppSOM);
+            /* [unique][in] */ __RPC__in_opt BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOM **ppSOM);
         
         DECLSPEC_XFGVIRT(IGPMDomain, SearchSOMs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchSOMs )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSOMCollection **ppIGPMSOMCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSOMCollection **ppIGPMSOMCollection);
         
         DECLSPEC_XFGVIRT(IGPMDomain, GetWMIFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWMIFilter )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilter **ppWMIFilter);
+            /* [in] */ __RPC__in BSTR bstrPath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilter **ppWMIFilter);
         
         DECLSPEC_XFGVIRT(IGPMDomain, SearchWMIFilters)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchWMIFilters )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilterCollection **ppIGPMWMIFilterCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilterCollection **ppIGPMWMIFilterCollection);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, CreateStarterGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateStarterGPO )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStarterGPO **ppnewTemplate);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStarterGPO **ppnewTemplate);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, CreateGPOFromStarterGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateGPOFromStarterGPO )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMStarterGPO *pGPOTemplate,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMGPO **ppnewGPO);
+            /* [in] */ __RPC__in_opt IGPMStarterGPO *pGPOTemplate,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMGPO **ppnewGPO);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, GetStarterGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetStarterGPO )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGuid,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStarterGPO **ppTemplate);
+            /* [in] */ __RPC__in BSTR bstrGuid,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStarterGPO **ppTemplate);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, SearchStarterGPOs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SearchStarterGPOs )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSearchCriteria *pIGPMSearchCriteria,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMStarterGPOCollection **ppIGPMTemplateCollection);
+            /* [in] */ __RPC__in_opt IGPMSearchCriteria *pIGPMSearchCriteria,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMStarterGPOCollection **ppIGPMTemplateCollection);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, LoadStarterGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LoadStarterGPO )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLoadFile,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bOverwrite,
+            /* [in] */ __RPC__in BSTR bstrLoadFile,
+            /* [in] */ VARIANT_BOOL bOverwrite,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMDomain2, RestoreStarterGPO)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RestoreStarterGPO )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMStarterGPOBackup *pIGPMTmplBackup,
+            /* [in] */ __RPC__in_opt IGPMStarterGPOBackup *pIGPMTmplBackup,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMDomain3, GenerateReport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReport )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMDomain3, get_InfrastructureDC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InfrastructureDC )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMDomain3, put_InfrastructureDC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InfrastructureDC )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IGPMDomain3, put_InfrastructureFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InfrastructureFlags )( 
             __RPC__in IGPMDomain3 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         END_INTERFACE
     } IGPMDomain3Vtbl;
@@ -12376,16 +11019,13 @@ EXTERN_C const IID IID_IGPMGPO3;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InfrastructureDC( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InfrastructureDC( 
-            /* [annotation][in] */ 
-            _In_  BSTR newVal) = 0;
+            /* [in] */ __RPC__in BSTR newVal) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InfrastructureFlags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
     };
     
@@ -12399,8 +11039,7 @@ EXTERN_C const IID IID_IGPMGPO3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12415,31 +11054,23 @@ EXTERN_C const IID IID_IGPMGPO3;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12464,116 +11095,97 @@ EXTERN_C const IID IID_IGPMGPO3;
         DECLSPEC_XFGVIRT(IGPMGPO, get_DisplayName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, put_DisplayName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayName )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_Path)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ID )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_DomainName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainName )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_CreationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CreationTime )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pDate);
+            /* [retval][out] */ __RPC__out DATE *pDate);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ModificationTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ModificationTime )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DATE *pDate);
+            /* [retval][out] */ __RPC__out DATE *pDate);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_UserDSVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserDSVersionNumber )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ComputerDSVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ComputerDSVersionNumber )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_UserSysvolVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserSysvolVersionNumber )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, get_ComputerSysvolVersionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ComputerSysvolVersionNumber )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pVal);
+            /* [retval][out] */ __RPC__out long *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GetWMIFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWMIFilter )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMWMIFilter **ppIGPMWMIFilter);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMWMIFilter **ppIGPMWMIFilter);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetWMIFilter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetWMIFilter )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMWMIFilter *pIGPMWMIFilter);
+            /* [in] */ __RPC__in_opt IGPMWMIFilter *pIGPMWMIFilter);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetUserEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetUserEnabled )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbEnabled);
+            /* [in] */ VARIANT_BOOL vbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetComputerEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetComputerEnabled )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vbEnabled);
+            /* [in] */ VARIANT_BOOL vbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, IsUserEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsUserEnabled )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, IsComputerEnabled)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsComputerEnabled )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbEnabled);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityInfo )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMSecurityInfo **ppSecurityInfo);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMSecurityInfo **ppSecurityInfo);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetSecurityInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityInfo )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  IGPMSecurityInfo *pSecurityInfo);
+            /* [in] */ __RPC__in_opt IGPMSecurityInfo *pSecurityInfo);
         
         DECLSPEC_XFGVIRT(IGPMGPO, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -12582,83 +11194,64 @@ EXTERN_C const IID IID_IGPMGPO3;
         DECLSPEC_XFGVIRT(IGPMGPO, Backup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Backup )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrBackupDir,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrComment,
+            /* [in] */ __RPC__in BSTR bstrBackupDir,
+            /* [in] */ __RPC__in BSTR bstrComment,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, Import)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Import )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IGPMBackup *pIGPMBackup,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IGPMBackup *pIGPMBackup,
             /* [optional][in] */ __RPC__in VARIANT *pvarMigrationTable,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GenerateReport)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReport )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
+            /* [in] */ GPMReportType gpmReportType,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GenerateReportToFile)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GenerateReportToFile )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  GPMReportType gpmReportType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTargetFilePath,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [in] */ GPMReportType gpmReportType,
+            /* [in] */ __RPC__in BSTR bstrTargetFilePath,
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, CopyTo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IGPMDomain *pIGPMDomain,
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IGPMDomain *pIGPMDomain,
             /* [optional][in] */ __RPC__in VARIANT *pvarNewDisplayName,
             /* [optional][in] */ __RPC__in VARIANT *pvarMigrationTable,
             /* [optional][in] */ __RPC__in VARIANT *pvarGPMProgress,
             /* [optional][out] */ __RPC__out VARIANT *pvarGPMCancel,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IGPMResult **ppIGPMResult);
+            /* [retval][out] */ __RPC__deref_out_opt IGPMResult **ppIGPMResult);
         
         DECLSPEC_XFGVIRT(IGPMGPO, SetSecurityDescriptor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSecurityDescriptor )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pSD);
+            /* [in] */ long lFlags,
+            /* [in] */ __RPC__in_opt IDispatch *pSD);
         
         DECLSPEC_XFGVIRT(IGPMGPO, GetSecurityDescriptor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetSecurityDescriptor )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  long lFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppSD);
+            /* [in] */ long lFlags,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppSD);
         
         DECLSPEC_XFGVIRT(IGPMGPO, IsACLConsistent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsACLConsistent )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvbConsistent);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pvbConsistent);
         
         DECLSPEC_XFGVIRT(IGPMGPO, MakeACLConsistent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MakeACLConsistent )( 
@@ -12667,32 +11260,27 @@ EXTERN_C const IID IID_IGPMGPO3;
         DECLSPEC_XFGVIRT(IGPMGPO2, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO2, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO3, get_InfrastructureDC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InfrastructureDC )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pVal);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO3, put_InfrastructureDC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InfrastructureDC )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR newVal);
+            /* [in] */ __RPC__in BSTR newVal);
         
         DECLSPEC_XFGVIRT(IGPMGPO3, put_InfrastructureFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InfrastructureFlags )( 
             __RPC__in IGPMGPO3 * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         END_INTERFACE
     } IGPMGPO3Vtbl;

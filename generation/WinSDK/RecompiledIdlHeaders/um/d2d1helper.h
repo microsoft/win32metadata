@@ -476,7 +476,7 @@ namespace D2D1
         D2D1_LAYER_OPTIONS layerOptions = D2D1_LAYER_OPTIONS_NONE
         )
     {
-        D2D1_LAYER_PARAMETERS layerParameters = { 0 };
+        D2D1_LAYER_PARAMETERS layerParameters = {};
 
         layerParameters.contentBounds = contentBounds;
         layerParameters.geometricMask = geometricMask;

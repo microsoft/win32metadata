@@ -2372,7 +2372,7 @@ _WINDOWS_NUMERICS_BEGIN_NAMESPACE_
     }
 
 
-    inline bool decompose(float4x4 const& matrix, _Out_ float3* scale, _Out_ quaternion* rotation, _Out_ float3* translation)
+    _Success_(return) inline bool decompose(_In_ float4x4 const& matrix, _Out_ float3* scale, _Out_ quaternion* rotation, _Out_ float3* translation)
     {
         using namespace ::DirectX;
 

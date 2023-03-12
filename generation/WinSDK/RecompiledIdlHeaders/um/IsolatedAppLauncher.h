@@ -3,14 +3,15 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
+#pragma warning( disable: 4049 )  /* more than 64k source lines */
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 475
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +39,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -108,12 +109,9 @@ EXTERN_C const IID IID_IIsolatedAppLauncher;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Launch( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR appUserModelId,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR arguments,
-            /* [annotation][in] */ 
-            _In_  const IsolatedAppLauncherTelemetryParameters *telemetryParameters) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR appUserModelId,
+            /* [string][in] */ __RPC__in_string LPCWSTR arguments,
+            /* [in] */ __RPC__in const IsolatedAppLauncherTelemetryParameters *telemetryParameters) = 0;
         
     };
     
@@ -127,8 +125,7 @@ EXTERN_C const IID IID_IIsolatedAppLauncher;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIsolatedAppLauncher * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -143,12 +140,9 @@ EXTERN_C const IID IID_IIsolatedAppLauncher;
         DECLSPEC_XFGVIRT(IIsolatedAppLauncher, Launch)
         HRESULT ( STDMETHODCALLTYPE *Launch )( 
             __RPC__in IIsolatedAppLauncher * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR appUserModelId,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR arguments,
-            /* [annotation][in] */ 
-            _In_  const IsolatedAppLauncherTelemetryParameters *telemetryParameters);
+            /* [string][in] */ __RPC__in_string LPCWSTR appUserModelId,
+            /* [string][in] */ __RPC__in_string LPCWSTR arguments,
+            /* [in] */ __RPC__in const IsolatedAppLauncherTelemetryParameters *telemetryParameters);
         
         END_INTERFACE
     } IIsolatedAppLauncherVtbl;

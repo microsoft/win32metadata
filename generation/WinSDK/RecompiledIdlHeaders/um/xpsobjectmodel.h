@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -760,12 +760,10 @@ EXTERN_C const IID IID_IXpsOMShareable;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type) = 0;
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type) = 0;
         
     };
     
@@ -779,8 +777,7 @@ EXTERN_C const IID IID_IXpsOMShareable;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMShareable * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -795,14 +792,12 @@ EXTERN_C const IID IID_IXpsOMShareable;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMShareable * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMShareable * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         END_INTERFACE
     } IXpsOMShareableVtbl;
@@ -860,104 +855,79 @@ EXTERN_C const IID IID_IXpsOMVisual;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTransform( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransformLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTransformLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *matrixTransform) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *matrixTransform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransformLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTransformLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetClipGeometry( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **clipGeometry) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **clipGeometry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetClipGeometryLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **clipGeometry) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **clipGeometry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetClipGeometryLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometry *clipGeometry) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMGeometry *clipGeometry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetClipGeometryLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetClipGeometryLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOpacity( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity) = 0;
+            /* [retval][out] */ __RPC__out FLOAT *opacity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOpacity( 
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity) = 0;
+            /* [in] */ FLOAT opacity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOpacityMaskBrush( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **opacityMaskBrush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **opacityMaskBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOpacityMaskBrushLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **opacityMaskBrush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **opacityMaskBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOpacityMaskBrushLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *opacityMaskBrush) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMBrush *opacityMaskBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOpacityMaskBrushLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOpacityMaskBrushLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetName( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *name) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetName( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR name) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR name) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIsHyperlinkTarget( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isHyperlink) = 0;
+            /* [retval][out] */ __RPC__out BOOL *isHyperlink) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIsHyperlinkTarget( 
-            /* [annotation][in] */ 
-            _In_  BOOL isHyperlink) = 0;
+            /* [in] */ BOOL isHyperlink) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetHyperlinkNavigateUri( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUri **hyperlinkUri) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUri **hyperlinkUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetHyperlinkNavigateUri( 
-            /* [annotation][in] */ 
-            _In_  IUri *hyperlinkUri) = 0;
+            /* [in] */ __RPC__in_opt IUri *hyperlinkUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguage( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *language) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *language) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLanguage( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR language) = 0;
         
     };
     
@@ -971,8 +941,7 @@ EXTERN_C const IID IID_IXpsOMVisual;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -987,164 +956,137 @@ EXTERN_C const IID IID_IXpsOMVisual;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *matrixTransform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometry)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometry )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **clipGeometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometryLocal)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometryLocal )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **clipGeometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetClipGeometryLocal)
         HRESULT ( STDMETHODCALLTYPE *SetClipGeometryLocal )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometry *clipGeometry);
+            /* [in] */ __RPC__in_opt IXpsOMGeometry *clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometryLookup)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometryLookup )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetClipGeometryLookup)
         HRESULT ( STDMETHODCALLTYPE *SetClipGeometryLookup )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrush)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrush )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **opacityMaskBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrushLocal )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **opacityMaskBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacityMaskBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *SetOpacityMaskBrushLocal )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *opacityMaskBrush);
+            /* [in] */ __RPC__in_opt IXpsOMBrush *opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrushLookup )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacityMaskBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *SetOpacityMaskBrushLookup )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *name);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR name);
+            /* [string][in] */ __RPC__in_string LPCWSTR name);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *GetIsHyperlinkTarget )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isHyperlink);
+            /* [retval][out] */ __RPC__out BOOL *isHyperlink);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *SetIsHyperlinkTarget )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][in] */ 
-            _In_  BOOL isHyperlink);
+            /* [in] */ BOOL isHyperlink);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetHyperlinkNavigateUri)
         HRESULT ( STDMETHODCALLTYPE *GetHyperlinkNavigateUri )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUri **hyperlinkUri);
+            /* [retval][out] */ __RPC__deref_out_opt IUri **hyperlinkUri);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetHyperlinkNavigateUri)
         HRESULT ( STDMETHODCALLTYPE *SetHyperlinkNavigateUri )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][in] */ 
-            _In_  IUri *hyperlinkUri);
+            /* [in] */ __RPC__in_opt IUri *hyperlinkUri);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetLanguage)
         HRESULT ( STDMETHODCALLTYPE *GetLanguage )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *language);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *language);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetLanguage)
         HRESULT ( STDMETHODCALLTYPE *SetLanguage )( 
             __RPC__in IXpsOMVisual * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language);
+            /* [string][in] */ __RPC__in_string LPCWSTR language);
         
         END_INTERFACE
     } IXpsOMVisualVtbl;
@@ -1278,12 +1220,10 @@ EXTERN_C const IID IID_IXpsOMPart;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetPartName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPartName( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri) = 0;
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri) = 0;
         
     };
     
@@ -1297,8 +1237,7 @@ EXTERN_C const IID IID_IXpsOMPart;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMPart * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1313,14 +1252,12 @@ EXTERN_C const IID IID_IXpsOMPart;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMPart * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMPart * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         END_INTERFACE
     } IXpsOMPartVtbl;
@@ -1380,84 +1317,61 @@ EXTERN_C const IID IID_IXpsOMGlyphsEditor;
         virtual HRESULT STDMETHODCALLTYPE ApplyEdits( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUnicodeString( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *unicodeString) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *unicodeString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetUnicodeString( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR unicodeString) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR unicodeString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGlyphIndexCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *indexCount) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *indexCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGlyphIndices( 
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *indexCount,
-            /* [annotation][out] */ 
-            _Out_  XPS_GLYPH_INDEX *glyphIndices) = 0;
+            /* [out][in] */ __RPC__inout UINT32 *indexCount,
+            /* [out] */ __RPC__out XPS_GLYPH_INDEX *glyphIndices) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetGlyphIndices( 
-            /* [annotation][in] */ 
-            _In_  UINT32 indexCount,
-            /* [annotation][in] */ 
-            _In_  const XPS_GLYPH_INDEX *glyphIndices) = 0;
+            /* [in] */ UINT32 indexCount,
+            /* [in] */ __RPC__in const XPS_GLYPH_INDEX *glyphIndices) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGlyphMappingCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *glyphMappingCount) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *glyphMappingCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGlyphMappings( 
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *glyphMappingCount,
-            /* [annotation][out] */ 
-            _Out_  XPS_GLYPH_MAPPING *glyphMappings) = 0;
+            /* [out][in] */ __RPC__inout UINT32 *glyphMappingCount,
+            /* [out] */ __RPC__out XPS_GLYPH_MAPPING *glyphMappings) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetGlyphMappings( 
-            /* [annotation][in] */ 
-            _In_  UINT32 glyphMappingCount,
-            /* [annotation][in] */ 
-            _In_  const XPS_GLYPH_MAPPING *glyphMappings) = 0;
+            /* [in] */ UINT32 glyphMappingCount,
+            /* [in] */ __RPC__in const XPS_GLYPH_MAPPING *glyphMappings) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProhibitedCaretStopCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *prohibitedCaretStopCount) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *prohibitedCaretStopCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProhibitedCaretStops( 
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *count,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *prohibitedCaretStops) = 0;
+            /* [out][in] */ __RPC__inout UINT32 *count,
+            /* [out] */ __RPC__out UINT32 *prohibitedCaretStops) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetProhibitedCaretStops( 
-            /* [annotation][in] */ 
-            _In_  UINT32 count,
-            /* [annotation][in] */ 
-            _In_  const UINT32 *prohibitedCaretStops) = 0;
+            /* [in] */ UINT32 count,
+            /* [in] */ __RPC__in const UINT32 *prohibitedCaretStops) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBidiLevel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *bidiLevel) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *bidiLevel) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBidiLevel( 
-            /* [annotation][in] */ 
-            _In_  UINT32 bidiLevel) = 0;
+            /* [in] */ UINT32 bidiLevel) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIsSideways( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isSideways) = 0;
+            /* [retval][out] */ __RPC__out BOOL *isSideways) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIsSideways( 
-            /* [annotation][in] */ 
-            _In_  BOOL isSideways) = 0;
+            /* [in] */ BOOL isSideways) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDeviceFontName( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *deviceFontName) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *deviceFontName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDeviceFontName( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR deviceFontName) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR deviceFontName) = 0;
         
     };
     
@@ -1471,8 +1385,7 @@ EXTERN_C const IID IID_IXpsOMGlyphsEditor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1491,116 +1404,93 @@ EXTERN_C const IID IID_IXpsOMGlyphsEditor;
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, GetUnicodeString)
         HRESULT ( STDMETHODCALLTYPE *GetUnicodeString )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *unicodeString);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *unicodeString);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, SetUnicodeString)
         HRESULT ( STDMETHODCALLTYPE *SetUnicodeString )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR unicodeString);
+            /* [string][in] */ __RPC__in_string LPCWSTR unicodeString);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, GetGlyphIndexCount)
         HRESULT ( STDMETHODCALLTYPE *GetGlyphIndexCount )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *indexCount);
+            /* [retval][out] */ __RPC__out UINT32 *indexCount);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, GetGlyphIndices)
         HRESULT ( STDMETHODCALLTYPE *GetGlyphIndices )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *indexCount,
-            /* [annotation][out] */ 
-            _Out_  XPS_GLYPH_INDEX *glyphIndices);
+            /* [out][in] */ __RPC__inout UINT32 *indexCount,
+            /* [out] */ __RPC__out XPS_GLYPH_INDEX *glyphIndices);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, SetGlyphIndices)
         HRESULT ( STDMETHODCALLTYPE *SetGlyphIndices )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 indexCount,
-            /* [annotation][in] */ 
-            _In_  const XPS_GLYPH_INDEX *glyphIndices);
+            /* [in] */ UINT32 indexCount,
+            /* [in] */ __RPC__in const XPS_GLYPH_INDEX *glyphIndices);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, GetGlyphMappingCount)
         HRESULT ( STDMETHODCALLTYPE *GetGlyphMappingCount )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *glyphMappingCount);
+            /* [retval][out] */ __RPC__out UINT32 *glyphMappingCount);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, GetGlyphMappings)
         HRESULT ( STDMETHODCALLTYPE *GetGlyphMappings )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *glyphMappingCount,
-            /* [annotation][out] */ 
-            _Out_  XPS_GLYPH_MAPPING *glyphMappings);
+            /* [out][in] */ __RPC__inout UINT32 *glyphMappingCount,
+            /* [out] */ __RPC__out XPS_GLYPH_MAPPING *glyphMappings);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, SetGlyphMappings)
         HRESULT ( STDMETHODCALLTYPE *SetGlyphMappings )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 glyphMappingCount,
-            /* [annotation][in] */ 
-            _In_  const XPS_GLYPH_MAPPING *glyphMappings);
+            /* [in] */ UINT32 glyphMappingCount,
+            /* [in] */ __RPC__in const XPS_GLYPH_MAPPING *glyphMappings);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, GetProhibitedCaretStopCount)
         HRESULT ( STDMETHODCALLTYPE *GetProhibitedCaretStopCount )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *prohibitedCaretStopCount);
+            /* [retval][out] */ __RPC__out UINT32 *prohibitedCaretStopCount);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, GetProhibitedCaretStops)
         HRESULT ( STDMETHODCALLTYPE *GetProhibitedCaretStops )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *count,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *prohibitedCaretStops);
+            /* [out][in] */ __RPC__inout UINT32 *count,
+            /* [out] */ __RPC__out UINT32 *prohibitedCaretStops);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, SetProhibitedCaretStops)
         HRESULT ( STDMETHODCALLTYPE *SetProhibitedCaretStops )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 count,
-            /* [annotation][in] */ 
-            _In_  const UINT32 *prohibitedCaretStops);
+            /* [in] */ UINT32 count,
+            /* [in] */ __RPC__in const UINT32 *prohibitedCaretStops);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, GetBidiLevel)
         HRESULT ( STDMETHODCALLTYPE *GetBidiLevel )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *bidiLevel);
+            /* [retval][out] */ __RPC__out UINT32 *bidiLevel);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, SetBidiLevel)
         HRESULT ( STDMETHODCALLTYPE *SetBidiLevel )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 bidiLevel);
+            /* [in] */ UINT32 bidiLevel);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, GetIsSideways)
         HRESULT ( STDMETHODCALLTYPE *GetIsSideways )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isSideways);
+            /* [retval][out] */ __RPC__out BOOL *isSideways);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, SetIsSideways)
         HRESULT ( STDMETHODCALLTYPE *SetIsSideways )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][in] */ 
-            _In_  BOOL isSideways);
+            /* [in] */ BOOL isSideways);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, GetDeviceFontName)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceFontName )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *deviceFontName);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *deviceFontName);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphsEditor, SetDeviceFontName)
         HRESULT ( STDMETHODCALLTYPE *SetDeviceFontName )( 
             __RPC__in IXpsOMGlyphsEditor * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR deviceFontName);
+            /* [string][in] */ __RPC__in_string LPCWSTR deviceFontName);
         
         END_INTERFACE
     } IXpsOMGlyphsEditorVtbl;
@@ -1706,118 +1596,88 @@ EXTERN_C const IID IID_IXpsOMGlyphs;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetUnicodeString( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *unicodeString) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *unicodeString) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGlyphIndexCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *indexCount) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *indexCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGlyphIndices( 
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *indexCount,
-            /* [annotation][out][in] */ 
-            _Inout_  XPS_GLYPH_INDEX *glyphIndices) = 0;
+            /* [out][in] */ __RPC__inout UINT32 *indexCount,
+            /* [out][in] */ __RPC__inout XPS_GLYPH_INDEX *glyphIndices) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGlyphMappingCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *glyphMappingCount) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *glyphMappingCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGlyphMappings( 
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *glyphMappingCount,
-            /* [annotation][out][in] */ 
-            _Inout_  XPS_GLYPH_MAPPING *glyphMappings) = 0;
+            /* [out][in] */ __RPC__inout UINT32 *glyphMappingCount,
+            /* [out][in] */ __RPC__inout XPS_GLYPH_MAPPING *glyphMappings) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProhibitedCaretStopCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *prohibitedCaretStopCount) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *prohibitedCaretStopCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProhibitedCaretStops( 
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *prohibitedCaretStopCount,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *prohibitedCaretStops) = 0;
+            /* [out][in] */ __RPC__inout UINT32 *prohibitedCaretStopCount,
+            /* [out] */ __RPC__out UINT32 *prohibitedCaretStops) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBidiLevel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *bidiLevel) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *bidiLevel) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIsSideways( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isSideways) = 0;
+            /* [retval][out] */ __RPC__out BOOL *isSideways) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDeviceFontName( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *deviceFontName) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *deviceFontName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStyleSimulations( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_STYLE_SIMULATION *styleSimulations) = 0;
+            /* [retval][out] */ __RPC__out XPS_STYLE_SIMULATION *styleSimulations) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStyleSimulations( 
-            /* [annotation][in] */ 
-            _In_  XPS_STYLE_SIMULATION styleSimulations) = 0;
+            /* [in] */ XPS_STYLE_SIMULATION styleSimulations) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOrigin( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *origin) = 0;
+            /* [retval][out] */ __RPC__out XPS_POINT *origin) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOrigin( 
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *origin) = 0;
+            /* [in] */ __RPC__in const XPS_POINT *origin) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFontRenderingEmSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *fontRenderingEmSize) = 0;
+            /* [retval][out] */ __RPC__out FLOAT *fontRenderingEmSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFontRenderingEmSize( 
-            /* [annotation][in] */ 
-            _In_  FLOAT fontRenderingEmSize) = 0;
+            /* [in] */ FLOAT fontRenderingEmSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFontResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResource **fontResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMFontResource **fontResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFontResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *fontResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMFontResource *fontResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFontFaceIndex( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SHORT *fontFaceIndex) = 0;
+            /* [retval][out] */ __RPC__out SHORT *fontFaceIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFontFaceIndex( 
-            /* [annotation][in] */ 
-            _In_  SHORT fontFaceIndex) = 0;
+            /* [in] */ SHORT fontFaceIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFillBrush( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **fillBrush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **fillBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFillBrushLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **fillBrush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **fillBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFillBrushLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *fillBrush) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMBrush *fillBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFillBrushLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFillBrushLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGlyphsEditor( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGlyphsEditor **editor) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGlyphsEditor **editor) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGlyphs **glyphs) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGlyphs **glyphs) = 0;
         
     };
     
@@ -1831,8 +1691,7 @@ EXTERN_C const IID IID_IXpsOMGlyphs;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1847,332 +1706,275 @@ EXTERN_C const IID IID_IXpsOMGlyphs;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *matrixTransform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometry)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometry )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **clipGeometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometryLocal)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometryLocal )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **clipGeometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetClipGeometryLocal)
         HRESULT ( STDMETHODCALLTYPE *SetClipGeometryLocal )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometry *clipGeometry);
+            /* [in] */ __RPC__in_opt IXpsOMGeometry *clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometryLookup)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometryLookup )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetClipGeometryLookup)
         HRESULT ( STDMETHODCALLTYPE *SetClipGeometryLookup )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrush)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrush )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **opacityMaskBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrushLocal )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **opacityMaskBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacityMaskBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *SetOpacityMaskBrushLocal )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *opacityMaskBrush);
+            /* [in] */ __RPC__in_opt IXpsOMBrush *opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrushLookup )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacityMaskBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *SetOpacityMaskBrushLookup )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *name);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR name);
+            /* [string][in] */ __RPC__in_string LPCWSTR name);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *GetIsHyperlinkTarget )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isHyperlink);
+            /* [retval][out] */ __RPC__out BOOL *isHyperlink);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *SetIsHyperlinkTarget )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  BOOL isHyperlink);
+            /* [in] */ BOOL isHyperlink);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetHyperlinkNavigateUri)
         HRESULT ( STDMETHODCALLTYPE *GetHyperlinkNavigateUri )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUri **hyperlinkUri);
+            /* [retval][out] */ __RPC__deref_out_opt IUri **hyperlinkUri);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetHyperlinkNavigateUri)
         HRESULT ( STDMETHODCALLTYPE *SetHyperlinkNavigateUri )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  IUri *hyperlinkUri);
+            /* [in] */ __RPC__in_opt IUri *hyperlinkUri);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetLanguage)
         HRESULT ( STDMETHODCALLTYPE *GetLanguage )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *language);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *language);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetLanguage)
         HRESULT ( STDMETHODCALLTYPE *SetLanguage )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language);
+            /* [string][in] */ __RPC__in_string LPCWSTR language);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetUnicodeString)
         HRESULT ( STDMETHODCALLTYPE *GetUnicodeString )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *unicodeString);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *unicodeString);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetGlyphIndexCount)
         HRESULT ( STDMETHODCALLTYPE *GetGlyphIndexCount )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *indexCount);
+            /* [retval][out] */ __RPC__out UINT32 *indexCount);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetGlyphIndices)
         HRESULT ( STDMETHODCALLTYPE *GetGlyphIndices )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *indexCount,
-            /* [annotation][out][in] */ 
-            _Inout_  XPS_GLYPH_INDEX *glyphIndices);
+            /* [out][in] */ __RPC__inout UINT32 *indexCount,
+            /* [out][in] */ __RPC__inout XPS_GLYPH_INDEX *glyphIndices);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetGlyphMappingCount)
         HRESULT ( STDMETHODCALLTYPE *GetGlyphMappingCount )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *glyphMappingCount);
+            /* [retval][out] */ __RPC__out UINT32 *glyphMappingCount);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetGlyphMappings)
         HRESULT ( STDMETHODCALLTYPE *GetGlyphMappings )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *glyphMappingCount,
-            /* [annotation][out][in] */ 
-            _Inout_  XPS_GLYPH_MAPPING *glyphMappings);
+            /* [out][in] */ __RPC__inout UINT32 *glyphMappingCount,
+            /* [out][in] */ __RPC__inout XPS_GLYPH_MAPPING *glyphMappings);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetProhibitedCaretStopCount)
         HRESULT ( STDMETHODCALLTYPE *GetProhibitedCaretStopCount )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *prohibitedCaretStopCount);
+            /* [retval][out] */ __RPC__out UINT32 *prohibitedCaretStopCount);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetProhibitedCaretStops)
         HRESULT ( STDMETHODCALLTYPE *GetProhibitedCaretStops )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *prohibitedCaretStopCount,
-            /* [annotation][out] */ 
-            _Out_  UINT32 *prohibitedCaretStops);
+            /* [out][in] */ __RPC__inout UINT32 *prohibitedCaretStopCount,
+            /* [out] */ __RPC__out UINT32 *prohibitedCaretStops);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetBidiLevel)
         HRESULT ( STDMETHODCALLTYPE *GetBidiLevel )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *bidiLevel);
+            /* [retval][out] */ __RPC__out UINT32 *bidiLevel);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetIsSideways)
         HRESULT ( STDMETHODCALLTYPE *GetIsSideways )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isSideways);
+            /* [retval][out] */ __RPC__out BOOL *isSideways);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetDeviceFontName)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceFontName )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *deviceFontName);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *deviceFontName);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetStyleSimulations)
         HRESULT ( STDMETHODCALLTYPE *GetStyleSimulations )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_STYLE_SIMULATION *styleSimulations);
+            /* [retval][out] */ __RPC__out XPS_STYLE_SIMULATION *styleSimulations);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, SetStyleSimulations)
         HRESULT ( STDMETHODCALLTYPE *SetStyleSimulations )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  XPS_STYLE_SIMULATION styleSimulations);
+            /* [in] */ XPS_STYLE_SIMULATION styleSimulations);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetOrigin)
         HRESULT ( STDMETHODCALLTYPE *GetOrigin )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *origin);
+            /* [retval][out] */ __RPC__out XPS_POINT *origin);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, SetOrigin)
         HRESULT ( STDMETHODCALLTYPE *SetOrigin )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *origin);
+            /* [in] */ __RPC__in const XPS_POINT *origin);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetFontRenderingEmSize)
         HRESULT ( STDMETHODCALLTYPE *GetFontRenderingEmSize )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *fontRenderingEmSize);
+            /* [retval][out] */ __RPC__out FLOAT *fontRenderingEmSize);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, SetFontRenderingEmSize)
         HRESULT ( STDMETHODCALLTYPE *SetFontRenderingEmSize )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT fontRenderingEmSize);
+            /* [in] */ FLOAT fontRenderingEmSize);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetFontResource)
         HRESULT ( STDMETHODCALLTYPE *GetFontResource )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResource **fontResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMFontResource **fontResource);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, SetFontResource)
         HRESULT ( STDMETHODCALLTYPE *SetFontResource )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *fontResource);
+            /* [in] */ __RPC__in_opt IXpsOMFontResource *fontResource);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetFontFaceIndex)
         HRESULT ( STDMETHODCALLTYPE *GetFontFaceIndex )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SHORT *fontFaceIndex);
+            /* [retval][out] */ __RPC__out SHORT *fontFaceIndex);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, SetFontFaceIndex)
         HRESULT ( STDMETHODCALLTYPE *SetFontFaceIndex )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  SHORT fontFaceIndex);
+            /* [in] */ SHORT fontFaceIndex);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetFillBrush)
         HRESULT ( STDMETHODCALLTYPE *GetFillBrush )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **fillBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **fillBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetFillBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *GetFillBrushLocal )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **fillBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **fillBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, SetFillBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *SetFillBrushLocal )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *fillBrush);
+            /* [in] */ __RPC__in_opt IXpsOMBrush *fillBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetFillBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *GetFillBrushLookup )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, SetFillBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *SetFillBrushLookup )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, GetGlyphsEditor)
         HRESULT ( STDMETHODCALLTYPE *GetGlyphsEditor )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGlyphsEditor **editor);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGlyphsEditor **editor);
         
         DECLSPEC_XFGVIRT(IXpsOMGlyphs, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMGlyphs * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGlyphs **glyphs);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGlyphs **glyphs);
         
         END_INTERFACE
     } IXpsOMGlyphsVtbl;
@@ -2388,34 +2190,25 @@ EXTERN_C const IID IID_IXpsOMDashCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DASH *dash) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__out XPS_DASH *dash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  const XPS_DASH *dash) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in const XPS_DASH *dash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  const XPS_DASH *dash) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in const XPS_DASH *dash) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  const XPS_DASH *dash) = 0;
+            /* [in] */ __RPC__in const XPS_DASH *dash) = 0;
         
     };
     
@@ -2429,8 +2222,7 @@ EXTERN_C const IID IID_IXpsOMDashCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMDashCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2445,44 +2237,35 @@ EXTERN_C const IID IID_IXpsOMDashCollection;
         DECLSPEC_XFGVIRT(IXpsOMDashCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMDashCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMDashCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMDashCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DASH *dash);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__out XPS_DASH *dash);
         
         DECLSPEC_XFGVIRT(IXpsOMDashCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMDashCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  const XPS_DASH *dash);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in const XPS_DASH *dash);
         
         DECLSPEC_XFGVIRT(IXpsOMDashCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMDashCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMDashCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMDashCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  const XPS_DASH *dash);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in const XPS_DASH *dash);
         
         DECLSPEC_XFGVIRT(IXpsOMDashCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMDashCollection * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_DASH *dash);
+            /* [in] */ __RPC__in const XPS_DASH *dash);
         
         END_INTERFACE
     } IXpsOMDashCollectionVtbl;
@@ -2552,16 +2335,13 @@ EXTERN_C const IID IID_IXpsOMMatrixTransform;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetMatrix( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_MATRIX *matrix) = 0;
+            /* [retval][out] */ __RPC__out XPS_MATRIX *matrix) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetMatrix( 
-            /* [annotation][in] */ 
-            _In_  const XPS_MATRIX *matrix) = 0;
+            /* [in] */ __RPC__in const XPS_MATRIX *matrix) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform) = 0;
         
     };
     
@@ -2575,8 +2355,7 @@ EXTERN_C const IID IID_IXpsOMMatrixTransform;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMMatrixTransform * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2591,32 +2370,27 @@ EXTERN_C const IID IID_IXpsOMMatrixTransform;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMMatrixTransform * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMMatrixTransform * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMMatrixTransform, GetMatrix)
         HRESULT ( STDMETHODCALLTYPE *GetMatrix )( 
             __RPC__in IXpsOMMatrixTransform * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_MATRIX *matrix);
+            /* [retval][out] */ __RPC__out XPS_MATRIX *matrix);
         
         DECLSPEC_XFGVIRT(IXpsOMMatrixTransform, SetMatrix)
         HRESULT ( STDMETHODCALLTYPE *SetMatrix )( 
             __RPC__in IXpsOMMatrixTransform * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_MATRIX *matrix);
+            /* [in] */ __RPC__in const XPS_MATRIX *matrix);
         
         DECLSPEC_XFGVIRT(IXpsOMMatrixTransform, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMMatrixTransform * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform);
         
         END_INTERFACE
     } IXpsOMMatrixTransformVtbl;
@@ -2684,40 +2458,31 @@ EXTERN_C const IID IID_IXpsOMGeometry;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetFigures( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometryFigureCollection **figures) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometryFigureCollection **figures) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFillRule( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_FILL_RULE *fillRule) = 0;
+            /* [retval][out] */ __RPC__out XPS_FILL_RULE *fillRule) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFillRule( 
-            /* [annotation][in] */ 
-            _In_  XPS_FILL_RULE fillRule) = 0;
+            /* [in] */ XPS_FILL_RULE fillRule) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransform( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransformLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTransformLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *transform) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransformLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lookup) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lookup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTransformLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lookup) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR lookup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **geometry) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **geometry) = 0;
         
     };
     
@@ -2731,8 +2496,7 @@ EXTERN_C const IID IID_IXpsOMGeometry;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2747,68 +2511,57 @@ EXTERN_C const IID IID_IXpsOMGeometry;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometry, GetFigures)
         HRESULT ( STDMETHODCALLTYPE *GetFigures )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometryFigureCollection **figures);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometryFigureCollection **figures);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometry, GetFillRule)
         HRESULT ( STDMETHODCALLTYPE *GetFillRule )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_FILL_RULE *fillRule);
+            /* [retval][out] */ __RPC__out XPS_FILL_RULE *fillRule);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometry, SetFillRule)
         HRESULT ( STDMETHODCALLTYPE *SetFillRule )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][in] */ 
-            _In_  XPS_FILL_RULE fillRule);
+            /* [in] */ XPS_FILL_RULE fillRule);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometry, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometry, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometry, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *transform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometry, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lookup);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lookup);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometry, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lookup);
+            /* [string][in] */ __RPC__in_string LPCWSTR lookup);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometry, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMGeometry * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **geometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **geometry);
         
         END_INTERFACE
     } IXpsOMGeometryVtbl;
@@ -2894,78 +2647,56 @@ EXTERN_C const IID IID_IXpsOMGeometryFigure;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **owner) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **owner) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSegmentData( 
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *dataCount,
-            /* [annotation][out][in] */ 
-            _Inout_  FLOAT *segmentData) = 0;
+            /* [out][in] */ __RPC__inout UINT32 *dataCount,
+            /* [out][in] */ __RPC__inout FLOAT *segmentData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSegmentTypes( 
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *segmentCount,
-            /* [annotation][out][in] */ 
-            _Inout_  XPS_SEGMENT_TYPE *segmentTypes) = 0;
+            /* [out][in] */ __RPC__inout UINT32 *segmentCount,
+            /* [out][in] */ __RPC__inout XPS_SEGMENT_TYPE *segmentTypes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSegmentStrokes( 
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *segmentCount,
-            /* [annotation][out][in] */ 
-            _Inout_  BOOL *segmentStrokes) = 0;
+            /* [out][in] */ __RPC__inout UINT32 *segmentCount,
+            /* [out][in] */ __RPC__inout BOOL *segmentStrokes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSegments( 
-            /* [annotation][in] */ 
-            _In_  UINT32 segmentCount,
-            /* [annotation][in] */ 
-            _In_  UINT32 segmentDataCount,
-            /* [annotation][in] */ 
-            _In_  const XPS_SEGMENT_TYPE *segmentTypes,
-            /* [annotation][in] */ 
-            _In_  const FLOAT *segmentData,
-            /* [annotation][in] */ 
-            _In_  const BOOL *segmentStrokes) = 0;
+            /* [in] */ UINT32 segmentCount,
+            /* [in] */ UINT32 segmentDataCount,
+            /* [in] */ __RPC__in const XPS_SEGMENT_TYPE *segmentTypes,
+            /* [in] */ __RPC__in const FLOAT *segmentData,
+            /* [in] */ __RPC__in const BOOL *segmentStrokes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStartPoint( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *startPoint) = 0;
+            /* [retval][out] */ __RPC__out XPS_POINT *startPoint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStartPoint( 
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *startPoint) = 0;
+            /* [in] */ __RPC__in const XPS_POINT *startPoint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIsClosed( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isClosed) = 0;
+            /* [retval][out] */ __RPC__out BOOL *isClosed) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIsClosed( 
-            /* [annotation][in] */ 
-            _In_  BOOL isClosed) = 0;
+            /* [in] */ BOOL isClosed) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIsFilled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isFilled) = 0;
+            /* [retval][out] */ __RPC__out BOOL *isFilled) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIsFilled( 
-            /* [annotation][in] */ 
-            _In_  BOOL isFilled) = 0;
+            /* [in] */ BOOL isFilled) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSegmentCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *segmentCount) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *segmentCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSegmentDataCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *segmentDataCount) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *segmentDataCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSegmentStrokePattern( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SEGMENT_STROKE_PATTERN *segmentStrokePattern) = 0;
+            /* [retval][out] */ __RPC__out XPS_SEGMENT_STROKE_PATTERN *segmentStrokePattern) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometryFigure **geometryFigure) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometryFigure **geometryFigure) = 0;
         
     };
     
@@ -2979,8 +2710,7 @@ EXTERN_C const IID IID_IXpsOMGeometryFigure;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2995,106 +2725,84 @@ EXTERN_C const IID IID_IXpsOMGeometryFigure;
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, GetSegmentData)
         HRESULT ( STDMETHODCALLTYPE *GetSegmentData )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *dataCount,
-            /* [annotation][out][in] */ 
-            _Inout_  FLOAT *segmentData);
+            /* [out][in] */ __RPC__inout UINT32 *dataCount,
+            /* [out][in] */ __RPC__inout FLOAT *segmentData);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, GetSegmentTypes)
         HRESULT ( STDMETHODCALLTYPE *GetSegmentTypes )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *segmentCount,
-            /* [annotation][out][in] */ 
-            _Inout_  XPS_SEGMENT_TYPE *segmentTypes);
+            /* [out][in] */ __RPC__inout UINT32 *segmentCount,
+            /* [out][in] */ __RPC__inout XPS_SEGMENT_TYPE *segmentTypes);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, GetSegmentStrokes)
         HRESULT ( STDMETHODCALLTYPE *GetSegmentStrokes )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][out][in] */ 
-            _Inout_  UINT32 *segmentCount,
-            /* [annotation][out][in] */ 
-            _Inout_  BOOL *segmentStrokes);
+            /* [out][in] */ __RPC__inout UINT32 *segmentCount,
+            /* [out][in] */ __RPC__inout BOOL *segmentStrokes);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, SetSegments)
         HRESULT ( STDMETHODCALLTYPE *SetSegments )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 segmentCount,
-            /* [annotation][in] */ 
-            _In_  UINT32 segmentDataCount,
-            /* [annotation][in] */ 
-            _In_  const XPS_SEGMENT_TYPE *segmentTypes,
-            /* [annotation][in] */ 
-            _In_  const FLOAT *segmentData,
-            /* [annotation][in] */ 
-            _In_  const BOOL *segmentStrokes);
+            /* [in] */ UINT32 segmentCount,
+            /* [in] */ UINT32 segmentDataCount,
+            /* [in] */ __RPC__in const XPS_SEGMENT_TYPE *segmentTypes,
+            /* [in] */ __RPC__in const FLOAT *segmentData,
+            /* [in] */ __RPC__in const BOOL *segmentStrokes);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, GetStartPoint)
         HRESULT ( STDMETHODCALLTYPE *GetStartPoint )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *startPoint);
+            /* [retval][out] */ __RPC__out XPS_POINT *startPoint);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, SetStartPoint)
         HRESULT ( STDMETHODCALLTYPE *SetStartPoint )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *startPoint);
+            /* [in] */ __RPC__in const XPS_POINT *startPoint);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, GetIsClosed)
         HRESULT ( STDMETHODCALLTYPE *GetIsClosed )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isClosed);
+            /* [retval][out] */ __RPC__out BOOL *isClosed);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, SetIsClosed)
         HRESULT ( STDMETHODCALLTYPE *SetIsClosed )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][in] */ 
-            _In_  BOOL isClosed);
+            /* [in] */ BOOL isClosed);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, GetIsFilled)
         HRESULT ( STDMETHODCALLTYPE *GetIsFilled )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isFilled);
+            /* [retval][out] */ __RPC__out BOOL *isFilled);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, SetIsFilled)
         HRESULT ( STDMETHODCALLTYPE *SetIsFilled )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][in] */ 
-            _In_  BOOL isFilled);
+            /* [in] */ BOOL isFilled);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, GetSegmentCount)
         HRESULT ( STDMETHODCALLTYPE *GetSegmentCount )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *segmentCount);
+            /* [retval][out] */ __RPC__out UINT32 *segmentCount);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, GetSegmentDataCount)
         HRESULT ( STDMETHODCALLTYPE *GetSegmentDataCount )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *segmentDataCount);
+            /* [retval][out] */ __RPC__out UINT32 *segmentDataCount);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, GetSegmentStrokePattern)
         HRESULT ( STDMETHODCALLTYPE *GetSegmentStrokePattern )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SEGMENT_STROKE_PATTERN *segmentStrokePattern);
+            /* [retval][out] */ __RPC__out XPS_SEGMENT_STROKE_PATTERN *segmentStrokePattern);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigure, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMGeometryFigure * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometryFigure **geometryFigure);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometryFigure **geometryFigure);
         
         END_INTERFACE
     } IXpsOMGeometryFigureVtbl;
@@ -3191,34 +2899,25 @@ EXTERN_C const IID IID_IXpsOMGeometryFigureCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometryFigure **geometryFigure) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometryFigure **geometryFigure) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometryFigure *geometryFigure) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMGeometryFigure *geometryFigure) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometryFigure *geometryFigure) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMGeometryFigure *geometryFigure) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometryFigure *geometryFigure) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMGeometryFigure *geometryFigure) = 0;
         
     };
     
@@ -3232,8 +2931,7 @@ EXTERN_C const IID IID_IXpsOMGeometryFigureCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMGeometryFigureCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3248,44 +2946,35 @@ EXTERN_C const IID IID_IXpsOMGeometryFigureCollection;
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigureCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMGeometryFigureCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigureCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMGeometryFigureCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometryFigure **geometryFigure);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometryFigure **geometryFigure);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigureCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMGeometryFigureCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometryFigure *geometryFigure);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMGeometryFigure *geometryFigure);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigureCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMGeometryFigureCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigureCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMGeometryFigureCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometryFigure *geometryFigure);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMGeometryFigure *geometryFigure);
         
         DECLSPEC_XFGVIRT(IXpsOMGeometryFigureCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMGeometryFigureCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometryFigure *geometryFigure);
+            /* [in] */ __RPC__in_opt IXpsOMGeometryFigure *geometryFigure);
         
         END_INTERFACE
     } IXpsOMGeometryFigureCollectionVtbl;
@@ -3355,152 +3044,115 @@ EXTERN_C const IID IID_IXpsOMPath;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetGeometry( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **geometry) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **geometry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGeometryLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **geometry) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **geometry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetGeometryLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometry *geometry) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMGeometry *geometry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGeometryLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lookup) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lookup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetGeometryLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lookup) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR lookup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAccessibilityShortDescription( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *shortDescription) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *shortDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAccessibilityShortDescription( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR shortDescription) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR shortDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAccessibilityLongDescription( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *longDescription) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *longDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAccessibilityLongDescription( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR longDescription) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR longDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSnapsToPixels( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *snapsToPixels) = 0;
+            /* [retval][out] */ __RPC__out BOOL *snapsToPixels) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSnapsToPixels( 
-            /* [annotation][in] */ 
-            _In_  BOOL snapsToPixels) = 0;
+            /* [in] */ BOOL snapsToPixels) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeBrush( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **brush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **brush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeBrushLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **brush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **brush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStrokeBrushLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *brush) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMBrush *brush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeBrushLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lookup) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lookup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStrokeBrushLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lookup) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR lookup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeDashes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDashCollection **strokeDashes) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDashCollection **strokeDashes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeDashCap( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DASH_CAP *strokeDashCap) = 0;
+            /* [retval][out] */ __RPC__out XPS_DASH_CAP *strokeDashCap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStrokeDashCap( 
-            /* [annotation][in] */ 
-            _In_  XPS_DASH_CAP strokeDashCap) = 0;
+            /* [in] */ XPS_DASH_CAP strokeDashCap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeDashOffset( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *strokeDashOffset) = 0;
+            /* [retval][out] */ __RPC__out FLOAT *strokeDashOffset) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStrokeDashOffset( 
-            /* [annotation][in] */ 
-            _In_  FLOAT strokeDashOffset) = 0;
+            /* [in] */ FLOAT strokeDashOffset) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeStartLineCap( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_LINE_CAP *strokeStartLineCap) = 0;
+            /* [retval][out] */ __RPC__out XPS_LINE_CAP *strokeStartLineCap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStrokeStartLineCap( 
-            /* [annotation][in] */ 
-            _In_  XPS_LINE_CAP strokeStartLineCap) = 0;
+            /* [in] */ XPS_LINE_CAP strokeStartLineCap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeEndLineCap( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_LINE_CAP *strokeEndLineCap) = 0;
+            /* [retval][out] */ __RPC__out XPS_LINE_CAP *strokeEndLineCap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStrokeEndLineCap( 
-            /* [annotation][in] */ 
-            _In_  XPS_LINE_CAP strokeEndLineCap) = 0;
+            /* [in] */ XPS_LINE_CAP strokeEndLineCap) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeLineJoin( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_LINE_JOIN *strokeLineJoin) = 0;
+            /* [retval][out] */ __RPC__out XPS_LINE_JOIN *strokeLineJoin) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStrokeLineJoin( 
-            /* [annotation][in] */ 
-            _In_  XPS_LINE_JOIN strokeLineJoin) = 0;
+            /* [in] */ XPS_LINE_JOIN strokeLineJoin) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeMiterLimit( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *strokeMiterLimit) = 0;
+            /* [retval][out] */ __RPC__out FLOAT *strokeMiterLimit) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStrokeMiterLimit( 
-            /* [annotation][in] */ 
-            _In_  FLOAT strokeMiterLimit) = 0;
+            /* [in] */ FLOAT strokeMiterLimit) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStrokeThickness( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *strokeThickness) = 0;
+            /* [retval][out] */ __RPC__out FLOAT *strokeThickness) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStrokeThickness( 
-            /* [annotation][in] */ 
-            _In_  FLOAT strokeThickness) = 0;
+            /* [in] */ FLOAT strokeThickness) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFillBrush( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **brush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **brush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFillBrushLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **brush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **brush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFillBrushLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *brush) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMBrush *brush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetFillBrushLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lookup) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lookup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetFillBrushLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lookup) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR lookup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPath **path) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPath **path) = 0;
         
     };
     
@@ -3514,8 +3166,7 @@ EXTERN_C const IID IID_IXpsOMPath;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3530,386 +3181,322 @@ EXTERN_C const IID IID_IXpsOMPath;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *matrixTransform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometry)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometry )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **clipGeometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometryLocal)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometryLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **clipGeometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetClipGeometryLocal)
         HRESULT ( STDMETHODCALLTYPE *SetClipGeometryLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometry *clipGeometry);
+            /* [in] */ __RPC__in_opt IXpsOMGeometry *clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometryLookup)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometryLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetClipGeometryLookup)
         HRESULT ( STDMETHODCALLTYPE *SetClipGeometryLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrush)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrush )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **opacityMaskBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrushLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **opacityMaskBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacityMaskBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *SetOpacityMaskBrushLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *opacityMaskBrush);
+            /* [in] */ __RPC__in_opt IXpsOMBrush *opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrushLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacityMaskBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *SetOpacityMaskBrushLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *name);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR name);
+            /* [string][in] */ __RPC__in_string LPCWSTR name);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *GetIsHyperlinkTarget )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isHyperlink);
+            /* [retval][out] */ __RPC__out BOOL *isHyperlink);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *SetIsHyperlinkTarget )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  BOOL isHyperlink);
+            /* [in] */ BOOL isHyperlink);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetHyperlinkNavigateUri)
         HRESULT ( STDMETHODCALLTYPE *GetHyperlinkNavigateUri )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUri **hyperlinkUri);
+            /* [retval][out] */ __RPC__deref_out_opt IUri **hyperlinkUri);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetHyperlinkNavigateUri)
         HRESULT ( STDMETHODCALLTYPE *SetHyperlinkNavigateUri )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  IUri *hyperlinkUri);
+            /* [in] */ __RPC__in_opt IUri *hyperlinkUri);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetLanguage)
         HRESULT ( STDMETHODCALLTYPE *GetLanguage )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *language);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *language);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetLanguage)
         HRESULT ( STDMETHODCALLTYPE *SetLanguage )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language);
+            /* [string][in] */ __RPC__in_string LPCWSTR language);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetGeometry)
         HRESULT ( STDMETHODCALLTYPE *GetGeometry )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **geometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **geometry);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetGeometryLocal)
         HRESULT ( STDMETHODCALLTYPE *GetGeometryLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **geometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **geometry);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetGeometryLocal)
         HRESULT ( STDMETHODCALLTYPE *SetGeometryLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometry *geometry);
+            /* [in] */ __RPC__in_opt IXpsOMGeometry *geometry);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetGeometryLookup)
         HRESULT ( STDMETHODCALLTYPE *GetGeometryLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lookup);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lookup);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetGeometryLookup)
         HRESULT ( STDMETHODCALLTYPE *SetGeometryLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lookup);
+            /* [string][in] */ __RPC__in_string LPCWSTR lookup);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetAccessibilityShortDescription)
         HRESULT ( STDMETHODCALLTYPE *GetAccessibilityShortDescription )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *shortDescription);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *shortDescription);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetAccessibilityShortDescription)
         HRESULT ( STDMETHODCALLTYPE *SetAccessibilityShortDescription )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR shortDescription);
+            /* [string][in] */ __RPC__in_string LPCWSTR shortDescription);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetAccessibilityLongDescription)
         HRESULT ( STDMETHODCALLTYPE *GetAccessibilityLongDescription )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *longDescription);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *longDescription);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetAccessibilityLongDescription)
         HRESULT ( STDMETHODCALLTYPE *SetAccessibilityLongDescription )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR longDescription);
+            /* [string][in] */ __RPC__in_string LPCWSTR longDescription);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetSnapsToPixels)
         HRESULT ( STDMETHODCALLTYPE *GetSnapsToPixels )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *snapsToPixels);
+            /* [retval][out] */ __RPC__out BOOL *snapsToPixels);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetSnapsToPixels)
         HRESULT ( STDMETHODCALLTYPE *SetSnapsToPixels )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  BOOL snapsToPixels);
+            /* [in] */ BOOL snapsToPixels);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeBrush)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeBrush )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **brush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **brush);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeBrushLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **brush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **brush);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetStrokeBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *SetStrokeBrushLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *brush);
+            /* [in] */ __RPC__in_opt IXpsOMBrush *brush);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeBrushLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lookup);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lookup);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetStrokeBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *SetStrokeBrushLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lookup);
+            /* [string][in] */ __RPC__in_string LPCWSTR lookup);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeDashes)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeDashes )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDashCollection **strokeDashes);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDashCollection **strokeDashes);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeDashCap)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeDashCap )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DASH_CAP *strokeDashCap);
+            /* [retval][out] */ __RPC__out XPS_DASH_CAP *strokeDashCap);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetStrokeDashCap)
         HRESULT ( STDMETHODCALLTYPE *SetStrokeDashCap )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  XPS_DASH_CAP strokeDashCap);
+            /* [in] */ XPS_DASH_CAP strokeDashCap);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeDashOffset)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeDashOffset )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *strokeDashOffset);
+            /* [retval][out] */ __RPC__out FLOAT *strokeDashOffset);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetStrokeDashOffset)
         HRESULT ( STDMETHODCALLTYPE *SetStrokeDashOffset )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT strokeDashOffset);
+            /* [in] */ FLOAT strokeDashOffset);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeStartLineCap)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeStartLineCap )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_LINE_CAP *strokeStartLineCap);
+            /* [retval][out] */ __RPC__out XPS_LINE_CAP *strokeStartLineCap);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetStrokeStartLineCap)
         HRESULT ( STDMETHODCALLTYPE *SetStrokeStartLineCap )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  XPS_LINE_CAP strokeStartLineCap);
+            /* [in] */ XPS_LINE_CAP strokeStartLineCap);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeEndLineCap)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeEndLineCap )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_LINE_CAP *strokeEndLineCap);
+            /* [retval][out] */ __RPC__out XPS_LINE_CAP *strokeEndLineCap);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetStrokeEndLineCap)
         HRESULT ( STDMETHODCALLTYPE *SetStrokeEndLineCap )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  XPS_LINE_CAP strokeEndLineCap);
+            /* [in] */ XPS_LINE_CAP strokeEndLineCap);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeLineJoin)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeLineJoin )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_LINE_JOIN *strokeLineJoin);
+            /* [retval][out] */ __RPC__out XPS_LINE_JOIN *strokeLineJoin);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetStrokeLineJoin)
         HRESULT ( STDMETHODCALLTYPE *SetStrokeLineJoin )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  XPS_LINE_JOIN strokeLineJoin);
+            /* [in] */ XPS_LINE_JOIN strokeLineJoin);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeMiterLimit)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeMiterLimit )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *strokeMiterLimit);
+            /* [retval][out] */ __RPC__out FLOAT *strokeMiterLimit);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetStrokeMiterLimit)
         HRESULT ( STDMETHODCALLTYPE *SetStrokeMiterLimit )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT strokeMiterLimit);
+            /* [in] */ FLOAT strokeMiterLimit);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetStrokeThickness)
         HRESULT ( STDMETHODCALLTYPE *GetStrokeThickness )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *strokeThickness);
+            /* [retval][out] */ __RPC__out FLOAT *strokeThickness);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetStrokeThickness)
         HRESULT ( STDMETHODCALLTYPE *SetStrokeThickness )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT strokeThickness);
+            /* [in] */ FLOAT strokeThickness);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetFillBrush)
         HRESULT ( STDMETHODCALLTYPE *GetFillBrush )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **brush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **brush);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetFillBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *GetFillBrushLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **brush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **brush);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetFillBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *SetFillBrushLocal )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *brush);
+            /* [in] */ __RPC__in_opt IXpsOMBrush *brush);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, GetFillBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *GetFillBrushLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lookup);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lookup);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, SetFillBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *SetFillBrushLookup )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lookup);
+            /* [string][in] */ __RPC__in_string LPCWSTR lookup);
         
         DECLSPEC_XFGVIRT(IXpsOMPath, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMPath * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPath **path);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPath **path);
         
         END_INTERFACE
     } IXpsOMPathVtbl;
@@ -4155,12 +3742,10 @@ EXTERN_C const IID IID_IXpsOMBrush;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOpacity( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity) = 0;
+            /* [retval][out] */ __RPC__out FLOAT *opacity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOpacity( 
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity) = 0;
+            /* [in] */ FLOAT opacity) = 0;
         
     };
     
@@ -4174,8 +3759,7 @@ EXTERN_C const IID IID_IXpsOMBrush;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMBrush * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4190,26 +3774,22 @@ EXTERN_C const IID IID_IXpsOMBrush;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMBrush * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         END_INTERFACE
     } IXpsOMBrushVtbl;
@@ -4274,34 +3854,25 @@ EXTERN_C const IID IID_IXpsOMGradientStopCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStop **stop) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGradientStop **stop) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *stop) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMGradientStop *stop) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *stop) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMGradientStop *stop) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *stop) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMGradientStop *stop) = 0;
         
     };
     
@@ -4315,8 +3886,7 @@ EXTERN_C const IID IID_IXpsOMGradientStopCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMGradientStopCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4331,44 +3901,35 @@ EXTERN_C const IID IID_IXpsOMGradientStopCollection;
         DECLSPEC_XFGVIRT(IXpsOMGradientStopCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMGradientStopCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientStopCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMGradientStopCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStop **stop);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGradientStop **stop);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientStopCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMGradientStopCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *stop);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMGradientStop *stop);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientStopCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMGradientStopCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientStopCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMGradientStopCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *stop);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMGradientStop *stop);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientStopCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMGradientStopCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *stop);
+            /* [in] */ __RPC__in_opt IXpsOMGradientStop *stop);
         
         END_INTERFACE
     } IXpsOMGradientStopCollectionVtbl;
@@ -4438,20 +3999,15 @@ EXTERN_C const IID IID_IXpsOMSolidColorBrush;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetColor( 
-            /* [annotation][out] */ 
-            _Out_  XPS_COLOR *color,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **colorProfile) = 0;
+            /* [out] */ __RPC__out XPS_COLOR *color,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResource **colorProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetColor( 
-            /* [annotation][in] */ 
-            _In_  const XPS_COLOR *color,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfile) = 0;
+            /* [in] */ __RPC__in const XPS_COLOR *color,
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *colorProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSolidColorBrush **solidColorBrush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMSolidColorBrush **solidColorBrush) = 0;
         
     };
     
@@ -4465,8 +4021,7 @@ EXTERN_C const IID IID_IXpsOMSolidColorBrush;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMSolidColorBrush * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4481,48 +4036,39 @@ EXTERN_C const IID IID_IXpsOMSolidColorBrush;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMSolidColorBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMSolidColorBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMSolidColorBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMSolidColorBrush * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMSolidColorBrush, GetColor)
         HRESULT ( STDMETHODCALLTYPE *GetColor )( 
             __RPC__in IXpsOMSolidColorBrush * This,
-            /* [annotation][out] */ 
-            _Out_  XPS_COLOR *color,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **colorProfile);
+            /* [out] */ __RPC__out XPS_COLOR *color,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResource **colorProfile);
         
         DECLSPEC_XFGVIRT(IXpsOMSolidColorBrush, SetColor)
         HRESULT ( STDMETHODCALLTYPE *SetColor )( 
             __RPC__in IXpsOMSolidColorBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_COLOR *color,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfile);
+            /* [in] */ __RPC__in const XPS_COLOR *color,
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *colorProfile);
         
         DECLSPEC_XFGVIRT(IXpsOMSolidColorBrush, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMSolidColorBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSolidColorBrush **solidColorBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMSolidColorBrush **solidColorBrush);
         
         END_INTERFACE
     } IXpsOMSolidColorBrushVtbl;
@@ -4597,48 +4143,37 @@ EXTERN_C const IID IID_IXpsOMTileBrush;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTransform( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransformLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTransformLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *transform) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransformLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTransformLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetViewbox( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *viewbox) = 0;
+            /* [retval][out] */ __RPC__out XPS_RECT *viewbox) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetViewbox( 
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewbox) = 0;
+            /* [in] */ __RPC__in const XPS_RECT *viewbox) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetViewport( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *viewport) = 0;
+            /* [retval][out] */ __RPC__out XPS_RECT *viewport) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetViewport( 
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewport) = 0;
+            /* [in] */ __RPC__in const XPS_RECT *viewport) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTileMode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_TILE_MODE *tileMode) = 0;
+            /* [retval][out] */ __RPC__out XPS_TILE_MODE *tileMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTileMode( 
-            /* [annotation][in] */ 
-            _In_  XPS_TILE_MODE tileMode) = 0;
+            /* [in] */ XPS_TILE_MODE tileMode) = 0;
         
     };
     
@@ -4652,8 +4187,7 @@ EXTERN_C const IID IID_IXpsOMTileBrush;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4668,92 +4202,77 @@ EXTERN_C const IID IID_IXpsOMTileBrush;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *transform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *transform);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetViewbox)
         HRESULT ( STDMETHODCALLTYPE *GetViewbox )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *viewbox);
+            /* [retval][out] */ __RPC__out XPS_RECT *viewbox);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetViewbox)
         HRESULT ( STDMETHODCALLTYPE *SetViewbox )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewbox);
+            /* [in] */ __RPC__in const XPS_RECT *viewbox);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetViewport)
         HRESULT ( STDMETHODCALLTYPE *GetViewport )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *viewport);
+            /* [retval][out] */ __RPC__out XPS_RECT *viewport);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetViewport)
         HRESULT ( STDMETHODCALLTYPE *SetViewport )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewport);
+            /* [in] */ __RPC__in const XPS_RECT *viewport);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTileMode)
         HRESULT ( STDMETHODCALLTYPE *GetTileMode )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_TILE_MODE *tileMode);
+            /* [retval][out] */ __RPC__out XPS_TILE_MODE *tileMode);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetTileMode)
         HRESULT ( STDMETHODCALLTYPE *SetTileMode )( 
             __RPC__in IXpsOMTileBrush * This,
-            /* [annotation][in] */ 
-            _In_  XPS_TILE_MODE tileMode);
+            /* [in] */ XPS_TILE_MODE tileMode);
         
         END_INTERFACE
     } IXpsOMTileBrushVtbl;
@@ -4852,28 +4371,22 @@ EXTERN_C const IID IID_IXpsOMVisualBrush;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetVisual( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisual **visual) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisual **visual) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVisualLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisual **visual) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisual **visual) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVisualLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMVisual *visual) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMVisual *visual) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVisualLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lookup) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lookup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVisualLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lookup) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR lookup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisualBrush **visualBrush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisualBrush **visualBrush) = 0;
         
     };
     
@@ -4887,8 +4400,7 @@ EXTERN_C const IID IID_IXpsOMVisualBrush;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4903,128 +4415,107 @@ EXTERN_C const IID IID_IXpsOMVisualBrush;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *transform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *transform);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetViewbox)
         HRESULT ( STDMETHODCALLTYPE *GetViewbox )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *viewbox);
+            /* [retval][out] */ __RPC__out XPS_RECT *viewbox);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetViewbox)
         HRESULT ( STDMETHODCALLTYPE *SetViewbox )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewbox);
+            /* [in] */ __RPC__in const XPS_RECT *viewbox);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetViewport)
         HRESULT ( STDMETHODCALLTYPE *GetViewport )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *viewport);
+            /* [retval][out] */ __RPC__out XPS_RECT *viewport);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetViewport)
         HRESULT ( STDMETHODCALLTYPE *SetViewport )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewport);
+            /* [in] */ __RPC__in const XPS_RECT *viewport);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTileMode)
         HRESULT ( STDMETHODCALLTYPE *GetTileMode )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_TILE_MODE *tileMode);
+            /* [retval][out] */ __RPC__out XPS_TILE_MODE *tileMode);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetTileMode)
         HRESULT ( STDMETHODCALLTYPE *SetTileMode )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][in] */ 
-            _In_  XPS_TILE_MODE tileMode);
+            /* [in] */ XPS_TILE_MODE tileMode);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualBrush, GetVisual)
         HRESULT ( STDMETHODCALLTYPE *GetVisual )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisual **visual);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisual **visual);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualBrush, GetVisualLocal)
         HRESULT ( STDMETHODCALLTYPE *GetVisualLocal )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisual **visual);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisual **visual);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualBrush, SetVisualLocal)
         HRESULT ( STDMETHODCALLTYPE *SetVisualLocal )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMVisual *visual);
+            /* [in] */ __RPC__in_opt IXpsOMVisual *visual);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualBrush, GetVisualLookup)
         HRESULT ( STDMETHODCALLTYPE *GetVisualLookup )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lookup);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lookup);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualBrush, SetVisualLookup)
         HRESULT ( STDMETHODCALLTYPE *SetVisualLookup )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lookup);
+            /* [string][in] */ __RPC__in_string LPCWSTR lookup);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualBrush, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMVisualBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisualBrush **visualBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisualBrush **visualBrush);
         
         END_INTERFACE
     } IXpsOMVisualBrushVtbl;
@@ -5142,24 +4633,19 @@ EXTERN_C const IID IID_IXpsOMImageBrush;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetImageResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageResource **imageResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetImageResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *imageResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *imageResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetColorProfileResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **colorProfileResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResource **colorProfileResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetColorProfileResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfileResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *colorProfileResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageBrush **imageBrush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageBrush **imageBrush) = 0;
         
     };
     
@@ -5173,8 +4659,7 @@ EXTERN_C const IID IID_IXpsOMImageBrush;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5189,122 +4674,102 @@ EXTERN_C const IID IID_IXpsOMImageBrush;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *transform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *transform);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetViewbox)
         HRESULT ( STDMETHODCALLTYPE *GetViewbox )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *viewbox);
+            /* [retval][out] */ __RPC__out XPS_RECT *viewbox);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetViewbox)
         HRESULT ( STDMETHODCALLTYPE *SetViewbox )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewbox);
+            /* [in] */ __RPC__in const XPS_RECT *viewbox);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetViewport)
         HRESULT ( STDMETHODCALLTYPE *GetViewport )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *viewport);
+            /* [retval][out] */ __RPC__out XPS_RECT *viewport);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetViewport)
         HRESULT ( STDMETHODCALLTYPE *SetViewport )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewport);
+            /* [in] */ __RPC__in const XPS_RECT *viewport);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, GetTileMode)
         HRESULT ( STDMETHODCALLTYPE *GetTileMode )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_TILE_MODE *tileMode);
+            /* [retval][out] */ __RPC__out XPS_TILE_MODE *tileMode);
         
         DECLSPEC_XFGVIRT(IXpsOMTileBrush, SetTileMode)
         HRESULT ( STDMETHODCALLTYPE *SetTileMode )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][in] */ 
-            _In_  XPS_TILE_MODE tileMode);
+            /* [in] */ XPS_TILE_MODE tileMode);
         
         DECLSPEC_XFGVIRT(IXpsOMImageBrush, GetImageResource)
         HRESULT ( STDMETHODCALLTYPE *GetImageResource )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageResource **imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMImageBrush, SetImageResource)
         HRESULT ( STDMETHODCALLTYPE *SetImageResource )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *imageResource);
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMImageBrush, GetColorProfileResource)
         HRESULT ( STDMETHODCALLTYPE *GetColorProfileResource )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **colorProfileResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResource **colorProfileResource);
         
         DECLSPEC_XFGVIRT(IXpsOMImageBrush, SetColorProfileResource)
         HRESULT ( STDMETHODCALLTYPE *SetColorProfileResource )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfileResource);
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *colorProfileResource);
         
         DECLSPEC_XFGVIRT(IXpsOMImageBrush, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMImageBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageBrush **imageBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageBrush **imageBrush);
         
         END_INTERFACE
     } IXpsOMImageBrushVtbl;
@@ -5419,32 +4884,24 @@ EXTERN_C const IID IID_IXpsOMGradientStop;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientBrush **owner) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGradientBrush **owner) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOffset( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *offset) = 0;
+            /* [retval][out] */ __RPC__out FLOAT *offset) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOffset( 
-            /* [annotation][in] */ 
-            _In_  FLOAT offset) = 0;
+            /* [in] */ FLOAT offset) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetColor( 
-            /* [annotation][out] */ 
-            _Out_  XPS_COLOR *color,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **colorProfile) = 0;
+            /* [out] */ __RPC__out XPS_COLOR *color,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResource **colorProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetColor( 
-            /* [annotation][in] */ 
-            _In_  const XPS_COLOR *color,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfile) = 0;
+            /* [in] */ __RPC__in const XPS_COLOR *color,
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *colorProfile) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStop **gradientStop) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGradientStop **gradientStop) = 0;
         
     };
     
@@ -5458,8 +4915,7 @@ EXTERN_C const IID IID_IXpsOMGradientStop;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMGradientStop * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5474,42 +4930,34 @@ EXTERN_C const IID IID_IXpsOMGradientStop;
         DECLSPEC_XFGVIRT(IXpsOMGradientStop, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMGradientStop * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientBrush **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGradientBrush **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientStop, GetOffset)
         HRESULT ( STDMETHODCALLTYPE *GetOffset )( 
             __RPC__in IXpsOMGradientStop * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *offset);
+            /* [retval][out] */ __RPC__out FLOAT *offset);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientStop, SetOffset)
         HRESULT ( STDMETHODCALLTYPE *SetOffset )( 
             __RPC__in IXpsOMGradientStop * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT offset);
+            /* [in] */ FLOAT offset);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientStop, GetColor)
         HRESULT ( STDMETHODCALLTYPE *GetColor )( 
             __RPC__in IXpsOMGradientStop * This,
-            /* [annotation][out] */ 
-            _Out_  XPS_COLOR *color,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **colorProfile);
+            /* [out] */ __RPC__out XPS_COLOR *color,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResource **colorProfile);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientStop, SetColor)
         HRESULT ( STDMETHODCALLTYPE *SetColor )( 
             __RPC__in IXpsOMGradientStop * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_COLOR *color,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfile);
+            /* [in] */ __RPC__in const XPS_COLOR *color,
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *colorProfile);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientStop, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMGradientStop * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStop **gradientStop);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGradientStop **gradientStop);
         
         END_INTERFACE
     } IXpsOMGradientStopVtbl;
@@ -5579,44 +5027,34 @@ EXTERN_C const IID IID_IXpsOMGradientBrush;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetGradientStops( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStopCollection **gradientStops) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGradientStopCollection **gradientStops) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransform( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransformLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTransformLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *transform) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransformLookup( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTransformLookup( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSpreadMethod( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SPREAD_METHOD *spreadMethod) = 0;
+            /* [retval][out] */ __RPC__out XPS_SPREAD_METHOD *spreadMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSpreadMethod( 
-            /* [annotation][in] */ 
-            _In_  XPS_SPREAD_METHOD spreadMethod) = 0;
+            /* [in] */ XPS_SPREAD_METHOD spreadMethod) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetColorInterpolationMode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_COLOR_INTERPOLATION *colorInterpolationMode) = 0;
+            /* [retval][out] */ __RPC__out XPS_COLOR_INTERPOLATION *colorInterpolationMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetColorInterpolationMode( 
-            /* [annotation][in] */ 
-            _In_  XPS_COLOR_INTERPOLATION colorInterpolationMode) = 0;
+            /* [in] */ XPS_COLOR_INTERPOLATION colorInterpolationMode) = 0;
         
     };
     
@@ -5630,8 +5068,7 @@ EXTERN_C const IID IID_IXpsOMGradientBrush;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5646,86 +5083,72 @@ EXTERN_C const IID IID_IXpsOMGradientBrush;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetGradientStops)
         HRESULT ( STDMETHODCALLTYPE *GetGradientStops )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStopCollection **gradientStops);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGradientStopCollection **gradientStops);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *transform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetSpreadMethod)
         HRESULT ( STDMETHODCALLTYPE *GetSpreadMethod )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SPREAD_METHOD *spreadMethod);
+            /* [retval][out] */ __RPC__out XPS_SPREAD_METHOD *spreadMethod);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetSpreadMethod)
         HRESULT ( STDMETHODCALLTYPE *SetSpreadMethod )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  XPS_SPREAD_METHOD spreadMethod);
+            /* [in] */ XPS_SPREAD_METHOD spreadMethod);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetColorInterpolationMode)
         HRESULT ( STDMETHODCALLTYPE *GetColorInterpolationMode )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_COLOR_INTERPOLATION *colorInterpolationMode);
+            /* [retval][out] */ __RPC__out XPS_COLOR_INTERPOLATION *colorInterpolationMode);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetColorInterpolationMode)
         HRESULT ( STDMETHODCALLTYPE *SetColorInterpolationMode )( 
             __RPC__in IXpsOMGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  XPS_COLOR_INTERPOLATION colorInterpolationMode);
+            /* [in] */ XPS_COLOR_INTERPOLATION colorInterpolationMode);
         
         END_INTERFACE
     } IXpsOMGradientBrushVtbl;
@@ -5821,24 +5244,19 @@ EXTERN_C const IID IID_IXpsOMLinearGradientBrush;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStartPoint( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *startPoint) = 0;
+            /* [retval][out] */ __RPC__out XPS_POINT *startPoint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStartPoint( 
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *startPoint) = 0;
+            /* [in] */ __RPC__in const XPS_POINT *startPoint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEndPoint( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *endPoint) = 0;
+            /* [retval][out] */ __RPC__out XPS_POINT *endPoint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetEndPoint( 
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *endPoint) = 0;
+            /* [in] */ __RPC__in const XPS_POINT *endPoint) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMLinearGradientBrush **linearGradientBrush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMLinearGradientBrush **linearGradientBrush) = 0;
         
     };
     
@@ -5852,8 +5270,7 @@ EXTERN_C const IID IID_IXpsOMLinearGradientBrush;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5868,116 +5285,97 @@ EXTERN_C const IID IID_IXpsOMLinearGradientBrush;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetGradientStops)
         HRESULT ( STDMETHODCALLTYPE *GetGradientStops )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStopCollection **gradientStops);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGradientStopCollection **gradientStops);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *transform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetSpreadMethod)
         HRESULT ( STDMETHODCALLTYPE *GetSpreadMethod )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SPREAD_METHOD *spreadMethod);
+            /* [retval][out] */ __RPC__out XPS_SPREAD_METHOD *spreadMethod);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetSpreadMethod)
         HRESULT ( STDMETHODCALLTYPE *SetSpreadMethod )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  XPS_SPREAD_METHOD spreadMethod);
+            /* [in] */ XPS_SPREAD_METHOD spreadMethod);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetColorInterpolationMode)
         HRESULT ( STDMETHODCALLTYPE *GetColorInterpolationMode )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_COLOR_INTERPOLATION *colorInterpolationMode);
+            /* [retval][out] */ __RPC__out XPS_COLOR_INTERPOLATION *colorInterpolationMode);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetColorInterpolationMode)
         HRESULT ( STDMETHODCALLTYPE *SetColorInterpolationMode )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  XPS_COLOR_INTERPOLATION colorInterpolationMode);
+            /* [in] */ XPS_COLOR_INTERPOLATION colorInterpolationMode);
         
         DECLSPEC_XFGVIRT(IXpsOMLinearGradientBrush, GetStartPoint)
         HRESULT ( STDMETHODCALLTYPE *GetStartPoint )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *startPoint);
+            /* [retval][out] */ __RPC__out XPS_POINT *startPoint);
         
         DECLSPEC_XFGVIRT(IXpsOMLinearGradientBrush, SetStartPoint)
         HRESULT ( STDMETHODCALLTYPE *SetStartPoint )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *startPoint);
+            /* [in] */ __RPC__in const XPS_POINT *startPoint);
         
         DECLSPEC_XFGVIRT(IXpsOMLinearGradientBrush, GetEndPoint)
         HRESULT ( STDMETHODCALLTYPE *GetEndPoint )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *endPoint);
+            /* [retval][out] */ __RPC__out XPS_POINT *endPoint);
         
         DECLSPEC_XFGVIRT(IXpsOMLinearGradientBrush, SetEndPoint)
         HRESULT ( STDMETHODCALLTYPE *SetEndPoint )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *endPoint);
+            /* [in] */ __RPC__in const XPS_POINT *endPoint);
         
         DECLSPEC_XFGVIRT(IXpsOMLinearGradientBrush, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMLinearGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMLinearGradientBrush **linearGradientBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMLinearGradientBrush **linearGradientBrush);
         
         END_INTERFACE
     } IXpsOMLinearGradientBrushVtbl;
@@ -6089,32 +5487,25 @@ EXTERN_C const IID IID_IXpsOMRadialGradientBrush;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCenter( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *center) = 0;
+            /* [retval][out] */ __RPC__out XPS_POINT *center) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCenter( 
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *center) = 0;
+            /* [in] */ __RPC__in const XPS_POINT *center) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRadiiSizes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIZE *radiiSizes) = 0;
+            /* [retval][out] */ __RPC__out XPS_SIZE *radiiSizes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRadiiSizes( 
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *radiiSizes) = 0;
+            /* [in] */ __RPC__in const XPS_SIZE *radiiSizes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetGradientOrigin( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *origin) = 0;
+            /* [retval][out] */ __RPC__out XPS_POINT *origin) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetGradientOrigin( 
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *origin) = 0;
+            /* [in] */ __RPC__in const XPS_POINT *origin) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRadialGradientBrush **radialGradientBrush) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRadialGradientBrush **radialGradientBrush) = 0;
         
     };
     
@@ -6128,8 +5519,7 @@ EXTERN_C const IID IID_IXpsOMRadialGradientBrush;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6144,128 +5534,107 @@ EXTERN_C const IID IID_IXpsOMRadialGradientBrush;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMBrush, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetGradientStops)
         HRESULT ( STDMETHODCALLTYPE *GetGradientStops )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStopCollection **gradientStops);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGradientStopCollection **gradientStops);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *transform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *transform);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetSpreadMethod)
         HRESULT ( STDMETHODCALLTYPE *GetSpreadMethod )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SPREAD_METHOD *spreadMethod);
+            /* [retval][out] */ __RPC__out XPS_SPREAD_METHOD *spreadMethod);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetSpreadMethod)
         HRESULT ( STDMETHODCALLTYPE *SetSpreadMethod )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  XPS_SPREAD_METHOD spreadMethod);
+            /* [in] */ XPS_SPREAD_METHOD spreadMethod);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, GetColorInterpolationMode)
         HRESULT ( STDMETHODCALLTYPE *GetColorInterpolationMode )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_COLOR_INTERPOLATION *colorInterpolationMode);
+            /* [retval][out] */ __RPC__out XPS_COLOR_INTERPOLATION *colorInterpolationMode);
         
         DECLSPEC_XFGVIRT(IXpsOMGradientBrush, SetColorInterpolationMode)
         HRESULT ( STDMETHODCALLTYPE *SetColorInterpolationMode )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  XPS_COLOR_INTERPOLATION colorInterpolationMode);
+            /* [in] */ XPS_COLOR_INTERPOLATION colorInterpolationMode);
         
         DECLSPEC_XFGVIRT(IXpsOMRadialGradientBrush, GetCenter)
         HRESULT ( STDMETHODCALLTYPE *GetCenter )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *center);
+            /* [retval][out] */ __RPC__out XPS_POINT *center);
         
         DECLSPEC_XFGVIRT(IXpsOMRadialGradientBrush, SetCenter)
         HRESULT ( STDMETHODCALLTYPE *SetCenter )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *center);
+            /* [in] */ __RPC__in const XPS_POINT *center);
         
         DECLSPEC_XFGVIRT(IXpsOMRadialGradientBrush, GetRadiiSizes)
         HRESULT ( STDMETHODCALLTYPE *GetRadiiSizes )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIZE *radiiSizes);
+            /* [retval][out] */ __RPC__out XPS_SIZE *radiiSizes);
         
         DECLSPEC_XFGVIRT(IXpsOMRadialGradientBrush, SetRadiiSizes)
         HRESULT ( STDMETHODCALLTYPE *SetRadiiSizes )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *radiiSizes);
+            /* [in] */ __RPC__in const XPS_SIZE *radiiSizes);
         
         DECLSPEC_XFGVIRT(IXpsOMRadialGradientBrush, GetGradientOrigin)
         HRESULT ( STDMETHODCALLTYPE *GetGradientOrigin )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_POINT *origin);
+            /* [retval][out] */ __RPC__out XPS_POINT *origin);
         
         DECLSPEC_XFGVIRT(IXpsOMRadialGradientBrush, SetGradientOrigin)
         HRESULT ( STDMETHODCALLTYPE *SetGradientOrigin )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *origin);
+            /* [in] */ __RPC__in const XPS_POINT *origin);
         
         DECLSPEC_XFGVIRT(IXpsOMRadialGradientBrush, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMRadialGradientBrush * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRadialGradientBrush **radialGradientBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRadialGradientBrush **radialGradientBrush);
         
         END_INTERFACE
     } IXpsOMRadialGradientBrushVtbl;
@@ -6394,8 +5763,7 @@ EXTERN_C const IID IID_IXpsOMResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6410,14 +5778,12 @@ EXTERN_C const IID IID_IXpsOMResource;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMResource * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         END_INTERFACE
     } IXpsOMResourceVtbl;
@@ -6476,20 +5842,16 @@ EXTERN_C const IID IID_IXpsOMPartResources;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetFontResources( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResourceCollection **fontResources) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMFontResourceCollection **fontResources) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetImageResources( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResourceCollection **imageResources) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageResourceCollection **imageResources) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetColorProfileResources( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResourceCollection **colorProfileResources) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResourceCollection **colorProfileResources) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRemoteDictionaryResources( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResourceCollection **dictionaryResources) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRemoteDictionaryResourceCollection **dictionaryResources) = 0;
         
     };
     
@@ -6503,8 +5865,7 @@ EXTERN_C const IID IID_IXpsOMPartResources;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMPartResources * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6519,26 +5880,22 @@ EXTERN_C const IID IID_IXpsOMPartResources;
         DECLSPEC_XFGVIRT(IXpsOMPartResources, GetFontResources)
         HRESULT ( STDMETHODCALLTYPE *GetFontResources )( 
             __RPC__in IXpsOMPartResources * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResourceCollection **fontResources);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMFontResourceCollection **fontResources);
         
         DECLSPEC_XFGVIRT(IXpsOMPartResources, GetImageResources)
         HRESULT ( STDMETHODCALLTYPE *GetImageResources )( 
             __RPC__in IXpsOMPartResources * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResourceCollection **imageResources);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageResourceCollection **imageResources);
         
         DECLSPEC_XFGVIRT(IXpsOMPartResources, GetColorProfileResources)
         HRESULT ( STDMETHODCALLTYPE *GetColorProfileResources )( 
             __RPC__in IXpsOMPartResources * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResourceCollection **colorProfileResources);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResourceCollection **colorProfileResources);
         
         DECLSPEC_XFGVIRT(IXpsOMPartResources, GetRemoteDictionaryResources)
         HRESULT ( STDMETHODCALLTYPE *GetRemoteDictionaryResources )( 
             __RPC__in IXpsOMPartResources * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResourceCollection **dictionaryResources);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRemoteDictionaryResourceCollection **dictionaryResources);
         
         END_INTERFACE
     } IXpsOMPartResourcesVtbl;
@@ -6602,64 +5959,44 @@ EXTERN_C const IID IID_IXpsOMDictionary;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][string][out] */ 
-            _Out_  LPWSTR *key,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMShareable **entry) = 0;
+            /* [in] */ UINT32 index,
+            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *key,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMShareable **entry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetByKey( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key,
-            /* [annotation][in] */ 
-            _In_  IXpsOMShareable *beforeEntry,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMShareable **entry) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR key,
+            /* [in] */ __RPC__in_opt IXpsOMShareable *beforeEntry,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMShareable **entry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIndex( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMShareable *entry,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *index) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMShareable *entry,
+            /* [retval][out] */ __RPC__out UINT32 *index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key,
-            /* [annotation][in] */ 
-            _In_  IXpsOMShareable *entry) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR key,
+            /* [in] */ __RPC__in_opt IXpsOMShareable *entry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key,
-            /* [annotation][in] */ 
-            _In_  IXpsOMShareable *entry) = 0;
+            /* [in] */ UINT32 index,
+            /* [string][in] */ __RPC__in_string LPCWSTR key,
+            /* [in] */ __RPC__in_opt IXpsOMShareable *entry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key,
-            /* [annotation][in] */ 
-            _In_  IXpsOMShareable *entry) = 0;
+            /* [in] */ UINT32 index,
+            /* [string][in] */ __RPC__in_string LPCWSTR key,
+            /* [in] */ __RPC__in_opt IXpsOMShareable *entry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **dictionary) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **dictionary) = 0;
         
     };
     
@@ -6673,8 +6010,7 @@ EXTERN_C const IID IID_IXpsOMDictionary;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6689,82 +6025,62 @@ EXTERN_C const IID IID_IXpsOMDictionary;
         DECLSPEC_XFGVIRT(IXpsOMDictionary, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMDictionary, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMDictionary, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][string][out] */ 
-            _Out_  LPWSTR *key,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMShareable **entry);
+            /* [in] */ UINT32 index,
+            /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *key,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMShareable **entry);
         
         DECLSPEC_XFGVIRT(IXpsOMDictionary, GetByKey)
         HRESULT ( STDMETHODCALLTYPE *GetByKey )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key,
-            /* [annotation][in] */ 
-            _In_  IXpsOMShareable *beforeEntry,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMShareable **entry);
+            /* [string][in] */ __RPC__in_string LPCWSTR key,
+            /* [in] */ __RPC__in_opt IXpsOMShareable *beforeEntry,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMShareable **entry);
         
         DECLSPEC_XFGVIRT(IXpsOMDictionary, GetIndex)
         HRESULT ( STDMETHODCALLTYPE *GetIndex )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMShareable *entry,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *index);
+            /* [in] */ __RPC__in_opt IXpsOMShareable *entry,
+            /* [retval][out] */ __RPC__out UINT32 *index);
         
         DECLSPEC_XFGVIRT(IXpsOMDictionary, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key,
-            /* [annotation][in] */ 
-            _In_  IXpsOMShareable *entry);
+            /* [string][in] */ __RPC__in_string LPCWSTR key,
+            /* [in] */ __RPC__in_opt IXpsOMShareable *entry);
         
         DECLSPEC_XFGVIRT(IXpsOMDictionary, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key,
-            /* [annotation][in] */ 
-            _In_  IXpsOMShareable *entry);
+            /* [in] */ UINT32 index,
+            /* [string][in] */ __RPC__in_string LPCWSTR key,
+            /* [in] */ __RPC__in_opt IXpsOMShareable *entry);
         
         DECLSPEC_XFGVIRT(IXpsOMDictionary, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMDictionary, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key,
-            /* [annotation][in] */ 
-            _In_  IXpsOMShareable *entry);
+            /* [in] */ UINT32 index,
+            /* [string][in] */ __RPC__in_string LPCWSTR key,
+            /* [in] */ __RPC__in_opt IXpsOMShareable *entry);
         
         DECLSPEC_XFGVIRT(IXpsOMDictionary, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMDictionary * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **dictionary);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **dictionary);
         
         END_INTERFACE
     } IXpsOMDictionaryVtbl;
@@ -6846,20 +6162,15 @@ EXTERN_C const IID IID_IXpsOMFontResource;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStream( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **readerStream) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **readerStream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContent( 
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  XPS_FONT_EMBEDDING embeddingOption,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName) = 0;
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ XPS_FONT_EMBEDDING embeddingOption,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetEmbeddingOption( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_FONT_EMBEDDING *embeddingOption) = 0;
+            /* [retval][out] */ __RPC__out XPS_FONT_EMBEDDING *embeddingOption) = 0;
         
     };
     
@@ -6873,8 +6184,7 @@ EXTERN_C const IID IID_IXpsOMFontResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMFontResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6889,36 +6199,29 @@ EXTERN_C const IID IID_IXpsOMFontResource;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMFontResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMFontResource * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMFontResource, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             __RPC__in IXpsOMFontResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **readerStream);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **readerStream);
         
         DECLSPEC_XFGVIRT(IXpsOMFontResource, SetContent)
         HRESULT ( STDMETHODCALLTYPE *SetContent )( 
             __RPC__in IXpsOMFontResource * This,
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  XPS_FONT_EMBEDDING embeddingOption,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName);
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ XPS_FONT_EMBEDDING embeddingOption,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName);
         
         DECLSPEC_XFGVIRT(IXpsOMFontResource, GetEmbeddingOption)
         HRESULT ( STDMETHODCALLTYPE *GetEmbeddingOption )( 
             __RPC__in IXpsOMFontResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_FONT_EMBEDDING *embeddingOption);
+            /* [retval][out] */ __RPC__out XPS_FONT_EMBEDDING *embeddingOption);
         
         END_INTERFACE
     } IXpsOMFontResourceVtbl;
@@ -6987,40 +6290,29 @@ EXTERN_C const IID IID_IXpsOMFontResourceCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResource **value) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMFontResource **value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *value) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMFontResource *value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *value) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMFontResource *value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *value) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMFontResource *value) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetByPartName( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResource **part) = 0;
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMFontResource **part) = 0;
         
     };
     
@@ -7034,8 +6326,7 @@ EXTERN_C const IID IID_IXpsOMFontResourceCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMFontResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7050,52 +6341,41 @@ EXTERN_C const IID IID_IXpsOMFontResourceCollection;
         DECLSPEC_XFGVIRT(IXpsOMFontResourceCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMFontResourceCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMFontResourceCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMFontResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResource **value);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMFontResource **value);
         
         DECLSPEC_XFGVIRT(IXpsOMFontResourceCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMFontResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *value);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMFontResource *value);
         
         DECLSPEC_XFGVIRT(IXpsOMFontResourceCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMFontResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *value);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMFontResource *value);
         
         DECLSPEC_XFGVIRT(IXpsOMFontResourceCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMFontResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *value);
+            /* [in] */ __RPC__in_opt IXpsOMFontResource *value);
         
         DECLSPEC_XFGVIRT(IXpsOMFontResourceCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMFontResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMFontResourceCollection, GetByPartName)
         HRESULT ( STDMETHODCALLTYPE *GetByPartName )( 
             __RPC__in IXpsOMFontResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResource **part);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMFontResource **part);
         
         END_INTERFACE
     } IXpsOMFontResourceCollectionVtbl;
@@ -7168,20 +6448,15 @@ EXTERN_C const IID IID_IXpsOMImageResource;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStream( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **readerStream) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **readerStream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContent( 
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  XPS_IMAGE_TYPE imageType,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName) = 0;
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ XPS_IMAGE_TYPE imageType,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetImageType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_IMAGE_TYPE *imageType) = 0;
+            /* [retval][out] */ __RPC__out XPS_IMAGE_TYPE *imageType) = 0;
         
     };
     
@@ -7195,8 +6470,7 @@ EXTERN_C const IID IID_IXpsOMImageResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMImageResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7211,36 +6485,29 @@ EXTERN_C const IID IID_IXpsOMImageResource;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMImageResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMImageResource * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMImageResource, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             __RPC__in IXpsOMImageResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **readerStream);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **readerStream);
         
         DECLSPEC_XFGVIRT(IXpsOMImageResource, SetContent)
         HRESULT ( STDMETHODCALLTYPE *SetContent )( 
             __RPC__in IXpsOMImageResource * This,
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  XPS_IMAGE_TYPE imageType,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName);
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ XPS_IMAGE_TYPE imageType,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName);
         
         DECLSPEC_XFGVIRT(IXpsOMImageResource, GetImageType)
         HRESULT ( STDMETHODCALLTYPE *GetImageType )( 
             __RPC__in IXpsOMImageResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_IMAGE_TYPE *imageType);
+            /* [retval][out] */ __RPC__out XPS_IMAGE_TYPE *imageType);
         
         END_INTERFACE
     } IXpsOMImageResourceVtbl;
@@ -7309,40 +6576,29 @@ EXTERN_C const IID IID_IXpsOMImageResourceCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **object) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageResource **object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *object) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *object) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *object) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetByPartName( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **part) = 0;
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageResource **part) = 0;
         
     };
     
@@ -7356,8 +6612,7 @@ EXTERN_C const IID IID_IXpsOMImageResourceCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMImageResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7372,52 +6627,41 @@ EXTERN_C const IID IID_IXpsOMImageResourceCollection;
         DECLSPEC_XFGVIRT(IXpsOMImageResourceCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMImageResourceCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMImageResourceCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMImageResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **object);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageResource **object);
         
         DECLSPEC_XFGVIRT(IXpsOMImageResourceCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMImageResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *object);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *object);
         
         DECLSPEC_XFGVIRT(IXpsOMImageResourceCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMImageResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMImageResourceCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMImageResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *object);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *object);
         
         DECLSPEC_XFGVIRT(IXpsOMImageResourceCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMImageResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *object);
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *object);
         
         DECLSPEC_XFGVIRT(IXpsOMImageResourceCollection, GetByPartName)
         HRESULT ( STDMETHODCALLTYPE *GetByPartName )( 
             __RPC__in IXpsOMImageResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **part);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageResource **part);
         
         END_INTERFACE
     } IXpsOMImageResourceCollectionVtbl;
@@ -7490,14 +6734,11 @@ EXTERN_C const IID IID_IXpsOMColorProfileResource;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStream( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **stream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContent( 
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName) = 0;
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName) = 0;
         
     };
     
@@ -7511,8 +6752,7 @@ EXTERN_C const IID IID_IXpsOMColorProfileResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMColorProfileResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7527,28 +6767,23 @@ EXTERN_C const IID IID_IXpsOMColorProfileResource;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMColorProfileResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMColorProfileResource * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMColorProfileResource, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             __RPC__in IXpsOMColorProfileResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **stream);
         
         DECLSPEC_XFGVIRT(IXpsOMColorProfileResource, SetContent)
         HRESULT ( STDMETHODCALLTYPE *SetContent )( 
             __RPC__in IXpsOMColorProfileResource * This,
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName);
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName);
         
         END_INTERFACE
     } IXpsOMColorProfileResourceVtbl;
@@ -7614,40 +6849,29 @@ EXTERN_C const IID IID_IXpsOMColorProfileResourceCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **object) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResource **object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *object) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *object) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *object) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetByPartName( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **part) = 0;
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResource **part) = 0;
         
     };
     
@@ -7661,8 +6885,7 @@ EXTERN_C const IID IID_IXpsOMColorProfileResourceCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMColorProfileResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7677,52 +6900,41 @@ EXTERN_C const IID IID_IXpsOMColorProfileResourceCollection;
         DECLSPEC_XFGVIRT(IXpsOMColorProfileResourceCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMColorProfileResourceCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMColorProfileResourceCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMColorProfileResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **object);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResource **object);
         
         DECLSPEC_XFGVIRT(IXpsOMColorProfileResourceCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMColorProfileResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *object);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *object);
         
         DECLSPEC_XFGVIRT(IXpsOMColorProfileResourceCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMColorProfileResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMColorProfileResourceCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMColorProfileResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *object);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *object);
         
         DECLSPEC_XFGVIRT(IXpsOMColorProfileResourceCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMColorProfileResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *object);
+            /* [in] */ __RPC__in_opt IXpsOMColorProfileResource *object);
         
         DECLSPEC_XFGVIRT(IXpsOMColorProfileResourceCollection, GetByPartName)
         HRESULT ( STDMETHODCALLTYPE *GetByPartName )( 
             __RPC__in IXpsOMColorProfileResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **part);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMColorProfileResource **part);
         
         END_INTERFACE
     } IXpsOMColorProfileResourceCollectionVtbl;
@@ -7795,14 +7007,11 @@ EXTERN_C const IID IID_IXpsOMPrintTicketResource;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetStream( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **stream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContent( 
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName) = 0;
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName) = 0;
         
     };
     
@@ -7816,8 +7025,7 @@ EXTERN_C const IID IID_IXpsOMPrintTicketResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMPrintTicketResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7832,28 +7040,23 @@ EXTERN_C const IID IID_IXpsOMPrintTicketResource;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMPrintTicketResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMPrintTicketResource * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPrintTicketResource, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             __RPC__in IXpsOMPrintTicketResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **stream);
         
         DECLSPEC_XFGVIRT(IXpsOMPrintTicketResource, SetContent)
         HRESULT ( STDMETHODCALLTYPE *SetContent )( 
             __RPC__in IXpsOMPrintTicketResource * This,
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName);
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName);
         
         END_INTERFACE
     } IXpsOMPrintTicketResourceVtbl;
@@ -7919,12 +7122,10 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResource;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDictionary( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **dictionary) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **dictionary) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDictionary( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *dictionary) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMDictionary *dictionary) = 0;
         
     };
     
@@ -7938,8 +7139,7 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMRemoteDictionaryResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7954,26 +7154,22 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResource;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMRemoteDictionaryResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMRemoteDictionaryResource * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResource, GetDictionary)
         HRESULT ( STDMETHODCALLTYPE *GetDictionary )( 
             __RPC__in IXpsOMRemoteDictionaryResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **dictionary);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **dictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResource, SetDictionary)
         HRESULT ( STDMETHODCALLTYPE *SetDictionary )( 
             __RPC__in IXpsOMRemoteDictionaryResource * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *dictionary);
+            /* [in] */ __RPC__in_opt IXpsOMDictionary *dictionary);
         
         END_INTERFACE
     } IXpsOMRemoteDictionaryResourceVtbl;
@@ -8039,40 +7235,29 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResourceCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **object) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRemoteDictionaryResource **object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *object) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMRemoteDictionaryResource *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *object) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMRemoteDictionaryResource *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *object) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMRemoteDictionaryResource *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetByPartName( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **remoteDictionaryResource) = 0;
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRemoteDictionaryResource **remoteDictionaryResource) = 0;
         
     };
     
@@ -8086,8 +7271,7 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResourceCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMRemoteDictionaryResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8102,52 +7286,41 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResourceCollection;
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResourceCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMRemoteDictionaryResourceCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResourceCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMRemoteDictionaryResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **object);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRemoteDictionaryResource **object);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResourceCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMRemoteDictionaryResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *object);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMRemoteDictionaryResource *object);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResourceCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMRemoteDictionaryResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResourceCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMRemoteDictionaryResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *object);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMRemoteDictionaryResource *object);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResourceCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMRemoteDictionaryResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *object);
+            /* [in] */ __RPC__in_opt IXpsOMRemoteDictionaryResource *object);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResourceCollection, GetByPartName)
         HRESULT ( STDMETHODCALLTYPE *GetByPartName )( 
             __RPC__in IXpsOMRemoteDictionaryResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
         
         END_INTERFACE
     } IXpsOMRemoteDictionaryResourceCollectionVtbl;
@@ -8220,40 +7393,29 @@ EXTERN_C const IID IID_IXpsOMSignatureBlockResourceCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSignatureBlockResource **signatureBlockResource) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMSignatureBlockResource **signatureBlockResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMSignatureBlockResource *signatureBlockResource) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMSignatureBlockResource *signatureBlockResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMSignatureBlockResource *signatureBlockResource) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMSignatureBlockResource *signatureBlockResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMSignatureBlockResource *signatureBlockResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMSignatureBlockResource *signatureBlockResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetByPartName( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSignatureBlockResource **signatureBlockResource) = 0;
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMSignatureBlockResource **signatureBlockResource) = 0;
         
     };
     
@@ -8267,8 +7429,7 @@ EXTERN_C const IID IID_IXpsOMSignatureBlockResourceCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMSignatureBlockResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8283,52 +7444,41 @@ EXTERN_C const IID IID_IXpsOMSignatureBlockResourceCollection;
         DECLSPEC_XFGVIRT(IXpsOMSignatureBlockResourceCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMSignatureBlockResourceCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMSignatureBlockResourceCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMSignatureBlockResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSignatureBlockResource **signatureBlockResource);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMSignatureBlockResource **signatureBlockResource);
         
         DECLSPEC_XFGVIRT(IXpsOMSignatureBlockResourceCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMSignatureBlockResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMSignatureBlockResource *signatureBlockResource);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMSignatureBlockResource *signatureBlockResource);
         
         DECLSPEC_XFGVIRT(IXpsOMSignatureBlockResourceCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMSignatureBlockResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMSignatureBlockResourceCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMSignatureBlockResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMSignatureBlockResource *signatureBlockResource);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMSignatureBlockResource *signatureBlockResource);
         
         DECLSPEC_XFGVIRT(IXpsOMSignatureBlockResourceCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMSignatureBlockResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMSignatureBlockResource *signatureBlockResource);
+            /* [in] */ __RPC__in_opt IXpsOMSignatureBlockResource *signatureBlockResource);
         
         DECLSPEC_XFGVIRT(IXpsOMSignatureBlockResourceCollection, GetByPartName)
         HRESULT ( STDMETHODCALLTYPE *GetByPartName )( 
             __RPC__in IXpsOMSignatureBlockResourceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSignatureBlockResource **signatureBlockResource);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMSignatureBlockResource **signatureBlockResource);
         
         END_INTERFACE
     } IXpsOMSignatureBlockResourceCollectionVtbl;
@@ -8401,18 +7551,14 @@ EXTERN_C const IID IID_IXpsOMDocumentStructureResource;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **owner) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocument **owner) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStream( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **stream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContent( 
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName) = 0;
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName) = 0;
         
     };
     
@@ -8426,8 +7572,7 @@ EXTERN_C const IID IID_IXpsOMDocumentStructureResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMDocumentStructureResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8442,34 +7587,28 @@ EXTERN_C const IID IID_IXpsOMDocumentStructureResource;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMDocumentStructureResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMDocumentStructureResource * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentStructureResource, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMDocumentStructureResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocument **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentStructureResource, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             __RPC__in IXpsOMDocumentStructureResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **stream);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentStructureResource, SetContent)
         HRESULT ( STDMETHODCALLTYPE *SetContent )( 
             __RPC__in IXpsOMDocumentStructureResource * This,
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName);
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName);
         
         END_INTERFACE
     } IXpsOMDocumentStructureResourceVtbl;
@@ -8538,18 +7677,14 @@ EXTERN_C const IID IID_IXpsOMStoryFragmentsResource;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **owner) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPageReference **owner) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStream( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **stream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContent( 
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName) = 0;
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName) = 0;
         
     };
     
@@ -8563,8 +7698,7 @@ EXTERN_C const IID IID_IXpsOMStoryFragmentsResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMStoryFragmentsResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8579,34 +7713,28 @@ EXTERN_C const IID IID_IXpsOMStoryFragmentsResource;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMStoryFragmentsResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMStoryFragmentsResource * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMStoryFragmentsResource, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMStoryFragmentsResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPageReference **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMStoryFragmentsResource, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             __RPC__in IXpsOMStoryFragmentsResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **stream);
         
         DECLSPEC_XFGVIRT(IXpsOMStoryFragmentsResource, SetContent)
         HRESULT ( STDMETHODCALLTYPE *SetContent )( 
             __RPC__in IXpsOMStoryFragmentsResource * This,
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName);
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName);
         
         END_INTERFACE
     } IXpsOMStoryFragmentsResourceVtbl;
@@ -8675,18 +7803,14 @@ EXTERN_C const IID IID_IXpsOMSignatureBlockResource;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **owner) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocument **owner) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStream( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IStream **stream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContent( 
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName) = 0;
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName) = 0;
         
     };
     
@@ -8700,8 +7824,7 @@ EXTERN_C const IID IID_IXpsOMSignatureBlockResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMSignatureBlockResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8716,34 +7839,28 @@ EXTERN_C const IID IID_IXpsOMSignatureBlockResource;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMSignatureBlockResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMSignatureBlockResource * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMSignatureBlockResource, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMSignatureBlockResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocument **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMSignatureBlockResource, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             __RPC__in IXpsOMSignatureBlockResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream);
+            /* [retval][out] */ __RPC__deref_out_opt IStream **stream);
         
         DECLSPEC_XFGVIRT(IXpsOMSignatureBlockResource, SetContent)
         HRESULT ( STDMETHODCALLTYPE *SetContent )( 
             __RPC__in IXpsOMSignatureBlockResource * This,
-            /* [annotation][in] */ 
-            _In_  IStream *sourceStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partName);
+            /* [in] */ __RPC__in_opt IStream *sourceStream,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partName);
         
         END_INTERFACE
     } IXpsOMSignatureBlockResourceVtbl;
@@ -8812,34 +7929,25 @@ EXTERN_C const IID IID_IXpsOMVisualCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisual **object) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisual **object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMVisual *object) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMVisual *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMVisual *object) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMVisual *object) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMVisual *object) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMVisual *object) = 0;
         
     };
     
@@ -8853,8 +7961,7 @@ EXTERN_C const IID IID_IXpsOMVisualCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMVisualCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8869,44 +7976,35 @@ EXTERN_C const IID IID_IXpsOMVisualCollection;
         DECLSPEC_XFGVIRT(IXpsOMVisualCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMVisualCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMVisualCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisual **object);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisual **object);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMVisualCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMVisual *object);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMVisual *object);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMVisualCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMVisualCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMVisual *object);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMVisual *object);
         
         DECLSPEC_XFGVIRT(IXpsOMVisualCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMVisualCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMVisual *object);
+            /* [in] */ __RPC__in_opt IXpsOMVisual *object);
         
         END_INTERFACE
     } IXpsOMVisualCollectionVtbl;
@@ -8976,56 +8074,43 @@ EXTERN_C const IID IID_IXpsOMCanvas;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetVisuals( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisualCollection **visuals) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisualCollection **visuals) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetUseAliasedEdgeMode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *useAliasedEdgeMode) = 0;
+            /* [retval][out] */ __RPC__out BOOL *useAliasedEdgeMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetUseAliasedEdgeMode( 
-            /* [annotation][in] */ 
-            _In_  BOOL useAliasedEdgeMode) = 0;
+            /* [in] */ BOOL useAliasedEdgeMode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAccessibilityShortDescription( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *shortDescription) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *shortDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAccessibilityShortDescription( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR shortDescription) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR shortDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAccessibilityLongDescription( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *longDescription) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *longDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAccessibilityLongDescription( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR longDescription) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR longDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDictionary( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **resourceDictionary) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **resourceDictionary) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDictionaryLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **resourceDictionary) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **resourceDictionary) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDictionaryLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *resourceDictionary) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMDictionary *resourceDictionary) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDictionaryResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **remoteDictionaryResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRemoteDictionaryResource **remoteDictionaryResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDictionaryResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *remoteDictionaryResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMRemoteDictionaryResource *remoteDictionaryResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCanvas **canvas) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMCanvas **canvas) = 0;
         
     };
     
@@ -9039,8 +8124,7 @@ EXTERN_C const IID IID_IXpsOMCanvas;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9055,242 +8139,202 @@ EXTERN_C const IID IID_IXpsOMCanvas;
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **owner);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **owner);
         
         DECLSPEC_XFGVIRT(IXpsOMShareable, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_OBJECT_TYPE *type);
+            /* [retval][out] */ __RPC__out XPS_OBJECT_TYPE *type);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransform)
         HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLocal )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **matrixTransform);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMMatrixTransform **matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetTransformLocal)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLocal )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMMatrixTransform *matrixTransform);
+            /* [in] */ __RPC__in_opt IXpsOMMatrixTransform *matrixTransform);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *GetTransformLookup )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetTransformLookup)
         HRESULT ( STDMETHODCALLTYPE *SetTransformLookup )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometry)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometry )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **clipGeometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometryLocal)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometryLocal )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **clipGeometry);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMGeometry **clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetClipGeometryLocal)
         HRESULT ( STDMETHODCALLTYPE *SetClipGeometryLocal )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGeometry *clipGeometry);
+            /* [in] */ __RPC__in_opt IXpsOMGeometry *clipGeometry);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetClipGeometryLookup)
         HRESULT ( STDMETHODCALLTYPE *GetClipGeometryLookup )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetClipGeometryLookup)
         HRESULT ( STDMETHODCALLTYPE *SetClipGeometryLookup )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacity)
         HRESULT ( STDMETHODCALLTYPE *GetOpacity )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  FLOAT *opacity);
+            /* [retval][out] */ __RPC__out FLOAT *opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacity)
         HRESULT ( STDMETHODCALLTYPE *SetOpacity )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT opacity);
+            /* [in] */ FLOAT opacity);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrush)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrush )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **opacityMaskBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrushLocal )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMBrush **opacityMaskBrush);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMBrush **opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacityMaskBrushLocal)
         HRESULT ( STDMETHODCALLTYPE *SetOpacityMaskBrushLocal )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMBrush *opacityMaskBrush);
+            /* [in] */ __RPC__in_opt IXpsOMBrush *opacityMaskBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetOpacityMaskBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *GetOpacityMaskBrushLookup )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetOpacityMaskBrushLookup)
         HRESULT ( STDMETHODCALLTYPE *SetOpacityMaskBrushLookup )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR key);
+            /* [string][in] */ __RPC__in_string LPCWSTR key);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *name);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR name);
+            /* [string][in] */ __RPC__in_string LPCWSTR name);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *GetIsHyperlinkTarget )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isHyperlink);
+            /* [retval][out] */ __RPC__out BOOL *isHyperlink);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *SetIsHyperlinkTarget )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][in] */ 
-            _In_  BOOL isHyperlink);
+            /* [in] */ BOOL isHyperlink);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetHyperlinkNavigateUri)
         HRESULT ( STDMETHODCALLTYPE *GetHyperlinkNavigateUri )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUri **hyperlinkUri);
+            /* [retval][out] */ __RPC__deref_out_opt IUri **hyperlinkUri);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetHyperlinkNavigateUri)
         HRESULT ( STDMETHODCALLTYPE *SetHyperlinkNavigateUri )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][in] */ 
-            _In_  IUri *hyperlinkUri);
+            /* [in] */ __RPC__in_opt IUri *hyperlinkUri);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, GetLanguage)
         HRESULT ( STDMETHODCALLTYPE *GetLanguage )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *language);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *language);
         
         DECLSPEC_XFGVIRT(IXpsOMVisual, SetLanguage)
         HRESULT ( STDMETHODCALLTYPE *SetLanguage )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language);
+            /* [string][in] */ __RPC__in_string LPCWSTR language);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, GetVisuals)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetVisuals )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisualCollection **visuals);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisualCollection **visuals);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, GetUseAliasedEdgeMode)
         HRESULT ( STDMETHODCALLTYPE *GetUseAliasedEdgeMode )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *useAliasedEdgeMode);
+            /* [retval][out] */ __RPC__out BOOL *useAliasedEdgeMode);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, SetUseAliasedEdgeMode)
         HRESULT ( STDMETHODCALLTYPE *SetUseAliasedEdgeMode )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][in] */ 
-            _In_  BOOL useAliasedEdgeMode);
+            /* [in] */ BOOL useAliasedEdgeMode);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, GetAccessibilityShortDescription)
         HRESULT ( STDMETHODCALLTYPE *GetAccessibilityShortDescription )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *shortDescription);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *shortDescription);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, SetAccessibilityShortDescription)
         HRESULT ( STDMETHODCALLTYPE *SetAccessibilityShortDescription )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR shortDescription);
+            /* [string][in] */ __RPC__in_string LPCWSTR shortDescription);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, GetAccessibilityLongDescription)
         HRESULT ( STDMETHODCALLTYPE *GetAccessibilityLongDescription )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *longDescription);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *longDescription);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, SetAccessibilityLongDescription)
         HRESULT ( STDMETHODCALLTYPE *SetAccessibilityLongDescription )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR longDescription);
+            /* [string][in] */ __RPC__in_string LPCWSTR longDescription);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, GetDictionary)
         HRESULT ( STDMETHODCALLTYPE *GetDictionary )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **resourceDictionary);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **resourceDictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, GetDictionaryLocal)
         HRESULT ( STDMETHODCALLTYPE *GetDictionaryLocal )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **resourceDictionary);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **resourceDictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, SetDictionaryLocal)
         HRESULT ( STDMETHODCALLTYPE *SetDictionaryLocal )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *resourceDictionary);
+            /* [in] */ __RPC__in_opt IXpsOMDictionary *resourceDictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, GetDictionaryResource)
         HRESULT ( STDMETHODCALLTYPE *GetDictionaryResource )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, SetDictionaryResource)
         HRESULT ( STDMETHODCALLTYPE *SetDictionaryResource )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *remoteDictionaryResource);
+            /* [in] */ __RPC__in_opt IXpsOMRemoteDictionaryResource *remoteDictionaryResource);
         
         DECLSPEC_XFGVIRT(IXpsOMCanvas, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMCanvas * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCanvas **canvas);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMCanvas **canvas);
         
         END_INTERFACE
     } IXpsOMCanvasVtbl;
@@ -9464,96 +8508,72 @@ EXTERN_C const IID IID_IXpsOMPage;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **pageReference) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPageReference **pageReference) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVisuals( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisualCollection **visuals) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisualCollection **visuals) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPageDimensions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIZE *pageDimensions) = 0;
+            /* [retval][out] */ __RPC__out XPS_SIZE *pageDimensions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPageDimensions( 
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *pageDimensions) = 0;
+            /* [in] */ __RPC__in const XPS_SIZE *pageDimensions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContentBox( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *contentBox) = 0;
+            /* [retval][out] */ __RPC__out XPS_RECT *contentBox) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContentBox( 
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *contentBox) = 0;
+            /* [in] */ __RPC__in const XPS_RECT *contentBox) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBleedBox( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *bleedBox) = 0;
+            /* [retval][out] */ __RPC__out XPS_RECT *bleedBox) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetBleedBox( 
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *bleedBox) = 0;
+            /* [in] */ __RPC__in const XPS_RECT *bleedBox) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguage( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *language) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *language) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLanguage( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR language) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetName( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *name) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetName( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR name) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR name) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIsHyperlinkTarget( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isHyperlinkTarget) = 0;
+            /* [retval][out] */ __RPC__out BOOL *isHyperlinkTarget) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIsHyperlinkTarget( 
-            /* [annotation][in] */ 
-            _In_  BOOL isHyperlinkTarget) = 0;
+            /* [in] */ BOOL isHyperlinkTarget) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDictionary( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **resourceDictionary) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **resourceDictionary) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDictionaryLocal( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **resourceDictionary) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **resourceDictionary) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDictionaryLocal( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *resourceDictionary) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMDictionary *resourceDictionary) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDictionaryResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **remoteDictionaryResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRemoteDictionaryResource **remoteDictionaryResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDictionaryResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *remoteDictionaryResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMRemoteDictionaryResource *remoteDictionaryResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Write( 
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize) = 0;
+            /* [in] */ __RPC__in_opt ISequentialStream *stream,
+            /* [in] */ BOOL optimizeMarkupSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GenerateUnusedLookupKey( 
-            /* [annotation][in] */ 
-            _In_  XPS_OBJECT_TYPE type,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key) = 0;
+            /* [in] */ XPS_OBJECT_TYPE type,
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPage **page) = 0;
         
     };
     
@@ -9567,8 +8587,7 @@ EXTERN_C const IID IID_IXpsOMPage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9583,150 +8602,124 @@ EXTERN_C const IID IID_IXpsOMPage;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **pageReference);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPageReference **pageReference);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetVisuals)
         HRESULT ( STDMETHODCALLTYPE *GetVisuals )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisualCollection **visuals);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMVisualCollection **visuals);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetPageDimensions)
         HRESULT ( STDMETHODCALLTYPE *GetPageDimensions )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIZE *pageDimensions);
+            /* [retval][out] */ __RPC__out XPS_SIZE *pageDimensions);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetPageDimensions)
         HRESULT ( STDMETHODCALLTYPE *SetPageDimensions )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *pageDimensions);
+            /* [in] */ __RPC__in const XPS_SIZE *pageDimensions);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetContentBox)
         HRESULT ( STDMETHODCALLTYPE *GetContentBox )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *contentBox);
+            /* [retval][out] */ __RPC__out XPS_RECT *contentBox);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetContentBox)
         HRESULT ( STDMETHODCALLTYPE *SetContentBox )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *contentBox);
+            /* [in] */ __RPC__in const XPS_RECT *contentBox);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetBleedBox)
         HRESULT ( STDMETHODCALLTYPE *GetBleedBox )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *bleedBox);
+            /* [retval][out] */ __RPC__out XPS_RECT *bleedBox);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetBleedBox)
         HRESULT ( STDMETHODCALLTYPE *SetBleedBox )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *bleedBox);
+            /* [in] */ __RPC__in const XPS_RECT *bleedBox);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetLanguage)
         HRESULT ( STDMETHODCALLTYPE *GetLanguage )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *language);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *language);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetLanguage)
         HRESULT ( STDMETHODCALLTYPE *SetLanguage )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language);
+            /* [string][in] */ __RPC__in_string LPCWSTR language);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *name);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR name);
+            /* [string][in] */ __RPC__in_string LPCWSTR name);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *GetIsHyperlinkTarget )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isHyperlinkTarget);
+            /* [retval][out] */ __RPC__out BOOL *isHyperlinkTarget);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *SetIsHyperlinkTarget )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][in] */ 
-            _In_  BOOL isHyperlinkTarget);
+            /* [in] */ BOOL isHyperlinkTarget);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetDictionary)
         HRESULT ( STDMETHODCALLTYPE *GetDictionary )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **resourceDictionary);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **resourceDictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetDictionaryLocal)
         HRESULT ( STDMETHODCALLTYPE *GetDictionaryLocal )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **resourceDictionary);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDictionary **resourceDictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetDictionaryLocal)
         HRESULT ( STDMETHODCALLTYPE *SetDictionaryLocal )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *resourceDictionary);
+            /* [in] */ __RPC__in_opt IXpsOMDictionary *resourceDictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetDictionaryResource)
         HRESULT ( STDMETHODCALLTYPE *GetDictionaryResource )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetDictionaryResource)
         HRESULT ( STDMETHODCALLTYPE *SetDictionaryResource )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *remoteDictionaryResource);
+            /* [in] */ __RPC__in_opt IXpsOMRemoteDictionaryResource *remoteDictionaryResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize);
+            /* [in] */ __RPC__in_opt ISequentialStream *stream,
+            /* [in] */ BOOL optimizeMarkupSize);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GenerateUnusedLookupKey)
         HRESULT ( STDMETHODCALLTYPE *GenerateUnusedLookupKey )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][in] */ 
-            _In_  XPS_OBJECT_TYPE type,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [in] */ XPS_OBJECT_TYPE type,
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMPage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPage **page);
         
         END_INTERFACE
     } IXpsOMPageVtbl;
@@ -9851,70 +8844,54 @@ EXTERN_C const IID IID_IXpsOMPageReference;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **document) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocument **document) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetPage( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPage **page) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetPage( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMPage *page) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMPage *page) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DiscardPage( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsPageLoaded( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isPageLoaded) = 0;
+            /* [retval][out] */ __RPC__out BOOL *isPageLoaded) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAdvisoryPageDimensions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIZE *pageDimensions) = 0;
+            /* [retval][out] */ __RPC__out XPS_SIZE *pageDimensions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAdvisoryPageDimensions( 
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *pageDimensions) = 0;
+            /* [in] */ __RPC__in const XPS_SIZE *pageDimensions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStoryFragmentsResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMStoryFragmentsResource **storyFragmentsResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMStoryFragmentsResource **storyFragmentsResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetStoryFragmentsResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMStoryFragmentsResource *storyFragmentsResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMStoryFragmentsResource *storyFragmentsResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPrintTicketResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPrintTicketResource **printTicketResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPrintTicketResource **printTicketResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPrintTicketResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *printTicketResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *printTicketResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetThumbnailResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageResource **imageResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetThumbnailResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *imageResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *imageResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CollectLinkTargets( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMNameCollection **linkTargets) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMNameCollection **linkTargets) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CollectPartResources( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPartResources **partResources) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPartResources **partResources) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HasRestrictedFonts( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *restrictedFonts) = 0;
+            /* [retval][out] */ __RPC__out BOOL *restrictedFonts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **pageReference) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPageReference **pageReference) = 0;
         
     };
     
@@ -9928,8 +8905,7 @@ EXTERN_C const IID IID_IXpsOMPageReference;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9944,20 +8920,17 @@ EXTERN_C const IID IID_IXpsOMPageReference;
         DECLSPEC_XFGVIRT(IXpsOMPageReference, GetOwner)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **document);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocument **document);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, GetPage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPage )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPage **page);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, SetPage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetPage )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPage *page);
+            /* [in] */ __RPC__in_opt IXpsOMPage *page);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, DiscardPage)
         HRESULT ( STDMETHODCALLTYPE *DiscardPage )( 
@@ -9966,80 +8939,67 @@ EXTERN_C const IID IID_IXpsOMPageReference;
         DECLSPEC_XFGVIRT(IXpsOMPageReference, IsPageLoaded)
         HRESULT ( STDMETHODCALLTYPE *IsPageLoaded )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isPageLoaded);
+            /* [retval][out] */ __RPC__out BOOL *isPageLoaded);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, GetAdvisoryPageDimensions)
         HRESULT ( STDMETHODCALLTYPE *GetAdvisoryPageDimensions )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIZE *pageDimensions);
+            /* [retval][out] */ __RPC__out XPS_SIZE *pageDimensions);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, SetAdvisoryPageDimensions)
         HRESULT ( STDMETHODCALLTYPE *SetAdvisoryPageDimensions )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *pageDimensions);
+            /* [in] */ __RPC__in const XPS_SIZE *pageDimensions);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, GetStoryFragmentsResource)
         HRESULT ( STDMETHODCALLTYPE *GetStoryFragmentsResource )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMStoryFragmentsResource **storyFragmentsResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMStoryFragmentsResource **storyFragmentsResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, SetStoryFragmentsResource)
         HRESULT ( STDMETHODCALLTYPE *SetStoryFragmentsResource )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMStoryFragmentsResource *storyFragmentsResource);
+            /* [in] */ __RPC__in_opt IXpsOMStoryFragmentsResource *storyFragmentsResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, GetPrintTicketResource)
         HRESULT ( STDMETHODCALLTYPE *GetPrintTicketResource )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPrintTicketResource **printTicketResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPrintTicketResource **printTicketResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, SetPrintTicketResource)
         HRESULT ( STDMETHODCALLTYPE *SetPrintTicketResource )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *printTicketResource);
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *printTicketResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, GetThumbnailResource)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnailResource )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMImageResource **imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, SetThumbnailResource)
         HRESULT ( STDMETHODCALLTYPE *SetThumbnailResource )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *imageResource);
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, CollectLinkTargets)
         HRESULT ( STDMETHODCALLTYPE *CollectLinkTargets )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMNameCollection **linkTargets);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMNameCollection **linkTargets);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, CollectPartResources)
         HRESULT ( STDMETHODCALLTYPE *CollectPartResources )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPartResources **partResources);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPartResources **partResources);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, HasRestrictedFonts)
         HRESULT ( STDMETHODCALLTYPE *HasRestrictedFonts )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *restrictedFonts);
+            /* [retval][out] */ __RPC__out BOOL *restrictedFonts);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReference, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMPageReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **pageReference);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPageReference **pageReference);
         
         END_INTERFACE
     } IXpsOMPageReferenceVtbl;
@@ -10142,34 +9102,25 @@ EXTERN_C const IID IID_IXpsOMPageReferenceCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **pageReference) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPageReference **pageReference) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPageReference *pageReference) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMPageReference *pageReference) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPageReference *pageReference) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMPageReference *pageReference) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMPageReference *pageReference) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMPageReference *pageReference) = 0;
         
     };
     
@@ -10183,8 +9134,7 @@ EXTERN_C const IID IID_IXpsOMPageReferenceCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMPageReferenceCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10199,44 +9149,35 @@ EXTERN_C const IID IID_IXpsOMPageReferenceCollection;
         DECLSPEC_XFGVIRT(IXpsOMPageReferenceCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMPageReferenceCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReferenceCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMPageReferenceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **pageReference);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPageReference **pageReference);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReferenceCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMPageReferenceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPageReference *pageReference);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMPageReference *pageReference);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReferenceCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMPageReferenceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReferenceCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMPageReferenceCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPageReference *pageReference);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMPageReference *pageReference);
         
         DECLSPEC_XFGVIRT(IXpsOMPageReferenceCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMPageReferenceCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPageReference *pageReference);
+            /* [in] */ __RPC__in_opt IXpsOMPageReference *pageReference);
         
         END_INTERFACE
     } IXpsOMPageReferenceCollectionVtbl;
@@ -10306,36 +9247,28 @@ EXTERN_C const IID IID_IXpsOMDocument;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentSequence **documentSequence) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocumentSequence **documentSequence) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPageReferences( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReferenceCollection **pageReferences) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPageReferenceCollection **pageReferences) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPrintTicketResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPrintTicketResource **printTicketResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPrintTicketResource **printTicketResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPrintTicketResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *printTicketResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *printTicketResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDocumentStructureResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentStructureResource **documentStructureResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocumentStructureResource **documentStructureResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDocumentStructureResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocumentStructureResource *documentStructureResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMDocumentStructureResource *documentStructureResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSignatureBlockResources( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSignatureBlockResourceCollection **signatureBlockResources) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMSignatureBlockResourceCollection **signatureBlockResources) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **document) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocument **document) = 0;
         
     };
     
@@ -10349,8 +9282,7 @@ EXTERN_C const IID IID_IXpsOMDocument;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10365,62 +9297,52 @@ EXTERN_C const IID IID_IXpsOMDocument;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMDocument, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentSequence **documentSequence);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocumentSequence **documentSequence);
         
         DECLSPEC_XFGVIRT(IXpsOMDocument, GetPageReferences)
         HRESULT ( STDMETHODCALLTYPE *GetPageReferences )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReferenceCollection **pageReferences);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPageReferenceCollection **pageReferences);
         
         DECLSPEC_XFGVIRT(IXpsOMDocument, GetPrintTicketResource)
         HRESULT ( STDMETHODCALLTYPE *GetPrintTicketResource )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPrintTicketResource **printTicketResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPrintTicketResource **printTicketResource);
         
         DECLSPEC_XFGVIRT(IXpsOMDocument, SetPrintTicketResource)
         HRESULT ( STDMETHODCALLTYPE *SetPrintTicketResource )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *printTicketResource);
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *printTicketResource);
         
         DECLSPEC_XFGVIRT(IXpsOMDocument, GetDocumentStructureResource)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentStructureResource )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentStructureResource **documentStructureResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocumentStructureResource **documentStructureResource);
         
         DECLSPEC_XFGVIRT(IXpsOMDocument, SetDocumentStructureResource)
         HRESULT ( STDMETHODCALLTYPE *SetDocumentStructureResource )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocumentStructureResource *documentStructureResource);
+            /* [in] */ __RPC__in_opt IXpsOMDocumentStructureResource *documentStructureResource);
         
         DECLSPEC_XFGVIRT(IXpsOMDocument, GetSignatureBlockResources)
         HRESULT ( STDMETHODCALLTYPE *GetSignatureBlockResources )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSignatureBlockResourceCollection **signatureBlockResources);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMSignatureBlockResourceCollection **signatureBlockResources);
         
         DECLSPEC_XFGVIRT(IXpsOMDocument, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **document);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocument **document);
         
         END_INTERFACE
     } IXpsOMDocumentVtbl;
@@ -10503,34 +9425,25 @@ EXTERN_C const IID IID_IXpsOMDocumentCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **document) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocument **document) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocument *document) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMDocument *document) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocument *document) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMDocument *document) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocument *document) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMDocument *document) = 0;
         
     };
     
@@ -10544,8 +9457,7 @@ EXTERN_C const IID IID_IXpsOMDocumentCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMDocumentCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10560,44 +9472,35 @@ EXTERN_C const IID IID_IXpsOMDocumentCollection;
         DECLSPEC_XFGVIRT(IXpsOMDocumentCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMDocumentCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMDocumentCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **document);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocument **document);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMDocumentCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocument *document);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMDocument *document);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMDocumentCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMDocumentCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocument *document);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IXpsOMDocument *document);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMDocumentCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocument *document);
+            /* [in] */ __RPC__in_opt IXpsOMDocument *document);
         
         END_INTERFACE
     } IXpsOMDocumentCollectionVtbl;
@@ -10667,20 +9570,16 @@ EXTERN_C const IID IID_IXpsOMDocumentSequence;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPackage **package) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDocuments( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentCollection **documents) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocumentCollection **documents) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPrintTicketResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPrintTicketResource **printTicketResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPrintTicketResource **printTicketResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPrintTicketResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *printTicketResource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *printTicketResource) = 0;
         
     };
     
@@ -10694,8 +9593,7 @@ EXTERN_C const IID IID_IXpsOMDocumentSequence;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMDocumentSequence * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10710,38 +9608,32 @@ EXTERN_C const IID IID_IXpsOMDocumentSequence;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMDocumentSequence * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMDocumentSequence * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentSequence, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMDocumentSequence * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPackage **package);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentSequence, GetDocuments)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDocuments )( 
             __RPC__in IXpsOMDocumentSequence * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentCollection **documents);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMDocumentCollection **documents);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentSequence, GetPrintTicketResource)
         HRESULT ( STDMETHODCALLTYPE *GetPrintTicketResource )( 
             __RPC__in IXpsOMDocumentSequence * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPrintTicketResource **printTicketResource);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPrintTicketResource **printTicketResource);
         
         DECLSPEC_XFGVIRT(IXpsOMDocumentSequence, SetPrintTicketResource)
         HRESULT ( STDMETHODCALLTYPE *SetPrintTicketResource )( 
             __RPC__in IXpsOMDocumentSequence * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *printTicketResource);
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *printTicketResource);
         
         END_INTERFACE
     } IXpsOMDocumentSequenceVtbl;
@@ -10812,140 +9704,106 @@ EXTERN_C const IID IID_IXpsOMCoreProperties;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOwner( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPackage **package) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCategory( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *category) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *category) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCategory( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR category) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR category) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContentStatus( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *contentStatus) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *contentStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContentStatus( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR contentStatus) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR contentStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetContentType( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *contentType) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *contentType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetContentType( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR contentType) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR contentType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCreated( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SYSTEMTIME *created) = 0;
+            /* [retval][out] */ __RPC__out SYSTEMTIME *created) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCreated( 
-            /* [annotation][in] */ 
-            _In_  const SYSTEMTIME *created) = 0;
+            /* [in] */ __RPC__in const SYSTEMTIME *created) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCreator( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *creator) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *creator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCreator( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR creator) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR creator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *description) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *description) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDescription( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR description) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR description) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIdentifier( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *identifier) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *identifier) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetIdentifier( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR identifier) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR identifier) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetKeywords( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *keywords) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *keywords) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetKeywords( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR keywords) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR keywords) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLanguage( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *language) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *language) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLanguage( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR language) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastModifiedBy( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lastModifiedBy) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lastModifiedBy) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLastModifiedBy( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lastModifiedBy) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR lastModifiedBy) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetLastPrinted( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SYSTEMTIME *lastPrinted) = 0;
+            /* [retval][out] */ __RPC__out SYSTEMTIME *lastPrinted) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetLastPrinted( 
-            /* [annotation][in] */ 
-            _In_  const SYSTEMTIME *lastPrinted) = 0;
+            /* [in] */ __RPC__in const SYSTEMTIME *lastPrinted) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetModified( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SYSTEMTIME *modified) = 0;
+            /* [retval][out] */ __RPC__out SYSTEMTIME *modified) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetModified( 
-            /* [annotation][in] */ 
-            _In_  const SYSTEMTIME *modified) = 0;
+            /* [in] */ __RPC__in const SYSTEMTIME *modified) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetRevision( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *revision) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *revision) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetRevision( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR revision) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR revision) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSubject( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *subject) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *subject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetSubject( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR subject) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR subject) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTitle( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *title) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *title) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTitle( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR title) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR title) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVersion( 
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *version) = 0;
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *version) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetVersion( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR version) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR version) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCoreProperties **coreProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMCoreProperties **coreProperties) = 0;
         
     };
     
@@ -10959,8 +9817,7 @@ EXTERN_C const IID IID_IXpsOMCoreProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10975,218 +9832,182 @@ EXTERN_C const IID IID_IXpsOMCoreProperties;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMPackage **package);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetCategory)
         HRESULT ( STDMETHODCALLTYPE *GetCategory )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *category);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *category);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetCategory)
         HRESULT ( STDMETHODCALLTYPE *SetCategory )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR category);
+            /* [string][in] */ __RPC__in_string LPCWSTR category);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetContentStatus)
         HRESULT ( STDMETHODCALLTYPE *GetContentStatus )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *contentStatus);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *contentStatus);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetContentStatus)
         HRESULT ( STDMETHODCALLTYPE *SetContentStatus )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR contentStatus);
+            /* [string][in] */ __RPC__in_string LPCWSTR contentStatus);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetContentType)
         HRESULT ( STDMETHODCALLTYPE *GetContentType )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *contentType);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *contentType);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetContentType)
         HRESULT ( STDMETHODCALLTYPE *SetContentType )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR contentType);
+            /* [string][in] */ __RPC__in_string LPCWSTR contentType);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetCreated)
         HRESULT ( STDMETHODCALLTYPE *GetCreated )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SYSTEMTIME *created);
+            /* [retval][out] */ __RPC__out SYSTEMTIME *created);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetCreated)
         HRESULT ( STDMETHODCALLTYPE *SetCreated )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][in] */ 
-            _In_  const SYSTEMTIME *created);
+            /* [in] */ __RPC__in const SYSTEMTIME *created);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetCreator)
         HRESULT ( STDMETHODCALLTYPE *GetCreator )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *creator);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *creator);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetCreator)
         HRESULT ( STDMETHODCALLTYPE *SetCreator )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR creator);
+            /* [string][in] */ __RPC__in_string LPCWSTR creator);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *description);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *description);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetDescription)
         HRESULT ( STDMETHODCALLTYPE *SetDescription )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR description);
+            /* [string][in] */ __RPC__in_string LPCWSTR description);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetIdentifier)
         HRESULT ( STDMETHODCALLTYPE *GetIdentifier )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *identifier);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *identifier);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetIdentifier)
         HRESULT ( STDMETHODCALLTYPE *SetIdentifier )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR identifier);
+            /* [string][in] */ __RPC__in_string LPCWSTR identifier);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetKeywords)
         HRESULT ( STDMETHODCALLTYPE *GetKeywords )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *keywords);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *keywords);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetKeywords)
         HRESULT ( STDMETHODCALLTYPE *SetKeywords )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR keywords);
+            /* [string][in] */ __RPC__in_string LPCWSTR keywords);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetLanguage)
         HRESULT ( STDMETHODCALLTYPE *GetLanguage )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *language);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *language);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetLanguage)
         HRESULT ( STDMETHODCALLTYPE *SetLanguage )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language);
+            /* [string][in] */ __RPC__in_string LPCWSTR language);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetLastModifiedBy)
         HRESULT ( STDMETHODCALLTYPE *GetLastModifiedBy )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *lastModifiedBy);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *lastModifiedBy);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetLastModifiedBy)
         HRESULT ( STDMETHODCALLTYPE *SetLastModifiedBy )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR lastModifiedBy);
+            /* [string][in] */ __RPC__in_string LPCWSTR lastModifiedBy);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetLastPrinted)
         HRESULT ( STDMETHODCALLTYPE *GetLastPrinted )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SYSTEMTIME *lastPrinted);
+            /* [retval][out] */ __RPC__out SYSTEMTIME *lastPrinted);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetLastPrinted)
         HRESULT ( STDMETHODCALLTYPE *SetLastPrinted )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][in] */ 
-            _In_  const SYSTEMTIME *lastPrinted);
+            /* [in] */ __RPC__in const SYSTEMTIME *lastPrinted);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetModified)
         HRESULT ( STDMETHODCALLTYPE *GetModified )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SYSTEMTIME *modified);
+            /* [retval][out] */ __RPC__out SYSTEMTIME *modified);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetModified)
         HRESULT ( STDMETHODCALLTYPE *SetModified )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][in] */ 
-            _In_  const SYSTEMTIME *modified);
+            /* [in] */ __RPC__in const SYSTEMTIME *modified);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetRevision)
         HRESULT ( STDMETHODCALLTYPE *GetRevision )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *revision);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *revision);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetRevision)
         HRESULT ( STDMETHODCALLTYPE *SetRevision )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR revision);
+            /* [string][in] */ __RPC__in_string LPCWSTR revision);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetSubject)
         HRESULT ( STDMETHODCALLTYPE *GetSubject )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *subject);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *subject);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetSubject)
         HRESULT ( STDMETHODCALLTYPE *SetSubject )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR subject);
+            /* [string][in] */ __RPC__in_string LPCWSTR subject);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetTitle)
         HRESULT ( STDMETHODCALLTYPE *GetTitle )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *title);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *title);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetTitle)
         HRESULT ( STDMETHODCALLTYPE *SetTitle )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR title);
+            /* [string][in] */ __RPC__in_string LPCWSTR title);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *version);
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *version);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, SetVersion)
         HRESULT ( STDMETHODCALLTYPE *SetVersion )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR version);
+            /* [string][in] */ __RPC__in_string LPCWSTR version);
         
         DECLSPEC_XFGVIRT(IXpsOMCoreProperties, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IXpsOMCoreProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCoreProperties **coreProperties);
+            /* [retval][out] */ __RPC__deref_out_opt IXpsOMCoreProperties **coreProperties);
         
         END_INTERFACE
     } IXpsOMCorePropertiesVtbl;
@@ -11347,52 +10168,38 @@ EXTERN_C const IID IID_IXpsOMPackage;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetDocumentSequence( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentSequence **documentSequence) = 0;
+            /* [retval][out] */ IXpsOMDocumentSequence **documentSequence) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDocumentSequence( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocumentSequence *documentSequence) = 0;
+            /* [in] */ IXpsOMDocumentSequence *documentSequence) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCoreProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCoreProperties **coreProperties) = 0;
+            /* [retval][out] */ IXpsOMCoreProperties **coreProperties) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetCoreProperties( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties) = 0;
+            /* [in] */ IXpsOMCoreProperties *coreProperties) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDiscardControlPartName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **discardControlPartUri) = 0;
+            /* [retval][out] */ IOpcPartUri **discardControlPartUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDiscardControlPartName( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartUri) = 0;
+            /* [in] */ IOpcPartUri *discardControlPartUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetThumbnailResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource) = 0;
+            /* [retval][out] */ IXpsOMImageResource **imageResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetThumbnailResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *imageResource) = 0;
+            /* [in] */ IXpsOMImageResource *imageResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WriteToFile( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize) = 0;
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes,
+            /* [in] */ BOOL optimizeMarkupSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WriteToStream( 
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize) = 0;
+            /* [in] */ ISequentialStream *stream,
+            /* [in] */ BOOL optimizeMarkupSize) = 0;
         
     };
     
@@ -11406,8 +10213,7 @@ EXTERN_C const IID IID_IXpsOMPackage;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsOMPackage * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11422,70 +10228,56 @@ EXTERN_C const IID IID_IXpsOMPackage;
         DECLSPEC_XFGVIRT(IXpsOMPackage, GetDocumentSequence)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDocumentSequence )( 
             IXpsOMPackage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentSequence **documentSequence);
+            /* [retval][out] */ IXpsOMDocumentSequence **documentSequence);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, SetDocumentSequence)
         HRESULT ( STDMETHODCALLTYPE *SetDocumentSequence )( 
             IXpsOMPackage * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocumentSequence *documentSequence);
+            /* [in] */ IXpsOMDocumentSequence *documentSequence);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, GetCoreProperties)
         HRESULT ( STDMETHODCALLTYPE *GetCoreProperties )( 
             IXpsOMPackage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCoreProperties **coreProperties);
+            /* [retval][out] */ IXpsOMCoreProperties **coreProperties);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, SetCoreProperties)
         HRESULT ( STDMETHODCALLTYPE *SetCoreProperties )( 
             IXpsOMPackage * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties);
+            /* [in] */ IXpsOMCoreProperties *coreProperties);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, GetDiscardControlPartName)
         HRESULT ( STDMETHODCALLTYPE *GetDiscardControlPartName )( 
             IXpsOMPackage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **discardControlPartUri);
+            /* [retval][out] */ IOpcPartUri **discardControlPartUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, SetDiscardControlPartName)
         HRESULT ( STDMETHODCALLTYPE *SetDiscardControlPartName )( 
             IXpsOMPackage * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartUri);
+            /* [in] */ IOpcPartUri *discardControlPartUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, GetThumbnailResource)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnailResource )( 
             IXpsOMPackage * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource);
+            /* [retval][out] */ IXpsOMImageResource **imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, SetThumbnailResource)
         HRESULT ( STDMETHODCALLTYPE *SetThumbnailResource )( 
             IXpsOMPackage * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *imageResource);
+            /* [in] */ IXpsOMImageResource *imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, WriteToFile)
         HRESULT ( STDMETHODCALLTYPE *WriteToFile )( 
             IXpsOMPackage * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize);
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes,
+            /* [in] */ BOOL optimizeMarkupSize);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, WriteToStream)
         HRESULT ( STDMETHODCALLTYPE *WriteToStream )( 
             IXpsOMPackage * This,
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize);
+            /* [in] */ ISequentialStream *stream,
+            /* [in] */ BOOL optimizeMarkupSize);
         
         END_INTERFACE
     } IXpsOMPackageVtbl;
@@ -11567,310 +10359,194 @@ EXTERN_C const IID IID_IXpsOMObjectFactory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreatePackage( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package) = 0;
+            /* [retval][out] */ IXpsOMPackage **package) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePackageFromFile( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR filename,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package) = 0;
+            /* [string][in] */ LPCWSTR filename,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPackage **package) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePackageFromStream( 
-            /* [annotation][in] */ 
-            _In_  IStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package) = 0;
+            /* [in] */ IStream *stream,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPackage **package) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateStoryFragmentsResource( 
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMStoryFragmentsResource **storyFragmentsResource) = 0;
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMStoryFragmentsResource **storyFragmentsResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDocumentStructureResource( 
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentStructureResource **documentStructureResource) = 0;
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMDocumentStructureResource **documentStructureResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateSignatureBlockResource( 
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSignatureBlockResource **signatureBlockResource) = 0;
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMSignatureBlockResource **signatureBlockResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateRemoteDictionaryResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *dictionary,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **remoteDictionaryResource) = 0;
+            /* [in] */ IXpsOMDictionary *dictionary,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMRemoteDictionaryResource **remoteDictionaryResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateRemoteDictionaryResourceFromStream( 
-            /* [annotation][in] */ 
-            _In_  IStream *dictionaryMarkupStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *dictionaryPartUri,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartResources *resources,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **dictionaryResource) = 0;
+            /* [in] */ IStream *dictionaryMarkupStream,
+            /* [in] */ IOpcPartUri *dictionaryPartUri,
+            /* [in] */ IXpsOMPartResources *resources,
+            /* [retval][out] */ IXpsOMRemoteDictionaryResource **dictionaryResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePartResources( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPartResources **partResources) = 0;
+            /* [retval][out] */ IXpsOMPartResources **partResources) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDocumentSequence( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentSequence **documentSequence) = 0;
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMDocumentSequence **documentSequence) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDocument( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **document) = 0;
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMDocument **document) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePageReference( 
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *advisoryPageDimensions,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **pageReference) = 0;
+            /* [in] */ const XPS_SIZE *advisoryPageDimensions,
+            /* [retval][out] */ IXpsOMPageReference **pageReference) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePage( 
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *pageDimensions,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page) = 0;
+            /* [in] */ const XPS_SIZE *pageDimensions,
+            /* [string][in] */ LPCWSTR language,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMPage **page) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePageFromStream( 
-            /* [annotation][in] */ 
-            _In_  IStream *pageMarkupStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartResources *resources,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page) = 0;
+            /* [in] */ IStream *pageMarkupStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [in] */ IXpsOMPartResources *resources,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPage **page) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateCanvas( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCanvas **canvas) = 0;
+            /* [retval][out] */ IXpsOMCanvas **canvas) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateGlyphs( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *fontResource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGlyphs **glyphs) = 0;
+            /* [in] */ IXpsOMFontResource *fontResource,
+            /* [retval][out] */ IXpsOMGlyphs **glyphs) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePath( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPath **path) = 0;
+            /* [retval][out] */ IXpsOMPath **path) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateGeometry( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **geometry) = 0;
+            /* [retval][out] */ IXpsOMGeometry **geometry) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateGeometryFigure( 
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *startPoint,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometryFigure **figure) = 0;
+            /* [in] */ const XPS_POINT *startPoint,
+            /* [retval][out] */ IXpsOMGeometryFigure **figure) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateMatrixTransform( 
-            /* [annotation][in] */ 
-            _In_  const XPS_MATRIX *matrix,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform) = 0;
+            /* [in] */ const XPS_MATRIX *matrix,
+            /* [retval][out] */ IXpsOMMatrixTransform **transform) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateSolidColorBrush( 
-            /* [annotation][in] */ 
-            _In_  const XPS_COLOR *color,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfile,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSolidColorBrush **solidColorBrush) = 0;
+            /* [in] */ const XPS_COLOR *color,
+            /* [in] */ IXpsOMColorProfileResource *colorProfile,
+            /* [retval][out] */ IXpsOMSolidColorBrush **solidColorBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateColorProfileResource( 
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **colorProfileResource) = 0;
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMColorProfileResource **colorProfileResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateImageBrush( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *image,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewBox,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewPort,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageBrush **imageBrush) = 0;
+            /* [in] */ IXpsOMImageResource *image,
+            /* [in] */ const XPS_RECT *viewBox,
+            /* [in] */ const XPS_RECT *viewPort,
+            /* [retval][out] */ IXpsOMImageBrush **imageBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateVisualBrush( 
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewBox,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewPort,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisualBrush **visualBrush) = 0;
+            /* [in] */ const XPS_RECT *viewBox,
+            /* [in] */ const XPS_RECT *viewPort,
+            /* [retval][out] */ IXpsOMVisualBrush **visualBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateImageResource( 
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  XPS_IMAGE_TYPE contentType,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource) = 0;
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ XPS_IMAGE_TYPE contentType,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMImageResource **imageResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePrintTicketResource( 
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPrintTicketResource **printTicketResource) = 0;
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMPrintTicketResource **printTicketResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateFontResource( 
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  XPS_FONT_EMBEDDING fontEmbedding,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][in] */ 
-            _In_  BOOL isObfSourceStream,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResource **fontResource) = 0;
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ XPS_FONT_EMBEDDING fontEmbedding,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [in] */ BOOL isObfSourceStream,
+            /* [retval][out] */ IXpsOMFontResource **fontResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateGradientStop( 
-            /* [annotation][in] */ 
-            _In_  const XPS_COLOR *color,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfile,
-            /* [annotation][in] */ 
-            _In_  FLOAT offset,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStop **gradientStop) = 0;
+            /* [in] */ const XPS_COLOR *color,
+            /* [in] */ IXpsOMColorProfileResource *colorProfile,
+            /* [in] */ FLOAT offset,
+            /* [retval][out] */ IXpsOMGradientStop **gradientStop) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateLinearGradientBrush( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop1,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop2,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *startPoint,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *endPoint,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMLinearGradientBrush **linearGradientBrush) = 0;
+            /* [in] */ IXpsOMGradientStop *gradStop1,
+            /* [in] */ IXpsOMGradientStop *gradStop2,
+            /* [in] */ const XPS_POINT *startPoint,
+            /* [in] */ const XPS_POINT *endPoint,
+            /* [retval][out] */ IXpsOMLinearGradientBrush **linearGradientBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateRadialGradientBrush( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop1,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop2,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *centerPoint,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *gradientOrigin,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *radiiSizes,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRadialGradientBrush **radialGradientBrush) = 0;
+            /* [in] */ IXpsOMGradientStop *gradStop1,
+            /* [in] */ IXpsOMGradientStop *gradStop2,
+            /* [in] */ const XPS_POINT *centerPoint,
+            /* [in] */ const XPS_POINT *gradientOrigin,
+            /* [in] */ const XPS_SIZE *radiiSizes,
+            /* [retval][out] */ IXpsOMRadialGradientBrush **radialGradientBrush) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateCoreProperties( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCoreProperties **coreProperties) = 0;
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMCoreProperties **coreProperties) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateDictionary( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **dictionary) = 0;
+            /* [retval][out] */ IXpsOMDictionary **dictionary) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePartUriCollection( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPartUriCollection **partUriCollection) = 0;
+            /* [retval][out] */ IXpsOMPartUriCollection **partUriCollection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePackageWriterOnFile( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_INTERLEAVING interleaving,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *packageThumbnail,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter) = 0;
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_INTERLEAVING interleaving,
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IXpsOMCoreProperties *coreProperties,
+            /* [in] */ IXpsOMImageResource *packageThumbnail,
+            /* [in] */ IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePackageWriterOnStream( 
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *outputStream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_INTERLEAVING interleaving,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *packageThumbnail,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter) = 0;
+            /* [in] */ ISequentialStream *outputStream,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_INTERLEAVING interleaving,
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IXpsOMCoreProperties *coreProperties,
+            /* [in] */ IXpsOMImageResource *packageThumbnail,
+            /* [in] */ IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePartUri( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR uri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri) = 0;
+            /* [string][in] */ LPCWSTR uri,
+            /* [retval][out] */ IOpcPartUri **partUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateReadOnlyStreamOnFile( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR filename,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream) = 0;
+            /* [string][in] */ LPCWSTR filename,
+            /* [retval][out] */ IStream **stream) = 0;
         
     };
     
@@ -11884,8 +10560,7 @@ EXTERN_C const IID IID_IXpsOMObjectFactory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11900,382 +10575,266 @@ EXTERN_C const IID IID_IXpsOMObjectFactory;
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePackage)
         HRESULT ( STDMETHODCALLTYPE *CreatePackage )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package);
+            /* [retval][out] */ IXpsOMPackage **package);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePackageFromFile)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageFromFile )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR filename,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package);
+            /* [string][in] */ LPCWSTR filename,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPackage **package);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePackageFromStream)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageFromStream )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package);
+            /* [in] */ IStream *stream,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPackage **package);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateStoryFragmentsResource)
         HRESULT ( STDMETHODCALLTYPE *CreateStoryFragmentsResource )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMStoryFragmentsResource **storyFragmentsResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMStoryFragmentsResource **storyFragmentsResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateDocumentStructureResource)
         HRESULT ( STDMETHODCALLTYPE *CreateDocumentStructureResource )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentStructureResource **documentStructureResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMDocumentStructureResource **documentStructureResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateSignatureBlockResource)
         HRESULT ( STDMETHODCALLTYPE *CreateSignatureBlockResource )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSignatureBlockResource **signatureBlockResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMSignatureBlockResource **signatureBlockResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateRemoteDictionaryResource)
         HRESULT ( STDMETHODCALLTYPE *CreateRemoteDictionaryResource )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *dictionary,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
+            /* [in] */ IXpsOMDictionary *dictionary,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateRemoteDictionaryResourceFromStream)
         HRESULT ( STDMETHODCALLTYPE *CreateRemoteDictionaryResourceFromStream )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *dictionaryMarkupStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *dictionaryPartUri,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartResources *resources,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **dictionaryResource);
+            /* [in] */ IStream *dictionaryMarkupStream,
+            /* [in] */ IOpcPartUri *dictionaryPartUri,
+            /* [in] */ IXpsOMPartResources *resources,
+            /* [retval][out] */ IXpsOMRemoteDictionaryResource **dictionaryResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePartResources)
         HRESULT ( STDMETHODCALLTYPE *CreatePartResources )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPartResources **partResources);
+            /* [retval][out] */ IXpsOMPartResources **partResources);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateDocumentSequence)
         HRESULT ( STDMETHODCALLTYPE *CreateDocumentSequence )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentSequence **documentSequence);
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMDocumentSequence **documentSequence);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateDocument)
         HRESULT ( STDMETHODCALLTYPE *CreateDocument )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **document);
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMDocument **document);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePageReference)
         HRESULT ( STDMETHODCALLTYPE *CreatePageReference )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *advisoryPageDimensions,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **pageReference);
+            /* [in] */ const XPS_SIZE *advisoryPageDimensions,
+            /* [retval][out] */ IXpsOMPageReference **pageReference);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePage)
         HRESULT ( STDMETHODCALLTYPE *CreatePage )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *pageDimensions,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page);
+            /* [in] */ const XPS_SIZE *pageDimensions,
+            /* [string][in] */ LPCWSTR language,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMPage **page);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePageFromStream)
         HRESULT ( STDMETHODCALLTYPE *CreatePageFromStream )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *pageMarkupStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartResources *resources,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page);
+            /* [in] */ IStream *pageMarkupStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [in] */ IXpsOMPartResources *resources,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPage **page);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateCanvas)
         HRESULT ( STDMETHODCALLTYPE *CreateCanvas )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCanvas **canvas);
+            /* [retval][out] */ IXpsOMCanvas **canvas);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateGlyphs)
         HRESULT ( STDMETHODCALLTYPE *CreateGlyphs )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *fontResource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGlyphs **glyphs);
+            /* [in] */ IXpsOMFontResource *fontResource,
+            /* [retval][out] */ IXpsOMGlyphs **glyphs);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePath)
         HRESULT ( STDMETHODCALLTYPE *CreatePath )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPath **path);
+            /* [retval][out] */ IXpsOMPath **path);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateGeometry)
         HRESULT ( STDMETHODCALLTYPE *CreateGeometry )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **geometry);
+            /* [retval][out] */ IXpsOMGeometry **geometry);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateGeometryFigure)
         HRESULT ( STDMETHODCALLTYPE *CreateGeometryFigure )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *startPoint,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometryFigure **figure);
+            /* [in] */ const XPS_POINT *startPoint,
+            /* [retval][out] */ IXpsOMGeometryFigure **figure);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateMatrixTransform)
         HRESULT ( STDMETHODCALLTYPE *CreateMatrixTransform )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_MATRIX *matrix,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [in] */ const XPS_MATRIX *matrix,
+            /* [retval][out] */ IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateSolidColorBrush)
         HRESULT ( STDMETHODCALLTYPE *CreateSolidColorBrush )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_COLOR *color,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfile,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSolidColorBrush **solidColorBrush);
+            /* [in] */ const XPS_COLOR *color,
+            /* [in] */ IXpsOMColorProfileResource *colorProfile,
+            /* [retval][out] */ IXpsOMSolidColorBrush **solidColorBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateColorProfileResource)
         HRESULT ( STDMETHODCALLTYPE *CreateColorProfileResource )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **colorProfileResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMColorProfileResource **colorProfileResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateImageBrush)
         HRESULT ( STDMETHODCALLTYPE *CreateImageBrush )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *image,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewBox,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewPort,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageBrush **imageBrush);
+            /* [in] */ IXpsOMImageResource *image,
+            /* [in] */ const XPS_RECT *viewBox,
+            /* [in] */ const XPS_RECT *viewPort,
+            /* [retval][out] */ IXpsOMImageBrush **imageBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateVisualBrush)
         HRESULT ( STDMETHODCALLTYPE *CreateVisualBrush )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewBox,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewPort,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisualBrush **visualBrush);
+            /* [in] */ const XPS_RECT *viewBox,
+            /* [in] */ const XPS_RECT *viewPort,
+            /* [retval][out] */ IXpsOMVisualBrush **visualBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateImageResource)
         HRESULT ( STDMETHODCALLTYPE *CreateImageResource )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  XPS_IMAGE_TYPE contentType,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ XPS_IMAGE_TYPE contentType,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMImageResource **imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePrintTicketResource)
         HRESULT ( STDMETHODCALLTYPE *CreatePrintTicketResource )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPrintTicketResource **printTicketResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMPrintTicketResource **printTicketResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateFontResource)
         HRESULT ( STDMETHODCALLTYPE *CreateFontResource )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  XPS_FONT_EMBEDDING fontEmbedding,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][in] */ 
-            _In_  BOOL isObfSourceStream,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResource **fontResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ XPS_FONT_EMBEDDING fontEmbedding,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [in] */ BOOL isObfSourceStream,
+            /* [retval][out] */ IXpsOMFontResource **fontResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateGradientStop)
         HRESULT ( STDMETHODCALLTYPE *CreateGradientStop )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_COLOR *color,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfile,
-            /* [annotation][in] */ 
-            _In_  FLOAT offset,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStop **gradientStop);
+            /* [in] */ const XPS_COLOR *color,
+            /* [in] */ IXpsOMColorProfileResource *colorProfile,
+            /* [in] */ FLOAT offset,
+            /* [retval][out] */ IXpsOMGradientStop **gradientStop);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateLinearGradientBrush)
         HRESULT ( STDMETHODCALLTYPE *CreateLinearGradientBrush )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop1,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop2,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *startPoint,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *endPoint,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMLinearGradientBrush **linearGradientBrush);
+            /* [in] */ IXpsOMGradientStop *gradStop1,
+            /* [in] */ IXpsOMGradientStop *gradStop2,
+            /* [in] */ const XPS_POINT *startPoint,
+            /* [in] */ const XPS_POINT *endPoint,
+            /* [retval][out] */ IXpsOMLinearGradientBrush **linearGradientBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateRadialGradientBrush)
         HRESULT ( STDMETHODCALLTYPE *CreateRadialGradientBrush )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop1,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop2,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *centerPoint,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *gradientOrigin,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *radiiSizes,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRadialGradientBrush **radialGradientBrush);
+            /* [in] */ IXpsOMGradientStop *gradStop1,
+            /* [in] */ IXpsOMGradientStop *gradStop2,
+            /* [in] */ const XPS_POINT *centerPoint,
+            /* [in] */ const XPS_POINT *gradientOrigin,
+            /* [in] */ const XPS_SIZE *radiiSizes,
+            /* [retval][out] */ IXpsOMRadialGradientBrush **radialGradientBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateCoreProperties)
         HRESULT ( STDMETHODCALLTYPE *CreateCoreProperties )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCoreProperties **coreProperties);
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMCoreProperties **coreProperties);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateDictionary)
         HRESULT ( STDMETHODCALLTYPE *CreateDictionary )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **dictionary);
+            /* [retval][out] */ IXpsOMDictionary **dictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePartUriCollection)
         HRESULT ( STDMETHODCALLTYPE *CreatePartUriCollection )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPartUriCollection **partUriCollection);
+            /* [retval][out] */ IXpsOMPartUriCollection **partUriCollection);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePackageWriterOnFile)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageWriterOnFile )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_INTERLEAVING interleaving,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *packageThumbnail,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter);
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_INTERLEAVING interleaving,
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IXpsOMCoreProperties *coreProperties,
+            /* [in] */ IXpsOMImageResource *packageThumbnail,
+            /* [in] */ IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePackageWriterOnStream)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageWriterOnStream )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *outputStream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_INTERLEAVING interleaving,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *packageThumbnail,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter);
+            /* [in] */ ISequentialStream *outputStream,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_INTERLEAVING interleaving,
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IXpsOMCoreProperties *coreProperties,
+            /* [in] */ IXpsOMImageResource *packageThumbnail,
+            /* [in] */ IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePartUri)
         HRESULT ( STDMETHODCALLTYPE *CreatePartUri )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR uri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [string][in] */ LPCWSTR uri,
+            /* [retval][out] */ IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateReadOnlyStreamOnFile)
         HRESULT ( STDMETHODCALLTYPE *CreateReadOnlyStreamOnFile )( 
             IXpsOMObjectFactory * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR filename,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream);
+            /* [string][in] */ LPCWSTR filename,
+            /* [retval][out] */ IStream **stream);
         
         END_INTERFACE
     } IXpsOMObjectFactoryVtbl;
@@ -12438,14 +10997,11 @@ EXTERN_C const IID IID_IXpsOMNameCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *name) = 0;
         
     };
     
@@ -12459,8 +11015,7 @@ EXTERN_C const IID IID_IXpsOMNameCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMNameCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12475,16 +11030,13 @@ EXTERN_C const IID IID_IXpsOMNameCollection;
         DECLSPEC_XFGVIRT(IXpsOMNameCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMNameCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMNameCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMNameCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name);
+            /* [in] */ UINT32 index,
+            /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *name);
         
         END_INTERFACE
     } IXpsOMNameCollectionVtbl;
@@ -12542,34 +11094,25 @@ EXTERN_C const IID IID_IXpsOMPartUriCollection;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count) = 0;
+            /* [retval][out] */ __RPC__out UINT32 *count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri) = 0;
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InsertAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index) = 0;
+            /* [in] */ UINT32 index) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAt( 
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri) = 0;
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Append( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri) = 0;
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri) = 0;
         
     };
     
@@ -12583,8 +11126,7 @@ EXTERN_C const IID IID_IXpsOMPartUriCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMPartUriCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12599,44 +11141,35 @@ EXTERN_C const IID IID_IXpsOMPartUriCollection;
         DECLSPEC_XFGVIRT(IXpsOMPartUriCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IXpsOMPartUriCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT32 *count);
+            /* [retval][out] */ __RPC__out UINT32 *count);
         
         DECLSPEC_XFGVIRT(IXpsOMPartUriCollection, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IXpsOMPartUriCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [in] */ UINT32 index,
+            /* [retval][out] */ __RPC__deref_out_opt IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPartUriCollection, InsertAt)
         HRESULT ( STDMETHODCALLTYPE *InsertAt )( 
             __RPC__in IXpsOMPartUriCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPartUriCollection, RemoveAt)
         HRESULT ( STDMETHODCALLTYPE *RemoveAt )( 
             __RPC__in IXpsOMPartUriCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index);
+            /* [in] */ UINT32 index);
         
         DECLSPEC_XFGVIRT(IXpsOMPartUriCollection, SetAt)
         HRESULT ( STDMETHODCALLTYPE *SetAt )( 
             __RPC__in IXpsOMPartUriCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 index,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ UINT32 index,
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPartUriCollection, Append)
         HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IXpsOMPartUriCollection * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ __RPC__in_opt IOpcPartUri *partUri);
         
         END_INTERFACE
     } IXpsOMPartUriCollectionVtbl;
@@ -12706,40 +11239,27 @@ EXTERN_C const IID IID_IXpsOMPackageWriter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE StartNewDocument( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentPartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentPrintTicket,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocumentStructureResource *documentStructure,
-            /* [annotation][in] */ 
-            _In_  IXpsOMSignatureBlockResourceCollection *signatureBlockResources,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartUriCollection *restrictedFonts) = 0;
+            /* [in] */ __RPC__in_opt IOpcPartUri *documentPartName,
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *documentPrintTicket,
+            /* [in] */ __RPC__in_opt IXpsOMDocumentStructureResource *documentStructure,
+            /* [in] */ __RPC__in_opt IXpsOMSignatureBlockResourceCollection *signatureBlockResources,
+            /* [in] */ __RPC__in_opt IXpsOMPartUriCollection *restrictedFonts) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddPage( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMPage *page,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *advisoryPageDimensions,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartUriCollection *discardableResourceParts,
-            /* [annotation][in] */ 
-            _In_  IXpsOMStoryFragmentsResource *storyFragments,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *pagePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *pageThumbnail) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMPage *page,
+            /* [in] */ __RPC__in const XPS_SIZE *advisoryPageDimensions,
+            /* [in] */ __RPC__in_opt IXpsOMPartUriCollection *discardableResourceParts,
+            /* [in] */ __RPC__in_opt IXpsOMStoryFragmentsResource *storyFragments,
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *pagePrintTicket,
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *pageThumbnail) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddResource( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMResource *resource) = 0;
+            /* [in] */ __RPC__in_opt IXpsOMResource *resource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsClosed( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isClosed) = 0;
+            /* [retval][out] */ __RPC__out BOOL *isClosed) = 0;
         
     };
     
@@ -12753,8 +11273,7 @@ EXTERN_C const IID IID_IXpsOMPackageWriter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMPackageWriter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12769,38 +11288,26 @@ EXTERN_C const IID IID_IXpsOMPackageWriter;
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter, StartNewDocument)
         HRESULT ( STDMETHODCALLTYPE *StartNewDocument )( 
             __RPC__in IXpsOMPackageWriter * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentPartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentPrintTicket,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocumentStructureResource *documentStructure,
-            /* [annotation][in] */ 
-            _In_  IXpsOMSignatureBlockResourceCollection *signatureBlockResources,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartUriCollection *restrictedFonts);
+            /* [in] */ __RPC__in_opt IOpcPartUri *documentPartName,
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *documentPrintTicket,
+            /* [in] */ __RPC__in_opt IXpsOMDocumentStructureResource *documentStructure,
+            /* [in] */ __RPC__in_opt IXpsOMSignatureBlockResourceCollection *signatureBlockResources,
+            /* [in] */ __RPC__in_opt IXpsOMPartUriCollection *restrictedFonts);
         
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter, AddPage)
         HRESULT ( STDMETHODCALLTYPE *AddPage )( 
             __RPC__in IXpsOMPackageWriter * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPage *page,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *advisoryPageDimensions,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartUriCollection *discardableResourceParts,
-            /* [annotation][in] */ 
-            _In_  IXpsOMStoryFragmentsResource *storyFragments,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *pagePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *pageThumbnail);
+            /* [in] */ __RPC__in_opt IXpsOMPage *page,
+            /* [in] */ __RPC__in const XPS_SIZE *advisoryPageDimensions,
+            /* [in] */ __RPC__in_opt IXpsOMPartUriCollection *discardableResourceParts,
+            /* [in] */ __RPC__in_opt IXpsOMStoryFragmentsResource *storyFragments,
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *pagePrintTicket,
+            /* [in] */ __RPC__in_opt IXpsOMImageResource *pageThumbnail);
         
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter, AddResource)
         HRESULT ( STDMETHODCALLTYPE *AddResource )( 
             __RPC__in IXpsOMPackageWriter * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMResource *resource);
+            /* [in] */ __RPC__in_opt IXpsOMResource *resource);
         
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
@@ -12809,8 +11316,7 @@ EXTERN_C const IID IID_IXpsOMPackageWriter;
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter, IsClosed)
         HRESULT ( STDMETHODCALLTYPE *IsClosed )( 
             __RPC__in IXpsOMPackageWriter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isClosed);
+            /* [retval][out] */ __RPC__out BOOL *isClosed);
         
         END_INTERFACE
     } IXpsOMPackageWriterVtbl;
@@ -12877,14 +11383,10 @@ EXTERN_C const IID IID_IXpsOMPackageTarget;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateXpsOMPackageWriter( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][out] */ 
-            _Out_  IXpsOMPackageWriter **packageWriter) = 0;
+            /* [in] */ __RPC__in_opt IOpcPartUri *documentSequencePartName,
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ __RPC__in_opt IOpcPartUri *discardControlPartName,
+            /* [out] */ __RPC__deref_out_opt IXpsOMPackageWriter **packageWriter) = 0;
         
     };
     
@@ -12898,8 +11400,7 @@ EXTERN_C const IID IID_IXpsOMPackageTarget;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsOMPackageTarget * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12914,14 +11415,10 @@ EXTERN_C const IID IID_IXpsOMPackageTarget;
         DECLSPEC_XFGVIRT(IXpsOMPackageTarget, CreateXpsOMPackageWriter)
         HRESULT ( STDMETHODCALLTYPE *CreateXpsOMPackageWriter )( 
             __RPC__in IXpsOMPackageTarget * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][out] */ 
-            _Out_  IXpsOMPackageWriter **packageWriter);
+            /* [in] */ __RPC__in_opt IOpcPartUri *documentSequencePartName,
+            /* [in] */ __RPC__in_opt IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ __RPC__in_opt IOpcPartUri *discardControlPartName,
+            /* [out] */ __RPC__deref_out_opt IXpsOMPackageWriter **packageWriter);
         
         END_INTERFACE
     } IXpsOMPackageTargetVtbl;
@@ -12988,16 +11485,11 @@ EXTERN_C const IID IID_IXpsOMThumbnailGenerator;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GenerateThumbnail( 
-            /* [annotation][in] */ 
-            _In_  IXpsOMPage *page,
-            /* [annotation][in] */ 
-            _In_  XPS_IMAGE_TYPE thumbnailType,
-            /* [annotation][in] */ 
-            _In_  XPS_THUMBNAIL_SIZE thumbnailSize,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *imageResourcePartName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource) = 0;
+            /* [in] */ IXpsOMPage *page,
+            /* [in] */ XPS_IMAGE_TYPE thumbnailType,
+            /* [in] */ XPS_THUMBNAIL_SIZE thumbnailSize,
+            /* [in] */ IOpcPartUri *imageResourcePartName,
+            /* [retval][out] */ IXpsOMImageResource **imageResource) = 0;
         
     };
     
@@ -13011,8 +11503,7 @@ EXTERN_C const IID IID_IXpsOMThumbnailGenerator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsOMThumbnailGenerator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13027,16 +11518,11 @@ EXTERN_C const IID IID_IXpsOMThumbnailGenerator;
         DECLSPEC_XFGVIRT(IXpsOMThumbnailGenerator, GenerateThumbnail)
         HRESULT ( STDMETHODCALLTYPE *GenerateThumbnail )( 
             IXpsOMThumbnailGenerator * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPage *page,
-            /* [annotation][in] */ 
-            _In_  XPS_IMAGE_TYPE thumbnailType,
-            /* [annotation][in] */ 
-            _In_  XPS_THUMBNAIL_SIZE thumbnailSize,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *imageResourcePartName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource);
+            /* [in] */ IXpsOMPage *page,
+            /* [in] */ XPS_IMAGE_TYPE thumbnailType,
+            /* [in] */ XPS_THUMBNAIL_SIZE thumbnailSize,
+            /* [in] */ IOpcPartUri *imageResourcePartName,
+            /* [retval][out] */ IXpsOMImageResource **imageResource);
         
         END_INTERFACE
     } IXpsOMThumbnailGeneratorVtbl;

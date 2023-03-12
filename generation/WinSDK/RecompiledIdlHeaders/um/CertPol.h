@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -106,24 +106,17 @@ EXTERN_C const IID IID_ICertPolicy;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  const BSTR strConfig) = 0;
+            /* [in] */ __RPC__in const BSTR strConfig) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE VerifyRequest( 
-            /* [annotation][in] */ 
-            _In_  const BSTR strConfig,
-            /* [annotation][in] */ 
-            _In_  LONG Context,
-            /* [annotation][in] */ 
-            _In_  LONG bNewRequest,
-            /* [annotation][in] */ 
-            _In_  LONG Flags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pDisposition) = 0;
+            /* [in] */ __RPC__in const BSTR strConfig,
+            /* [in] */ LONG Context,
+            /* [in] */ LONG bNewRequest,
+            /* [in] */ LONG Flags,
+            /* [retval][out] */ __RPC__out LONG *pDisposition) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pstrDescription) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDescription) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShutDown( void) = 0;
         
@@ -139,8 +132,7 @@ EXTERN_C const IID IID_ICertPolicy;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertPolicy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -155,31 +147,23 @@ EXTERN_C const IID IID_ICertPolicy;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertPolicy * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertPolicy * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertPolicy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -204,28 +188,21 @@ EXTERN_C const IID IID_ICertPolicy;
         DECLSPEC_XFGVIRT(ICertPolicy, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ICertPolicy * This,
-            /* [annotation][in] */ 
-            _In_  const BSTR strConfig);
+            /* [in] */ __RPC__in const BSTR strConfig);
         
         DECLSPEC_XFGVIRT(ICertPolicy, VerifyRequest)
         HRESULT ( STDMETHODCALLTYPE *VerifyRequest )( 
             __RPC__in ICertPolicy * This,
-            /* [annotation][in] */ 
-            _In_  const BSTR strConfig,
-            /* [annotation][in] */ 
-            _In_  LONG Context,
-            /* [annotation][in] */ 
-            _In_  LONG bNewRequest,
-            /* [annotation][in] */ 
-            _In_  LONG Flags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pDisposition);
+            /* [in] */ __RPC__in const BSTR strConfig,
+            /* [in] */ LONG Context,
+            /* [in] */ LONG bNewRequest,
+            /* [in] */ LONG Flags,
+            /* [retval][out] */ __RPC__out LONG *pDisposition);
         
         DECLSPEC_XFGVIRT(ICertPolicy, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in ICertPolicy * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pstrDescription);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDescription);
         
         DECLSPEC_XFGVIRT(ICertPolicy, ShutDown)
         HRESULT ( STDMETHODCALLTYPE *ShutDown )( 
@@ -306,8 +283,7 @@ EXTERN_C const IID IID_ICertPolicy2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetManageModule( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ICertManageModule **ppManageModule) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ICertManageModule **ppManageModule) = 0;
         
     };
     
@@ -321,8 +297,7 @@ EXTERN_C const IID IID_ICertPolicy2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertPolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -337,31 +312,23 @@ EXTERN_C const IID IID_ICertPolicy2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertPolicy2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertPolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertPolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -386,28 +353,21 @@ EXTERN_C const IID IID_ICertPolicy2;
         DECLSPEC_XFGVIRT(ICertPolicy, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ICertPolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  const BSTR strConfig);
+            /* [in] */ __RPC__in const BSTR strConfig);
         
         DECLSPEC_XFGVIRT(ICertPolicy, VerifyRequest)
         HRESULT ( STDMETHODCALLTYPE *VerifyRequest )( 
             __RPC__in ICertPolicy2 * This,
-            /* [annotation][in] */ 
-            _In_  const BSTR strConfig,
-            /* [annotation][in] */ 
-            _In_  LONG Context,
-            /* [annotation][in] */ 
-            _In_  LONG bNewRequest,
-            /* [annotation][in] */ 
-            _In_  LONG Flags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pDisposition);
+            /* [in] */ __RPC__in const BSTR strConfig,
+            /* [in] */ LONG Context,
+            /* [in] */ LONG bNewRequest,
+            /* [in] */ LONG Flags,
+            /* [retval][out] */ __RPC__out LONG *pDisposition);
         
         DECLSPEC_XFGVIRT(ICertPolicy, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in ICertPolicy2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pstrDescription);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrDescription);
         
         DECLSPEC_XFGVIRT(ICertPolicy, ShutDown)
         HRESULT ( STDMETHODCALLTYPE *ShutDown )( 
@@ -416,8 +376,7 @@ EXTERN_C const IID IID_ICertPolicy2;
         DECLSPEC_XFGVIRT(ICertPolicy2, GetManageModule)
         HRESULT ( STDMETHODCALLTYPE *GetManageModule )( 
             __RPC__in ICertPolicy2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ICertManageModule **ppManageModule);
+            /* [retval][out] */ __RPC__deref_out_opt ICertManageModule **ppManageModule);
         
         END_INTERFACE
     } ICertPolicy2Vtbl;
@@ -545,24 +504,20 @@ EXTERN_C const IID IID_INDESPolicy;
         virtual HRESULT STDMETHODCALLTYPE GenerateChallenge( 
             /* [ref][in] */ PCWSTR pwszTemplate,
             /* [ref][in] */ PCWSTR pwszParams,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  PWSTR *ppwszResponse) = 0;
+            /* [retval][out] */ PWSTR *ppwszResponse) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE VerifyRequest( 
             /* [ref][in] */ CERTTRANSBLOB *pctbRequest,
             /* [ref][in] */ CERTTRANSBLOB *pctbSigningCertEncoded,
             /* [ref][in] */ PCWSTR pwszTemplate,
             /* [ref][in] */ PCWSTR pwszTransactionId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfVerified) = 0;
+            /* [retval][out] */ BOOL *pfVerified) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Notify( 
             /* [ref][in] */ PCWSTR pwszChallenge,
             /* [ref][in] */ PCWSTR pwszTransactionId,
-            /* [annotation][in] */ 
-            _In_  X509SCEPDisposition disposition,
-            /* [annotation][in] */ 
-            _In_  LONG lastHResult,
+            /* [in] */ X509SCEPDisposition disposition,
+            /* [in] */ LONG lastHResult,
             /* [ref][in] */ CERTTRANSBLOB *pctbIssuedCertEncoded) = 0;
         
     };
@@ -577,8 +532,7 @@ EXTERN_C const IID IID_INDESPolicy;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INDESPolicy * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -603,8 +557,7 @@ EXTERN_C const IID IID_INDESPolicy;
             INDESPolicy * This,
             /* [ref][in] */ PCWSTR pwszTemplate,
             /* [ref][in] */ PCWSTR pwszParams,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  PWSTR *ppwszResponse);
+            /* [retval][out] */ PWSTR *ppwszResponse);
         
         DECLSPEC_XFGVIRT(INDESPolicy, VerifyRequest)
         HRESULT ( STDMETHODCALLTYPE *VerifyRequest )( 
@@ -613,18 +566,15 @@ EXTERN_C const IID IID_INDESPolicy;
             /* [ref][in] */ CERTTRANSBLOB *pctbSigningCertEncoded,
             /* [ref][in] */ PCWSTR pwszTemplate,
             /* [ref][in] */ PCWSTR pwszTransactionId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfVerified);
+            /* [retval][out] */ BOOL *pfVerified);
         
         DECLSPEC_XFGVIRT(INDESPolicy, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             INDESPolicy * This,
             /* [ref][in] */ PCWSTR pwszChallenge,
             /* [ref][in] */ PCWSTR pwszTransactionId,
-            /* [annotation][in] */ 
-            _In_  X509SCEPDisposition disposition,
-            /* [annotation][in] */ 
-            _In_  LONG lastHResult,
+            /* [in] */ X509SCEPDisposition disposition,
+            /* [in] */ LONG lastHResult,
             /* [ref][in] */ CERTTRANSBLOB *pctbIssuedCertEncoded);
         
         END_INTERFACE

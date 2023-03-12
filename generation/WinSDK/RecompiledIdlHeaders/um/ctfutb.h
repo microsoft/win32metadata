@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -268,66 +268,44 @@ EXTERN_C const IID IID_ITfLangBarMgr;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AdviseEventSink( 
-            /* [annotation][in] */ 
-            _In_  ITfLangBarEventSink *pSink,
-            /* [annotation][in] */ 
-            _In_  HWND hwnd,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][in] */ 
-            _In_  DWORD *pdwCookie) = 0;
+            /* [in] */ __RPC__in_opt ITfLangBarEventSink *pSink,
+            /* [in] */ __RPC__in HWND hwnd,
+            /* [in] */ DWORD dwFlags,
+            /* [in] */ __RPC__in DWORD *pdwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnadviseEventSink( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie) = 0;
+            /* [in] */ DWORD dwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetThreadMarshalInterface( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwType,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  IUnknown **ppunk) = 0;
+            /* [in] */ DWORD dwThreadId,
+            /* [in] */ DWORD dwType,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppunk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetThreadLangBarItemMgr( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][out] */ 
-            _Out_  ITfLangBarItemMgr **pplbi,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwThreadid) = 0;
+            /* [in] */ DWORD dwThreadId,
+            /* [out] */ __RPC__deref_out_opt ITfLangBarItemMgr **pplbi,
+            /* [out] */ __RPC__out DWORD *pdwThreadid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetInputProcessorProfiles( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][out] */ 
-            _Out_  ITfInputProcessorProfiles **ppaip,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwThreadid) = 0;
+            /* [in] */ DWORD dwThreadId,
+            /* [out] */ __RPC__deref_out_opt ITfInputProcessorProfiles **ppaip,
+            /* [out] */ __RPC__out DWORD *pdwThreadid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RestoreLastFocus( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwThreadId,
-            /* [annotation][in] */ 
-            _In_  BOOL fPrev) = 0;
+            /* [out] */ __RPC__out DWORD *pdwThreadId,
+            /* [in] */ BOOL fPrev) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetModalInput( 
-            /* [annotation][in] */ 
-            _In_  ITfLangBarEventSink *pSink,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ __RPC__in_opt ITfLangBarEventSink *pSink,
+            /* [in] */ DWORD dwThreadId,
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShowFloating( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetShowFloatingStatus( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ __RPC__out DWORD *pdwFlags) = 0;
         
     };
     
@@ -341,8 +319,7 @@ EXTERN_C const IID IID_ITfLangBarMgr;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarMgr * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -357,82 +334,60 @@ EXTERN_C const IID IID_ITfLangBarMgr;
         DECLSPEC_XFGVIRT(ITfLangBarMgr, AdviseEventSink)
         HRESULT ( STDMETHODCALLTYPE *AdviseEventSink )( 
             __RPC__in ITfLangBarMgr * This,
-            /* [annotation][in] */ 
-            _In_  ITfLangBarEventSink *pSink,
-            /* [annotation][in] */ 
-            _In_  HWND hwnd,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][in] */ 
-            _In_  DWORD *pdwCookie);
+            /* [in] */ __RPC__in_opt ITfLangBarEventSink *pSink,
+            /* [in] */ __RPC__in HWND hwnd,
+            /* [in] */ DWORD dwFlags,
+            /* [in] */ __RPC__in DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(ITfLangBarMgr, UnadviseEventSink)
         HRESULT ( STDMETHODCALLTYPE *UnadviseEventSink )( 
             __RPC__in ITfLangBarMgr * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie);
+            /* [in] */ DWORD dwCookie);
         
         DECLSPEC_XFGVIRT(ITfLangBarMgr, GetThreadMarshalInterface)
         HRESULT ( STDMETHODCALLTYPE *GetThreadMarshalInterface )( 
             __RPC__in ITfLangBarMgr * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwType,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][iid_is][out] */ 
-            _COM_Outptr_  IUnknown **ppunk);
+            /* [in] */ DWORD dwThreadId,
+            /* [in] */ DWORD dwType,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [iid_is][out] */ __RPC__deref_out_opt IUnknown **ppunk);
         
         DECLSPEC_XFGVIRT(ITfLangBarMgr, GetThreadLangBarItemMgr)
         HRESULT ( STDMETHODCALLTYPE *GetThreadLangBarItemMgr )( 
             __RPC__in ITfLangBarMgr * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][out] */ 
-            _Out_  ITfLangBarItemMgr **pplbi,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwThreadid);
+            /* [in] */ DWORD dwThreadId,
+            /* [out] */ __RPC__deref_out_opt ITfLangBarItemMgr **pplbi,
+            /* [out] */ __RPC__out DWORD *pdwThreadid);
         
         DECLSPEC_XFGVIRT(ITfLangBarMgr, GetInputProcessorProfiles)
         HRESULT ( STDMETHODCALLTYPE *GetInputProcessorProfiles )( 
             __RPC__in ITfLangBarMgr * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][out] */ 
-            _Out_  ITfInputProcessorProfiles **ppaip,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwThreadid);
+            /* [in] */ DWORD dwThreadId,
+            /* [out] */ __RPC__deref_out_opt ITfInputProcessorProfiles **ppaip,
+            /* [out] */ __RPC__out DWORD *pdwThreadid);
         
         DECLSPEC_XFGVIRT(ITfLangBarMgr, RestoreLastFocus)
         HRESULT ( STDMETHODCALLTYPE *RestoreLastFocus )( 
             __RPC__in ITfLangBarMgr * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwThreadId,
-            /* [annotation][in] */ 
-            _In_  BOOL fPrev);
+            /* [out] */ __RPC__out DWORD *pdwThreadId,
+            /* [in] */ BOOL fPrev);
         
         DECLSPEC_XFGVIRT(ITfLangBarMgr, SetModalInput)
         HRESULT ( STDMETHODCALLTYPE *SetModalInput )( 
             __RPC__in ITfLangBarMgr * This,
-            /* [annotation][in] */ 
-            _In_  ITfLangBarEventSink *pSink,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ __RPC__in_opt ITfLangBarEventSink *pSink,
+            /* [in] */ DWORD dwThreadId,
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITfLangBarMgr, ShowFloating)
         HRESULT ( STDMETHODCALLTYPE *ShowFloating )( 
             __RPC__in ITfLangBarMgr * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITfLangBarMgr, GetShowFloatingStatus)
         HRESULT ( STDMETHODCALLTYPE *GetShowFloatingStatus )( 
             __RPC__in ITfLangBarMgr * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ __RPC__out DWORD *pdwFlags);
         
         END_INTERFACE
     } ITfLangBarMgrVtbl;
@@ -511,38 +466,27 @@ EXTERN_C const IID IID_ITfLangBarEventSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnSetFocus( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId) = 0;
+            /* [in] */ DWORD dwThreadId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnThreadTerminate( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId) = 0;
+            /* [in] */ DWORD dwThreadId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnThreadItemChange( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId) = 0;
+            /* [in] */ DWORD dwThreadId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnModalInput( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][in] */ 
-            _In_  UINT uMsg,
-            /* [annotation][in] */ 
-            _In_  WPARAM wParam,
-            /* [annotation][in] */ 
-            _In_  LPARAM lParam) = 0;
+            /* [in] */ DWORD dwThreadId,
+            /* [in] */ UINT uMsg,
+            /* [in] */ WPARAM wParam,
+            /* [in] */ LPARAM lParam) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShowFloating( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItemFloatingRect( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguid,
-            /* [annotation][out] */ 
-            _Out_  RECT *prc) = 0;
+            /* [in] */ DWORD dwThreadId,
+            /* [in] */ __RPC__in REFGUID rguid,
+            /* [out] */ __RPC__out RECT *prc) = 0;
         
     };
     
@@ -556,8 +500,7 @@ EXTERN_C const IID IID_ITfLangBarEventSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarEventSink * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -572,48 +515,37 @@ EXTERN_C const IID IID_ITfLangBarEventSink;
         DECLSPEC_XFGVIRT(ITfLangBarEventSink, OnSetFocus)
         HRESULT ( STDMETHODCALLTYPE *OnSetFocus )( 
             __RPC__in ITfLangBarEventSink * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId);
+            /* [in] */ DWORD dwThreadId);
         
         DECLSPEC_XFGVIRT(ITfLangBarEventSink, OnThreadTerminate)
         HRESULT ( STDMETHODCALLTYPE *OnThreadTerminate )( 
             __RPC__in ITfLangBarEventSink * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId);
+            /* [in] */ DWORD dwThreadId);
         
         DECLSPEC_XFGVIRT(ITfLangBarEventSink, OnThreadItemChange)
         HRESULT ( STDMETHODCALLTYPE *OnThreadItemChange )( 
             __RPC__in ITfLangBarEventSink * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId);
+            /* [in] */ DWORD dwThreadId);
         
         DECLSPEC_XFGVIRT(ITfLangBarEventSink, OnModalInput)
         HRESULT ( STDMETHODCALLTYPE *OnModalInput )( 
             __RPC__in ITfLangBarEventSink * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][in] */ 
-            _In_  UINT uMsg,
-            /* [annotation][in] */ 
-            _In_  WPARAM wParam,
-            /* [annotation][in] */ 
-            _In_  LPARAM lParam);
+            /* [in] */ DWORD dwThreadId,
+            /* [in] */ UINT uMsg,
+            /* [in] */ WPARAM wParam,
+            /* [in] */ LPARAM lParam);
         
         DECLSPEC_XFGVIRT(ITfLangBarEventSink, ShowFloating)
         HRESULT ( STDMETHODCALLTYPE *ShowFloating )( 
             __RPC__in ITfLangBarEventSink * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITfLangBarEventSink, GetItemFloatingRect)
         HRESULT ( STDMETHODCALLTYPE *GetItemFloatingRect )( 
             __RPC__in ITfLangBarEventSink * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguid,
-            /* [annotation][out] */ 
-            _Out_  RECT *prc);
+            /* [in] */ DWORD dwThreadId,
+            /* [in] */ __RPC__in REFGUID rguid,
+            /* [out] */ __RPC__out RECT *prc);
         
         END_INTERFACE
     } ITfLangBarEventSinkVtbl;
@@ -683,8 +615,7 @@ EXTERN_C const IID IID_ITfLangBarItemSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnUpdate( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
     };
     
@@ -698,8 +629,7 @@ EXTERN_C const IID IID_ITfLangBarItemSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemSink * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -714,8 +644,7 @@ EXTERN_C const IID IID_ITfLangBarItemSink;
         DECLSPEC_XFGVIRT(ITfLangBarItemSink, OnUpdate)
         HRESULT ( STDMETHODCALLTYPE *OnUpdate )( 
             __RPC__in ITfLangBarItemSink * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         END_INTERFACE
     } ITfLangBarItemSinkVtbl;
@@ -770,22 +699,17 @@ EXTERN_C const IID IID_IEnumTfLangBarItems;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumTfLangBarItems **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumTfLangBarItems **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(ulCount)  ITfLangBarItem **ppItem,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  ULONG *pcFetched) = 0;
+            /* [in] */ ULONG ulCount,
+            /* [size_is][out] */ __RPC__out_ecount_full(ulCount) ITfLangBarItem **ppItem,
+            /* [unique][out][in] */ __RPC__inout_opt ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount) = 0;
+            /* [in] */ ULONG ulCount) = 0;
         
     };
     
@@ -799,8 +723,7 @@ EXTERN_C const IID IID_IEnumTfLangBarItems;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumTfLangBarItems * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -815,18 +738,14 @@ EXTERN_C const IID IID_IEnumTfLangBarItems;
         DECLSPEC_XFGVIRT(IEnumTfLangBarItems, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumTfLangBarItems * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumTfLangBarItems **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumTfLangBarItems **ppEnum);
         
         DECLSPEC_XFGVIRT(IEnumTfLangBarItems, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumTfLangBarItems * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(ulCount)  ITfLangBarItem **ppItem,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  ULONG *pcFetched);
+            /* [in] */ ULONG ulCount,
+            /* [size_is][out] */ __RPC__out_ecount_full(ulCount) ITfLangBarItem **ppItem,
+            /* [unique][out][in] */ __RPC__inout_opt ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(IEnumTfLangBarItems, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -835,8 +754,7 @@ EXTERN_C const IID IID_IEnumTfLangBarItems;
         DECLSPEC_XFGVIRT(IEnumTfLangBarItems, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumTfLangBarItems * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount);
+            /* [in] */ ULONG ulCount);
         
         END_INTERFACE
     } IEnumTfLangBarItemsVtbl;
@@ -927,82 +845,55 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumItems( 
-            /* [annotation][out] */ 
-            _Out_  IEnumTfLangBarItems **ppEnum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumTfLangBarItems **ppEnum) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItem( 
-            /* [annotation][in] */ 
-            _In_  REFGUID rguid,
-            /* [annotation][out] */ 
-            _Out_  ITfLangBarItem **ppItem) = 0;
+            /* [in] */ __RPC__in REFGUID rguid,
+            /* [out] */ __RPC__deref_out_opt ITfLangBarItem **ppItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AddItem( 
-            /* [annotation][in] */ 
-            _In_  ITfLangBarItem *punk) = 0;
+            /* [in] */ __RPC__in_opt ITfLangBarItem *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RemoveItem( 
-            /* [annotation][in] */ 
-            _In_  ITfLangBarItem *punk) = 0;
+            /* [in] */ __RPC__in_opt ITfLangBarItem *punk) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AdviseItemSink( 
-            /* [annotation][in] */ 
-            _In_  ITfLangBarItemSink *punk,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguidItem) = 0;
+            /* [in] */ __RPC__in_opt ITfLangBarItemSink *punk,
+            /* [out] */ __RPC__out DWORD *pdwCookie,
+            /* [in] */ __RPC__in REFGUID rguidItem) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnadviseItemSink( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie) = 0;
+            /* [in] */ DWORD dwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItemFloatingRect( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguid,
-            /* [annotation][out] */ 
-            _Out_  RECT *prc) = 0;
+            /* [in] */ DWORD dwThreadId,
+            /* [in] */ __RPC__in REFGUID rguid,
+            /* [out] */ __RPC__out RECT *prc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItemsStatus( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  const GUID *prgguid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(ulCount)  DWORD *pdwStatus) = 0;
+            /* [in] */ ULONG ulCount,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) const GUID *prgguid,
+            /* [size_is][out] */ __RPC__out_ecount_full(ulCount) DWORD *pdwStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItemNum( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulCount) = 0;
+            /* [out] */ __RPC__out ULONG *pulCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItems( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(ulCount,*pcFetched)  ITfLangBarItem **ppItem,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(ulCount,*pcFetched)  TF_LANGBARITEMINFO *pInfo,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(ulCount,*pcFetched)  DWORD *pdwStatus,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  ULONG *pcFetched) = 0;
+            /* [in] */ ULONG ulCount,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) ITfLangBarItem **ppItem,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TF_LANGBARITEMINFO *pInfo,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) DWORD *pdwStatus,
+            /* [unique][out][in] */ __RPC__inout_opt ULONG *pcFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE AdviseItemsSink( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  ITfLangBarItemSink **ppunk,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  const GUID *pguidItem,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(ulCount)  DWORD *pdwCookie) = 0;
+            /* [in] */ ULONG ulCount,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) ITfLangBarItemSink **ppunk,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) const GUID *pguidItem,
+            /* [size_is][out] */ __RPC__out_ecount_full(ulCount) DWORD *pdwCookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnadviseItemsSink( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  DWORD *pdwCookie) = 0;
+            /* [in] */ ULONG ulCount,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) DWORD *pdwCookie) = 0;
         
     };
     
@@ -1016,8 +907,7 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1032,104 +922,77 @@ EXTERN_C const IID IID_ITfLangBarItemMgr;
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, EnumItems)
         HRESULT ( STDMETHODCALLTYPE *EnumItems )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumTfLangBarItems **ppEnum);
+            /* [out] */ __RPC__deref_out_opt IEnumTfLangBarItems **ppEnum);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, GetItem)
         HRESULT ( STDMETHODCALLTYPE *GetItem )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguid,
-            /* [annotation][out] */ 
-            _Out_  ITfLangBarItem **ppItem);
+            /* [in] */ __RPC__in REFGUID rguid,
+            /* [out] */ __RPC__deref_out_opt ITfLangBarItem **ppItem);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, AddItem)
         HRESULT ( STDMETHODCALLTYPE *AddItem )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  ITfLangBarItem *punk);
+            /* [in] */ __RPC__in_opt ITfLangBarItem *punk);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, RemoveItem)
         HRESULT ( STDMETHODCALLTYPE *RemoveItem )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  ITfLangBarItem *punk);
+            /* [in] */ __RPC__in_opt ITfLangBarItem *punk);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, AdviseItemSink)
         HRESULT ( STDMETHODCALLTYPE *AdviseItemSink )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  ITfLangBarItemSink *punk,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwCookie,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguidItem);
+            /* [in] */ __RPC__in_opt ITfLangBarItemSink *punk,
+            /* [out] */ __RPC__out DWORD *pdwCookie,
+            /* [in] */ __RPC__in REFGUID rguidItem);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, UnadviseItemSink)
         HRESULT ( STDMETHODCALLTYPE *UnadviseItemSink )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwCookie);
+            /* [in] */ DWORD dwCookie);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, GetItemFloatingRect)
         HRESULT ( STDMETHODCALLTYPE *GetItemFloatingRect )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwThreadId,
-            /* [annotation][in] */ 
-            _In_  REFGUID rguid,
-            /* [annotation][out] */ 
-            _Out_  RECT *prc);
+            /* [in] */ DWORD dwThreadId,
+            /* [in] */ __RPC__in REFGUID rguid,
+            /* [out] */ __RPC__out RECT *prc);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, GetItemsStatus)
         HRESULT ( STDMETHODCALLTYPE *GetItemsStatus )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  const GUID *prgguid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(ulCount)  DWORD *pdwStatus);
+            /* [in] */ ULONG ulCount,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) const GUID *prgguid,
+            /* [size_is][out] */ __RPC__out_ecount_full(ulCount) DWORD *pdwStatus);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, GetItemNum)
         HRESULT ( STDMETHODCALLTYPE *GetItemNum )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulCount);
+            /* [out] */ __RPC__out ULONG *pulCount);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, GetItems)
         HRESULT ( STDMETHODCALLTYPE *GetItems )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(ulCount,*pcFetched)  ITfLangBarItem **ppItem,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(ulCount,*pcFetched)  TF_LANGBARITEMINFO *pInfo,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(ulCount,*pcFetched)  DWORD *pdwStatus,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  ULONG *pcFetched);
+            /* [in] */ ULONG ulCount,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) ITfLangBarItem **ppItem,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) TF_LANGBARITEMINFO *pInfo,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(ulCount, *pcFetched) DWORD *pdwStatus,
+            /* [unique][out][in] */ __RPC__inout_opt ULONG *pcFetched);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, AdviseItemsSink)
         HRESULT ( STDMETHODCALLTYPE *AdviseItemsSink )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  ITfLangBarItemSink **ppunk,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  const GUID *pguidItem,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(ulCount)  DWORD *pdwCookie);
+            /* [in] */ ULONG ulCount,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) ITfLangBarItemSink **ppunk,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) const GUID *pguidItem,
+            /* [size_is][out] */ __RPC__out_ecount_full(ulCount) DWORD *pdwCookie);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemMgr, UnadviseItemsSink)
         HRESULT ( STDMETHODCALLTYPE *UnadviseItemsSink )( 
             __RPC__in ITfLangBarItemMgr * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulCount,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(ulCount)  DWORD *pdwCookie);
+            /* [in] */ ULONG ulCount,
+            /* [size_is][in] */ __RPC__in_ecount_full(ulCount) DWORD *pdwCookie);
         
         END_INTERFACE
     } ITfLangBarItemMgrVtbl;
@@ -1229,20 +1092,16 @@ EXTERN_C const IID IID_ITfLangBarItem;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetInfo( 
-            /* [annotation][out] */ 
-            _Out_  TF_LANGBARITEMINFO *pInfo) = 0;
+            /* [out] */ __RPC__out TF_LANGBARITEMINFO *pInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatus) = 0;
+            /* [out] */ __RPC__out DWORD *pdwStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Show( 
-            /* [annotation][in] */ 
-            _In_  BOOL fShow) = 0;
+            /* [in] */ BOOL fShow) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTooltipString( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrToolTip) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrToolTip) = 0;
         
     };
     
@@ -1256,8 +1115,7 @@ EXTERN_C const IID IID_ITfLangBarItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1272,26 +1130,22 @@ EXTERN_C const IID IID_ITfLangBarItem;
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in ITfLangBarItem * This,
-            /* [annotation][out] */ 
-            _Out_  TF_LANGBARITEMINFO *pInfo);
+            /* [out] */ __RPC__out TF_LANGBARITEMINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITfLangBarItem * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatus);
+            /* [out] */ __RPC__out DWORD *pdwStatus);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in ITfLangBarItem * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fShow);
+            /* [in] */ BOOL fShow);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipString )( 
             __RPC__in ITfLangBarItem * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrToolTip);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrToolTip);
         
         END_INTERFACE
     } ITfLangBarItemVtbl;
@@ -1367,12 +1221,10 @@ EXTERN_C const IID IID_ITfSystemLangBarItemSink;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE InitMenu( 
-            /* [annotation][in] */ 
-            _In_  ITfMenu *pMenu) = 0;
+            /* [in] */ __RPC__in_opt ITfMenu *pMenu) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnMenuSelect( 
-            /* [annotation][in] */ 
-            _In_  UINT wID) = 0;
+            /* [in] */ UINT wID) = 0;
         
     };
     
@@ -1386,8 +1238,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItemSink;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfSystemLangBarItemSink * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1402,14 +1253,12 @@ EXTERN_C const IID IID_ITfSystemLangBarItemSink;
         DECLSPEC_XFGVIRT(ITfSystemLangBarItemSink, InitMenu)
         HRESULT ( STDMETHODCALLTYPE *InitMenu )( 
             __RPC__in ITfSystemLangBarItemSink * This,
-            /* [annotation][in] */ 
-            _In_  ITfMenu *pMenu);
+            /* [in] */ __RPC__in_opt ITfMenu *pMenu);
         
         DECLSPEC_XFGVIRT(ITfSystemLangBarItemSink, OnMenuSelect)
         HRESULT ( STDMETHODCALLTYPE *OnMenuSelect )( 
             __RPC__in ITfSystemLangBarItemSink * This,
-            /* [annotation][in] */ 
-            _In_  UINT wID);
+            /* [in] */ UINT wID);
         
         END_INTERFACE
     } ITfSystemLangBarItemSinkVtbl;
@@ -1467,14 +1316,11 @@ EXTERN_C const IID IID_ITfSystemLangBarItem;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetIcon( 
-            /* [annotation][in] */ 
-            _In_  HICON hIcon) = 0;
+            /* [in] */ __RPC__in HICON hIcon) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetTooltipString( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cch)  WCHAR *pchToolTip,
-            /* [annotation][in] */ 
-            _In_  ULONG cch) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(cch) WCHAR *pchToolTip,
+            /* [in] */ ULONG cch) = 0;
         
     };
     
@@ -1488,8 +1334,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfSystemLangBarItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1504,16 +1349,13 @@ EXTERN_C const IID IID_ITfSystemLangBarItem;
         DECLSPEC_XFGVIRT(ITfSystemLangBarItem, SetIcon)
         HRESULT ( STDMETHODCALLTYPE *SetIcon )( 
             __RPC__in ITfSystemLangBarItem * This,
-            /* [annotation][in] */ 
-            _In_  HICON hIcon);
+            /* [in] */ __RPC__in HICON hIcon);
         
         DECLSPEC_XFGVIRT(ITfSystemLangBarItem, SetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *SetTooltipString )( 
             __RPC__in ITfSystemLangBarItem * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cch)  WCHAR *pchToolTip,
-            /* [annotation][in] */ 
-            _In_  ULONG cch);
+            /* [size_is][in] */ __RPC__in_ecount_full(cch) WCHAR *pchToolTip,
+            /* [in] */ ULONG cch);
         
         END_INTERFACE
     } ITfSystemLangBarItemVtbl;
@@ -1571,14 +1413,11 @@ EXTERN_C const IID IID_ITfSystemLangBarItemText;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetItemText( 
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cch)  const WCHAR *pch,
-            /* [annotation][in] */ 
-            _In_  ULONG cch) = 0;
+            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pch,
+            /* [in] */ ULONG cch) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetItemText( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrText) = 0;
         
     };
     
@@ -1592,8 +1431,7 @@ EXTERN_C const IID IID_ITfSystemLangBarItemText;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfSystemLangBarItemText * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1608,16 +1446,13 @@ EXTERN_C const IID IID_ITfSystemLangBarItemText;
         DECLSPEC_XFGVIRT(ITfSystemLangBarItemText, SetItemText)
         HRESULT ( STDMETHODCALLTYPE *SetItemText )( 
             __RPC__in ITfSystemLangBarItemText * This,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cch)  const WCHAR *pch,
-            /* [annotation][in] */ 
-            _In_  ULONG cch);
+            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pch,
+            /* [in] */ ULONG cch);
         
         DECLSPEC_XFGVIRT(ITfSystemLangBarItemText, GetItemText)
         HRESULT ( STDMETHODCALLTYPE *GetItemText )( 
             __RPC__in ITfSystemLangBarItemText * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrText);
         
         END_INTERFACE
     } ITfSystemLangBarItemTextVtbl;
@@ -1675,12 +1510,10 @@ EXTERN_C const IID IID_ITfSystemDeviceTypeLangBarItem;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetIconMode( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIconMode( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags) = 0;
+            /* [out] */ __RPC__out DWORD *pdwFlags) = 0;
         
     };
     
@@ -1694,8 +1527,7 @@ EXTERN_C const IID IID_ITfSystemDeviceTypeLangBarItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfSystemDeviceTypeLangBarItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1710,14 +1542,12 @@ EXTERN_C const IID IID_ITfSystemDeviceTypeLangBarItem;
         DECLSPEC_XFGVIRT(ITfSystemDeviceTypeLangBarItem, SetIconMode)
         HRESULT ( STDMETHODCALLTYPE *SetIconMode )( 
             __RPC__in ITfSystemDeviceTypeLangBarItem * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(ITfSystemDeviceTypeLangBarItem, GetIconMode)
         HRESULT ( STDMETHODCALLTYPE *GetIconMode )( 
             __RPC__in ITfSystemDeviceTypeLangBarItem * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwFlags);
+            /* [out] */ __RPC__out DWORD *pdwFlags);
         
         END_INTERFACE
     } ITfSystemDeviceTypeLangBarItemVtbl;
@@ -1798,28 +1628,21 @@ EXTERN_C const IID IID_ITfLangBarItemButton;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnClick( 
-            /* [annotation][in] */ 
-            _In_  TfLBIClick click,
-            /* [annotation][in] */ 
-            _In_  POINT pt,
-            /* [annotation][in] */ 
-            _In_  const RECT *prcArea) = 0;
+            /* [in] */ TfLBIClick click,
+            /* [in] */ POINT pt,
+            /* [in] */ __RPC__in const RECT *prcArea) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitMenu( 
-            /* [annotation][in] */ 
-            _In_  ITfMenu *pMenu) = 0;
+            /* [in] */ __RPC__in_opt ITfMenu *pMenu) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnMenuSelect( 
-            /* [annotation][in] */ 
-            _In_  UINT wID) = 0;
+            /* [in] */ UINT wID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetIcon( 
-            /* [annotation][out] */ 
-            _Out_  HICON *phIcon) = 0;
+            /* [out] */ __RPC__deref_out_opt HICON *phIcon) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrText) = 0;
         
     };
     
@@ -1833,8 +1656,7 @@ EXTERN_C const IID IID_ITfLangBarItemButton;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemButton * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1849,60 +1671,49 @@ EXTERN_C const IID IID_ITfLangBarItemButton;
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in ITfLangBarItemButton * This,
-            /* [annotation][out] */ 
-            _Out_  TF_LANGBARITEMINFO *pInfo);
+            /* [out] */ __RPC__out TF_LANGBARITEMINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITfLangBarItemButton * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatus);
+            /* [out] */ __RPC__out DWORD *pdwStatus);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in ITfLangBarItemButton * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fShow);
+            /* [in] */ BOOL fShow);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipString )( 
             __RPC__in ITfLangBarItemButton * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrToolTip);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrToolTip);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemButton, OnClick)
         HRESULT ( STDMETHODCALLTYPE *OnClick )( 
             __RPC__in ITfLangBarItemButton * This,
-            /* [annotation][in] */ 
-            _In_  TfLBIClick click,
-            /* [annotation][in] */ 
-            _In_  POINT pt,
-            /* [annotation][in] */ 
-            _In_  const RECT *prcArea);
+            /* [in] */ TfLBIClick click,
+            /* [in] */ POINT pt,
+            /* [in] */ __RPC__in const RECT *prcArea);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemButton, InitMenu)
         HRESULT ( STDMETHODCALLTYPE *InitMenu )( 
             __RPC__in ITfLangBarItemButton * This,
-            /* [annotation][in] */ 
-            _In_  ITfMenu *pMenu);
+            /* [in] */ __RPC__in_opt ITfMenu *pMenu);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemButton, OnMenuSelect)
         HRESULT ( STDMETHODCALLTYPE *OnMenuSelect )( 
             __RPC__in ITfLangBarItemButton * This,
-            /* [annotation][in] */ 
-            _In_  UINT wID);
+            /* [in] */ UINT wID);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemButton, GetIcon)
         HRESULT ( STDMETHODCALLTYPE *GetIcon )( 
             __RPC__in ITfLangBarItemButton * This,
-            /* [annotation][out] */ 
-            _Out_  HICON *phIcon);
+            /* [out] */ __RPC__deref_out_opt HICON *phIcon);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemButton, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in ITfLangBarItemButton * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrText);
         
         END_INTERFACE
     } ITfLangBarItemButtonVtbl;
@@ -1982,42 +1793,29 @@ EXTERN_C const IID IID_ITfLangBarItemBitmapButton;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnClick( 
-            /* [annotation][in] */ 
-            _In_  TfLBIClick click,
-            /* [annotation][in] */ 
-            _In_  POINT pt,
-            /* [annotation][in] */ 
-            _In_  const RECT *prcArea) = 0;
+            /* [in] */ TfLBIClick click,
+            /* [in] */ POINT pt,
+            /* [in] */ __RPC__in const RECT *prcArea) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitMenu( 
-            /* [annotation][in] */ 
-            _In_  ITfMenu *pMenu) = 0;
+            /* [in] */ __RPC__in_opt ITfMenu *pMenu) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnMenuSelect( 
-            /* [annotation][in] */ 
-            _In_  UINT wID) = 0;
+            /* [in] */ UINT wID) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPreferredSize( 
-            /* [annotation][in] */ 
-            _In_  const SIZE *pszDefault,
-            /* [annotation][out] */ 
-            _Out_  SIZE *psz) = 0;
+            /* [in] */ __RPC__in const SIZE *pszDefault,
+            /* [out] */ __RPC__out SIZE *psz) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DrawBitmap( 
-            /* [annotation][in] */ 
-            _In_  LONG bmWidth,
-            /* [annotation][in] */ 
-            _In_  LONG bmHeight,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][out] */ 
-            _Out_  HBITMAP *phbmp,
-            /* [annotation][out] */ 
-            _Out_  HBITMAP *phbmpMask) = 0;
+            /* [in] */ LONG bmWidth,
+            /* [in] */ LONG bmHeight,
+            /* [in] */ DWORD dwFlags,
+            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmp,
+            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmpMask) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetText( 
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText) = 0;
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrText) = 0;
         
     };
     
@@ -2031,8 +1829,7 @@ EXTERN_C const IID IID_ITfLangBarItemBitmapButton;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2047,76 +1844,59 @@ EXTERN_C const IID IID_ITfLangBarItemBitmapButton;
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][out] */ 
-            _Out_  TF_LANGBARITEMINFO *pInfo);
+            /* [out] */ __RPC__out TF_LANGBARITEMINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatus);
+            /* [out] */ __RPC__out DWORD *pdwStatus);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fShow);
+            /* [in] */ BOOL fShow);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipString )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrToolTip);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrToolTip);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, OnClick)
         HRESULT ( STDMETHODCALLTYPE *OnClick )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][in] */ 
-            _In_  TfLBIClick click,
-            /* [annotation][in] */ 
-            _In_  POINT pt,
-            /* [annotation][in] */ 
-            _In_  const RECT *prcArea);
+            /* [in] */ TfLBIClick click,
+            /* [in] */ POINT pt,
+            /* [in] */ __RPC__in const RECT *prcArea);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, InitMenu)
         HRESULT ( STDMETHODCALLTYPE *InitMenu )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][in] */ 
-            _In_  ITfMenu *pMenu);
+            /* [in] */ __RPC__in_opt ITfMenu *pMenu);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, OnMenuSelect)
         HRESULT ( STDMETHODCALLTYPE *OnMenuSelect )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][in] */ 
-            _In_  UINT wID);
+            /* [in] */ UINT wID);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, GetPreferredSize)
         HRESULT ( STDMETHODCALLTYPE *GetPreferredSize )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][in] */ 
-            _In_  const SIZE *pszDefault,
-            /* [annotation][out] */ 
-            _Out_  SIZE *psz);
+            /* [in] */ __RPC__in const SIZE *pszDefault,
+            /* [out] */ __RPC__out SIZE *psz);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, DrawBitmap)
         HRESULT ( STDMETHODCALLTYPE *DrawBitmap )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][in] */ 
-            _In_  LONG bmWidth,
-            /* [annotation][in] */ 
-            _In_  LONG bmHeight,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][out] */ 
-            _Out_  HBITMAP *phbmp,
-            /* [annotation][out] */ 
-            _Out_  HBITMAP *phbmpMask);
+            /* [in] */ LONG bmWidth,
+            /* [in] */ LONG bmHeight,
+            /* [in] */ DWORD dwFlags,
+            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmp,
+            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmpMask);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBitmapButton, GetText)
         HRESULT ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in ITfLangBarItemBitmapButton * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrText);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrText);
         
         END_INTERFACE
     } ITfLangBarItemBitmapButtonVtbl;
@@ -2199,30 +1979,20 @@ EXTERN_C const IID IID_ITfLangBarItemBitmap;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnClick( 
-            /* [annotation][in] */ 
-            _In_  TfLBIClick click,
-            /* [annotation][in] */ 
-            _In_  POINT pt,
-            /* [annotation][in] */ 
-            _In_  const RECT *prcArea) = 0;
+            /* [in] */ TfLBIClick click,
+            /* [in] */ POINT pt,
+            /* [in] */ __RPC__in const RECT *prcArea) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPreferredSize( 
-            /* [annotation][in] */ 
-            _In_  const SIZE *pszDefault,
-            /* [annotation][out] */ 
-            _Out_  SIZE *psz) = 0;
+            /* [in] */ __RPC__in const SIZE *pszDefault,
+            /* [out] */ __RPC__out SIZE *psz) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DrawBitmap( 
-            /* [annotation][in] */ 
-            _In_  LONG bmWidth,
-            /* [annotation][in] */ 
-            _In_  LONG bmHeight,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][out] */ 
-            _Out_  HBITMAP *phbmp,
-            /* [annotation][out] */ 
-            _Out_  HBITMAP *phbmpMask) = 0;
+            /* [in] */ LONG bmWidth,
+            /* [in] */ LONG bmHeight,
+            /* [in] */ DWORD dwFlags,
+            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmp,
+            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmpMask) = 0;
         
     };
     
@@ -2236,8 +2006,7 @@ EXTERN_C const IID IID_ITfLangBarItemBitmap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemBitmap * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2252,58 +2021,44 @@ EXTERN_C const IID IID_ITfLangBarItemBitmap;
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in ITfLangBarItemBitmap * This,
-            /* [annotation][out] */ 
-            _Out_  TF_LANGBARITEMINFO *pInfo);
+            /* [out] */ __RPC__out TF_LANGBARITEMINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITfLangBarItemBitmap * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatus);
+            /* [out] */ __RPC__out DWORD *pdwStatus);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in ITfLangBarItemBitmap * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fShow);
+            /* [in] */ BOOL fShow);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipString )( 
             __RPC__in ITfLangBarItemBitmap * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrToolTip);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrToolTip);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBitmap, OnClick)
         HRESULT ( STDMETHODCALLTYPE *OnClick )( 
             __RPC__in ITfLangBarItemBitmap * This,
-            /* [annotation][in] */ 
-            _In_  TfLBIClick click,
-            /* [annotation][in] */ 
-            _In_  POINT pt,
-            /* [annotation][in] */ 
-            _In_  const RECT *prcArea);
+            /* [in] */ TfLBIClick click,
+            /* [in] */ POINT pt,
+            /* [in] */ __RPC__in const RECT *prcArea);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBitmap, GetPreferredSize)
         HRESULT ( STDMETHODCALLTYPE *GetPreferredSize )( 
             __RPC__in ITfLangBarItemBitmap * This,
-            /* [annotation][in] */ 
-            _In_  const SIZE *pszDefault,
-            /* [annotation][out] */ 
-            _Out_  SIZE *psz);
+            /* [in] */ __RPC__in const SIZE *pszDefault,
+            /* [out] */ __RPC__out SIZE *psz);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBitmap, DrawBitmap)
         HRESULT ( STDMETHODCALLTYPE *DrawBitmap )( 
             __RPC__in ITfLangBarItemBitmap * This,
-            /* [annotation][in] */ 
-            _In_  LONG bmWidth,
-            /* [annotation][in] */ 
-            _In_  LONG bmHeight,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][out] */ 
-            _Out_  HBITMAP *phbmp,
-            /* [annotation][out] */ 
-            _Out_  HBITMAP *phbmpMask);
+            /* [in] */ LONG bmWidth,
+            /* [in] */ LONG bmHeight,
+            /* [in] */ DWORD dwFlags,
+            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmp,
+            /* [out] */ __RPC__deref_out_opt HBITMAP *phbmpMask);
         
         END_INTERFACE
     } ITfLangBarItemBitmapVtbl;
@@ -2403,22 +2158,16 @@ EXTERN_C const IID IID_ITfLangBarItemBalloon;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnClick( 
-            /* [annotation][in] */ 
-            _In_  TfLBIClick click,
-            /* [annotation][in] */ 
-            _In_  POINT pt,
-            /* [annotation][in] */ 
-            _In_  const RECT *prcArea) = 0;
+            /* [in] */ TfLBIClick click,
+            /* [in] */ POINT pt,
+            /* [in] */ __RPC__in const RECT *prcArea) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPreferredSize( 
-            /* [annotation][in] */ 
-            _In_  const SIZE *pszDefault,
-            /* [annotation][out] */ 
-            _Out_  SIZE *psz) = 0;
+            /* [in] */ __RPC__in const SIZE *pszDefault,
+            /* [out] */ __RPC__out SIZE *psz) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetBalloonInfo( 
-            /* [annotation][out] */ 
-            _Out_  TF_LBBALLOONINFO *pInfo) = 0;
+            /* [out] */ __RPC__out TF_LBBALLOONINFO *pInfo) = 0;
         
     };
     
@@ -2432,8 +2181,7 @@ EXTERN_C const IID IID_ITfLangBarItemBalloon;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfLangBarItemBalloon * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2448,50 +2196,40 @@ EXTERN_C const IID IID_ITfLangBarItemBalloon;
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in ITfLangBarItemBalloon * This,
-            /* [annotation][out] */ 
-            _Out_  TF_LANGBARITEMINFO *pInfo);
+            /* [out] */ __RPC__out TF_LANGBARITEMINFO *pInfo);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in ITfLangBarItemBalloon * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwStatus);
+            /* [out] */ __RPC__out DWORD *pdwStatus);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in ITfLangBarItemBalloon * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fShow);
+            /* [in] */ BOOL fShow);
         
         DECLSPEC_XFGVIRT(ITfLangBarItem, GetTooltipString)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipString )( 
             __RPC__in ITfLangBarItemBalloon * This,
-            /* [annotation][out] */ 
-            _Out_  BSTR *pbstrToolTip);
+            /* [out] */ __RPC__deref_out_opt BSTR *pbstrToolTip);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBalloon, OnClick)
         HRESULT ( STDMETHODCALLTYPE *OnClick )( 
             __RPC__in ITfLangBarItemBalloon * This,
-            /* [annotation][in] */ 
-            _In_  TfLBIClick click,
-            /* [annotation][in] */ 
-            _In_  POINT pt,
-            /* [annotation][in] */ 
-            _In_  const RECT *prcArea);
+            /* [in] */ TfLBIClick click,
+            /* [in] */ POINT pt,
+            /* [in] */ __RPC__in const RECT *prcArea);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBalloon, GetPreferredSize)
         HRESULT ( STDMETHODCALLTYPE *GetPreferredSize )( 
             __RPC__in ITfLangBarItemBalloon * This,
-            /* [annotation][in] */ 
-            _In_  const SIZE *pszDefault,
-            /* [annotation][out] */ 
-            _Out_  SIZE *psz);
+            /* [in] */ __RPC__in const SIZE *pszDefault,
+            /* [out] */ __RPC__out SIZE *psz);
         
         DECLSPEC_XFGVIRT(ITfLangBarItemBalloon, GetBalloonInfo)
         HRESULT ( STDMETHODCALLTYPE *GetBalloonInfo )( 
             __RPC__in ITfLangBarItemBalloon * This,
-            /* [annotation][out] */ 
-            _Out_  TF_LBBALLOONINFO *pInfo);
+            /* [out] */ __RPC__out TF_LBBALLOONINFO *pInfo);
         
         END_INTERFACE
     } ITfLangBarItemBalloonVtbl;
@@ -2587,20 +2325,13 @@ EXTERN_C const IID IID_ITfMenu;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddMenuItem( 
-            /* [annotation][in] */ 
-            _In_  UINT uId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][in] */ 
-            _In_  HBITMAP hbmp,
-            /* [annotation][in] */ 
-            _In_  HBITMAP hbmpMask,
-            /* [annotation][size_is][unique][in] */ 
-            _In_reads_(cch)  const WCHAR *pch,
-            /* [annotation][in] */ 
-            _In_  ULONG cch,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  ITfMenu **ppMenu) = 0;
+            /* [in] */ UINT uId,
+            /* [in] */ DWORD dwFlags,
+            /* [in] */ __RPC__in HBITMAP hbmp,
+            /* [in] */ __RPC__in HBITMAP hbmpMask,
+            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cch) const WCHAR *pch,
+            /* [in] */ ULONG cch,
+            /* [unique][out][in] */ __RPC__deref_opt_inout_opt ITfMenu **ppMenu) = 0;
         
     };
     
@@ -2614,8 +2345,7 @@ EXTERN_C const IID IID_ITfMenu;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfMenu * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2630,20 +2360,13 @@ EXTERN_C const IID IID_ITfMenu;
         DECLSPEC_XFGVIRT(ITfMenu, AddMenuItem)
         HRESULT ( STDMETHODCALLTYPE *AddMenuItem )( 
             __RPC__in ITfMenu * This,
-            /* [annotation][in] */ 
-            _In_  UINT uId,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags,
-            /* [annotation][in] */ 
-            _In_  HBITMAP hbmp,
-            /* [annotation][in] */ 
-            _In_  HBITMAP hbmpMask,
-            /* [annotation][size_is][unique][in] */ 
-            _In_reads_(cch)  const WCHAR *pch,
-            /* [annotation][in] */ 
-            _In_  ULONG cch,
-            /* [annotation][unique][out][in] */ 
-            _Inout_  ITfMenu **ppMenu);
+            /* [in] */ UINT uId,
+            /* [in] */ DWORD dwFlags,
+            /* [in] */ __RPC__in HBITMAP hbmp,
+            /* [in] */ __RPC__in HBITMAP hbmpMask,
+            /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cch) const WCHAR *pch,
+            /* [in] */ ULONG cch,
+            /* [unique][out][in] */ __RPC__deref_opt_inout_opt ITfMenu **ppMenu);
         
         END_INTERFACE
     } ITfMenuVtbl;

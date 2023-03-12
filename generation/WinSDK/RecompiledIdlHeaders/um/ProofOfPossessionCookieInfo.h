@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -129,12 +129,9 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCookieInfoForUri( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR uri,
-            /* [annotation][out] */ 
-            _Out_  DWORD *cookieInfoCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*cookieInfoCount)  ProofOfPossessionCookieInfo **cookieInfo) = 0;
+            /* [in] */ __RPC__in LPCWSTR uri,
+            /* [out] */ __RPC__out DWORD *cookieInfoCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*cookieInfoCount) ProofOfPossessionCookieInfo **cookieInfo) = 0;
         
     };
     
@@ -148,8 +145,7 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProofOfPossessionCookieInfoManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -164,12 +160,9 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager;
         DECLSPEC_XFGVIRT(IProofOfPossessionCookieInfoManager, GetCookieInfoForUri)
         HRESULT ( STDMETHODCALLTYPE *GetCookieInfoForUri )( 
             __RPC__in IProofOfPossessionCookieInfoManager * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR uri,
-            /* [annotation][out] */ 
-            _Out_  DWORD *cookieInfoCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*cookieInfoCount)  ProofOfPossessionCookieInfo **cookieInfo);
+            /* [in] */ __RPC__in LPCWSTR uri,
+            /* [out] */ __RPC__out DWORD *cookieInfoCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*cookieInfoCount) ProofOfPossessionCookieInfo **cookieInfo);
         
         END_INTERFACE
     } IProofOfPossessionCookieInfoManagerVtbl;
@@ -224,14 +217,10 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetCookieInfoWithUriForAccount( 
-            /* [annotation][in] */ 
-            _In_  IInspectable *webAccount,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR uri,
-            /* [annotation][out] */ 
-            _Out_  DWORD *cookieInfoCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*cookieInfoCount)  ProofOfPossessionCookieInfo **cookieInfo) = 0;
+            /* [in] */ __RPC__in_opt IInspectable *webAccount,
+            /* [in] */ __RPC__in LPCWSTR uri,
+            /* [out] */ __RPC__out DWORD *cookieInfoCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*cookieInfoCount) ProofOfPossessionCookieInfo **cookieInfo) = 0;
         
     };
     
@@ -245,8 +234,7 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProofOfPossessionCookieInfoManager2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -261,14 +249,10 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager2;
         DECLSPEC_XFGVIRT(IProofOfPossessionCookieInfoManager2, GetCookieInfoWithUriForAccount)
         HRESULT ( STDMETHODCALLTYPE *GetCookieInfoWithUriForAccount )( 
             __RPC__in IProofOfPossessionCookieInfoManager2 * This,
-            /* [annotation][in] */ 
-            _In_  IInspectable *webAccount,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR uri,
-            /* [annotation][out] */ 
-            _Out_  DWORD *cookieInfoCount,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*cookieInfoCount)  ProofOfPossessionCookieInfo **cookieInfo);
+            /* [in] */ __RPC__in_opt IInspectable *webAccount,
+            /* [in] */ __RPC__in LPCWSTR uri,
+            /* [out] */ __RPC__out DWORD *cookieInfoCount,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*cookieInfoCount) ProofOfPossessionCookieInfo **cookieInfo);
         
         END_INTERFACE
     } IProofOfPossessionCookieInfoManager2Vtbl;

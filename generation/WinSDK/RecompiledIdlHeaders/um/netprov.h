@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -121,18 +121,13 @@ EXTERN_C const IID IID_IProvisioningDomain;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Add( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszwPathToFolder) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR pszwPathToFolder) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Query( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszwDomain,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszwLanguage,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszwXPathQuery,
-            /* [annotation][out] */ 
-            _Out_  IXMLDOMNodeList **Nodes) = 0;
+            /* [string][in] */ __RPC__in_string LPCWSTR pszwDomain,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszwLanguage,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszwXPathQuery,
+            /* [out] */ __RPC__deref_out_opt IXMLDOMNodeList **Nodes) = 0;
         
     };
     
@@ -146,8 +141,7 @@ EXTERN_C const IID IID_IProvisioningDomain;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProvisioningDomain * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -162,20 +156,15 @@ EXTERN_C const IID IID_IProvisioningDomain;
         DECLSPEC_XFGVIRT(IProvisioningDomain, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IProvisioningDomain * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszwPathToFolder);
+            /* [string][in] */ __RPC__in_string LPCWSTR pszwPathToFolder);
         
         DECLSPEC_XFGVIRT(IProvisioningDomain, Query)
         HRESULT ( STDMETHODCALLTYPE *Query )( 
             __RPC__in IProvisioningDomain * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszwDomain,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszwLanguage,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR pszwXPathQuery,
-            /* [annotation][out] */ 
-            _Out_  IXMLDOMNodeList **Nodes);
+            /* [string][in] */ __RPC__in_string LPCWSTR pszwDomain,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszwLanguage,
+            /* [string][in] */ __RPC__in_string LPCWSTR pszwXPathQuery,
+            /* [out] */ __RPC__deref_out_opt IXMLDOMNodeList **Nodes);
         
         END_INTERFACE
     } IProvisioningDomainVtbl;
@@ -283,14 +272,10 @@ EXTERN_C const IID IID_IProvisioningProfileWireless;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CreateProfile( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrXMLWirelessConfigProfile,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrXMLConnectionConfigProfile,
-            /* [annotation][in] */ 
-            _In_  GUID *pAdapterInstanceGuid,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulStatus) = 0;
+            /* [in] */ __RPC__in BSTR bstrXMLWirelessConfigProfile,
+            /* [in] */ __RPC__in BSTR bstrXMLConnectionConfigProfile,
+            /* [in] */ __RPC__in GUID *pAdapterInstanceGuid,
+            /* [out] */ __RPC__out ULONG *pulStatus) = 0;
         
     };
     
@@ -304,8 +289,7 @@ EXTERN_C const IID IID_IProvisioningProfileWireless;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProvisioningProfileWireless * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -320,14 +304,10 @@ EXTERN_C const IID IID_IProvisioningProfileWireless;
         DECLSPEC_XFGVIRT(IProvisioningProfileWireless, CreateProfile)
         HRESULT ( STDMETHODCALLTYPE *CreateProfile )( 
             __RPC__in IProvisioningProfileWireless * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrXMLWirelessConfigProfile,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrXMLConnectionConfigProfile,
-            /* [annotation][in] */ 
-            _In_  GUID *pAdapterInstanceGuid,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pulStatus);
+            /* [in] */ __RPC__in BSTR bstrXMLWirelessConfigProfile,
+            /* [in] */ __RPC__in BSTR bstrXMLConnectionConfigProfile,
+            /* [in] */ __RPC__in GUID *pAdapterInstanceGuid,
+            /* [out] */ __RPC__out ULONG *pulStatus);
         
         END_INTERFACE
     } IProvisioningProfileWirelessVtbl;

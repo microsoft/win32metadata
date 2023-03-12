@@ -4629,6 +4629,11 @@ SetupInstallFilesFromInfSectionW(
 //
 #define SPSVCINST_UNIQUE_NAME (0x00010000)
 
+//
+// (AddService) don't overwrite failure actions if they already exist
+//
+#define SPSVCINST_NOCLOBBER_FAILUREACTIONS (0x00020000)
+
 #endif // _SETUPAPI_VER >= _WIN32_WINNT_WIN10
 
 WINSETUPAPI

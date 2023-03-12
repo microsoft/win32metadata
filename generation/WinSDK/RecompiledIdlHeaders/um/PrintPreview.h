@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -102,20 +102,14 @@ EXTERN_C const IID IID_IPrintPreviewDxgiPackageTarget;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetJobPageCount( 
-            /* [annotation][in] */ 
-            _In_  PageCountType countType,
-            /* [annotation][in] */ 
-            _In_  UINT32 count) = 0;
+            /* [in] */ PageCountType countType,
+            /* [in] */ UINT32 count) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE DrawPage( 
-            /* [annotation][in] */ 
-            _In_  UINT32 jobPageNumber,
-            /* [annotation][in] */ 
-            _In_  IDXGISurface *pageImage,
-            /* [annotation][in] */ 
-            _In_  FLOAT dpiX,
-            /* [annotation][in] */ 
-            _In_  FLOAT dpiY) = 0;
+            /* [in] */ UINT32 jobPageNumber,
+            /* [in] */ __RPC__in_opt IDXGISurface *pageImage,
+            /* [in] */ FLOAT dpiX,
+            /* [in] */ FLOAT dpiY) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InvalidatePreview( void) = 0;
         
@@ -131,8 +125,7 @@ EXTERN_C const IID IID_IPrintPreviewDxgiPackageTarget;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrintPreviewDxgiPackageTarget * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -147,22 +140,16 @@ EXTERN_C const IID IID_IPrintPreviewDxgiPackageTarget;
         DECLSPEC_XFGVIRT(IPrintPreviewDxgiPackageTarget, SetJobPageCount)
         HRESULT ( STDMETHODCALLTYPE *SetJobPageCount )( 
             __RPC__in IPrintPreviewDxgiPackageTarget * This,
-            /* [annotation][in] */ 
-            _In_  PageCountType countType,
-            /* [annotation][in] */ 
-            _In_  UINT32 count);
+            /* [in] */ PageCountType countType,
+            /* [in] */ UINT32 count);
         
         DECLSPEC_XFGVIRT(IPrintPreviewDxgiPackageTarget, DrawPage)
         HRESULT ( STDMETHODCALLTYPE *DrawPage )( 
             __RPC__in IPrintPreviewDxgiPackageTarget * This,
-            /* [annotation][in] */ 
-            _In_  UINT32 jobPageNumber,
-            /* [annotation][in] */ 
-            _In_  IDXGISurface *pageImage,
-            /* [annotation][in] */ 
-            _In_  FLOAT dpiX,
-            /* [annotation][in] */ 
-            _In_  FLOAT dpiY);
+            /* [in] */ UINT32 jobPageNumber,
+            /* [in] */ __RPC__in_opt IDXGISurface *pageImage,
+            /* [in] */ FLOAT dpiX,
+            /* [in] */ FLOAT dpiY);
         
         DECLSPEC_XFGVIRT(IPrintPreviewDxgiPackageTarget, InvalidatePreview)
         HRESULT ( STDMETHODCALLTYPE *InvalidatePreview )( 

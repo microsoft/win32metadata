@@ -373,6 +373,7 @@ typedef struct _SecBufferDesc {
 #define SECBUFFER_SUBSCRIBE_GENERIC_TLS_EXTENSION 26 // Buffer for subscribing to generic TLS extensions.
 #define SECBUFFER_FLAGS                         27  // ISC/ASC REQ Flags
 #define SECBUFFER_TRAFFIC_SECRETS               28  // Message sequence lengths and corresponding traffic secrets.
+#define SECBUFFER_CERTIFICATE_REQUEST_CONTEXT   29  // TLS 1.3 certificate request context.
 
 #define SECBUFFER_ATTRMASK                      0xF0000000
 #define SECBUFFER_READONLY                      0x80000000  // Buffer is read-only, no checksum
@@ -453,6 +454,12 @@ typedef struct _SEC_DTLS_MTU {
 typedef struct _SEC_FLAGS {
     unsigned long long Flags; // The caller sets ISC/ASC REQ flags; the lower 32 bits are reserved, must be set to 0.
 } SEC_FLAGS, *PSEC_FLAGS;
+
+typedef struct _SEC_CERTIFICATE_REQUEST_CONTEXT {
+    unsigned char cbCertificateRequestContext; // Size in bytes of the rgCertificateRequestContext array.
+    unsigned char rgCertificateRequestContext[ANYSIZE_ARRAY]; // The TLS 1.3 certificate request context.
+} SEC_CERTIFICATE_REQUEST_CONTEXT, *PSEC_CERTIFICATE_REQUEST_CONTEXT;
+
 
 //
 //  Traffic secret types:
@@ -549,6 +556,8 @@ typedef struct _SEC_TRAFFIC_SECRETS {
 // Request that schannel perform server cert chain validation without failing the handshake on errors (deferred),
 // same as SCH_CRED_DEFERRED_CRED_VALIDATION except applies to context not credential handle.
 #define ISC_REQ_DEFERRED_CRED_VALIDATION 0x0000000200000000
+// Prevents the client sending the post_handshake_auth extension in the TLS 1.3 Client Hello.
+#define ISC_REQ_NO_POST_HANDSHAKE_AUTH   0x0000000400000000
 
 #define ISC_RET_DELEGATE                0x00000001
 #define ISC_RET_MUTUAL_AUTH             0x00000002
@@ -581,6 +590,7 @@ typedef struct _SEC_TRAFFIC_SECRETS {
 #define ISC_RET_CONFIDENTIALITY_ONLY    0x40000000 // honored by SPNEGO/Kerberos
 #define ISC_RET_MESSAGES                 0x0000000100000000 // Indicates that the TLS 1.3+ record layer is disabled, and the security context consumes and produces cleartext TLS messages, rather than records.
 #define ISC_RET_DEFERRED_CRED_VALIDATION 0x0000000200000000 // Indicates that SCH_CRED_DEFERRED_CRED_VALIDATION/ISC_REQ_DEFERRED_CRED_VALIDATION request will be honored.
+#define ISC_RET_NO_POST_HANDSHAKE_AUTH   0x0000000400000000 // Indicates that the TLS 1.3 Client Hello will not contain the post_handshake_auth extension.
 
 #define ASC_REQ_DELEGATE                0x00000001
 #define ASC_REQ_MUTUAL_AUTH             0x00000002
@@ -3424,7 +3434,7 @@ SECURITY_STATUS
 SEC_ENTRY
 SspiCopyAuthIdentity(
     _In_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE AuthData,
-    _Outptr_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE* AuthDataCopy
+    _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PSEC_WINNT_AUTH_IDENTITY_OPAQUE* AuthDataCopy
     );
 
 //
@@ -3435,7 +3445,7 @@ SspiCopyAuthIdentity(
 VOID
 SEC_ENTRY
 SspiFreeAuthIdentity(
-    _In_opt_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE AuthData
+    _In_opt_ __drv_freesMem(Mem) PSEC_WINNT_AUTH_IDENTITY_OPAQUE AuthData
     );
 
 VOID
@@ -3461,7 +3471,7 @@ SspiEncodeStringsAsAuthIdentity(
     _In_opt_ PCWSTR pszUserName,
     _In_opt_ PCWSTR pszDomainName,
     _In_opt_ PCWSTR pszPackedCredentialsString,
-    _Outptr_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE* ppAuthIdentity
+    _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PSEC_WINNT_AUTH_IDENTITY_OPAQUE* ppAuthIdentity
     );
 
 SECURITY_STATUS
@@ -3495,7 +3505,7 @@ SEC_ENTRY
 SspiUnmarshalAuthIdentity(
     _In_ unsigned long AuthIdentityLength,
     _In_reads_bytes_(AuthIdentityLength) char* AuthIdentityByteArray,
-    _Outptr_ PSEC_WINNT_AUTH_IDENTITY_OPAQUE* ppAuthIdentity
+    _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PSEC_WINNT_AUTH_IDENTITY_OPAQUE* ppAuthIdentity
     );
 
 #endif // NTDDI_VERSION

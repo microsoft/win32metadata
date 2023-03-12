@@ -312,6 +312,8 @@ namespace Windows
 
             interface ICompositionObject4;
 
+            interface ICompositionObject5;
+
             interface ICompositionObjectFactory;
 
             interface ICompositionObjectStatics;
@@ -397,6 +399,8 @@ namespace Windows
             interface ICompositor6;
 
             interface ICompositor7;
+
+            interface ICompositor8;
 
             interface ICompositorStatics;
 
@@ -1731,6 +1735,14 @@ namespace Windows
                 HRESULT TryGetAnimationController([in] HSTRING propertyName, [out] [retval] Windows.UI.Composition.AnimationController** result);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.UI.Composition.CompositionObject)]
+            [uuid(1D7F391B-A130-5265-A62B-60B8E668965A)]
+            interface ICompositionObject5 : IInspectable
+            {
+                [overload("StartAnimation")] HRESULT StartAnimationWithController([in] HSTRING propertyName, [in] Windows.UI.Composition.CompositionAnimation* animation, [in] Windows.UI.Composition.AnimationController* animationController);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             [exclusiveto(Windows.UI.Composition.CompositionObject)]
             [uuid(51205C5E-558A-4F2A-8D39-37BFE1E20DDD)]
@@ -2258,6 +2270,14 @@ namespace Windows
                 [overload("CreateRectangleClip")] HRESULT CreateRectangleClip([out] [retval] Windows.UI.Composition.RectangleClip** result);
                 [overload("CreateRectangleClip")] HRESULT CreateRectangleClipWithSides([in] FLOAT left, [in] FLOAT top, [in] FLOAT right, [in] FLOAT bottom, [out] [retval] Windows.UI.Composition.RectangleClip** result);
                 [overload("CreateRectangleClip")] HRESULT CreateRectangleClipWithSidesAndRadius([in] FLOAT left, [in] FLOAT top, [in] FLOAT right, [in] FLOAT bottom, [in] Windows.Foundation.Numerics.Vector2 topLeftRadius, [in] Windows.Foundation.Numerics.Vector2 topRightRadius, [in] Windows.Foundation.Numerics.Vector2 bottomRightRadius, [in] Windows.Foundation.Numerics.Vector2 bottomLeftRadius, [out] [retval] Windows.UI.Composition.RectangleClip** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.UI.Composition.Compositor)]
+            [uuid(9A0BDEE2-FE7B-5F62-A366-9CF8EFFE2112)]
+            interface ICompositor8 : IInspectable
+            {
+                HRESULT CreateAnimationController([out] [retval] Windows.UI.Composition.AnimationController** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
@@ -3347,6 +3367,7 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 3.0)] interface Windows.UI.Composition.ICompositionObject2;
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)] interface Windows.UI.Composition.ICompositionObject3;
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)] interface Windows.UI.Composition.ICompositionObject4;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.UI.Composition.ICompositionObject5;
                 interface Windows.Foundation.IClosable;
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)] interface Windows.UI.Composition.IAnimationObject;
             }
@@ -3569,6 +3590,7 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.UI.Composition.ICompositorWithVisualSurface;
                 [contract(Windows.Foundation.UniversalApiContract, 12.0)] interface Windows.UI.Composition.ICompositor7;
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.UI.Composition.ICompositorWithBlurredWallpaperBackdropBrush;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.UI.Composition.ICompositor8;
                 interface Windows.Foundation.IClosable;
             }
 

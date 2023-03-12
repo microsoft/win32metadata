@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -98,16 +98,13 @@ EXTERN_C const IID IID_IMixerOCXNotify;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnInvalidateRect( 
-            /* [annotation][in] */ 
-            _In_  LPCRECT lpcRect) = 0;
+            /* [in] */ __RPC__in LPCRECT lpcRect) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnStatusChange( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulStatusFlags) = 0;
+            /* [in] */ ULONG ulStatusFlags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDataChange( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulDataFlags) = 0;
+            /* [in] */ ULONG ulDataFlags) = 0;
         
     };
     
@@ -121,8 +118,7 @@ EXTERN_C const IID IID_IMixerOCXNotify;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMixerOCXNotify * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -137,20 +133,17 @@ EXTERN_C const IID IID_IMixerOCXNotify;
         DECLSPEC_XFGVIRT(IMixerOCXNotify, OnInvalidateRect)
         HRESULT ( STDMETHODCALLTYPE *OnInvalidateRect )( 
             __RPC__in IMixerOCXNotify * This,
-            /* [annotation][in] */ 
-            _In_  LPCRECT lpcRect);
+            /* [in] */ __RPC__in LPCRECT lpcRect);
         
         DECLSPEC_XFGVIRT(IMixerOCXNotify, OnStatusChange)
         HRESULT ( STDMETHODCALLTYPE *OnStatusChange )( 
             __RPC__in IMixerOCXNotify * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulStatusFlags);
+            /* [in] */ ULONG ulStatusFlags);
         
         DECLSPEC_XFGVIRT(IMixerOCXNotify, OnDataChange)
         HRESULT ( STDMETHODCALLTYPE *OnDataChange )( 
             __RPC__in IMixerOCXNotify * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulDataFlags);
+            /* [in] */ ULONG ulDataFlags);
         
         END_INTERFACE
     } IMixerOCXNotifyVtbl;
@@ -211,46 +204,32 @@ EXTERN_C const IID IID_IMixerOCX;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE OnDisplayChange( 
-            /* [annotation][in] */ 
-            _In_  ULONG ulBitsPerPixel,
-            /* [annotation][in] */ 
-            _In_  ULONG ulScreenWidth,
-            /* [annotation][in] */ 
-            _In_  ULONG ulScreenHeight) = 0;
+            /* [in] */ ULONG ulBitsPerPixel,
+            /* [in] */ ULONG ulScreenWidth,
+            /* [in] */ ULONG ulScreenHeight) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAspectRatio( 
-            /* [annotation][out] */ 
-            _Out_  LPDWORD pdwPictAspectRatioX,
-            /* [annotation][out] */ 
-            _Out_  LPDWORD pdwPictAspectRatioY) = 0;
+            /* [out] */ __RPC__out LPDWORD pdwPictAspectRatioX,
+            /* [out] */ __RPC__out LPDWORD pdwPictAspectRatioY) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVideoSize( 
-            /* [annotation][out] */ 
-            _Out_  LPDWORD pdwVideoWidth,
-            /* [annotation][out] */ 
-            _Out_  LPDWORD pdwVideoHeight) = 0;
+            /* [out] */ __RPC__out LPDWORD pdwVideoWidth,
+            /* [out] */ __RPC__out LPDWORD pdwVideoHeight) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
-            /* [annotation][out] */ 
-            _Out_  LPDWORD *pdwStatus) = 0;
+            /* [out] */ __RPC__deref_out_opt LPDWORD *pdwStatus) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OnDraw( 
-            /* [annotation][in] */ 
-            _In_  HDC hdcDraw,
-            /* [annotation][in] */ 
-            _In_  LPCRECT prcDraw) = 0;
+            /* [in] */ __RPC__in HDC hdcDraw,
+            /* [in] */ __RPC__in LPCRECT prcDraw) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetDrawRegion( 
-            /* [annotation][in] */ 
-            _In_  LPPOINT lpptTopLeftSC,
-            /* [annotation][in] */ 
-            _In_  LPCRECT prcDrawCC,
-            /* [annotation][in] */ 
-            _In_  LPCRECT lprcClip) = 0;
+            /* [in] */ __RPC__in LPPOINT lpptTopLeftSC,
+            /* [in] */ __RPC__in LPCRECT prcDrawCC,
+            /* [in] */ __RPC__in LPCRECT lprcClip) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Advise( 
-            /* [annotation][in] */ 
-            _In_  IMixerOCXNotify *pmdns) = 0;
+            /* [in] */ __RPC__in_opt IMixerOCXNotify *pmdns) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnAdvise( void) = 0;
         
@@ -266,8 +245,7 @@ EXTERN_C const IID IID_IMixerOCX;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMixerOCX * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -282,58 +260,44 @@ EXTERN_C const IID IID_IMixerOCX;
         DECLSPEC_XFGVIRT(IMixerOCX, OnDisplayChange)
         HRESULT ( STDMETHODCALLTYPE *OnDisplayChange )( 
             __RPC__in IMixerOCX * This,
-            /* [annotation][in] */ 
-            _In_  ULONG ulBitsPerPixel,
-            /* [annotation][in] */ 
-            _In_  ULONG ulScreenWidth,
-            /* [annotation][in] */ 
-            _In_  ULONG ulScreenHeight);
+            /* [in] */ ULONG ulBitsPerPixel,
+            /* [in] */ ULONG ulScreenWidth,
+            /* [in] */ ULONG ulScreenHeight);
         
         DECLSPEC_XFGVIRT(IMixerOCX, GetAspectRatio)
         HRESULT ( STDMETHODCALLTYPE *GetAspectRatio )( 
             __RPC__in IMixerOCX * This,
-            /* [annotation][out] */ 
-            _Out_  LPDWORD pdwPictAspectRatioX,
-            /* [annotation][out] */ 
-            _Out_  LPDWORD pdwPictAspectRatioY);
+            /* [out] */ __RPC__out LPDWORD pdwPictAspectRatioX,
+            /* [out] */ __RPC__out LPDWORD pdwPictAspectRatioY);
         
         DECLSPEC_XFGVIRT(IMixerOCX, GetVideoSize)
         HRESULT ( STDMETHODCALLTYPE *GetVideoSize )( 
             __RPC__in IMixerOCX * This,
-            /* [annotation][out] */ 
-            _Out_  LPDWORD pdwVideoWidth,
-            /* [annotation][out] */ 
-            _Out_  LPDWORD pdwVideoHeight);
+            /* [out] */ __RPC__out LPDWORD pdwVideoWidth,
+            /* [out] */ __RPC__out LPDWORD pdwVideoHeight);
         
         DECLSPEC_XFGVIRT(IMixerOCX, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IMixerOCX * This,
-            /* [annotation][out] */ 
-            _Out_  LPDWORD *pdwStatus);
+            /* [out] */ __RPC__deref_out_opt LPDWORD *pdwStatus);
         
         DECLSPEC_XFGVIRT(IMixerOCX, OnDraw)
         HRESULT ( STDMETHODCALLTYPE *OnDraw )( 
             __RPC__in IMixerOCX * This,
-            /* [annotation][in] */ 
-            _In_  HDC hdcDraw,
-            /* [annotation][in] */ 
-            _In_  LPCRECT prcDraw);
+            /* [in] */ __RPC__in HDC hdcDraw,
+            /* [in] */ __RPC__in LPCRECT prcDraw);
         
         DECLSPEC_XFGVIRT(IMixerOCX, SetDrawRegion)
         HRESULT ( STDMETHODCALLTYPE *SetDrawRegion )( 
             __RPC__in IMixerOCX * This,
-            /* [annotation][in] */ 
-            _In_  LPPOINT lpptTopLeftSC,
-            /* [annotation][in] */ 
-            _In_  LPCRECT prcDrawCC,
-            /* [annotation][in] */ 
-            _In_  LPCRECT lprcClip);
+            /* [in] */ __RPC__in LPPOINT lpptTopLeftSC,
+            /* [in] */ __RPC__in LPCRECT prcDrawCC,
+            /* [in] */ __RPC__in LPCRECT lprcClip);
         
         DECLSPEC_XFGVIRT(IMixerOCX, Advise)
         HRESULT ( STDMETHODCALLTYPE *Advise )( 
             __RPC__in IMixerOCX * This,
-            /* [annotation][in] */ 
-            _In_  IMixerOCXNotify *pmdns);
+            /* [in] */ __RPC__in_opt IMixerOCXNotify *pmdns);
         
         DECLSPEC_XFGVIRT(IMixerOCX, UnAdvise)
         HRESULT ( STDMETHODCALLTYPE *UnAdvise )( 

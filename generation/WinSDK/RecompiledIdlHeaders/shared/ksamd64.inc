@@ -67,6 +67,13 @@ KAPC_RECORD_FLAGS_CHECK_ALERT equ 00001H
 
 
 ;
+;  Apc Callback Data Structure Offset Definitions
+;
+
+AcdContextRecord equ 00008H
+KAPC_CALLBACK_DATA_LENGTH equ 00020H
+
+;
 ;  Bug Check Code Definitions
 ;
 
@@ -484,9 +491,9 @@ PfBucketShift equ 00030H
 PfBuffer equ 00038H
 PfSegment equ 00040H
 PfAffinity equ 00048H
-PfSource equ 00158H
-PfStarted equ 0015AH
-ProfileObjectLength equ 00160H
+PfSource equ 00260H
+PfStarted equ 00262H
+ProfileObjectLength equ 00268H
 
 ;
 ;  Queue Object Structure Offset Definitions
@@ -572,7 +579,7 @@ ThWin32Thread equ 001C8H
 ThStackBase equ 00038H
 ThLegoData equ 002D0H
 KernelThreadObjectLength equ 00480H
-ExecutiveThreadObjectLength equ 008F0H
+ExecutiveThreadObjectLength equ 00900H
 
 
 ;
@@ -933,6 +940,7 @@ PcVirtualApicAssist equ 08888H
 PcFeatureBits equ 08B20H
 PcNmiActive equ 08026H
 PcMceActive equ 08027H
+PcCombinedNmiMceActive equ 08026H
 PcSfCode equ 08DE8H
 PcSfVa equ 08DF0H
 PcSfPa equ 08DF8H
@@ -940,8 +948,8 @@ PcKernelDirectoryTableBase equ 0A000H
 PcExceptionStack equ 083E8H
 PcExceptionStackActive equ 083E6H
 PcDpcRequestSummary equ 0353CH
-PcTransitionShadowStack equ 09820H
-PcKernelShadowStackInitial equ 09828H
+PcTransitionShadowStack equ 095A0H
+PcKernelShadowStackInitial equ 095A8H
 ;
 ;
 CPU_AMD equ 00001H
@@ -1044,6 +1052,7 @@ PbIdleHalt equ 00007H
 PbCurrentThread equ 00008H
 PbNextThread equ 00010H
 PbIdleThread equ 00018H
+PbSmtIsolationThread equ 08880H
 PbNestingLevel equ 00020H
 PbNumber equ 00024H
 PbRspBase equ 00028H
@@ -1064,8 +1073,8 @@ PbMinorVersion equ 00088H
 PbMajorVersion equ 0008AH
 PbBuildType equ 0008CH
 PbCpuVendor equ 0008DH
-PbCoresPerPhysicalProcessor equ 0008EH
-PbLogicalProcessorsPerCore equ 0008FH
+PbCoresPerPhysicalProcessor equ 000A0H
+PbLogicalProcessorsPerCore equ 000A4H
 PbApicMask equ 000DCH
 PbCFlushSize equ 000E8H
 PbAcpiReserved equ 000E0H
@@ -1090,7 +1099,7 @@ PbContextSwitches equ 02D3CH
 PbTargetCount equ 02D84H
 PbIpiFrozen equ 02D88H
 PbRequestMailbox equ 0BEC0H
-PbMailbox equ 095C0H
+PbMailbox equ 09340H
 PbDpcList equ 03340H
 PbDpcLock equ 03350H
 PbDpcCount equ 0335CH
@@ -1134,7 +1143,7 @@ PbVendorString equ 08990H
 ProcessorBlockLength equ 0BF00H
 PbShadowFlags equ 09E98H
 PbTrappedSecurityDomain equ 000F0H
-PbKernelShadowStackInitial equ 096A8H
+PbKernelShadowStackInitial equ 09428H
 
 ;
 ;  Time Fields (TIME_FIELDS) Structure Offset Definitions

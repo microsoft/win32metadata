@@ -196,6 +196,10 @@
     "pointerType": "PFN_HANDLE_CMD"
   },
   {
+    "name": "FN_CUSTOM_HELP",
+    "pointerType": "PFN_CUSTOM_HELP"
+  },
+  {
     "name": "NS_OSVERSIONCHECK",
     "pointerType": "PNS_OSVERSIONCHECK"
   },
@@ -340,6 +344,10 @@
     "pointerType": "PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK"
   },
   {
+    "name": "LSA_REDIRECTED_LOGON_GET_SID",
+    "pointerType": "PLSA_REDIRECTED_LOGON_GET_SID"
+  },
+  {
     "name": "LSA_IMPERSONATE_CLIENT",
     "pointerType": "PLSA_IMPERSONATE_CLIENT"
   },
@@ -362,6 +370,10 @@
   {
     "name": "LSA_GET_CLIENT_INFO",
     "pointerType": "PLSA_GET_CLIENT_INFO"
+  },
+  {
+    "name": "LSA_GET_CLIENT_INFO_EX",
+    "pointerType": "PLSA_GET_CLIENT_INFO_EX"
   },
   {
     "name": "LSA_REGISTER_NOTIFICATION",

@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -34,7 +34,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -148,52 +148,31 @@ EXTERN_C const IID IID__IManipulationEvents;
     {
     public:
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ManipulationStarted( 
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y) = 0;
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ManipulationDelta( 
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y,
-            /* [annotation][in] */ 
-            _In_  FLOAT translationDeltaX,
-            /* [annotation][in] */ 
-            _In_  FLOAT translationDeltaY,
-            /* [annotation][in] */ 
-            _In_  FLOAT scaleDelta,
-            /* [annotation][in] */ 
-            _In_  FLOAT expansionDelta,
-            /* [annotation][in] */ 
-            _In_  FLOAT rotationDelta,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeTranslationX,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeTranslationY,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeScale,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeExpansion,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeRotation) = 0;
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y,
+            /* [in] */ FLOAT translationDeltaX,
+            /* [in] */ FLOAT translationDeltaY,
+            /* [in] */ FLOAT scaleDelta,
+            /* [in] */ FLOAT expansionDelta,
+            /* [in] */ FLOAT rotationDelta,
+            /* [in] */ FLOAT cumulativeTranslationX,
+            /* [in] */ FLOAT cumulativeTranslationY,
+            /* [in] */ FLOAT cumulativeScale,
+            /* [in] */ FLOAT cumulativeExpansion,
+            /* [in] */ FLOAT cumulativeRotation) = 0;
         
         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE ManipulationCompleted( 
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeTranslationX,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeTranslationY,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeScale,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeExpansion,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeRotation) = 0;
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y,
+            /* [in] */ FLOAT cumulativeTranslationX,
+            /* [in] */ FLOAT cumulativeTranslationY,
+            /* [in] */ FLOAT cumulativeScale,
+            /* [in] */ FLOAT cumulativeExpansion,
+            /* [in] */ FLOAT cumulativeRotation) = 0;
         
     };
     
@@ -207,8 +186,7 @@ EXTERN_C const IID IID__IManipulationEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IManipulationEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -223,56 +201,35 @@ EXTERN_C const IID IID__IManipulationEvents;
         DECLSPEC_XFGVIRT(_IManipulationEvents, ManipulationStarted)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ManipulationStarted )( 
             __RPC__in _IManipulationEvents * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y);
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y);
         
         DECLSPEC_XFGVIRT(_IManipulationEvents, ManipulationDelta)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ManipulationDelta )( 
             __RPC__in _IManipulationEvents * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y,
-            /* [annotation][in] */ 
-            _In_  FLOAT translationDeltaX,
-            /* [annotation][in] */ 
-            _In_  FLOAT translationDeltaY,
-            /* [annotation][in] */ 
-            _In_  FLOAT scaleDelta,
-            /* [annotation][in] */ 
-            _In_  FLOAT expansionDelta,
-            /* [annotation][in] */ 
-            _In_  FLOAT rotationDelta,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeTranslationX,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeTranslationY,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeScale,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeExpansion,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeRotation);
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y,
+            /* [in] */ FLOAT translationDeltaX,
+            /* [in] */ FLOAT translationDeltaY,
+            /* [in] */ FLOAT scaleDelta,
+            /* [in] */ FLOAT expansionDelta,
+            /* [in] */ FLOAT rotationDelta,
+            /* [in] */ FLOAT cumulativeTranslationX,
+            /* [in] */ FLOAT cumulativeTranslationY,
+            /* [in] */ FLOAT cumulativeScale,
+            /* [in] */ FLOAT cumulativeExpansion,
+            /* [in] */ FLOAT cumulativeRotation);
         
         DECLSPEC_XFGVIRT(_IManipulationEvents, ManipulationCompleted)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ManipulationCompleted )( 
             __RPC__in _IManipulationEvents * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeTranslationX,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeTranslationY,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeScale,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeExpansion,
-            /* [annotation][in] */ 
-            _In_  FLOAT cumulativeRotation);
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y,
+            /* [in] */ FLOAT cumulativeTranslationX,
+            /* [in] */ FLOAT cumulativeTranslationY,
+            /* [in] */ FLOAT cumulativeScale,
+            /* [in] */ FLOAT cumulativeExpansion,
+            /* [in] */ FLOAT cumulativeRotation);
         
         END_INTERFACE
     } _IManipulationEventsVtbl;
@@ -333,198 +290,150 @@ EXTERN_C const IID IID_IInertiaProcessor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE get_InitialOriginX( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *x) = 0;
+            /* [out] */ __RPC__out FLOAT *x) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_InitialOriginX( 
-            /* [annotation][in] */ 
-            _In_  FLOAT x) = 0;
+            /* [in] */ FLOAT x) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_InitialOriginY( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *y) = 0;
+            /* [out] */ __RPC__out FLOAT *y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_InitialOriginY( 
-            /* [annotation][in] */ 
-            _In_  FLOAT y) = 0;
+            /* [in] */ FLOAT y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_InitialVelocityX( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *x) = 0;
+            /* [out] */ __RPC__out FLOAT *x) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_InitialVelocityX( 
-            /* [annotation][in] */ 
-            _In_  FLOAT x) = 0;
+            /* [in] */ FLOAT x) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_InitialVelocityY( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *y) = 0;
+            /* [out] */ __RPC__out FLOAT *y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_InitialVelocityY( 
-            /* [annotation][in] */ 
-            _In_  FLOAT y) = 0;
+            /* [in] */ FLOAT y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_InitialAngularVelocity( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *velocity) = 0;
+            /* [out] */ __RPC__out FLOAT *velocity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_InitialAngularVelocity( 
-            /* [annotation][in] */ 
-            _In_  FLOAT velocity) = 0;
+            /* [in] */ FLOAT velocity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_InitialExpansionVelocity( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *velocity) = 0;
+            /* [out] */ __RPC__out FLOAT *velocity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_InitialExpansionVelocity( 
-            /* [annotation][in] */ 
-            _In_  FLOAT velocity) = 0;
+            /* [in] */ FLOAT velocity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_InitialRadius( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *radius) = 0;
+            /* [out] */ __RPC__out FLOAT *radius) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_InitialRadius( 
-            /* [annotation][in] */ 
-            _In_  FLOAT radius) = 0;
+            /* [in] */ FLOAT radius) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_BoundaryLeft( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *left) = 0;
+            /* [out] */ __RPC__out FLOAT *left) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_BoundaryLeft( 
-            /* [annotation][in] */ 
-            _In_  FLOAT left) = 0;
+            /* [in] */ FLOAT left) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_BoundaryTop( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *top) = 0;
+            /* [out] */ __RPC__out FLOAT *top) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_BoundaryTop( 
-            /* [annotation][in] */ 
-            _In_  FLOAT top) = 0;
+            /* [in] */ FLOAT top) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_BoundaryRight( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *right) = 0;
+            /* [out] */ __RPC__out FLOAT *right) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_BoundaryRight( 
-            /* [annotation][in] */ 
-            _In_  FLOAT right) = 0;
+            /* [in] */ FLOAT right) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_BoundaryBottom( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *bottom) = 0;
+            /* [out] */ __RPC__out FLOAT *bottom) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_BoundaryBottom( 
-            /* [annotation][in] */ 
-            _In_  FLOAT bottom) = 0;
+            /* [in] */ FLOAT bottom) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_ElasticMarginLeft( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *left) = 0;
+            /* [out] */ __RPC__out FLOAT *left) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_ElasticMarginLeft( 
-            /* [annotation][in] */ 
-            _In_  FLOAT left) = 0;
+            /* [in] */ FLOAT left) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_ElasticMarginTop( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *top) = 0;
+            /* [out] */ __RPC__out FLOAT *top) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_ElasticMarginTop( 
-            /* [annotation][in] */ 
-            _In_  FLOAT top) = 0;
+            /* [in] */ FLOAT top) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_ElasticMarginRight( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *right) = 0;
+            /* [out] */ __RPC__out FLOAT *right) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_ElasticMarginRight( 
-            /* [annotation][in] */ 
-            _In_  FLOAT right) = 0;
+            /* [in] */ FLOAT right) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_ElasticMarginBottom( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *bottom) = 0;
+            /* [out] */ __RPC__out FLOAT *bottom) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_ElasticMarginBottom( 
-            /* [annotation][in] */ 
-            _In_  FLOAT bottom) = 0;
+            /* [in] */ FLOAT bottom) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_DesiredDisplacement( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *displacement) = 0;
+            /* [out] */ __RPC__out FLOAT *displacement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DesiredDisplacement( 
-            /* [annotation][in] */ 
-            _In_  FLOAT displacement) = 0;
+            /* [in] */ FLOAT displacement) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_DesiredRotation( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *rotation) = 0;
+            /* [out] */ __RPC__out FLOAT *rotation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DesiredRotation( 
-            /* [annotation][in] */ 
-            _In_  FLOAT rotation) = 0;
+            /* [in] */ FLOAT rotation) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_DesiredExpansion( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *expansion) = 0;
+            /* [out] */ __RPC__out FLOAT *expansion) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DesiredExpansion( 
-            /* [annotation][in] */ 
-            _In_  FLOAT expansion) = 0;
+            /* [in] */ FLOAT expansion) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_DesiredDeceleration( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *deceleration) = 0;
+            /* [out] */ __RPC__out FLOAT *deceleration) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DesiredDeceleration( 
-            /* [annotation][in] */ 
-            _In_  FLOAT deceleration) = 0;
+            /* [in] */ FLOAT deceleration) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_DesiredAngularDeceleration( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *deceleration) = 0;
+            /* [out] */ __RPC__out FLOAT *deceleration) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DesiredAngularDeceleration( 
-            /* [annotation][in] */ 
-            _In_  FLOAT deceleration) = 0;
+            /* [in] */ FLOAT deceleration) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_DesiredExpansionDeceleration( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *deceleration) = 0;
+            /* [out] */ __RPC__out FLOAT *deceleration) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_DesiredExpansionDeceleration( 
-            /* [annotation][in] */ 
-            _In_  FLOAT deceleration) = 0;
+            /* [in] */ FLOAT deceleration) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_InitialTimestamp( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *timestamp) = 0;
+            /* [out] */ __RPC__out DWORD *timestamp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_InitialTimestamp( 
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp) = 0;
+            /* [in] */ DWORD timestamp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Process( 
-            /* [annotation][out] */ 
-            _Out_  BOOL *completed) = 0;
+            /* [out] */ __RPC__out BOOL *completed) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessTime( 
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp,
-            /* [annotation][out] */ 
-            _Out_  BOOL *completed) = 0;
+            /* [in] */ DWORD timestamp,
+            /* [out] */ __RPC__out BOOL *completed) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Complete( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CompleteTime( 
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp) = 0;
+            /* [in] */ DWORD timestamp) = 0;
         
     };
     
@@ -538,8 +447,7 @@ EXTERN_C const IID IID_IInertiaProcessor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -554,266 +462,222 @@ EXTERN_C const IID IID_IInertiaProcessor;
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_InitialOriginX)
         HRESULT ( STDMETHODCALLTYPE *get_InitialOriginX )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *x);
+            /* [out] */ __RPC__out FLOAT *x);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_InitialOriginX)
         HRESULT ( STDMETHODCALLTYPE *put_InitialOriginX )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT x);
+            /* [in] */ FLOAT x);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_InitialOriginY)
         HRESULT ( STDMETHODCALLTYPE *get_InitialOriginY )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *y);
+            /* [out] */ __RPC__out FLOAT *y);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_InitialOriginY)
         HRESULT ( STDMETHODCALLTYPE *put_InitialOriginY )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT y);
+            /* [in] */ FLOAT y);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_InitialVelocityX)
         HRESULT ( STDMETHODCALLTYPE *get_InitialVelocityX )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *x);
+            /* [out] */ __RPC__out FLOAT *x);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_InitialVelocityX)
         HRESULT ( STDMETHODCALLTYPE *put_InitialVelocityX )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT x);
+            /* [in] */ FLOAT x);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_InitialVelocityY)
         HRESULT ( STDMETHODCALLTYPE *get_InitialVelocityY )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *y);
+            /* [out] */ __RPC__out FLOAT *y);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_InitialVelocityY)
         HRESULT ( STDMETHODCALLTYPE *put_InitialVelocityY )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT y);
+            /* [in] */ FLOAT y);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_InitialAngularVelocity)
         HRESULT ( STDMETHODCALLTYPE *get_InitialAngularVelocity )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *velocity);
+            /* [out] */ __RPC__out FLOAT *velocity);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_InitialAngularVelocity)
         HRESULT ( STDMETHODCALLTYPE *put_InitialAngularVelocity )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT velocity);
+            /* [in] */ FLOAT velocity);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_InitialExpansionVelocity)
         HRESULT ( STDMETHODCALLTYPE *get_InitialExpansionVelocity )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *velocity);
+            /* [out] */ __RPC__out FLOAT *velocity);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_InitialExpansionVelocity)
         HRESULT ( STDMETHODCALLTYPE *put_InitialExpansionVelocity )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT velocity);
+            /* [in] */ FLOAT velocity);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_InitialRadius)
         HRESULT ( STDMETHODCALLTYPE *get_InitialRadius )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *radius);
+            /* [out] */ __RPC__out FLOAT *radius);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_InitialRadius)
         HRESULT ( STDMETHODCALLTYPE *put_InitialRadius )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT radius);
+            /* [in] */ FLOAT radius);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_BoundaryLeft)
         HRESULT ( STDMETHODCALLTYPE *get_BoundaryLeft )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *left);
+            /* [out] */ __RPC__out FLOAT *left);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_BoundaryLeft)
         HRESULT ( STDMETHODCALLTYPE *put_BoundaryLeft )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT left);
+            /* [in] */ FLOAT left);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_BoundaryTop)
         HRESULT ( STDMETHODCALLTYPE *get_BoundaryTop )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *top);
+            /* [out] */ __RPC__out FLOAT *top);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_BoundaryTop)
         HRESULT ( STDMETHODCALLTYPE *put_BoundaryTop )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT top);
+            /* [in] */ FLOAT top);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_BoundaryRight)
         HRESULT ( STDMETHODCALLTYPE *get_BoundaryRight )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *right);
+            /* [out] */ __RPC__out FLOAT *right);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_BoundaryRight)
         HRESULT ( STDMETHODCALLTYPE *put_BoundaryRight )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT right);
+            /* [in] */ FLOAT right);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_BoundaryBottom)
         HRESULT ( STDMETHODCALLTYPE *get_BoundaryBottom )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *bottom);
+            /* [out] */ __RPC__out FLOAT *bottom);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_BoundaryBottom)
         HRESULT ( STDMETHODCALLTYPE *put_BoundaryBottom )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT bottom);
+            /* [in] */ FLOAT bottom);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_ElasticMarginLeft)
         HRESULT ( STDMETHODCALLTYPE *get_ElasticMarginLeft )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *left);
+            /* [out] */ __RPC__out FLOAT *left);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_ElasticMarginLeft)
         HRESULT ( STDMETHODCALLTYPE *put_ElasticMarginLeft )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT left);
+            /* [in] */ FLOAT left);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_ElasticMarginTop)
         HRESULT ( STDMETHODCALLTYPE *get_ElasticMarginTop )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *top);
+            /* [out] */ __RPC__out FLOAT *top);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_ElasticMarginTop)
         HRESULT ( STDMETHODCALLTYPE *put_ElasticMarginTop )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT top);
+            /* [in] */ FLOAT top);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_ElasticMarginRight)
         HRESULT ( STDMETHODCALLTYPE *get_ElasticMarginRight )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *right);
+            /* [out] */ __RPC__out FLOAT *right);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_ElasticMarginRight)
         HRESULT ( STDMETHODCALLTYPE *put_ElasticMarginRight )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT right);
+            /* [in] */ FLOAT right);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_ElasticMarginBottom)
         HRESULT ( STDMETHODCALLTYPE *get_ElasticMarginBottom )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *bottom);
+            /* [out] */ __RPC__out FLOAT *bottom);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_ElasticMarginBottom)
         HRESULT ( STDMETHODCALLTYPE *put_ElasticMarginBottom )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT bottom);
+            /* [in] */ FLOAT bottom);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_DesiredDisplacement)
         HRESULT ( STDMETHODCALLTYPE *get_DesiredDisplacement )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *displacement);
+            /* [out] */ __RPC__out FLOAT *displacement);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_DesiredDisplacement)
         HRESULT ( STDMETHODCALLTYPE *put_DesiredDisplacement )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT displacement);
+            /* [in] */ FLOAT displacement);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_DesiredRotation)
         HRESULT ( STDMETHODCALLTYPE *get_DesiredRotation )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *rotation);
+            /* [out] */ __RPC__out FLOAT *rotation);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_DesiredRotation)
         HRESULT ( STDMETHODCALLTYPE *put_DesiredRotation )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT rotation);
+            /* [in] */ FLOAT rotation);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_DesiredExpansion)
         HRESULT ( STDMETHODCALLTYPE *get_DesiredExpansion )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *expansion);
+            /* [out] */ __RPC__out FLOAT *expansion);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_DesiredExpansion)
         HRESULT ( STDMETHODCALLTYPE *put_DesiredExpansion )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT expansion);
+            /* [in] */ FLOAT expansion);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_DesiredDeceleration)
         HRESULT ( STDMETHODCALLTYPE *get_DesiredDeceleration )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *deceleration);
+            /* [out] */ __RPC__out FLOAT *deceleration);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_DesiredDeceleration)
         HRESULT ( STDMETHODCALLTYPE *put_DesiredDeceleration )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT deceleration);
+            /* [in] */ FLOAT deceleration);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_DesiredAngularDeceleration)
         HRESULT ( STDMETHODCALLTYPE *get_DesiredAngularDeceleration )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *deceleration);
+            /* [out] */ __RPC__out FLOAT *deceleration);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_DesiredAngularDeceleration)
         HRESULT ( STDMETHODCALLTYPE *put_DesiredAngularDeceleration )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT deceleration);
+            /* [in] */ FLOAT deceleration);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_DesiredExpansionDeceleration)
         HRESULT ( STDMETHODCALLTYPE *get_DesiredExpansionDeceleration )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *deceleration);
+            /* [out] */ __RPC__out FLOAT *deceleration);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_DesiredExpansionDeceleration)
         HRESULT ( STDMETHODCALLTYPE *put_DesiredExpansionDeceleration )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT deceleration);
+            /* [in] */ FLOAT deceleration);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, get_InitialTimestamp)
         HRESULT ( STDMETHODCALLTYPE *get_InitialTimestamp )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *timestamp);
+            /* [out] */ __RPC__out DWORD *timestamp);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, put_InitialTimestamp)
         HRESULT ( STDMETHODCALLTYPE *put_InitialTimestamp )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp);
+            /* [in] */ DWORD timestamp);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -822,16 +686,13 @@ EXTERN_C const IID IID_IInertiaProcessor;
         DECLSPEC_XFGVIRT(IInertiaProcessor, Process)
         HRESULT ( STDMETHODCALLTYPE *Process )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  BOOL *completed);
+            /* [out] */ __RPC__out BOOL *completed);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, ProcessTime)
         HRESULT ( STDMETHODCALLTYPE *ProcessTime )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp,
-            /* [annotation][out] */ 
-            _Out_  BOOL *completed);
+            /* [in] */ DWORD timestamp,
+            /* [out] */ __RPC__out BOOL *completed);
         
         DECLSPEC_XFGVIRT(IInertiaProcessor, Complete)
         HRESULT ( STDMETHODCALLTYPE *Complete )( 
@@ -840,8 +701,7 @@ EXTERN_C const IID IID_IInertiaProcessor;
         DECLSPEC_XFGVIRT(IInertiaProcessor, CompleteTime)
         HRESULT ( STDMETHODCALLTYPE *CompleteTime )( 
             __RPC__in IInertiaProcessor * This,
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp);
+            /* [in] */ DWORD timestamp);
         
         END_INTERFACE
     } IInertiaProcessorVtbl;
@@ -1040,116 +900,81 @@ EXTERN_C const IID IID_IManipulationProcessor;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE get_SupportedManipulations( 
-            /* [annotation][out] */ 
-            _Out_  MANIPULATION_PROCESSOR_MANIPULATIONS *manipulations) = 0;
+            /* [out] */ __RPC__out MANIPULATION_PROCESSOR_MANIPULATIONS *manipulations) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_SupportedManipulations( 
-            /* [annotation][in] */ 
-            _In_  MANIPULATION_PROCESSOR_MANIPULATIONS manipulations) = 0;
+            /* [in] */ MANIPULATION_PROCESSOR_MANIPULATIONS manipulations) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_PivotPointX( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *pivotPointX) = 0;
+            /* [out] */ __RPC__out FLOAT *pivotPointX) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_PivotPointX( 
-            /* [annotation][in] */ 
-            _In_  FLOAT pivotPointX) = 0;
+            /* [in] */ FLOAT pivotPointX) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_PivotPointY( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *pivotPointY) = 0;
+            /* [out] */ __RPC__out FLOAT *pivotPointY) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_PivotPointY( 
-            /* [annotation][in] */ 
-            _In_  FLOAT pivotPointY) = 0;
+            /* [in] */ FLOAT pivotPointY) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_PivotRadius( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *pivotRadius) = 0;
+            /* [out] */ __RPC__out FLOAT *pivotRadius) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_PivotRadius( 
-            /* [annotation][in] */ 
-            _In_  FLOAT pivotRadius) = 0;
+            /* [in] */ FLOAT pivotRadius) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CompleteManipulation( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessDown( 
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y) = 0;
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessMove( 
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y) = 0;
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessUp( 
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y) = 0;
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessDownWithTime( 
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y,
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp) = 0;
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y,
+            /* [in] */ DWORD timestamp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessMoveWithTime( 
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y,
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp) = 0;
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y,
+            /* [in] */ DWORD timestamp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ProcessUpWithTime( 
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y,
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp) = 0;
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y,
+            /* [in] */ DWORD timestamp) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVelocityX( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *velocityX) = 0;
+            /* [out] */ __RPC__out FLOAT *velocityX) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetVelocityY( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *velocityY) = 0;
+            /* [out] */ __RPC__out FLOAT *velocityY) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetExpansionVelocity( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *expansionVelocity) = 0;
+            /* [out] */ __RPC__out FLOAT *expansionVelocity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAngularVelocity( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *angularVelocity) = 0;
+            /* [out] */ __RPC__out FLOAT *angularVelocity) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE get_MinimumScaleRotateRadius( 
-            /* [annotation][out] */ 
-            _Out_  FLOAT *minRadius) = 0;
+            /* [out] */ __RPC__out FLOAT *minRadius) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE put_MinimumScaleRotateRadius( 
-            /* [annotation][in] */ 
-            _In_  FLOAT minRadius) = 0;
+            /* [in] */ FLOAT minRadius) = 0;
         
     };
     
@@ -1163,8 +988,7 @@ EXTERN_C const IID IID_IManipulationProcessor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1179,50 +1003,42 @@ EXTERN_C const IID IID_IManipulationProcessor;
         DECLSPEC_XFGVIRT(IManipulationProcessor, get_SupportedManipulations)
         HRESULT ( STDMETHODCALLTYPE *get_SupportedManipulations )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  MANIPULATION_PROCESSOR_MANIPULATIONS *manipulations);
+            /* [out] */ __RPC__out MANIPULATION_PROCESSOR_MANIPULATIONS *manipulations);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, put_SupportedManipulations)
         HRESULT ( STDMETHODCALLTYPE *put_SupportedManipulations )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  MANIPULATION_PROCESSOR_MANIPULATIONS manipulations);
+            /* [in] */ MANIPULATION_PROCESSOR_MANIPULATIONS manipulations);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, get_PivotPointX)
         HRESULT ( STDMETHODCALLTYPE *get_PivotPointX )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *pivotPointX);
+            /* [out] */ __RPC__out FLOAT *pivotPointX);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, put_PivotPointX)
         HRESULT ( STDMETHODCALLTYPE *put_PivotPointX )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT pivotPointX);
+            /* [in] */ FLOAT pivotPointX);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, get_PivotPointY)
         HRESULT ( STDMETHODCALLTYPE *get_PivotPointY )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *pivotPointY);
+            /* [out] */ __RPC__out FLOAT *pivotPointY);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, put_PivotPointY)
         HRESULT ( STDMETHODCALLTYPE *put_PivotPointY )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT pivotPointY);
+            /* [in] */ FLOAT pivotPointY);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, get_PivotRadius)
         HRESULT ( STDMETHODCALLTYPE *get_PivotRadius )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *pivotRadius);
+            /* [out] */ __RPC__out FLOAT *pivotRadius);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, put_PivotRadius)
         HRESULT ( STDMETHODCALLTYPE *put_PivotRadius )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT pivotRadius);
+            /* [in] */ FLOAT pivotRadius);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, CompleteManipulation)
         HRESULT ( STDMETHODCALLTYPE *CompleteManipulation )( 
@@ -1231,104 +1047,77 @@ EXTERN_C const IID IID_IManipulationProcessor;
         DECLSPEC_XFGVIRT(IManipulationProcessor, ProcessDown)
         HRESULT ( STDMETHODCALLTYPE *ProcessDown )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y);
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, ProcessMove)
         HRESULT ( STDMETHODCALLTYPE *ProcessMove )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y);
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, ProcessUp)
         HRESULT ( STDMETHODCALLTYPE *ProcessUp )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y);
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, ProcessDownWithTime)
         HRESULT ( STDMETHODCALLTYPE *ProcessDownWithTime )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y,
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp);
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y,
+            /* [in] */ DWORD timestamp);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, ProcessMoveWithTime)
         HRESULT ( STDMETHODCALLTYPE *ProcessMoveWithTime )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y,
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp);
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y,
+            /* [in] */ DWORD timestamp);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, ProcessUpWithTime)
         HRESULT ( STDMETHODCALLTYPE *ProcessUpWithTime )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  MANIPULATOR_ID manipulatorId,
-            /* [annotation][in] */ 
-            _In_  FLOAT x,
-            /* [annotation][in] */ 
-            _In_  FLOAT y,
-            /* [annotation][in] */ 
-            _In_  DWORD timestamp);
+            /* [in] */ MANIPULATOR_ID manipulatorId,
+            /* [in] */ FLOAT x,
+            /* [in] */ FLOAT y,
+            /* [in] */ DWORD timestamp);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, GetVelocityX)
         HRESULT ( STDMETHODCALLTYPE *GetVelocityX )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *velocityX);
+            /* [out] */ __RPC__out FLOAT *velocityX);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, GetVelocityY)
         HRESULT ( STDMETHODCALLTYPE *GetVelocityY )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *velocityY);
+            /* [out] */ __RPC__out FLOAT *velocityY);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, GetExpansionVelocity)
         HRESULT ( STDMETHODCALLTYPE *GetExpansionVelocity )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *expansionVelocity);
+            /* [out] */ __RPC__out FLOAT *expansionVelocity);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, GetAngularVelocity)
         HRESULT ( STDMETHODCALLTYPE *GetAngularVelocity )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *angularVelocity);
+            /* [out] */ __RPC__out FLOAT *angularVelocity);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, get_MinimumScaleRotateRadius)
         HRESULT ( STDMETHODCALLTYPE *get_MinimumScaleRotateRadius )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  FLOAT *minRadius);
+            /* [out] */ __RPC__out FLOAT *minRadius);
         
         DECLSPEC_XFGVIRT(IManipulationProcessor, put_MinimumScaleRotateRadius)
         HRESULT ( STDMETHODCALLTYPE *put_MinimumScaleRotateRadius )( 
             __RPC__in IManipulationProcessor * This,
-            /* [annotation][in] */ 
-            _In_  FLOAT minRadius);
+            /* [in] */ FLOAT minRadius);
         
         END_INTERFACE
     } IManipulationProcessorVtbl;

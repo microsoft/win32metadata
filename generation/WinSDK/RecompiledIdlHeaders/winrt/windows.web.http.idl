@@ -127,6 +127,8 @@ namespace Windows
 
             interface IHttpClient2;
 
+            interface IHttpClient3;
+
             interface IHttpClientFactory;
 
             interface IHttpContent;
@@ -160,6 +162,8 @@ namespace Windows
             interface IHttpMultipartFormDataContentFactory;
 
             interface IHttpRequestMessage;
+
+            interface IHttpRequestMessage2;
 
             interface IHttpRequestMessageFactory;
 
@@ -430,6 +434,15 @@ namespace Windows
                 [overload("TrySendRequestAsync")] HRESULT TrySendRequestAsync2([in] Windows.Web.Http.HttpRequestMessage* request, [in] Windows.Web.Http.HttpCompletionOption completionOption, [out] [retval] Windows.Foundation.IAsyncOperationWithProgress<Windows.Web.Http.HttpRequestResult*, Windows.Web.Http.HttpProgress>** operation);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Web.Http.HttpClient)]
+            [uuid(1172FD01-9899-4194-963F-8F9D72A7EC15)]
+            interface IHttpClient3 : IInspectable
+            {
+                [propget] HRESULT DefaultPrivacyAnnotation([out] [retval] HSTRING* value);
+                [propput] HRESULT DefaultPrivacyAnnotation([in] HSTRING value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Web.Http.HttpClient)]
             [uuid(C30C4ECA-E3FA-4F99-AFB4-63CC65009462)]
@@ -615,6 +628,15 @@ namespace Windows
                 [propget] HRESULT TransportInformation([out] [retval] Windows.Web.Http.HttpTransportInformation** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Web.Http.HttpRequestMessage)]
+            [uuid(C3C60489-62C2-4A3F-9554-226E7C60BD96)]
+            interface IHttpRequestMessage2 : IInspectable
+            {
+                [propget] HRESULT PrivacyAnnotation([out] [retval] HSTRING* value);
+                [propput] HRESULT PrivacyAnnotation([in] HSTRING value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Web.Http.HttpRequestMessage)]
             [uuid(5BAC994E-3886-412E-AEC3-52EC7F25616F)]
@@ -713,6 +735,7 @@ namespace Windows
             {
                 [default] interface Windows.Web.Http.IHttpClient;
                 [contract(Windows.Foundation.UniversalApiContract, 8.0)] interface Windows.Web.Http.IHttpClient2;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Web.Http.IHttpClient3;
                 interface Windows.Foundation.IClosable;
                 interface Windows.Foundation.IStringable;
             }
@@ -827,6 +850,7 @@ namespace Windows
             runtimeclass HttpRequestMessage
             {
                 [default] interface Windows.Web.Http.IHttpRequestMessage;
+                [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Web.Http.IHttpRequestMessage2;
                 interface Windows.Foundation.IClosable;
                 interface Windows.Foundation.IStringable;
             }

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -130,36 +130,23 @@ EXTERN_C const IID IID_IDedupReadFileCallback;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE ReadBackupFile( 
-            /* [annotation][in] */ 
-            _In_  BSTR FileFullPath,
-            /* [annotation][in] */ 
-            _In_  hyper FileOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG SizeToRead,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(SizeToRead,*ReturnedSize)  BYTE *FileBuffer,
-            /* [annotation][out] */ 
-            _Out_  ULONG *ReturnedSize,
-            /* [annotation][in] */ 
-            _In_  DWORD Flags) = 0;
+            /* [in] */ __RPC__in BSTR FileFullPath,
+            /* [in] */ hyper FileOffset,
+            /* [in] */ ULONG SizeToRead,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(SizeToRead, *ReturnedSize) BYTE *FileBuffer,
+            /* [out] */ __RPC__out ULONG *ReturnedSize,
+            /* [in] */ DWORD Flags) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE OrderContainersRestore( 
-            /* [annotation][in] */ 
-            _In_  ULONG NumberOfContainers,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(NumberOfContainers)  BSTR *ContainerPaths,
-            /* [annotation][out] */ 
-            _Out_  ULONG *ReadPlanEntries,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*ReadPlanEntries)  DEDUP_CONTAINER_EXTENT **ReadPlan) = 0;
+            /* [in] */ ULONG NumberOfContainers,
+            /* [size_is][in] */ __RPC__in_ecount_full(NumberOfContainers) BSTR *ContainerPaths,
+            /* [out] */ __RPC__out ULONG *ReadPlanEntries,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*ReadPlanEntries) DEDUP_CONTAINER_EXTENT **ReadPlan) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE PreviewContainerRead( 
-            /* [annotation][in] */ 
-            _In_  BSTR FileFullPath,
-            /* [annotation][in] */ 
-            _In_  ULONG NumberOfReads,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(NumberOfReads)  DDP_FILE_EXTENT *ReadOffsets) = 0;
+            /* [in] */ __RPC__in BSTR FileFullPath,
+            /* [in] */ ULONG NumberOfReads,
+            /* [size_is][in] */ __RPC__in_ecount_full(NumberOfReads) DDP_FILE_EXTENT *ReadOffsets) = 0;
         
     };
     
@@ -173,8 +160,7 @@ EXTERN_C const IID IID_IDedupReadFileCallback;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupReadFileCallback * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -189,40 +175,27 @@ EXTERN_C const IID IID_IDedupReadFileCallback;
         DECLSPEC_XFGVIRT(IDedupReadFileCallback, ReadBackupFile)
         HRESULT ( STDMETHODCALLTYPE *ReadBackupFile )( 
             __RPC__in IDedupReadFileCallback * This,
-            /* [annotation][in] */ 
-            _In_  BSTR FileFullPath,
-            /* [annotation][in] */ 
-            _In_  hyper FileOffset,
-            /* [annotation][in] */ 
-            _In_  ULONG SizeToRead,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(SizeToRead,*ReturnedSize)  BYTE *FileBuffer,
-            /* [annotation][out] */ 
-            _Out_  ULONG *ReturnedSize,
-            /* [annotation][in] */ 
-            _In_  DWORD Flags);
+            /* [in] */ __RPC__in BSTR FileFullPath,
+            /* [in] */ hyper FileOffset,
+            /* [in] */ ULONG SizeToRead,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(SizeToRead, *ReturnedSize) BYTE *FileBuffer,
+            /* [out] */ __RPC__out ULONG *ReturnedSize,
+            /* [in] */ DWORD Flags);
         
         DECLSPEC_XFGVIRT(IDedupReadFileCallback, OrderContainersRestore)
         HRESULT ( STDMETHODCALLTYPE *OrderContainersRestore )( 
             __RPC__in IDedupReadFileCallback * This,
-            /* [annotation][in] */ 
-            _In_  ULONG NumberOfContainers,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(NumberOfContainers)  BSTR *ContainerPaths,
-            /* [annotation][out] */ 
-            _Out_  ULONG *ReadPlanEntries,
-            /* [annotation][size_is][size_is][out] */ 
-            _Out_writes_(*ReadPlanEntries)  DEDUP_CONTAINER_EXTENT **ReadPlan);
+            /* [in] */ ULONG NumberOfContainers,
+            /* [size_is][in] */ __RPC__in_ecount_full(NumberOfContainers) BSTR *ContainerPaths,
+            /* [out] */ __RPC__out ULONG *ReadPlanEntries,
+            /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*ReadPlanEntries) DEDUP_CONTAINER_EXTENT **ReadPlan);
         
         DECLSPEC_XFGVIRT(IDedupReadFileCallback, PreviewContainerRead)
         HRESULT ( STDMETHODCALLTYPE *PreviewContainerRead )( 
             __RPC__in IDedupReadFileCallback * This,
-            /* [annotation][in] */ 
-            _In_  BSTR FileFullPath,
-            /* [annotation][in] */ 
-            _In_  ULONG NumberOfReads,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(NumberOfReads)  DDP_FILE_EXTENT *ReadOffsets);
+            /* [in] */ __RPC__in BSTR FileFullPath,
+            /* [in] */ ULONG NumberOfReads,
+            /* [size_is][in] */ __RPC__in_ecount_full(NumberOfReads) DDP_FILE_EXTENT *ReadOffsets);
         
         END_INTERFACE
     } IDedupReadFileCallbackVtbl;
@@ -283,16 +256,11 @@ EXTERN_C const IID IID_IDedupBackupSupport;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RestoreFiles( 
-            /* [annotation][in] */ 
-            _In_  ULONG NumberOfFiles,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(NumberOfFiles)  BSTR *FileFullPaths,
-            /* [annotation][in] */ 
-            _In_  IDedupReadFileCallback *Store,
-            /* [annotation][in] */ 
-            _In_  DWORD Flags,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(NumberOfFiles)  HRESULT *FileResults) = 0;
+            /* [in] */ ULONG NumberOfFiles,
+            /* [size_is][in] */ __RPC__in_ecount_full(NumberOfFiles) BSTR *FileFullPaths,
+            /* [in] */ __RPC__in_opt IDedupReadFileCallback *Store,
+            /* [in] */ DWORD Flags,
+            /* [size_is][out] */ __RPC__out_ecount_full(NumberOfFiles) HRESULT *FileResults) = 0;
         
     };
     
@@ -306,8 +274,7 @@ EXTERN_C const IID IID_IDedupBackupSupport;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupBackupSupport * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -322,16 +289,11 @@ EXTERN_C const IID IID_IDedupBackupSupport;
         DECLSPEC_XFGVIRT(IDedupBackupSupport, RestoreFiles)
         HRESULT ( STDMETHODCALLTYPE *RestoreFiles )( 
             __RPC__in IDedupBackupSupport * This,
-            /* [annotation][in] */ 
-            _In_  ULONG NumberOfFiles,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(NumberOfFiles)  BSTR *FileFullPaths,
-            /* [annotation][in] */ 
-            _In_  IDedupReadFileCallback *Store,
-            /* [annotation][in] */ 
-            _In_  DWORD Flags,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(NumberOfFiles)  HRESULT *FileResults);
+            /* [in] */ ULONG NumberOfFiles,
+            /* [size_is][in] */ __RPC__in_ecount_full(NumberOfFiles) BSTR *FileFullPaths,
+            /* [in] */ __RPC__in_opt IDedupReadFileCallback *Store,
+            /* [in] */ DWORD Flags,
+            /* [size_is][out] */ __RPC__out_ecount_full(NumberOfFiles) HRESULT *FileResults);
         
         END_INTERFACE
     } IDedupBackupSupportVtbl;

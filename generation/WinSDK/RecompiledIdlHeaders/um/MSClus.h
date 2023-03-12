@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -1276,7 +1276,8 @@ enum CLUSTER_OBJECT_TYPE
         CLUSTER_OBJECT_TYPE_QUORUM	= 0x9,
         CLUSTER_OBJECT_TYPE_SHARED_VOLUME	= 0xa,
         CLUSTER_OBJECT_TYPE_GROUPSET	= 0xd,
-        CLUSTER_OBJECT_TYPE_AFFINITYRULE	= 0x10
+        CLUSTER_OBJECT_TYPE_AFFINITYRULE	= 0x10,
+        CLUSTER_OBJECT_TYPE_FAULTDOMAIN	= 0x11
     } 	CLUSTER_OBJECT_TYPE;
 
 typedef 
@@ -1658,6 +1659,8 @@ enum CLCTL_CODES
         CLCTL_VALIDATE_COMMON_PROPERTIES	= ( ( ( 0x1 << 0 )  | ( ( 0 + 24 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_GET_COMMON_PROPERTY_FMTS	= ( ( ( 0x1 << 0 )  | ( ( 0 + 25 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_GET_COMMON_RESOURCE_PROPERTY_FMTS	= ( ( ( 0x1 << 0 )  | ( ( 0 + 26 )  << 2 )  )  | ( 0 << 22 )  ) ,
+        CLCTL_CHECK_VOTER_EVICT_WITNESS	= ( ( ( 0x1 << 0 )  | ( ( 0 + 27 )  << 2 )  )  | ( 0 << 22 )  ) ,
+        CLCTL_CHECK_VOTER_DOWN_WITNESS	= ( ( ( 0x1 << 0 )  | ( ( 0 + 28 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_ENUM_PRIVATE_PROPERTIES	= ( ( ( 0x1 << 0 )  | ( ( 0 + 30 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_GET_RO_PRIVATE_PROPERTIES	= ( ( ( 0x1 << 0 )  | ( ( 0 + 31 )  << 2 )  )  | ( 0 << 22 )  ) ,
         CLCTL_GET_PRIVATE_PROPERTIES	= ( ( ( 0x1 << 0 )  | ( ( 0 + 32 )  << 2 )  )  | ( 0 << 22 )  ) ,
@@ -2155,7 +2158,9 @@ enum CLUSCTL_CLUSTER_CODES
         CLUSCTL_CLUSTER_ENUM_AFFINITY_RULE_NAMES	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_ENUM_AFFINITY_RULE_NAMES ) ,
         CLUSCTL_CLUSTER_GET_NODES_IN_FD	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_GET_NODES_IN_FD ) ,
         CLUSCTL_CLUSTER_FORCE_FLUSH_DB	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_FORCE_DB_FLUSH ) ,
-        CLUSCTL_CLUSTER_GET_CLMUSR_TOKEN	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_NETNAME_GET_VIRTUAL_SERVER_TOKEN ) 
+        CLUSCTL_CLUSTER_GET_CLMUSR_TOKEN	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_NETNAME_GET_VIRTUAL_SERVER_TOKEN ) ,
+        CLUSCTL_CLUSTER_CHECK_VOTER_EVICT_WITNESS	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_CHECK_VOTER_EVICT_WITNESS ) ,
+        CLUSCTL_CLUSTER_CHECK_VOTER_DOWN_WITNESS	= ( ( CLUS_OBJECT_CLUSTER << 24 )  | CLCTL_CHECK_VOTER_DOWN_WITNESS ) 
     } 	CLUSCTL_CLUSTER_CODES;
 
 typedef 
@@ -2776,20 +2781,15 @@ EXTERN_C const IID IID_ISClusApplication;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainNames( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISDomainNames **ppDomains) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISDomainNames **ppDomains) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClusterNames( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrDomainName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusterNames **ppClusters) = 0;
+            /* [in] */ __RPC__in BSTR bstrDomainName,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusterNames **ppClusters) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OpenCluster( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrClusterName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **pCluster) = 0;
+            /* [in] */ __RPC__in BSTR bstrClusterName,
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **pCluster) = 0;
         
     };
     
@@ -2803,8 +2803,7 @@ EXTERN_C const IID IID_ISClusApplication;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusApplication * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2819,31 +2818,23 @@ EXTERN_C const IID IID_ISClusApplication;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusApplication * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusApplication * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusApplication * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2868,24 +2859,19 @@ EXTERN_C const IID IID_ISClusApplication;
         DECLSPEC_XFGVIRT(ISClusApplication, get_DomainNames)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainNames )( 
             __RPC__in ISClusApplication * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISDomainNames **ppDomains);
+            /* [retval][out] */ __RPC__deref_out_opt ISDomainNames **ppDomains);
         
         DECLSPEC_XFGVIRT(ISClusApplication, get_ClusterNames)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClusterNames )( 
             __RPC__in ISClusApplication * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrDomainName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusterNames **ppClusters);
+            /* [in] */ __RPC__in BSTR bstrDomainName,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusterNames **ppClusters);
         
         DECLSPEC_XFGVIRT(ISClusApplication, OpenCluster)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OpenCluster )( 
             __RPC__in ISClusApplication * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrClusterName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **pCluster);
+            /* [in] */ __RPC__in BSTR bstrClusterName,
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **pCluster);
         
         END_INTERFACE
     } ISClusApplicationVtbl;
@@ -2959,20 +2945,16 @@ EXTERN_C const IID IID_ISDomainNames;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDomainName) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDomainName) = 0;
         
     };
     
@@ -2986,8 +2968,7 @@ EXTERN_C const IID IID_ISDomainNames;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISDomainNames * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3002,31 +2983,23 @@ EXTERN_C const IID IID_ISDomainNames;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISDomainNames * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISDomainNames * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISDomainNames * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3051,14 +3024,12 @@ EXTERN_C const IID IID_ISDomainNames;
         DECLSPEC_XFGVIRT(ISDomainNames, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISDomainNames * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISDomainNames, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISDomainNames * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISDomainNames, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -3067,10 +3038,8 @@ EXTERN_C const IID IID_ISDomainNames;
         DECLSPEC_XFGVIRT(ISDomainNames, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISDomainNames * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDomainName);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDomainName);
         
         END_INTERFACE
     } ISDomainNamesVtbl;
@@ -3147,24 +3116,19 @@ EXTERN_C const IID IID_ISClusterNames;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrClusterName) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrClusterName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DomainName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDomainName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDomainName) = 0;
         
     };
     
@@ -3178,8 +3142,7 @@ EXTERN_C const IID IID_ISClusterNames;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusterNames * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3194,31 +3157,23 @@ EXTERN_C const IID IID_ISClusterNames;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusterNames * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusterNames * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusterNames * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3243,14 +3198,12 @@ EXTERN_C const IID IID_ISClusterNames;
         DECLSPEC_XFGVIRT(ISClusterNames, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusterNames * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusterNames, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusterNames * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusterNames, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -3259,16 +3212,13 @@ EXTERN_C const IID IID_ISClusterNames;
         DECLSPEC_XFGVIRT(ISClusterNames, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusterNames * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrClusterName);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrClusterName);
         
         DECLSPEC_XFGVIRT(ISClusterNames, get_DomainName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DomainName )( 
             __RPC__in ISClusterNames * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDomainName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDomainName);
         
         END_INTERFACE
     } ISClusterNamesVtbl;
@@ -3348,8 +3298,7 @@ EXTERN_C const IID IID_ISClusRefObject;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Handle( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle) = 0;
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle) = 0;
         
     };
     
@@ -3363,8 +3312,7 @@ EXTERN_C const IID IID_ISClusRefObject;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusRefObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3379,31 +3327,23 @@ EXTERN_C const IID IID_ISClusRefObject;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusRefObject * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusRefObject * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusRefObject * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3428,8 +3368,7 @@ EXTERN_C const IID IID_ISClusRefObject;
         DECLSPEC_XFGVIRT(ISClusRefObject, get_Handle)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in ISClusRefObject * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle);
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle);
         
         END_INTERFACE
     } ISClusRefObjectVtbl;
@@ -3497,44 +3436,34 @@ EXTERN_C const IID IID_ISClusVersion;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrClusterName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrClusterName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MajorVersion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnMajorVersion) = 0;
+            /* [retval][out] */ __RPC__out long *pnMajorVersion) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MinorVersion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnMinorVersion) = 0;
+            /* [retval][out] */ __RPC__out long *pnMinorVersion) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_BuildNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SHORT *pnBuildNumber) = 0;
+            /* [retval][out] */ __RPC__out SHORT *pnBuildNumber) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VendorId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrVendorId) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVendorId) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CSDVersion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrCSDVersion) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSDVersion) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClusterHighestVersion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnClusterHighestVersion) = 0;
+            /* [retval][out] */ __RPC__out long *pnClusterHighestVersion) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClusterLowestVersion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnClusterLowestVersion) = 0;
+            /* [retval][out] */ __RPC__out long *pnClusterLowestVersion) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnFlags) = 0;
+            /* [retval][out] */ __RPC__out long *pnFlags) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MixedVersion( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarMixedVersion) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarMixedVersion) = 0;
         
     };
     
@@ -3548,8 +3477,7 @@ EXTERN_C const IID IID_ISClusVersion;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3564,31 +3492,23 @@ EXTERN_C const IID IID_ISClusVersion;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3613,62 +3533,52 @@ EXTERN_C const IID IID_ISClusVersion;
         DECLSPEC_XFGVIRT(ISClusVersion, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrClusterName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrClusterName);
         
         DECLSPEC_XFGVIRT(ISClusVersion, get_MajorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorVersion )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnMajorVersion);
+            /* [retval][out] */ __RPC__out long *pnMajorVersion);
         
         DECLSPEC_XFGVIRT(ISClusVersion, get_MinorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorVersion )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnMinorVersion);
+            /* [retval][out] */ __RPC__out long *pnMinorVersion);
         
         DECLSPEC_XFGVIRT(ISClusVersion, get_BuildNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BuildNumber )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SHORT *pnBuildNumber);
+            /* [retval][out] */ __RPC__out SHORT *pnBuildNumber);
         
         DECLSPEC_XFGVIRT(ISClusVersion, get_VendorId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VendorId )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrVendorId);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVendorId);
         
         DECLSPEC_XFGVIRT(ISClusVersion, get_CSDVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CSDVersion )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrCSDVersion);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSDVersion);
         
         DECLSPEC_XFGVIRT(ISClusVersion, get_ClusterHighestVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClusterHighestVersion )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnClusterHighestVersion);
+            /* [retval][out] */ __RPC__out long *pnClusterHighestVersion);
         
         DECLSPEC_XFGVIRT(ISClusVersion, get_ClusterLowestVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClusterLowestVersion )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnClusterLowestVersion);
+            /* [retval][out] */ __RPC__out long *pnClusterLowestVersion);
         
         DECLSPEC_XFGVIRT(ISClusVersion, get_Flags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Flags )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnFlags);
+            /* [retval][out] */ __RPC__out long *pnFlags);
         
         DECLSPEC_XFGVIRT(ISClusVersion, get_MixedVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MixedVersion )( 
             __RPC__in ISClusVersion * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarMixedVersion);
+            /* [retval][out] */ __RPC__out VARIANT *pvarMixedVersion);
         
         END_INTERFACE
     } ISClusVersionVtbl;
@@ -3763,87 +3673,67 @@ EXTERN_C const IID IID_ISCluster;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][hidden][propget] */ HRESULT STDMETHODCALLTYPE get_Handle( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle) = 0;
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Open( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrClusterName) = 0;
+            /* [in] */ __RPC__in BSTR bstrClusterName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrClusterName) = 0;
+            /* [in] */ __RPC__in BSTR bstrClusterName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Version( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusVersion **ppClusVersion) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusVersion **ppClusVersion) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_QuorumResource( 
-            /* [annotation][in] */ 
-            _In_  ISClusResource *pClusterResource) = 0;
+            /* [in] */ __RPC__in_opt ISClusResource *pClusterResource) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuorumResource( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **pClusterResource) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **pClusterResource) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuorumLogSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnLogSize) = 0;
+            /* [retval][out] */ __RPC__out long *pnLogSize) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_QuorumLogSize( 
-            /* [annotation][in] */ 
-            _In_  long nLogSize) = 0;
+            /* [in] */ long nLogSize) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_QuorumPath( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *ppPath) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppPath) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_QuorumPath( 
             __RPC__in BSTR pPath) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Nodes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNodes **ppNodes) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNodes **ppNodes) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ResourceGroups( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroups **ppClusterResourceGroups) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroups **ppClusterResourceGroups) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Resources( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResources **ppClusterResources) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResources **ppClusterResources) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ResourceTypes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResTypes **ppResourceTypes) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResTypes **ppResourceTypes) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Networks( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetworks **ppNetworks) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetworks **ppNetworks) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetInterfaces( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetInterfaces **ppNetInterfaces) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetInterfaces **ppNetInterfaces) = 0;
         
     };
     
@@ -3857,8 +3747,7 @@ EXTERN_C const IID IID_ISCluster;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISCluster * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3873,31 +3762,23 @@ EXTERN_C const IID IID_ISCluster;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISCluster * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISCluster * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISCluster * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3922,86 +3803,72 @@ EXTERN_C const IID IID_ISCluster;
         DECLSPEC_XFGVIRT(ISCluster, get_CommonProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonProperties )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISCluster, get_PrivateProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateProperties )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISCluster, get_CommonROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonROProperties )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISCluster, get_PrivateROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateROProperties )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISCluster, get_Handle)
         /* [helpstring][id][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle);
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle);
         
         DECLSPEC_XFGVIRT(ISCluster, Open)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in ISCluster * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrClusterName);
+            /* [in] */ __RPC__in BSTR bstrClusterName);
         
         DECLSPEC_XFGVIRT(ISCluster, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(ISCluster, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in ISCluster * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrClusterName);
+            /* [in] */ __RPC__in BSTR bstrClusterName);
         
         DECLSPEC_XFGVIRT(ISCluster, get_Version)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Version )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusVersion **ppClusVersion);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusVersion **ppClusVersion);
         
         DECLSPEC_XFGVIRT(ISCluster, put_QuorumResource)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuorumResource )( 
             __RPC__in ISCluster * This,
-            /* [annotation][in] */ 
-            _In_  ISClusResource *pClusterResource);
+            /* [in] */ __RPC__in_opt ISClusResource *pClusterResource);
         
         DECLSPEC_XFGVIRT(ISCluster, get_QuorumResource)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuorumResource )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **pClusterResource);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **pClusterResource);
         
         DECLSPEC_XFGVIRT(ISCluster, get_QuorumLogSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuorumLogSize )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pnLogSize);
+            /* [retval][out] */ __RPC__out long *pnLogSize);
         
         DECLSPEC_XFGVIRT(ISCluster, put_QuorumLogSize)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuorumLogSize )( 
             __RPC__in ISCluster * This,
-            /* [annotation][in] */ 
-            _In_  long nLogSize);
+            /* [in] */ long nLogSize);
         
         DECLSPEC_XFGVIRT(ISCluster, get_QuorumPath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QuorumPath )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *ppPath);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppPath);
         
         DECLSPEC_XFGVIRT(ISCluster, put_QuorumPath)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_QuorumPath )( 
@@ -4011,38 +3878,32 @@ EXTERN_C const IID IID_ISCluster;
         DECLSPEC_XFGVIRT(ISCluster, get_Nodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Nodes )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNodes **ppNodes);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNodes **ppNodes);
         
         DECLSPEC_XFGVIRT(ISCluster, get_ResourceGroups)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ResourceGroups )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroups **ppClusterResourceGroups);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroups **ppClusterResourceGroups);
         
         DECLSPEC_XFGVIRT(ISCluster, get_Resources)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Resources )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResources **ppClusterResources);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResources **ppClusterResources);
         
         DECLSPEC_XFGVIRT(ISCluster, get_ResourceTypes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ResourceTypes )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResTypes **ppResourceTypes);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResTypes **ppResourceTypes);
         
         DECLSPEC_XFGVIRT(ISCluster, get_Networks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Networks )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetworks **ppNetworks);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetworks **ppNetworks);
         
         DECLSPEC_XFGVIRT(ISCluster, get_NetInterfaces)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetInterfaces )( 
             __RPC__in ISCluster * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetInterfaces **ppNetInterfaces);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetInterfaces **ppNetInterfaces);
         
         END_INTERFACE
     } ISClusterVtbl;
@@ -4170,36 +4031,28 @@ EXTERN_C const IID IID_ISClusNode;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [helpstring][id][hidden][propget] */ HRESULT STDMETHODCALLTYPE get_Handle( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle) = 0;
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NodeID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrNodeID) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrNodeID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_NODE_STATE *dwState) = 0;
+            /* [retval][out] */ __RPC__out CLUSTER_NODE_STATE *dwState) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Pause( void) = 0;
         
@@ -4208,16 +4061,13 @@ EXTERN_C const IID IID_ISClusNode;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Evict( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ResourceGroups( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroups **ppResourceGroups) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroups **ppResourceGroups) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Cluster( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetInterfaces( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNodeNetInterfaces **ppClusNetInterfaces) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNodeNetInterfaces **ppClusNetInterfaces) = 0;
         
     };
     
@@ -4231,8 +4081,7 @@ EXTERN_C const IID IID_ISClusNode;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4247,31 +4096,23 @@ EXTERN_C const IID IID_ISClusNode;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4296,50 +4137,42 @@ EXTERN_C const IID IID_ISClusNode;
         DECLSPEC_XFGVIRT(ISClusNode, get_CommonProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonProperties )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNode, get_PrivateProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateProperties )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNode, get_CommonROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonROProperties )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNode, get_PrivateROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateROProperties )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNode, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(ISClusNode, get_Handle)
         /* [helpstring][id][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle);
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle);
         
         DECLSPEC_XFGVIRT(ISClusNode, get_NodeID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NodeID )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrNodeID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrNodeID);
         
         DECLSPEC_XFGVIRT(ISClusNode, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_NODE_STATE *dwState);
+            /* [retval][out] */ __RPC__out CLUSTER_NODE_STATE *dwState);
         
         DECLSPEC_XFGVIRT(ISClusNode, Pause)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Pause )( 
@@ -4356,20 +4189,17 @@ EXTERN_C const IID IID_ISClusNode;
         DECLSPEC_XFGVIRT(ISClusNode, get_ResourceGroups)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ResourceGroups )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroups **ppResourceGroups);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroups **ppResourceGroups);
         
         DECLSPEC_XFGVIRT(ISClusNode, get_Cluster)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cluster )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster);
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster);
         
         DECLSPEC_XFGVIRT(ISClusNode, get_NetInterfaces)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetInterfaces )( 
             __RPC__in ISClusNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNodeNetInterfaces **ppClusNetInterfaces);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNodeNetInterfaces **ppClusNetInterfaces);
         
         END_INTERFACE
     } ISClusNodeVtbl;
@@ -4476,20 +4306,16 @@ EXTERN_C const IID IID_ISClusNodes;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppNode) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppNode) = 0;
         
     };
     
@@ -4503,8 +4329,7 @@ EXTERN_C const IID IID_ISClusNodes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusNodes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4519,31 +4344,23 @@ EXTERN_C const IID IID_ISClusNodes;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusNodes * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusNodes * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusNodes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4568,14 +4385,12 @@ EXTERN_C const IID IID_ISClusNodes;
         DECLSPEC_XFGVIRT(ISClusNodes, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusNodes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusNodes, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusNodes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusNodes, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -4584,10 +4399,8 @@ EXTERN_C const IID IID_ISClusNodes;
         DECLSPEC_XFGVIRT(ISClusNodes, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusNodes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppNode);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppNode);
         
         END_INTERFACE
     } ISClusNodesVtbl;
@@ -4664,48 +4477,37 @@ EXTERN_C const IID IID_ISClusNetwork;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][hidden][propget] */ HRESULT STDMETHODCALLTYPE get_Handle( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle) = 0;
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNetworkName) = 0;
+            /* [in] */ __RPC__in BSTR bstrNetworkName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetworkID( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrNetworkID) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrNetworkID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_NETWORK_STATE *dwState) = 0;
+            /* [retval][out] */ __RPC__out CLUSTER_NETWORK_STATE *dwState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NetInterfaces( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetworkNetInterfaces **ppClusNetInterfaces) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetworkNetInterfaces **ppClusNetInterfaces) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Cluster( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster) = 0;
         
     };
     
@@ -4719,8 +4521,7 @@ EXTERN_C const IID IID_ISClusNetwork;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4735,31 +4536,23 @@ EXTERN_C const IID IID_ISClusNetwork;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4784,68 +4577,57 @@ EXTERN_C const IID IID_ISClusNetwork;
         DECLSPEC_XFGVIRT(ISClusNetwork, get_CommonProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonProperties )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNetwork, get_PrivateProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateProperties )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNetwork, get_CommonROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonROProperties )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNetwork, get_PrivateROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateROProperties )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNetwork, get_Handle)
         /* [helpstring][id][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle);
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle);
         
         DECLSPEC_XFGVIRT(ISClusNetwork, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(ISClusNetwork, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNetworkName);
+            /* [in] */ __RPC__in BSTR bstrNetworkName);
         
         DECLSPEC_XFGVIRT(ISClusNetwork, get_NetworkID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetworkID )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrNetworkID);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrNetworkID);
         
         DECLSPEC_XFGVIRT(ISClusNetwork, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_NETWORK_STATE *dwState);
+            /* [retval][out] */ __RPC__out CLUSTER_NETWORK_STATE *dwState);
         
         DECLSPEC_XFGVIRT(ISClusNetwork, get_NetInterfaces)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetInterfaces )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetworkNetInterfaces **ppClusNetInterfaces);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetworkNetInterfaces **ppClusNetInterfaces);
         
         DECLSPEC_XFGVIRT(ISClusNetwork, get_Cluster)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cluster )( 
             __RPC__in ISClusNetwork * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster);
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster);
         
         END_INTERFACE
     } ISClusNetworkVtbl;
@@ -4943,20 +4725,16 @@ EXTERN_C const IID IID_ISClusNetworks;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetwork **ppClusNetwork) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetwork **ppClusNetwork) = 0;
         
     };
     
@@ -4970,8 +4748,7 @@ EXTERN_C const IID IID_ISClusNetworks;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusNetworks * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4986,31 +4763,23 @@ EXTERN_C const IID IID_ISClusNetworks;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusNetworks * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusNetworks * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusNetworks * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5035,14 +4804,12 @@ EXTERN_C const IID IID_ISClusNetworks;
         DECLSPEC_XFGVIRT(ISClusNetworks, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusNetworks * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusNetworks, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusNetworks * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusNetworks, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -5051,10 +4818,8 @@ EXTERN_C const IID IID_ISClusNetworks;
         DECLSPEC_XFGVIRT(ISClusNetworks, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusNetworks * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetwork **ppClusNetwork);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetwork **ppClusNetwork);
         
         END_INTERFACE
     } ISClusNetworksVtbl;
@@ -5131,36 +4896,28 @@ EXTERN_C const IID IID_ISClusNetInterface;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [helpstring][id][hidden][propget] */ HRESULT STDMETHODCALLTYPE get_Handle( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle) = 0;
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_NETINTERFACE_STATE *dwState) = 0;
+            /* [retval][out] */ __RPC__out CLUSTER_NETINTERFACE_STATE *dwState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Cluster( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster) = 0;
         
     };
     
@@ -5174,8 +4931,7 @@ EXTERN_C const IID IID_ISClusNetInterface;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5190,31 +4946,23 @@ EXTERN_C const IID IID_ISClusNetInterface;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5239,50 +4987,42 @@ EXTERN_C const IID IID_ISClusNetInterface;
         DECLSPEC_XFGVIRT(ISClusNetInterface, get_CommonProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonProperties )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNetInterface, get_PrivateProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateProperties )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNetInterface, get_CommonROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonROProperties )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNetInterface, get_PrivateROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateROProperties )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusNetInterface, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(ISClusNetInterface, get_Handle)
         /* [helpstring][id][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle);
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle);
         
         DECLSPEC_XFGVIRT(ISClusNetInterface, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_NETINTERFACE_STATE *dwState);
+            /* [retval][out] */ __RPC__out CLUSTER_NETINTERFACE_STATE *dwState);
         
         DECLSPEC_XFGVIRT(ISClusNetInterface, get_Cluster)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cluster )( 
             __RPC__in ISClusNetInterface * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster);
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster);
         
         END_INTERFACE
     } ISClusNetInterfaceVtbl;
@@ -5371,20 +5111,16 @@ EXTERN_C const IID IID_ISClusNetInterfaces;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetInterface **ppClusNetInterface) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetInterface **ppClusNetInterface) = 0;
         
     };
     
@@ -5398,8 +5134,7 @@ EXTERN_C const IID IID_ISClusNetInterfaces;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5414,31 +5149,23 @@ EXTERN_C const IID IID_ISClusNetInterfaces;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusNetInterfaces * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5463,14 +5190,12 @@ EXTERN_C const IID IID_ISClusNetInterfaces;
         DECLSPEC_XFGVIRT(ISClusNetInterfaces, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusNetInterfaces * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusNetInterfaces, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusNetInterfaces * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusNetInterfaces, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -5479,10 +5204,8 @@ EXTERN_C const IID IID_ISClusNetInterfaces;
         DECLSPEC_XFGVIRT(ISClusNetInterfaces, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetInterface **ppClusNetInterface);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetInterface **ppClusNetInterface);
         
         END_INTERFACE
     } ISClusNetInterfacesVtbl;
@@ -5559,20 +5282,16 @@ EXTERN_C const IID IID_ISClusNodeNetInterfaces;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetInterface **ppClusNetInterface) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetInterface **ppClusNetInterface) = 0;
         
     };
     
@@ -5586,8 +5305,7 @@ EXTERN_C const IID IID_ISClusNodeNetInterfaces;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusNodeNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5602,31 +5320,23 @@ EXTERN_C const IID IID_ISClusNodeNetInterfaces;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusNodeNetInterfaces * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusNodeNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusNodeNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5651,14 +5361,12 @@ EXTERN_C const IID IID_ISClusNodeNetInterfaces;
         DECLSPEC_XFGVIRT(ISClusNodeNetInterfaces, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusNodeNetInterfaces * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusNodeNetInterfaces, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusNodeNetInterfaces * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusNodeNetInterfaces, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -5667,10 +5375,8 @@ EXTERN_C const IID IID_ISClusNodeNetInterfaces;
         DECLSPEC_XFGVIRT(ISClusNodeNetInterfaces, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusNodeNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetInterface **ppClusNetInterface);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetInterface **ppClusNetInterface);
         
         END_INTERFACE
     } ISClusNodeNetInterfacesVtbl;
@@ -5747,20 +5453,16 @@ EXTERN_C const IID IID_ISClusNetworkNetInterfaces;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetInterface **ppClusNetInterface) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetInterface **ppClusNetInterface) = 0;
         
     };
     
@@ -5774,8 +5476,7 @@ EXTERN_C const IID IID_ISClusNetworkNetInterfaces;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusNetworkNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5790,31 +5491,23 @@ EXTERN_C const IID IID_ISClusNetworkNetInterfaces;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusNetworkNetInterfaces * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusNetworkNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusNetworkNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5839,14 +5532,12 @@ EXTERN_C const IID IID_ISClusNetworkNetInterfaces;
         DECLSPEC_XFGVIRT(ISClusNetworkNetInterfaces, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusNetworkNetInterfaces * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusNetworkNetInterfaces, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusNetworkNetInterfaces * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusNetworkNetInterfaces, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -5855,10 +5546,8 @@ EXTERN_C const IID IID_ISClusNetworkNetInterfaces;
         DECLSPEC_XFGVIRT(ISClusNetworkNetInterfaces, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusNetworkNetInterfaces * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNetInterface **ppClusNetInterface);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNetInterface **ppClusNetInterface);
         
         END_INTERFACE
     } ISClusNetworkNetInterfacesVtbl;
@@ -5935,74 +5624,56 @@ EXTERN_C const IID IID_ISClusResGroup;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][hidden][propget] */ HRESULT STDMETHODCALLTYPE get_Handle( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle) = 0;
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGroupName) = 0;
+            /* [in] */ __RPC__in BSTR bstrGroupName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_GROUP_STATE *dwState) = 0;
+            /* [retval][out] */ __RPC__out CLUSTER_GROUP_STATE *dwState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OwnerNode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppOwnerNode) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppOwnerNode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Resources( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroupResources **ppClusterGroupResources) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroupResources **ppClusterGroupResources) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PreferredOwnerNodes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroupPreferredOwnerNodes **ppOwnerNodes) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroupPreferredOwnerNodes **ppOwnerNodes) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Online( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varTimeout,
+            /* [in] */ VARIANT varTimeout,
             /* [optional][in] */ VARIANT varNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPending) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarPending) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Move( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varTimeout,
+            /* [in] */ VARIANT varTimeout,
             /* [optional][in] */ VARIANT varNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPending) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarPending) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Offline( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varTimeout,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPending) = 0;
+            /* [in] */ VARIANT varTimeout,
+            /* [retval][out] */ __RPC__out VARIANT *pvarPending) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Cluster( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster) = 0;
         
     };
     
@@ -6016,8 +5687,7 @@ EXTERN_C const IID IID_ISClusResGroup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6032,31 +5702,23 @@ EXTERN_C const IID IID_ISClusResGroup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6081,68 +5743,57 @@ EXTERN_C const IID IID_ISClusResGroup;
         DECLSPEC_XFGVIRT(ISClusResGroup, get_CommonProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonProperties )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, get_PrivateProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateProperties )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, get_CommonROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonROProperties )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, get_PrivateROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateROProperties )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, get_Handle)
         /* [helpstring][id][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle);
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGroupName);
+            /* [in] */ __RPC__in BSTR bstrGroupName);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_GROUP_STATE *dwState);
+            /* [retval][out] */ __RPC__out CLUSTER_GROUP_STATE *dwState);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, get_OwnerNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OwnerNode )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppOwnerNode);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppOwnerNode);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, get_Resources)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Resources )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroupResources **ppClusterGroupResources);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroupResources **ppClusterGroupResources);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, get_PreferredOwnerNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreferredOwnerNodes )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroupPreferredOwnerNodes **ppOwnerNodes);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroupPreferredOwnerNodes **ppOwnerNodes);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -6151,34 +5802,27 @@ EXTERN_C const IID IID_ISClusResGroup;
         DECLSPEC_XFGVIRT(ISClusResGroup, Online)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Online )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varTimeout,
+            /* [in] */ VARIANT varTimeout,
             /* [optional][in] */ VARIANT varNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPending);
+            /* [retval][out] */ __RPC__out VARIANT *pvarPending);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, Move)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varTimeout,
+            /* [in] */ VARIANT varTimeout,
             /* [optional][in] */ VARIANT varNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPending);
+            /* [retval][out] */ __RPC__out VARIANT *pvarPending);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, Offline)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Offline )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varTimeout,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPending);
+            /* [in] */ VARIANT varTimeout,
+            /* [retval][out] */ __RPC__out VARIANT *pvarPending);
         
         DECLSPEC_XFGVIRT(ISClusResGroup, get_Cluster)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cluster )( 
             __RPC__in ISClusResGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster);
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster);
         
         END_INTERFACE
     } ISClusResGroupVtbl;
@@ -6291,30 +5935,23 @@ EXTERN_C const IID IID_ISClusResGroups;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroup **ppClusResGroup) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroup **ppClusResGroup) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceGroupName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroup **ppResourceGroup) = 0;
+            /* [in] */ __RPC__in BSTR bstrResourceGroupName,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroup **ppResourceGroup) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -6328,8 +5965,7 @@ EXTERN_C const IID IID_ISClusResGroups;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResGroups * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6344,31 +5980,23 @@ EXTERN_C const IID IID_ISClusResGroups;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResGroups * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResGroups * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResGroups * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6393,14 +6021,12 @@ EXTERN_C const IID IID_ISClusResGroups;
         DECLSPEC_XFGVIRT(ISClusResGroups, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusResGroups * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusResGroups, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusResGroups * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusResGroups, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -6409,24 +6035,19 @@ EXTERN_C const IID IID_ISClusResGroups;
         DECLSPEC_XFGVIRT(ISClusResGroups, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusResGroups * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroup **ppClusResGroup);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroup **ppClusResGroup);
         
         DECLSPEC_XFGVIRT(ISClusResGroups, CreateItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateItem )( 
             __RPC__in ISClusResGroups * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceGroupName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroup **ppResourceGroup);
+            /* [in] */ __RPC__in BSTR bstrResourceGroupName,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroup **ppResourceGroup);
         
         DECLSPEC_XFGVIRT(ISClusResGroups, DeleteItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteItem )( 
             __RPC__in ISClusResGroups * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusResGroupsVtbl;
@@ -6509,136 +6130,102 @@ EXTERN_C const IID IID_ISClusResource;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][hidden][propget] */ HRESULT STDMETHODCALLTYPE get_Handle( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle) = 0;
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName) = 0;
+            /* [in] */ __RPC__in BSTR bstrResourceName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_RESOURCE_STATE *dwState) = 0;
+            /* [retval][out] */ __RPC__out CLUSTER_RESOURCE_STATE *dwState) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CoreFlag( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUS_FLAGS *dwCoreFlag) = 0;
+            /* [retval][out] */ __RPC__out CLUS_FLAGS *dwCoreFlag) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE BecomeQuorumResource( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrDevicePath,
-            /* [annotation][in] */ 
-            _In_  long lMaxLogSize) = 0;
+            /* [in] */ __RPC__in BSTR bstrDevicePath,
+            /* [in] */ long lMaxLogSize) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Fail( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Online( 
-            /* [annotation][in] */ 
-            _In_  long nTimeout,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPending) = 0;
+            /* [in] */ long nTimeout,
+            /* [retval][out] */ __RPC__out VARIANT *pvarPending) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Offline( 
-            /* [annotation][in] */ 
-            _In_  long nTimeout,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPending) = 0;
+            /* [in] */ long nTimeout,
+            /* [retval][out] */ __RPC__out VARIANT *pvarPending) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ChangeResourceGroup( 
-            /* [annotation][in] */ 
-            _In_  ISClusResGroup *pResourceGroup) = 0;
+            /* [in] */ __RPC__in_opt ISClusResGroup *pResourceGroup) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddResourceNode( 
-            /* [annotation][in] */ 
-            _In_  ISClusNode *pNode) = 0;
+            /* [in] */ __RPC__in_opt ISClusNode *pNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveResourceNode( 
-            /* [annotation][in] */ 
-            _In_  ISClusNode *pNode) = 0;
+            /* [in] */ __RPC__in_opt ISClusNode *pNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CanResourceBeDependent( 
-            /* [annotation][in] */ 
-            _In_  ISClusResource *pResource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarDependent) = 0;
+            /* [in] */ __RPC__in_opt ISClusResource *pResource,
+            /* [retval][out] */ __RPC__out VARIANT *pvarDependent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PossibleOwnerNodes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResPossibleOwnerNodes **ppOwnerNodes) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResPossibleOwnerNodes **ppOwnerNodes) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Dependencies( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResDependencies **ppResDependencies) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResDependencies **ppResDependencies) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Dependents( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResDependents **ppResDependents) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResDependents **ppResDependents) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Group( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroup **ppResGroup) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroup **ppResGroup) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_OwnerNode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppOwnerNode) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppOwnerNode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Cluster( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClassInfo( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_RESOURCE_CLASS *prcClassInfo) = 0;
+            /* [retval][out] */ __RPC__out CLUSTER_RESOURCE_CLASS *prcClassInfo) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Disk( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusDisk **ppDisk) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusDisk **ppDisk) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_RegistryKeys( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusRegistryKeys **ppRegistryKeys) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusRegistryKeys **ppRegistryKeys) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CryptoKeys( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusCryptoKeys **ppCryptoKeys) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusCryptoKeys **ppCryptoKeys) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TypeName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrTypeName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTypeName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResType **ppResourceType) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResType **ppResourceType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MaintenanceMode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pbMaintenanceMode) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pbMaintenanceMode) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MaintenanceMode( 
-            /* [annotation][in] */ 
-            _In_  BOOL bMaintenanceMode) = 0;
+            /* [in] */ BOOL bMaintenanceMode) = 0;
         
     };
     
@@ -6652,8 +6239,7 @@ EXTERN_C const IID IID_ISClusResource;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6668,31 +6254,23 @@ EXTERN_C const IID IID_ISClusResource;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6717,64 +6295,53 @@ EXTERN_C const IID IID_ISClusResource;
         DECLSPEC_XFGVIRT(ISClusResource, get_CommonProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonProperties )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_PrivateProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateProperties )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_CommonROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonROProperties )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_PrivateROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateROProperties )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_Handle)
         /* [helpstring][id][hidden][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ULONG_PTR *phandle);
+            /* [retval][out] */ __RPC__out ULONG_PTR *phandle);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(ISClusResource, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName);
+            /* [in] */ __RPC__in BSTR bstrResourceName);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_RESOURCE_STATE *dwState);
+            /* [retval][out] */ __RPC__out CLUSTER_RESOURCE_STATE *dwState);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_CoreFlag)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CoreFlag )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUS_FLAGS *dwCoreFlag);
+            /* [retval][out] */ __RPC__out CLUS_FLAGS *dwCoreFlag);
         
         DECLSPEC_XFGVIRT(ISClusResource, BecomeQuorumResource)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BecomeQuorumResource )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrDevicePath,
-            /* [annotation][in] */ 
-            _In_  long lMaxLogSize);
+            /* [in] */ __RPC__in BSTR bstrDevicePath,
+            /* [in] */ long lMaxLogSize);
         
         DECLSPEC_XFGVIRT(ISClusResource, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -6787,128 +6354,105 @@ EXTERN_C const IID IID_ISClusResource;
         DECLSPEC_XFGVIRT(ISClusResource, Online)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Online )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  long nTimeout,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPending);
+            /* [in] */ long nTimeout,
+            /* [retval][out] */ __RPC__out VARIANT *pvarPending);
         
         DECLSPEC_XFGVIRT(ISClusResource, Offline)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Offline )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  long nTimeout,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPending);
+            /* [in] */ long nTimeout,
+            /* [retval][out] */ __RPC__out VARIANT *pvarPending);
         
         DECLSPEC_XFGVIRT(ISClusResource, ChangeResourceGroup)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ChangeResourceGroup )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  ISClusResGroup *pResourceGroup);
+            /* [in] */ __RPC__in_opt ISClusResGroup *pResourceGroup);
         
         DECLSPEC_XFGVIRT(ISClusResource, AddResourceNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddResourceNode )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  ISClusNode *pNode);
+            /* [in] */ __RPC__in_opt ISClusNode *pNode);
         
         DECLSPEC_XFGVIRT(ISClusResource, RemoveResourceNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveResourceNode )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  ISClusNode *pNode);
+            /* [in] */ __RPC__in_opt ISClusNode *pNode);
         
         DECLSPEC_XFGVIRT(ISClusResource, CanResourceBeDependent)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CanResourceBeDependent )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  ISClusResource *pResource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarDependent);
+            /* [in] */ __RPC__in_opt ISClusResource *pResource,
+            /* [retval][out] */ __RPC__out VARIANT *pvarDependent);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_PossibleOwnerNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PossibleOwnerNodes )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResPossibleOwnerNodes **ppOwnerNodes);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResPossibleOwnerNodes **ppOwnerNodes);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_Dependencies)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dependencies )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResDependencies **ppResDependencies);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResDependencies **ppResDependencies);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_Dependents)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dependents )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResDependents **ppResDependents);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResDependents **ppResDependents);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_Group)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Group )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResGroup **ppResGroup);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResGroup **ppResGroup);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_OwnerNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OwnerNode )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppOwnerNode);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppOwnerNode);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_Cluster)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cluster )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster);
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_ClassInfo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClassInfo )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_RESOURCE_CLASS *prcClassInfo);
+            /* [retval][out] */ __RPC__out CLUSTER_RESOURCE_CLASS *prcClassInfo);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_Disk)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Disk )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusDisk **ppDisk);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusDisk **ppDisk);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_RegistryKeys)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RegistryKeys )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusRegistryKeys **ppRegistryKeys);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusRegistryKeys **ppRegistryKeys);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_CryptoKeys)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CryptoKeys )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusCryptoKeys **ppCryptoKeys);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusCryptoKeys **ppCryptoKeys);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_TypeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TypeName )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrTypeName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTypeName);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResType **ppResourceType);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResType **ppResourceType);
         
         DECLSPEC_XFGVIRT(ISClusResource, get_MaintenanceMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaintenanceMode )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pbMaintenanceMode);
+            /* [retval][out] */ __RPC__out BOOL *pbMaintenanceMode);
         
         DECLSPEC_XFGVIRT(ISClusResource, put_MaintenanceMode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaintenanceMode )( 
             __RPC__in ISClusResource * This,
-            /* [annotation][in] */ 
-            _In_  BOOL bMaintenanceMode);
+            /* [in] */ BOOL bMaintenanceMode);
         
         END_INTERFACE
     } ISClusResourceVtbl;
@@ -7069,42 +6613,31 @@ EXTERN_C const IID IID_ISClusResDependencies;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusResource) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceType,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusterResource) = 0;
+            /* [in] */ __RPC__in BSTR bstrResourceName,
+            /* [in] */ __RPC__in BSTR bstrResourceType,
+            /* [in] */ CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusterResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddItem( 
-            /* [annotation][in] */ 
-            _In_  ISClusResource *pResource) = 0;
+            /* [in] */ __RPC__in_opt ISClusResource *pResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -7118,8 +6651,7 @@ EXTERN_C const IID IID_ISClusResDependencies;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7134,31 +6666,23 @@ EXTERN_C const IID IID_ISClusResDependencies;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7183,14 +6707,12 @@ EXTERN_C const IID IID_ISClusResDependencies;
         DECLSPEC_XFGVIRT(ISClusResDependencies, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusResDependencies, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusResDependencies, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -7199,40 +6721,31 @@ EXTERN_C const IID IID_ISClusResDependencies;
         DECLSPEC_XFGVIRT(ISClusResDependencies, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusResource);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusResource);
         
         DECLSPEC_XFGVIRT(ISClusResDependencies, CreateItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateItem )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceType,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusterResource);
+            /* [in] */ __RPC__in BSTR bstrResourceName,
+            /* [in] */ __RPC__in BSTR bstrResourceType,
+            /* [in] */ CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusterResource);
         
         DECLSPEC_XFGVIRT(ISClusResDependencies, DeleteItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteItem )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         DECLSPEC_XFGVIRT(ISClusResDependencies, AddItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddItem )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][in] */ 
-            _In_  ISClusResource *pResource);
+            /* [in] */ __RPC__in_opt ISClusResource *pResource);
         
         DECLSPEC_XFGVIRT(ISClusResDependencies, RemoveItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveItem )( 
             __RPC__in ISClusResDependencies * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusResDependenciesVtbl;
@@ -7321,34 +6834,25 @@ EXTERN_C const IID IID_ISClusResGroupResources;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusResource) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceType,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusterResource) = 0;
+            /* [in] */ __RPC__in BSTR bstrResourceName,
+            /* [in] */ __RPC__in BSTR bstrResourceType,
+            /* [in] */ CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusterResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -7362,8 +6866,7 @@ EXTERN_C const IID IID_ISClusResGroupResources;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResGroupResources * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7378,31 +6881,23 @@ EXTERN_C const IID IID_ISClusResGroupResources;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResGroupResources * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResGroupResources * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResGroupResources * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7427,14 +6922,12 @@ EXTERN_C const IID IID_ISClusResGroupResources;
         DECLSPEC_XFGVIRT(ISClusResGroupResources, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusResGroupResources * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusResGroupResources, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusResGroupResources * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusResGroupResources, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -7443,28 +6936,21 @@ EXTERN_C const IID IID_ISClusResGroupResources;
         DECLSPEC_XFGVIRT(ISClusResGroupResources, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusResGroupResources * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusResource);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusResource);
         
         DECLSPEC_XFGVIRT(ISClusResGroupResources, CreateItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateItem )( 
             __RPC__in ISClusResGroupResources * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceType,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusterResource);
+            /* [in] */ __RPC__in BSTR bstrResourceName,
+            /* [in] */ __RPC__in BSTR bstrResourceType,
+            /* [in] */ CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusterResource);
         
         DECLSPEC_XFGVIRT(ISClusResGroupResources, DeleteItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteItem )( 
             __RPC__in ISClusResGroupResources * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusResGroupResourcesVtbl;
@@ -7547,34 +7033,25 @@ EXTERN_C const IID IID_ISClusResTypeResources;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusResource) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGroupName,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusterResource) = 0;
+            /* [in] */ __RPC__in BSTR bstrResourceName,
+            /* [in] */ __RPC__in BSTR bstrGroupName,
+            /* [in] */ CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusterResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -7588,8 +7065,7 @@ EXTERN_C const IID IID_ISClusResTypeResources;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResTypeResources * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7604,31 +7080,23 @@ EXTERN_C const IID IID_ISClusResTypeResources;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResTypeResources * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResTypeResources * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResTypeResources * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7653,14 +7121,12 @@ EXTERN_C const IID IID_ISClusResTypeResources;
         DECLSPEC_XFGVIRT(ISClusResTypeResources, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusResTypeResources * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusResTypeResources, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusResTypeResources * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusResTypeResources, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -7669,28 +7135,21 @@ EXTERN_C const IID IID_ISClusResTypeResources;
         DECLSPEC_XFGVIRT(ISClusResTypeResources, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusResTypeResources * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusResource);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusResource);
         
         DECLSPEC_XFGVIRT(ISClusResTypeResources, CreateItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateItem )( 
             __RPC__in ISClusResTypeResources * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGroupName,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusterResource);
+            /* [in] */ __RPC__in BSTR bstrResourceName,
+            /* [in] */ __RPC__in BSTR bstrGroupName,
+            /* [in] */ CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusterResource);
         
         DECLSPEC_XFGVIRT(ISClusResTypeResources, DeleteItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteItem )( 
             __RPC__in ISClusResTypeResources * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusResTypeResourcesVtbl;
@@ -7773,36 +7232,26 @@ EXTERN_C const IID IID_ISClusResources;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusResource) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGroupName,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusterResource) = 0;
+            /* [in] */ __RPC__in BSTR bstrResourceName,
+            /* [in] */ __RPC__in BSTR bstrResourceType,
+            /* [in] */ __RPC__in BSTR bstrGroupName,
+            /* [in] */ CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusterResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -7816,8 +7265,7 @@ EXTERN_C const IID IID_ISClusResources;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResources * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7832,31 +7280,23 @@ EXTERN_C const IID IID_ISClusResources;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResources * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResources * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResources * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7881,14 +7321,12 @@ EXTERN_C const IID IID_ISClusResources;
         DECLSPEC_XFGVIRT(ISClusResources, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusResources * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusResources, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusResources * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusResources, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -7897,30 +7335,22 @@ EXTERN_C const IID IID_ISClusResources;
         DECLSPEC_XFGVIRT(ISClusResources, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusResources * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusResource);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusResource);
         
         DECLSPEC_XFGVIRT(ISClusResources, CreateItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateItem )( 
             __RPC__in ISClusResources * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceType,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrGroupName,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusterResource);
+            /* [in] */ __RPC__in BSTR bstrResourceName,
+            /* [in] */ __RPC__in BSTR bstrResourceType,
+            /* [in] */ __RPC__in BSTR bstrGroupName,
+            /* [in] */ CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusterResource);
         
         DECLSPEC_XFGVIRT(ISClusResources, DeleteItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteItem )( 
             __RPC__in ISClusResources * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusResourcesVtbl;
@@ -8003,40 +7433,31 @@ EXTERN_C const IID IID_ISClusResGroupPreferredOwnerNodes;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppNode) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InsertItem( 
-            /* [annotation][in] */ 
-            _In_  ISClusNode *pNode,
-            /* [annotation][in] */ 
-            _In_  long nPosition) = 0;
+            /* [in] */ __RPC__in_opt ISClusNode *pNode,
+            /* [in] */ long nPosition) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Modified( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarModified) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarModified) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SaveChanges( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddItem( 
-            /* [annotation][in] */ 
-            _In_  ISClusNode *pNode) = 0;
+            /* [in] */ __RPC__in_opt ISClusNode *pNode) = 0;
         
     };
     
@@ -8050,8 +7471,7 @@ EXTERN_C const IID IID_ISClusResGroupPreferredOwnerNodes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8066,31 +7486,23 @@ EXTERN_C const IID IID_ISClusResGroupPreferredOwnerNodes;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8115,14 +7527,12 @@ EXTERN_C const IID IID_ISClusResGroupPreferredOwnerNodes;
         DECLSPEC_XFGVIRT(ISClusResGroupPreferredOwnerNodes, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusResGroupPreferredOwnerNodes, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusResGroupPreferredOwnerNodes, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -8131,30 +7541,24 @@ EXTERN_C const IID IID_ISClusResGroupPreferredOwnerNodes;
         DECLSPEC_XFGVIRT(ISClusResGroupPreferredOwnerNodes, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppNode);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppNode);
         
         DECLSPEC_XFGVIRT(ISClusResGroupPreferredOwnerNodes, InsertItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InsertItem )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  ISClusNode *pNode,
-            /* [annotation][in] */ 
-            _In_  long nPosition);
+            /* [in] */ __RPC__in_opt ISClusNode *pNode,
+            /* [in] */ long nPosition);
         
         DECLSPEC_XFGVIRT(ISClusResGroupPreferredOwnerNodes, RemoveItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveItem )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         DECLSPEC_XFGVIRT(ISClusResGroupPreferredOwnerNodes, get_Modified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modified )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarModified);
+            /* [retval][out] */ __RPC__out VARIANT *pvarModified);
         
         DECLSPEC_XFGVIRT(ISClusResGroupPreferredOwnerNodes, SaveChanges)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SaveChanges )( 
@@ -8163,8 +7567,7 @@ EXTERN_C const IID IID_ISClusResGroupPreferredOwnerNodes;
         DECLSPEC_XFGVIRT(ISClusResGroupPreferredOwnerNodes, AddItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddItem )( 
             __RPC__in ISClusResGroupPreferredOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  ISClusNode *pNode);
+            /* [in] */ __RPC__in_opt ISClusNode *pNode);
         
         END_INTERFACE
     } ISClusResGroupPreferredOwnerNodesVtbl;
@@ -8256,32 +7659,25 @@ EXTERN_C const IID IID_ISClusResPossibleOwnerNodes;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppNode) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddItem( 
-            /* [annotation][in] */ 
-            _In_  ISClusNode *pNode) = 0;
+            /* [in] */ __RPC__in_opt ISClusNode *pNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Modified( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarModified) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarModified) = 0;
         
     };
     
@@ -8295,8 +7691,7 @@ EXTERN_C const IID IID_ISClusResPossibleOwnerNodes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResPossibleOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8311,31 +7706,23 @@ EXTERN_C const IID IID_ISClusResPossibleOwnerNodes;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResPossibleOwnerNodes * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResPossibleOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResPossibleOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8360,14 +7747,12 @@ EXTERN_C const IID IID_ISClusResPossibleOwnerNodes;
         DECLSPEC_XFGVIRT(ISClusResPossibleOwnerNodes, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusResPossibleOwnerNodes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusResPossibleOwnerNodes, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusResPossibleOwnerNodes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusResPossibleOwnerNodes, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -8376,28 +7761,23 @@ EXTERN_C const IID IID_ISClusResPossibleOwnerNodes;
         DECLSPEC_XFGVIRT(ISClusResPossibleOwnerNodes, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusResPossibleOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppNode);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppNode);
         
         DECLSPEC_XFGVIRT(ISClusResPossibleOwnerNodes, AddItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddItem )( 
             __RPC__in ISClusResPossibleOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  ISClusNode *pNode);
+            /* [in] */ __RPC__in_opt ISClusNode *pNode);
         
         DECLSPEC_XFGVIRT(ISClusResPossibleOwnerNodes, RemoveItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveItem )( 
             __RPC__in ISClusResPossibleOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         DECLSPEC_XFGVIRT(ISClusResPossibleOwnerNodes, get_Modified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modified )( 
             __RPC__in ISClusResPossibleOwnerNodes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarModified);
+            /* [retval][out] */ __RPC__out VARIANT *pvarModified);
         
         END_INTERFACE
     } ISClusResPossibleOwnerNodesVtbl;
@@ -8483,20 +7863,16 @@ EXTERN_C const IID IID_ISClusResTypePossibleOwnerNodes;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppNode) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppNode) = 0;
         
     };
     
@@ -8510,8 +7886,7 @@ EXTERN_C const IID IID_ISClusResTypePossibleOwnerNodes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResTypePossibleOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8526,31 +7901,23 @@ EXTERN_C const IID IID_ISClusResTypePossibleOwnerNodes;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResTypePossibleOwnerNodes * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResTypePossibleOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResTypePossibleOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8575,14 +7942,12 @@ EXTERN_C const IID IID_ISClusResTypePossibleOwnerNodes;
         DECLSPEC_XFGVIRT(ISClusResTypePossibleOwnerNodes, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusResTypePossibleOwnerNodes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusResTypePossibleOwnerNodes, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusResTypePossibleOwnerNodes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusResTypePossibleOwnerNodes, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -8591,10 +7956,8 @@ EXTERN_C const IID IID_ISClusResTypePossibleOwnerNodes;
         DECLSPEC_XFGVIRT(ISClusResTypePossibleOwnerNodes, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusResTypePossibleOwnerNodes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusNode **ppNode);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusNode **ppNode);
         
         END_INTERFACE
     } ISClusResTypePossibleOwnerNodesVtbl;
@@ -8671,42 +8034,33 @@ EXTERN_C const IID IID_ISClusResType;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CommonROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PrivateROProperties( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Delete( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Cluster( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Resources( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResTypeResources **ppClusterResTypeResources) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResTypeResources **ppClusterResTypeResources) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PossibleOwnerNodes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResTypePossibleOwnerNodes **ppOwnerNodes) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResTypePossibleOwnerNodes **ppOwnerNodes) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AvailableDisks( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusDisks **ppAvailableDisks) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusDisks **ppAvailableDisks) = 0;
         
     };
     
@@ -8720,8 +8074,7 @@ EXTERN_C const IID IID_ISClusResType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8736,31 +8089,23 @@ EXTERN_C const IID IID_ISClusResType;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8785,32 +8130,27 @@ EXTERN_C const IID IID_ISClusResType;
         DECLSPEC_XFGVIRT(ISClusResType, get_CommonProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonProperties )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResType, get_PrivateProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateProperties )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResType, get_CommonROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CommonROProperties )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResType, get_PrivateROProperties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateROProperties )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperties **ppProperties);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperties **ppProperties);
         
         DECLSPEC_XFGVIRT(ISClusResType, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(ISClusResType, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
@@ -8819,26 +8159,22 @@ EXTERN_C const IID IID_ISClusResType;
         DECLSPEC_XFGVIRT(ISClusResType, get_Cluster)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cluster )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISCluster **ppCluster);
+            /* [retval][out] */ __RPC__deref_out_opt ISCluster **ppCluster);
         
         DECLSPEC_XFGVIRT(ISClusResType, get_Resources)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Resources )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResTypeResources **ppClusterResTypeResources);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResTypeResources **ppClusterResTypeResources);
         
         DECLSPEC_XFGVIRT(ISClusResType, get_PossibleOwnerNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PossibleOwnerNodes )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResTypePossibleOwnerNodes **ppOwnerNodes);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResTypePossibleOwnerNodes **ppOwnerNodes);
         
         DECLSPEC_XFGVIRT(ISClusResType, get_AvailableDisks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AvailableDisks )( 
             __RPC__in ISClusResType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusDisks **ppAvailableDisks);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusDisks **ppAvailableDisks);
         
         END_INTERFACE
     } ISClusResTypeVtbl;
@@ -8933,38 +8269,27 @@ EXTERN_C const IID IID_ISClusResTypes;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResType **ppClusResType) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResType **ppClusResType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceTypeName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrDisplayName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceTypeDll,
-            /* [annotation][in] */ 
-            _In_  long dwLooksAlivePollInterval,
-            /* [annotation][in] */ 
-            _In_  long dwIsAlivePollInterval,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResType **ppResourceType) = 0;
+            /* [in] */ __RPC__in BSTR bstrResourceTypeName,
+            /* [in] */ __RPC__in BSTR bstrDisplayName,
+            /* [in] */ __RPC__in BSTR bstrResourceTypeDll,
+            /* [in] */ long dwLooksAlivePollInterval,
+            /* [in] */ long dwIsAlivePollInterval,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResType **ppResourceType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -8978,8 +8303,7 @@ EXTERN_C const IID IID_ISClusResTypes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResTypes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8994,31 +8318,23 @@ EXTERN_C const IID IID_ISClusResTypes;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResTypes * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResTypes * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResTypes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9043,14 +8359,12 @@ EXTERN_C const IID IID_ISClusResTypes;
         DECLSPEC_XFGVIRT(ISClusResTypes, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusResTypes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusResTypes, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusResTypes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusResTypes, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -9059,32 +8373,23 @@ EXTERN_C const IID IID_ISClusResTypes;
         DECLSPEC_XFGVIRT(ISClusResTypes, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusResTypes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResType **ppClusResType);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResType **ppClusResType);
         
         DECLSPEC_XFGVIRT(ISClusResTypes, CreateItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateItem )( 
             __RPC__in ISClusResTypes * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceTypeName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrDisplayName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceTypeDll,
-            /* [annotation][in] */ 
-            _In_  long dwLooksAlivePollInterval,
-            /* [annotation][in] */ 
-            _In_  long dwIsAlivePollInterval,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResType **ppResourceType);
+            /* [in] */ __RPC__in BSTR bstrResourceTypeName,
+            /* [in] */ __RPC__in BSTR bstrDisplayName,
+            /* [in] */ __RPC__in BSTR bstrResourceTypeDll,
+            /* [in] */ long dwLooksAlivePollInterval,
+            /* [in] */ long dwIsAlivePollInterval,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResType **ppResourceType);
         
         DECLSPEC_XFGVIRT(ISClusResTypes, DeleteItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteItem )( 
             __RPC__in ISClusResTypes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusResTypesVtbl;
@@ -9167,60 +8472,46 @@ EXTERN_C const IID IID_ISClusProperty;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pLength) = 0;
+            /* [retval][out] */ __RPC__out long *pLength) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ValueCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pCount) = 0;
+            /* [retval][out] */ __RPC__out long *pCount) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Values( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPropertyValues **ppClusterPropertyValues) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPropertyValues **ppClusterPropertyValues) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarValue) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarValue) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Value( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue) = 0;
+            /* [in] */ VARIANT varValue) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_PROPERTY_TYPE *pType) = 0;
+            /* [retval][out] */ __RPC__out CLUSTER_PROPERTY_TYPE *pType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Type( 
-            /* [annotation][in] */ 
-            _In_  CLUSTER_PROPERTY_TYPE Type) = 0;
+            /* [in] */ CLUSTER_PROPERTY_TYPE Type) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Format( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_PROPERTY_FORMAT *pFormat) = 0;
+            /* [retval][out] */ __RPC__out CLUSTER_PROPERTY_FORMAT *pFormat) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Format( 
-            /* [annotation][in] */ 
-            _In_  CLUSTER_PROPERTY_FORMAT Format) = 0;
+            /* [in] */ CLUSTER_PROPERTY_FORMAT Format) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReadOnly( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarReadOnly) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarReadOnly) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Private( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPrivate) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarPrivate) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Common( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarCommon) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarCommon) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Modified( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarModified) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarModified) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UseDefaultValue( void) = 0;
         
@@ -9236,8 +8527,7 @@ EXTERN_C const IID IID_ISClusProperty;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9252,31 +8542,23 @@ EXTERN_C const IID IID_ISClusProperty;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9301,86 +8583,72 @@ EXTERN_C const IID IID_ISClusProperty;
         DECLSPEC_XFGVIRT(ISClusProperty, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(ISClusProperty, get_Length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Length )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pLength);
+            /* [retval][out] */ __RPC__out long *pLength);
         
         DECLSPEC_XFGVIRT(ISClusProperty, get_ValueCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ValueCount )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pCount);
+            /* [retval][out] */ __RPC__out long *pCount);
         
         DECLSPEC_XFGVIRT(ISClusProperty, get_Values)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Values )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPropertyValues **ppClusterPropertyValues);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPropertyValues **ppClusterPropertyValues);
         
         DECLSPEC_XFGVIRT(ISClusProperty, get_Value)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarValue);
+            /* [retval][out] */ __RPC__out VARIANT *pvarValue);
         
         DECLSPEC_XFGVIRT(ISClusProperty, put_Value)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue);
+            /* [in] */ VARIANT varValue);
         
         DECLSPEC_XFGVIRT(ISClusProperty, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_PROPERTY_TYPE *pType);
+            /* [retval][out] */ __RPC__out CLUSTER_PROPERTY_TYPE *pType);
         
         DECLSPEC_XFGVIRT(ISClusProperty, put_Type)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_PROPERTY_TYPE Type);
+            /* [in] */ CLUSTER_PROPERTY_TYPE Type);
         
         DECLSPEC_XFGVIRT(ISClusProperty, get_Format)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Format )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_PROPERTY_FORMAT *pFormat);
+            /* [retval][out] */ __RPC__out CLUSTER_PROPERTY_FORMAT *pFormat);
         
         DECLSPEC_XFGVIRT(ISClusProperty, put_Format)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Format )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_PROPERTY_FORMAT Format);
+            /* [in] */ CLUSTER_PROPERTY_FORMAT Format);
         
         DECLSPEC_XFGVIRT(ISClusProperty, get_ReadOnly)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReadOnly )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarReadOnly);
+            /* [retval][out] */ __RPC__out VARIANT *pvarReadOnly);
         
         DECLSPEC_XFGVIRT(ISClusProperty, get_Private)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Private )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPrivate);
+            /* [retval][out] */ __RPC__out VARIANT *pvarPrivate);
         
         DECLSPEC_XFGVIRT(ISClusProperty, get_Common)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Common )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarCommon);
+            /* [retval][out] */ __RPC__out VARIANT *pvarCommon);
         
         DECLSPEC_XFGVIRT(ISClusProperty, get_Modified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modified )( 
             __RPC__in ISClusProperty * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarModified);
+            /* [retval][out] */ __RPC__out VARIANT *pvarModified);
         
         DECLSPEC_XFGVIRT(ISClusProperty, UseDefaultValue)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UseDefaultValue )( 
@@ -9494,40 +8762,31 @@ EXTERN_C const IID IID_ISClusPropertyValue;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarValue) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarValue) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Value( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue) = 0;
+            /* [in] */ VARIANT varValue) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_PROPERTY_TYPE *pType) = 0;
+            /* [retval][out] */ __RPC__out CLUSTER_PROPERTY_TYPE *pType) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Type( 
-            /* [annotation][in] */ 
-            _In_  CLUSTER_PROPERTY_TYPE Type) = 0;
+            /* [in] */ CLUSTER_PROPERTY_TYPE Type) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Format( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_PROPERTY_FORMAT *pFormat) = 0;
+            /* [retval][out] */ __RPC__out CLUSTER_PROPERTY_FORMAT *pFormat) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Format( 
-            /* [annotation][in] */ 
-            _In_  CLUSTER_PROPERTY_FORMAT Format) = 0;
+            /* [in] */ CLUSTER_PROPERTY_FORMAT Format) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pLength) = 0;
+            /* [retval][out] */ __RPC__out long *pLength) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DataCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pCount) = 0;
+            /* [retval][out] */ __RPC__out long *pCount) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Data( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPropertyValueData **ppClusterPropertyValueData) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPropertyValueData **ppClusterPropertyValueData) = 0;
         
     };
     
@@ -9541,8 +8800,7 @@ EXTERN_C const IID IID_ISClusPropertyValue;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9557,31 +8815,23 @@ EXTERN_C const IID IID_ISClusPropertyValue;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9606,56 +8856,47 @@ EXTERN_C const IID IID_ISClusPropertyValue;
         DECLSPEC_XFGVIRT(ISClusPropertyValue, get_Value)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarValue);
+            /* [retval][out] */ __RPC__out VARIANT *pvarValue);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValue, put_Value)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue);
+            /* [in] */ VARIANT varValue);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValue, get_Type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_PROPERTY_TYPE *pType);
+            /* [retval][out] */ __RPC__out CLUSTER_PROPERTY_TYPE *pType);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValue, put_Type)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Type )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_PROPERTY_TYPE Type);
+            /* [in] */ CLUSTER_PROPERTY_TYPE Type);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValue, get_Format)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Format )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  CLUSTER_PROPERTY_FORMAT *pFormat);
+            /* [retval][out] */ __RPC__out CLUSTER_PROPERTY_FORMAT *pFormat);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValue, put_Format)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Format )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_PROPERTY_FORMAT Format);
+            /* [in] */ CLUSTER_PROPERTY_FORMAT Format);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValue, get_Length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Length )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pLength);
+            /* [retval][out] */ __RPC__out long *pLength);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValue, get_DataCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCount )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pCount);
+            /* [retval][out] */ __RPC__out long *pCount);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValue, get_Data)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Data )( 
             __RPC__in ISClusPropertyValue * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPropertyValueData **ppClusterPropertyValueData);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPropertyValueData **ppClusterPropertyValueData);
         
         END_INTERFACE
     } ISClusPropertyValueVtbl;
@@ -9747,30 +8988,22 @@ EXTERN_C const IID IID_ISClusPropertyValues;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPropertyValue **ppPropertyValue) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPropertyValue **ppPropertyValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPropertyValue **ppPropertyValue) = 0;
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ VARIANT varValue,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPropertyValue **ppPropertyValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -9784,8 +9017,7 @@ EXTERN_C const IID IID_ISClusPropertyValues;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusPropertyValues * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9800,31 +9032,23 @@ EXTERN_C const IID IID_ISClusPropertyValues;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusPropertyValues * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusPropertyValues * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusPropertyValues * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9849,38 +9073,30 @@ EXTERN_C const IID IID_ISClusPropertyValues;
         DECLSPEC_XFGVIRT(ISClusPropertyValues, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusPropertyValues * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValues, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusPropertyValues * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValues, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusPropertyValues * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPropertyValue **ppPropertyValue);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPropertyValue **ppPropertyValue);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValues, CreateItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateItem )( 
             __RPC__in ISClusPropertyValues * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPropertyValue **ppPropertyValue);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ VARIANT varValue,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPropertyValue **ppPropertyValue);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValues, RemoveItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveItem )( 
             __RPC__in ISClusPropertyValues * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusPropertyValuesVtbl;
@@ -9960,52 +9176,39 @@ EXTERN_C const IID IID_ISClusProperties;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperty **ppClusProperty) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperty **ppClusProperty) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperty **pProperty) = 0;
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ VARIANT varValue,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperty **pProperty) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UseDefaultValue( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SaveChanges( 
-            /* [annotation][defaultvalue][out] */ 
-            _Out_  VARIANT *pvarStatusCode = 0) = 0;
+            /* [defaultvalue][out] */ __RPC__out VARIANT *pvarStatusCode = 0) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ReadOnly( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarReadOnly) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarReadOnly) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Private( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPrivate) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarPrivate) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Common( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarCommon) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarCommon) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Modified( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarModified) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarModified) = 0;
         
     };
     
@@ -10019,8 +9222,7 @@ EXTERN_C const IID IID_ISClusProperties;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10035,31 +9237,23 @@ EXTERN_C const IID IID_ISClusProperties;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10084,14 +9278,12 @@ EXTERN_C const IID IID_ISClusProperties;
         DECLSPEC_XFGVIRT(ISClusProperties, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusProperties, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusProperties, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -10100,56 +9292,45 @@ EXTERN_C const IID IID_ISClusProperties;
         DECLSPEC_XFGVIRT(ISClusProperties, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperty **ppClusProperty);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperty **ppClusProperty);
         
         DECLSPEC_XFGVIRT(ISClusProperties, CreateItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateItem )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusProperty **pProperty);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ VARIANT varValue,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusProperty **pProperty);
         
         DECLSPEC_XFGVIRT(ISClusProperties, UseDefaultValue)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UseDefaultValue )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         DECLSPEC_XFGVIRT(ISClusProperties, SaveChanges)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SaveChanges )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][defaultvalue][out] */ 
-            _Out_  VARIANT *pvarStatusCode);
+            /* [defaultvalue][out] */ __RPC__out VARIANT *pvarStatusCode);
         
         DECLSPEC_XFGVIRT(ISClusProperties, get_ReadOnly)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReadOnly )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarReadOnly);
+            /* [retval][out] */ __RPC__out VARIANT *pvarReadOnly);
         
         DECLSPEC_XFGVIRT(ISClusProperties, get_Private)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Private )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPrivate);
+            /* [retval][out] */ __RPC__out VARIANT *pvarPrivate);
         
         DECLSPEC_XFGVIRT(ISClusProperties, get_Common)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Common )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarCommon);
+            /* [retval][out] */ __RPC__out VARIANT *pvarCommon);
         
         DECLSPEC_XFGVIRT(ISClusProperties, get_Modified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Modified )( 
             __RPC__in ISClusProperties * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarModified);
+            /* [retval][out] */ __RPC__out VARIANT *pvarModified);
         
         END_INTERFACE
     } ISClusPropertiesVtbl;
@@ -10247,28 +9428,21 @@ EXTERN_C const IID IID_ISClusPropertyValueData;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarValue) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pvarValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarData) = 0;
+            /* [in] */ VARIANT varValue,
+            /* [retval][out] */ __RPC__out VARIANT *pvarData) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -10282,8 +9456,7 @@ EXTERN_C const IID IID_ISClusPropertyValueData;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusPropertyValueData * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10298,31 +9471,23 @@ EXTERN_C const IID IID_ISClusPropertyValueData;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusPropertyValueData * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusPropertyValueData * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusPropertyValueData * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10347,36 +9512,29 @@ EXTERN_C const IID IID_ISClusPropertyValueData;
         DECLSPEC_XFGVIRT(ISClusPropertyValueData, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusPropertyValueData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValueData, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusPropertyValueData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValueData, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusPropertyValueData * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarValue);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__out VARIANT *pvarValue);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValueData, CreateItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateItem )( 
             __RPC__in ISClusPropertyValueData * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarData);
+            /* [in] */ VARIANT varValue,
+            /* [retval][out] */ __RPC__out VARIANT *pvarData);
         
         DECLSPEC_XFGVIRT(ISClusPropertyValueData, RemoveItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveItem )( 
             __RPC__in ISClusPropertyValueData * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusPropertyValueDataVtbl;
@@ -10456,32 +9614,25 @@ EXTERN_C const IID IID_ISClusPartition;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plFlags) = 0;
+            /* [retval][out] */ __RPC__out long *plFlags) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DeviceName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDeviceName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeLabel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrVolumeLabel) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVolumeLabel) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SerialNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plSerialNumber) = 0;
+            /* [retval][out] */ __RPC__out long *plSerialNumber) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MaximumComponentLength( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plMaximumComponentLength) = 0;
+            /* [retval][out] */ __RPC__out long *plMaximumComponentLength) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileSystemFlags( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plFileSystemFlags) = 0;
+            /* [retval][out] */ __RPC__out long *plFileSystemFlags) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileSystem( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFileSystem) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFileSystem) = 0;
         
     };
     
@@ -10495,8 +9646,7 @@ EXTERN_C const IID IID_ISClusPartition;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10511,31 +9661,23 @@ EXTERN_C const IID IID_ISClusPartition;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10560,44 +9702,37 @@ EXTERN_C const IID IID_ISClusPartition;
         DECLSPEC_XFGVIRT(ISClusPartition, get_Flags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Flags )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plFlags);
+            /* [retval][out] */ __RPC__out long *plFlags);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_DeviceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceName )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDeviceName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_VolumeLabel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VolumeLabel )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrVolumeLabel);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVolumeLabel);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_SerialNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SerialNumber )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plSerialNumber);
+            /* [retval][out] */ __RPC__out long *plSerialNumber);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_MaximumComponentLength)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaximumComponentLength )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plMaximumComponentLength);
+            /* [retval][out] */ __RPC__out long *plMaximumComponentLength);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_FileSystemFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSystemFlags )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plFileSystemFlags);
+            /* [retval][out] */ __RPC__out long *plFileSystemFlags);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_FileSystem)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSystem )( 
             __RPC__in ISClusPartition * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFileSystem);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFileSystem);
         
         END_INTERFACE
     } ISClusPartitionVtbl;
@@ -10683,24 +9818,19 @@ EXTERN_C const IID IID_ISClusPartitionEx;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TotalSize( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plTotalSize) = 0;
+            /* [retval][out] */ __RPC__out long *plTotalSize) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FreeSpace( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plFreeSpace) = 0;
+            /* [retval][out] */ __RPC__out long *plFreeSpace) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DeviceNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plDeviceNumber) = 0;
+            /* [retval][out] */ __RPC__out long *plDeviceNumber) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PartitionNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plPartitionNumber) = 0;
+            /* [retval][out] */ __RPC__out long *plPartitionNumber) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_VolumeGuid( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrVolumeGuid) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVolumeGuid) = 0;
         
     };
     
@@ -10714,8 +9844,7 @@ EXTERN_C const IID IID_ISClusPartitionEx;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10730,31 +9859,23 @@ EXTERN_C const IID IID_ISClusPartitionEx;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10779,74 +9900,62 @@ EXTERN_C const IID IID_ISClusPartitionEx;
         DECLSPEC_XFGVIRT(ISClusPartition, get_Flags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Flags )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plFlags);
+            /* [retval][out] */ __RPC__out long *plFlags);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_DeviceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceName )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrDeviceName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_VolumeLabel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VolumeLabel )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrVolumeLabel);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVolumeLabel);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_SerialNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SerialNumber )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plSerialNumber);
+            /* [retval][out] */ __RPC__out long *plSerialNumber);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_MaximumComponentLength)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaximumComponentLength )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plMaximumComponentLength);
+            /* [retval][out] */ __RPC__out long *plMaximumComponentLength);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_FileSystemFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSystemFlags )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plFileSystemFlags);
+            /* [retval][out] */ __RPC__out long *plFileSystemFlags);
         
         DECLSPEC_XFGVIRT(ISClusPartition, get_FileSystem)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileSystem )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFileSystem);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFileSystem);
         
         DECLSPEC_XFGVIRT(ISClusPartitionEx, get_TotalSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalSize )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plTotalSize);
+            /* [retval][out] */ __RPC__out long *plTotalSize);
         
         DECLSPEC_XFGVIRT(ISClusPartitionEx, get_FreeSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeSpace )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plFreeSpace);
+            /* [retval][out] */ __RPC__out long *plFreeSpace);
         
         DECLSPEC_XFGVIRT(ISClusPartitionEx, get_DeviceNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceNumber )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plDeviceNumber);
+            /* [retval][out] */ __RPC__out long *plDeviceNumber);
         
         DECLSPEC_XFGVIRT(ISClusPartitionEx, get_PartitionNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PartitionNumber )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plPartitionNumber);
+            /* [retval][out] */ __RPC__out long *plPartitionNumber);
         
         DECLSPEC_XFGVIRT(ISClusPartitionEx, get_VolumeGuid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VolumeGuid )( 
             __RPC__in ISClusPartitionEx * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrVolumeGuid);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrVolumeGuid);
         
         END_INTERFACE
     } ISClusPartitionExVtbl;
@@ -10948,18 +10057,14 @@ EXTERN_C const IID IID_ISClusPartitions;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPartition **ppPartition) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPartition **ppPartition) = 0;
         
     };
     
@@ -10973,8 +10078,7 @@ EXTERN_C const IID IID_ISClusPartitions;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusPartitions * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10989,31 +10093,23 @@ EXTERN_C const IID IID_ISClusPartitions;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusPartitions * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusPartitions * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusPartitions * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11038,22 +10134,18 @@ EXTERN_C const IID IID_ISClusPartitions;
         DECLSPEC_XFGVIRT(ISClusPartitions, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusPartitions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusPartitions, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusPartitions * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusPartitions, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusPartitions * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPartition **ppPartition);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPartition **ppPartition);
         
         END_INTERFACE
     } ISClusPartitionsVtbl;
@@ -11127,20 +10219,16 @@ EXTERN_C const IID IID_ISClusDisk;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Signature( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plSignature) = 0;
+            /* [retval][out] */ __RPC__out long *plSignature) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ScsiAddress( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusScsiAddress **ppScsiAddress) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusScsiAddress **ppScsiAddress) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DiskNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plDiskNumber) = 0;
+            /* [retval][out] */ __RPC__out long *plDiskNumber) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Partitions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPartitions **ppPartitions) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPartitions **ppPartitions) = 0;
         
     };
     
@@ -11154,8 +10242,7 @@ EXTERN_C const IID IID_ISClusDisk;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusDisk * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11170,31 +10257,23 @@ EXTERN_C const IID IID_ISClusDisk;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusDisk * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusDisk * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusDisk * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11219,26 +10298,22 @@ EXTERN_C const IID IID_ISClusDisk;
         DECLSPEC_XFGVIRT(ISClusDisk, get_Signature)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Signature )( 
             __RPC__in ISClusDisk * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plSignature);
+            /* [retval][out] */ __RPC__out long *plSignature);
         
         DECLSPEC_XFGVIRT(ISClusDisk, get_ScsiAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScsiAddress )( 
             __RPC__in ISClusDisk * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusScsiAddress **ppScsiAddress);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusScsiAddress **ppScsiAddress);
         
         DECLSPEC_XFGVIRT(ISClusDisk, get_DiskNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiskNumber )( 
             __RPC__in ISClusDisk * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plDiskNumber);
+            /* [retval][out] */ __RPC__out long *plDiskNumber);
         
         DECLSPEC_XFGVIRT(ISClusDisk, get_Partitions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Partitions )( 
             __RPC__in ISClusDisk * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusPartitions **ppPartitions);
+            /* [retval][out] */ __RPC__deref_out_opt ISClusPartitions **ppPartitions);
         
         END_INTERFACE
     } ISClusDiskVtbl;
@@ -11315,18 +10390,14 @@ EXTERN_C const IID IID_ISClusDisks;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusDisk **ppDisk) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusDisk **ppDisk) = 0;
         
     };
     
@@ -11340,8 +10411,7 @@ EXTERN_C const IID IID_ISClusDisks;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusDisks * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11356,31 +10426,23 @@ EXTERN_C const IID IID_ISClusDisks;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusDisks * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusDisks * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusDisks * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11405,22 +10467,18 @@ EXTERN_C const IID IID_ISClusDisks;
         DECLSPEC_XFGVIRT(ISClusDisks, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusDisks * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusDisks, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusDisks * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusDisks, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusDisks * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusDisk **ppDisk);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusDisk **ppDisk);
         
         END_INTERFACE
     } ISClusDisksVtbl;
@@ -11494,20 +10552,16 @@ EXTERN_C const IID IID_ISClusScsiAddress;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PortNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPortNumber) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarPortNumber) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PathId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPathId) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarPathId) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarTargetId) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarTargetId) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Lun( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarLun) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarLun) = 0;
         
     };
     
@@ -11521,8 +10575,7 @@ EXTERN_C const IID IID_ISClusScsiAddress;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusScsiAddress * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11537,31 +10590,23 @@ EXTERN_C const IID IID_ISClusScsiAddress;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusScsiAddress * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusScsiAddress * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusScsiAddress * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11586,26 +10631,22 @@ EXTERN_C const IID IID_ISClusScsiAddress;
         DECLSPEC_XFGVIRT(ISClusScsiAddress, get_PortNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PortNumber )( 
             __RPC__in ISClusScsiAddress * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPortNumber);
+            /* [retval][out] */ __RPC__out VARIANT *pvarPortNumber);
         
         DECLSPEC_XFGVIRT(ISClusScsiAddress, get_PathId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PathId )( 
             __RPC__in ISClusScsiAddress * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarPathId);
+            /* [retval][out] */ __RPC__out VARIANT *pvarPathId);
         
         DECLSPEC_XFGVIRT(ISClusScsiAddress, get_TargetId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetId )( 
             __RPC__in ISClusScsiAddress * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarTargetId);
+            /* [retval][out] */ __RPC__out VARIANT *pvarTargetId);
         
         DECLSPEC_XFGVIRT(ISClusScsiAddress, get_Lun)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Lun )( 
             __RPC__in ISClusScsiAddress * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarLun);
+            /* [retval][out] */ __RPC__out VARIANT *pvarLun);
         
         END_INTERFACE
     } ISClusScsiAddressVtbl;
@@ -11682,28 +10723,22 @@ EXTERN_C const IID IID_ISClusRegistryKeys;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrRegistryKey) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRegistryKey) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRegistryKey) = 0;
+            /* [in] */ __RPC__in BSTR bstrRegistryKey) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -11717,8 +10752,7 @@ EXTERN_C const IID IID_ISClusRegistryKeys;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusRegistryKeys * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11733,31 +10767,23 @@ EXTERN_C const IID IID_ISClusRegistryKeys;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusRegistryKeys * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusRegistryKeys * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusRegistryKeys * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11782,14 +10808,12 @@ EXTERN_C const IID IID_ISClusRegistryKeys;
         DECLSPEC_XFGVIRT(ISClusRegistryKeys, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusRegistryKeys * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusRegistryKeys, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusRegistryKeys * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusRegistryKeys, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -11798,22 +10822,18 @@ EXTERN_C const IID IID_ISClusRegistryKeys;
         DECLSPEC_XFGVIRT(ISClusRegistryKeys, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusRegistryKeys * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrRegistryKey);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRegistryKey);
         
         DECLSPEC_XFGVIRT(ISClusRegistryKeys, AddItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddItem )( 
             __RPC__in ISClusRegistryKeys * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRegistryKey);
+            /* [in] */ __RPC__in BSTR bstrRegistryKey);
         
         DECLSPEC_XFGVIRT(ISClusRegistryKeys, RemoveItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveItem )( 
             __RPC__in ISClusRegistryKeys * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusRegistryKeysVtbl;
@@ -11896,28 +10916,22 @@ EXTERN_C const IID IID_ISClusCryptoKeys;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrCyrptoKey) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCyrptoKey) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrCryptoKey) = 0;
+            /* [in] */ __RPC__in BSTR bstrCryptoKey) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -11931,8 +10945,7 @@ EXTERN_C const IID IID_ISClusCryptoKeys;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusCryptoKeys * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11947,31 +10960,23 @@ EXTERN_C const IID IID_ISClusCryptoKeys;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusCryptoKeys * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusCryptoKeys * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusCryptoKeys * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11996,14 +11001,12 @@ EXTERN_C const IID IID_ISClusCryptoKeys;
         DECLSPEC_XFGVIRT(ISClusCryptoKeys, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusCryptoKeys * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusCryptoKeys, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusCryptoKeys * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusCryptoKeys, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -12012,22 +11015,18 @@ EXTERN_C const IID IID_ISClusCryptoKeys;
         DECLSPEC_XFGVIRT(ISClusCryptoKeys, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusCryptoKeys * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrCyrptoKey);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCyrptoKey);
         
         DECLSPEC_XFGVIRT(ISClusCryptoKeys, AddItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddItem )( 
             __RPC__in ISClusCryptoKeys * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrCryptoKey);
+            /* [in] */ __RPC__in BSTR bstrCryptoKey);
         
         DECLSPEC_XFGVIRT(ISClusCryptoKeys, RemoveItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveItem )( 
             __RPC__in ISClusCryptoKeys * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusCryptoKeysVtbl;
@@ -12110,42 +11109,31 @@ EXTERN_C const IID IID_ISClusResDependents;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount) = 0;
+            /* [retval][out] */ __RPC__out long *plCount) = 0;
         
         virtual /* [helpstring][id][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Refresh( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusResource) = 0;
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceType,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusterResource) = 0;
+            /* [in] */ __RPC__in BSTR bstrResourceName,
+            /* [in] */ __RPC__in BSTR bstrResourceType,
+            /* [in] */ CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusterResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddItem( 
-            /* [annotation][in] */ 
-            _In_  ISClusResource *pResource) = 0;
+            /* [in] */ __RPC__in_opt ISClusResource *pResource) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE RemoveItem( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex) = 0;
+            /* [in] */ VARIANT varIndex) = 0;
         
     };
     
@@ -12159,8 +11147,7 @@ EXTERN_C const IID IID_ISClusResDependents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12175,31 +11162,23 @@ EXTERN_C const IID IID_ISClusResDependents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12224,14 +11203,12 @@ EXTERN_C const IID IID_ISClusResDependents;
         DECLSPEC_XFGVIRT(ISClusResDependents, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plCount);
+            /* [retval][out] */ __RPC__out long *plCount);
         
         DECLSPEC_XFGVIRT(ISClusResDependents, get__NewEnum)
         /* [helpstring][id][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **retval);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **retval);
         
         DECLSPEC_XFGVIRT(ISClusResDependents, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
@@ -12240,40 +11217,31 @@ EXTERN_C const IID IID_ISClusResDependents;
         DECLSPEC_XFGVIRT(ISClusResDependents, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusResource);
+            /* [in] */ VARIANT varIndex,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusResource);
         
         DECLSPEC_XFGVIRT(ISClusResDependents, CreateItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateItem )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrResourceType,
-            /* [annotation][in] */ 
-            _In_  CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISClusResource **ppClusterResource);
+            /* [in] */ __RPC__in BSTR bstrResourceName,
+            /* [in] */ __RPC__in BSTR bstrResourceType,
+            /* [in] */ CLUSTER_RESOURCE_CREATE_FLAGS dwFlags,
+            /* [retval][out] */ __RPC__deref_out_opt ISClusResource **ppClusterResource);
         
         DECLSPEC_XFGVIRT(ISClusResDependents, DeleteItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteItem )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         DECLSPEC_XFGVIRT(ISClusResDependents, AddItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddItem )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][in] */ 
-            _In_  ISClusResource *pResource);
+            /* [in] */ __RPC__in_opt ISClusResource *pResource);
         
         DECLSPEC_XFGVIRT(ISClusResDependents, RemoveItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveItem )( 
             __RPC__in ISClusResDependents * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varIndex);
+            /* [in] */ VARIANT varIndex);
         
         END_INTERFACE
     } ISClusResDependentsVtbl;

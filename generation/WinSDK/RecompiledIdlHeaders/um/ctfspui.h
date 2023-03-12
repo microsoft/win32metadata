@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -121,16 +121,12 @@ EXTERN_C const IID IID_ITfSpeechUIServer;
         virtual HRESULT STDMETHODCALLTYPE Initialize( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ShowUI( 
-            /* [annotation][in] */ 
-            _In_  BOOL fShow) = 0;
+            /* [in] */ BOOL fShow) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UpdateBalloon( 
-            /* [annotation][in] */ 
-            _In_  TfLBBalloonStyle style,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cch)  const WCHAR *pch,
-            /* [annotation][in] */ 
-            _In_  ULONG cch) = 0;
+            /* [in] */ TfLBBalloonStyle style,
+            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pch,
+            /* [in] */ ULONG cch) = 0;
         
     };
     
@@ -144,8 +140,7 @@ EXTERN_C const IID IID_ITfSpeechUIServer;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITfSpeechUIServer * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -164,18 +159,14 @@ EXTERN_C const IID IID_ITfSpeechUIServer;
         DECLSPEC_XFGVIRT(ITfSpeechUIServer, ShowUI)
         HRESULT ( STDMETHODCALLTYPE *ShowUI )( 
             __RPC__in ITfSpeechUIServer * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fShow);
+            /* [in] */ BOOL fShow);
         
         DECLSPEC_XFGVIRT(ITfSpeechUIServer, UpdateBalloon)
         HRESULT ( STDMETHODCALLTYPE *UpdateBalloon )( 
             __RPC__in ITfSpeechUIServer * This,
-            /* [annotation][in] */ 
-            _In_  TfLBBalloonStyle style,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cch)  const WCHAR *pch,
-            /* [annotation][in] */ 
-            _In_  ULONG cch);
+            /* [in] */ TfLBBalloonStyle style,
+            /* [size_is][in] */ __RPC__in_ecount_full(cch) const WCHAR *pch,
+            /* [in] */ ULONG cch);
         
         END_INTERFACE
     } ITfSpeechUIServerVtbl;

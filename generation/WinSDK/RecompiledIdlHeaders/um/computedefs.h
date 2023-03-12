@@ -80,7 +80,13 @@ typedef enum HCS_EVENT_TYPE
 
     /// Common Events
     HcsEventOperationCallback = 0x01000000,
-    HcsEventServiceDisconnect = 0x02000000
+    HcsEventServiceDisconnect = 0x02000000,
+
+    // Event groups, enabled by HCS_EVENT_OPTIONS set by clients
+    HcsEventGroupVmLifecycle = 0x80000002,
+
+    // Events for HCS_OPERATION
+    HcsEventGroupOperationInfo = 0xC0000001,
 
 } HCS_EVENT_TYPE;
 
@@ -102,17 +108,34 @@ typedef struct HCS_EVENT
 typedef enum HCS_EVENT_OPTIONS
 {
     HcsEventOptionNone = 0x00000000,
-    HcsEventOptionEnableOperationCallbacks = 0x00000001
-
+    HcsEventOptionEnableOperationCallbacks = 0x00000001,
+    HcsEventOptionEnableVmLifecycle = 0x00000002,
 } HCS_EVENT_OPTIONS;
 
 DEFINE_ENUM_FLAG_OPERATORS(HCS_EVENT_OPTIONS);
+
+// Filter for an operation's events
+typedef enum HCS_OPERATION_OPTIONS
+{
+    HcsOperationOptionNone = 0x00000000,
+    HcsOperationOptionProgressUpdate = 0x00000001,
+} HCS_OPERATION_OPTIONS;
+
+DEFINE_ENUM_FLAG_OPERATORS(HCS_OPERATION_OPTIONS);
 
 // Function type for compute system event callbacks
 typedef void (CALLBACK *HCS_EVENT_CALLBACK)(
     _In_ HCS_EVENT* event,
     _In_opt_ void* context
     );
+
+// Resource type for HCS_OPERATION resource support.
+typedef enum HCS_RESOURCE_TYPE
+{
+    HcsResourceTypeNone = 0,
+    HcsResourceTypeFile = 1,
+    HcsResourceTypeJob = 2
+} HCS_RESOURCE_TYPE;
 
 // Flags applicable to HCS_NOTIFICATIONS
 typedef enum HCS_NOTIFICATION_FLAGS
@@ -146,6 +169,8 @@ typedef enum HCS_NOTIFICATIONS
     HcsNotificationSystemOperationCompletion = 0x0000000F,
 
     HcsNotificationSystemPassThru = 0x00000010,
+
+    HcsNotificationOperationProgressUpdate = 0x00000100,
 
     // Notifications for HCS_PROCESS handles
     HcsNotificationProcessExited = 0x00010000,

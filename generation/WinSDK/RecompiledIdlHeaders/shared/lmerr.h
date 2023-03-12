@@ -618,13 +618,23 @@
 #define NERR_ProvisioningBlobUnsupported   (NERR_BASE + 619)   /* Computer account provisioning blob version is not supported. */
 #define NERR_DS8DCRequired                 (NERR_BASE + 620)   /* The specified domain controller does not meet the version requirement for this operation. Please select a domain controller capable of issuing claims. */
 #define NERR_LDAPCapableDCRequired         (NERR_BASE + 621)   /* This operation requires a domain controller which supports LDAP. Please select an LDAP-capable domain controller. */
+
+/*
+ *  Additional error codes
+ *
+ *          NERR_BASE + (622 - MAX)
+ */
 #define NERR_DS8DCNotFound                 (NERR_BASE + 622)   /* A domain controller which meets the version requirement for this operation could not be located. Please ensure that a domain controller capable of issuing claims is available. */
 #define NERR_TargetVersionUnsupported      (NERR_BASE + 623)   /* The Windows version of the specified image does not support provisioning. */
 #define NERR_InvalidMachineNameForJoin     (NERR_BASE + 624)   /* The machine name is blocked from joining the domain.*/
 #define NERR_DS9DCNotFound                 (NERR_BASE + 625)   /* The domain controller does not meet the version requirement for this operation. See http://go.microsoft.com/fwlink/?LinkId=294288 for more information. */
 #define NERR_PlainTextSecretsRequired      (NERR_BASE + 626)   /* The local machine does not allow querying of LSA secrets in plain-text. */
 #define NERR_CannotUnjoinAadDomain         (NERR_BASE + 627)   /* Unable to leave the Azure AD domain that this machine is joined to. Check the event log for detailed error information. */
-
+#define NERR_CannotUpdateAadHostName       (NERR_BASE + 628)   /* Unable to update hostname in Azure AD. Check the event log for detailed error information. */
+#define NERR_DuplicateHostName             (NERR_BASE + 629)   /* The hostname is already taken by another device. */
+#define NERR_HostNameTooLong               (NERR_BASE + 630)   /* The hostname is too long. */
+#define NERR_TooManyHostNames              (NERR_BASE + 631)   /* Too many hostnames specified for the device. */
+#define NERR_AccountReuseBlockedByPolicy   (NERR_BASE + 632)   /* An account with the same name exists in Active Directory. Re-using the account was blocked by security policy.*/
 
 /***********WARNING ****************
  *The range 2750-2799 has been     *

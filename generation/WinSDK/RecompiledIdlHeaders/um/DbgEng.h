@@ -63,7 +63,7 @@ DEFINE_GUID(IID_IDebugBreakpoint, 0x5bd9d474, 0x5975, 0x423a,
 DEFINE_GUID(IID_IDebugBreakpoint2, 0x1b278d20, 0x79f2, 0x426e,
             0xa3, 0xf9, 0xc1, 0xdd, 0xf3, 0x75, 0xd4, 0x8e);
 /* 38f5c249-b448-43bb-9835-579d4ec02249 */
-DEFINE_GUID(IID_IDebugBreakpoint3, 0x38f5c249, 0xb448, 0x43bb, 
+DEFINE_GUID(IID_IDebugBreakpoint3, 0x38f5c249, 0xb448, 0x43bb,
             0x98, 0x35, 0x57, 0x9d, 0x4e, 0xc0, 0x22, 0x49);
 /* 27fe5639-8407-4f47-8364-ee118fb08ac8 */
 DEFINE_GUID(IID_IDebugClient, 0x27fe5639, 0x8407, 0x4f47,
@@ -87,7 +87,7 @@ DEFINE_GUID(IID_IDebugClient6, 0xfd28b4c5, 0xc498, 0x4686,
 DEFINE_GUID(IID_IDebugClient7, 0x13586be3, 0x542e, 0x481e,
             0xb1, 0xf2, 0x84, 0x97, 0xba, 0x74, 0xf9, 0xa9);
 /* CEC43ADD-6375-469e-83D5-414E4033C19A */
-DEFINE_GUID(IID_IDebugClient8, 0xcec43add, 0x6375, 0x469e, 
+DEFINE_GUID(IID_IDebugClient8, 0xcec43add, 0x6375, 0x469e,
             0x83, 0xd5, 0x41, 0x4e, 0x40, 0x33, 0xc1, 0x9a);
 /* a02b66c4-aea3-4234-a9f7-fe4c383d4e29 */
 DEFINE_GUID(IID_IDebugPlmClient, 0xa02b66c4, 0xaea3, 0x4234,
@@ -616,6 +616,10 @@ typedef struct _PROCESS_NAME_ENTRY
 // OutBuffer - ULONG for architecture
 // return - S_OK
 #define DEBUG_REQUEST_GET_MODULE_ARCHITECTURE 38
+
+// InBuffer - ULONG64 for process server identification and PWSTR as module path
+// OutBuffer - ULONG for architecture
+#define DEBUG_REQUEST_GET_IMAGE_ARCHITECTURE 39
 
 //
 // GetSourceFileInformation requests.
@@ -1758,7 +1762,7 @@ DECLARE_INTERFACE_(IDebugBreakpoint3, IUnknown)
         THIS_
         _In_ PCWSTR Expression
         ) PURE;
-        
+
     // IDebugBreakpoint3.
 
     STDMETHOD(GetGuid)(
@@ -1812,6 +1816,8 @@ DECLARE_INTERFACE_(IDebugBreakpoint3, IUnknown)
 #define DEBUG_PROC_DESC_NO_USER_NAME    0x00000020
 // Retrieve the process's package family name.
 #define DEBUG_PROC_DESC_WITH_PACKAGEFAMILY 0x00000040
+// Retrieve the process's architecture.
+#define DEBUG_PROC_DESC_WITH_ARCHITECTURE 0x00000080
 
 //
 // Attach flags.
@@ -2007,7 +2013,7 @@ typedef struct _DEBUG_CREATE_PROCESS_OPTIONS
 #define DEBUG_CLIENT_WINDBG             0x6
 #define DEBUG_CLIENT_WINIDE             0x7
 
-typedef struct _DEBUG_CLIENT_CONTEXT 
+typedef struct _DEBUG_CLIENT_CONTEXT
 {
     UINT cbSize;
     UINT eClient;
@@ -6906,7 +6912,7 @@ DECLARE_INTERFACE_(IDebugClient8, IUnknown)
         ) PURE;
 
     // IDebugClient8
-    
+
     STDMETHOD(OpenDumpFileWide2)(
         THIS_
         _In_opt_ PCWSTR FileName,
@@ -7349,7 +7355,9 @@ DECLARE_INTERFACE_(IDebugOutputStream, IUnknown)
 // When opening .cab or .zip files, if there is a trace (.run file), open
 // it instead of any other dump files in the archive.
 #define DEBUG_ENGOPT_PREFER_TRACE_FILES          0x00800000
-#define DEBUG_ENGOPT_ALL                         0x00EFFFFF
+// Use suffixes of the form @n (n is a non-negative integer) to disambiguate shadowed variables.
+#define DEBUG_ENGOPT_RESOLVE_SHADOWED_VARIABLES  0x01000000
+#define DEBUG_ENGOPT_ALL                         0x01EFFFFF
 
 // General unspecified ID constant.
 #define DEBUG_ANY_ID 0xffffffff
@@ -13467,7 +13475,7 @@ DECLARE_INTERFACE_(IDebugControl5, IUnknown)
         _In_ ULONG FrameContextsEntrySize,
         _In_ ULONG Flags
         ) PURE;
-        
+
     STDMETHOD(GetBreakpointByGuid)(
         THIS_
         _In_ LPGUID Guid,
@@ -14934,7 +14942,7 @@ DECLARE_INTERFACE_(IDebugControl6, IUnknown)
 
     // IDebugControl6
 
-    // Returns additional info states for 
+    // Returns additional info states for
     STDMETHOD(GetExecutionStatusEx)(
         THIS_
         _Out_ PULONG Status
@@ -16409,7 +16417,7 @@ DECLARE_INTERFACE_(IDebugControl7, IUnknown)
 
     // IDebugControl6
 
-    // Returns additional info states for 
+    // Returns additional info states for
     STDMETHOD(GetExecutionStatusEx)(
         THIS_
         _Out_ PULONG Status
@@ -16565,6 +16573,7 @@ DECLARE_INTERFACE_(IDebugControl7, IUnknown)
 #define DEBUG_DATA_DumpPowerState                    100056
 #define DEBUG_DATA_DumpMmStorage                     100064
 #define DEBUG_DATA_DumpAttributes                    100072
+#define DEBUG_DATA_PagingLevels                      100080
 
 //
 // Processor information structures.
@@ -18670,7 +18679,7 @@ DECLARE_INTERFACE_(IDebugOutputCallbacks2, IUnknown)
         THIS_
         _Out_ PULONG Mask
         ) PURE;
-    
+
     STDMETHOD(Output2)(
         THIS_
         _In_ ULONG Which,
@@ -19472,7 +19481,7 @@ typedef struct _DEBUG_MODULE_PARAMETERS
 // Restrict FindSourceFileAndToken to token lookup only.
 #define DEBUG_FIND_SOURCE_TOKEN_LOOKUP 0x00000008
 // Indicates that the FileToken/FileTokenSize arguments refer to the checksum
-// information for the source file obtained from a call to the 
+// information for the source file obtained from a call to the
 // GetSourceFileInformation method with the 'Which' parameter
 // set to DEBUG_SRCFILE_SYMBOL_CHECKSUMINFO
 #define DEBUG_FIND_SOURCE_WITH_CHECKSUM 0x00000010
@@ -25498,9 +25507,9 @@ typedef HRESULT (CALLBACK* PDEBUG_EXTENSION_INITIALIZE)
 // Exit routine.  Called once just before attempting to unload
 // the extension DLL.  If DebugExtensionCanUnload is present,
 // it will be called between the return of this callback and
-// an actual unload of the DLL.  If not, the extension DLL 
-// will be unloaded upon return of this method.  As with 
-// initialization, a session may or may not be active at the 
+// an actual unload of the DLL.  If not, the extension DLL
+// will be unloaded upon return of this method.  As with
+// initialization, a session may or may not be active at the
 // time of the call.
 typedef void (CALLBACK* PDEBUG_EXTENSION_UNINITIALIZE)
     (void);
@@ -25509,9 +25518,9 @@ typedef void (CALLBACK* PDEBUG_EXTENSION_UNINITIALIZE)
 // between the uninitialize callback and actual unload of
 // the DLL.  The extension should return either S_OK (if no
 // objects are present which would prevent unload of the
-// extension) or S_FALSE (if there are still outstanding 
+// extension) or S_FALSE (if there are still outstanding
 // references to model objects in the debugger extension)
-// 
+//
 // This is the debugger's equivalent of DllCanUnloadNow
 // for extensions which manipulate the debugger's object
 // model.
@@ -25519,7 +25528,7 @@ typedef HRESULT (CALLBACK* PDEBUG_EXTENSION_CANUNLOAD)
     (void);
 // Unload routine.  If and only if DebugExtensionCanUnload
 // is presnt in the debugger extension, this will be called
-// after a successful CanUnload call immediately before the 
+// after a successful CanUnload call immediately before the
 // debugger actually unloads the extension DLL.
 typedef void (CALLBACK* PDEBUG_EXTENSION_UNLOAD)
     (void);
@@ -25661,7 +25670,7 @@ typedef HRESULT (CALLBACK* PDEBUG_STACK_PROVIDER_BEGINTHREADSTACKRECONSTRUCTION)
     (
     _In_ ULONG StreamType,
     _In_reads_(BufferSize) PVOID MiniDumpStreamBuffer,
-    _In_ ULONG BufferSize); 
+    _In_ ULONG BufferSize);
 
 // Queries dump stream provider per-thread
 // Stack frames and symbolic data are returned
@@ -25674,19 +25683,19 @@ typedef HRESULT (CALLBACK* PDEBUG_STACK_PROVIDER_RECONSTRUCTSTACK)
     _In_reads_(CountNativeFrames) PDEBUG_STACK_FRAME_EX NativeFrames,
     _In_ ULONG CountNativeFrames,
     _Outptr_result_buffer_(*StackSymFramesFilled) PSTACK_SYM_FRAME_INFO *StackSymFrames,
-    _Out_ PULONG StackSymFramesFilled); 
+    _Out_ PULONG StackSymFramesFilled);
 
 //After ReconstructStack is called and used dbgeng will call the stack provider to free memory
 // FreeStackSymFrames
 typedef HRESULT (CALLBACK* PDEBUG_STACK_PROVIDER_FREESTACKSYMFRAMES)
     (
-    _In_opt_ PSTACK_SYM_FRAME_INFO StackSymFrames); 
+    _In_opt_ PSTACK_SYM_FRAME_INFO StackSymFrames);
 
 // Dbgeng is done with thread stack reconstruction
 // Dump stack provider may clean up state
 // EndThreadStackReconstruction
 typedef HRESULT (CALLBACK* PDEBUG_STACK_PROVIDER_ENDTHREADSTACKRECONSTRUCTION)
-    (void); 
+    (void);
 
 
 //----------------------------------------------------------------------------

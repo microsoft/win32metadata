@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -34,7 +34,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -1344,12 +1344,9 @@ EXTERN_C const IID IID_IXMLDOMImplementation;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE hasFeature( 
-            /* [annotation][in] */ 
-            _In_  BSTR feature,
-            /* [annotation][in] */ 
-            _In_  BSTR version,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasFeature) = 0;
+            /* [in] */ BSTR feature,
+            /* [in] */ BSTR version,
+            /* [retval][out] */ VARIANT_BOOL *hasFeature) = 0;
         
     };
     
@@ -1363,8 +1360,7 @@ EXTERN_C const IID IID_IXMLDOMImplementation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMImplementation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1379,31 +1375,23 @@ EXTERN_C const IID IID_IXMLDOMImplementation;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMImplementation * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMImplementation * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMImplementation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1428,12 +1416,9 @@ EXTERN_C const IID IID_IXMLDOMImplementation;
         DECLSPEC_XFGVIRT(IXMLDOMImplementation, hasFeature)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *hasFeature )( 
             IXMLDOMImplementation * This,
-            /* [annotation][in] */ 
-            _In_  BSTR feature,
-            /* [annotation][in] */ 
-            _In_  BSTR version,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasFeature);
+            /* [in] */ BSTR feature,
+            /* [in] */ BSTR version,
+            /* [retval][out] */ VARIANT_BOOL *hasFeature);
         
         END_INTERFACE
     } IXMLDOMImplementationVtbl;
@@ -1501,170 +1486,123 @@ EXTERN_C const IID IID_IXMLDOMNode;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_nodeName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name) = 0;
+            /* [retval][out] */ BSTR *name) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_nodeValue( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value) = 0;
+            /* [retval][out] */ VARIANT *value) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_nodeValue( 
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [in] */ VARIANT value) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_nodeType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type) = 0;
+            /* [retval][out] */ DOMNodeType *type) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_parentNode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent) = 0;
+            /* [retval][out] */ IXMLDOMNode **parent) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_childNodes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList) = 0;
+            /* [retval][out] */ IXMLDOMNodeList **childList) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_firstChild( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild) = 0;
+            /* [retval][out] */ IXMLDOMNode **firstChild) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_lastChild( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild) = 0;
+            /* [retval][out] */ IXMLDOMNode **lastChild) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_previousSibling( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling) = 0;
+            /* [retval][out] */ IXMLDOMNode **previousSibling) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_nextSibling( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling) = 0;
+            /* [retval][out] */ IXMLDOMNode **nextSibling) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_attributes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap) = 0;
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE insertBefore( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild) = 0;
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE replaceChild( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild) = 0;
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeChild( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild) = 0;
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE appendChild( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild) = 0;
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE hasChildNodes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild) = 0;
+            /* [retval][out] */ VARIANT_BOOL *hasChild) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ownerDocument( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument) = 0;
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE cloneNode( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot) = 0;
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_nodeTypeString( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType) = 0;
+            /* [out][retval] */ BSTR *nodeType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_text( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text) = 0;
+            /* [out][retval] */ BSTR *text) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_text( 
-            /* [annotation][in] */ 
-            _In_  BSTR text) = 0;
+            /* [in] */ BSTR text) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_specified( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified) = 0;
+            /* [retval][out] */ VARIANT_BOOL *isSpecified) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_definition( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode) = 0;
+            /* [out][retval] */ IXMLDOMNode **definitionNode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_nodeTypedValue( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue) = 0;
+            /* [out][retval] */ VARIANT *typedValue) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_nodeTypedValue( 
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue) = 0;
+            /* [in] */ VARIANT typedValue) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_dataType( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName) = 0;
+            /* [out][retval] */ VARIANT *dataTypeName) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_dataType( 
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName) = 0;
+            /* [in] */ BSTR dataTypeName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_xml( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString) = 0;
+            /* [out][retval] */ BSTR *xmlString) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE transformNode( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString) = 0;
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE selectNodes( 
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList) = 0;
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE selectSingleNode( 
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode) = 0;
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_parsed( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed) = 0;
+            /* [out][retval] */ VARIANT_BOOL *isParsed) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_namespaceURI( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI) = 0;
+            /* [out][retval] */ BSTR *namespaceURI) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_prefix( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString) = 0;
+            /* [out][retval] */ BSTR *prefixString) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_baseName( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString) = 0;
+            /* [out][retval] */ BSTR *nameString) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE transformNodeToObject( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject) = 0;
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject) = 0;
         
     };
     
@@ -1678,8 +1616,7 @@ EXTERN_C const IID IID_IXMLDOMNode;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1694,31 +1631,23 @@ EXTERN_C const IID IID_IXMLDOMNode;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMNode * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1743,240 +1672,193 @@ EXTERN_C const IID IID_IXMLDOMNode;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMNode * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMNode * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMNode * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMNode * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMNode * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMNode * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMNode * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMNode * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMNode * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMNode * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMNode * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMNode * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         END_INTERFACE
     } IXMLDOMNodeVtbl;
@@ -2160,8 +2042,7 @@ EXTERN_C const IID IID_IXMLDOMDocumentFragment;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2176,31 +2057,23 @@ EXTERN_C const IID IID_IXMLDOMDocumentFragment;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2225,240 +2098,193 @@ EXTERN_C const IID IID_IXMLDOMDocumentFragment;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMDocumentFragment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         END_INTERFACE
     } IXMLDOMDocumentFragmentVtbl;
@@ -2632,164 +2458,117 @@ EXTERN_C const IID IID_IXMLDOMDocument;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_doctype( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocumentType **documentType) = 0;
+            /* [retval][out] */ IXMLDOMDocumentType **documentType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_implementation( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMImplementation **impl) = 0;
+            /* [retval][out] */ IXMLDOMImplementation **impl) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_documentElement( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMElement **DOMElement) = 0;
+            /* [retval][out] */ IXMLDOMElement **DOMElement) = 0;
         
         virtual /* [helpstring][id][propputref] */ HRESULT STDMETHODCALLTYPE putref_documentElement( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMElement *DOMElement) = 0;
+            /* [in] */ IXMLDOMElement *DOMElement) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createElement( 
-            /* [annotation][in] */ 
-            _In_  BSTR tagName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMElement **element) = 0;
+            /* [in] */ BSTR tagName,
+            /* [retval][out] */ IXMLDOMElement **element) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createDocumentFragment( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocumentFragment **docFrag) = 0;
+            /* [retval][out] */ IXMLDOMDocumentFragment **docFrag) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createTextNode( 
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMText **text) = 0;
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMText **text) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createComment( 
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMComment **comment) = 0;
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMComment **comment) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createCDATASection( 
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMCDATASection **cdata) = 0;
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMCDATASection **cdata) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createProcessingInstruction( 
-            /* [annotation][in] */ 
-            _In_  BSTR target,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMProcessingInstruction **pi) = 0;
+            /* [in] */ BSTR target,
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMProcessingInstruction **pi) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMAttribute **attribute) = 0;
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMAttribute **attribute) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createEntityReference( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMEntityReference **entityRef) = 0;
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMEntityReference **entityRef) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getElementsByTagName( 
-            /* [annotation][in] */ 
-            _In_  BSTR tagName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList) = 0;
+            /* [in] */ BSTR tagName,
+            /* [retval][out] */ IXMLDOMNodeList **resultList) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createNode( 
-            /* [annotation][in] */ 
-            _In_  VARIANT Type,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **node) = 0;
+            /* [in] */ VARIANT Type,
+            /* [in] */ BSTR name,
+            /* [in] */ BSTR namespaceURI,
+            /* [out][retval] */ IXMLDOMNode **node) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE nodeFromID( 
-            /* [annotation][in] */ 
-            _In_  BSTR idString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **node) = 0;
+            /* [in] */ BSTR idString,
+            /* [out][retval] */ IXMLDOMNode **node) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE load( 
-            /* [annotation][in] */ 
-            _In_  VARIANT xmlSource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful) = 0;
+            /* [in] */ VARIANT xmlSource,
+            /* [retval][out] */ VARIANT_BOOL *isSuccessful) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_readyState( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *value) = 0;
+            /* [out][retval] */ long *value) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_parseError( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMParseError **errorObj) = 0;
+            /* [out][retval] */ IXMLDOMParseError **errorObj) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_url( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *urlString) = 0;
+            /* [out][retval] */ BSTR *urlString) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_async( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isAsync) = 0;
+            /* [out][retval] */ VARIANT_BOOL *isAsync) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_async( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isAsync) = 0;
+            /* [in] */ VARIANT_BOOL isAsync) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE abort( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE loadXML( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrXML,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful) = 0;
+            /* [in] */ BSTR bstrXML,
+            /* [retval][out] */ VARIANT_BOOL *isSuccessful) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE save( 
-            /* [annotation][in] */ 
-            _In_  VARIANT destination) = 0;
+            /* [in] */ VARIANT destination) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_validateOnParse( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isValidating) = 0;
+            /* [out][retval] */ VARIANT_BOOL *isValidating) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_validateOnParse( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isValidating) = 0;
+            /* [in] */ VARIANT_BOOL isValidating) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_resolveExternals( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isResolving) = 0;
+            /* [out][retval] */ VARIANT_BOOL *isResolving) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_resolveExternals( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isResolving) = 0;
+            /* [in] */ VARIANT_BOOL isResolving) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_preserveWhiteSpace( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isPreserving) = 0;
+            /* [out][retval] */ VARIANT_BOOL *isPreserving) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_preserveWhiteSpace( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isPreserving) = 0;
+            /* [in] */ VARIANT_BOOL isPreserving) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_onreadystatechange( 
-            /* [annotation][in] */ 
-            _In_  VARIANT readystatechangeSink) = 0;
+            /* [in] */ VARIANT readystatechangeSink) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ondataavailable( 
-            /* [annotation][in] */ 
-            _In_  VARIANT ondataavailableSink) = 0;
+            /* [in] */ VARIANT ondataavailableSink) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ontransformnode( 
-            /* [annotation][in] */ 
-            _In_  VARIANT ontransformnodeSink) = 0;
+            /* [in] */ VARIANT ontransformnodeSink) = 0;
         
     };
     
@@ -2803,8 +2582,7 @@ EXTERN_C const IID IID_IXMLDOMDocument;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2819,31 +2597,23 @@ EXTERN_C const IID IID_IXMLDOMDocument;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMDocument * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2868,394 +2638,312 @@ EXTERN_C const IID IID_IXMLDOMDocument;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_doctype)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_doctype )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocumentType **documentType);
+            /* [retval][out] */ IXMLDOMDocumentType **documentType);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_implementation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_implementation )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMImplementation **impl);
+            /* [retval][out] */ IXMLDOMImplementation **impl);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_documentElement)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_documentElement )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMElement **DOMElement);
+            /* [retval][out] */ IXMLDOMElement **DOMElement);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, putref_documentElement)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_documentElement )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMElement *DOMElement);
+            /* [in] */ IXMLDOMElement *DOMElement);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createElement)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createElement )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR tagName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMElement **element);
+            /* [in] */ BSTR tagName,
+            /* [retval][out] */ IXMLDOMElement **element);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createDocumentFragment)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createDocumentFragment )( 
             IXMLDOMDocument * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocumentFragment **docFrag);
+            /* [retval][out] */ IXMLDOMDocumentFragment **docFrag);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createTextNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createTextNode )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMText **text);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMText **text);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createComment)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createComment )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMComment **comment);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMComment **comment);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createCDATASection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createCDATASection )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMCDATASection **cdata);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMCDATASection **cdata);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createProcessingInstruction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createProcessingInstruction )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR target,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMProcessingInstruction **pi);
+            /* [in] */ BSTR target,
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMProcessingInstruction **pi);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createAttribute )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMAttribute **attribute);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMAttribute **attribute);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createEntityReference)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createEntityReference )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMEntityReference **entityRef);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMEntityReference **entityRef);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, getElementsByTagName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getElementsByTagName )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR tagName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR tagName,
+            /* [retval][out] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createNode )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Type,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **node);
+            /* [in] */ VARIANT Type,
+            /* [in] */ BSTR name,
+            /* [in] */ BSTR namespaceURI,
+            /* [out][retval] */ IXMLDOMNode **node);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, nodeFromID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *nodeFromID )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR idString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **node);
+            /* [in] */ BSTR idString,
+            /* [out][retval] */ IXMLDOMNode **node);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, load)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *load )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT xmlSource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful);
+            /* [in] */ VARIANT xmlSource,
+            /* [retval][out] */ VARIANT_BOOL *isSuccessful);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_readyState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_readyState )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *value);
+            /* [out][retval] */ long *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_parseError)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parseError )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMParseError **errorObj);
+            /* [out][retval] */ IXMLDOMParseError **errorObj);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_url)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_url )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *urlString);
+            /* [out][retval] */ BSTR *urlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_async)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_async )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isAsync);
+            /* [out][retval] */ VARIANT_BOOL *isAsync);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_async)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_async )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isAsync);
+            /* [in] */ VARIANT_BOOL isAsync);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, abort)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *abort )( 
@@ -3264,70 +2952,58 @@ EXTERN_C const IID IID_IXMLDOMDocument;
         DECLSPEC_XFGVIRT(IXMLDOMDocument, loadXML)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *loadXML )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrXML,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful);
+            /* [in] */ BSTR bstrXML,
+            /* [retval][out] */ VARIANT_BOOL *isSuccessful);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *save )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT destination);
+            /* [in] */ VARIANT destination);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_validateOnParse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_validateOnParse )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isValidating);
+            /* [out][retval] */ VARIANT_BOOL *isValidating);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_validateOnParse)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_validateOnParse )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isValidating);
+            /* [in] */ VARIANT_BOOL isValidating);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_resolveExternals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_resolveExternals )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isResolving);
+            /* [out][retval] */ VARIANT_BOOL *isResolving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_resolveExternals)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_resolveExternals )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isResolving);
+            /* [in] */ VARIANT_BOOL isResolving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_preserveWhiteSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_preserveWhiteSpace )( 
             IXMLDOMDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isPreserving);
+            /* [out][retval] */ VARIANT_BOOL *isPreserving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_preserveWhiteSpace)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_preserveWhiteSpace )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isPreserving);
+            /* [in] */ VARIANT_BOOL isPreserving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_onreadystatechange)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_onreadystatechange )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT readystatechangeSink);
+            /* [in] */ VARIANT readystatechangeSink);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_ondataavailable)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ondataavailable )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ondataavailableSink);
+            /* [in] */ VARIANT ondataavailableSink);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_ontransformnode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ontransformnode )( 
             IXMLDOMDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ontransformnodeSink);
+            /* [in] */ VARIANT ontransformnodeSink);
         
         END_INTERFACE
     } IXMLDOMDocumentVtbl;
@@ -3600,32 +3276,24 @@ EXTERN_C const IID IID_IXMLDOMDocument2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_namespaces( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMSchemaCollection **namespaceCollection) = 0;
+            /* [retval][out] */ IXMLDOMSchemaCollection **namespaceCollection) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_schemas( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *otherCollection) = 0;
+            /* [retval][out] */ VARIANT *otherCollection) = 0;
         
         virtual /* [helpstring][id][propputref] */ HRESULT STDMETHODCALLTYPE putref_schemas( 
-            /* [annotation][in] */ 
-            _In_  VARIANT otherCollection) = 0;
+            /* [in] */ VARIANT otherCollection) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE validate( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMParseError **errorObj) = 0;
+            /* [out][retval] */ IXMLDOMParseError **errorObj) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setProperty( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [in] */ BSTR name,
+            /* [in] */ VARIANT value) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getProperty( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value) = 0;
+            /* [in] */ BSTR name,
+            /* [retval][out] */ VARIANT *value) = 0;
         
     };
     
@@ -3639,8 +3307,7 @@ EXTERN_C const IID IID_IXMLDOMDocument2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3655,31 +3322,23 @@ EXTERN_C const IID IID_IXMLDOMDocument2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3704,394 +3363,312 @@ EXTERN_C const IID IID_IXMLDOMDocument2;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_doctype)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_doctype )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocumentType **documentType);
+            /* [retval][out] */ IXMLDOMDocumentType **documentType);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_implementation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_implementation )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMImplementation **impl);
+            /* [retval][out] */ IXMLDOMImplementation **impl);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_documentElement)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_documentElement )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMElement **DOMElement);
+            /* [retval][out] */ IXMLDOMElement **DOMElement);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, putref_documentElement)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_documentElement )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMElement *DOMElement);
+            /* [in] */ IXMLDOMElement *DOMElement);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createElement)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createElement )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR tagName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMElement **element);
+            /* [in] */ BSTR tagName,
+            /* [retval][out] */ IXMLDOMElement **element);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createDocumentFragment)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createDocumentFragment )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocumentFragment **docFrag);
+            /* [retval][out] */ IXMLDOMDocumentFragment **docFrag);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createTextNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createTextNode )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMText **text);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMText **text);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createComment)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createComment )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMComment **comment);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMComment **comment);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createCDATASection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createCDATASection )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMCDATASection **cdata);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMCDATASection **cdata);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createProcessingInstruction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createProcessingInstruction )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR target,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMProcessingInstruction **pi);
+            /* [in] */ BSTR target,
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMProcessingInstruction **pi);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createAttribute )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMAttribute **attribute);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMAttribute **attribute);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createEntityReference)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createEntityReference )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMEntityReference **entityRef);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMEntityReference **entityRef);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, getElementsByTagName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getElementsByTagName )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR tagName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR tagName,
+            /* [retval][out] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createNode )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Type,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **node);
+            /* [in] */ VARIANT Type,
+            /* [in] */ BSTR name,
+            /* [in] */ BSTR namespaceURI,
+            /* [out][retval] */ IXMLDOMNode **node);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, nodeFromID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *nodeFromID )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR idString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **node);
+            /* [in] */ BSTR idString,
+            /* [out][retval] */ IXMLDOMNode **node);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, load)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *load )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT xmlSource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful);
+            /* [in] */ VARIANT xmlSource,
+            /* [retval][out] */ VARIANT_BOOL *isSuccessful);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_readyState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_readyState )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *value);
+            /* [out][retval] */ long *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_parseError)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parseError )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMParseError **errorObj);
+            /* [out][retval] */ IXMLDOMParseError **errorObj);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_url)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_url )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *urlString);
+            /* [out][retval] */ BSTR *urlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_async)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_async )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isAsync);
+            /* [out][retval] */ VARIANT_BOOL *isAsync);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_async)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_async )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isAsync);
+            /* [in] */ VARIANT_BOOL isAsync);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, abort)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *abort )( 
@@ -4100,110 +3677,90 @@ EXTERN_C const IID IID_IXMLDOMDocument2;
         DECLSPEC_XFGVIRT(IXMLDOMDocument, loadXML)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *loadXML )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrXML,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful);
+            /* [in] */ BSTR bstrXML,
+            /* [retval][out] */ VARIANT_BOOL *isSuccessful);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *save )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT destination);
+            /* [in] */ VARIANT destination);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_validateOnParse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_validateOnParse )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isValidating);
+            /* [out][retval] */ VARIANT_BOOL *isValidating);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_validateOnParse)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_validateOnParse )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isValidating);
+            /* [in] */ VARIANT_BOOL isValidating);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_resolveExternals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_resolveExternals )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isResolving);
+            /* [out][retval] */ VARIANT_BOOL *isResolving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_resolveExternals)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_resolveExternals )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isResolving);
+            /* [in] */ VARIANT_BOOL isResolving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_preserveWhiteSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_preserveWhiteSpace )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isPreserving);
+            /* [out][retval] */ VARIANT_BOOL *isPreserving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_preserveWhiteSpace)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_preserveWhiteSpace )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isPreserving);
+            /* [in] */ VARIANT_BOOL isPreserving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_onreadystatechange)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_onreadystatechange )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT readystatechangeSink);
+            /* [in] */ VARIANT readystatechangeSink);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_ondataavailable)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ondataavailable )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ondataavailableSink);
+            /* [in] */ VARIANT ondataavailableSink);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_ontransformnode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ontransformnode )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ontransformnodeSink);
+            /* [in] */ VARIANT ontransformnodeSink);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, get_namespaces)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaces )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMSchemaCollection **namespaceCollection);
+            /* [retval][out] */ IXMLDOMSchemaCollection **namespaceCollection);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, get_schemas)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_schemas )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *otherCollection);
+            /* [retval][out] */ VARIANT *otherCollection);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, putref_schemas)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_schemas )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT otherCollection);
+            /* [in] */ VARIANT otherCollection);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, validate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *validate )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMParseError **errorObj);
+            /* [out][retval] */ IXMLDOMParseError **errorObj);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, setProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setProperty )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ BSTR name,
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, getProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getProperty )( 
             IXMLDOMDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ VARIANT *value);
         
         END_INTERFACE
     } IXMLDOMDocument2Vtbl;
@@ -4495,18 +4052,13 @@ EXTERN_C const IID IID_IXMLDOMDocument3;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE validateNode( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *node,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMParseError **errorObj) = 0;
+            /* [in] */ IXMLDOMNode *node,
+            /* [retval][out] */ IXMLDOMParseError **errorObj) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE importNode( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *node,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **clone) = 0;
+            /* [in] */ IXMLDOMNode *node,
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **clone) = 0;
         
     };
     
@@ -4520,8 +4072,7 @@ EXTERN_C const IID IID_IXMLDOMDocument3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4536,31 +4087,23 @@ EXTERN_C const IID IID_IXMLDOMDocument3;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4585,394 +4128,312 @@ EXTERN_C const IID IID_IXMLDOMDocument3;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_doctype)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_doctype )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocumentType **documentType);
+            /* [retval][out] */ IXMLDOMDocumentType **documentType);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_implementation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_implementation )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMImplementation **impl);
+            /* [retval][out] */ IXMLDOMImplementation **impl);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_documentElement)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_documentElement )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMElement **DOMElement);
+            /* [retval][out] */ IXMLDOMElement **DOMElement);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, putref_documentElement)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_documentElement )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMElement *DOMElement);
+            /* [in] */ IXMLDOMElement *DOMElement);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createElement)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createElement )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR tagName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMElement **element);
+            /* [in] */ BSTR tagName,
+            /* [retval][out] */ IXMLDOMElement **element);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createDocumentFragment)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createDocumentFragment )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocumentFragment **docFrag);
+            /* [retval][out] */ IXMLDOMDocumentFragment **docFrag);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createTextNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createTextNode )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMText **text);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMText **text);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createComment)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createComment )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMComment **comment);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMComment **comment);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createCDATASection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createCDATASection )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMCDATASection **cdata);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMCDATASection **cdata);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createProcessingInstruction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createProcessingInstruction )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR target,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMProcessingInstruction **pi);
+            /* [in] */ BSTR target,
+            /* [in] */ BSTR data,
+            /* [retval][out] */ IXMLDOMProcessingInstruction **pi);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createAttribute )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMAttribute **attribute);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMAttribute **attribute);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createEntityReference)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createEntityReference )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMEntityReference **entityRef);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMEntityReference **entityRef);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, getElementsByTagName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getElementsByTagName )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR tagName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR tagName,
+            /* [retval][out] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, createNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createNode )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT Type,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **node);
+            /* [in] */ VARIANT Type,
+            /* [in] */ BSTR name,
+            /* [in] */ BSTR namespaceURI,
+            /* [out][retval] */ IXMLDOMNode **node);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, nodeFromID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *nodeFromID )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR idString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **node);
+            /* [in] */ BSTR idString,
+            /* [out][retval] */ IXMLDOMNode **node);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, load)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *load )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT xmlSource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful);
+            /* [in] */ VARIANT xmlSource,
+            /* [retval][out] */ VARIANT_BOOL *isSuccessful);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_readyState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_readyState )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *value);
+            /* [out][retval] */ long *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_parseError)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parseError )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMParseError **errorObj);
+            /* [out][retval] */ IXMLDOMParseError **errorObj);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_url)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_url )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *urlString);
+            /* [out][retval] */ BSTR *urlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_async)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_async )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isAsync);
+            /* [out][retval] */ VARIANT_BOOL *isAsync);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_async)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_async )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isAsync);
+            /* [in] */ VARIANT_BOOL isAsync);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, abort)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *abort )( 
@@ -4981,128 +4442,103 @@ EXTERN_C const IID IID_IXMLDOMDocument3;
         DECLSPEC_XFGVIRT(IXMLDOMDocument, loadXML)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *loadXML )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrXML,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful);
+            /* [in] */ BSTR bstrXML,
+            /* [retval][out] */ VARIANT_BOOL *isSuccessful);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *save )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT destination);
+            /* [in] */ VARIANT destination);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_validateOnParse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_validateOnParse )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isValidating);
+            /* [out][retval] */ VARIANT_BOOL *isValidating);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_validateOnParse)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_validateOnParse )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isValidating);
+            /* [in] */ VARIANT_BOOL isValidating);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_resolveExternals)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_resolveExternals )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isResolving);
+            /* [out][retval] */ VARIANT_BOOL *isResolving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_resolveExternals)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_resolveExternals )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isResolving);
+            /* [in] */ VARIANT_BOOL isResolving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, get_preserveWhiteSpace)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_preserveWhiteSpace )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isPreserving);
+            /* [out][retval] */ VARIANT_BOOL *isPreserving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_preserveWhiteSpace)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_preserveWhiteSpace )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL isPreserving);
+            /* [in] */ VARIANT_BOOL isPreserving);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_onreadystatechange)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_onreadystatechange )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT readystatechangeSink);
+            /* [in] */ VARIANT readystatechangeSink);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_ondataavailable)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ondataavailable )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ondataavailableSink);
+            /* [in] */ VARIANT ondataavailableSink);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument, put_ontransformnode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ontransformnode )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ontransformnodeSink);
+            /* [in] */ VARIANT ontransformnodeSink);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, get_namespaces)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaces )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMSchemaCollection **namespaceCollection);
+            /* [retval][out] */ IXMLDOMSchemaCollection **namespaceCollection);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, get_schemas)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_schemas )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *otherCollection);
+            /* [retval][out] */ VARIANT *otherCollection);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, putref_schemas)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_schemas )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT otherCollection);
+            /* [in] */ VARIANT otherCollection);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, validate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *validate )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMParseError **errorObj);
+            /* [out][retval] */ IXMLDOMParseError **errorObj);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, setProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setProperty )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ BSTR name,
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument2, getProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getProperty )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument3, validateNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *validateNode )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *node,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMParseError **errorObj);
+            /* [in] */ IXMLDOMNode *node,
+            /* [retval][out] */ IXMLDOMParseError **errorObj);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocument3, importNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *importNode )( 
             IXMLDOMDocument3 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *node,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **clone);
+            /* [in] */ IXMLDOMNode *node,
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **clone);
         
         END_INTERFACE
     } IXMLDOMDocument3Vtbl;
@@ -5401,24 +4837,19 @@ EXTERN_C const IID IID_IXMLDOMNodeList;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_item( 
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **listItem) = 0;
+            /* [in] */ long index,
+            /* [retval][out] */ IXMLDOMNode **listItem) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *listLength) = 0;
+            /* [retval][out] */ long *listLength) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE nextNode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextItem) = 0;
+            /* [retval][out] */ IXMLDOMNode **nextItem) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE reset( void) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__newEnum( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IUnknown **ppUnk) = 0;
+            /* [out][retval] */ IUnknown **ppUnk) = 0;
         
     };
     
@@ -5432,8 +4863,7 @@ EXTERN_C const IID IID_IXMLDOMNodeList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMNodeList * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5448,31 +4878,23 @@ EXTERN_C const IID IID_IXMLDOMNodeList;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMNodeList * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMNodeList * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMNodeList * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5497,22 +4919,18 @@ EXTERN_C const IID IID_IXMLDOMNodeList;
         DECLSPEC_XFGVIRT(IXMLDOMNodeList, get_item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_item )( 
             IXMLDOMNodeList * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **listItem);
+            /* [in] */ long index,
+            /* [retval][out] */ IXMLDOMNode **listItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNodeList, get_length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLDOMNodeList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *listLength);
+            /* [retval][out] */ long *listLength);
         
         DECLSPEC_XFGVIRT(IXMLDOMNodeList, nextNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *nextNode )( 
             IXMLDOMNodeList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextItem);
+            /* [retval][out] */ IXMLDOMNode **nextItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNodeList, reset)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *reset )( 
@@ -5521,8 +4939,7 @@ EXTERN_C const IID IID_IXMLDOMNodeList;
         DECLSPEC_XFGVIRT(IXMLDOMNodeList, get__newEnum)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__newEnum )( 
             IXMLDOMNodeList * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IUnknown **ppUnk);
+            /* [out][retval] */ IUnknown **ppUnk);
         
         END_INTERFACE
     } IXMLDOMNodeListVtbl;
@@ -5602,58 +5019,41 @@ EXTERN_C const IID IID_IXMLDOMNamedNodeMap;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getNamedItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **namedItem) = 0;
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMNode **namedItem) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setNamedItem( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newItem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nameItem) = 0;
+            /* [in] */ IXMLDOMNode *newItem,
+            /* [retval][out] */ IXMLDOMNode **nameItem) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeNamedItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **namedItem) = 0;
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMNode **namedItem) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_item( 
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **listItem) = 0;
+            /* [in] */ long index,
+            /* [retval][out] */ IXMLDOMNode **listItem) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *listLength) = 0;
+            /* [retval][out] */ long *listLength) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getQualifiedItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR baseName,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **qualifiedItem) = 0;
+            /* [in] */ BSTR baseName,
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ IXMLDOMNode **qualifiedItem) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeQualifiedItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR baseName,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **qualifiedItem) = 0;
+            /* [in] */ BSTR baseName,
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ IXMLDOMNode **qualifiedItem) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE nextNode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextItem) = 0;
+            /* [retval][out] */ IXMLDOMNode **nextItem) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE reset( void) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__newEnum( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IUnknown **ppUnk) = 0;
+            /* [out][retval] */ IUnknown **ppUnk) = 0;
         
     };
     
@@ -5667,8 +5067,7 @@ EXTERN_C const IID IID_IXMLDOMNamedNodeMap;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5683,31 +5082,23 @@ EXTERN_C const IID IID_IXMLDOMNamedNodeMap;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5732,66 +5123,50 @@ EXTERN_C const IID IID_IXMLDOMNamedNodeMap;
         DECLSPEC_XFGVIRT(IXMLDOMNamedNodeMap, getNamedItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getNamedItem )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **namedItem);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMNode **namedItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNamedNodeMap, setNamedItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setNamedItem )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newItem,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nameItem);
+            /* [in] */ IXMLDOMNode *newItem,
+            /* [retval][out] */ IXMLDOMNode **nameItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNamedNodeMap, removeNamedItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeNamedItem )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **namedItem);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMNode **namedItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNamedNodeMap, get_item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_item )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **listItem);
+            /* [in] */ long index,
+            /* [retval][out] */ IXMLDOMNode **listItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNamedNodeMap, get_length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *listLength);
+            /* [retval][out] */ long *listLength);
         
         DECLSPEC_XFGVIRT(IXMLDOMNamedNodeMap, getQualifiedItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getQualifiedItem )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][in] */ 
-            _In_  BSTR baseName,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **qualifiedItem);
+            /* [in] */ BSTR baseName,
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ IXMLDOMNode **qualifiedItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNamedNodeMap, removeQualifiedItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeQualifiedItem )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][in] */ 
-            _In_  BSTR baseName,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **qualifiedItem);
+            /* [in] */ BSTR baseName,
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ IXMLDOMNode **qualifiedItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNamedNodeMap, nextNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *nextNode )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextItem);
+            /* [retval][out] */ IXMLDOMNode **nextItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNamedNodeMap, reset)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *reset )( 
@@ -5800,8 +5175,7 @@ EXTERN_C const IID IID_IXMLDOMNamedNodeMap;
         DECLSPEC_XFGVIRT(IXMLDOMNamedNodeMap, get__newEnum)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__newEnum )( 
             IXMLDOMNamedNodeMap * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IUnknown **ppUnk);
+            /* [out][retval] */ IUnknown **ppUnk);
         
         END_INTERFACE
     } IXMLDOMNamedNodeMapVtbl;
@@ -5896,48 +5270,34 @@ EXTERN_C const IID IID_IXMLDOMCharacterData;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_data( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *data) = 0;
+            /* [retval][out] */ BSTR *data) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_data( 
-            /* [annotation][in] */ 
-            _In_  BSTR data) = 0;
+            /* [in] */ BSTR data) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *dataLength) = 0;
+            /* [retval][out] */ long *dataLength) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE substringData( 
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *data) = 0;
+            /* [in] */ long offset,
+            /* [in] */ long count,
+            /* [retval][out] */ BSTR *data) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE appendData( 
-            /* [annotation][in] */ 
-            _In_  BSTR data) = 0;
+            /* [in] */ BSTR data) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE insertData( 
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  BSTR data) = 0;
+            /* [in] */ long offset,
+            /* [in] */ BSTR data) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE deleteData( 
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count) = 0;
+            /* [in] */ long offset,
+            /* [in] */ long count) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE replaceData( 
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count,
-            /* [annotation][in] */ 
-            _In_  BSTR data) = 0;
+            /* [in] */ long offset,
+            /* [in] */ long count,
+            /* [in] */ BSTR data) = 0;
         
     };
     
@@ -5951,8 +5311,7 @@ EXTERN_C const IID IID_IXMLDOMCharacterData;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5967,31 +5326,23 @@ EXTERN_C const IID IID_IXMLDOMCharacterData;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6016,300 +5367,239 @@ EXTERN_C const IID IID_IXMLDOMCharacterData;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, get_data)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_data )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *data);
+            /* [retval][out] */ BSTR *data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, put_data)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_data )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, get_length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *dataLength);
+            /* [retval][out] */ long *dataLength);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, substringData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *substringData )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *data);
+            /* [in] */ long offset,
+            /* [in] */ long count,
+            /* [retval][out] */ BSTR *data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, appendData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendData )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, insertData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertData )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ long offset,
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, deleteData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *deleteData )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count);
+            /* [in] */ long offset,
+            /* [in] */ long count);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, replaceData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceData )( 
             IXMLDOMCharacterData * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ long offset,
+            /* [in] */ long count,
+            /* [in] */ BSTR data);
         
         END_INTERFACE
     } IXMLDOMCharacterDataVtbl;
@@ -6507,16 +5797,13 @@ EXTERN_C const IID IID_IXMLDOMAttribute;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *attributeName) = 0;
+            /* [retval][out] */ BSTR *attributeName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_value( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *attributeValue) = 0;
+            /* [retval][out] */ VARIANT *attributeValue) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_value( 
-            /* [annotation][in] */ 
-            _In_  VARIANT attributeValue) = 0;
+            /* [in] */ VARIANT attributeValue) = 0;
         
     };
     
@@ -6530,8 +5817,7 @@ EXTERN_C const IID IID_IXMLDOMAttribute;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6546,31 +5832,23 @@ EXTERN_C const IID IID_IXMLDOMAttribute;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6595,258 +5873,208 @@ EXTERN_C const IID IID_IXMLDOMAttribute;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMAttribute, get_name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *attributeName);
+            /* [retval][out] */ BSTR *attributeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMAttribute, get_value)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_value )( 
             IXMLDOMAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *attributeValue);
+            /* [retval][out] */ VARIANT *attributeValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMAttribute, put_value)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_value )( 
             IXMLDOMAttribute * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT attributeValue);
+            /* [in] */ VARIANT attributeValue);
         
         END_INTERFACE
     } IXMLDOMAttributeVtbl;
@@ -7029,48 +6257,34 @@ EXTERN_C const IID IID_IXMLDOMElement;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_tagName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *tagName) = 0;
+            /* [retval][out] */ BSTR *tagName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value) = 0;
+            /* [in] */ BSTR name,
+            /* [retval][out] */ VARIANT *value) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [in] */ BSTR name,
+            /* [in] */ VARIANT value) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR name) = 0;
+            /* [in] */ BSTR name) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getAttributeNode( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMAttribute **attributeNode) = 0;
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMAttribute **attributeNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setAttributeNode( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMAttribute *DOMAttribute,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMAttribute **attributeNode) = 0;
+            /* [in] */ IXMLDOMAttribute *DOMAttribute,
+            /* [retval][out] */ IXMLDOMAttribute **attributeNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeAttributeNode( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMAttribute *DOMAttribute,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMAttribute **attributeNode) = 0;
+            /* [in] */ IXMLDOMAttribute *DOMAttribute,
+            /* [retval][out] */ IXMLDOMAttribute **attributeNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getElementsByTagName( 
-            /* [annotation][in] */ 
-            _In_  BSTR tagName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList) = 0;
+            /* [in] */ BSTR tagName,
+            /* [retval][out] */ IXMLDOMNodeList **resultList) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE normalize( void) = 0;
         
@@ -7086,8 +6300,7 @@ EXTERN_C const IID IID_IXMLDOMElement;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7102,31 +6315,23 @@ EXTERN_C const IID IID_IXMLDOMElement;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMElement * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7151,300 +6356,239 @@ EXTERN_C const IID IID_IXMLDOMElement;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMElement, get_tagName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_tagName )( 
             IXMLDOMElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *tagName);
+            /* [retval][out] */ BSTR *tagName);
         
         DECLSPEC_XFGVIRT(IXMLDOMElement, getAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAttribute )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMElement, setAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setAttribute )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ BSTR name,
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMElement, removeAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeAttribute )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name);
+            /* [in] */ BSTR name);
         
         DECLSPEC_XFGVIRT(IXMLDOMElement, getAttributeNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAttributeNode )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMAttribute **attributeNode);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ IXMLDOMAttribute **attributeNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMElement, setAttributeNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setAttributeNode )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMAttribute *DOMAttribute,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMAttribute **attributeNode);
+            /* [in] */ IXMLDOMAttribute *DOMAttribute,
+            /* [retval][out] */ IXMLDOMAttribute **attributeNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMElement, removeAttributeNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeAttributeNode )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMAttribute *DOMAttribute,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMAttribute **attributeNode);
+            /* [in] */ IXMLDOMAttribute *DOMAttribute,
+            /* [retval][out] */ IXMLDOMAttribute **attributeNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMElement, getElementsByTagName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getElementsByTagName )( 
             IXMLDOMElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR tagName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR tagName,
+            /* [retval][out] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMElement, normalize)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *normalize )( 
@@ -7649,10 +6793,8 @@ EXTERN_C const IID IID_IXMLDOMText;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE splitText( 
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMText **rightHandTextNode) = 0;
+            /* [in] */ long offset,
+            /* [retval][out] */ IXMLDOMText **rightHandTextNode) = 0;
         
     };
     
@@ -7666,8 +6808,7 @@ EXTERN_C const IID IID_IXMLDOMText;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7682,31 +6823,23 @@ EXTERN_C const IID IID_IXMLDOMText;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMText * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7731,308 +6864,245 @@ EXTERN_C const IID IID_IXMLDOMText;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMText * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMText * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMText * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMText * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMText * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMText * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMText * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMText * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMText * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMText * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, get_data)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_data )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *data);
+            /* [retval][out] */ BSTR *data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, put_data)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_data )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, get_length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLDOMText * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *dataLength);
+            /* [retval][out] */ long *dataLength);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, substringData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *substringData )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *data);
+            /* [in] */ long offset,
+            /* [in] */ long count,
+            /* [retval][out] */ BSTR *data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, appendData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendData )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, insertData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertData )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ long offset,
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, deleteData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *deleteData )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count);
+            /* [in] */ long offset,
+            /* [in] */ long count);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, replaceData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceData )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ long offset,
+            /* [in] */ long count,
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMText, splitText)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *splitText )( 
             IXMLDOMText * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMText **rightHandTextNode);
+            /* [in] */ long offset,
+            /* [retval][out] */ IXMLDOMText **rightHandTextNode);
         
         END_INTERFACE
     } IXMLDOMTextVtbl;
@@ -8245,8 +7315,7 @@ EXTERN_C const IID IID_IXMLDOMComment;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8261,31 +7330,23 @@ EXTERN_C const IID IID_IXMLDOMComment;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMComment * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8310,300 +7371,239 @@ EXTERN_C const IID IID_IXMLDOMComment;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMComment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMComment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMComment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMComment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMComment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMComment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMComment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMComment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMComment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMComment * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, get_data)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_data )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *data);
+            /* [retval][out] */ BSTR *data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, put_data)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_data )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, get_length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLDOMComment * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *dataLength);
+            /* [retval][out] */ long *dataLength);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, substringData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *substringData )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *data);
+            /* [in] */ long offset,
+            /* [in] */ long count,
+            /* [retval][out] */ BSTR *data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, appendData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendData )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, insertData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertData )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ long offset,
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, deleteData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *deleteData )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count);
+            /* [in] */ long offset,
+            /* [in] */ long count);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, replaceData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceData )( 
             IXMLDOMComment * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ long offset,
+            /* [in] */ long count,
+            /* [in] */ BSTR data);
         
         END_INTERFACE
     } IXMLDOMCommentVtbl;
@@ -8802,16 +7802,13 @@ EXTERN_C const IID IID_IXMLDOMProcessingInstruction;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_target( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name) = 0;
+            /* [retval][out] */ BSTR *name) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_data( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *value) = 0;
+            /* [retval][out] */ BSTR *value) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_data( 
-            /* [annotation][in] */ 
-            _In_  BSTR value) = 0;
+            /* [in] */ BSTR value) = 0;
         
     };
     
@@ -8825,8 +7822,7 @@ EXTERN_C const IID IID_IXMLDOMProcessingInstruction;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8841,31 +7837,23 @@ EXTERN_C const IID IID_IXMLDOMProcessingInstruction;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8890,258 +7878,208 @@ EXTERN_C const IID IID_IXMLDOMProcessingInstruction;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMProcessingInstruction, get_target)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_target )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMProcessingInstruction, get_data)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_data )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *value);
+            /* [retval][out] */ BSTR *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMProcessingInstruction, put_data)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_data )( 
             IXMLDOMProcessingInstruction * This,
-            /* [annotation][in] */ 
-            _In_  BSTR value);
+            /* [in] */ BSTR value);
         
         END_INTERFACE
     } IXMLDOMProcessingInstructionVtbl;
@@ -9335,8 +8273,7 @@ EXTERN_C const IID IID_IXMLDOMCDATASection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9351,31 +8288,23 @@ EXTERN_C const IID IID_IXMLDOMCDATASection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9400,308 +8329,245 @@ EXTERN_C const IID IID_IXMLDOMCDATASection;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, get_data)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_data )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *data);
+            /* [retval][out] */ BSTR *data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, put_data)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_data )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, get_length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *dataLength);
+            /* [retval][out] */ long *dataLength);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, substringData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *substringData )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *data);
+            /* [in] */ long offset,
+            /* [in] */ long count,
+            /* [retval][out] */ BSTR *data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, appendData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendData )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, insertData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertData )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ long offset,
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, deleteData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *deleteData )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count);
+            /* [in] */ long offset,
+            /* [in] */ long count);
         
         DECLSPEC_XFGVIRT(IXMLDOMCharacterData, replaceData)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceData )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][in] */ 
-            _In_  long count,
-            /* [annotation][in] */ 
-            _In_  BSTR data);
+            /* [in] */ long offset,
+            /* [in] */ long count,
+            /* [in] */ BSTR data);
         
         DECLSPEC_XFGVIRT(IXMLDOMText, splitText)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *splitText )( 
             IXMLDOMCDATASection * This,
-            /* [annotation][in] */ 
-            _In_  long offset,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMText **rightHandTextNode);
+            /* [in] */ long offset,
+            /* [retval][out] */ IXMLDOMText **rightHandTextNode);
         
         END_INTERFACE
     } IXMLDOMCDATASectionVtbl;
@@ -9904,16 +8770,13 @@ EXTERN_C const IID IID_IXMLDOMDocumentType;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *rootName) = 0;
+            /* [retval][out] */ BSTR *rootName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_entities( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **entityMap) = 0;
+            /* [retval][out] */ IXMLDOMNamedNodeMap **entityMap) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_notations( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **notationMap) = 0;
+            /* [retval][out] */ IXMLDOMNamedNodeMap **notationMap) = 0;
         
     };
     
@@ -9927,8 +8790,7 @@ EXTERN_C const IID IID_IXMLDOMDocumentType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9943,31 +8805,23 @@ EXTERN_C const IID IID_IXMLDOMDocumentType;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9992,258 +8846,208 @@ EXTERN_C const IID IID_IXMLDOMDocumentType;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocumentType, get_name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *rootName);
+            /* [retval][out] */ BSTR *rootName);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocumentType, get_entities)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_entities )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **entityMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **entityMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMDocumentType, get_notations)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_notations )( 
             IXMLDOMDocumentType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **notationMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **notationMap);
         
         END_INTERFACE
     } IXMLDOMDocumentTypeVtbl;
@@ -10426,12 +9230,10 @@ EXTERN_C const IID IID_IXMLDOMNotation;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_publicId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *publicID) = 0;
+            /* [retval][out] */ VARIANT *publicID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_systemId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *systemID) = 0;
+            /* [retval][out] */ VARIANT *systemID) = 0;
         
     };
     
@@ -10445,8 +9247,7 @@ EXTERN_C const IID IID_IXMLDOMNotation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10461,31 +9262,23 @@ EXTERN_C const IID IID_IXMLDOMNotation;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMNotation * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10510,252 +9303,203 @@ EXTERN_C const IID IID_IXMLDOMNotation;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMNotation * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMNotation * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMNotation * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMNotation * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMNotation * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMNotation * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMNotation * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMNotation * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMNotation * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMNotation * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMNotation * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMNotation, get_publicId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_publicId )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *publicID);
+            /* [retval][out] */ VARIANT *publicID);
         
         DECLSPEC_XFGVIRT(IXMLDOMNotation, get_systemId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_systemId )( 
             IXMLDOMNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *systemID);
+            /* [retval][out] */ VARIANT *systemID);
         
         END_INTERFACE
     } IXMLDOMNotationVtbl;
@@ -10935,16 +9679,13 @@ EXTERN_C const IID IID_IXMLDOMEntity;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_publicId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *publicID) = 0;
+            /* [retval][out] */ VARIANT *publicID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_systemId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *systemID) = 0;
+            /* [retval][out] */ VARIANT *systemID) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_notationName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name) = 0;
+            /* [retval][out] */ BSTR *name) = 0;
         
     };
     
@@ -10958,8 +9699,7 @@ EXTERN_C const IID IID_IXMLDOMEntity;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10974,31 +9714,23 @@ EXTERN_C const IID IID_IXMLDOMEntity;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMEntity * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11023,258 +9755,208 @@ EXTERN_C const IID IID_IXMLDOMEntity;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMEntity * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMEntity * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMEntity * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMEntity * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMEntity * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMEntity * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMEntity * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMEntity * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMEntity * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMEntity * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMEntity * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXMLDOMEntity, get_publicId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_publicId )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *publicID);
+            /* [retval][out] */ VARIANT *publicID);
         
         DECLSPEC_XFGVIRT(IXMLDOMEntity, get_systemId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_systemId )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *systemID);
+            /* [retval][out] */ VARIANT *systemID);
         
         DECLSPEC_XFGVIRT(IXMLDOMEntity, get_notationName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_notationName )( 
             IXMLDOMEntity * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         END_INTERFACE
     } IXMLDOMEntityVtbl;
@@ -11468,8 +10150,7 @@ EXTERN_C const IID IID_IXMLDOMEntityReference;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11484,31 +10165,23 @@ EXTERN_C const IID IID_IXMLDOMEntityReference;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11533,240 +10206,193 @@ EXTERN_C const IID IID_IXMLDOMEntityReference;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXMLDOMEntityReference * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         END_INTERFACE
     } IXMLDOMEntityReferenceVtbl;
@@ -11940,32 +10566,25 @@ EXTERN_C const IID IID_IXMLDOMParseError;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_errorCode( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *errorCode) = 0;
+            /* [out][retval] */ long *errorCode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_url( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *urlString) = 0;
+            /* [out][retval] */ BSTR *urlString) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_reason( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *reasonString) = 0;
+            /* [out][retval] */ BSTR *reasonString) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_srcText( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *sourceString) = 0;
+            /* [out][retval] */ BSTR *sourceString) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_line( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *lineNumber) = 0;
+            /* [out][retval] */ long *lineNumber) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_linepos( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *linePosition) = 0;
+            /* [out][retval] */ long *linePosition) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_filepos( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *filePosition) = 0;
+            /* [out][retval] */ long *filePosition) = 0;
         
     };
     
@@ -11979,8 +10598,7 @@ EXTERN_C const IID IID_IXMLDOMParseError;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMParseError * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11995,31 +10613,23 @@ EXTERN_C const IID IID_IXMLDOMParseError;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMParseError * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMParseError * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMParseError * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12044,44 +10654,37 @@ EXTERN_C const IID IID_IXMLDOMParseError;
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_errorCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_errorCode )( 
             IXMLDOMParseError * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *errorCode);
+            /* [out][retval] */ long *errorCode);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_url)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_url )( 
             IXMLDOMParseError * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *urlString);
+            /* [out][retval] */ BSTR *urlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_reason)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_reason )( 
             IXMLDOMParseError * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *reasonString);
+            /* [out][retval] */ BSTR *reasonString);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_srcText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_srcText )( 
             IXMLDOMParseError * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *sourceString);
+            /* [out][retval] */ BSTR *sourceString);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_line)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_line )( 
             IXMLDOMParseError * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *lineNumber);
+            /* [out][retval] */ long *lineNumber);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_linepos)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_linepos )( 
             IXMLDOMParseError * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *linePosition);
+            /* [out][retval] */ long *linePosition);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_filepos)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_filepos )( 
             IXMLDOMParseError * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *filePosition);
+            /* [out][retval] */ long *filePosition);
         
         END_INTERFACE
     } IXMLDOMParseErrorVtbl;
@@ -12167,22 +10770,17 @@ EXTERN_C const IID IID_IXMLDOMParseError2;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_errorXPath( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *xpathexpr) = 0;
+            /* [retval][out] */ BSTR *xpathexpr) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_allErrors( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMParseErrorCollection **allErrors) = 0;
+            /* [retval][out] */ IXMLDOMParseErrorCollection **allErrors) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE errorParameters( 
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *param) = 0;
+            /* [in] */ long index,
+            /* [retval][out] */ BSTR *param) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_errorParametersCount( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *count) = 0;
+            /* [retval][out] */ long *count) = 0;
         
     };
     
@@ -12196,8 +10794,7 @@ EXTERN_C const IID IID_IXMLDOMParseError2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12212,31 +10809,23 @@ EXTERN_C const IID IID_IXMLDOMParseError2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12261,70 +10850,58 @@ EXTERN_C const IID IID_IXMLDOMParseError2;
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_errorCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_errorCode )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *errorCode);
+            /* [out][retval] */ long *errorCode);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_url)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_url )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *urlString);
+            /* [out][retval] */ BSTR *urlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_reason)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_reason )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *reasonString);
+            /* [out][retval] */ BSTR *reasonString);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_srcText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_srcText )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *sourceString);
+            /* [out][retval] */ BSTR *sourceString);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_line)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_line )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *lineNumber);
+            /* [out][retval] */ long *lineNumber);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_linepos)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_linepos )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *linePosition);
+            /* [out][retval] */ long *linePosition);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError, get_filepos)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_filepos )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *filePosition);
+            /* [out][retval] */ long *filePosition);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError2, get_errorXPath)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_errorXPath )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *xpathexpr);
+            /* [retval][out] */ BSTR *xpathexpr);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError2, get_allErrors)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_allErrors )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMParseErrorCollection **allErrors);
+            /* [retval][out] */ IXMLDOMParseErrorCollection **allErrors);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError2, errorParameters)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *errorParameters )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *param);
+            /* [in] */ long index,
+            /* [retval][out] */ BSTR *param);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseError2, get_errorParametersCount)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_errorParametersCount )( 
             IXMLDOMParseError2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *count);
+            /* [retval][out] */ long *count);
         
         END_INTERFACE
     } IXMLDOMParseError2Vtbl;
@@ -12423,24 +11000,19 @@ EXTERN_C const IID IID_IXMLDOMParseErrorCollection;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_item( 
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMParseError2 **error) = 0;
+            /* [in] */ long index,
+            /* [retval][out] */ IXMLDOMParseError2 **error) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length) = 0;
+            /* [retval][out] */ long *length) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_next( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMParseError2 **error) = 0;
+            /* [retval][out] */ IXMLDOMParseError2 **error) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE reset( void) = 0;
         
         virtual /* [propget][restricted][hidden][id] */ HRESULT STDMETHODCALLTYPE get__newEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppunk) = 0;
+            /* [retval][out] */ IUnknown **ppunk) = 0;
         
     };
     
@@ -12454,8 +11026,7 @@ EXTERN_C const IID IID_IXMLDOMParseErrorCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMParseErrorCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12470,31 +11041,23 @@ EXTERN_C const IID IID_IXMLDOMParseErrorCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMParseErrorCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMParseErrorCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMParseErrorCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12519,22 +11082,18 @@ EXTERN_C const IID IID_IXMLDOMParseErrorCollection;
         DECLSPEC_XFGVIRT(IXMLDOMParseErrorCollection, get_item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_item )( 
             IXMLDOMParseErrorCollection * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMParseError2 **error);
+            /* [in] */ long index,
+            /* [retval][out] */ IXMLDOMParseError2 **error);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseErrorCollection, get_length)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLDOMParseErrorCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length);
+            /* [retval][out] */ long *length);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseErrorCollection, get_next)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_next )( 
             IXMLDOMParseErrorCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMParseError2 **error);
+            /* [retval][out] */ IXMLDOMParseError2 **error);
         
         DECLSPEC_XFGVIRT(IXMLDOMParseErrorCollection, reset)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *reset )( 
@@ -12543,8 +11102,7 @@ EXTERN_C const IID IID_IXMLDOMParseErrorCollection;
         DECLSPEC_XFGVIRT(IXMLDOMParseErrorCollection, get__newEnum)
         /* [propget][restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *get__newEnum )( 
             IXMLDOMParseErrorCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppunk);
+            /* [retval][out] */ IUnknown **ppunk);
         
         END_INTERFACE
     } IXMLDOMParseErrorCollectionVtbl;
@@ -12624,38 +11182,28 @@ EXTERN_C const IID IID_IXMLDOMSchemaCollection;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE add( 
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][in] */ 
-            _In_  VARIANT var) = 0;
+            /* [in] */ BSTR namespaceURI,
+            /* [in] */ VARIANT var) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE get( 
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **schemaNode) = 0;
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ IXMLDOMNode **schemaNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE remove( 
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI) = 0;
+            /* [in] */ BSTR namespaceURI) = 0;
         
         virtual /* [propget][helpstring][id] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length) = 0;
+            /* [retval][out] */ long *length) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_namespaceURI( 
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *length) = 0;
+            /* [in] */ long index,
+            /* [retval][out] */ BSTR *length) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE addCollection( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMSchemaCollection *otherCollection) = 0;
+            /* [in] */ IXMLDOMSchemaCollection *otherCollection) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__newEnum( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IUnknown **ppUnk) = 0;
+            /* [out][retval] */ IUnknown **ppUnk) = 0;
         
     };
     
@@ -12669,8 +11217,7 @@ EXTERN_C const IID IID_IXMLDOMSchemaCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12685,31 +11232,23 @@ EXTERN_C const IID IID_IXMLDOMSchemaCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -12734,50 +11273,40 @@ EXTERN_C const IID IID_IXMLDOMSchemaCollection;
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *add )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][in] */ 
-            _In_  VARIANT var);
+            /* [in] */ BSTR namespaceURI,
+            /* [in] */ VARIANT var);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, get)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *get )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **schemaNode);
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ IXMLDOMNode **schemaNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *remove )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI);
+            /* [in] */ BSTR namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, get_length)
         /* [propget][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length);
+            /* [retval][out] */ long *length);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *length);
+            /* [in] */ long index,
+            /* [retval][out] */ BSTR *length);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, addCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *addCollection )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMSchemaCollection *otherCollection);
+            /* [in] */ IXMLDOMSchemaCollection *otherCollection);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, get__newEnum)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__newEnum )( 
             IXMLDOMSchemaCollection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IUnknown **ppUnk);
+            /* [out][retval] */ IUnknown **ppUnk);
         
         END_INTERFACE
     } IXMLDOMSchemaCollectionVtbl;
@@ -12863,70 +11392,47 @@ EXTERN_C const IID IID_IXTLRuntime;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE uniqueID( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pID) = 0;
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ long *pID) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE depth( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pDepth) = 0;
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ long *pDepth) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE childNumber( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pNumber) = 0;
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ long *pNumber) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ancestorChildNumber( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNodeName,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pNumber) = 0;
+            /* [in] */ BSTR bstrNodeName,
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ long *pNumber) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE absoluteChildNumber( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pNumber) = 0;
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ long *pNumber) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE formatIndex( 
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFormat,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFormattedString) = 0;
+            /* [in] */ long lIndex,
+            /* [in] */ BSTR bstrFormat,
+            /* [retval][out] */ BSTR *pbstrFormattedString) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE formatNumber( 
-            /* [annotation][in] */ 
-            _In_  double dblNumber,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFormat,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFormattedString) = 0;
+            /* [in] */ double dblNumber,
+            /* [in] */ BSTR bstrFormat,
+            /* [retval][out] */ BSTR *pbstrFormattedString) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE formatDate( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varDate,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFormat,
+            /* [in] */ VARIANT varDate,
+            /* [in] */ BSTR bstrFormat,
             /* [optional][in] */ VARIANT varDestLocale,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFormattedString) = 0;
+            /* [retval][out] */ BSTR *pbstrFormattedString) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE formatTime( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varTime,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFormat,
+            /* [in] */ VARIANT varTime,
+            /* [in] */ BSTR bstrFormat,
             /* [optional][in] */ VARIANT varDestLocale,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFormattedString) = 0;
+            /* [retval][out] */ BSTR *pbstrFormattedString) = 0;
         
     };
     
@@ -12940,8 +11446,7 @@ EXTERN_C const IID IID_IXTLRuntime;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -12956,31 +11461,23 @@ EXTERN_C const IID IID_IXTLRuntime;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXTLRuntime * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13005,324 +11502,254 @@ EXTERN_C const IID IID_IXTLRuntime;
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeName )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeValue )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeValue )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeType )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DOMNodeType *type);
+            /* [retval][out] */ DOMNodeType *type);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parentNode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parentNode )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **parent);
+            /* [retval][out] */ IXMLDOMNode **parent);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_childNodes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_childNodes )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNodeList **childList);
+            /* [retval][out] */ IXMLDOMNodeList **childList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_firstChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_firstChild )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **firstChild);
+            /* [retval][out] */ IXMLDOMNode **firstChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_lastChild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lastChild )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **lastChild);
+            /* [retval][out] */ IXMLDOMNode **lastChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_previousSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_previousSibling )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **previousSibling);
+            /* [retval][out] */ IXMLDOMNode **previousSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nextSibling)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nextSibling )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextSibling);
+            /* [retval][out] */ IXMLDOMNode **nextSibling);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNamedNodeMap **attributeMap);
+            /* [retval][out] */ IXMLDOMNamedNodeMap **attributeMap);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, insertBefore)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *insertBefore )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  VARIANT refChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ VARIANT refChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, replaceChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *replaceChild )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *oldChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outOldChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [in] */ IXMLDOMNode *oldChild,
+            /* [retval][out] */ IXMLDOMNode **outOldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *childNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **oldChild);
+            /* [in] */ IXMLDOMNode *childNode,
+            /* [retval][out] */ IXMLDOMNode **oldChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, appendChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *appendChild )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *newChild,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **outNewChild);
+            /* [in] */ IXMLDOMNode *newChild,
+            /* [retval][out] */ IXMLDOMNode **outNewChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, hasChildNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *hasChildNodes )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *hasChild);
+            /* [retval][out] */ VARIANT_BOOL *hasChild);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_ownerDocument)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerDocument )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **XMLDOMDocument);
+            /* [retval][out] */ IXMLDOMDocument **XMLDOMDocument);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, cloneNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cloneNode )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL deep,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **cloneRoot);
+            /* [in] */ VARIANT_BOOL deep,
+            /* [retval][out] */ IXMLDOMNode **cloneRoot);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypeString)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypeString )( 
             IXTLRuntime * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nodeType);
+            /* [out][retval] */ BSTR *nodeType);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXTLRuntime * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *text);
+            /* [out][retval] */ BSTR *text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  BSTR text);
+            /* [in] */ BSTR text);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_specified)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_specified )( 
             IXTLRuntime * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSpecified);
+            /* [retval][out] */ VARIANT_BOOL *isSpecified);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_definition)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_definition )( 
             IXTLRuntime * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **definitionNode);
+            /* [out][retval] */ IXMLDOMNode **definitionNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_nodeTypedValue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_nodeTypedValue )( 
             IXTLRuntime * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *typedValue);
+            /* [out][retval] */ VARIANT *typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_nodeTypedValue)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_nodeTypedValue )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT typedValue);
+            /* [in] */ VARIANT typedValue);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_dataType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dataType )( 
             IXTLRuntime * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *dataTypeName);
+            /* [out][retval] */ VARIANT *dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, put_dataType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_dataType )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  BSTR dataTypeName);
+            /* [in] */ BSTR dataTypeName);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_xml)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_xml )( 
             IXTLRuntime * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNode )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *xmlString);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [out][retval] */ BSTR *xmlString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectNodes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectNodes )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNodeList **resultList);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNodeList **resultList);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, selectSingleNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *selectSingleNode )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  BSTR queryString,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLDOMNode **resultNode);
+            /* [in] */ BSTR queryString,
+            /* [out][retval] */ IXMLDOMNode **resultNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_parsed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parsed )( 
             IXTLRuntime * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *isParsed);
+            /* [out][retval] */ VARIANT_BOOL *isParsed);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXTLRuntime * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [out][retval] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_prefix)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_prefix )( 
             IXTLRuntime * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *prefixString);
+            /* [out][retval] */ BSTR *prefixString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, get_baseName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseName )( 
             IXTLRuntime * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *nameString);
+            /* [out][retval] */ BSTR *nameString);
         
         DECLSPEC_XFGVIRT(IXMLDOMNode, transformNodeToObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transformNodeToObject )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet,
-            /* [annotation][in] */ 
-            _In_  VARIANT outputObject);
+            /* [in] */ IXMLDOMNode *stylesheet,
+            /* [in] */ VARIANT outputObject);
         
         DECLSPEC_XFGVIRT(IXTLRuntime, uniqueID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *uniqueID )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pID);
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ long *pID);
         
         DECLSPEC_XFGVIRT(IXTLRuntime, depth)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *depth )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pDepth);
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ long *pDepth);
         
         DECLSPEC_XFGVIRT(IXTLRuntime, childNumber)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *childNumber )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pNumber);
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ long *pNumber);
         
         DECLSPEC_XFGVIRT(IXTLRuntime, ancestorChildNumber)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ancestorChildNumber )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNodeName,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pNumber);
+            /* [in] */ BSTR bstrNodeName,
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ long *pNumber);
         
         DECLSPEC_XFGVIRT(IXTLRuntime, absoluteChildNumber)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *absoluteChildNumber )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pNumber);
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ long *pNumber);
         
         DECLSPEC_XFGVIRT(IXTLRuntime, formatIndex)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *formatIndex )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  long lIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFormat,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFormattedString);
+            /* [in] */ long lIndex,
+            /* [in] */ BSTR bstrFormat,
+            /* [retval][out] */ BSTR *pbstrFormattedString);
         
         DECLSPEC_XFGVIRT(IXTLRuntime, formatNumber)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *formatNumber )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  double dblNumber,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFormat,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFormattedString);
+            /* [in] */ double dblNumber,
+            /* [in] */ BSTR bstrFormat,
+            /* [retval][out] */ BSTR *pbstrFormattedString);
         
         DECLSPEC_XFGVIRT(IXTLRuntime, formatDate)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *formatDate )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varDate,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFormat,
+            /* [in] */ VARIANT varDate,
+            /* [in] */ BSTR bstrFormat,
             /* [optional][in] */ VARIANT varDestLocale,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFormattedString);
+            /* [retval][out] */ BSTR *pbstrFormattedString);
         
         DECLSPEC_XFGVIRT(IXTLRuntime, formatTime)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *formatTime )( 
             IXTLRuntime * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varTime,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFormat,
+            /* [in] */ VARIANT varTime,
+            /* [in] */ BSTR bstrFormat,
             /* [optional][in] */ VARIANT varDestLocale,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrFormattedString);
+            /* [retval][out] */ BSTR *pbstrFormattedString);
         
         END_INTERFACE
     } IXTLRuntimeVtbl;
@@ -13523,16 +11950,13 @@ EXTERN_C const IID IID_IXSLTemplate;
     {
     public:
         virtual /* [helpstring][id][propputref] */ HRESULT STDMETHODCALLTYPE putref_stylesheet( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet) = 0;
+            /* [in] */ IXMLDOMNode *stylesheet) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_stylesheet( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **stylesheet) = 0;
+            /* [retval][out] */ IXMLDOMNode **stylesheet) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createProcessor( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXSLProcessor **ppProcessor) = 0;
+            /* [retval][out] */ IXSLProcessor **ppProcessor) = 0;
         
     };
     
@@ -13546,8 +11970,7 @@ EXTERN_C const IID IID_IXSLTemplate;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXSLTemplate * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13562,31 +11985,23 @@ EXTERN_C const IID IID_IXSLTemplate;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXSLTemplate * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXSLTemplate * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXSLTemplate * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13611,20 +12026,17 @@ EXTERN_C const IID IID_IXSLTemplate;
         DECLSPEC_XFGVIRT(IXSLTemplate, putref_stylesheet)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_stylesheet )( 
             IXSLTemplate * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *stylesheet);
+            /* [in] */ IXMLDOMNode *stylesheet);
         
         DECLSPEC_XFGVIRT(IXSLTemplate, get_stylesheet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_stylesheet )( 
             IXSLTemplate * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **stylesheet);
+            /* [retval][out] */ IXMLDOMNode **stylesheet);
         
         DECLSPEC_XFGVIRT(IXSLTemplate, createProcessor)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createProcessor )( 
             IXSLTemplate * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXSLProcessor **ppProcessor);
+            /* [retval][out] */ IXSLProcessor **ppProcessor);
         
         END_INTERFACE
     } IXSLTemplateVtbl;
@@ -13698,66 +12110,49 @@ EXTERN_C const IID IID_IXSLProcessor;
     {
     public:
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_input( 
-            /* [annotation][in] */ 
-            _In_  VARIANT var) = 0;
+            /* [in] */ VARIANT var) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_input( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVar) = 0;
+            /* [retval][out] */ VARIANT *pVar) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ownerTemplate( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXSLTemplate **ppTemplate) = 0;
+            /* [retval][out] */ IXSLTemplate **ppTemplate) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setStartMode( 
-            /* [annotation][in] */ 
-            _In_  BSTR mode,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR namespaceURI = 0) = 0;
+            /* [in] */ BSTR mode,
+            /* [defaultvalue][in] */ BSTR namespaceURI = 0) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_startMode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mode) = 0;
+            /* [retval][out] */ BSTR *mode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_startModeURI( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI) = 0;
+            /* [retval][out] */ BSTR *namespaceURI) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_output( 
-            /* [annotation][in] */ 
-            _In_  VARIANT output) = 0;
+            /* [in] */ VARIANT output) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_output( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pOutput) = 0;
+            /* [retval][out] */ VARIANT *pOutput) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE transform( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pDone) = 0;
+            /* [retval][out] */ VARIANT_BOOL *pDone) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE reset( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_readyState( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pReadyState) = 0;
+            /* [retval][out] */ long *pReadyState) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE addParameter( 
-            /* [annotation][in] */ 
-            _In_  BSTR baseName,
-            /* [annotation][in] */ 
-            _In_  VARIANT parameter,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR namespaceURI = 0) = 0;
+            /* [in] */ BSTR baseName,
+            /* [in] */ VARIANT parameter,
+            /* [defaultvalue][in] */ BSTR namespaceURI = 0) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE addObject( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *obj,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI) = 0;
+            /* [in] */ IDispatch *obj,
+            /* [in] */ BSTR namespaceURI) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_stylesheet( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **stylesheet) = 0;
+            /* [retval][out] */ IXMLDOMNode **stylesheet) = 0;
         
     };
     
@@ -13771,8 +12166,7 @@ EXTERN_C const IID IID_IXSLProcessor;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXSLProcessor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -13787,31 +12181,23 @@ EXTERN_C const IID IID_IXSLProcessor;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXSLProcessor * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXSLProcessor * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXSLProcessor * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -13836,58 +12222,48 @@ EXTERN_C const IID IID_IXSLProcessor;
         DECLSPEC_XFGVIRT(IXSLProcessor, put_input)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_input )( 
             IXSLProcessor * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT var);
+            /* [in] */ VARIANT var);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, get_input)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_input )( 
             IXSLProcessor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pVar);
+            /* [retval][out] */ VARIANT *pVar);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, get_ownerTemplate)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ownerTemplate )( 
             IXSLProcessor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXSLTemplate **ppTemplate);
+            /* [retval][out] */ IXSLTemplate **ppTemplate);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, setStartMode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setStartMode )( 
             IXSLProcessor * This,
-            /* [annotation][in] */ 
-            _In_  BSTR mode,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR namespaceURI);
+            /* [in] */ BSTR mode,
+            /* [defaultvalue][in] */ BSTR namespaceURI);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, get_startMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_startMode )( 
             IXSLProcessor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *mode);
+            /* [retval][out] */ BSTR *mode);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, get_startModeURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_startModeURI )( 
             IXSLProcessor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, put_output)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_output )( 
             IXSLProcessor * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT output);
+            /* [in] */ VARIANT output);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, get_output)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_output )( 
             IXSLProcessor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pOutput);
+            /* [retval][out] */ VARIANT *pOutput);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, transform)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *transform )( 
             IXSLProcessor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pDone);
+            /* [retval][out] */ VARIANT_BOOL *pDone);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, reset)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *reset )( 
@@ -13896,32 +12272,25 @@ EXTERN_C const IID IID_IXSLProcessor;
         DECLSPEC_XFGVIRT(IXSLProcessor, get_readyState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_readyState )( 
             IXSLProcessor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pReadyState);
+            /* [retval][out] */ long *pReadyState);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, addParameter)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *addParameter )( 
             IXSLProcessor * This,
-            /* [annotation][in] */ 
-            _In_  BSTR baseName,
-            /* [annotation][in] */ 
-            _In_  VARIANT parameter,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  BSTR namespaceURI);
+            /* [in] */ BSTR baseName,
+            /* [in] */ VARIANT parameter,
+            /* [defaultvalue][in] */ BSTR namespaceURI);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, addObject)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *addObject )( 
             IXSLProcessor * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *obj,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI);
+            /* [in] */ IDispatch *obj,
+            /* [in] */ BSTR namespaceURI);
         
         DECLSPEC_XFGVIRT(IXSLProcessor, get_stylesheet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_stylesheet )( 
             IXSLProcessor * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **stylesheet);
+            /* [retval][out] */ IXMLDOMNode **stylesheet);
         
         END_INTERFACE
     } IXSLProcessorVtbl;
@@ -14028,83 +12397,62 @@ EXTERN_C const IID IID_ISAXXMLReader;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE getFeature( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvfValue) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [retval][out] */ VARIANT_BOOL *pvfValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE putFeature( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vfValue) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ VARIANT_BOOL vfValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getProperty( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarValue) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [retval][out] */ VARIANT *pvarValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE putProperty( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ VARIANT varValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getEntityResolver( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXEntityResolver **ppResolver) = 0;
+            /* [retval][out] */ ISAXEntityResolver **ppResolver) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE putEntityResolver( 
-            /* [annotation][in] */ 
-            _In_  ISAXEntityResolver *pResolver) = 0;
+            /* [in] */ ISAXEntityResolver *pResolver) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getContentHandler( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXContentHandler **ppHandler) = 0;
+            /* [retval][out] */ ISAXContentHandler **ppHandler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE putContentHandler( 
-            /* [annotation][in] */ 
-            _In_  ISAXContentHandler *pHandler) = 0;
+            /* [in] */ ISAXContentHandler *pHandler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getDTDHandler( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXDTDHandler **ppHandler) = 0;
+            /* [retval][out] */ ISAXDTDHandler **ppHandler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE putDTDHandler( 
-            /* [annotation][in] */ 
-            _In_  ISAXDTDHandler *pHandler) = 0;
+            /* [in] */ ISAXDTDHandler *pHandler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getErrorHandler( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXErrorHandler **ppHandler) = 0;
+            /* [retval][out] */ ISAXErrorHandler **ppHandler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE putErrorHandler( 
-            /* [annotation][in] */ 
-            _In_  ISAXErrorHandler *pHandler) = 0;
+            /* [in] */ ISAXErrorHandler *pHandler) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getBaseURL( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  const wchar_t **ppwchBaseUrl) = 0;
+            /* [retval][out] */ const wchar_t **ppwchBaseUrl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE putBaseURL( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchBaseUrl) = 0;
+            /* [in] */ const wchar_t *pwchBaseUrl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getSecureBaseURL( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  const wchar_t **ppwchSecureBaseUrl) = 0;
+            /* [retval][out] */ const wchar_t **ppwchSecureBaseUrl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE putSecureBaseURL( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSecureBaseUrl) = 0;
+            /* [in] */ const wchar_t *pwchSecureBaseUrl) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE parse( 
             /* [optional][in] */ VARIANT varInput) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE parseURL( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUrl) = 0;
+            /* [in] */ const wchar_t *pwchUrl) = 0;
         
     };
     
@@ -14118,8 +12466,7 @@ EXTERN_C const IID IID_ISAXXMLReader;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14134,106 +12481,86 @@ EXTERN_C const IID IID_ISAXXMLReader;
         DECLSPEC_XFGVIRT(ISAXXMLReader, getFeature)
         HRESULT ( STDMETHODCALLTYPE *getFeature )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvfValue);
+            /* [in] */ const wchar_t *pwchName,
+            /* [retval][out] */ VARIANT_BOOL *pvfValue);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putFeature)
         HRESULT ( STDMETHODCALLTYPE *putFeature )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vfValue);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ VARIANT_BOOL vfValue);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getProperty)
         HRESULT ( STDMETHODCALLTYPE *getProperty )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarValue);
+            /* [in] */ const wchar_t *pwchName,
+            /* [retval][out] */ VARIANT *pvarValue);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putProperty)
         HRESULT ( STDMETHODCALLTYPE *putProperty )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ VARIANT varValue);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getEntityResolver)
         HRESULT ( STDMETHODCALLTYPE *getEntityResolver )( 
             ISAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXEntityResolver **ppResolver);
+            /* [retval][out] */ ISAXEntityResolver **ppResolver);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putEntityResolver)
         HRESULT ( STDMETHODCALLTYPE *putEntityResolver )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  ISAXEntityResolver *pResolver);
+            /* [in] */ ISAXEntityResolver *pResolver);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getContentHandler)
         HRESULT ( STDMETHODCALLTYPE *getContentHandler )( 
             ISAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXContentHandler **ppHandler);
+            /* [retval][out] */ ISAXContentHandler **ppHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putContentHandler)
         HRESULT ( STDMETHODCALLTYPE *putContentHandler )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  ISAXContentHandler *pHandler);
+            /* [in] */ ISAXContentHandler *pHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getDTDHandler)
         HRESULT ( STDMETHODCALLTYPE *getDTDHandler )( 
             ISAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXDTDHandler **ppHandler);
+            /* [retval][out] */ ISAXDTDHandler **ppHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putDTDHandler)
         HRESULT ( STDMETHODCALLTYPE *putDTDHandler )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  ISAXDTDHandler *pHandler);
+            /* [in] */ ISAXDTDHandler *pHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getErrorHandler)
         HRESULT ( STDMETHODCALLTYPE *getErrorHandler )( 
             ISAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXErrorHandler **ppHandler);
+            /* [retval][out] */ ISAXErrorHandler **ppHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putErrorHandler)
         HRESULT ( STDMETHODCALLTYPE *putErrorHandler )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  ISAXErrorHandler *pHandler);
+            /* [in] */ ISAXErrorHandler *pHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getBaseURL)
         HRESULT ( STDMETHODCALLTYPE *getBaseURL )( 
             ISAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  const wchar_t **ppwchBaseUrl);
+            /* [retval][out] */ const wchar_t **ppwchBaseUrl);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putBaseURL)
         HRESULT ( STDMETHODCALLTYPE *putBaseURL )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchBaseUrl);
+            /* [in] */ const wchar_t *pwchBaseUrl);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getSecureBaseURL)
         HRESULT ( STDMETHODCALLTYPE *getSecureBaseURL )( 
             ISAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  const wchar_t **ppwchSecureBaseUrl);
+            /* [retval][out] */ const wchar_t **ppwchSecureBaseUrl);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putSecureBaseURL)
         HRESULT ( STDMETHODCALLTYPE *putSecureBaseURL )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSecureBaseUrl);
+            /* [in] */ const wchar_t *pwchSecureBaseUrl);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, parse)
         HRESULT ( STDMETHODCALLTYPE *parse )( 
@@ -14243,8 +12570,7 @@ EXTERN_C const IID IID_ISAXXMLReader;
         DECLSPEC_XFGVIRT(ISAXXMLReader, parseURL)
         HRESULT ( STDMETHODCALLTYPE *parseURL )( 
             ISAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUrl);
+            /* [in] */ const wchar_t *pwchUrl);
         
         END_INTERFACE
     } ISAXXMLReaderVtbl;
@@ -14350,12 +12676,10 @@ EXTERN_C const IID IID_ISAXXMLFilter;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE getParent( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXXMLReader **ppReader) = 0;
+            /* [retval][out] */ ISAXXMLReader **ppReader) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE putParent( 
-            /* [annotation][in] */ 
-            _In_  ISAXXMLReader *pReader) = 0;
+            /* [in] */ ISAXXMLReader *pReader) = 0;
         
     };
     
@@ -14369,8 +12693,7 @@ EXTERN_C const IID IID_ISAXXMLFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14385,106 +12708,86 @@ EXTERN_C const IID IID_ISAXXMLFilter;
         DECLSPEC_XFGVIRT(ISAXXMLReader, getFeature)
         HRESULT ( STDMETHODCALLTYPE *getFeature )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pvfValue);
+            /* [in] */ const wchar_t *pwchName,
+            /* [retval][out] */ VARIANT_BOOL *pvfValue);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putFeature)
         HRESULT ( STDMETHODCALLTYPE *putFeature )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vfValue);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ VARIANT_BOOL vfValue);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getProperty)
         HRESULT ( STDMETHODCALLTYPE *getProperty )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarValue);
+            /* [in] */ const wchar_t *pwchName,
+            /* [retval][out] */ VARIANT *pvarValue);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putProperty)
         HRESULT ( STDMETHODCALLTYPE *putProperty )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ VARIANT varValue);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getEntityResolver)
         HRESULT ( STDMETHODCALLTYPE *getEntityResolver )( 
             ISAXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXEntityResolver **ppResolver);
+            /* [retval][out] */ ISAXEntityResolver **ppResolver);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putEntityResolver)
         HRESULT ( STDMETHODCALLTYPE *putEntityResolver )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  ISAXEntityResolver *pResolver);
+            /* [in] */ ISAXEntityResolver *pResolver);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getContentHandler)
         HRESULT ( STDMETHODCALLTYPE *getContentHandler )( 
             ISAXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXContentHandler **ppHandler);
+            /* [retval][out] */ ISAXContentHandler **ppHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putContentHandler)
         HRESULT ( STDMETHODCALLTYPE *putContentHandler )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  ISAXContentHandler *pHandler);
+            /* [in] */ ISAXContentHandler *pHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getDTDHandler)
         HRESULT ( STDMETHODCALLTYPE *getDTDHandler )( 
             ISAXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXDTDHandler **ppHandler);
+            /* [retval][out] */ ISAXDTDHandler **ppHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putDTDHandler)
         HRESULT ( STDMETHODCALLTYPE *putDTDHandler )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  ISAXDTDHandler *pHandler);
+            /* [in] */ ISAXDTDHandler *pHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getErrorHandler)
         HRESULT ( STDMETHODCALLTYPE *getErrorHandler )( 
             ISAXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXErrorHandler **ppHandler);
+            /* [retval][out] */ ISAXErrorHandler **ppHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putErrorHandler)
         HRESULT ( STDMETHODCALLTYPE *putErrorHandler )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  ISAXErrorHandler *pHandler);
+            /* [in] */ ISAXErrorHandler *pHandler);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getBaseURL)
         HRESULT ( STDMETHODCALLTYPE *getBaseURL )( 
             ISAXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  const wchar_t **ppwchBaseUrl);
+            /* [retval][out] */ const wchar_t **ppwchBaseUrl);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putBaseURL)
         HRESULT ( STDMETHODCALLTYPE *putBaseURL )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchBaseUrl);
+            /* [in] */ const wchar_t *pwchBaseUrl);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, getSecureBaseURL)
         HRESULT ( STDMETHODCALLTYPE *getSecureBaseURL )( 
             ISAXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  const wchar_t **ppwchSecureBaseUrl);
+            /* [retval][out] */ const wchar_t **ppwchSecureBaseUrl);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, putSecureBaseURL)
         HRESULT ( STDMETHODCALLTYPE *putSecureBaseURL )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSecureBaseUrl);
+            /* [in] */ const wchar_t *pwchSecureBaseUrl);
         
         DECLSPEC_XFGVIRT(ISAXXMLReader, parse)
         HRESULT ( STDMETHODCALLTYPE *parse )( 
@@ -14494,20 +12797,17 @@ EXTERN_C const IID IID_ISAXXMLFilter;
         DECLSPEC_XFGVIRT(ISAXXMLReader, parseURL)
         HRESULT ( STDMETHODCALLTYPE *parseURL )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUrl);
+            /* [in] */ const wchar_t *pwchUrl);
         
         DECLSPEC_XFGVIRT(ISAXXMLFilter, getParent)
         HRESULT ( STDMETHODCALLTYPE *getParent )( 
             ISAXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISAXXMLReader **ppReader);
+            /* [retval][out] */ ISAXXMLReader **ppReader);
         
         DECLSPEC_XFGVIRT(ISAXXMLFilter, putParent)
         HRESULT ( STDMETHODCALLTYPE *putParent )( 
             ISAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  ISAXXMLReader *pReader);
+            /* [in] */ ISAXXMLReader *pReader);
         
         END_INTERFACE
     } ISAXXMLFilterVtbl;
@@ -14620,20 +12920,16 @@ EXTERN_C const IID IID_ISAXLocator;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE getColumnNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pnColumn) = 0;
+            /* [retval][out] */ int *pnColumn) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getLineNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pnLine) = 0;
+            /* [retval][out] */ int *pnLine) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getPublicId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  const wchar_t **ppwchPublicId) = 0;
+            /* [retval][out] */ const wchar_t **ppwchPublicId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getSystemId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  const wchar_t **ppwchSystemId) = 0;
+            /* [retval][out] */ const wchar_t **ppwchSystemId) = 0;
         
     };
     
@@ -14647,8 +12943,7 @@ EXTERN_C const IID IID_ISAXLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISAXLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14663,26 +12958,22 @@ EXTERN_C const IID IID_ISAXLocator;
         DECLSPEC_XFGVIRT(ISAXLocator, getColumnNumber)
         HRESULT ( STDMETHODCALLTYPE *getColumnNumber )( 
             ISAXLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pnColumn);
+            /* [retval][out] */ int *pnColumn);
         
         DECLSPEC_XFGVIRT(ISAXLocator, getLineNumber)
         HRESULT ( STDMETHODCALLTYPE *getLineNumber )( 
             ISAXLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pnLine);
+            /* [retval][out] */ int *pnLine);
         
         DECLSPEC_XFGVIRT(ISAXLocator, getPublicId)
         HRESULT ( STDMETHODCALLTYPE *getPublicId )( 
             ISAXLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  const wchar_t **ppwchPublicId);
+            /* [retval][out] */ const wchar_t **ppwchPublicId);
         
         DECLSPEC_XFGVIRT(ISAXLocator, getSystemId)
         HRESULT ( STDMETHODCALLTYPE *getSystemId )( 
             ISAXLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  const wchar_t **ppwchSystemId);
+            /* [retval][out] */ const wchar_t **ppwchSystemId);
         
         END_INTERFACE
     } ISAXLocatorVtbl;
@@ -14746,12 +13037,9 @@ EXTERN_C const IID IID_ISAXEntityResolver;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE resolveEntity( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPublicId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSystemId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarInput) = 0;
+            /* [in] */ const wchar_t *pwchPublicId,
+            /* [in] */ const wchar_t *pwchSystemId,
+            /* [retval][out] */ VARIANT *pvarInput) = 0;
         
     };
     
@@ -14765,8 +13053,7 @@ EXTERN_C const IID IID_ISAXEntityResolver;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISAXEntityResolver * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14781,12 +13068,9 @@ EXTERN_C const IID IID_ISAXEntityResolver;
         DECLSPEC_XFGVIRT(ISAXEntityResolver, resolveEntity)
         HRESULT ( STDMETHODCALLTYPE *resolveEntity )( 
             ISAXEntityResolver * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPublicId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSystemId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarInput);
+            /* [in] */ const wchar_t *pwchPublicId,
+            /* [in] */ const wchar_t *pwchSystemId,
+            /* [retval][out] */ VARIANT *pvarInput);
         
         END_INTERFACE
     } ISAXEntityResolverVtbl;
@@ -14841,86 +13125,56 @@ EXTERN_C const IID IID_ISAXContentHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE putDocumentLocator( 
-            /* [annotation][in] */ 
-            _In_  ISAXLocator *pLocator) = 0;
+            /* [in] */ ISAXLocator *pLocator) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE startDocument( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE endDocument( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE startPrefixMapping( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPrefix,
-            /* [annotation][in] */ 
-            _In_  int cchPrefix,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUri,
-            /* [annotation][in] */ 
-            _In_  int cchUri) = 0;
+            /* [in] */ const wchar_t *pwchPrefix,
+            /* [in] */ int cchPrefix,
+            /* [in] */ const wchar_t *pwchUri,
+            /* [in] */ int cchUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE endPrefixMapping( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPrefix,
-            /* [annotation][in] */ 
-            _In_  int cchPrefix) = 0;
+            /* [in] */ const wchar_t *pwchPrefix,
+            /* [in] */ int cchPrefix) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE startElement( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchNamespaceUri,
-            /* [annotation][in] */ 
-            _In_  int cchNamespaceUri,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchLocalName,
-            /* [annotation][in] */ 
-            _In_  int cchLocalName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchQName,
-            /* [annotation][in] */ 
-            _In_  int cchQName,
-            /* [annotation][in] */ 
-            _In_  ISAXAttributes *pAttributes) = 0;
+            /* [in] */ const wchar_t *pwchNamespaceUri,
+            /* [in] */ int cchNamespaceUri,
+            /* [in] */ const wchar_t *pwchLocalName,
+            /* [in] */ int cchLocalName,
+            /* [in] */ const wchar_t *pwchQName,
+            /* [in] */ int cchQName,
+            /* [in] */ ISAXAttributes *pAttributes) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE endElement( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchNamespaceUri,
-            /* [annotation][in] */ 
-            _In_  int cchNamespaceUri,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchLocalName,
-            /* [annotation][in] */ 
-            _In_  int cchLocalName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchQName,
-            /* [annotation][in] */ 
-            _In_  int cchQName) = 0;
+            /* [in] */ const wchar_t *pwchNamespaceUri,
+            /* [in] */ int cchNamespaceUri,
+            /* [in] */ const wchar_t *pwchLocalName,
+            /* [in] */ int cchLocalName,
+            /* [in] */ const wchar_t *pwchQName,
+            /* [in] */ int cchQName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE characters( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchChars,
-            /* [annotation][in] */ 
-            _In_  int cchChars) = 0;
+            /* [in] */ const wchar_t *pwchChars,
+            /* [in] */ int cchChars) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ignorableWhitespace( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchChars,
-            /* [annotation][in] */ 
-            _In_  int cchChars) = 0;
+            /* [in] */ const wchar_t *pwchChars,
+            /* [in] */ int cchChars) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE processingInstruction( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchTarget,
-            /* [annotation][in] */ 
-            _In_  int cchTarget,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchData,
-            /* [annotation][in] */ 
-            _In_  int cchData) = 0;
+            /* [in] */ const wchar_t *pwchTarget,
+            /* [in] */ int cchTarget,
+            /* [in] */ const wchar_t *pwchData,
+            /* [in] */ int cchData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE skippedEntity( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName) = 0;
         
     };
     
@@ -14934,8 +13188,7 @@ EXTERN_C const IID IID_ISAXContentHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -14950,8 +13203,7 @@ EXTERN_C const IID IID_ISAXContentHandler;
         DECLSPEC_XFGVIRT(ISAXContentHandler, putDocumentLocator)
         HRESULT ( STDMETHODCALLTYPE *putDocumentLocator )( 
             ISAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  ISAXLocator *pLocator);
+            /* [in] */ ISAXLocator *pLocator);
         
         DECLSPEC_XFGVIRT(ISAXContentHandler, startDocument)
         HRESULT ( STDMETHODCALLTYPE *startDocument )( 
@@ -14964,92 +13216,63 @@ EXTERN_C const IID IID_ISAXContentHandler;
         DECLSPEC_XFGVIRT(ISAXContentHandler, startPrefixMapping)
         HRESULT ( STDMETHODCALLTYPE *startPrefixMapping )( 
             ISAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPrefix,
-            /* [annotation][in] */ 
-            _In_  int cchPrefix,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUri,
-            /* [annotation][in] */ 
-            _In_  int cchUri);
+            /* [in] */ const wchar_t *pwchPrefix,
+            /* [in] */ int cchPrefix,
+            /* [in] */ const wchar_t *pwchUri,
+            /* [in] */ int cchUri);
         
         DECLSPEC_XFGVIRT(ISAXContentHandler, endPrefixMapping)
         HRESULT ( STDMETHODCALLTYPE *endPrefixMapping )( 
             ISAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPrefix,
-            /* [annotation][in] */ 
-            _In_  int cchPrefix);
+            /* [in] */ const wchar_t *pwchPrefix,
+            /* [in] */ int cchPrefix);
         
         DECLSPEC_XFGVIRT(ISAXContentHandler, startElement)
         HRESULT ( STDMETHODCALLTYPE *startElement )( 
             ISAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchNamespaceUri,
-            /* [annotation][in] */ 
-            _In_  int cchNamespaceUri,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchLocalName,
-            /* [annotation][in] */ 
-            _In_  int cchLocalName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchQName,
-            /* [annotation][in] */ 
-            _In_  int cchQName,
-            /* [annotation][in] */ 
-            _In_  ISAXAttributes *pAttributes);
+            /* [in] */ const wchar_t *pwchNamespaceUri,
+            /* [in] */ int cchNamespaceUri,
+            /* [in] */ const wchar_t *pwchLocalName,
+            /* [in] */ int cchLocalName,
+            /* [in] */ const wchar_t *pwchQName,
+            /* [in] */ int cchQName,
+            /* [in] */ ISAXAttributes *pAttributes);
         
         DECLSPEC_XFGVIRT(ISAXContentHandler, endElement)
         HRESULT ( STDMETHODCALLTYPE *endElement )( 
             ISAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchNamespaceUri,
-            /* [annotation][in] */ 
-            _In_  int cchNamespaceUri,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchLocalName,
-            /* [annotation][in] */ 
-            _In_  int cchLocalName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchQName,
-            /* [annotation][in] */ 
-            _In_  int cchQName);
+            /* [in] */ const wchar_t *pwchNamespaceUri,
+            /* [in] */ int cchNamespaceUri,
+            /* [in] */ const wchar_t *pwchLocalName,
+            /* [in] */ int cchLocalName,
+            /* [in] */ const wchar_t *pwchQName,
+            /* [in] */ int cchQName);
         
         DECLSPEC_XFGVIRT(ISAXContentHandler, characters)
         HRESULT ( STDMETHODCALLTYPE *characters )( 
             ISAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchChars,
-            /* [annotation][in] */ 
-            _In_  int cchChars);
+            /* [in] */ const wchar_t *pwchChars,
+            /* [in] */ int cchChars);
         
         DECLSPEC_XFGVIRT(ISAXContentHandler, ignorableWhitespace)
         HRESULT ( STDMETHODCALLTYPE *ignorableWhitespace )( 
             ISAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchChars,
-            /* [annotation][in] */ 
-            _In_  int cchChars);
+            /* [in] */ const wchar_t *pwchChars,
+            /* [in] */ int cchChars);
         
         DECLSPEC_XFGVIRT(ISAXContentHandler, processingInstruction)
         HRESULT ( STDMETHODCALLTYPE *processingInstruction )( 
             ISAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchTarget,
-            /* [annotation][in] */ 
-            _In_  int cchTarget,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchData,
-            /* [annotation][in] */ 
-            _In_  int cchData);
+            /* [in] */ const wchar_t *pwchTarget,
+            /* [in] */ int cchTarget,
+            /* [in] */ const wchar_t *pwchData,
+            /* [in] */ int cchData);
         
         DECLSPEC_XFGVIRT(ISAXContentHandler, skippedEntity)
         HRESULT ( STDMETHODCALLTYPE *skippedEntity )( 
             ISAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName);
         
         END_INTERFACE
     } ISAXContentHandlerVtbl;
@@ -15134,36 +13357,22 @@ EXTERN_C const IID IID_ISAXDTDHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE notationDecl( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPublicId,
-            /* [annotation][in] */ 
-            _In_  int cchPublicId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSystemId,
-            /* [annotation][in] */ 
-            _In_  int cchSystemId) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchPublicId,
+            /* [in] */ int cchPublicId,
+            /* [in] */ const wchar_t *pwchSystemId,
+            /* [in] */ int cchSystemId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE unparsedEntityDecl( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPublicId,
-            /* [annotation][in] */ 
-            _In_  int cchPublicId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSystemId,
-            /* [annotation][in] */ 
-            _In_  int cchSystemId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchNotationName,
-            /* [annotation][in] */ 
-            _In_  int cchNotationName) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchPublicId,
+            /* [in] */ int cchPublicId,
+            /* [in] */ const wchar_t *pwchSystemId,
+            /* [in] */ int cchSystemId,
+            /* [in] */ const wchar_t *pwchNotationName,
+            /* [in] */ int cchNotationName) = 0;
         
     };
     
@@ -15177,8 +13386,7 @@ EXTERN_C const IID IID_ISAXDTDHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISAXDTDHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15193,38 +13401,24 @@ EXTERN_C const IID IID_ISAXDTDHandler;
         DECLSPEC_XFGVIRT(ISAXDTDHandler, notationDecl)
         HRESULT ( STDMETHODCALLTYPE *notationDecl )( 
             ISAXDTDHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPublicId,
-            /* [annotation][in] */ 
-            _In_  int cchPublicId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSystemId,
-            /* [annotation][in] */ 
-            _In_  int cchSystemId);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchPublicId,
+            /* [in] */ int cchPublicId,
+            /* [in] */ const wchar_t *pwchSystemId,
+            /* [in] */ int cchSystemId);
         
         DECLSPEC_XFGVIRT(ISAXDTDHandler, unparsedEntityDecl)
         HRESULT ( STDMETHODCALLTYPE *unparsedEntityDecl )( 
             ISAXDTDHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPublicId,
-            /* [annotation][in] */ 
-            _In_  int cchPublicId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSystemId,
-            /* [annotation][in] */ 
-            _In_  int cchSystemId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchNotationName,
-            /* [annotation][in] */ 
-            _In_  int cchNotationName);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchPublicId,
+            /* [in] */ int cchPublicId,
+            /* [in] */ const wchar_t *pwchSystemId,
+            /* [in] */ int cchSystemId,
+            /* [in] */ const wchar_t *pwchNotationName,
+            /* [in] */ int cchNotationName);
         
         END_INTERFACE
     } ISAXDTDHandlerVtbl;
@@ -15282,28 +13476,19 @@ EXTERN_C const IID IID_ISAXErrorHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE error( 
-            /* [annotation][in] */ 
-            _In_  ISAXLocator *pLocator,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchErrorMessage,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrErrorCode) = 0;
+            /* [in] */ ISAXLocator *pLocator,
+            /* [in] */ const wchar_t *pwchErrorMessage,
+            /* [in] */ HRESULT hrErrorCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE fatalError( 
-            /* [annotation][in] */ 
-            _In_  ISAXLocator *pLocator,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchErrorMessage,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrErrorCode) = 0;
+            /* [in] */ ISAXLocator *pLocator,
+            /* [in] */ const wchar_t *pwchErrorMessage,
+            /* [in] */ HRESULT hrErrorCode) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ignorableWarning( 
-            /* [annotation][in] */ 
-            _In_  ISAXLocator *pLocator,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchErrorMessage,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrErrorCode) = 0;
+            /* [in] */ ISAXLocator *pLocator,
+            /* [in] */ const wchar_t *pwchErrorMessage,
+            /* [in] */ HRESULT hrErrorCode) = 0;
         
     };
     
@@ -15317,8 +13502,7 @@ EXTERN_C const IID IID_ISAXErrorHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISAXErrorHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15333,32 +13517,23 @@ EXTERN_C const IID IID_ISAXErrorHandler;
         DECLSPEC_XFGVIRT(ISAXErrorHandler, error)
         HRESULT ( STDMETHODCALLTYPE *error )( 
             ISAXErrorHandler * This,
-            /* [annotation][in] */ 
-            _In_  ISAXLocator *pLocator,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchErrorMessage,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrErrorCode);
+            /* [in] */ ISAXLocator *pLocator,
+            /* [in] */ const wchar_t *pwchErrorMessage,
+            /* [in] */ HRESULT hrErrorCode);
         
         DECLSPEC_XFGVIRT(ISAXErrorHandler, fatalError)
         HRESULT ( STDMETHODCALLTYPE *fatalError )( 
             ISAXErrorHandler * This,
-            /* [annotation][in] */ 
-            _In_  ISAXLocator *pLocator,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchErrorMessage,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrErrorCode);
+            /* [in] */ ISAXLocator *pLocator,
+            /* [in] */ const wchar_t *pwchErrorMessage,
+            /* [in] */ HRESULT hrErrorCode);
         
         DECLSPEC_XFGVIRT(ISAXErrorHandler, ignorableWarning)
         HRESULT ( STDMETHODCALLTYPE *ignorableWarning )( 
             ISAXErrorHandler * This,
-            /* [annotation][in] */ 
-            _In_  ISAXLocator *pLocator,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchErrorMessage,
-            /* [annotation][in] */ 
-            _In_  HRESULT hrErrorCode);
+            /* [in] */ ISAXLocator *pLocator,
+            /* [in] */ const wchar_t *pwchErrorMessage,
+            /* [in] */ HRESULT hrErrorCode);
         
         END_INTERFACE
     } ISAXErrorHandlerVtbl;
@@ -15419,42 +13594,30 @@ EXTERN_C const IID IID_ISAXLexicalHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE startDTD( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPublicId,
-            /* [annotation][in] */ 
-            _In_  int cchPublicId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSystemId,
-            /* [annotation][in] */ 
-            _In_  int cchSystemId) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchPublicId,
+            /* [in] */ int cchPublicId,
+            /* [in] */ const wchar_t *pwchSystemId,
+            /* [in] */ int cchSystemId) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE endDTD( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE startEntity( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE endEntity( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE startCDATA( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE endCDATA( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE comment( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchChars,
-            /* [annotation][in] */ 
-            _In_  int cchChars) = 0;
+            /* [in] */ const wchar_t *pwchChars,
+            /* [in] */ int cchChars) = 0;
         
     };
     
@@ -15468,8 +13631,7 @@ EXTERN_C const IID IID_ISAXLexicalHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISAXLexicalHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15484,18 +13646,12 @@ EXTERN_C const IID IID_ISAXLexicalHandler;
         DECLSPEC_XFGVIRT(ISAXLexicalHandler, startDTD)
         HRESULT ( STDMETHODCALLTYPE *startDTD )( 
             ISAXLexicalHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPublicId,
-            /* [annotation][in] */ 
-            _In_  int cchPublicId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSystemId,
-            /* [annotation][in] */ 
-            _In_  int cchSystemId);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchPublicId,
+            /* [in] */ int cchPublicId,
+            /* [in] */ const wchar_t *pwchSystemId,
+            /* [in] */ int cchSystemId);
         
         DECLSPEC_XFGVIRT(ISAXLexicalHandler, endDTD)
         HRESULT ( STDMETHODCALLTYPE *endDTD )( 
@@ -15504,18 +13660,14 @@ EXTERN_C const IID IID_ISAXLexicalHandler;
         DECLSPEC_XFGVIRT(ISAXLexicalHandler, startEntity)
         HRESULT ( STDMETHODCALLTYPE *startEntity )( 
             ISAXLexicalHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName);
         
         DECLSPEC_XFGVIRT(ISAXLexicalHandler, endEntity)
         HRESULT ( STDMETHODCALLTYPE *endEntity )( 
             ISAXLexicalHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName);
         
         DECLSPEC_XFGVIRT(ISAXLexicalHandler, startCDATA)
         HRESULT ( STDMETHODCALLTYPE *startCDATA )( 
@@ -15528,10 +13680,8 @@ EXTERN_C const IID IID_ISAXLexicalHandler;
         DECLSPEC_XFGVIRT(ISAXLexicalHandler, comment)
         HRESULT ( STDMETHODCALLTYPE *comment )( 
             ISAXLexicalHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchChars,
-            /* [annotation][in] */ 
-            _In_  int cchChars);
+            /* [in] */ const wchar_t *pwchChars,
+            /* [in] */ int cchChars);
         
         END_INTERFACE
     } ISAXLexicalHandlerVtbl;
@@ -15604,60 +13754,36 @@ EXTERN_C const IID IID_ISAXDeclHandler;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE elementDecl( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchModel,
-            /* [annotation][in] */ 
-            _In_  int cchModel) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchModel,
+            /* [in] */ int cchModel) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE attributeDecl( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchElementName,
-            /* [annotation][in] */ 
-            _In_  int cchElementName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchAttributeName,
-            /* [annotation][in] */ 
-            _In_  int cchAttributeName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchType,
-            /* [annotation][in] */ 
-            _In_  int cchType,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchValueDefault,
-            /* [annotation][in] */ 
-            _In_  int cchValueDefault,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchValue,
-            /* [annotation][in] */ 
-            _In_  int cchValue) = 0;
+            /* [in] */ const wchar_t *pwchElementName,
+            /* [in] */ int cchElementName,
+            /* [in] */ const wchar_t *pwchAttributeName,
+            /* [in] */ int cchAttributeName,
+            /* [in] */ const wchar_t *pwchType,
+            /* [in] */ int cchType,
+            /* [in] */ const wchar_t *pwchValueDefault,
+            /* [in] */ int cchValueDefault,
+            /* [in] */ const wchar_t *pwchValue,
+            /* [in] */ int cchValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE internalEntityDecl( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchValue,
-            /* [annotation][in] */ 
-            _In_  int cchValue) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchValue,
+            /* [in] */ int cchValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE externalEntityDecl( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPublicId,
-            /* [annotation][in] */ 
-            _In_  int cchPublicId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSystemId,
-            /* [annotation][in] */ 
-            _In_  int cchSystemId) = 0;
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchPublicId,
+            /* [in] */ int cchPublicId,
+            /* [in] */ const wchar_t *pwchSystemId,
+            /* [in] */ int cchSystemId) = 0;
         
     };
     
@@ -15671,8 +13797,7 @@ EXTERN_C const IID IID_ISAXDeclHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISAXDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15687,66 +13812,42 @@ EXTERN_C const IID IID_ISAXDeclHandler;
         DECLSPEC_XFGVIRT(ISAXDeclHandler, elementDecl)
         HRESULT ( STDMETHODCALLTYPE *elementDecl )( 
             ISAXDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchModel,
-            /* [annotation][in] */ 
-            _In_  int cchModel);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchModel,
+            /* [in] */ int cchModel);
         
         DECLSPEC_XFGVIRT(ISAXDeclHandler, attributeDecl)
         HRESULT ( STDMETHODCALLTYPE *attributeDecl )( 
             ISAXDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchElementName,
-            /* [annotation][in] */ 
-            _In_  int cchElementName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchAttributeName,
-            /* [annotation][in] */ 
-            _In_  int cchAttributeName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchType,
-            /* [annotation][in] */ 
-            _In_  int cchType,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchValueDefault,
-            /* [annotation][in] */ 
-            _In_  int cchValueDefault,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchValue,
-            /* [annotation][in] */ 
-            _In_  int cchValue);
+            /* [in] */ const wchar_t *pwchElementName,
+            /* [in] */ int cchElementName,
+            /* [in] */ const wchar_t *pwchAttributeName,
+            /* [in] */ int cchAttributeName,
+            /* [in] */ const wchar_t *pwchType,
+            /* [in] */ int cchType,
+            /* [in] */ const wchar_t *pwchValueDefault,
+            /* [in] */ int cchValueDefault,
+            /* [in] */ const wchar_t *pwchValue,
+            /* [in] */ int cchValue);
         
         DECLSPEC_XFGVIRT(ISAXDeclHandler, internalEntityDecl)
         HRESULT ( STDMETHODCALLTYPE *internalEntityDecl )( 
             ISAXDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchValue,
-            /* [annotation][in] */ 
-            _In_  int cchValue);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchValue,
+            /* [in] */ int cchValue);
         
         DECLSPEC_XFGVIRT(ISAXDeclHandler, externalEntityDecl)
         HRESULT ( STDMETHODCALLTYPE *externalEntityDecl )( 
             ISAXDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchName,
-            /* [annotation][in] */ 
-            _In_  int cchName,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchPublicId,
-            /* [annotation][in] */ 
-            _In_  int cchPublicId,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchSystemId,
-            /* [annotation][in] */ 
-            _In_  int cchSystemId);
+            /* [in] */ const wchar_t *pwchName,
+            /* [in] */ int cchName,
+            /* [in] */ const wchar_t *pwchPublicId,
+            /* [in] */ int cchPublicId,
+            /* [in] */ const wchar_t *pwchSystemId,
+            /* [in] */ int cchSystemId);
         
         END_INTERFACE
     } ISAXDeclHandlerVtbl;
@@ -15810,132 +13911,81 @@ EXTERN_C const IID IID_ISAXAttributes;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE getLength( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pnLength) = 0;
+            /* [retval][out] */ int *pnLength) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getURI( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchUri,
-            /* [annotation][out] */ 
-            _Out_  int *pcchUri) = 0;
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchUri,
+            /* [out] */ int *pcchUri) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getLocalName( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchLocalName,
-            /* [annotation][out] */ 
-            _Out_  int *pcchLocalName) = 0;
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchLocalName,
+            /* [out] */ int *pcchLocalName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getQName( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchQName,
-            /* [annotation][out] */ 
-            _Out_  int *pcchQName) = 0;
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchQName,
+            /* [out] */ int *pcchQName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getName( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchUri,
-            /* [annotation][out] */ 
-            _Out_  int *pcchUri,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchLocalName,
-            /* [annotation][out] */ 
-            _Out_  int *pcchLocalName,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchQName,
-            /* [annotation][out] */ 
-            _Out_  int *pcchQName) = 0;
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchUri,
+            /* [out] */ int *pcchUri,
+            /* [out] */ const wchar_t **ppwchLocalName,
+            /* [out] */ int *pcchLocalName,
+            /* [out] */ const wchar_t **ppwchQName,
+            /* [out] */ int *pcchQName) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getIndexFromName( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUri,
-            /* [annotation][in] */ 
-            _In_  int cchUri,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchLocalName,
-            /* [annotation][in] */ 
-            _In_  int cchLocalName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pnIndex) = 0;
+            /* [in] */ const wchar_t *pwchUri,
+            /* [in] */ int cchUri,
+            /* [in] */ const wchar_t *pwchLocalName,
+            /* [in] */ int cchLocalName,
+            /* [retval][out] */ int *pnIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getIndexFromQName( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchQName,
-            /* [annotation][in] */ 
-            _In_  int cchQName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pnIndex) = 0;
+            /* [in] */ const wchar_t *pwchQName,
+            /* [in] */ int cchQName,
+            /* [retval][out] */ int *pnIndex) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getType( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchType,
-            /* [annotation][out] */ 
-            _Out_  int *pcchType) = 0;
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchType,
+            /* [out] */ int *pcchType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getTypeFromName( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUri,
-            /* [annotation][in] */ 
-            _In_  int cchUri,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchLocalName,
-            /* [annotation][in] */ 
-            _In_  int cchLocalName,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchType,
-            /* [annotation][out] */ 
-            _Out_  int *pcchType) = 0;
+            /* [in] */ const wchar_t *pwchUri,
+            /* [in] */ int cchUri,
+            /* [in] */ const wchar_t *pwchLocalName,
+            /* [in] */ int cchLocalName,
+            /* [out] */ const wchar_t **ppwchType,
+            /* [out] */ int *pcchType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getTypeFromQName( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchQName,
-            /* [annotation][in] */ 
-            _In_  int cchQName,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchType,
-            /* [annotation][out] */ 
-            _Out_  int *pcchType) = 0;
+            /* [in] */ const wchar_t *pwchQName,
+            /* [in] */ int cchQName,
+            /* [out] */ const wchar_t **ppwchType,
+            /* [out] */ int *pcchType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getValue( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchValue,
-            /* [annotation][out] */ 
-            _Out_  int *pcchValue) = 0;
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchValue,
+            /* [out] */ int *pcchValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getValueFromName( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUri,
-            /* [annotation][in] */ 
-            _In_  int cchUri,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchLocalName,
-            /* [annotation][in] */ 
-            _In_  int cchLocalName,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchValue,
-            /* [annotation][out] */ 
-            _Out_  int *pcchValue) = 0;
+            /* [in] */ const wchar_t *pwchUri,
+            /* [in] */ int cchUri,
+            /* [in] */ const wchar_t *pwchLocalName,
+            /* [in] */ int cchLocalName,
+            /* [out] */ const wchar_t **ppwchValue,
+            /* [out] */ int *pcchValue) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getValueFromQName( 
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchQName,
-            /* [annotation][in] */ 
-            _In_  int cchQName,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchValue,
-            /* [annotation][out] */ 
-            _Out_  int *pcchValue) = 0;
+            /* [in] */ const wchar_t *pwchQName,
+            /* [in] */ int cchQName,
+            /* [out] */ const wchar_t **ppwchValue,
+            /* [out] */ int *pcchValue) = 0;
         
     };
     
@@ -15949,8 +13999,7 @@ EXTERN_C const IID IID_ISAXAttributes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -15965,156 +14014,105 @@ EXTERN_C const IID IID_ISAXAttributes;
         DECLSPEC_XFGVIRT(ISAXAttributes, getLength)
         HRESULT ( STDMETHODCALLTYPE *getLength )( 
             ISAXAttributes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pnLength);
+            /* [retval][out] */ int *pnLength);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getURI)
         HRESULT ( STDMETHODCALLTYPE *getURI )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchUri,
-            /* [annotation][out] */ 
-            _Out_  int *pcchUri);
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchUri,
+            /* [out] */ int *pcchUri);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getLocalName)
         HRESULT ( STDMETHODCALLTYPE *getLocalName )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchLocalName,
-            /* [annotation][out] */ 
-            _Out_  int *pcchLocalName);
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchLocalName,
+            /* [out] */ int *pcchLocalName);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getQName)
         HRESULT ( STDMETHODCALLTYPE *getQName )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchQName,
-            /* [annotation][out] */ 
-            _Out_  int *pcchQName);
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchQName,
+            /* [out] */ int *pcchQName);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getName)
         HRESULT ( STDMETHODCALLTYPE *getName )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchUri,
-            /* [annotation][out] */ 
-            _Out_  int *pcchUri,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchLocalName,
-            /* [annotation][out] */ 
-            _Out_  int *pcchLocalName,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchQName,
-            /* [annotation][out] */ 
-            _Out_  int *pcchQName);
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchUri,
+            /* [out] */ int *pcchUri,
+            /* [out] */ const wchar_t **ppwchLocalName,
+            /* [out] */ int *pcchLocalName,
+            /* [out] */ const wchar_t **ppwchQName,
+            /* [out] */ int *pcchQName);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getIndexFromName)
         HRESULT ( STDMETHODCALLTYPE *getIndexFromName )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUri,
-            /* [annotation][in] */ 
-            _In_  int cchUri,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchLocalName,
-            /* [annotation][in] */ 
-            _In_  int cchLocalName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pnIndex);
+            /* [in] */ const wchar_t *pwchUri,
+            /* [in] */ int cchUri,
+            /* [in] */ const wchar_t *pwchLocalName,
+            /* [in] */ int cchLocalName,
+            /* [retval][out] */ int *pnIndex);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getIndexFromQName)
         HRESULT ( STDMETHODCALLTYPE *getIndexFromQName )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchQName,
-            /* [annotation][in] */ 
-            _In_  int cchQName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *pnIndex);
+            /* [in] */ const wchar_t *pwchQName,
+            /* [in] */ int cchQName,
+            /* [retval][out] */ int *pnIndex);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getType)
         HRESULT ( STDMETHODCALLTYPE *getType )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchType,
-            /* [annotation][out] */ 
-            _Out_  int *pcchType);
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchType,
+            /* [out] */ int *pcchType);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getTypeFromName)
         HRESULT ( STDMETHODCALLTYPE *getTypeFromName )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUri,
-            /* [annotation][in] */ 
-            _In_  int cchUri,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchLocalName,
-            /* [annotation][in] */ 
-            _In_  int cchLocalName,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchType,
-            /* [annotation][out] */ 
-            _Out_  int *pcchType);
+            /* [in] */ const wchar_t *pwchUri,
+            /* [in] */ int cchUri,
+            /* [in] */ const wchar_t *pwchLocalName,
+            /* [in] */ int cchLocalName,
+            /* [out] */ const wchar_t **ppwchType,
+            /* [out] */ int *pcchType);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getTypeFromQName)
         HRESULT ( STDMETHODCALLTYPE *getTypeFromQName )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchQName,
-            /* [annotation][in] */ 
-            _In_  int cchQName,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchType,
-            /* [annotation][out] */ 
-            _Out_  int *pcchType);
+            /* [in] */ const wchar_t *pwchQName,
+            /* [in] */ int cchQName,
+            /* [out] */ const wchar_t **ppwchType,
+            /* [out] */ int *pcchType);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getValue)
         HRESULT ( STDMETHODCALLTYPE *getValue )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchValue,
-            /* [annotation][out] */ 
-            _Out_  int *pcchValue);
+            /* [in] */ int nIndex,
+            /* [out] */ const wchar_t **ppwchValue,
+            /* [out] */ int *pcchValue);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getValueFromName)
         HRESULT ( STDMETHODCALLTYPE *getValueFromName )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchUri,
-            /* [annotation][in] */ 
-            _In_  int cchUri,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchLocalName,
-            /* [annotation][in] */ 
-            _In_  int cchLocalName,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchValue,
-            /* [annotation][out] */ 
-            _Out_  int *pcchValue);
+            /* [in] */ const wchar_t *pwchUri,
+            /* [in] */ int cchUri,
+            /* [in] */ const wchar_t *pwchLocalName,
+            /* [in] */ int cchLocalName,
+            /* [out] */ const wchar_t **ppwchValue,
+            /* [out] */ int *pcchValue);
         
         DECLSPEC_XFGVIRT(ISAXAttributes, getValueFromQName)
         HRESULT ( STDMETHODCALLTYPE *getValueFromQName )( 
             ISAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  const wchar_t *pwchQName,
-            /* [annotation][in] */ 
-            _In_  int cchQName,
-            /* [annotation][out] */ 
-            _Out_  const wchar_t **ppwchValue,
-            /* [annotation][out] */ 
-            _Out_  int *pcchValue);
+            /* [in] */ const wchar_t *pwchQName,
+            /* [in] */ int cchQName,
+            /* [out] */ const wchar_t **ppwchValue,
+            /* [out] */ int *pcchValue);
         
         END_INTERFACE
     } ISAXAttributesVtbl;
@@ -16205,83 +14203,62 @@ EXTERN_C const IID IID_IVBSAXXMLReader;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getFeature( 
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fValue) = 0;
+            /* [in] */ BSTR strName,
+            /* [retval][out] */ VARIANT_BOOL *fValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE putFeature( 
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fValue) = 0;
+            /* [in] */ BSTR strName,
+            /* [in] */ VARIANT_BOOL fValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getProperty( 
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varValue) = 0;
+            /* [in] */ BSTR strName,
+            /* [retval][out] */ VARIANT *varValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE putProperty( 
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue) = 0;
+            /* [in] */ BSTR strName,
+            /* [in] */ VARIANT varValue) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_entityResolver( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXEntityResolver **oResolver) = 0;
+            /* [retval][out] */ IVBSAXEntityResolver **oResolver) = 0;
         
         virtual /* [helpstring][id][propputref] */ HRESULT STDMETHODCALLTYPE putref_entityResolver( 
-            /* [annotation][in] */ 
-            _In_  IVBSAXEntityResolver *oResolver) = 0;
+            /* [in] */ IVBSAXEntityResolver *oResolver) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_contentHandler( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXContentHandler **oHandler) = 0;
+            /* [retval][out] */ IVBSAXContentHandler **oHandler) = 0;
         
         virtual /* [helpstring][id][propputref] */ HRESULT STDMETHODCALLTYPE putref_contentHandler( 
-            /* [annotation][in] */ 
-            _In_  IVBSAXContentHandler *oHandler) = 0;
+            /* [in] */ IVBSAXContentHandler *oHandler) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_dtdHandler( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXDTDHandler **oHandler) = 0;
+            /* [retval][out] */ IVBSAXDTDHandler **oHandler) = 0;
         
         virtual /* [helpstring][id][propputref] */ HRESULT STDMETHODCALLTYPE putref_dtdHandler( 
-            /* [annotation][in] */ 
-            _In_  IVBSAXDTDHandler *oHandler) = 0;
+            /* [in] */ IVBSAXDTDHandler *oHandler) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_errorHandler( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXErrorHandler **oHandler) = 0;
+            /* [retval][out] */ IVBSAXErrorHandler **oHandler) = 0;
         
         virtual /* [helpstring][id][propputref] */ HRESULT STDMETHODCALLTYPE putref_errorHandler( 
-            /* [annotation][in] */ 
-            _In_  IVBSAXErrorHandler *oHandler) = 0;
+            /* [in] */ IVBSAXErrorHandler *oHandler) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_baseURL( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strBaseURL) = 0;
+            /* [retval][out] */ BSTR *strBaseURL) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_baseURL( 
-            /* [annotation][in] */ 
-            _In_  BSTR strBaseURL) = 0;
+            /* [in] */ BSTR strBaseURL) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_secureBaseURL( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strSecureBaseURL) = 0;
+            /* [retval][out] */ BSTR *strSecureBaseURL) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_secureBaseURL( 
-            /* [annotation][in] */ 
-            _In_  BSTR strSecureBaseURL) = 0;
+            /* [in] */ BSTR strSecureBaseURL) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE parse( 
             /* [optional][in] */ VARIANT varInput) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE parseURL( 
-            /* [annotation][in] */ 
-            _In_  BSTR strURL) = 0;
+            /* [in] */ BSTR strURL) = 0;
         
     };
     
@@ -16295,8 +14272,7 @@ EXTERN_C const IID IID_IVBSAXXMLReader;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16311,31 +14287,23 @@ EXTERN_C const IID IID_IVBSAXXMLReader;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBSAXXMLReader * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -16360,106 +14328,86 @@ EXTERN_C const IID IID_IVBSAXXMLReader;
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, getFeature)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getFeature )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fValue);
+            /* [in] */ BSTR strName,
+            /* [retval][out] */ VARIANT_BOOL *fValue);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, putFeature)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *putFeature )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fValue);
+            /* [in] */ BSTR strName,
+            /* [in] */ VARIANT_BOOL fValue);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, getProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getProperty )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varValue);
+            /* [in] */ BSTR strName,
+            /* [retval][out] */ VARIANT *varValue);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, putProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *putProperty )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue);
+            /* [in] */ BSTR strName,
+            /* [in] */ VARIANT varValue);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, get_entityResolver)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_entityResolver )( 
             IVBSAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXEntityResolver **oResolver);
+            /* [retval][out] */ IVBSAXEntityResolver **oResolver);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, putref_entityResolver)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_entityResolver )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  IVBSAXEntityResolver *oResolver);
+            /* [in] */ IVBSAXEntityResolver *oResolver);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, get_contentHandler)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_contentHandler )( 
             IVBSAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXContentHandler **oHandler);
+            /* [retval][out] */ IVBSAXContentHandler **oHandler);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, putref_contentHandler)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_contentHandler )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  IVBSAXContentHandler *oHandler);
+            /* [in] */ IVBSAXContentHandler *oHandler);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, get_dtdHandler)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dtdHandler )( 
             IVBSAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXDTDHandler **oHandler);
+            /* [retval][out] */ IVBSAXDTDHandler **oHandler);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, putref_dtdHandler)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_dtdHandler )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  IVBSAXDTDHandler *oHandler);
+            /* [in] */ IVBSAXDTDHandler *oHandler);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, get_errorHandler)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_errorHandler )( 
             IVBSAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXErrorHandler **oHandler);
+            /* [retval][out] */ IVBSAXErrorHandler **oHandler);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, putref_errorHandler)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_errorHandler )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  IVBSAXErrorHandler *oHandler);
+            /* [in] */ IVBSAXErrorHandler *oHandler);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, get_baseURL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_baseURL )( 
             IVBSAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strBaseURL);
+            /* [retval][out] */ BSTR *strBaseURL);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, put_baseURL)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_baseURL )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strBaseURL);
+            /* [in] */ BSTR strBaseURL);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, get_secureBaseURL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_secureBaseURL )( 
             IVBSAXXMLReader * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strSecureBaseURL);
+            /* [retval][out] */ BSTR *strSecureBaseURL);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, put_secureBaseURL)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_secureBaseURL )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strSecureBaseURL);
+            /* [in] */ BSTR strSecureBaseURL);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, parse)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *parse )( 
@@ -16469,8 +14417,7 @@ EXTERN_C const IID IID_IVBSAXXMLReader;
         DECLSPEC_XFGVIRT(IVBSAXXMLReader, parseURL)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *parseURL )( 
             IVBSAXXMLReader * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strURL);
+            /* [in] */ BSTR strURL);
         
         END_INTERFACE
     } IVBSAXXMLReaderVtbl;
@@ -16589,12 +14536,10 @@ EXTERN_C const IID IID_IVBSAXXMLFilter;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_parent( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXXMLReader **oReader) = 0;
+            /* [retval][out] */ IVBSAXXMLReader **oReader) = 0;
         
         virtual /* [helpstring][id][propputref] */ HRESULT STDMETHODCALLTYPE putref_parent( 
-            /* [annotation][in] */ 
-            _In_  IVBSAXXMLReader *oReader) = 0;
+            /* [in] */ IVBSAXXMLReader *oReader) = 0;
         
     };
     
@@ -16608,8 +14553,7 @@ EXTERN_C const IID IID_IVBSAXXMLFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBSAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16624,31 +14568,23 @@ EXTERN_C const IID IID_IVBSAXXMLFilter;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBSAXXMLFilter * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBSAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBSAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -16673,14 +14609,12 @@ EXTERN_C const IID IID_IVBSAXXMLFilter;
         DECLSPEC_XFGVIRT(IVBSAXXMLFilter, get_parent)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parent )( 
             IVBSAXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXXMLReader **oReader);
+            /* [retval][out] */ IVBSAXXMLReader **oReader);
         
         DECLSPEC_XFGVIRT(IVBSAXXMLFilter, putref_parent)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_parent )( 
             IVBSAXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  IVBSAXXMLReader *oReader);
+            /* [in] */ IVBSAXXMLReader *oReader);
         
         END_INTERFACE
     } IVBSAXXMLFilterVtbl;
@@ -16751,20 +14685,16 @@ EXTERN_C const IID IID_IVBSAXLocator;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_columnNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *nColumn) = 0;
+            /* [retval][out] */ int *nColumn) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_lineNumber( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *nLine) = 0;
+            /* [retval][out] */ int *nLine) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_publicId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strPublicId) = 0;
+            /* [retval][out] */ BSTR *strPublicId) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_systemId( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strSystemId) = 0;
+            /* [retval][out] */ BSTR *strSystemId) = 0;
         
     };
     
@@ -16778,8 +14708,7 @@ EXTERN_C const IID IID_IVBSAXLocator;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBSAXLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16794,31 +14723,23 @@ EXTERN_C const IID IID_IVBSAXLocator;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBSAXLocator * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBSAXLocator * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBSAXLocator * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -16843,26 +14764,22 @@ EXTERN_C const IID IID_IVBSAXLocator;
         DECLSPEC_XFGVIRT(IVBSAXLocator, get_columnNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_columnNumber )( 
             IVBSAXLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *nColumn);
+            /* [retval][out] */ int *nColumn);
         
         DECLSPEC_XFGVIRT(IVBSAXLocator, get_lineNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_lineNumber )( 
             IVBSAXLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *nLine);
+            /* [retval][out] */ int *nLine);
         
         DECLSPEC_XFGVIRT(IVBSAXLocator, get_publicId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_publicId )( 
             IVBSAXLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strPublicId);
+            /* [retval][out] */ BSTR *strPublicId);
         
         DECLSPEC_XFGVIRT(IVBSAXLocator, get_systemId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_systemId )( 
             IVBSAXLocator * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strSystemId);
+            /* [retval][out] */ BSTR *strSystemId);
         
         END_INTERFACE
     } IVBSAXLocatorVtbl;
@@ -16939,12 +14856,9 @@ EXTERN_C const IID IID_IVBSAXEntityResolver;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE resolveEntity( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPublicId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strSystemId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varInput) = 0;
+            /* [out][in] */ BSTR *strPublicId,
+            /* [out][in] */ BSTR *strSystemId,
+            /* [retval][out] */ VARIANT *varInput) = 0;
         
     };
     
@@ -16958,8 +14872,7 @@ EXTERN_C const IID IID_IVBSAXEntityResolver;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBSAXEntityResolver * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -16974,31 +14887,23 @@ EXTERN_C const IID IID_IVBSAXEntityResolver;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBSAXEntityResolver * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBSAXEntityResolver * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBSAXEntityResolver * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -17023,12 +14928,9 @@ EXTERN_C const IID IID_IVBSAXEntityResolver;
         DECLSPEC_XFGVIRT(IVBSAXEntityResolver, resolveEntity)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *resolveEntity )( 
             IVBSAXEntityResolver * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPublicId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strSystemId,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varInput);
+            /* [out][in] */ BSTR *strPublicId,
+            /* [out][in] */ BSTR *strSystemId,
+            /* [retval][out] */ VARIANT *varInput);
         
         END_INTERFACE
     } IVBSAXEntityResolverVtbl;
@@ -17096,58 +14998,42 @@ EXTERN_C const IID IID_IVBSAXContentHandler;
     {
     public:
         virtual /* [helpstring][id][propputref] */ HRESULT STDMETHODCALLTYPE putref_documentLocator( 
-            /* [annotation][in] */ 
-            _In_  IVBSAXLocator *oLocator) = 0;
+            /* [in] */ IVBSAXLocator *oLocator) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE startDocument( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE endDocument( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE startPrefixMapping( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPrefix,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strURI) = 0;
+            /* [out][in] */ BSTR *strPrefix,
+            /* [out][in] */ BSTR *strURI) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE endPrefixMapping( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPrefix) = 0;
+            /* [out][in] */ BSTR *strPrefix) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE startElement( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strNamespaceURI,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strLocalName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strQName,
-            /* [annotation][in] */ 
-            _In_  IVBSAXAttributes *oAttributes) = 0;
+            /* [out][in] */ BSTR *strNamespaceURI,
+            /* [out][in] */ BSTR *strLocalName,
+            /* [out][in] */ BSTR *strQName,
+            /* [in] */ IVBSAXAttributes *oAttributes) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE endElement( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strNamespaceURI,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strLocalName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strQName) = 0;
+            /* [out][in] */ BSTR *strNamespaceURI,
+            /* [out][in] */ BSTR *strLocalName,
+            /* [out][in] */ BSTR *strQName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE characters( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strChars) = 0;
+            /* [out][in] */ BSTR *strChars) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ignorableWhitespace( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strChars) = 0;
+            /* [out][in] */ BSTR *strChars) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE processingInstruction( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strTarget,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strData) = 0;
+            /* [out][in] */ BSTR *strTarget,
+            /* [out][in] */ BSTR *strData) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE skippedEntity( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName) = 0;
+            /* [out][in] */ BSTR *strName) = 0;
         
     };
     
@@ -17161,8 +15047,7 @@ EXTERN_C const IID IID_IVBSAXContentHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBSAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17177,31 +15062,23 @@ EXTERN_C const IID IID_IVBSAXContentHandler;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBSAXContentHandler * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBSAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBSAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -17226,8 +15103,7 @@ EXTERN_C const IID IID_IVBSAXContentHandler;
         DECLSPEC_XFGVIRT(IVBSAXContentHandler, putref_documentLocator)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_documentLocator )( 
             IVBSAXContentHandler * This,
-            /* [annotation][in] */ 
-            _In_  IVBSAXLocator *oLocator);
+            /* [in] */ IVBSAXLocator *oLocator);
         
         DECLSPEC_XFGVIRT(IVBSAXContentHandler, startDocument)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *startDocument )( 
@@ -17240,64 +15116,49 @@ EXTERN_C const IID IID_IVBSAXContentHandler;
         DECLSPEC_XFGVIRT(IVBSAXContentHandler, startPrefixMapping)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *startPrefixMapping )( 
             IVBSAXContentHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPrefix,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strURI);
+            /* [out][in] */ BSTR *strPrefix,
+            /* [out][in] */ BSTR *strURI);
         
         DECLSPEC_XFGVIRT(IVBSAXContentHandler, endPrefixMapping)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *endPrefixMapping )( 
             IVBSAXContentHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPrefix);
+            /* [out][in] */ BSTR *strPrefix);
         
         DECLSPEC_XFGVIRT(IVBSAXContentHandler, startElement)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *startElement )( 
             IVBSAXContentHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strNamespaceURI,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strLocalName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strQName,
-            /* [annotation][in] */ 
-            _In_  IVBSAXAttributes *oAttributes);
+            /* [out][in] */ BSTR *strNamespaceURI,
+            /* [out][in] */ BSTR *strLocalName,
+            /* [out][in] */ BSTR *strQName,
+            /* [in] */ IVBSAXAttributes *oAttributes);
         
         DECLSPEC_XFGVIRT(IVBSAXContentHandler, endElement)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *endElement )( 
             IVBSAXContentHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strNamespaceURI,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strLocalName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strQName);
+            /* [out][in] */ BSTR *strNamespaceURI,
+            /* [out][in] */ BSTR *strLocalName,
+            /* [out][in] */ BSTR *strQName);
         
         DECLSPEC_XFGVIRT(IVBSAXContentHandler, characters)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *characters )( 
             IVBSAXContentHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strChars);
+            /* [out][in] */ BSTR *strChars);
         
         DECLSPEC_XFGVIRT(IVBSAXContentHandler, ignorableWhitespace)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ignorableWhitespace )( 
             IVBSAXContentHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strChars);
+            /* [out][in] */ BSTR *strChars);
         
         DECLSPEC_XFGVIRT(IVBSAXContentHandler, processingInstruction)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *processingInstruction )( 
             IVBSAXContentHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strTarget,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strData);
+            /* [out][in] */ BSTR *strTarget,
+            /* [out][in] */ BSTR *strData);
         
         DECLSPEC_XFGVIRT(IVBSAXContentHandler, skippedEntity)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *skippedEntity )( 
             IVBSAXContentHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName);
+            /* [out][in] */ BSTR *strName);
         
         END_INTERFACE
     } IVBSAXContentHandlerVtbl;
@@ -17395,22 +15256,15 @@ EXTERN_C const IID IID_IVBSAXDTDHandler;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE notationDecl( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPublicId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strSystemId) = 0;
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strPublicId,
+            /* [out][in] */ BSTR *strSystemId) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE unparsedEntityDecl( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPublicId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strSystemId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strNotationName) = 0;
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strPublicId,
+            /* [out][in] */ BSTR *strSystemId,
+            /* [out][in] */ BSTR *strNotationName) = 0;
         
     };
     
@@ -17424,8 +15278,7 @@ EXTERN_C const IID IID_IVBSAXDTDHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBSAXDTDHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17440,31 +15293,23 @@ EXTERN_C const IID IID_IVBSAXDTDHandler;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBSAXDTDHandler * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBSAXDTDHandler * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBSAXDTDHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -17489,24 +15334,17 @@ EXTERN_C const IID IID_IVBSAXDTDHandler;
         DECLSPEC_XFGVIRT(IVBSAXDTDHandler, notationDecl)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *notationDecl )( 
             IVBSAXDTDHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPublicId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strSystemId);
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strPublicId,
+            /* [out][in] */ BSTR *strSystemId);
         
         DECLSPEC_XFGVIRT(IVBSAXDTDHandler, unparsedEntityDecl)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *unparsedEntityDecl )( 
             IVBSAXDTDHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPublicId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strSystemId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strNotationName);
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strPublicId,
+            /* [out][in] */ BSTR *strSystemId,
+            /* [out][in] */ BSTR *strNotationName);
         
         END_INTERFACE
     } IVBSAXDTDHandlerVtbl;
@@ -17577,28 +15415,19 @@ EXTERN_C const IID IID_IVBSAXErrorHandler;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE error( 
-            /* [annotation][in] */ 
-            _In_  IVBSAXLocator *oLocator,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strErrorMessage,
-            /* [annotation][in] */ 
-            _In_  long nErrorCode) = 0;
+            /* [in] */ IVBSAXLocator *oLocator,
+            /* [out][in] */ BSTR *strErrorMessage,
+            /* [in] */ long nErrorCode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE fatalError( 
-            /* [annotation][in] */ 
-            _In_  IVBSAXLocator *oLocator,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strErrorMessage,
-            /* [annotation][in] */ 
-            _In_  long nErrorCode) = 0;
+            /* [in] */ IVBSAXLocator *oLocator,
+            /* [out][in] */ BSTR *strErrorMessage,
+            /* [in] */ long nErrorCode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ignorableWarning( 
-            /* [annotation][in] */ 
-            _In_  IVBSAXLocator *oLocator,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strErrorMessage,
-            /* [annotation][in] */ 
-            _In_  long nErrorCode) = 0;
+            /* [in] */ IVBSAXLocator *oLocator,
+            /* [out][in] */ BSTR *strErrorMessage,
+            /* [in] */ long nErrorCode) = 0;
         
     };
     
@@ -17612,8 +15441,7 @@ EXTERN_C const IID IID_IVBSAXErrorHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBSAXErrorHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17628,31 +15456,23 @@ EXTERN_C const IID IID_IVBSAXErrorHandler;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBSAXErrorHandler * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBSAXErrorHandler * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBSAXErrorHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -17677,32 +15497,23 @@ EXTERN_C const IID IID_IVBSAXErrorHandler;
         DECLSPEC_XFGVIRT(IVBSAXErrorHandler, error)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *error )( 
             IVBSAXErrorHandler * This,
-            /* [annotation][in] */ 
-            _In_  IVBSAXLocator *oLocator,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strErrorMessage,
-            /* [annotation][in] */ 
-            _In_  long nErrorCode);
+            /* [in] */ IVBSAXLocator *oLocator,
+            /* [out][in] */ BSTR *strErrorMessage,
+            /* [in] */ long nErrorCode);
         
         DECLSPEC_XFGVIRT(IVBSAXErrorHandler, fatalError)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *fatalError )( 
             IVBSAXErrorHandler * This,
-            /* [annotation][in] */ 
-            _In_  IVBSAXLocator *oLocator,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strErrorMessage,
-            /* [annotation][in] */ 
-            _In_  long nErrorCode);
+            /* [in] */ IVBSAXLocator *oLocator,
+            /* [out][in] */ BSTR *strErrorMessage,
+            /* [in] */ long nErrorCode);
         
         DECLSPEC_XFGVIRT(IVBSAXErrorHandler, ignorableWarning)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ignorableWarning )( 
             IVBSAXErrorHandler * This,
-            /* [annotation][in] */ 
-            _In_  IVBSAXLocator *oLocator,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strErrorMessage,
-            /* [annotation][in] */ 
-            _In_  long nErrorCode);
+            /* [in] */ IVBSAXLocator *oLocator,
+            /* [out][in] */ BSTR *strErrorMessage,
+            /* [in] */ long nErrorCode);
         
         END_INTERFACE
     } IVBSAXErrorHandlerVtbl;
@@ -17776,30 +15587,24 @@ EXTERN_C const IID IID_IVBSAXLexicalHandler;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE startDTD( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPublicId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strSystemId) = 0;
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strPublicId,
+            /* [out][in] */ BSTR *strSystemId) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE endDTD( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE startEntity( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName) = 0;
+            /* [out][in] */ BSTR *strName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE endEntity( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName) = 0;
+            /* [out][in] */ BSTR *strName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE startCDATA( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE endCDATA( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE comment( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strChars) = 0;
+            /* [out][in] */ BSTR *strChars) = 0;
         
     };
     
@@ -17813,8 +15618,7 @@ EXTERN_C const IID IID_IVBSAXLexicalHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBSAXLexicalHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -17829,31 +15633,23 @@ EXTERN_C const IID IID_IVBSAXLexicalHandler;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBSAXLexicalHandler * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBSAXLexicalHandler * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBSAXLexicalHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -17878,12 +15674,9 @@ EXTERN_C const IID IID_IVBSAXLexicalHandler;
         DECLSPEC_XFGVIRT(IVBSAXLexicalHandler, startDTD)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *startDTD )( 
             IVBSAXLexicalHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPublicId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strSystemId);
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strPublicId,
+            /* [out][in] */ BSTR *strSystemId);
         
         DECLSPEC_XFGVIRT(IVBSAXLexicalHandler, endDTD)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *endDTD )( 
@@ -17892,14 +15685,12 @@ EXTERN_C const IID IID_IVBSAXLexicalHandler;
         DECLSPEC_XFGVIRT(IVBSAXLexicalHandler, startEntity)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *startEntity )( 
             IVBSAXLexicalHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName);
+            /* [out][in] */ BSTR *strName);
         
         DECLSPEC_XFGVIRT(IVBSAXLexicalHandler, endEntity)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *endEntity )( 
             IVBSAXLexicalHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName);
+            /* [out][in] */ BSTR *strName);
         
         DECLSPEC_XFGVIRT(IVBSAXLexicalHandler, startCDATA)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *startCDATA )( 
@@ -17912,8 +15703,7 @@ EXTERN_C const IID IID_IVBSAXLexicalHandler;
         DECLSPEC_XFGVIRT(IVBSAXLexicalHandler, comment)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *comment )( 
             IVBSAXLexicalHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strChars);
+            /* [out][in] */ BSTR *strChars);
         
         END_INTERFACE
     } IVBSAXLexicalHandlerVtbl;
@@ -17999,36 +15789,24 @@ EXTERN_C const IID IID_IVBSAXDeclHandler;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE elementDecl( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strModel) = 0;
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strModel) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE attributeDecl( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strElementName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strAttributeName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strType,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strValueDefault,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strValue) = 0;
+            /* [out][in] */ BSTR *strElementName,
+            /* [out][in] */ BSTR *strAttributeName,
+            /* [out][in] */ BSTR *strType,
+            /* [out][in] */ BSTR *strValueDefault,
+            /* [out][in] */ BSTR *strValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE internalEntityDecl( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strValue) = 0;
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE externalEntityDecl( 
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPublicId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strSystemId) = 0;
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strPublicId,
+            /* [out][in] */ BSTR *strSystemId) = 0;
         
     };
     
@@ -18042,8 +15820,7 @@ EXTERN_C const IID IID_IVBSAXDeclHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBSAXDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18058,31 +15835,23 @@ EXTERN_C const IID IID_IVBSAXDeclHandler;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBSAXDeclHandler * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBSAXDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBSAXDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -18107,42 +15876,30 @@ EXTERN_C const IID IID_IVBSAXDeclHandler;
         DECLSPEC_XFGVIRT(IVBSAXDeclHandler, elementDecl)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *elementDecl )( 
             IVBSAXDeclHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strModel);
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strModel);
         
         DECLSPEC_XFGVIRT(IVBSAXDeclHandler, attributeDecl)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *attributeDecl )( 
             IVBSAXDeclHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strElementName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strAttributeName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strType,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strValueDefault,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strValue);
+            /* [out][in] */ BSTR *strElementName,
+            /* [out][in] */ BSTR *strAttributeName,
+            /* [out][in] */ BSTR *strType,
+            /* [out][in] */ BSTR *strValueDefault,
+            /* [out][in] */ BSTR *strValue);
         
         DECLSPEC_XFGVIRT(IVBSAXDeclHandler, internalEntityDecl)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *internalEntityDecl )( 
             IVBSAXDeclHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strValue);
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strValue);
         
         DECLSPEC_XFGVIRT(IVBSAXDeclHandler, externalEntityDecl)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *externalEntityDecl )( 
             IVBSAXDeclHandler * This,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strName,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strPublicId,
-            /* [annotation][out][in] */ 
-            _Inout_  BSTR *strSystemId);
+            /* [out][in] */ BSTR *strName,
+            /* [out][in] */ BSTR *strPublicId,
+            /* [out][in] */ BSTR *strSystemId);
         
         END_INTERFACE
     } IVBSAXDeclHandlerVtbl;
@@ -18219,80 +15976,54 @@ EXTERN_C const IID IID_IVBSAXAttributes;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *nLength) = 0;
+            /* [retval][out] */ int *nLength) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getURI( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strURI) = 0;
+            /* [in] */ int nIndex,
+            /* [retval][out] */ BSTR *strURI) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getLocalName( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strLocalName) = 0;
+            /* [in] */ int nIndex,
+            /* [retval][out] */ BSTR *strLocalName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getQName( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strQName) = 0;
+            /* [in] */ int nIndex,
+            /* [retval][out] */ BSTR *strQName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getIndexFromName( 
-            /* [annotation][in] */ 
-            _In_  BSTR strURI,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *nIndex) = 0;
+            /* [in] */ BSTR strURI,
+            /* [in] */ BSTR strLocalName,
+            /* [retval][out] */ int *nIndex) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getIndexFromQName( 
-            /* [annotation][in] */ 
-            _In_  BSTR strQName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *nIndex) = 0;
+            /* [in] */ BSTR strQName,
+            /* [retval][out] */ int *nIndex) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getType( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strType) = 0;
+            /* [in] */ int nIndex,
+            /* [retval][out] */ BSTR *strType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getTypeFromName( 
-            /* [annotation][in] */ 
-            _In_  BSTR strURI,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strType) = 0;
+            /* [in] */ BSTR strURI,
+            /* [in] */ BSTR strLocalName,
+            /* [retval][out] */ BSTR *strType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getTypeFromQName( 
-            /* [annotation][in] */ 
-            _In_  BSTR strQName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strType) = 0;
+            /* [in] */ BSTR strQName,
+            /* [retval][out] */ BSTR *strType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getValue( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strValue) = 0;
+            /* [in] */ int nIndex,
+            /* [retval][out] */ BSTR *strValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getValueFromName( 
-            /* [annotation][in] */ 
-            _In_  BSTR strURI,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strValue) = 0;
+            /* [in] */ BSTR strURI,
+            /* [in] */ BSTR strLocalName,
+            /* [retval][out] */ BSTR *strValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getValueFromQName( 
-            /* [annotation][in] */ 
-            _In_  BSTR strQName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strValue) = 0;
+            /* [in] */ BSTR strQName,
+            /* [retval][out] */ BSTR *strValue) = 0;
         
     };
     
@@ -18306,8 +16037,7 @@ EXTERN_C const IID IID_IVBSAXAttributes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18322,31 +16052,23 @@ EXTERN_C const IID IID_IVBSAXAttributes;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBSAXAttributes * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -18371,102 +16093,76 @@ EXTERN_C const IID IID_IVBSAXAttributes;
         DECLSPEC_XFGVIRT(IVBSAXAttributes, get_length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IVBSAXAttributes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *nLength);
+            /* [retval][out] */ int *nLength);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getURI)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getURI )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strURI);
+            /* [in] */ int nIndex,
+            /* [retval][out] */ BSTR *strURI);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getLocalName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getLocalName )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strLocalName);
+            /* [in] */ int nIndex,
+            /* [retval][out] */ BSTR *strLocalName);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getQName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getQName )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strQName);
+            /* [in] */ int nIndex,
+            /* [retval][out] */ BSTR *strQName);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getIndexFromName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getIndexFromName )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strURI,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *nIndex);
+            /* [in] */ BSTR strURI,
+            /* [in] */ BSTR strLocalName,
+            /* [retval][out] */ int *nIndex);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getIndexFromQName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getIndexFromQName )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strQName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *nIndex);
+            /* [in] */ BSTR strQName,
+            /* [retval][out] */ int *nIndex);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getType )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strType);
+            /* [in] */ int nIndex,
+            /* [retval][out] */ BSTR *strType);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getTypeFromName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getTypeFromName )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strURI,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strType);
+            /* [in] */ BSTR strURI,
+            /* [in] */ BSTR strLocalName,
+            /* [retval][out] */ BSTR *strType);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getTypeFromQName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getTypeFromQName )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strQName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strType);
+            /* [in] */ BSTR strQName,
+            /* [retval][out] */ BSTR *strType);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getValue)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getValue )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strValue);
+            /* [in] */ int nIndex,
+            /* [retval][out] */ BSTR *strValue);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getValueFromName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getValueFromName )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strURI,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strValue);
+            /* [in] */ BSTR strURI,
+            /* [in] */ BSTR strLocalName,
+            /* [retval][out] */ BSTR *strValue);
         
         DECLSPEC_XFGVIRT(IVBSAXAttributes, getValueFromQName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getValueFromQName )( 
             IVBSAXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strQName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strValue);
+            /* [in] */ BSTR strQName,
+            /* [retval][out] */ BSTR *strValue);
         
         END_INTERFACE
     } IVBSAXAttributesVtbl;
@@ -18567,68 +16263,52 @@ EXTERN_C const IID IID_IMXWriter;
     {
     public:
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_output( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varDestination) = 0;
+            /* [in] */ VARIANT varDestination) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_output( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varDestination) = 0;
+            /* [retval][out] */ VARIANT *varDestination) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_encoding( 
-            /* [annotation][in] */ 
-            _In_  BSTR strEncoding) = 0;
+            /* [in] */ BSTR strEncoding) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_encoding( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strEncoding) = 0;
+            /* [retval][out] */ BSTR *strEncoding) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_byteOrderMark( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fWriteByteOrderMark) = 0;
+            /* [in] */ VARIANT_BOOL fWriteByteOrderMark) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_byteOrderMark( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fWriteByteOrderMark) = 0;
+            /* [retval][out] */ VARIANT_BOOL *fWriteByteOrderMark) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_indent( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fIndentMode) = 0;
+            /* [in] */ VARIANT_BOOL fIndentMode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_indent( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fIndentMode) = 0;
+            /* [retval][out] */ VARIANT_BOOL *fIndentMode) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_standalone( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fValue) = 0;
+            /* [in] */ VARIANT_BOOL fValue) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_standalone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fValue) = 0;
+            /* [retval][out] */ VARIANT_BOOL *fValue) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_omitXMLDeclaration( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fValue) = 0;
+            /* [in] */ VARIANT_BOOL fValue) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_omitXMLDeclaration( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fValue) = 0;
+            /* [retval][out] */ VARIANT_BOOL *fValue) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_version( 
-            /* [annotation][in] */ 
-            _In_  BSTR strVersion) = 0;
+            /* [in] */ BSTR strVersion) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_version( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strVersion) = 0;
+            /* [retval][out] */ BSTR *strVersion) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_disableOutputEscaping( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fValue) = 0;
+            /* [in] */ VARIANT_BOOL fValue) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_disableOutputEscaping( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fValue) = 0;
+            /* [retval][out] */ VARIANT_BOOL *fValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE flush( void) = 0;
         
@@ -18644,8 +16324,7 @@ EXTERN_C const IID IID_IMXWriter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -18660,31 +16339,23 @@ EXTERN_C const IID IID_IMXWriter;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IMXWriter * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -18709,98 +16380,82 @@ EXTERN_C const IID IID_IMXWriter;
         DECLSPEC_XFGVIRT(IMXWriter, put_output)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_output )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varDestination);
+            /* [in] */ VARIANT varDestination);
         
         DECLSPEC_XFGVIRT(IMXWriter, get_output)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_output )( 
             IMXWriter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varDestination);
+            /* [retval][out] */ VARIANT *varDestination);
         
         DECLSPEC_XFGVIRT(IMXWriter, put_encoding)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_encoding )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strEncoding);
+            /* [in] */ BSTR strEncoding);
         
         DECLSPEC_XFGVIRT(IMXWriter, get_encoding)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_encoding )( 
             IMXWriter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strEncoding);
+            /* [retval][out] */ BSTR *strEncoding);
         
         DECLSPEC_XFGVIRT(IMXWriter, put_byteOrderMark)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_byteOrderMark )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fWriteByteOrderMark);
+            /* [in] */ VARIANT_BOOL fWriteByteOrderMark);
         
         DECLSPEC_XFGVIRT(IMXWriter, get_byteOrderMark)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_byteOrderMark )( 
             IMXWriter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fWriteByteOrderMark);
+            /* [retval][out] */ VARIANT_BOOL *fWriteByteOrderMark);
         
         DECLSPEC_XFGVIRT(IMXWriter, put_indent)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_indent )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fIndentMode);
+            /* [in] */ VARIANT_BOOL fIndentMode);
         
         DECLSPEC_XFGVIRT(IMXWriter, get_indent)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_indent )( 
             IMXWriter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fIndentMode);
+            /* [retval][out] */ VARIANT_BOOL *fIndentMode);
         
         DECLSPEC_XFGVIRT(IMXWriter, put_standalone)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_standalone )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fValue);
+            /* [in] */ VARIANT_BOOL fValue);
         
         DECLSPEC_XFGVIRT(IMXWriter, get_standalone)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_standalone )( 
             IMXWriter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fValue);
+            /* [retval][out] */ VARIANT_BOOL *fValue);
         
         DECLSPEC_XFGVIRT(IMXWriter, put_omitXMLDeclaration)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_omitXMLDeclaration )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fValue);
+            /* [in] */ VARIANT_BOOL fValue);
         
         DECLSPEC_XFGVIRT(IMXWriter, get_omitXMLDeclaration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_omitXMLDeclaration )( 
             IMXWriter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fValue);
+            /* [retval][out] */ VARIANT_BOOL *fValue);
         
         DECLSPEC_XFGVIRT(IMXWriter, put_version)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_version )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strVersion);
+            /* [in] */ BSTR strVersion);
         
         DECLSPEC_XFGVIRT(IMXWriter, get_version)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_version )( 
             IMXWriter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *strVersion);
+            /* [retval][out] */ BSTR *strVersion);
         
         DECLSPEC_XFGVIRT(IMXWriter, put_disableOutputEscaping)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_disableOutputEscaping )( 
             IMXWriter * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fValue);
+            /* [in] */ VARIANT_BOOL fValue);
         
         DECLSPEC_XFGVIRT(IMXWriter, get_disableOutputEscaping)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_disableOutputEscaping )( 
             IMXWriter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fValue);
+            /* [retval][out] */ VARIANT_BOOL *fValue);
         
         DECLSPEC_XFGVIRT(IMXWriter, flush)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *flush )( 
@@ -18920,76 +16575,51 @@ EXTERN_C const IID IID_IMXAttributes;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE addAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR strURI,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName,
-            /* [annotation][in] */ 
-            _In_  BSTR strQName,
-            /* [annotation][in] */ 
-            _In_  BSTR strType,
-            /* [annotation][in] */ 
-            _In_  BSTR strValue) = 0;
+            /* [in] */ BSTR strURI,
+            /* [in] */ BSTR strLocalName,
+            /* [in] */ BSTR strQName,
+            /* [in] */ BSTR strType,
+            /* [in] */ BSTR strValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE addAttributeFromIndex( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varAtts,
-            /* [annotation][in] */ 
-            _In_  int nIndex) = 0;
+            /* [in] */ VARIANT varAtts,
+            /* [in] */ int nIndex) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE clear( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeAttribute( 
-            /* [annotation][in] */ 
-            _In_  int nIndex) = 0;
+            /* [in] */ int nIndex) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setAttribute( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strURI,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName,
-            /* [annotation][in] */ 
-            _In_  BSTR strQName,
-            /* [annotation][in] */ 
-            _In_  BSTR strType,
-            /* [annotation][in] */ 
-            _In_  BSTR strValue) = 0;
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strURI,
+            /* [in] */ BSTR strLocalName,
+            /* [in] */ BSTR strQName,
+            /* [in] */ BSTR strType,
+            /* [in] */ BSTR strValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setAttributes( 
-            /* [annotation][in] */ 
-            _In_  VARIANT varAtts) = 0;
+            /* [in] */ VARIANT varAtts) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setLocalName( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName) = 0;
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strLocalName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setQName( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strQName) = 0;
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strQName) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setType( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strType) = 0;
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setURI( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strURI) = 0;
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strURI) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setValue( 
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strValue) = 0;
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strValue) = 0;
         
     };
     
@@ -19003,8 +16633,7 @@ EXTERN_C const IID IID_IMXAttributes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -19019,31 +16648,23 @@ EXTERN_C const IID IID_IMXAttributes;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IMXAttributes * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -19068,24 +16689,17 @@ EXTERN_C const IID IID_IMXAttributes;
         DECLSPEC_XFGVIRT(IMXAttributes, addAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *addAttribute )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strURI,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName,
-            /* [annotation][in] */ 
-            _In_  BSTR strQName,
-            /* [annotation][in] */ 
-            _In_  BSTR strType,
-            /* [annotation][in] */ 
-            _In_  BSTR strValue);
+            /* [in] */ BSTR strURI,
+            /* [in] */ BSTR strLocalName,
+            /* [in] */ BSTR strQName,
+            /* [in] */ BSTR strType,
+            /* [in] */ BSTR strValue);
         
         DECLSPEC_XFGVIRT(IMXAttributes, addAttributeFromIndex)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *addAttributeFromIndex )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varAtts,
-            /* [annotation][in] */ 
-            _In_  int nIndex);
+            /* [in] */ VARIANT varAtts,
+            /* [in] */ int nIndex);
         
         DECLSPEC_XFGVIRT(IMXAttributes, clear)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *clear )( 
@@ -19094,70 +16708,52 @@ EXTERN_C const IID IID_IMXAttributes;
         DECLSPEC_XFGVIRT(IMXAttributes, removeAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeAttribute )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex);
+            /* [in] */ int nIndex);
         
         DECLSPEC_XFGVIRT(IMXAttributes, setAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setAttribute )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strURI,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName,
-            /* [annotation][in] */ 
-            _In_  BSTR strQName,
-            /* [annotation][in] */ 
-            _In_  BSTR strType,
-            /* [annotation][in] */ 
-            _In_  BSTR strValue);
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strURI,
+            /* [in] */ BSTR strLocalName,
+            /* [in] */ BSTR strQName,
+            /* [in] */ BSTR strType,
+            /* [in] */ BSTR strValue);
         
         DECLSPEC_XFGVIRT(IMXAttributes, setAttributes)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setAttributes )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT varAtts);
+            /* [in] */ VARIANT varAtts);
         
         DECLSPEC_XFGVIRT(IMXAttributes, setLocalName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setLocalName )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strLocalName);
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strLocalName);
         
         DECLSPEC_XFGVIRT(IMXAttributes, setQName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setQName )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strQName);
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strQName);
         
         DECLSPEC_XFGVIRT(IMXAttributes, setType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setType )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strType);
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strType);
         
         DECLSPEC_XFGVIRT(IMXAttributes, setURI)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setURI )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strURI);
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strURI);
         
         DECLSPEC_XFGVIRT(IMXAttributes, setValue)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setValue )( 
             IMXAttributes * This,
-            /* [annotation][in] */ 
-            _In_  int nIndex,
-            /* [annotation][in] */ 
-            _In_  BSTR strValue);
+            /* [in] */ int nIndex,
+            /* [in] */ BSTR strValue);
         
         END_INTERFACE
     } IMXAttributesVtbl;
@@ -19272,8 +16868,7 @@ EXTERN_C const IID IID_IMXReaderControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMXReaderControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -19288,31 +16883,23 @@ EXTERN_C const IID IID_IMXReaderControl;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IMXReaderControl * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IMXReaderControl * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IMXReaderControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -19418,8 +17005,7 @@ EXTERN_C const IID IID_IMXSchemaDeclHandler;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE schemaElementDecl( 
-            /* [annotation][in] */ 
-            _In_  ISchemaElement *oSchemaElement) = 0;
+            /* [in] */ ISchemaElement *oSchemaElement) = 0;
         
     };
     
@@ -19433,8 +17019,7 @@ EXTERN_C const IID IID_IMXSchemaDeclHandler;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMXSchemaDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -19449,31 +17034,23 @@ EXTERN_C const IID IID_IMXSchemaDeclHandler;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IMXSchemaDeclHandler * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IMXSchemaDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IMXSchemaDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -19498,8 +17075,7 @@ EXTERN_C const IID IID_IMXSchemaDeclHandler;
         DECLSPEC_XFGVIRT(IMXSchemaDeclHandler, schemaElementDecl)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *schemaElementDecl )( 
             IMXSchemaDeclHandler * This,
-            /* [annotation][in] */ 
-            _In_  ISchemaElement *oSchemaElement);
+            /* [in] */ ISchemaElement *oSchemaElement);
         
         END_INTERFACE
     } IMXSchemaDeclHandlerVtbl;
@@ -19567,60 +17143,44 @@ EXTERN_C const IID IID_IMXXMLFilter;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getFeature( 
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fValue) = 0;
+            /* [in] */ BSTR strName,
+            /* [retval][out] */ VARIANT_BOOL *fValue) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE putFeature( 
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fValue) = 0;
+            /* [in] */ BSTR strName,
+            /* [in] */ VARIANT_BOOL fValue) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getProperty( 
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varValue) = 0;
+            /* [in] */ BSTR strName,
+            /* [retval][out] */ VARIANT *varValue) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE putProperty( 
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue) = 0;
+            /* [in] */ BSTR strName,
+            /* [in] */ VARIANT varValue) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_entityResolver( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **oResolver) = 0;
+            /* [retval][out] */ IUnknown **oResolver) = 0;
         
         virtual /* [propputref][id] */ HRESULT STDMETHODCALLTYPE putref_entityResolver( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *oResolver) = 0;
+            /* [in] */ IUnknown *oResolver) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_contentHandler( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **oHandler) = 0;
+            /* [retval][out] */ IUnknown **oHandler) = 0;
         
         virtual /* [propputref][id] */ HRESULT STDMETHODCALLTYPE putref_contentHandler( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *oHandler) = 0;
+            /* [in] */ IUnknown *oHandler) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_dtdHandler( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **oHandler) = 0;
+            /* [retval][out] */ IUnknown **oHandler) = 0;
         
         virtual /* [propputref][id] */ HRESULT STDMETHODCALLTYPE putref_dtdHandler( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *oHandler) = 0;
+            /* [in] */ IUnknown *oHandler) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_errorHandler( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **oHandler) = 0;
+            /* [retval][out] */ IUnknown **oHandler) = 0;
         
         virtual /* [propputref][id] */ HRESULT STDMETHODCALLTYPE putref_errorHandler( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *oHandler) = 0;
+            /* [in] */ IUnknown *oHandler) = 0;
         
     };
     
@@ -19634,8 +17194,7 @@ EXTERN_C const IID IID_IMXXMLFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -19650,31 +17209,23 @@ EXTERN_C const IID IID_IMXXMLFilter;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IMXXMLFilter * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -19699,82 +17250,66 @@ EXTERN_C const IID IID_IMXXMLFilter;
         DECLSPEC_XFGVIRT(IMXXMLFilter, getFeature)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getFeature )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fValue);
+            /* [in] */ BSTR strName,
+            /* [retval][out] */ VARIANT_BOOL *fValue);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, putFeature)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *putFeature )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fValue);
+            /* [in] */ BSTR strName,
+            /* [in] */ VARIANT_BOOL fValue);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, getProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getProperty )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *varValue);
+            /* [in] */ BSTR strName,
+            /* [retval][out] */ VARIANT *varValue);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, putProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *putProperty )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strName,
-            /* [annotation][in] */ 
-            _In_  VARIANT varValue);
+            /* [in] */ BSTR strName,
+            /* [in] */ VARIANT varValue);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, get_entityResolver)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_entityResolver )( 
             IMXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **oResolver);
+            /* [retval][out] */ IUnknown **oResolver);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, putref_entityResolver)
         /* [propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_entityResolver )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *oResolver);
+            /* [in] */ IUnknown *oResolver);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, get_contentHandler)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_contentHandler )( 
             IMXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **oHandler);
+            /* [retval][out] */ IUnknown **oHandler);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, putref_contentHandler)
         /* [propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_contentHandler )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *oHandler);
+            /* [in] */ IUnknown *oHandler);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, get_dtdHandler)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_dtdHandler )( 
             IMXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **oHandler);
+            /* [retval][out] */ IUnknown **oHandler);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, putref_dtdHandler)
         /* [propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_dtdHandler )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *oHandler);
+            /* [in] */ IUnknown *oHandler);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, get_errorHandler)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_errorHandler )( 
             IMXXMLFilter * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **oHandler);
+            /* [retval][out] */ IUnknown **oHandler);
         
         DECLSPEC_XFGVIRT(IMXXMLFilter, putref_errorHandler)
         /* [propputref][id] */ HRESULT ( STDMETHODCALLTYPE *putref_errorHandler )( 
             IMXXMLFilter * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *oHandler);
+            /* [in] */ IUnknown *oHandler);
         
         END_INTERFACE
     } IMXXMLFilterVtbl;
@@ -19877,24 +17412,18 @@ EXTERN_C const IID IID_IXMLDOMSchemaCollection2;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE validate( void) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_validateOnLoad( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL validateOnLoad) = 0;
+            /* [in] */ VARIANT_BOOL validateOnLoad) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_validateOnLoad( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *validateOnLoad) = 0;
+            /* [retval][out] */ VARIANT_BOOL *validateOnLoad) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getSchema( 
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema) = 0;
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ ISchema **schema) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getDeclaration( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *node,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItem **item) = 0;
+            /* [in] */ IXMLDOMNode *node,
+            /* [retval][out] */ ISchemaItem **item) = 0;
         
     };
     
@@ -19908,8 +17437,7 @@ EXTERN_C const IID IID_IXMLDOMSchemaCollection2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -19924,31 +17452,23 @@ EXTERN_C const IID IID_IXMLDOMSchemaCollection2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -19973,50 +17493,40 @@ EXTERN_C const IID IID_IXMLDOMSchemaCollection2;
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *add )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][in] */ 
-            _In_  VARIANT var);
+            /* [in] */ BSTR namespaceURI,
+            /* [in] */ VARIANT var);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, get)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *get )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **schemaNode);
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ IXMLDOMNode **schemaNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *remove )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI);
+            /* [in] */ BSTR namespaceURI);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, get_length)
         /* [propget][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length);
+            /* [retval][out] */ long *length);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, get_namespaceURI)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *length);
+            /* [in] */ long index,
+            /* [retval][out] */ BSTR *length);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, addCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *addCollection )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMSchemaCollection *otherCollection);
+            /* [in] */ IXMLDOMSchemaCollection *otherCollection);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection, get__newEnum)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__newEnum )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IUnknown **ppUnk);
+            /* [out][retval] */ IUnknown **ppUnk);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection2, validate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *validate )( 
@@ -20025,30 +17535,24 @@ EXTERN_C const IID IID_IXMLDOMSchemaCollection2;
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection2, put_validateOnLoad)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_validateOnLoad )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL validateOnLoad);
+            /* [in] */ VARIANT_BOOL validateOnLoad);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection2, get_validateOnLoad)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_validateOnLoad )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *validateOnLoad);
+            /* [retval][out] */ VARIANT_BOOL *validateOnLoad);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection2, getSchema)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getSchema )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(IXMLDOMSchemaCollection2, getDeclaration)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getDeclaration )( 
             IXMLDOMSchemaCollection2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *node,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItem **item);
+            /* [in] */ IXMLDOMNode *node,
+            /* [retval][out] */ ISchemaItem **item);
         
         END_INTERFACE
     } IXMLDOMSchemaCollection2Vtbl;
@@ -20150,18 +17654,14 @@ EXTERN_C const IID IID_ISchemaStringCollection;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_item( 
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstr) = 0;
+            /* [in] */ long index,
+            /* [retval][out] */ BSTR *bstr) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length) = 0;
+            /* [retval][out] */ long *length) = 0;
         
         virtual /* [propget][restricted][hidden][id] */ HRESULT STDMETHODCALLTYPE get__newEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppunk) = 0;
+            /* [retval][out] */ IUnknown **ppunk) = 0;
         
     };
     
@@ -20175,8 +17675,7 @@ EXTERN_C const IID IID_ISchemaStringCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaStringCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -20191,31 +17690,23 @@ EXTERN_C const IID IID_ISchemaStringCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaStringCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaStringCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaStringCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -20240,22 +17731,18 @@ EXTERN_C const IID IID_ISchemaStringCollection;
         DECLSPEC_XFGVIRT(ISchemaStringCollection, get_item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_item )( 
             ISchemaStringCollection * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstr);
+            /* [in] */ long index,
+            /* [retval][out] */ BSTR *bstr);
         
         DECLSPEC_XFGVIRT(ISchemaStringCollection, get_length)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             ISchemaStringCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length);
+            /* [retval][out] */ long *length);
         
         DECLSPEC_XFGVIRT(ISchemaStringCollection, get__newEnum)
         /* [propget][restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *get__newEnum )( 
             ISchemaStringCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppunk);
+            /* [retval][out] */ IUnknown **ppunk);
         
         END_INTERFACE
     } ISchemaStringCollectionVtbl;
@@ -20329,32 +17816,23 @@ EXTERN_C const IID IID_ISchemaItemCollection;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_item( 
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItem **item) = 0;
+            /* [in] */ long index,
+            /* [retval][out] */ ISchemaItem **item) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE itemByName( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItem **item) = 0;
+            /* [in] */ BSTR name,
+            /* [retval][out] */ ISchemaItem **item) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE itemByQName( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItem **item) = 0;
+            /* [in] */ BSTR name,
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ ISchemaItem **item) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length) = 0;
+            /* [retval][out] */ long *length) = 0;
         
         virtual /* [propget][restricted][hidden][id] */ HRESULT STDMETHODCALLTYPE get__newEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppunk) = 0;
+            /* [retval][out] */ IUnknown **ppunk) = 0;
         
     };
     
@@ -20368,8 +17846,7 @@ EXTERN_C const IID IID_ISchemaItemCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaItemCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -20384,31 +17861,23 @@ EXTERN_C const IID IID_ISchemaItemCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaItemCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaItemCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaItemCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -20433,40 +17902,31 @@ EXTERN_C const IID IID_ISchemaItemCollection;
         DECLSPEC_XFGVIRT(ISchemaItemCollection, get_item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_item )( 
             ISchemaItemCollection * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItem **item);
+            /* [in] */ long index,
+            /* [retval][out] */ ISchemaItem **item);
         
         DECLSPEC_XFGVIRT(ISchemaItemCollection, itemByName)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *itemByName )( 
             ISchemaItemCollection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItem **item);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ ISchemaItem **item);
         
         DECLSPEC_XFGVIRT(ISchemaItemCollection, itemByQName)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *itemByQName )( 
             ISchemaItemCollection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItem **item);
+            /* [in] */ BSTR name,
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ ISchemaItem **item);
         
         DECLSPEC_XFGVIRT(ISchemaItemCollection, get_length)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             ISchemaItemCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length);
+            /* [retval][out] */ long *length);
         
         DECLSPEC_XFGVIRT(ISchemaItemCollection, get__newEnum)
         /* [propget][restricted][hidden][id] */ HRESULT ( STDMETHODCALLTYPE *get__newEnum )( 
             ISchemaItemCollection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppunk);
+            /* [retval][out] */ IUnknown **ppunk);
         
         END_INTERFACE
     } ISchemaItemCollectionVtbl;
@@ -20546,34 +18006,26 @@ EXTERN_C const IID IID_ISchemaItem;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name) = 0;
+            /* [retval][out] */ BSTR *name) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_namespaceURI( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI) = 0;
+            /* [retval][out] */ BSTR *namespaceURI) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_schema( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema) = 0;
+            /* [retval][out] */ ISchema **schema) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_id( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id) = 0;
+            /* [retval][out] */ BSTR *id) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_itemType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType) = 0;
+            /* [retval][out] */ SOMITEMTYPE *itemType) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_unhandledAttributes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes) = 0;
+            /* [retval][out] */ IVBSAXAttributes **attributes) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE writeAnnotation( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten) = 0;
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten) = 0;
         
     };
     
@@ -20587,8 +18039,7 @@ EXTERN_C const IID IID_ISchemaItem;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -20603,31 +18054,23 @@ EXTERN_C const IID IID_ISchemaItem;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaItem * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaItem * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaItem * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -20652,46 +18095,38 @@ EXTERN_C const IID IID_ISchemaItem;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaItem * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaItem * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         END_INTERFACE
     } ISchemaItemVtbl;
@@ -20777,40 +18212,31 @@ EXTERN_C const IID IID_ISchema;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_targetNamespace( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *targetNamespace) = 0;
+            /* [retval][out] */ BSTR *targetNamespace) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_version( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *version) = 0;
+            /* [retval][out] */ BSTR *version) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_types( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **types) = 0;
+            /* [retval][out] */ ISchemaItemCollection **types) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_elements( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **elements) = 0;
+            /* [retval][out] */ ISchemaItemCollection **elements) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_attributes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **attributes) = 0;
+            /* [retval][out] */ ISchemaItemCollection **attributes) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_attributeGroups( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **attributeGroups) = 0;
+            /* [retval][out] */ ISchemaItemCollection **attributeGroups) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_modelGroups( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **modelGroups) = 0;
+            /* [retval][out] */ ISchemaItemCollection **modelGroups) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_notations( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **notations) = 0;
+            /* [retval][out] */ ISchemaItemCollection **notations) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_schemaLocations( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **schemaLocations) = 0;
+            /* [retval][out] */ ISchemaStringCollection **schemaLocations) = 0;
         
     };
     
@@ -20824,8 +18250,7 @@ EXTERN_C const IID IID_ISchema;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchema * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -20840,31 +18265,23 @@ EXTERN_C const IID IID_ISchema;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchema * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchema * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchema * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -20889,100 +18306,83 @@ EXTERN_C const IID IID_ISchema;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchema * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchema, get_targetNamespace)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_targetNamespace )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *targetNamespace);
+            /* [retval][out] */ BSTR *targetNamespace);
         
         DECLSPEC_XFGVIRT(ISchema, get_version)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_version )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *version);
+            /* [retval][out] */ BSTR *version);
         
         DECLSPEC_XFGVIRT(ISchema, get_types)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_types )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **types);
+            /* [retval][out] */ ISchemaItemCollection **types);
         
         DECLSPEC_XFGVIRT(ISchema, get_elements)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_elements )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **elements);
+            /* [retval][out] */ ISchemaItemCollection **elements);
         
         DECLSPEC_XFGVIRT(ISchema, get_attributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **attributes);
+            /* [retval][out] */ ISchemaItemCollection **attributes);
         
         DECLSPEC_XFGVIRT(ISchema, get_attributeGroups)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_attributeGroups )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **attributeGroups);
+            /* [retval][out] */ ISchemaItemCollection **attributeGroups);
         
         DECLSPEC_XFGVIRT(ISchema, get_modelGroups)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_modelGroups )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **modelGroups);
+            /* [retval][out] */ ISchemaItemCollection **modelGroups);
         
         DECLSPEC_XFGVIRT(ISchema, get_notations)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_notations )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **notations);
+            /* [retval][out] */ ISchemaItemCollection **notations);
         
         DECLSPEC_XFGVIRT(ISchema, get_schemaLocations)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schemaLocations )( 
             ISchema * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **schemaLocations);
+            /* [retval][out] */ ISchemaStringCollection **schemaLocations);
         
         END_INTERFACE
     } ISchemaVtbl;
@@ -21096,12 +18496,10 @@ EXTERN_C const IID IID_ISchemaParticle;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_minOccurs( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *minOccurs) = 0;
+            /* [retval][out] */ VARIANT *minOccurs) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_maxOccurs( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *maxOccurs) = 0;
+            /* [retval][out] */ VARIANT *maxOccurs) = 0;
         
     };
     
@@ -21115,8 +18513,7 @@ EXTERN_C const IID IID_ISchemaParticle;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaParticle * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -21131,31 +18528,23 @@ EXTERN_C const IID IID_ISchemaParticle;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaParticle * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaParticle * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaParticle * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -21180,58 +18569,48 @@ EXTERN_C const IID IID_ISchemaParticle;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaParticle * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaParticle * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaParticle * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaParticle * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaParticle * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaParticle * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaParticle * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchemaParticle, get_minOccurs)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_minOccurs )( 
             ISchemaParticle * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *minOccurs);
+            /* [retval][out] */ VARIANT *minOccurs);
         
         DECLSPEC_XFGVIRT(ISchemaParticle, get_maxOccurs)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxOccurs )( 
             ISchemaParticle * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *maxOccurs);
+            /* [retval][out] */ VARIANT *maxOccurs);
         
         END_INTERFACE
     } ISchemaParticleVtbl;
@@ -21324,28 +18703,22 @@ EXTERN_C const IID IID_ISchemaAttribute;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaType **type) = 0;
+            /* [retval][out] */ ISchemaType **type) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_scope( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaComplexType **scope) = 0;
+            /* [retval][out] */ ISchemaComplexType **scope) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_defaultValue( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *defaultValue) = 0;
+            /* [retval][out] */ BSTR *defaultValue) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_fixedValue( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *fixedValue) = 0;
+            /* [retval][out] */ BSTR *fixedValue) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_use( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMAUSE *use) = 0;
+            /* [retval][out] */ SCHEMAUSE *use) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_isReference( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *reference) = 0;
+            /* [retval][out] */ VARIANT_BOOL *reference) = 0;
         
     };
     
@@ -21359,8 +18732,7 @@ EXTERN_C const IID IID_ISchemaAttribute;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaAttribute * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -21375,31 +18747,23 @@ EXTERN_C const IID IID_ISchemaAttribute;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaAttribute * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaAttribute * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaAttribute * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -21424,82 +18788,68 @@ EXTERN_C const IID IID_ISchemaAttribute;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaAttribute * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchemaAttribute, get_type)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_type )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaType **type);
+            /* [retval][out] */ ISchemaType **type);
         
         DECLSPEC_XFGVIRT(ISchemaAttribute, get_scope)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_scope )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaComplexType **scope);
+            /* [retval][out] */ ISchemaComplexType **scope);
         
         DECLSPEC_XFGVIRT(ISchemaAttribute, get_defaultValue)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_defaultValue )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *defaultValue);
+            /* [retval][out] */ BSTR *defaultValue);
         
         DECLSPEC_XFGVIRT(ISchemaAttribute, get_fixedValue)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_fixedValue )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *fixedValue);
+            /* [retval][out] */ BSTR *fixedValue);
         
         DECLSPEC_XFGVIRT(ISchemaAttribute, get_use)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_use )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMAUSE *use);
+            /* [retval][out] */ SCHEMAUSE *use);
         
         DECLSPEC_XFGVIRT(ISchemaAttribute, get_isReference)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isReference )( 
             ISchemaAttribute * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *reference);
+            /* [retval][out] */ VARIANT_BOOL *reference);
         
         END_INTERFACE
     } ISchemaAttributeVtbl;
@@ -21604,48 +18954,37 @@ EXTERN_C const IID IID_ISchemaElement;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaType **type) = 0;
+            /* [retval][out] */ ISchemaType **type) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_scope( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaComplexType **scope) = 0;
+            /* [retval][out] */ ISchemaComplexType **scope) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_defaultValue( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *defaultValue) = 0;
+            /* [retval][out] */ BSTR *defaultValue) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_fixedValue( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *fixedValue) = 0;
+            /* [retval][out] */ BSTR *fixedValue) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_isNillable( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *nillable) = 0;
+            /* [retval][out] */ VARIANT_BOOL *nillable) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_identityConstraints( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **constraints) = 0;
+            /* [retval][out] */ ISchemaItemCollection **constraints) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_substitutionGroup( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaElement **element) = 0;
+            /* [retval][out] */ ISchemaElement **element) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_substitutionGroupExclusions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *exclusions) = 0;
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *exclusions) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_disallowedSubstitutions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *disallowed) = 0;
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *disallowed) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_isAbstract( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *abstract) = 0;
+            /* [retval][out] */ VARIANT_BOOL *abstract) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_isReference( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *reference) = 0;
+            /* [retval][out] */ VARIANT_BOOL *reference) = 0;
         
     };
     
@@ -21659,8 +18998,7 @@ EXTERN_C const IID IID_ISchemaElement;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaElement * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -21675,31 +19013,23 @@ EXTERN_C const IID IID_ISchemaElement;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaElement * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaElement * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaElement * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -21724,124 +19054,103 @@ EXTERN_C const IID IID_ISchemaElement;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaElement * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchemaParticle, get_minOccurs)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_minOccurs )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *minOccurs);
+            /* [retval][out] */ VARIANT *minOccurs);
         
         DECLSPEC_XFGVIRT(ISchemaParticle, get_maxOccurs)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxOccurs )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *maxOccurs);
+            /* [retval][out] */ VARIANT *maxOccurs);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_type)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_type )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaType **type);
+            /* [retval][out] */ ISchemaType **type);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_scope)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_scope )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaComplexType **scope);
+            /* [retval][out] */ ISchemaComplexType **scope);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_defaultValue)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_defaultValue )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *defaultValue);
+            /* [retval][out] */ BSTR *defaultValue);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_fixedValue)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_fixedValue )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *fixedValue);
+            /* [retval][out] */ BSTR *fixedValue);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_isNillable)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isNillable )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *nillable);
+            /* [retval][out] */ VARIANT_BOOL *nillable);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_identityConstraints)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_identityConstraints )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **constraints);
+            /* [retval][out] */ ISchemaItemCollection **constraints);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_substitutionGroup)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_substitutionGroup )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaElement **element);
+            /* [retval][out] */ ISchemaElement **element);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_substitutionGroupExclusions)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_substitutionGroupExclusions )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *exclusions);
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *exclusions);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_disallowedSubstitutions)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_disallowedSubstitutions )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *disallowed);
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *disallowed);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_isAbstract)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isAbstract )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *abstract);
+            /* [retval][out] */ VARIANT_BOOL *abstract);
         
         DECLSPEC_XFGVIRT(ISchemaElement, get_isReference)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isReference )( 
             ISchemaElement * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *reference);
+            /* [retval][out] */ VARIANT_BOOL *reference);
         
         END_INTERFACE
     } ISchemaElementVtbl;
@@ -21968,74 +19277,56 @@ EXTERN_C const IID IID_ISchemaType;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_baseTypes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **baseTypes) = 0;
+            /* [retval][out] */ ISchemaItemCollection **baseTypes) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_final( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *final) = 0;
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *final) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_variety( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMATYPEVARIETY *variety) = 0;
+            /* [retval][out] */ SCHEMATYPEVARIETY *variety) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_derivedBy( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *derivedBy) = 0;
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *derivedBy) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE isValid( 
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *valid) = 0;
+            /* [in] */ BSTR data,
+            /* [retval][out] */ VARIANT_BOOL *valid) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_minExclusive( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *minExclusive) = 0;
+            /* [retval][out] */ BSTR *minExclusive) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_minInclusive( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *minInclusive) = 0;
+            /* [retval][out] */ BSTR *minInclusive) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_maxExclusive( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *maxExclusive) = 0;
+            /* [retval][out] */ BSTR *maxExclusive) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_maxInclusive( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *maxInclusive) = 0;
+            /* [retval][out] */ BSTR *maxInclusive) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_totalDigits( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *totalDigits) = 0;
+            /* [retval][out] */ VARIANT *totalDigits) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_fractionDigits( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *fractionDigits) = 0;
+            /* [retval][out] */ VARIANT *fractionDigits) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *length) = 0;
+            /* [retval][out] */ VARIANT *length) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_minLength( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *minLength) = 0;
+            /* [retval][out] */ VARIANT *minLength) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_maxLength( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *maxLength) = 0;
+            /* [retval][out] */ VARIANT *maxLength) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_enumeration( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **enumeration) = 0;
+            /* [retval][out] */ ISchemaStringCollection **enumeration) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_whitespace( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMAWHITESPACE *whitespace) = 0;
+            /* [retval][out] */ SCHEMAWHITESPACE *whitespace) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_patterns( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **patterns) = 0;
+            /* [retval][out] */ ISchemaStringCollection **patterns) = 0;
         
     };
     
@@ -22049,8 +19340,7 @@ EXTERN_C const IID IID_ISchemaType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -22065,31 +19355,23 @@ EXTERN_C const IID IID_ISchemaType;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaType * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaType * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -22114,150 +19396,124 @@ EXTERN_C const IID IID_ISchemaType;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaType * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_baseTypes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_baseTypes )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **baseTypes);
+            /* [retval][out] */ ISchemaItemCollection **baseTypes);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_final)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_final )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *final);
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *final);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_variety)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_variety )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMATYPEVARIETY *variety);
+            /* [retval][out] */ SCHEMATYPEVARIETY *variety);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_derivedBy)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_derivedBy )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *derivedBy);
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *derivedBy);
         
         DECLSPEC_XFGVIRT(ISchemaType, isValid)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *isValid )( 
             ISchemaType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *valid);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ VARIANT_BOOL *valid);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_minExclusive)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_minExclusive )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *minExclusive);
+            /* [retval][out] */ BSTR *minExclusive);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_minInclusive)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_minInclusive )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *minInclusive);
+            /* [retval][out] */ BSTR *minInclusive);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_maxExclusive)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxExclusive )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *maxExclusive);
+            /* [retval][out] */ BSTR *maxExclusive);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_maxInclusive)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxInclusive )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *maxInclusive);
+            /* [retval][out] */ BSTR *maxInclusive);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_totalDigits)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_totalDigits )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *totalDigits);
+            /* [retval][out] */ VARIANT *totalDigits);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_fractionDigits)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_fractionDigits )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *fractionDigits);
+            /* [retval][out] */ VARIANT *fractionDigits);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_length)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *length);
+            /* [retval][out] */ VARIANT *length);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_minLength)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_minLength )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *minLength);
+            /* [retval][out] */ VARIANT *minLength);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_maxLength)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxLength )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *maxLength);
+            /* [retval][out] */ VARIANT *maxLength);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_enumeration)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enumeration )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **enumeration);
+            /* [retval][out] */ ISchemaStringCollection **enumeration);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_whitespace)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_whitespace )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMAWHITESPACE *whitespace);
+            /* [retval][out] */ SCHEMAWHITESPACE *whitespace);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_patterns)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_patterns )( 
             ISchemaType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **patterns);
+            /* [retval][out] */ ISchemaStringCollection **patterns);
         
         END_INTERFACE
     } ISchemaTypeVtbl;
@@ -22395,28 +19651,22 @@ EXTERN_C const IID IID_ISchemaComplexType;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_isAbstract( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *abstract) = 0;
+            /* [retval][out] */ VARIANT_BOOL *abstract) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_anyAttribute( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaAny **anyAttribute) = 0;
+            /* [retval][out] */ ISchemaAny **anyAttribute) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_attributes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **attributes) = 0;
+            /* [retval][out] */ ISchemaItemCollection **attributes) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_contentType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMACONTENTTYPE *contentType) = 0;
+            /* [retval][out] */ SCHEMACONTENTTYPE *contentType) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_contentModel( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaModelGroup **contentModel) = 0;
+            /* [retval][out] */ ISchemaModelGroup **contentModel) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_prohibitedSubstitutions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *prohibited) = 0;
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *prohibited) = 0;
         
     };
     
@@ -22430,8 +19680,7 @@ EXTERN_C const IID IID_ISchemaComplexType;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaComplexType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -22446,31 +19695,23 @@ EXTERN_C const IID IID_ISchemaComplexType;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaComplexType * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaComplexType * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaComplexType * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -22495,186 +19736,154 @@ EXTERN_C const IID IID_ISchemaComplexType;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaComplexType * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_baseTypes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_baseTypes )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **baseTypes);
+            /* [retval][out] */ ISchemaItemCollection **baseTypes);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_final)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_final )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *final);
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *final);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_variety)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_variety )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMATYPEVARIETY *variety);
+            /* [retval][out] */ SCHEMATYPEVARIETY *variety);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_derivedBy)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_derivedBy )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *derivedBy);
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *derivedBy);
         
         DECLSPEC_XFGVIRT(ISchemaType, isValid)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *isValid )( 
             ISchemaComplexType * This,
-            /* [annotation][in] */ 
-            _In_  BSTR data,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *valid);
+            /* [in] */ BSTR data,
+            /* [retval][out] */ VARIANT_BOOL *valid);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_minExclusive)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_minExclusive )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *minExclusive);
+            /* [retval][out] */ BSTR *minExclusive);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_minInclusive)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_minInclusive )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *minInclusive);
+            /* [retval][out] */ BSTR *minInclusive);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_maxExclusive)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxExclusive )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *maxExclusive);
+            /* [retval][out] */ BSTR *maxExclusive);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_maxInclusive)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxInclusive )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *maxInclusive);
+            /* [retval][out] */ BSTR *maxInclusive);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_totalDigits)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_totalDigits )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *totalDigits);
+            /* [retval][out] */ VARIANT *totalDigits);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_fractionDigits)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_fractionDigits )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *fractionDigits);
+            /* [retval][out] */ VARIANT *fractionDigits);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_length)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *length);
+            /* [retval][out] */ VARIANT *length);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_minLength)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_minLength )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *minLength);
+            /* [retval][out] */ VARIANT *minLength);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_maxLength)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxLength )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *maxLength);
+            /* [retval][out] */ VARIANT *maxLength);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_enumeration)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_enumeration )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **enumeration);
+            /* [retval][out] */ ISchemaStringCollection **enumeration);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_whitespace)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_whitespace )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMAWHITESPACE *whitespace);
+            /* [retval][out] */ SCHEMAWHITESPACE *whitespace);
         
         DECLSPEC_XFGVIRT(ISchemaType, get_patterns)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_patterns )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **patterns);
+            /* [retval][out] */ ISchemaStringCollection **patterns);
         
         DECLSPEC_XFGVIRT(ISchemaComplexType, get_isAbstract)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_isAbstract )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *abstract);
+            /* [retval][out] */ VARIANT_BOOL *abstract);
         
         DECLSPEC_XFGVIRT(ISchemaComplexType, get_anyAttribute)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_anyAttribute )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaAny **anyAttribute);
+            /* [retval][out] */ ISchemaAny **anyAttribute);
         
         DECLSPEC_XFGVIRT(ISchemaComplexType, get_attributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **attributes);
+            /* [retval][out] */ ISchemaItemCollection **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaComplexType, get_contentType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_contentType )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMACONTENTTYPE *contentType);
+            /* [retval][out] */ SCHEMACONTENTTYPE *contentType);
         
         DECLSPEC_XFGVIRT(ISchemaComplexType, get_contentModel)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_contentModel )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaModelGroup **contentModel);
+            /* [retval][out] */ ISchemaModelGroup **contentModel);
         
         DECLSPEC_XFGVIRT(ISchemaComplexType, get_prohibitedSubstitutions)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_prohibitedSubstitutions )( 
             ISchemaComplexType * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMADERIVATIONMETHOD *prohibited);
+            /* [retval][out] */ SCHEMADERIVATIONMETHOD *prohibited);
         
         END_INTERFACE
     } ISchemaComplexTypeVtbl;
@@ -22831,12 +20040,10 @@ EXTERN_C const IID IID_ISchemaAttributeGroup;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_anyAttribute( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaAny **anyAttribute) = 0;
+            /* [retval][out] */ ISchemaAny **anyAttribute) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_attributes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **attributes) = 0;
+            /* [retval][out] */ ISchemaItemCollection **attributes) = 0;
         
     };
     
@@ -22850,8 +20057,7 @@ EXTERN_C const IID IID_ISchemaAttributeGroup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -22866,31 +20072,23 @@ EXTERN_C const IID IID_ISchemaAttributeGroup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -22915,58 +20113,48 @@ EXTERN_C const IID IID_ISchemaAttributeGroup;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchemaAttributeGroup, get_anyAttribute)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_anyAttribute )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaAny **anyAttribute);
+            /* [retval][out] */ ISchemaAny **anyAttribute);
         
         DECLSPEC_XFGVIRT(ISchemaAttributeGroup, get_attributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             ISchemaAttributeGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **attributes);
+            /* [retval][out] */ ISchemaItemCollection **attributes);
         
         END_INTERFACE
     } ISchemaAttributeGroupVtbl;
@@ -23059,8 +20247,7 @@ EXTERN_C const IID IID_ISchemaModelGroup;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_particles( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **particles) = 0;
+            /* [retval][out] */ ISchemaItemCollection **particles) = 0;
         
     };
     
@@ -23074,8 +20261,7 @@ EXTERN_C const IID IID_ISchemaModelGroup;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaModelGroup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -23090,31 +20276,23 @@ EXTERN_C const IID IID_ISchemaModelGroup;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaModelGroup * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaModelGroup * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaModelGroup * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -23139,64 +20317,53 @@ EXTERN_C const IID IID_ISchemaModelGroup;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaModelGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaModelGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaModelGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaModelGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaModelGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaModelGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaModelGroup * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchemaParticle, get_minOccurs)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_minOccurs )( 
             ISchemaModelGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *minOccurs);
+            /* [retval][out] */ VARIANT *minOccurs);
         
         DECLSPEC_XFGVIRT(ISchemaParticle, get_maxOccurs)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxOccurs )( 
             ISchemaModelGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *maxOccurs);
+            /* [retval][out] */ VARIANT *maxOccurs);
         
         DECLSPEC_XFGVIRT(ISchemaModelGroup, get_particles)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_particles )( 
             ISchemaModelGroup * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaItemCollection **particles);
+            /* [retval][out] */ ISchemaItemCollection **particles);
         
         END_INTERFACE
     } ISchemaModelGroupVtbl;
@@ -23293,12 +20460,10 @@ EXTERN_C const IID IID_ISchemaAny;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_namespaces( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **namespaces) = 0;
+            /* [retval][out] */ ISchemaStringCollection **namespaces) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_processContents( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMAPROCESSCONTENTS *processContents) = 0;
+            /* [retval][out] */ SCHEMAPROCESSCONTENTS *processContents) = 0;
         
     };
     
@@ -23312,8 +20477,7 @@ EXTERN_C const IID IID_ISchemaAny;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaAny * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -23328,31 +20492,23 @@ EXTERN_C const IID IID_ISchemaAny;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaAny * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaAny * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaAny * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -23377,70 +20533,58 @@ EXTERN_C const IID IID_ISchemaAny;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaAny * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaAny * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaAny * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaAny * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaAny * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaAny * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaAny * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchemaParticle, get_minOccurs)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_minOccurs )( 
             ISchemaAny * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *minOccurs);
+            /* [retval][out] */ VARIANT *minOccurs);
         
         DECLSPEC_XFGVIRT(ISchemaParticle, get_maxOccurs)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_maxOccurs )( 
             ISchemaAny * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *maxOccurs);
+            /* [retval][out] */ VARIANT *maxOccurs);
         
         DECLSPEC_XFGVIRT(ISchemaAny, get_namespaces)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaces )( 
             ISchemaAny * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **namespaces);
+            /* [retval][out] */ ISchemaStringCollection **namespaces);
         
         DECLSPEC_XFGVIRT(ISchemaAny, get_processContents)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_processContents )( 
             ISchemaAny * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SCHEMAPROCESSCONTENTS *processContents);
+            /* [retval][out] */ SCHEMAPROCESSCONTENTS *processContents);
         
         END_INTERFACE
     } ISchemaAnyVtbl;
@@ -23540,16 +20684,13 @@ EXTERN_C const IID IID_ISchemaIdentityConstraint;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_selector( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *selector) = 0;
+            /* [retval][out] */ BSTR *selector) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_fields( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **fields) = 0;
+            /* [retval][out] */ ISchemaStringCollection **fields) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_referencedKey( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaIdentityConstraint **key) = 0;
+            /* [retval][out] */ ISchemaIdentityConstraint **key) = 0;
         
     };
     
@@ -23563,8 +20704,7 @@ EXTERN_C const IID IID_ISchemaIdentityConstraint;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -23579,31 +20719,23 @@ EXTERN_C const IID IID_ISchemaIdentityConstraint;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -23628,64 +20760,53 @@ EXTERN_C const IID IID_ISchemaIdentityConstraint;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchemaIdentityConstraint, get_selector)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_selector )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *selector);
+            /* [retval][out] */ BSTR *selector);
         
         DECLSPEC_XFGVIRT(ISchemaIdentityConstraint, get_fields)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_fields )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaStringCollection **fields);
+            /* [retval][out] */ ISchemaStringCollection **fields);
         
         DECLSPEC_XFGVIRT(ISchemaIdentityConstraint, get_referencedKey)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_referencedKey )( 
             ISchemaIdentityConstraint * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchemaIdentityConstraint **key);
+            /* [retval][out] */ ISchemaIdentityConstraint **key);
         
         END_INTERFACE
     } ISchemaIdentityConstraintVtbl;
@@ -23781,12 +20902,10 @@ EXTERN_C const IID IID_ISchemaNotation;
     {
     public:
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_systemIdentifier( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *uri) = 0;
+            /* [retval][out] */ BSTR *uri) = 0;
         
         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_publicIdentifier( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *uri) = 0;
+            /* [retval][out] */ BSTR *uri) = 0;
         
     };
     
@@ -23800,8 +20919,7 @@ EXTERN_C const IID IID_ISchemaNotation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISchemaNotation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -23816,31 +20934,23 @@ EXTERN_C const IID IID_ISchemaNotation;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ISchemaNotation * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ISchemaNotation * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ISchemaNotation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -23865,58 +20975,48 @@ EXTERN_C const IID IID_ISchemaNotation;
         DECLSPEC_XFGVIRT(ISchemaItem, get_name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             ISchemaNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *name);
+            /* [retval][out] */ BSTR *name);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_namespaceURI)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_namespaceURI )( 
             ISchemaNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *namespaceURI);
+            /* [retval][out] */ BSTR *namespaceURI);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_schema)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_schema )( 
             ISchemaNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  ISchema **schema);
+            /* [retval][out] */ ISchema **schema);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_id)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             ISchemaNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *id);
+            /* [retval][out] */ BSTR *id);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_itemType)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_itemType )( 
             ISchemaNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SOMITEMTYPE *itemType);
+            /* [retval][out] */ SOMITEMTYPE *itemType);
         
         DECLSPEC_XFGVIRT(ISchemaItem, get_unhandledAttributes)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_unhandledAttributes )( 
             ISchemaNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IVBSAXAttributes **attributes);
+            /* [retval][out] */ IVBSAXAttributes **attributes);
         
         DECLSPEC_XFGVIRT(ISchemaItem, writeAnnotation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *writeAnnotation )( 
             ISchemaNotation * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *annotationSink,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isWritten);
+            /* [in] */ IUnknown *annotationSink,
+            /* [retval][out] */ VARIANT_BOOL *isWritten);
         
         DECLSPEC_XFGVIRT(ISchemaNotation, get_systemIdentifier)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_systemIdentifier )( 
             ISchemaNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *uri);
+            /* [retval][out] */ BSTR *uri);
         
         DECLSPEC_XFGVIRT(ISchemaNotation, get_publicIdentifier)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_publicIdentifier )( 
             ISchemaNotation * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *uri);
+            /* [retval][out] */ BSTR *uri);
         
         END_INTERFACE
     } ISchemaNotationVtbl;
@@ -24009,22 +21109,18 @@ EXTERN_C const IID IID_IXMLElementCollection;
     {
     public:
         virtual /* [id][hidden][restricted][propput] */ HRESULT STDMETHODCALLTYPE put_length( 
-            /* [annotation][in] */ 
-            _In_  long v) = 0;
+            /* [in] */ long v) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *p) = 0;
+            /* [out][retval] */ long *p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__newEnum( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IUnknown **ppUnk) = 0;
+            /* [out][retval] */ IUnknown **ppUnk) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE item( 
             /* [in][optional] */ VARIANT var1,
             /* [in][optional] */ VARIANT var2,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IDispatch **ppDisp) = 0;
+            /* [out][retval] */ IDispatch **ppDisp) = 0;
         
     };
     
@@ -24038,8 +21134,7 @@ EXTERN_C const IID IID_IXMLElementCollection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLElementCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -24054,31 +21149,23 @@ EXTERN_C const IID IID_IXMLElementCollection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLElementCollection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLElementCollection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLElementCollection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -24103,28 +21190,24 @@ EXTERN_C const IID IID_IXMLElementCollection;
         DECLSPEC_XFGVIRT(IXMLElementCollection, put_length)
         /* [id][hidden][restricted][propput] */ HRESULT ( STDMETHODCALLTYPE *put_length )( 
             IXMLElementCollection * This,
-            /* [annotation][in] */ 
-            _In_  long v);
+            /* [in] */ long v);
         
         DECLSPEC_XFGVIRT(IXMLElementCollection, get_length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLElementCollection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *p);
+            /* [out][retval] */ long *p);
         
         DECLSPEC_XFGVIRT(IXMLElementCollection, get__newEnum)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__newEnum )( 
             IXMLElementCollection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IUnknown **ppUnk);
+            /* [out][retval] */ IUnknown **ppUnk);
         
         DECLSPEC_XFGVIRT(IXMLElementCollection, item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *item )( 
             IXMLElementCollection * This,
             /* [in][optional] */ VARIANT var1,
             /* [in][optional] */ VARIANT var2,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [out][retval] */ IDispatch **ppDisp);
         
         END_INTERFACE
     } IXMLElementCollectionVtbl;
@@ -24201,63 +21284,48 @@ EXTERN_C const IID IID_IXMLDocument;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_root( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement **p) = 0;
+            /* [out][retval] */ IXMLElement **p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get_fileSize( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get_fileModifiedDate( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get_fileUpdatedDate( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_URL( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_URL( 
-            /* [annotation][in] */ 
-            _In_  BSTR p) = 0;
+            /* [in] */ BSTR p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get_mimeType( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_readyState( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *pl) = 0;
+            /* [out][retval] */ long *pl) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_charset( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_charset( 
-            /* [annotation][in] */ 
-            _In_  BSTR p) = 0;
+            /* [in] */ BSTR p) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_version( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_doctype( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get_dtdURL( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createElement( 
-            /* [annotation][in] */ 
-            _In_  VARIANT vType,
+            /* [in] */ VARIANT vType,
             /* [in][optional] */ VARIANT var1,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement **ppElem) = 0;
+            /* [out][retval] */ IXMLElement **ppElem) = 0;
         
     };
     
@@ -24271,8 +21339,7 @@ EXTERN_C const IID IID_IXMLDocument;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDocument * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -24287,31 +21354,23 @@ EXTERN_C const IID IID_IXMLDocument;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDocument * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDocument * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDocument * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -24336,89 +21395,74 @@ EXTERN_C const IID IID_IXMLDocument;
         DECLSPEC_XFGVIRT(IXMLDocument, get_root)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_root )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement **p);
+            /* [out][retval] */ IXMLElement **p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, get_fileSize)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get_fileSize )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, get_fileModifiedDate)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get_fileModifiedDate )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, get_fileUpdatedDate)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get_fileUpdatedDate )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, get_URL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_URL )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, put_URL)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_URL )( 
             IXMLDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR p);
+            /* [in] */ BSTR p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, get_mimeType)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get_mimeType )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, get_readyState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_readyState )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *pl);
+            /* [out][retval] */ long *pl);
         
         DECLSPEC_XFGVIRT(IXMLDocument, get_charset)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_charset )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, put_charset)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_charset )( 
             IXMLDocument * This,
-            /* [annotation][in] */ 
-            _In_  BSTR p);
+            /* [in] */ BSTR p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, get_version)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_version )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, get_doctype)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_doctype )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, get_dtdURL)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dtdURL )( 
             IXMLDocument * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument, createElement)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createElement )( 
             IXMLDocument * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT vType,
+            /* [in] */ VARIANT vType,
             /* [in][optional] */ VARIANT var1,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement **ppElem);
+            /* [out][retval] */ IXMLElement **ppElem);
         
         END_INTERFACE
     } IXMLDocumentVtbl;
@@ -24525,71 +21569,54 @@ EXTERN_C const IID IID_IXMLDocument2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_root( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement2 **p) = 0;
+            /* [out][retval] */ IXMLElement2 **p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get_fileSize( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get_fileModifiedDate( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get_fileUpdatedDate( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_URL( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_URL( 
-            /* [annotation][in] */ 
-            _In_  BSTR p) = 0;
+            /* [in] */ BSTR p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get_mimeType( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_readyState( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *pl) = 0;
+            /* [out][retval] */ long *pl) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_charset( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_charset( 
-            /* [annotation][in] */ 
-            _In_  BSTR p) = 0;
+            /* [in] */ BSTR p) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_version( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_doctype( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get_dtdURL( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE createElement( 
-            /* [annotation][in] */ 
-            _In_  VARIANT vType,
+            /* [in] */ VARIANT vType,
             /* [in][optional] */ VARIANT var1,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement2 **ppElem) = 0;
+            /* [out][retval] */ IXMLElement2 **ppElem) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_async( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *pf) = 0;
+            /* [out][retval] */ VARIANT_BOOL *pf) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_async( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL f) = 0;
+            /* [in] */ VARIANT_BOOL f) = 0;
         
     };
     
@@ -24603,8 +21630,7 @@ EXTERN_C const IID IID_IXMLDocument2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -24619,31 +21645,23 @@ EXTERN_C const IID IID_IXMLDocument2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDocument2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -24668,101 +21686,84 @@ EXTERN_C const IID IID_IXMLDocument2;
         DECLSPEC_XFGVIRT(IXMLDocument2, get_root)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_root )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement2 **p);
+            /* [out][retval] */ IXMLElement2 **p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_fileSize)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get_fileSize )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_fileModifiedDate)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get_fileModifiedDate )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_fileUpdatedDate)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get_fileUpdatedDate )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_URL)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_URL )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, put_URL)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_URL )( 
             IXMLDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR p);
+            /* [in] */ BSTR p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_mimeType)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get_mimeType )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_readyState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_readyState )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *pl);
+            /* [out][retval] */ long *pl);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_charset)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_charset )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, put_charset)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_charset )( 
             IXMLDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR p);
+            /* [in] */ BSTR p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_version)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_version )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_doctype)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_doctype )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_dtdURL)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get_dtdURL )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, createElement)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createElement )( 
             IXMLDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT vType,
+            /* [in] */ VARIANT vType,
             /* [in][optional] */ VARIANT var1,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement2 **ppElem);
+            /* [out][retval] */ IXMLElement2 **ppElem);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, get_async)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_async )( 
             IXMLDocument2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT_BOOL *pf);
+            /* [out][retval] */ VARIANT_BOOL *pf);
         
         DECLSPEC_XFGVIRT(IXMLDocument2, put_async)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_async )( 
             IXMLDocument2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL f);
+            /* [in] */ VARIANT_BOOL f);
         
         END_INTERFACE
     } IXMLDocument2Vtbl;
@@ -24875,58 +21876,44 @@ EXTERN_C const IID IID_IXMLElement;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_tagName( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_tagName( 
-            /* [annotation][in] */ 
-            _In_  BSTR p) = 0;
+            /* [in] */ BSTR p) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_parent( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement **ppParent) = 0;
+            /* [out][retval] */ IXMLElement **ppParent) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName,
-            /* [annotation][in] */ 
-            _In_  VARIANT PropertyValue) = 0;
+            /* [in] */ BSTR strPropertyName,
+            /* [in] */ VARIANT PropertyValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *PropertyValue) = 0;
+            /* [in] */ BSTR strPropertyName,
+            /* [out][retval] */ VARIANT *PropertyValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName) = 0;
+            /* [in] */ BSTR strPropertyName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_children( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElementCollection **pp) = 0;
+            /* [out][retval] */ IXMLElementCollection **pp) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_type( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *plType) = 0;
+            /* [out][retval] */ long *plType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_text( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_text( 
-            /* [annotation][in] */ 
-            _In_  BSTR p) = 0;
+            /* [in] */ BSTR p) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE addChild( 
-            /* [annotation][in] */ 
-            _In_  IXMLElement *pChildElem,
+            /* [in] */ IXMLElement *pChildElem,
             long lIndex,
             long lReserved) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeChild( 
-            /* [annotation][in] */ 
-            _In_  IXMLElement *pChildElem) = 0;
+            /* [in] */ IXMLElement *pChildElem) = 0;
         
     };
     
@@ -24940,8 +21927,7 @@ EXTERN_C const IID IID_IXMLElement;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLElement * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -24956,31 +21942,23 @@ EXTERN_C const IID IID_IXMLElement;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLElement * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLElement * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLElement * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -25005,80 +21983,66 @@ EXTERN_C const IID IID_IXMLElement;
         DECLSPEC_XFGVIRT(IXMLElement, get_tagName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_tagName )( 
             IXMLElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLElement, put_tagName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_tagName )( 
             IXMLElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR p);
+            /* [in] */ BSTR p);
         
         DECLSPEC_XFGVIRT(IXMLElement, get_parent)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parent )( 
             IXMLElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement **ppParent);
+            /* [out][retval] */ IXMLElement **ppParent);
         
         DECLSPEC_XFGVIRT(IXMLElement, setAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setAttribute )( 
             IXMLElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName,
-            /* [annotation][in] */ 
-            _In_  VARIANT PropertyValue);
+            /* [in] */ BSTR strPropertyName,
+            /* [in] */ VARIANT PropertyValue);
         
         DECLSPEC_XFGVIRT(IXMLElement, getAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAttribute )( 
             IXMLElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *PropertyValue);
+            /* [in] */ BSTR strPropertyName,
+            /* [out][retval] */ VARIANT *PropertyValue);
         
         DECLSPEC_XFGVIRT(IXMLElement, removeAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeAttribute )( 
             IXMLElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName);
+            /* [in] */ BSTR strPropertyName);
         
         DECLSPEC_XFGVIRT(IXMLElement, get_children)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_children )( 
             IXMLElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElementCollection **pp);
+            /* [out][retval] */ IXMLElementCollection **pp);
         
         DECLSPEC_XFGVIRT(IXMLElement, get_type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_type )( 
             IXMLElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *plType);
+            /* [out][retval] */ long *plType);
         
         DECLSPEC_XFGVIRT(IXMLElement, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLElement * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLElement, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLElement * This,
-            /* [annotation][in] */ 
-            _In_  BSTR p);
+            /* [in] */ BSTR p);
         
         DECLSPEC_XFGVIRT(IXMLElement, addChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *addChild )( 
             IXMLElement * This,
-            /* [annotation][in] */ 
-            _In_  IXMLElement *pChildElem,
+            /* [in] */ IXMLElement *pChildElem,
             long lIndex,
             long lReserved);
         
         DECLSPEC_XFGVIRT(IXMLElement, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLElement * This,
-            /* [annotation][in] */ 
-            _In_  IXMLElement *pChildElem);
+            /* [in] */ IXMLElement *pChildElem);
         
         END_INTERFACE
     } IXMLElementVtbl;
@@ -25179,62 +22143,47 @@ EXTERN_C const IID IID_IXMLElement2;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_tagName( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_tagName( 
-            /* [annotation][in] */ 
-            _In_  BSTR p) = 0;
+            /* [in] */ BSTR p) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_parent( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement2 **ppParent) = 0;
+            /* [out][retval] */ IXMLElement2 **ppParent) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName,
-            /* [annotation][in] */ 
-            _In_  VARIANT PropertyValue) = 0;
+            /* [in] */ BSTR strPropertyName,
+            /* [in] */ VARIANT PropertyValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *PropertyValue) = 0;
+            /* [in] */ BSTR strPropertyName,
+            /* [out][retval] */ VARIANT *PropertyValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeAttribute( 
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName) = 0;
+            /* [in] */ BSTR strPropertyName) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_children( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElementCollection **pp) = 0;
+            /* [out][retval] */ IXMLElementCollection **pp) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_type( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *plType) = 0;
+            /* [out][retval] */ long *plType) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_text( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p) = 0;
+            /* [out][retval] */ BSTR *p) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_text( 
-            /* [annotation][in] */ 
-            _In_  BSTR p) = 0;
+            /* [in] */ BSTR p) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE addChild( 
-            /* [annotation][in] */ 
-            _In_  IXMLElement2 *pChildElem,
+            /* [in] */ IXMLElement2 *pChildElem,
             long lIndex,
             long lReserved) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeChild( 
-            /* [annotation][in] */ 
-            _In_  IXMLElement2 *pChildElem) = 0;
+            /* [in] */ IXMLElement2 *pChildElem) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_attributes( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElementCollection **pp) = 0;
+            /* [out][retval] */ IXMLElementCollection **pp) = 0;
         
     };
     
@@ -25248,8 +22197,7 @@ EXTERN_C const IID IID_IXMLElement2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLElement2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -25264,31 +22212,23 @@ EXTERN_C const IID IID_IXMLElement2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLElement2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLElement2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLElement2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -25313,86 +22253,71 @@ EXTERN_C const IID IID_IXMLElement2;
         DECLSPEC_XFGVIRT(IXMLElement2, get_tagName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_tagName )( 
             IXMLElement2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLElement2, put_tagName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_tagName )( 
             IXMLElement2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR p);
+            /* [in] */ BSTR p);
         
         DECLSPEC_XFGVIRT(IXMLElement2, get_parent)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_parent )( 
             IXMLElement2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElement2 **ppParent);
+            /* [out][retval] */ IXMLElement2 **ppParent);
         
         DECLSPEC_XFGVIRT(IXMLElement2, setAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setAttribute )( 
             IXMLElement2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName,
-            /* [annotation][in] */ 
-            _In_  VARIANT PropertyValue);
+            /* [in] */ BSTR strPropertyName,
+            /* [in] */ VARIANT PropertyValue);
         
         DECLSPEC_XFGVIRT(IXMLElement2, getAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAttribute )( 
             IXMLElement2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  VARIANT *PropertyValue);
+            /* [in] */ BSTR strPropertyName,
+            /* [out][retval] */ VARIANT *PropertyValue);
         
         DECLSPEC_XFGVIRT(IXMLElement2, removeAttribute)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeAttribute )( 
             IXMLElement2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strPropertyName);
+            /* [in] */ BSTR strPropertyName);
         
         DECLSPEC_XFGVIRT(IXMLElement2, get_children)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_children )( 
             IXMLElement2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElementCollection **pp);
+            /* [out][retval] */ IXMLElementCollection **pp);
         
         DECLSPEC_XFGVIRT(IXMLElement2, get_type)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_type )( 
             IXMLElement2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  long *plType);
+            /* [out][retval] */ long *plType);
         
         DECLSPEC_XFGVIRT(IXMLElement2, get_text)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_text )( 
             IXMLElement2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *p);
+            /* [out][retval] */ BSTR *p);
         
         DECLSPEC_XFGVIRT(IXMLElement2, put_text)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_text )( 
             IXMLElement2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR p);
+            /* [in] */ BSTR p);
         
         DECLSPEC_XFGVIRT(IXMLElement2, addChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *addChild )( 
             IXMLElement2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLElement2 *pChildElem,
+            /* [in] */ IXMLElement2 *pChildElem,
             long lIndex,
             long lReserved);
         
         DECLSPEC_XFGVIRT(IXMLElement2, removeChild)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeChild )( 
             IXMLElement2 * This,
-            /* [annotation][in] */ 
-            _In_  IXMLElement2 *pChildElem);
+            /* [in] */ IXMLElement2 *pChildElem);
         
         DECLSPEC_XFGVIRT(IXMLElement2, get_attributes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_attributes )( 
             IXMLElement2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IXMLElementCollection **pp);
+            /* [out][retval] */ IXMLElementCollection **pp);
         
         END_INTERFACE
     } IXMLElement2Vtbl;
@@ -25496,12 +22421,10 @@ EXTERN_C const IID IID_IXMLAttribute;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_name( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *n) = 0;
+            /* [out][retval] */ BSTR *n) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_value( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *v) = 0;
+            /* [out][retval] */ BSTR *v) = 0;
         
     };
     
@@ -25515,8 +22438,7 @@ EXTERN_C const IID IID_IXMLAttribute;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLAttribute * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -25531,31 +22453,23 @@ EXTERN_C const IID IID_IXMLAttribute;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLAttribute * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLAttribute * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLAttribute * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -25580,14 +22494,12 @@ EXTERN_C const IID IID_IXMLAttribute;
         DECLSPEC_XFGVIRT(IXMLAttribute, get_name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_name )( 
             IXMLAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *n);
+            /* [out][retval] */ BSTR *n);
         
         DECLSPEC_XFGVIRT(IXMLAttribute, get_value)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_value )( 
             IXMLAttribute * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  BSTR *v);
+            /* [out][retval] */ BSTR *v);
         
         END_INTERFACE
     } IXMLAttributeVtbl;
@@ -25672,8 +22584,7 @@ EXTERN_C const IID IID_IXMLError;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLError * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -25743,52 +22654,39 @@ EXTERN_C const IID IID_IXMLDOMSelection;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_expr( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *expression) = 0;
+            /* [retval][out] */ BSTR *expression) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_expr( 
-            /* [annotation][in] */ 
-            _In_  BSTR expression) = 0;
+            /* [in] */ BSTR expression) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_context( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **ppNode) = 0;
+            /* [retval][out] */ IXMLDOMNode **ppNode) = 0;
         
         virtual /* [helpstring][id][propputref] */ HRESULT STDMETHODCALLTYPE putref_context( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode) = 0;
+            /* [in] */ IXMLDOMNode *pNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE peekNode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **ppNode) = 0;
+            /* [retval][out] */ IXMLDOMNode **ppNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE matches( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **ppNode) = 0;
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ IXMLDOMNode **ppNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeNext( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **ppNode) = 0;
+            /* [retval][out] */ IXMLDOMNode **ppNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE removeAll( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE clone( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMSelection **ppNode) = 0;
+            /* [retval][out] */ IXMLDOMSelection **ppNode) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getProperty( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value) = 0;
+            /* [in] */ BSTR name,
+            /* [retval][out] */ VARIANT *value) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setProperty( 
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [in] */ BSTR name,
+            /* [in] */ VARIANT value) = 0;
         
     };
     
@@ -25802,8 +22700,7 @@ EXTERN_C const IID IID_IXMLDOMSelection;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXMLDOMSelection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -25818,31 +22715,23 @@ EXTERN_C const IID IID_IXMLDOMSelection;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IXMLDOMSelection * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IXMLDOMSelection * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IXMLDOMSelection * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -25867,22 +22756,18 @@ EXTERN_C const IID IID_IXMLDOMSelection;
         DECLSPEC_XFGVIRT(IXMLDOMNodeList, get_item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_item )( 
             IXMLDOMSelection * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **listItem);
+            /* [in] */ long index,
+            /* [retval][out] */ IXMLDOMNode **listItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNodeList, get_length)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IXMLDOMSelection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *listLength);
+            /* [retval][out] */ long *listLength);
         
         DECLSPEC_XFGVIRT(IXMLDOMNodeList, nextNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *nextNode )( 
             IXMLDOMSelection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **nextItem);
+            /* [retval][out] */ IXMLDOMNode **nextItem);
         
         DECLSPEC_XFGVIRT(IXMLDOMNodeList, reset)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *reset )( 
@@ -25891,52 +22776,43 @@ EXTERN_C const IID IID_IXMLDOMSelection;
         DECLSPEC_XFGVIRT(IXMLDOMNodeList, get__newEnum)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__newEnum )( 
             IXMLDOMSelection * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  IUnknown **ppUnk);
+            /* [out][retval] */ IUnknown **ppUnk);
         
         DECLSPEC_XFGVIRT(IXMLDOMSelection, get_expr)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_expr )( 
             IXMLDOMSelection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *expression);
+            /* [retval][out] */ BSTR *expression);
         
         DECLSPEC_XFGVIRT(IXMLDOMSelection, put_expr)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_expr )( 
             IXMLDOMSelection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR expression);
+            /* [in] */ BSTR expression);
         
         DECLSPEC_XFGVIRT(IXMLDOMSelection, get_context)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_context )( 
             IXMLDOMSelection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **ppNode);
+            /* [retval][out] */ IXMLDOMNode **ppNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMSelection, putref_context)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_context )( 
             IXMLDOMSelection * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode);
+            /* [in] */ IXMLDOMNode *pNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMSelection, peekNode)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *peekNode )( 
             IXMLDOMSelection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **ppNode);
+            /* [retval][out] */ IXMLDOMNode **ppNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMSelection, matches)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *matches )( 
             IXMLDOMSelection * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **ppNode);
+            /* [in] */ IXMLDOMNode *pNode,
+            /* [retval][out] */ IXMLDOMNode **ppNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMSelection, removeNext)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeNext )( 
             IXMLDOMSelection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMNode **ppNode);
+            /* [retval][out] */ IXMLDOMNode **ppNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMSelection, removeAll)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeAll )( 
@@ -25945,24 +22821,19 @@ EXTERN_C const IID IID_IXMLDOMSelection;
         DECLSPEC_XFGVIRT(IXMLDOMSelection, clone)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *clone )( 
             IXMLDOMSelection * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMSelection **ppNode);
+            /* [retval][out] */ IXMLDOMSelection **ppNode);
         
         DECLSPEC_XFGVIRT(IXMLDOMSelection, getProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getProperty )( 
             IXMLDOMSelection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [in] */ BSTR name,
+            /* [retval][out] */ VARIANT *value);
         
         DECLSPEC_XFGVIRT(IXMLDOMSelection, setProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setProperty )( 
             IXMLDOMSelection * This,
-            /* [annotation][in] */ 
-            _In_  BSTR name,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ BSTR name,
+            /* [in] */ VARIANT value);
         
         END_INTERFACE
     } IXMLDOMSelectionVtbl;
@@ -26085,8 +22956,7 @@ EXTERN_C const IID DIID_XMLDOMDocumentEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in XMLDOMDocumentEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -26101,31 +22971,23 @@ EXTERN_C const IID DIID_XMLDOMDocumentEvents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in XMLDOMDocumentEvents * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in XMLDOMDocumentEvents * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in XMLDOMDocumentEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -26207,24 +23069,19 @@ EXTERN_C const IID IID_IDSOControl;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_XMLDocument( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **ppDoc) = 0;
+            /* [retval][out] */ IXMLDOMDocument **ppDoc) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_XMLDocument( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMDocument *ppDoc) = 0;
+            /* [in] */ IXMLDOMDocument *ppDoc) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_JavaDSOCompatible( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *fJavaDSOCompatible) = 0;
+            /* [retval][out] */ BOOL *fJavaDSOCompatible) = 0;
         
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_JavaDSOCompatible( 
-            /* [annotation][in] */ 
-            _In_  BOOL fJavaDSOCompatible) = 0;
+            /* [in] */ BOOL fJavaDSOCompatible) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_readyState( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *state) = 0;
+            /* [retval][out] */ long *state) = 0;
         
     };
     
@@ -26238,8 +23095,7 @@ EXTERN_C const IID IID_IDSOControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDSOControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -26254,31 +23110,23 @@ EXTERN_C const IID IID_IDSOControl;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IDSOControl * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IDSOControl * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IDSOControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -26303,32 +23151,27 @@ EXTERN_C const IID IID_IDSOControl;
         DECLSPEC_XFGVIRT(IDSOControl, get_XMLDocument)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_XMLDocument )( 
             IDSOControl * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXMLDOMDocument **ppDoc);
+            /* [retval][out] */ IXMLDOMDocument **ppDoc);
         
         DECLSPEC_XFGVIRT(IDSOControl, put_XMLDocument)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_XMLDocument )( 
             IDSOControl * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMDocument *ppDoc);
+            /* [in] */ IXMLDOMDocument *ppDoc);
         
         DECLSPEC_XFGVIRT(IDSOControl, get_JavaDSOCompatible)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_JavaDSOCompatible )( 
             IDSOControl * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *fJavaDSOCompatible);
+            /* [retval][out] */ BOOL *fJavaDSOCompatible);
         
         DECLSPEC_XFGVIRT(IDSOControl, put_JavaDSOCompatible)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_JavaDSOCompatible )( 
             IDSOControl * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fJavaDSOCompatible);
+            /* [in] */ BOOL fJavaDSOCompatible);
         
         DECLSPEC_XFGVIRT(IDSOControl, get_readyState)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_readyState )( 
             IDSOControl * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *state);
+            /* [retval][out] */ long *state);
         
         END_INTERFACE
     } IDSOControlVtbl;
@@ -26408,29 +23251,22 @@ EXTERN_C const IID IID_IXMLHTTPRequest;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE open( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMethod,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
+            /* [in] */ __RPC__in BSTR bstrMethod,
+            /* [in] */ __RPC__in BSTR bstrUrl,
             /* [optional][in] */ VARIANT varAsync,
             /* [optional][in] */ VARIANT bstrUser,
             /* [optional][in] */ VARIANT bstrPassword) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setRequestHeader( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValue) = 0;
+            /* [in] */ __RPC__in BSTR bstrHeader,
+            /* [in] */ __RPC__in BSTR bstrValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getResponseHeader( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrValue) = 0;
+            /* [in] */ __RPC__in BSTR bstrHeader,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrValue) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getAllResponseHeaders( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrHeaders) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrHeaders) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE send( 
             /* [optional][in] */ VARIANT varBody) = 0;
@@ -26438,36 +23274,28 @@ EXTERN_C const IID IID_IXMLHTTPRequest;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE abort( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_status( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plStatus) = 0;
+            /* [retval][out] */ __RPC__out long *plStatus) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_statusText( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrStatus) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrStatus) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_responseXML( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppBody) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppBody) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_responseText( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrBody) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBody) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_responseBody( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBody) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarBody) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_responseStream( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBody) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarBody) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_readyState( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plState) = 0;
+            /* [retval][out] */ __RPC__out long *plState) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_onreadystatechange( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *pReadyStateSink) = 0;
+            /* [in] */ __RPC__in_opt IDispatch *pReadyStateSink) = 0;
         
     };
     
@@ -26481,8 +23309,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -26497,31 +23324,23 @@ EXTERN_C const IID IID_IXMLHTTPRequest;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -26546,10 +23365,8 @@ EXTERN_C const IID IID_IXMLHTTPRequest;
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, open)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *open )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMethod,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
+            /* [in] */ __RPC__in BSTR bstrMethod,
+            /* [in] */ __RPC__in BSTR bstrUrl,
             /* [optional][in] */ VARIANT varAsync,
             /* [optional][in] */ VARIANT bstrUser,
             /* [optional][in] */ VARIANT bstrPassword);
@@ -26557,24 +23374,19 @@ EXTERN_C const IID IID_IXMLHTTPRequest;
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, setRequestHeader)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setRequestHeader )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValue);
+            /* [in] */ __RPC__in BSTR bstrHeader,
+            /* [in] */ __RPC__in BSTR bstrValue);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, getResponseHeader)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getResponseHeader )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrValue);
+            /* [in] */ __RPC__in BSTR bstrHeader,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrValue);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, getAllResponseHeaders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAllResponseHeaders )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrHeaders);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrHeaders);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, send)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *send )( 
@@ -26588,50 +23400,42 @@ EXTERN_C const IID IID_IXMLHTTPRequest;
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plStatus);
+            /* [retval][out] */ __RPC__out long *plStatus);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_statusText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_statusText )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrStatus);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrStatus);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseXML)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseXML )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppBody);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseText )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrBody);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseBody)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseBody )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBody);
+            /* [retval][out] */ __RPC__out VARIANT *pvarBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseStream)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseStream )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBody);
+            /* [retval][out] */ __RPC__out VARIANT *pvarBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_readyState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_readyState )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plState);
+            /* [retval][out] */ __RPC__out long *plState);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, put_onreadystatechange)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_onreadystatechange )( 
             __RPC__in IXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pReadyStateSink);
+            /* [in] */ __RPC__in_opt IDispatch *pReadyStateSink);
         
         END_INTERFACE
     } IXMLHTTPRequestVtbl;
@@ -26738,31 +23542,22 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setTimeouts( 
-            /* [annotation][in] */ 
-            _In_  long resolveTimeout,
-            /* [annotation][in] */ 
-            _In_  long connectTimeout,
-            /* [annotation][in] */ 
-            _In_  long sendTimeout,
-            /* [annotation][in] */ 
-            _In_  long receiveTimeout) = 0;
+            /* [in] */ long resolveTimeout,
+            /* [in] */ long connectTimeout,
+            /* [in] */ long sendTimeout,
+            /* [in] */ long receiveTimeout) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE waitForResponse( 
             /* [optional][in] */ VARIANT timeoutInSeconds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *isSuccessful) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getOption( 
-            /* [annotation][in] */ 
-            _In_  SERVERXMLHTTP_OPTION option,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value) = 0;
+            /* [in] */ SERVERXMLHTTP_OPTION option,
+            /* [retval][out] */ __RPC__out VARIANT *value) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setOption( 
-            /* [annotation][in] */ 
-            _In_  SERVERXMLHTTP_OPTION option,
-            /* [annotation][in] */ 
-            _In_  VARIANT value) = 0;
+            /* [in] */ SERVERXMLHTTP_OPTION option,
+            /* [in] */ VARIANT value) = 0;
         
     };
     
@@ -26776,8 +23571,7 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -26792,31 +23586,23 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -26841,10 +23627,8 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest;
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, open)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *open )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMethod,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
+            /* [in] */ __RPC__in BSTR bstrMethod,
+            /* [in] */ __RPC__in BSTR bstrUrl,
             /* [optional][in] */ VARIANT varAsync,
             /* [optional][in] */ VARIANT bstrUser,
             /* [optional][in] */ VARIANT bstrPassword);
@@ -26852,24 +23636,19 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest;
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, setRequestHeader)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setRequestHeader )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValue);
+            /* [in] */ __RPC__in BSTR bstrHeader,
+            /* [in] */ __RPC__in BSTR bstrValue);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, getResponseHeader)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getResponseHeader )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrValue);
+            /* [in] */ __RPC__in BSTR bstrHeader,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrValue);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, getAllResponseHeaders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAllResponseHeaders )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrHeaders);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrHeaders);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, send)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *send )( 
@@ -26883,85 +23662,68 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest;
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plStatus);
+            /* [retval][out] */ __RPC__out long *plStatus);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_statusText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_statusText )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrStatus);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrStatus);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseXML)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseXML )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppBody);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseText )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrBody);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseBody)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseBody )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBody);
+            /* [retval][out] */ __RPC__out VARIANT *pvarBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseStream)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseStream )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBody);
+            /* [retval][out] */ __RPC__out VARIANT *pvarBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_readyState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_readyState )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plState);
+            /* [retval][out] */ __RPC__out long *plState);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, put_onreadystatechange)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_onreadystatechange )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pReadyStateSink);
+            /* [in] */ __RPC__in_opt IDispatch *pReadyStateSink);
         
         DECLSPEC_XFGVIRT(IServerXMLHTTPRequest, setTimeouts)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setTimeouts )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  long resolveTimeout,
-            /* [annotation][in] */ 
-            _In_  long connectTimeout,
-            /* [annotation][in] */ 
-            _In_  long sendTimeout,
-            /* [annotation][in] */ 
-            _In_  long receiveTimeout);
+            /* [in] */ long resolveTimeout,
+            /* [in] */ long connectTimeout,
+            /* [in] */ long sendTimeout,
+            /* [in] */ long receiveTimeout);
         
         DECLSPEC_XFGVIRT(IServerXMLHTTPRequest, waitForResponse)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *waitForResponse )( 
             __RPC__in IServerXMLHTTPRequest * This,
             /* [optional][in] */ VARIANT timeoutInSeconds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *isSuccessful);
         
         DECLSPEC_XFGVIRT(IServerXMLHTTPRequest, getOption)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getOption )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  SERVERXMLHTTP_OPTION option,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [in] */ SERVERXMLHTTP_OPTION option,
+            /* [retval][out] */ __RPC__out VARIANT *value);
         
         DECLSPEC_XFGVIRT(IServerXMLHTTPRequest, setOption)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setOption )( 
             __RPC__in IServerXMLHTTPRequest * This,
-            /* [annotation][in] */ 
-            _In_  SERVERXMLHTTP_OPTION option,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ SERVERXMLHTTP_OPTION option,
+            /* [in] */ VARIANT value);
         
         END_INTERFACE
     } IServerXMLHTTPRequestVtbl;
@@ -27081,16 +23843,13 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest2;
     {
     public:
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setProxy( 
-            /* [annotation][in] */ 
-            _In_  SXH_PROXY_SETTING proxySetting,
+            /* [in] */ SXH_PROXY_SETTING proxySetting,
             /* [optional][in] */ VARIANT varProxyServer,
             /* [optional][in] */ VARIANT varBypassList) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setProxyCredentials( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword) = 0;
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword) = 0;
         
     };
     
@@ -27104,8 +23863,7 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -27120,31 +23878,23 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -27169,10 +23919,8 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest2;
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, open)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *open )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrMethod,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
+            /* [in] */ __RPC__in BSTR bstrMethod,
+            /* [in] */ __RPC__in BSTR bstrUrl,
             /* [optional][in] */ VARIANT varAsync,
             /* [optional][in] */ VARIANT bstrUser,
             /* [optional][in] */ VARIANT bstrPassword);
@@ -27180,24 +23928,19 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest2;
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, setRequestHeader)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setRequestHeader )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValue);
+            /* [in] */ __RPC__in BSTR bstrHeader,
+            /* [in] */ __RPC__in BSTR bstrValue);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, getResponseHeader)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getResponseHeader )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrValue);
+            /* [in] */ __RPC__in BSTR bstrHeader,
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrValue);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, getAllResponseHeaders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getAllResponseHeaders )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrHeaders);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrHeaders);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, send)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *send )( 
@@ -27211,101 +23954,81 @@ EXTERN_C const IID IID_IServerXMLHTTPRequest2;
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_status )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plStatus);
+            /* [retval][out] */ __RPC__out long *plStatus);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_statusText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_statusText )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrStatus);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrStatus);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseXML)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseXML )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppBody);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseText)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseText )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrBody);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseBody)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseBody )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBody);
+            /* [retval][out] */ __RPC__out VARIANT *pvarBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_responseStream)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_responseStream )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarBody);
+            /* [retval][out] */ __RPC__out VARIANT *pvarBody);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, get_readyState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_readyState )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *plState);
+            /* [retval][out] */ __RPC__out long *plState);
         
         DECLSPEC_XFGVIRT(IXMLHTTPRequest, put_onreadystatechange)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_onreadystatechange )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pReadyStateSink);
+            /* [in] */ __RPC__in_opt IDispatch *pReadyStateSink);
         
         DECLSPEC_XFGVIRT(IServerXMLHTTPRequest, setTimeouts)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setTimeouts )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  long resolveTimeout,
-            /* [annotation][in] */ 
-            _In_  long connectTimeout,
-            /* [annotation][in] */ 
-            _In_  long sendTimeout,
-            /* [annotation][in] */ 
-            _In_  long receiveTimeout);
+            /* [in] */ long resolveTimeout,
+            /* [in] */ long connectTimeout,
+            /* [in] */ long sendTimeout,
+            /* [in] */ long receiveTimeout);
         
         DECLSPEC_XFGVIRT(IServerXMLHTTPRequest, waitForResponse)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *waitForResponse )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
             /* [optional][in] */ VARIANT timeoutInSeconds,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *isSuccessful);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *isSuccessful);
         
         DECLSPEC_XFGVIRT(IServerXMLHTTPRequest, getOption)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getOption )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  SERVERXMLHTTP_OPTION option,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *value);
+            /* [in] */ SERVERXMLHTTP_OPTION option,
+            /* [retval][out] */ __RPC__out VARIANT *value);
         
         DECLSPEC_XFGVIRT(IServerXMLHTTPRequest, setOption)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setOption )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  SERVERXMLHTTP_OPTION option,
-            /* [annotation][in] */ 
-            _In_  VARIANT value);
+            /* [in] */ SERVERXMLHTTP_OPTION option,
+            /* [in] */ VARIANT value);
         
         DECLSPEC_XFGVIRT(IServerXMLHTTPRequest2, setProxy)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setProxy )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  SXH_PROXY_SETTING proxySetting,
+            /* [in] */ SXH_PROXY_SETTING proxySetting,
             /* [optional][in] */ VARIANT varProxyServer,
             /* [optional][in] */ VARIANT varBypassList);
         
         DECLSPEC_XFGVIRT(IServerXMLHTTPRequest2, setProxyCredentials)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setProxyCredentials )( 
             __RPC__in IServerXMLHTTPRequest2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUserName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrPassword);
+            /* [in] */ __RPC__in BSTR bstrUserName,
+            /* [in] */ __RPC__in BSTR bstrPassword);
         
         END_INTERFACE
     } IServerXMLHTTPRequest2Vtbl;
@@ -27432,18 +24155,14 @@ EXTERN_C const IID IID_IMXNamespacePrefixes;
     {
     public:
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_item( 
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *prefix) = 0;
+            /* [in] */ long index,
+            /* [retval][out] */ BSTR *prefix) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_length( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length) = 0;
+            /* [retval][out] */ long *length) = 0;
         
         virtual /* [id][hidden][restricted][propget] */ HRESULT STDMETHODCALLTYPE get__newEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppUnk) = 0;
+            /* [retval][out] */ IUnknown **ppUnk) = 0;
         
     };
     
@@ -27457,8 +24176,7 @@ EXTERN_C const IID IID_IMXNamespacePrefixes;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMXNamespacePrefixes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -27473,31 +24191,23 @@ EXTERN_C const IID IID_IMXNamespacePrefixes;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IMXNamespacePrefixes * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IMXNamespacePrefixes * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IMXNamespacePrefixes * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -27522,22 +24232,18 @@ EXTERN_C const IID IID_IMXNamespacePrefixes;
         DECLSPEC_XFGVIRT(IMXNamespacePrefixes, get_item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_item )( 
             IMXNamespacePrefixes * This,
-            /* [annotation][in] */ 
-            _In_  long index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *prefix);
+            /* [in] */ long index,
+            /* [retval][out] */ BSTR *prefix);
         
         DECLSPEC_XFGVIRT(IMXNamespacePrefixes, get_length)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_length )( 
             IMXNamespacePrefixes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *length);
+            /* [retval][out] */ long *length);
         
         DECLSPEC_XFGVIRT(IMXNamespacePrefixes, get__newEnum)
         /* [id][hidden][restricted][propget] */ HRESULT ( STDMETHODCALLTYPE *get__newEnum )( 
             IMXNamespacePrefixes * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppUnk);
+            /* [retval][out] */ IUnknown **ppUnk);
         
         END_INTERFACE
     } IMXNamespacePrefixesVtbl;
@@ -27611,54 +24317,40 @@ EXTERN_C const IID IID_IVBMXNamespaceManager;
     {
     public:
         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_allowOverride( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fOverride) = 0;
+            /* [in] */ VARIANT_BOOL fOverride) = 0;
         
         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_allowOverride( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fOverride) = 0;
+            /* [retval][out] */ VARIANT_BOOL *fOverride) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE reset( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE pushContext( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE pushNodeContext( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *contextNode,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT_BOOL fDeep = -1) = 0;
+            /* [in] */ IXMLDOMNode *contextNode,
+            /* [defaultvalue][in] */ VARIANT_BOOL fDeep = -1) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE popContext( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE declarePrefix( 
-            /* [annotation][in] */ 
-            _In_  BSTR prefix,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI) = 0;
+            /* [in] */ BSTR prefix,
+            /* [in] */ BSTR namespaceURI) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getDeclaredPrefixes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IMXNamespacePrefixes **prefixes) = 0;
+            /* [retval][out] */ IMXNamespacePrefixes **prefixes) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getPrefixes( 
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IMXNamespacePrefixes **prefixes) = 0;
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ IMXNamespacePrefixes **prefixes) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getURI( 
-            /* [annotation][in] */ 
-            _In_  BSTR prefix,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *uri) = 0;
+            /* [in] */ BSTR prefix,
+            /* [retval][out] */ VARIANT *uri) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getURIFromNode( 
-            /* [annotation][in] */ 
-            _In_  BSTR strPrefix,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *contextNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *uri) = 0;
+            /* [in] */ BSTR strPrefix,
+            /* [in] */ IXMLDOMNode *contextNode,
+            /* [retval][out] */ VARIANT *uri) = 0;
         
     };
     
@@ -27672,8 +24364,7 @@ EXTERN_C const IID IID_IVBMXNamespaceManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -27688,31 +24379,23 @@ EXTERN_C const IID IID_IVBMXNamespaceManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [range][in] */ UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -27737,14 +24420,12 @@ EXTERN_C const IID IID_IVBMXNamespaceManager;
         DECLSPEC_XFGVIRT(IVBMXNamespaceManager, put_allowOverride)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_allowOverride )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fOverride);
+            /* [in] */ VARIANT_BOOL fOverride);
         
         DECLSPEC_XFGVIRT(IVBMXNamespaceManager, get_allowOverride)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_allowOverride )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fOverride);
+            /* [retval][out] */ VARIANT_BOOL *fOverride);
         
         DECLSPEC_XFGVIRT(IVBMXNamespaceManager, reset)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *reset )( 
@@ -27757,10 +24438,8 @@ EXTERN_C const IID IID_IVBMXNamespaceManager;
         DECLSPEC_XFGVIRT(IVBMXNamespaceManager, pushNodeContext)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *pushNodeContext )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *contextNode,
-            /* [annotation][defaultvalue][in] */ 
-            _In_  VARIANT_BOOL fDeep);
+            /* [in] */ IXMLDOMNode *contextNode,
+            /* [defaultvalue][in] */ VARIANT_BOOL fDeep);
         
         DECLSPEC_XFGVIRT(IVBMXNamespaceManager, popContext)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *popContext )( 
@@ -27769,42 +24448,32 @@ EXTERN_C const IID IID_IVBMXNamespaceManager;
         DECLSPEC_XFGVIRT(IVBMXNamespaceManager, declarePrefix)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *declarePrefix )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR prefix,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI);
+            /* [in] */ BSTR prefix,
+            /* [in] */ BSTR namespaceURI);
         
         DECLSPEC_XFGVIRT(IVBMXNamespaceManager, getDeclaredPrefixes)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getDeclaredPrefixes )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IMXNamespacePrefixes **prefixes);
+            /* [retval][out] */ IMXNamespacePrefixes **prefixes);
         
         DECLSPEC_XFGVIRT(IVBMXNamespaceManager, getPrefixes)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getPrefixes )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR namespaceURI,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IMXNamespacePrefixes **prefixes);
+            /* [in] */ BSTR namespaceURI,
+            /* [retval][out] */ IMXNamespacePrefixes **prefixes);
         
         DECLSPEC_XFGVIRT(IVBMXNamespaceManager, getURI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getURI )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR prefix,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *uri);
+            /* [in] */ BSTR prefix,
+            /* [retval][out] */ VARIANT *uri);
         
         DECLSPEC_XFGVIRT(IVBMXNamespaceManager, getURIFromNode)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getURIFromNode )( 
             IVBMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strPrefix,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *contextNode,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *uri);
+            /* [in] */ BSTR strPrefix,
+            /* [in] */ IXMLDOMNode *contextNode,
+            /* [retval][out] */ VARIANT *uri);
         
         END_INTERFACE
     } IVBMXNamespaceManagerVtbl;
@@ -27902,54 +24571,43 @@ EXTERN_C const IID IID_IMXNamespaceManager;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE putAllowOverride( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fOverride) = 0;
+            /* [in] */ VARIANT_BOOL fOverride) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getAllowOverride( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fOverride) = 0;
+            /* [retval][out] */ VARIANT_BOOL *fOverride) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE pushContext( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE pushNodeContext( 
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *contextNode,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fDeep) = 0;
+            /* [in] */ IXMLDOMNode *contextNode,
+            /* [in] */ VARIANT_BOOL fDeep) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE popContext( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE declarePrefix( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR prefix,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR namespaceURI) = 0;
+            /* [in] */ LPCWSTR prefix,
+            /* [in] */ LPCWSTR namespaceURI) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getDeclaredPrefix( 
-            /* [annotation][in] */ 
-            _In_  long nIndex,
+            /* [in] */ long nIndex,
             /* [annotation][out][in] */ 
             _Out_writes_to_(*pcchPrefix, *pcchPrefix)  wchar_t *pwchPrefix,
             /* [annotation][out][in] */ 
             _Inout_  int *pcchPrefix) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getPrefix( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszNamespaceURI,
-            /* [annotation][in] */ 
-            _In_  long nIndex,
+            /* [in] */ LPCWSTR pwszNamespaceURI,
+            /* [in] */ long nIndex,
             /* [annotation][out][in] */ 
             _Out_writes_to_(*pcchPrefix, *pcchPrefix)  wchar_t *pwchPrefix,
             /* [annotation][out][in] */ 
             _Inout_  int *pcchPrefix) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE getURI( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwchPrefix,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pContextNode,
+            /* [in] */ LPCWSTR pwchPrefix,
+            /* [in] */ IXMLDOMNode *pContextNode,
             /* [annotation][out][in] */ 
             _Out_writes_to_(*pcchUri, *pcchUri)  wchar_t *pwchUri,
             /* [annotation][out][in] */ 
@@ -27967,8 +24625,7 @@ EXTERN_C const IID IID_IMXNamespaceManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -27983,14 +24640,12 @@ EXTERN_C const IID IID_IMXNamespaceManager;
         DECLSPEC_XFGVIRT(IMXNamespaceManager, putAllowOverride)
         HRESULT ( STDMETHODCALLTYPE *putAllowOverride )( 
             IMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fOverride);
+            /* [in] */ VARIANT_BOOL fOverride);
         
         DECLSPEC_XFGVIRT(IMXNamespaceManager, getAllowOverride)
         HRESULT ( STDMETHODCALLTYPE *getAllowOverride )( 
             IMXNamespaceManager * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *fOverride);
+            /* [retval][out] */ VARIANT_BOOL *fOverride);
         
         DECLSPEC_XFGVIRT(IMXNamespaceManager, reset)
         HRESULT ( STDMETHODCALLTYPE *reset )( 
@@ -28003,10 +24658,8 @@ EXTERN_C const IID IID_IMXNamespaceManager;
         DECLSPEC_XFGVIRT(IMXNamespaceManager, pushNodeContext)
         HRESULT ( STDMETHODCALLTYPE *pushNodeContext )( 
             IMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *contextNode,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fDeep);
+            /* [in] */ IXMLDOMNode *contextNode,
+            /* [in] */ VARIANT_BOOL fDeep);
         
         DECLSPEC_XFGVIRT(IMXNamespaceManager, popContext)
         HRESULT ( STDMETHODCALLTYPE *popContext )( 
@@ -28015,16 +24668,13 @@ EXTERN_C const IID IID_IMXNamespaceManager;
         DECLSPEC_XFGVIRT(IMXNamespaceManager, declarePrefix)
         HRESULT ( STDMETHODCALLTYPE *declarePrefix )( 
             IMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR prefix,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR namespaceURI);
+            /* [in] */ LPCWSTR prefix,
+            /* [in] */ LPCWSTR namespaceURI);
         
         DECLSPEC_XFGVIRT(IMXNamespaceManager, getDeclaredPrefix)
         HRESULT ( STDMETHODCALLTYPE *getDeclaredPrefix )( 
             IMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  long nIndex,
+            /* [in] */ long nIndex,
             /* [annotation][out][in] */ 
             _Out_writes_to_(*pcchPrefix, *pcchPrefix)  wchar_t *pwchPrefix,
             /* [annotation][out][in] */ 
@@ -28033,10 +24683,8 @@ EXTERN_C const IID IID_IMXNamespaceManager;
         DECLSPEC_XFGVIRT(IMXNamespaceManager, getPrefix)
         HRESULT ( STDMETHODCALLTYPE *getPrefix )( 
             IMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwszNamespaceURI,
-            /* [annotation][in] */ 
-            _In_  long nIndex,
+            /* [in] */ LPCWSTR pwszNamespaceURI,
+            /* [in] */ long nIndex,
             /* [annotation][out][in] */ 
             _Out_writes_to_(*pcchPrefix, *pcchPrefix)  wchar_t *pwchPrefix,
             /* [annotation][out][in] */ 
@@ -28045,10 +24693,8 @@ EXTERN_C const IID IID_IMXNamespaceManager;
         DECLSPEC_XFGVIRT(IMXNamespaceManager, getURI)
         HRESULT ( STDMETHODCALLTYPE *getURI )( 
             IMXNamespaceManager * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR pwchPrefix,
-            /* [annotation][in] */ 
-            _In_  IXMLDOMNode *pContextNode,
+            /* [in] */ LPCWSTR pwchPrefix,
+            /* [in] */ IXMLDOMNode *pContextNode,
             /* [annotation][out][in] */ 
             _Out_writes_to_(*pcchUri, *pcchUri)  wchar_t *pwchUri,
             /* [annotation][out][in] */ 

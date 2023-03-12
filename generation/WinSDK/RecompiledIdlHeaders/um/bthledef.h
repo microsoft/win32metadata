@@ -135,9 +135,40 @@ DEFINE_GUID(BTH_LE_ATT_BLUETOOTH_BASE_GUID,                 0x00000000, 0x0000, 
 #define BTH_LE_GAP_APPEARANCE_CATEGORY_RUNNING_WALKING_SENSOR \
                                                             0x0011
 #define BTH_LE_GAP_APPEARANCE_CATEGORY_CYCLING              0x0012
-
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_CONTROL_DEVICE       0x0013
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_NETWORK_DEVICE       0x0014
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_SENSOR               0x0015
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_LIGHT_FIXTURES       0x0016
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_FAN                  0x0017
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_HVAC                 0x0018
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_AIR_CONDITIONING     0x0019
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_HUMIDIFIER           0x001A
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_HEATING              0x001B
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_ACCESS_CONTROL       0x001C
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_MOTORIZED_DEVICE     0x001D
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_POWER_DEVICE         0x001E
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_LIGHT_SOURCE         0x001F
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_WINDOW_COVERING      0x0020
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_AUDIO_SINK           0x0021
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_AUDIO_SOURCE         0x0022
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_MOTORIZED_VEHICLE    0x0023
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_DOMESTIC_APPLIANCE   0x0024
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_WEARABLE_AUDIO_DEVICE \
+                                                            0x0025
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_AIRCRAFT             0x0026
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_AV_EQUIPMENT         0x0027
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_DISPLAY_EQUIPMENT    0x0028
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_HEARING_AID          0x0029
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_GAMING               0x002A
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_SIGNAGE              0x002B
 #define BTH_LE_GAP_APPEARANCE_CATEGORY_PLUSE_OXIMETER       0x0031
 #define BTH_LE_GAP_APPEARANCE_CATEGORY_WEIGHT_SCALE         0x0032
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_PERSONAL_MOBILITY_DEVICE \
+                                                            0x0033
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_CONTINUOUS_GLUCOSE_MONITOR \
+                                                            0x0034
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_INSULIN_PUMP         0x0035
+#define BTH_LE_GAP_APPEARANCE_CATEGORY_MEDICATION_DELIVERY  0x0036
 #define BTH_LE_GAP_APPEARANCE_CATEGORY_OUTDOOR_SPORTS_ACTIVITY \
                                                             0x0051
 
@@ -184,6 +215,50 @@ DEFINE_GUID(BTH_LE_ATT_BLUETOOTH_BASE_GUID,                 0x00000000, 0x0000, 
                                                             0x04
 #define BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_AND_CADENCE_SENSOR \
                                                             0x05
+
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SINK_SUBCATEGORY_STANDALONE_SPEAKER \
+                                                            0x01
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SINK_SUBCATEGORY_SOUNDBAR \
+                                                            0x02
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SINK_SUBCATEGORY_BOOKSHELF_SPEAKER \
+                                                            0x03
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SINK_SUBCATEGORY_STANDMOUNTED_SPEAKER \
+                                                            0x04
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SINK_SUBCATEGORY_SPEAKERPHONE \
+                                                            0x05
+
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_MICROPHONE \
+                                                            0x01
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_ALARM \
+                                                            0x02
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_BELL 0x03
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_HORN 0x04
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_BROADCASTING_DEVICE \
+                                                            0x05
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_SERVICE_DESK \
+                                                            0x06
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_KIOSK \
+                                                            0x07
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_BROADCASTING_ROOM \
+                                                            0x08
+#define BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_AUDITORIUM \
+                                                            0x09
+
+#define BTH_LE_GAP_APPEARANCE_WEARABLE_AUDIO_DEVICE_SUBCATEGORY_EARBUD \
+                                                            0x01
+#define BTH_LE_GAP_APPEARANCE_WEARABLE_AUDIO_DEVICE_SUBCATEGORY_HEADSET \
+                                                            0x02
+#define BTH_LE_GAP_APPEARANCE_WEARABLE_AUDIO_DEVICE_SUBCATEGORY_HEADPHONES \
+                                                            0x03
+#define BTH_LE_GAP_APPEARANCE_WEARABLE_AUDIO_DEVICE_SUBCATEGORY_NECKBAND \
+                                                            0x04
+
+#define BTH_LE_GAP_APPEARANCE_HEARING_AID_SUBCATEGORY_IN_EAR_HEARING_AID \
+                                                            0x01
+#define BTH_LE_GAP_APPEARANCE_HEARING_AID_SUBCATEGORY_BEHIND_EAR_HEARING_AID \
+                                                            0x02
+#define BTH_LE_GAP_APPEARANCE_HEARING_AID_SUBCATEGORY_COCHLEAR_IMPLANT \
+                                                            0x03
 
 #define BTH_LE_GAP_APPEARANCE_PULSE_OXIMETER_SUBCATEGORY_FINGERTIP \
                                                             0x01

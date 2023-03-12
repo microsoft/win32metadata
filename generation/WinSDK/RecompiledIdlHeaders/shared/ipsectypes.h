@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -34,7 +34,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -253,6 +253,10 @@ typedef struct IPSEC_TRAFFIC_SELECTOR_POLICY0_
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 #define IPSEC_POLICY_FLAG_SITE_TO_SITE_TUNNEL (0x00010000)
 #endif // (NTDDI_VERSION > NTDDI_WIN10_RS3)
+#define IPSEC_POLICY_FLAG_BANDWIDTH1 (0x10000000)
+#define IPSEC_POLICY_FLAG_BANDWIDTH2 (0x20000000)
+#define IPSEC_POLICY_FLAG_BANDWIDTH3 (0x40000000)
+#define IPSEC_POLICY_FLAG_BANDWIDTH4 (0x80000000)
 typedef struct IPSEC_TRANSPORT_POLICY0_
     {
     UINT32 numIpsecProposals;
@@ -637,6 +641,10 @@ typedef struct IPSEC_ID0_
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
 #define IPSEC_SA_BUNDLE_FLAG_LOW_POWER_MODE_SUPPORT (0x00800000)
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#define IPSEC_SA_BUNDLE_FLAG_TUNNEL_BANDWIDTH1 (0x10000000)
+#define IPSEC_SA_BUNDLE_FLAG_TUNNEL_BANDWIDTH2 (0x20000000)
+#define IPSEC_SA_BUNDLE_FLAG_TUNNEL_BANDWIDTH3 (0x40000000)
+#define IPSEC_SA_BUNDLE_FLAG_TUNNEL_BANDWIDTH4 (0x80000000)
 typedef struct IPSEC_SA_BUNDLE0_
     {
     UINT32 flags;

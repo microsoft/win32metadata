@@ -321,7 +321,7 @@ namespace Windows
                     [propget] HRESULT ShortenedLocalName([out] [retval] BYTE* value);
                     [propget] HRESULT CompleteLocalName([out] [retval] BYTE* value);
                     [propget] HRESULT TxPowerLevel([out] [retval] BYTE* value);
-                    [propget] HRESULT SlaveConnectionIntervalRange([out] [retval] BYTE* value);
+                    [propget] HRESULT PeripheralConnectionIntervalRange([out] [retval] BYTE* value);
                     [propget] HRESULT ServiceSolicitation16BitUuids([out] [retval] BYTE* value);
                     [propget] HRESULT ServiceSolicitation32BitUuids([out] [retval] BYTE* value);
                     [propget] HRESULT ServiceSolicitation128BitUuids([out] [retval] BYTE* value);

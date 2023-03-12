@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -278,7 +278,7 @@ enum XACTSTAT
 typedef struct XACTOPT
     {
     ULONG ulTimeout;
-    unsigned char szDescription[ 40 ];
+    char szDescription[ 40 ];
     } 	XACTOPT;
 
 
@@ -303,24 +303,17 @@ EXTERN_C const IID IID_ITransaction;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Commit( 
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][in] */ 
-            _In_  DWORD grfTC,
-            /* [annotation][in] */ 
-            _In_  DWORD grfRM) = 0;
+            /* [in] */ BOOL fRetaining,
+            /* [in] */ DWORD grfTC,
+            /* [in] */ DWORD grfRM) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Abort( 
-            /* [annotation][unique][in] */ 
-            _In_  BOID *pboidReason,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][in] */ 
-            _In_  BOOL fAsync) = 0;
+            /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
+            /* [in] */ BOOL fRetaining,
+            /* [in] */ BOOL fAsync) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTransactionInfo( 
-            /* [annotation][out] */ 
-            _Out_  XACTTRANSINFO *pinfo) = 0;
+            /* [out] */ __RPC__out XACTTRANSINFO *pinfo) = 0;
         
     };
     
@@ -334,8 +327,7 @@ EXTERN_C const IID IID_ITransaction;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransaction * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -350,28 +342,21 @@ EXTERN_C const IID IID_ITransaction;
         DECLSPEC_XFGVIRT(ITransaction, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ITransaction * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][in] */ 
-            _In_  DWORD grfTC,
-            /* [annotation][in] */ 
-            _In_  DWORD grfRM);
+            /* [in] */ BOOL fRetaining,
+            /* [in] */ DWORD grfTC,
+            /* [in] */ DWORD grfRM);
         
         DECLSPEC_XFGVIRT(ITransaction, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             __RPC__in ITransaction * This,
-            /* [annotation][unique][in] */ 
-            _In_  BOID *pboidReason,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][in] */ 
-            _In_  BOOL fAsync);
+            /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
+            /* [in] */ BOOL fRetaining,
+            /* [in] */ BOOL fAsync);
         
         DECLSPEC_XFGVIRT(ITransaction, GetTransactionInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTransactionInfo )( 
             __RPC__in ITransaction * This,
-            /* [annotation][out] */ 
-            _Out_  XACTTRANSINFO *pinfo);
+            /* [out] */ __RPC__out XACTTRANSINFO *pinfo);
         
         END_INTERFACE
     } ITransactionVtbl;
@@ -432,8 +417,7 @@ EXTERN_C const IID IID_ITransactionCloner;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE CloneWithCommitDisabled( 
-            /* [annotation][out] */ 
-            _Out_  ITransaction **ppITransaction) = 0;
+            /* [out] */ __RPC__deref_out_opt ITransaction **ppITransaction) = 0;
         
     };
     
@@ -447,8 +431,7 @@ EXTERN_C const IID IID_ITransactionCloner;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionCloner * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -463,34 +446,26 @@ EXTERN_C const IID IID_ITransactionCloner;
         DECLSPEC_XFGVIRT(ITransaction, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ITransactionCloner * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][in] */ 
-            _In_  DWORD grfTC,
-            /* [annotation][in] */ 
-            _In_  DWORD grfRM);
+            /* [in] */ BOOL fRetaining,
+            /* [in] */ DWORD grfTC,
+            /* [in] */ DWORD grfRM);
         
         DECLSPEC_XFGVIRT(ITransaction, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             __RPC__in ITransactionCloner * This,
-            /* [annotation][unique][in] */ 
-            _In_  BOID *pboidReason,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][in] */ 
-            _In_  BOOL fAsync);
+            /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
+            /* [in] */ BOOL fRetaining,
+            /* [in] */ BOOL fAsync);
         
         DECLSPEC_XFGVIRT(ITransaction, GetTransactionInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTransactionInfo )( 
             __RPC__in ITransactionCloner * This,
-            /* [annotation][out] */ 
-            _Out_  XACTTRANSINFO *pinfo);
+            /* [out] */ __RPC__out XACTTRANSINFO *pinfo);
         
         DECLSPEC_XFGVIRT(ITransactionCloner, CloneWithCommitDisabled)
         HRESULT ( STDMETHODCALLTYPE *CloneWithCommitDisabled )( 
             __RPC__in ITransactionCloner * This,
-            /* [annotation][out] */ 
-            _Out_  ITransaction **ppITransaction);
+            /* [out] */ __RPC__deref_out_opt ITransaction **ppITransaction);
         
         END_INTERFACE
     } ITransactionClonerVtbl;
@@ -555,8 +530,7 @@ EXTERN_C const IID IID_ITransaction2;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetTransactionInfo2( 
-            /* [annotation][out] */ 
-            _Out_  XACTTRANSINFO *pinfo) = 0;
+            /* [out] */ __RPC__out XACTTRANSINFO *pinfo) = 0;
         
     };
     
@@ -570,8 +544,7 @@ EXTERN_C const IID IID_ITransaction2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransaction2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -586,40 +559,31 @@ EXTERN_C const IID IID_ITransaction2;
         DECLSPEC_XFGVIRT(ITransaction, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ITransaction2 * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][in] */ 
-            _In_  DWORD grfTC,
-            /* [annotation][in] */ 
-            _In_  DWORD grfRM);
+            /* [in] */ BOOL fRetaining,
+            /* [in] */ DWORD grfTC,
+            /* [in] */ DWORD grfRM);
         
         DECLSPEC_XFGVIRT(ITransaction, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             __RPC__in ITransaction2 * This,
-            /* [annotation][unique][in] */ 
-            _In_  BOID *pboidReason,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][in] */ 
-            _In_  BOOL fAsync);
+            /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
+            /* [in] */ BOOL fRetaining,
+            /* [in] */ BOOL fAsync);
         
         DECLSPEC_XFGVIRT(ITransaction, GetTransactionInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTransactionInfo )( 
             __RPC__in ITransaction2 * This,
-            /* [annotation][out] */ 
-            _Out_  XACTTRANSINFO *pinfo);
+            /* [out] */ __RPC__out XACTTRANSINFO *pinfo);
         
         DECLSPEC_XFGVIRT(ITransactionCloner, CloneWithCommitDisabled)
         HRESULT ( STDMETHODCALLTYPE *CloneWithCommitDisabled )( 
             __RPC__in ITransaction2 * This,
-            /* [annotation][out] */ 
-            _Out_  ITransaction **ppITransaction);
+            /* [out] */ __RPC__deref_out_opt ITransaction **ppITransaction);
         
         DECLSPEC_XFGVIRT(ITransaction2, GetTransactionInfo2)
         HRESULT ( STDMETHODCALLTYPE *GetTransactionInfo2 )( 
             __RPC__in ITransaction2 * This,
-            /* [annotation][out] */ 
-            _Out_  XACTTRANSINFO *pinfo);
+            /* [out] */ __RPC__out XACTTRANSINFO *pinfo);
         
         END_INTERFACE
     } ITransaction2Vtbl;
@@ -688,20 +652,14 @@ EXTERN_C const IID IID_ITransactionDispenser;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetOptionsObject( 
-            /* [annotation][out] */ 
-            _Out_  ITransactionOptions **ppOptions) = 0;
+            /* [out] */ __RPC__deref_out_opt ITransactionOptions **ppOptions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE BeginTransaction( 
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *punkOuter,
-            /* [annotation][in] */ 
-            _In_  ISOLEVEL isoLevel,
-            /* [annotation][in] */ 
-            _In_  ULONG isoFlags,
-            /* [annotation][unique][in] */ 
-            _In_  ITransactionOptions *pOptions,
-            /* [annotation][out] */ 
-            _Out_  ITransaction **ppTransaction) = 0;
+            /* [unique][in] */ __RPC__in_opt IUnknown *punkOuter,
+            /* [in] */ ISOLEVEL isoLevel,
+            /* [in] */ ULONG isoFlags,
+            /* [unique][in] */ __RPC__in_opt ITransactionOptions *pOptions,
+            /* [out] */ __RPC__deref_out_opt ITransaction **ppTransaction) = 0;
         
     };
     
@@ -715,8 +673,7 @@ EXTERN_C const IID IID_ITransactionDispenser;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionDispenser * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -731,22 +688,16 @@ EXTERN_C const IID IID_ITransactionDispenser;
         DECLSPEC_XFGVIRT(ITransactionDispenser, GetOptionsObject)
         HRESULT ( STDMETHODCALLTYPE *GetOptionsObject )( 
             __RPC__in ITransactionDispenser * This,
-            /* [annotation][out] */ 
-            _Out_  ITransactionOptions **ppOptions);
+            /* [out] */ __RPC__deref_out_opt ITransactionOptions **ppOptions);
         
         DECLSPEC_XFGVIRT(ITransactionDispenser, BeginTransaction)
         HRESULT ( STDMETHODCALLTYPE *BeginTransaction )( 
             __RPC__in ITransactionDispenser * This,
-            /* [annotation][unique][in] */ 
-            _In_  IUnknown *punkOuter,
-            /* [annotation][in] */ 
-            _In_  ISOLEVEL isoLevel,
-            /* [annotation][in] */ 
-            _In_  ULONG isoFlags,
-            /* [annotation][unique][in] */ 
-            _In_  ITransactionOptions *pOptions,
-            /* [annotation][out] */ 
-            _Out_  ITransaction **ppTransaction);
+            /* [unique][in] */ __RPC__in_opt IUnknown *punkOuter,
+            /* [in] */ ISOLEVEL isoLevel,
+            /* [in] */ ULONG isoFlags,
+            /* [unique][in] */ __RPC__in_opt ITransactionOptions *pOptions,
+            /* [out] */ __RPC__deref_out_opt ITransaction **ppTransaction);
         
         END_INTERFACE
     } ITransactionDispenserVtbl;
@@ -804,12 +755,10 @@ EXTERN_C const IID IID_ITransactionOptions;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE SetOptions( 
-            /* [annotation][in] */ 
-            _In_  XACTOPT *pOptions) = 0;
+            /* [in] */ __RPC__in XACTOPT *pOptions) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetOptions( 
-            /* [annotation][out][in] */ 
-            _Inout_  XACTOPT *pOptions) = 0;
+            /* [out][in] */ __RPC__inout XACTOPT *pOptions) = 0;
         
     };
     
@@ -823,8 +772,7 @@ EXTERN_C const IID IID_ITransactionOptions;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionOptions * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -839,14 +787,12 @@ EXTERN_C const IID IID_ITransactionOptions;
         DECLSPEC_XFGVIRT(ITransactionOptions, SetOptions)
         HRESULT ( STDMETHODCALLTYPE *SetOptions )( 
             __RPC__in ITransactionOptions * This,
-            /* [annotation][in] */ 
-            _In_  XACTOPT *pOptions);
+            /* [in] */ __RPC__in XACTOPT *pOptions);
         
         DECLSPEC_XFGVIRT(ITransactionOptions, GetOptions)
         HRESULT ( STDMETHODCALLTYPE *GetOptions )( 
             __RPC__in ITransactionOptions * This,
-            /* [annotation][out][in] */ 
-            _Inout_  XACTOPT *pOptions);
+            /* [out][in] */ __RPC__inout XACTOPT *pOptions);
         
         END_INTERFACE
     } ITransactionOptionsVtbl;
@@ -904,30 +850,20 @@ EXTERN_C const IID IID_ITransactionOutcomeEvents;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Committed( 
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][unique][in] */ 
-            _In_  XACTUOW *pNewUOW,
-            /* [annotation][in] */ 
-            _In_  HRESULT hr) = 0;
+            /* [in] */ BOOL fRetaining,
+            /* [unique][in] */ __RPC__in_opt XACTUOW *pNewUOW,
+            /* [in] */ HRESULT hr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Aborted( 
-            /* [annotation][unique][in] */ 
-            _In_  BOID *pboidReason,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][unique][in] */ 
-            _In_  XACTUOW *pNewUOW,
-            /* [annotation][in] */ 
-            _In_  HRESULT hr) = 0;
+            /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
+            /* [in] */ BOOL fRetaining,
+            /* [unique][in] */ __RPC__in_opt XACTUOW *pNewUOW,
+            /* [in] */ HRESULT hr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE HeuristicDecision( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwDecision,
-            /* [annotation][unique][in] */ 
-            _In_  BOID *pboidReason,
-            /* [annotation][in] */ 
-            _In_  HRESULT hr) = 0;
+            /* [in] */ DWORD dwDecision,
+            /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
+            /* [in] */ HRESULT hr) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Indoubt( void) = 0;
         
@@ -943,8 +879,7 @@ EXTERN_C const IID IID_ITransactionOutcomeEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionOutcomeEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -959,34 +894,24 @@ EXTERN_C const IID IID_ITransactionOutcomeEvents;
         DECLSPEC_XFGVIRT(ITransactionOutcomeEvents, Committed)
         HRESULT ( STDMETHODCALLTYPE *Committed )( 
             __RPC__in ITransactionOutcomeEvents * This,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][unique][in] */ 
-            _In_  XACTUOW *pNewUOW,
-            /* [annotation][in] */ 
-            _In_  HRESULT hr);
+            /* [in] */ BOOL fRetaining,
+            /* [unique][in] */ __RPC__in_opt XACTUOW *pNewUOW,
+            /* [in] */ HRESULT hr);
         
         DECLSPEC_XFGVIRT(ITransactionOutcomeEvents, Aborted)
         HRESULT ( STDMETHODCALLTYPE *Aborted )( 
             __RPC__in ITransactionOutcomeEvents * This,
-            /* [annotation][unique][in] */ 
-            _In_  BOID *pboidReason,
-            /* [annotation][in] */ 
-            _In_  BOOL fRetaining,
-            /* [annotation][unique][in] */ 
-            _In_  XACTUOW *pNewUOW,
-            /* [annotation][in] */ 
-            _In_  HRESULT hr);
+            /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
+            /* [in] */ BOOL fRetaining,
+            /* [unique][in] */ __RPC__in_opt XACTUOW *pNewUOW,
+            /* [in] */ HRESULT hr);
         
         DECLSPEC_XFGVIRT(ITransactionOutcomeEvents, HeuristicDecision)
         HRESULT ( STDMETHODCALLTYPE *HeuristicDecision )( 
             __RPC__in ITransactionOutcomeEvents * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwDecision,
-            /* [annotation][unique][in] */ 
-            _In_  BOID *pboidReason,
-            /* [annotation][in] */ 
-            _In_  HRESULT hr);
+            /* [in] */ DWORD dwDecision,
+            /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
+            /* [in] */ HRESULT hr);
         
         DECLSPEC_XFGVIRT(ITransactionOutcomeEvents, Indoubt)
         HRESULT ( STDMETHODCALLTYPE *Indoubt )( 
@@ -1054,14 +979,11 @@ EXTERN_C const IID IID_ITmNodeName;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetNodeNameSize( 
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbNodeNameSize) = 0;
+            /* [out] */ __RPC__out ULONG *pcbNodeNameSize) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNodeName( 
-            /* [annotation][in] */ 
-            _In_  ULONG cbNodeNameBufferSize,
-            /* [annotation][out][in] */ 
-            _Inout_  LPWSTR pNodeNameBuffer) = 0;
+            /* [in] */ ULONG cbNodeNameBufferSize,
+            /* [out][in] */ __RPC__inout LPWSTR pNodeNameBuffer) = 0;
         
     };
     
@@ -1075,8 +997,7 @@ EXTERN_C const IID IID_ITmNodeName;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITmNodeName * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1091,16 +1012,13 @@ EXTERN_C const IID IID_ITmNodeName;
         DECLSPEC_XFGVIRT(ITmNodeName, GetNodeNameSize)
         HRESULT ( STDMETHODCALLTYPE *GetNodeNameSize )( 
             __RPC__in ITmNodeName * This,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pcbNodeNameSize);
+            /* [out] */ __RPC__out ULONG *pcbNodeNameSize);
         
         DECLSPEC_XFGVIRT(ITmNodeName, GetNodeName)
         HRESULT ( STDMETHODCALLTYPE *GetNodeName )( 
             __RPC__in ITmNodeName * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cbNodeNameBufferSize,
-            /* [annotation][out][in] */ 
-            _Inout_  LPWSTR pNodeNameBuffer);
+            /* [in] */ ULONG cbNodeNameBufferSize,
+            /* [out][in] */ __RPC__inout LPWSTR pNodeNameBuffer);
         
         END_INTERFACE
     } ITmNodeNameVtbl;
@@ -1158,8 +1076,7 @@ EXTERN_C const IID IID_IKernelTransaction;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetHandle( 
-            /* [annotation][out] */ 
-            _Out_  HANDLE *pHandle) = 0;
+            /* [out] */ HANDLE *pHandle) = 0;
         
     };
     
@@ -1173,8 +1090,7 @@ EXTERN_C const IID IID_IKernelTransaction;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IKernelTransaction * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1189,8 +1105,7 @@ EXTERN_C const IID IID_IKernelTransaction;
         DECLSPEC_XFGVIRT(IKernelTransaction, GetHandle)
         HRESULT ( STDMETHODCALLTYPE *GetHandle )( 
             IKernelTransaction * This,
-            /* [annotation][out] */ 
-            _Out_  HANDLE *pHandle);
+            /* [out] */ HANDLE *pHandle);
         
         END_INTERFACE
     } IKernelTransactionVtbl;

@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -137,124 +137,76 @@ EXTERN_C const IID IID_IXpsOMObjectFactory1;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentTypeFromFile( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR filename,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType) = 0;
+            /* [in] */ LPCWSTR filename,
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetDocumentTypeFromStream( 
-            /* [annotation][in] */ 
-            _In_  IStream *xpsDocumentStream,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType) = 0;
+            /* [in] */ IStream *xpsDocumentStream,
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertHDPhotoToJpegXR( 
-            /* [annotation][out][in] */ 
-            _Inout_  IXpsOMImageResource *imageResource) = 0;
+            /* [out][in] */ IXpsOMImageResource *imageResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE ConvertJpegXRToHDPhoto( 
-            /* [annotation][out][in] */ 
-            _Inout_  IXpsOMImageResource *imageResource) = 0;
+            /* [out][in] */ IXpsOMImageResource *imageResource) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePackageWriterOnFile1( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_INTERLEAVING interleaving,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *packageThumbnail,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter) = 0;
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_INTERLEAVING interleaving,
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IXpsOMCoreProperties *coreProperties,
+            /* [in] */ IXpsOMImageResource *packageThumbnail,
+            /* [in] */ IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePackageWriterOnStream1( 
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *outputStream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_INTERLEAVING interleaving,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *packageThumbnail,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter) = 0;
+            /* [in] */ ISequentialStream *outputStream,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_INTERLEAVING interleaving,
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IXpsOMCoreProperties *coreProperties,
+            /* [in] */ IXpsOMImageResource *packageThumbnail,
+            /* [in] */ IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePackage1( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage1 **package) = 0;
+            /* [retval][out] */ IXpsOMPackage1 **package) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePackageFromStream1( 
-            /* [annotation][in] */ 
-            _In_  IStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage1 **package) = 0;
+            /* [in] */ IStream *stream,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPackage1 **package) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePackageFromFile1( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR filename,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage1 **package) = 0;
+            /* [string][in] */ LPCWSTR filename,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPackage1 **package) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePage1( 
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *pageDimensions,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage1 **page) = 0;
+            /* [in] */ const XPS_SIZE *pageDimensions,
+            /* [string][in] */ LPCWSTR language,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMPage1 **page) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreatePageFromStream1( 
-            /* [annotation][in] */ 
-            _In_  IStream *pageMarkupStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartResources *resources,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage1 **page) = 0;
+            /* [in] */ IStream *pageMarkupStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [in] */ IXpsOMPartResources *resources,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPage1 **page) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CreateRemoteDictionaryResourceFromStream1( 
-            /* [annotation][in] */ 
-            _In_  IStream *dictionaryMarkupStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartResources *resources,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **dictionaryResource) = 0;
+            /* [in] */ IStream *dictionaryMarkupStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [in] */ IXpsOMPartResources *resources,
+            /* [retval][out] */ IXpsOMRemoteDictionaryResource **dictionaryResource) = 0;
         
     };
     
@@ -268,8 +220,7 @@ EXTERN_C const IID IID_IXpsOMObjectFactory1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -284,526 +235,362 @@ EXTERN_C const IID IID_IXpsOMObjectFactory1;
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePackage)
         HRESULT ( STDMETHODCALLTYPE *CreatePackage )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package);
+            /* [retval][out] */ IXpsOMPackage **package);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePackageFromFile)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageFromFile )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR filename,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package);
+            /* [string][in] */ LPCWSTR filename,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPackage **package);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePackageFromStream)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageFromStream )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage **package);
+            /* [in] */ IStream *stream,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPackage **package);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateStoryFragmentsResource)
         HRESULT ( STDMETHODCALLTYPE *CreateStoryFragmentsResource )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMStoryFragmentsResource **storyFragmentsResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMStoryFragmentsResource **storyFragmentsResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateDocumentStructureResource)
         HRESULT ( STDMETHODCALLTYPE *CreateDocumentStructureResource )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentStructureResource **documentStructureResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMDocumentStructureResource **documentStructureResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateSignatureBlockResource)
         HRESULT ( STDMETHODCALLTYPE *CreateSignatureBlockResource )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSignatureBlockResource **signatureBlockResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMSignatureBlockResource **signatureBlockResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateRemoteDictionaryResource)
         HRESULT ( STDMETHODCALLTYPE *CreateRemoteDictionaryResource )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *dictionary,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
+            /* [in] */ IXpsOMDictionary *dictionary,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateRemoteDictionaryResourceFromStream)
         HRESULT ( STDMETHODCALLTYPE *CreateRemoteDictionaryResourceFromStream )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *dictionaryMarkupStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *dictionaryPartUri,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartResources *resources,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **dictionaryResource);
+            /* [in] */ IStream *dictionaryMarkupStream,
+            /* [in] */ IOpcPartUri *dictionaryPartUri,
+            /* [in] */ IXpsOMPartResources *resources,
+            /* [retval][out] */ IXpsOMRemoteDictionaryResource **dictionaryResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePartResources)
         HRESULT ( STDMETHODCALLTYPE *CreatePartResources )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPartResources **partResources);
+            /* [retval][out] */ IXpsOMPartResources **partResources);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateDocumentSequence)
         HRESULT ( STDMETHODCALLTYPE *CreateDocumentSequence )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentSequence **documentSequence);
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMDocumentSequence **documentSequence);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateDocument)
         HRESULT ( STDMETHODCALLTYPE *CreateDocument )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocument **document);
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMDocument **document);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePageReference)
         HRESULT ( STDMETHODCALLTYPE *CreatePageReference )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *advisoryPageDimensions,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **pageReference);
+            /* [in] */ const XPS_SIZE *advisoryPageDimensions,
+            /* [retval][out] */ IXpsOMPageReference **pageReference);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePage)
         HRESULT ( STDMETHODCALLTYPE *CreatePage )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *pageDimensions,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page);
+            /* [in] */ const XPS_SIZE *pageDimensions,
+            /* [string][in] */ LPCWSTR language,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMPage **page);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePageFromStream)
         HRESULT ( STDMETHODCALLTYPE *CreatePageFromStream )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *pageMarkupStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartResources *resources,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page);
+            /* [in] */ IStream *pageMarkupStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [in] */ IXpsOMPartResources *resources,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPage **page);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateCanvas)
         HRESULT ( STDMETHODCALLTYPE *CreateCanvas )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCanvas **canvas);
+            /* [retval][out] */ IXpsOMCanvas **canvas);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateGlyphs)
         HRESULT ( STDMETHODCALLTYPE *CreateGlyphs )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMFontResource *fontResource,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGlyphs **glyphs);
+            /* [in] */ IXpsOMFontResource *fontResource,
+            /* [retval][out] */ IXpsOMGlyphs **glyphs);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePath)
         HRESULT ( STDMETHODCALLTYPE *CreatePath )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPath **path);
+            /* [retval][out] */ IXpsOMPath **path);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateGeometry)
         HRESULT ( STDMETHODCALLTYPE *CreateGeometry )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometry **geometry);
+            /* [retval][out] */ IXpsOMGeometry **geometry);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateGeometryFigure)
         HRESULT ( STDMETHODCALLTYPE *CreateGeometryFigure )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *startPoint,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGeometryFigure **figure);
+            /* [in] */ const XPS_POINT *startPoint,
+            /* [retval][out] */ IXpsOMGeometryFigure **figure);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateMatrixTransform)
         HRESULT ( STDMETHODCALLTYPE *CreateMatrixTransform )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_MATRIX *matrix,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMMatrixTransform **transform);
+            /* [in] */ const XPS_MATRIX *matrix,
+            /* [retval][out] */ IXpsOMMatrixTransform **transform);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateSolidColorBrush)
         HRESULT ( STDMETHODCALLTYPE *CreateSolidColorBrush )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_COLOR *color,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfile,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMSolidColorBrush **solidColorBrush);
+            /* [in] */ const XPS_COLOR *color,
+            /* [in] */ IXpsOMColorProfileResource *colorProfile,
+            /* [retval][out] */ IXpsOMSolidColorBrush **solidColorBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateColorProfileResource)
         HRESULT ( STDMETHODCALLTYPE *CreateColorProfileResource )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMColorProfileResource **colorProfileResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMColorProfileResource **colorProfileResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateImageBrush)
         HRESULT ( STDMETHODCALLTYPE *CreateImageBrush )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *image,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewBox,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewPort,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageBrush **imageBrush);
+            /* [in] */ IXpsOMImageResource *image,
+            /* [in] */ const XPS_RECT *viewBox,
+            /* [in] */ const XPS_RECT *viewPort,
+            /* [retval][out] */ IXpsOMImageBrush **imageBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateVisualBrush)
         HRESULT ( STDMETHODCALLTYPE *CreateVisualBrush )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewBox,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *viewPort,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisualBrush **visualBrush);
+            /* [in] */ const XPS_RECT *viewBox,
+            /* [in] */ const XPS_RECT *viewPort,
+            /* [retval][out] */ IXpsOMVisualBrush **visualBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateImageResource)
         HRESULT ( STDMETHODCALLTYPE *CreateImageResource )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  XPS_IMAGE_TYPE contentType,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ XPS_IMAGE_TYPE contentType,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMImageResource **imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePrintTicketResource)
         HRESULT ( STDMETHODCALLTYPE *CreatePrintTicketResource )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPrintTicketResource **printTicketResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMPrintTicketResource **printTicketResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateFontResource)
         HRESULT ( STDMETHODCALLTYPE *CreateFontResource )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *acquiredStream,
-            /* [annotation][in] */ 
-            _In_  XPS_FONT_EMBEDDING fontEmbedding,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][in] */ 
-            _In_  BOOL isObfSourceStream,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMFontResource **fontResource);
+            /* [in] */ IStream *acquiredStream,
+            /* [in] */ XPS_FONT_EMBEDDING fontEmbedding,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [in] */ BOOL isObfSourceStream,
+            /* [retval][out] */ IXpsOMFontResource **fontResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateGradientStop)
         HRESULT ( STDMETHODCALLTYPE *CreateGradientStop )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_COLOR *color,
-            /* [annotation][in] */ 
-            _In_  IXpsOMColorProfileResource *colorProfile,
-            /* [annotation][in] */ 
-            _In_  FLOAT offset,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMGradientStop **gradientStop);
+            /* [in] */ const XPS_COLOR *color,
+            /* [in] */ IXpsOMColorProfileResource *colorProfile,
+            /* [in] */ FLOAT offset,
+            /* [retval][out] */ IXpsOMGradientStop **gradientStop);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateLinearGradientBrush)
         HRESULT ( STDMETHODCALLTYPE *CreateLinearGradientBrush )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop1,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop2,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *startPoint,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *endPoint,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMLinearGradientBrush **linearGradientBrush);
+            /* [in] */ IXpsOMGradientStop *gradStop1,
+            /* [in] */ IXpsOMGradientStop *gradStop2,
+            /* [in] */ const XPS_POINT *startPoint,
+            /* [in] */ const XPS_POINT *endPoint,
+            /* [retval][out] */ IXpsOMLinearGradientBrush **linearGradientBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateRadialGradientBrush)
         HRESULT ( STDMETHODCALLTYPE *CreateRadialGradientBrush )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop1,
-            /* [annotation][in] */ 
-            _In_  IXpsOMGradientStop *gradStop2,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *centerPoint,
-            /* [annotation][in] */ 
-            _In_  const XPS_POINT *gradientOrigin,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *radiiSizes,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRadialGradientBrush **radialGradientBrush);
+            /* [in] */ IXpsOMGradientStop *gradStop1,
+            /* [in] */ IXpsOMGradientStop *gradStop2,
+            /* [in] */ const XPS_POINT *centerPoint,
+            /* [in] */ const XPS_POINT *gradientOrigin,
+            /* [in] */ const XPS_SIZE *radiiSizes,
+            /* [retval][out] */ IXpsOMRadialGradientBrush **radialGradientBrush);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateCoreProperties)
         HRESULT ( STDMETHODCALLTYPE *CreateCoreProperties )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCoreProperties **coreProperties);
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMCoreProperties **coreProperties);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateDictionary)
         HRESULT ( STDMETHODCALLTYPE *CreateDictionary )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **dictionary);
+            /* [retval][out] */ IXpsOMDictionary **dictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePartUriCollection)
         HRESULT ( STDMETHODCALLTYPE *CreatePartUriCollection )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPartUriCollection **partUriCollection);
+            /* [retval][out] */ IXpsOMPartUriCollection **partUriCollection);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePackageWriterOnFile)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageWriterOnFile )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_INTERLEAVING interleaving,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *packageThumbnail,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter);
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_INTERLEAVING interleaving,
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IXpsOMCoreProperties *coreProperties,
+            /* [in] */ IXpsOMImageResource *packageThumbnail,
+            /* [in] */ IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePackageWriterOnStream)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageWriterOnStream )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *outputStream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_INTERLEAVING interleaving,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *packageThumbnail,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter);
+            /* [in] */ ISequentialStream *outputStream,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_INTERLEAVING interleaving,
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IXpsOMCoreProperties *coreProperties,
+            /* [in] */ IXpsOMImageResource *packageThumbnail,
+            /* [in] */ IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreatePartUri)
         HRESULT ( STDMETHODCALLTYPE *CreatePartUri )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR uri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [string][in] */ LPCWSTR uri,
+            /* [retval][out] */ IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory, CreateReadOnlyStreamOnFile)
         HRESULT ( STDMETHODCALLTYPE *CreateReadOnlyStreamOnFile )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR filename,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IStream **stream);
+            /* [string][in] */ LPCWSTR filename,
+            /* [retval][out] */ IStream **stream);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, GetDocumentTypeFromFile)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentTypeFromFile )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR filename,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType);
+            /* [in] */ LPCWSTR filename,
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, GetDocumentTypeFromStream)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentTypeFromStream )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *xpsDocumentStream,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType);
+            /* [in] */ IStream *xpsDocumentStream,
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, ConvertHDPhotoToJpegXR)
         HRESULT ( STDMETHODCALLTYPE *ConvertHDPhotoToJpegXR )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  IXpsOMImageResource *imageResource);
+            /* [out][in] */ IXpsOMImageResource *imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, ConvertJpegXRToHDPhoto)
         HRESULT ( STDMETHODCALLTYPE *ConvertJpegXRToHDPhoto )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  IXpsOMImageResource *imageResource);
+            /* [out][in] */ IXpsOMImageResource *imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, CreatePackageWriterOnFile1)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageWriterOnFile1 )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_INTERLEAVING interleaving,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *packageThumbnail,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter);
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_INTERLEAVING interleaving,
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IXpsOMCoreProperties *coreProperties,
+            /* [in] */ IXpsOMImageResource *packageThumbnail,
+            /* [in] */ IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, CreatePackageWriterOnStream1)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageWriterOnStream1 )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *outputStream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_INTERLEAVING interleaving,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *packageThumbnail,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentSequencePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter);
+            /* [in] */ ISequentialStream *outputStream,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_INTERLEAVING interleaving,
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IXpsOMCoreProperties *coreProperties,
+            /* [in] */ IXpsOMImageResource *packageThumbnail,
+            /* [in] */ IXpsOMPrintTicketResource *documentSequencePrintTicket,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, CreatePackage1)
         HRESULT ( STDMETHODCALLTYPE *CreatePackage1 )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage1 **package);
+            /* [retval][out] */ IXpsOMPackage1 **package);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, CreatePackageFromStream1)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageFromStream1 )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage1 **package);
+            /* [in] */ IStream *stream,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPackage1 **package);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, CreatePackageFromFile1)
         HRESULT ( STDMETHODCALLTYPE *CreatePackageFromFile1 )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR filename,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackage1 **package);
+            /* [string][in] */ LPCWSTR filename,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPackage1 **package);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, CreatePage1)
         HRESULT ( STDMETHODCALLTYPE *CreatePage1 )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *pageDimensions,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage1 **page);
+            /* [in] */ const XPS_SIZE *pageDimensions,
+            /* [string][in] */ LPCWSTR language,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [retval][out] */ IXpsOMPage1 **page);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, CreatePageFromStream1)
         HRESULT ( STDMETHODCALLTYPE *CreatePageFromStream1 )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *pageMarkupStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartResources *resources,
-            /* [annotation][in] */ 
-            _In_  BOOL reuseObjects,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage1 **page);
+            /* [in] */ IStream *pageMarkupStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [in] */ IXpsOMPartResources *resources,
+            /* [in] */ BOOL reuseObjects,
+            /* [retval][out] */ IXpsOMPage1 **page);
         
         DECLSPEC_XFGVIRT(IXpsOMObjectFactory1, CreateRemoteDictionaryResourceFromStream1)
         HRESULT ( STDMETHODCALLTYPE *CreateRemoteDictionaryResourceFromStream1 )( 
             IXpsOMObjectFactory1 * This,
-            /* [annotation][in] */ 
-            _In_  IStream *dictionaryMarkupStream,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartResources *resources,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **dictionaryResource);
+            /* [in] */ IStream *dictionaryMarkupStream,
+            /* [in] */ IOpcPartUri *partUri,
+            /* [in] */ IXpsOMPartResources *resources,
+            /* [retval][out] */ IXpsOMRemoteDictionaryResource **dictionaryResource);
         
         END_INTERFACE
     } IXpsOMObjectFactory1Vtbl;
@@ -1003,28 +790,19 @@ EXTERN_C const IID IID_IXpsOMPackage1;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType) = 0;
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WriteToFile1( 
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType) = 0;
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE WriteToStream1( 
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *outputStream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType) = 0;
+            /* [in] */ ISequentialStream *outputStream,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType) = 0;
         
     };
     
@@ -1038,8 +816,7 @@ EXTERN_C const IID IID_IXpsOMPackage1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsOMPackage1 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1054,100 +831,77 @@ EXTERN_C const IID IID_IXpsOMPackage1;
         DECLSPEC_XFGVIRT(IXpsOMPackage, GetDocumentSequence)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDocumentSequence )( 
             IXpsOMPackage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDocumentSequence **documentSequence);
+            /* [retval][out] */ IXpsOMDocumentSequence **documentSequence);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, SetDocumentSequence)
         HRESULT ( STDMETHODCALLTYPE *SetDocumentSequence )( 
             IXpsOMPackage1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocumentSequence *documentSequence);
+            /* [in] */ IXpsOMDocumentSequence *documentSequence);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, GetCoreProperties)
         HRESULT ( STDMETHODCALLTYPE *GetCoreProperties )( 
             IXpsOMPackage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMCoreProperties **coreProperties);
+            /* [retval][out] */ IXpsOMCoreProperties **coreProperties);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, SetCoreProperties)
         HRESULT ( STDMETHODCALLTYPE *SetCoreProperties )( 
             IXpsOMPackage1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMCoreProperties *coreProperties);
+            /* [in] */ IXpsOMCoreProperties *coreProperties);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, GetDiscardControlPartName)
         HRESULT ( STDMETHODCALLTYPE *GetDiscardControlPartName )( 
             IXpsOMPackage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **discardControlPartUri);
+            /* [retval][out] */ IOpcPartUri **discardControlPartUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, SetDiscardControlPartName)
         HRESULT ( STDMETHODCALLTYPE *SetDiscardControlPartName )( 
             IXpsOMPackage1 * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartUri);
+            /* [in] */ IOpcPartUri *discardControlPartUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, GetThumbnailResource)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnailResource )( 
             IXpsOMPackage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMImageResource **imageResource);
+            /* [retval][out] */ IXpsOMImageResource **imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, SetThumbnailResource)
         HRESULT ( STDMETHODCALLTYPE *SetThumbnailResource )( 
             IXpsOMPackage1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *imageResource);
+            /* [in] */ IXpsOMImageResource *imageResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, WriteToFile)
         HRESULT ( STDMETHODCALLTYPE *WriteToFile )( 
             IXpsOMPackage1 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize);
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes,
+            /* [in] */ BOOL optimizeMarkupSize);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage, WriteToStream)
         HRESULT ( STDMETHODCALLTYPE *WriteToStream )( 
             IXpsOMPackage1 * This,
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize);
+            /* [in] */ ISequentialStream *stream,
+            /* [in] */ BOOL optimizeMarkupSize);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage1, GetDocumentType)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentType )( 
             IXpsOMPackage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType);
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage1, WriteToFile1)
         HRESULT ( STDMETHODCALLTYPE *WriteToFile1 )( 
             IXpsOMPackage1 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR fileName,
-            /* [annotation][unique][in] */ 
-            _In_  LPSECURITY_ATTRIBUTES securityAttributes,
-            /* [annotation][in] */ 
-            _In_  DWORD flagsAndAttributes,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType);
+            /* [string][in] */ LPCWSTR fileName,
+            /* [unique][in] */ LPSECURITY_ATTRIBUTES securityAttributes,
+            /* [in] */ DWORD flagsAndAttributes,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType);
         
         DECLSPEC_XFGVIRT(IXpsOMPackage1, WriteToStream1)
         HRESULT ( STDMETHODCALLTYPE *WriteToStream1 )( 
             IXpsOMPackage1 * This,
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *outputStream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType);
+            /* [in] */ ISequentialStream *outputStream,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType);
         
         END_INTERFACE
     } IXpsOMPackage1Vtbl;
@@ -1239,16 +993,12 @@ EXTERN_C const IID IID_IXpsOMPage1;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType) = 0;
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Write1( 
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType) = 0;
+            /* [in] */ ISequentialStream *stream,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType) = 0;
         
     };
     
@@ -1262,8 +1012,7 @@ EXTERN_C const IID IID_IXpsOMPage1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1278,166 +1027,136 @@ EXTERN_C const IID IID_IXpsOMPage1;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetOwner)
         HRESULT ( STDMETHODCALLTYPE *GetOwner )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPageReference **pageReference);
+            /* [retval][out] */ IXpsOMPageReference **pageReference);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetVisuals)
         HRESULT ( STDMETHODCALLTYPE *GetVisuals )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMVisualCollection **visuals);
+            /* [retval][out] */ IXpsOMVisualCollection **visuals);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetPageDimensions)
         HRESULT ( STDMETHODCALLTYPE *GetPageDimensions )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_SIZE *pageDimensions);
+            /* [retval][out] */ XPS_SIZE *pageDimensions);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetPageDimensions)
         HRESULT ( STDMETHODCALLTYPE *SetPageDimensions )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *pageDimensions);
+            /* [in] */ const XPS_SIZE *pageDimensions);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetContentBox)
         HRESULT ( STDMETHODCALLTYPE *GetContentBox )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *contentBox);
+            /* [retval][out] */ XPS_RECT *contentBox);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetContentBox)
         HRESULT ( STDMETHODCALLTYPE *SetContentBox )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *contentBox);
+            /* [in] */ const XPS_RECT *contentBox);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetBleedBox)
         HRESULT ( STDMETHODCALLTYPE *GetBleedBox )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_RECT *bleedBox);
+            /* [retval][out] */ XPS_RECT *bleedBox);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetBleedBox)
         HRESULT ( STDMETHODCALLTYPE *SetBleedBox )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  const XPS_RECT *bleedBox);
+            /* [in] */ const XPS_RECT *bleedBox);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetLanguage)
         HRESULT ( STDMETHODCALLTYPE *GetLanguage )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *language);
+            /* [retval][string][out] */ LPWSTR *language);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetLanguage)
         HRESULT ( STDMETHODCALLTYPE *SetLanguage )( 
             IXpsOMPage1 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR language);
+            /* [string][in] */ LPCWSTR language);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *name);
+            /* [retval][string][out] */ LPWSTR *name);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetName)
         HRESULT ( STDMETHODCALLTYPE *SetName )( 
             IXpsOMPage1 * This,
-            /* [annotation][string][in] */ 
-            _In_  LPCWSTR name);
+            /* [string][in] */ LPCWSTR name);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *GetIsHyperlinkTarget )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isHyperlinkTarget);
+            /* [retval][out] */ BOOL *isHyperlinkTarget);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetIsHyperlinkTarget)
         HRESULT ( STDMETHODCALLTYPE *SetIsHyperlinkTarget )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  BOOL isHyperlinkTarget);
+            /* [in] */ BOOL isHyperlinkTarget);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetDictionary)
         HRESULT ( STDMETHODCALLTYPE *GetDictionary )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **resourceDictionary);
+            /* [retval][out] */ IXpsOMDictionary **resourceDictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetDictionaryLocal)
         HRESULT ( STDMETHODCALLTYPE *GetDictionaryLocal )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **resourceDictionary);
+            /* [retval][out] */ IXpsOMDictionary **resourceDictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetDictionaryLocal)
         HRESULT ( STDMETHODCALLTYPE *SetDictionaryLocal )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *resourceDictionary);
+            /* [in] */ IXpsOMDictionary *resourceDictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GetDictionaryResource)
         HRESULT ( STDMETHODCALLTYPE *GetDictionaryResource )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
+            /* [retval][out] */ IXpsOMRemoteDictionaryResource **remoteDictionaryResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, SetDictionaryResource)
         HRESULT ( STDMETHODCALLTYPE *SetDictionaryResource )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMRemoteDictionaryResource *remoteDictionaryResource);
+            /* [in] */ IXpsOMRemoteDictionaryResource *remoteDictionaryResource);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, Write)
         HRESULT ( STDMETHODCALLTYPE *Write )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize);
+            /* [in] */ ISequentialStream *stream,
+            /* [in] */ BOOL optimizeMarkupSize);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, GenerateUnusedLookupKey)
         HRESULT ( STDMETHODCALLTYPE *GenerateUnusedLookupKey )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  XPS_OBJECT_TYPE type,
-            /* [annotation][retval][string][out] */ 
-            _Out_retval_  LPWSTR *key);
+            /* [in] */ XPS_OBJECT_TYPE type,
+            /* [retval][string][out] */ LPWSTR *key);
         
         DECLSPEC_XFGVIRT(IXpsOMPage, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPage **page);
+            /* [retval][out] */ IXpsOMPage **page);
         
         DECLSPEC_XFGVIRT(IXpsOMPage1, GetDocumentType)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentType )( 
             IXpsOMPage1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType);
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType);
         
         DECLSPEC_XFGVIRT(IXpsOMPage1, Write1)
         HRESULT ( STDMETHODCALLTYPE *Write1 )( 
             IXpsOMPage1 * This,
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *stream,
-            /* [annotation][in] */ 
-            _In_  BOOL optimizeMarkupSize,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType);
+            /* [in] */ ISequentialStream *stream,
+            /* [in] */ BOOL optimizeMarkupSize,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType);
         
         END_INTERFACE
     } IXpsOMPage1Vtbl;
@@ -1569,20 +1288,15 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetXpsOMPackageWriter( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter) = 0;
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetXpsOMFactory( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMObjectFactory **xpsFactory) = 0;
+            /* [retval][out] */ IXpsOMObjectFactory **xpsFactory) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetXpsType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType) = 0;
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType) = 0;
         
     };
     
@@ -1596,8 +1310,7 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsDocumentPackageTarget * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1612,24 +1325,19 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget;
         DECLSPEC_XFGVIRT(IXpsDocumentPackageTarget, GetXpsOMPackageWriter)
         HRESULT ( STDMETHODCALLTYPE *GetXpsOMPackageWriter )( 
             IXpsDocumentPackageTarget * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter **packageWriter);
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [retval][out] */ IXpsOMPackageWriter **packageWriter);
         
         DECLSPEC_XFGVIRT(IXpsDocumentPackageTarget, GetXpsOMFactory)
         HRESULT ( STDMETHODCALLTYPE *GetXpsOMFactory )( 
             IXpsDocumentPackageTarget * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMObjectFactory **xpsFactory);
+            /* [retval][out] */ IXpsOMObjectFactory **xpsFactory);
         
         DECLSPEC_XFGVIRT(IXpsDocumentPackageTarget, GetXpsType)
         HRESULT ( STDMETHODCALLTYPE *GetXpsType )( 
             IXpsDocumentPackageTarget * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType);
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType);
         
         END_INTERFACE
     } IXpsDocumentPackageTargetVtbl;
@@ -1690,14 +1398,11 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResource1;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetDocumentType( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType) = 0;
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Write1( 
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *stream,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType) = 0;
+            /* [in] */ ISequentialStream *stream,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType) = 0;
         
     };
     
@@ -1711,8 +1416,7 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResource1;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsOMRemoteDictionaryResource1 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1727,40 +1431,33 @@ EXTERN_C const IID IID_IXpsOMRemoteDictionaryResource1;
         DECLSPEC_XFGVIRT(IXpsOMPart, GetPartName)
         HRESULT ( STDMETHODCALLTYPE *GetPartName )( 
             IXpsOMRemoteDictionaryResource1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IOpcPartUri **partUri);
+            /* [retval][out] */ IOpcPartUri **partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMPart, SetPartName)
         HRESULT ( STDMETHODCALLTYPE *SetPartName )( 
             IXpsOMRemoteDictionaryResource1 * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *partUri);
+            /* [in] */ IOpcPartUri *partUri);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResource, GetDictionary)
         HRESULT ( STDMETHODCALLTYPE *GetDictionary )( 
             IXpsOMRemoteDictionaryResource1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMDictionary **dictionary);
+            /* [retval][out] */ IXpsOMDictionary **dictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResource, SetDictionary)
         HRESULT ( STDMETHODCALLTYPE *SetDictionary )( 
             IXpsOMRemoteDictionaryResource1 * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDictionary *dictionary);
+            /* [in] */ IXpsOMDictionary *dictionary);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResource1, GetDocumentType)
         HRESULT ( STDMETHODCALLTYPE *GetDocumentType )( 
             IXpsOMRemoteDictionaryResource1 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  XPS_DOCUMENT_TYPE *documentType);
+            /* [retval][out] */ XPS_DOCUMENT_TYPE *documentType);
         
         DECLSPEC_XFGVIRT(IXpsOMRemoteDictionaryResource1, Write1)
         HRESULT ( STDMETHODCALLTYPE *Write1 )( 
             IXpsOMRemoteDictionaryResource1 * This,
-            /* [annotation][in] */ 
-            _In_  ISequentialStream *stream,
-            /* [annotation][in] */ 
-            _In_  XPS_DOCUMENT_TYPE documentType);
+            /* [in] */ ISequentialStream *stream,
+            /* [in] */ XPS_DOCUMENT_TYPE documentType);
         
         END_INTERFACE
     } IXpsOMRemoteDictionaryResource1Vtbl;

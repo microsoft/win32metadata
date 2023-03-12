@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -85,9 +85,9 @@ extern "C"{
 #include <winapifamily.h>
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-typedef PACTRL_ACCESSW PACTRL_ACCESSW_ALLOCATE_ALL_NODES;
+typedef /* [allocate] */ PACTRL_ACCESSW PACTRL_ACCESSW_ALLOCATE_ALL_NODES;
 
-typedef PACTRL_AUDITW PACTRL_AUDITW_ALLOCATE_ALL_NODES;
+typedef /* [allocate] */ PACTRL_AUDITW PACTRL_AUDITW_ALLOCATE_ALL_NODES;
 
 
 
@@ -111,46 +111,31 @@ EXTERN_C const IID IID_IAccessControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GrantAccessRights( 
-            /* [annotation][in] */ 
-            _In_  PACTRL_ACCESSW pAccessList) = 0;
+            /* [in] */ __RPC__in PACTRL_ACCESSW pAccessList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAccessRights( 
-            /* [annotation][in] */ 
-            _In_  PACTRL_ACCESSW pAccessList) = 0;
+            /* [in] */ __RPC__in PACTRL_ACCESSW pAccessList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetOwner( 
-            /* [annotation][in] */ 
-            _In_  PTRUSTEEW pOwner,
-            /* [annotation][in] */ 
-            _In_  PTRUSTEEW pGroup) = 0;
+            /* [in] */ __RPC__in PTRUSTEEW pOwner,
+            /* [in] */ __RPC__in PTRUSTEEW pGroup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RevokeAccessRights( 
-            /* [annotation][in] */ 
-            _In_  LPWSTR lpProperty,
-            /* [annotation][in] */ 
-            _In_  ULONG cTrustees,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cTrustees)  TRUSTEEW prgTrustees[  ]) = 0;
+            /* [in] */ __RPC__in LPWSTR lpProperty,
+            /* [in] */ ULONG cTrustees,
+            /* [size_is][in] */ __RPC__in_ecount_full(cTrustees) TRUSTEEW prgTrustees[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAllAccessRights( 
-            /* [annotation][in] */ 
-            _In_  LPWSTR lpProperty,
-            /* [annotation][out] */ 
-            _Out_  PACTRL_ACCESSW_ALLOCATE_ALL_NODES *ppAccessList,
-            /* [annotation][out] */ 
-            _Out_  PTRUSTEEW *ppOwner,
-            /* [annotation][out] */ 
-            _Out_  PTRUSTEEW *ppGroup) = 0;
+            /* [in] */ __RPC__in LPWSTR lpProperty,
+            /* [out] */ __RPC__deref_out_opt PACTRL_ACCESSW_ALLOCATE_ALL_NODES *ppAccessList,
+            /* [out] */ __RPC__deref_out_opt PTRUSTEEW *ppOwner,
+            /* [out] */ __RPC__deref_out_opt PTRUSTEEW *ppGroup) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsAccessAllowed( 
-            /* [annotation][in] */ 
-            _In_  PTRUSTEEW pTrustee,
-            /* [annotation][in] */ 
-            _In_  LPWSTR lpProperty,
-            /* [annotation][in] */ 
-            _In_  ACCESS_RIGHTS AccessRights,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfAccessAllowed) = 0;
+            /* [in] */ __RPC__in PTRUSTEEW pTrustee,
+            /* [in] */ __RPC__in LPWSTR lpProperty,
+            /* [in] */ ACCESS_RIGHTS AccessRights,
+            /* [out] */ __RPC__out BOOL *pfAccessAllowed) = 0;
         
     };
     
@@ -164,8 +149,7 @@ EXTERN_C const IID IID_IAccessControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAccessControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -180,56 +164,41 @@ EXTERN_C const IID IID_IAccessControl;
         DECLSPEC_XFGVIRT(IAccessControl, GrantAccessRights)
         HRESULT ( STDMETHODCALLTYPE *GrantAccessRights )( 
             __RPC__in IAccessControl * This,
-            /* [annotation][in] */ 
-            _In_  PACTRL_ACCESSW pAccessList);
+            /* [in] */ __RPC__in PACTRL_ACCESSW pAccessList);
         
         DECLSPEC_XFGVIRT(IAccessControl, SetAccessRights)
         HRESULT ( STDMETHODCALLTYPE *SetAccessRights )( 
             __RPC__in IAccessControl * This,
-            /* [annotation][in] */ 
-            _In_  PACTRL_ACCESSW pAccessList);
+            /* [in] */ __RPC__in PACTRL_ACCESSW pAccessList);
         
         DECLSPEC_XFGVIRT(IAccessControl, SetOwner)
         HRESULT ( STDMETHODCALLTYPE *SetOwner )( 
             __RPC__in IAccessControl * This,
-            /* [annotation][in] */ 
-            _In_  PTRUSTEEW pOwner,
-            /* [annotation][in] */ 
-            _In_  PTRUSTEEW pGroup);
+            /* [in] */ __RPC__in PTRUSTEEW pOwner,
+            /* [in] */ __RPC__in PTRUSTEEW pGroup);
         
         DECLSPEC_XFGVIRT(IAccessControl, RevokeAccessRights)
         HRESULT ( STDMETHODCALLTYPE *RevokeAccessRights )( 
             __RPC__in IAccessControl * This,
-            /* [annotation][in] */ 
-            _In_  LPWSTR lpProperty,
-            /* [annotation][in] */ 
-            _In_  ULONG cTrustees,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cTrustees)  TRUSTEEW prgTrustees[  ]);
+            /* [in] */ __RPC__in LPWSTR lpProperty,
+            /* [in] */ ULONG cTrustees,
+            /* [size_is][in] */ __RPC__in_ecount_full(cTrustees) TRUSTEEW prgTrustees[  ]);
         
         DECLSPEC_XFGVIRT(IAccessControl, GetAllAccessRights)
         HRESULT ( STDMETHODCALLTYPE *GetAllAccessRights )( 
             __RPC__in IAccessControl * This,
-            /* [annotation][in] */ 
-            _In_  LPWSTR lpProperty,
-            /* [annotation][out] */ 
-            _Out_  PACTRL_ACCESSW_ALLOCATE_ALL_NODES *ppAccessList,
-            /* [annotation][out] */ 
-            _Out_  PTRUSTEEW *ppOwner,
-            /* [annotation][out] */ 
-            _Out_  PTRUSTEEW *ppGroup);
+            /* [in] */ __RPC__in LPWSTR lpProperty,
+            /* [out] */ __RPC__deref_out_opt PACTRL_ACCESSW_ALLOCATE_ALL_NODES *ppAccessList,
+            /* [out] */ __RPC__deref_out_opt PTRUSTEEW *ppOwner,
+            /* [out] */ __RPC__deref_out_opt PTRUSTEEW *ppGroup);
         
         DECLSPEC_XFGVIRT(IAccessControl, IsAccessAllowed)
         HRESULT ( STDMETHODCALLTYPE *IsAccessAllowed )( 
             __RPC__in IAccessControl * This,
-            /* [annotation][in] */ 
-            _In_  PTRUSTEEW pTrustee,
-            /* [annotation][in] */ 
-            _In_  LPWSTR lpProperty,
-            /* [annotation][in] */ 
-            _In_  ACCESS_RIGHTS AccessRights,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfAccessAllowed);
+            /* [in] */ __RPC__in PTRUSTEEW pTrustee,
+            /* [in] */ __RPC__in LPWSTR lpProperty,
+            /* [in] */ ACCESS_RIGHTS AccessRights,
+            /* [out] */ __RPC__out BOOL *pfAccessAllowed);
         
         END_INTERFACE
     } IAccessControlVtbl;
@@ -308,34 +277,24 @@ EXTERN_C const IID IID_IAuditControl;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GrantAuditRights( 
-            /* [annotation][in] */ 
-            _In_  PACTRL_AUDITW pAuditList) = 0;
+            /* [in] */ __RPC__in PACTRL_AUDITW pAuditList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetAuditRights( 
-            /* [annotation][in] */ 
-            _In_  PACTRL_AUDITW pAuditList) = 0;
+            /* [in] */ __RPC__in PACTRL_AUDITW pAuditList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RevokeAuditRights( 
-            /* [annotation][in] */ 
-            _In_  LPWSTR lpProperty,
-            /* [annotation][in] */ 
-            _In_  ULONG cTrustees,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cTrustees)  TRUSTEEW prgTrustees[  ]) = 0;
+            /* [in] */ __RPC__in LPWSTR lpProperty,
+            /* [in] */ ULONG cTrustees,
+            /* [size_is][in] */ __RPC__in_ecount_full(cTrustees) TRUSTEEW prgTrustees[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetAllAuditRights( 
-            /* [annotation][in] */ 
-            _In_  LPWSTR lpProperty,
-            /* [annotation][out] */ 
-            _Out_  PACTRL_AUDITW *ppAuditList) = 0;
+            /* [in] */ __RPC__in LPWSTR lpProperty,
+            /* [out] */ __RPC__deref_out_opt PACTRL_AUDITW *ppAuditList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE IsAccessAudited( 
-            /* [annotation][in] */ 
-            _In_  PTRUSTEEW pTrustee,
-            /* [annotation][in] */ 
-            _In_  ACCESS_RIGHTS AuditRights,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfAccessAudited) = 0;
+            /* [in] */ __RPC__in PTRUSTEEW pTrustee,
+            /* [in] */ ACCESS_RIGHTS AuditRights,
+            /* [out] */ __RPC__out BOOL *pfAccessAudited) = 0;
         
     };
     
@@ -349,8 +308,7 @@ EXTERN_C const IID IID_IAuditControl;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAuditControl * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -365,42 +323,32 @@ EXTERN_C const IID IID_IAuditControl;
         DECLSPEC_XFGVIRT(IAuditControl, GrantAuditRights)
         HRESULT ( STDMETHODCALLTYPE *GrantAuditRights )( 
             __RPC__in IAuditControl * This,
-            /* [annotation][in] */ 
-            _In_  PACTRL_AUDITW pAuditList);
+            /* [in] */ __RPC__in PACTRL_AUDITW pAuditList);
         
         DECLSPEC_XFGVIRT(IAuditControl, SetAuditRights)
         HRESULT ( STDMETHODCALLTYPE *SetAuditRights )( 
             __RPC__in IAuditControl * This,
-            /* [annotation][in] */ 
-            _In_  PACTRL_AUDITW pAuditList);
+            /* [in] */ __RPC__in PACTRL_AUDITW pAuditList);
         
         DECLSPEC_XFGVIRT(IAuditControl, RevokeAuditRights)
         HRESULT ( STDMETHODCALLTYPE *RevokeAuditRights )( 
             __RPC__in IAuditControl * This,
-            /* [annotation][in] */ 
-            _In_  LPWSTR lpProperty,
-            /* [annotation][in] */ 
-            _In_  ULONG cTrustees,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cTrustees)  TRUSTEEW prgTrustees[  ]);
+            /* [in] */ __RPC__in LPWSTR lpProperty,
+            /* [in] */ ULONG cTrustees,
+            /* [size_is][in] */ __RPC__in_ecount_full(cTrustees) TRUSTEEW prgTrustees[  ]);
         
         DECLSPEC_XFGVIRT(IAuditControl, GetAllAuditRights)
         HRESULT ( STDMETHODCALLTYPE *GetAllAuditRights )( 
             __RPC__in IAuditControl * This,
-            /* [annotation][in] */ 
-            _In_  LPWSTR lpProperty,
-            /* [annotation][out] */ 
-            _Out_  PACTRL_AUDITW *ppAuditList);
+            /* [in] */ __RPC__in LPWSTR lpProperty,
+            /* [out] */ __RPC__deref_out_opt PACTRL_AUDITW *ppAuditList);
         
         DECLSPEC_XFGVIRT(IAuditControl, IsAccessAudited)
         HRESULT ( STDMETHODCALLTYPE *IsAccessAudited )( 
             __RPC__in IAuditControl * This,
-            /* [annotation][in] */ 
-            _In_  PTRUSTEEW pTrustee,
-            /* [annotation][in] */ 
-            _In_  ACCESS_RIGHTS AuditRights,
-            /* [annotation][out] */ 
-            _Out_  BOOL *pfAccessAudited);
+            /* [in] */ __RPC__in PTRUSTEEW pTrustee,
+            /* [in] */ ACCESS_RIGHTS AuditRights,
+            /* [out] */ __RPC__out BOOL *pfAccessAudited);
         
         END_INTERFACE
     } IAuditControlVtbl;

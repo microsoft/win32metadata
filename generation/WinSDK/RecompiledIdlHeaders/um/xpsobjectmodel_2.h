@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -104,16 +104,12 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE AddModelTexture( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *texturePartName,
-            /* [annotation][in] */ 
-            _In_  IStream *textureData) = 0;
+            /* [in] */ IOpcPartUri *texturePartName,
+            /* [in] */ IStream *textureData) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetModelPrintTicket( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *printTicketPartName,
-            /* [annotation][in] */ 
-            _In_  IStream *printTicketData) = 0;
+            /* [in] */ IOpcPartUri *printTicketPartName,
+            /* [in] */ IStream *printTicketData) = 0;
         
     };
     
@@ -127,8 +123,7 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsOMPackageWriter3D * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -143,38 +138,26 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter, StartNewDocument)
         HRESULT ( STDMETHODCALLTYPE *StartNewDocument )( 
             IXpsOMPackageWriter3D * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentPartName,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *documentPrintTicket,
-            /* [annotation][in] */ 
-            _In_  IXpsOMDocumentStructureResource *documentStructure,
-            /* [annotation][in] */ 
-            _In_  IXpsOMSignatureBlockResourceCollection *signatureBlockResources,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartUriCollection *restrictedFonts);
+            /* [in] */ IOpcPartUri *documentPartName,
+            /* [in] */ IXpsOMPrintTicketResource *documentPrintTicket,
+            /* [in] */ IXpsOMDocumentStructureResource *documentStructure,
+            /* [in] */ IXpsOMSignatureBlockResourceCollection *signatureBlockResources,
+            /* [in] */ IXpsOMPartUriCollection *restrictedFonts);
         
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter, AddPage)
         HRESULT ( STDMETHODCALLTYPE *AddPage )( 
             IXpsOMPackageWriter3D * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPage *page,
-            /* [annotation][in] */ 
-            _In_  const XPS_SIZE *advisoryPageDimensions,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPartUriCollection *discardableResourceParts,
-            /* [annotation][in] */ 
-            _In_  IXpsOMStoryFragmentsResource *storyFragments,
-            /* [annotation][in] */ 
-            _In_  IXpsOMPrintTicketResource *pagePrintTicket,
-            /* [annotation][in] */ 
-            _In_  IXpsOMImageResource *pageThumbnail);
+            /* [in] */ IXpsOMPage *page,
+            /* [in] */ const XPS_SIZE *advisoryPageDimensions,
+            /* [in] */ IXpsOMPartUriCollection *discardableResourceParts,
+            /* [in] */ IXpsOMStoryFragmentsResource *storyFragments,
+            /* [in] */ IXpsOMPrintTicketResource *pagePrintTicket,
+            /* [in] */ IXpsOMImageResource *pageThumbnail);
         
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter, AddResource)
         HRESULT ( STDMETHODCALLTYPE *AddResource )( 
             IXpsOMPackageWriter3D * This,
-            /* [annotation][in] */ 
-            _In_  IXpsOMResource *resource);
+            /* [in] */ IXpsOMResource *resource);
         
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
@@ -183,24 +166,19 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter, IsClosed)
         HRESULT ( STDMETHODCALLTYPE *IsClosed )( 
             IXpsOMPackageWriter3D * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *isClosed);
+            /* [retval][out] */ BOOL *isClosed);
         
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter3D, AddModelTexture)
         HRESULT ( STDMETHODCALLTYPE *AddModelTexture )( 
             IXpsOMPackageWriter3D * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *texturePartName,
-            /* [annotation][in] */ 
-            _In_  IStream *textureData);
+            /* [in] */ IOpcPartUri *texturePartName,
+            /* [in] */ IStream *textureData);
         
         DECLSPEC_XFGVIRT(IXpsOMPackageWriter3D, SetModelPrintTicket)
         HRESULT ( STDMETHODCALLTYPE *SetModelPrintTicket )( 
             IXpsOMPackageWriter3D * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *printTicketPartName,
-            /* [annotation][in] */ 
-            _In_  IStream *printTicketData);
+            /* [in] */ IOpcPartUri *printTicketPartName,
+            /* [in] */ IStream *printTicketData);
         
         END_INTERFACE
     } IXpsOMPackageWriter3DVtbl;
@@ -274,20 +252,14 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget3D;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetXpsOMPackageWriter3D( 
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *modelPartName,
-            /* [annotation][in] */ 
-            _In_  IStream *modelData,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter3D **packageWriter) = 0;
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [in] */ IOpcPartUri *modelPartName,
+            /* [in] */ IStream *modelData,
+            /* [retval][out] */ IXpsOMPackageWriter3D **packageWriter) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetXpsOMFactory( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMObjectFactory **xpsFactory) = 0;
+            /* [retval][out] */ IXpsOMObjectFactory **xpsFactory) = 0;
         
     };
     
@@ -301,8 +273,7 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget3D;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsDocumentPackageTarget3D * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -317,22 +288,16 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget3D;
         DECLSPEC_XFGVIRT(IXpsDocumentPackageTarget3D, GetXpsOMPackageWriter3D)
         HRESULT ( STDMETHODCALLTYPE *GetXpsOMPackageWriter3D )( 
             IXpsDocumentPackageTarget3D * This,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *documentSequencePartName,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *discardControlPartName,
-            /* [annotation][in] */ 
-            _In_  IOpcPartUri *modelPartName,
-            /* [annotation][in] */ 
-            _In_  IStream *modelData,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMPackageWriter3D **packageWriter);
+            /* [in] */ IOpcPartUri *documentSequencePartName,
+            /* [in] */ IOpcPartUri *discardControlPartName,
+            /* [in] */ IOpcPartUri *modelPartName,
+            /* [in] */ IStream *modelData,
+            /* [retval][out] */ IXpsOMPackageWriter3D **packageWriter);
         
         DECLSPEC_XFGVIRT(IXpsDocumentPackageTarget3D, GetXpsOMFactory)
         HRESULT ( STDMETHODCALLTYPE *GetXpsOMFactory )( 
             IXpsDocumentPackageTarget3D * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IXpsOMObjectFactory **xpsFactory);
+            /* [retval][out] */ IXpsOMObjectFactory **xpsFactory);
         
         END_INTERFACE
     } IXpsDocumentPackageTarget3DVtbl;

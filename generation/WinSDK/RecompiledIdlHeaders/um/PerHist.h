@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -112,22 +112,17 @@ EXTERN_C const IID IID_IPersistHistory;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE LoadHistory( 
-            /* [annotation][in] */ 
-            _In_  IStream *pStream,
-            /* [annotation][in] */ 
-            _In_  IBindCtx *pbc) = 0;
+            /* [in] */ __RPC__in_opt IStream *pStream,
+            /* [in] */ __RPC__in_opt IBindCtx *pbc) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SaveHistory( 
-            /* [annotation][in] */ 
-            _In_  IStream *pStream) = 0;
+            /* [in] */ __RPC__in_opt IStream *pStream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetPositionCookie( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwPositioncookie) = 0;
+            /* [in] */ DWORD dwPositioncookie) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetPositionCookie( 
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwPositioncookie) = 0;
+            /* [out] */ __RPC__out DWORD *pdwPositioncookie) = 0;
         
     };
     
@@ -141,8 +136,7 @@ EXTERN_C const IID IID_IPersistHistory;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPersistHistory * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -157,34 +151,28 @@ EXTERN_C const IID IID_IPersistHistory;
         DECLSPEC_XFGVIRT(IPersist, GetClassID)
         HRESULT ( STDMETHODCALLTYPE *GetClassID )( 
             __RPC__in IPersistHistory * This,
-            /* [annotation][out] */ 
-            _Out_  CLSID *pClassID);
+            /* [out] */ __RPC__out CLSID *pClassID);
         
         DECLSPEC_XFGVIRT(IPersistHistory, LoadHistory)
         HRESULT ( STDMETHODCALLTYPE *LoadHistory )( 
             __RPC__in IPersistHistory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *pStream,
-            /* [annotation][in] */ 
-            _In_  IBindCtx *pbc);
+            /* [in] */ __RPC__in_opt IStream *pStream,
+            /* [in] */ __RPC__in_opt IBindCtx *pbc);
         
         DECLSPEC_XFGVIRT(IPersistHistory, SaveHistory)
         HRESULT ( STDMETHODCALLTYPE *SaveHistory )( 
             __RPC__in IPersistHistory * This,
-            /* [annotation][in] */ 
-            _In_  IStream *pStream);
+            /* [in] */ __RPC__in_opt IStream *pStream);
         
         DECLSPEC_XFGVIRT(IPersistHistory, SetPositionCookie)
         HRESULT ( STDMETHODCALLTYPE *SetPositionCookie )( 
             __RPC__in IPersistHistory * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwPositioncookie);
+            /* [in] */ DWORD dwPositioncookie);
         
         DECLSPEC_XFGVIRT(IPersistHistory, GetPositionCookie)
         HRESULT ( STDMETHODCALLTYPE *GetPositionCookie )( 
             __RPC__in IPersistHistory * This,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwPositioncookie);
+            /* [out] */ __RPC__out DWORD *pdwPositioncookie);
         
         END_INTERFACE
     } IPersistHistoryVtbl;

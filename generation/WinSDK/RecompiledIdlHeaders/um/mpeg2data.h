@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -253,8 +253,7 @@ EXTERN_C const IID IID_IMpeg2TableFilter;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMpeg2TableFilter * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -401,40 +400,25 @@ EXTERN_C const IID IID_IMpeg2Data;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetSection( 
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  TID tid,
-            /* [annotation][in] */ 
-            _In_  PMPEG2_FILTER pFilter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  ISectionList **ppSectionList) = 0;
+            /* [in] */ PID pid,
+            /* [in] */ TID tid,
+            /* [in] */ __RPC__in PMPEG2_FILTER pFilter,
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ __RPC__deref_out_opt ISectionList **ppSectionList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetTable( 
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  TID tid,
-            /* [annotation][in] */ 
-            _In_  PMPEG2_FILTER pFilter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  ISectionList **ppSectionList) = 0;
+            /* [in] */ PID pid,
+            /* [in] */ TID tid,
+            /* [in] */ __RPC__in PMPEG2_FILTER pFilter,
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ __RPC__deref_out_opt ISectionList **ppSectionList) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetStreamOfSections( 
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  TID tid,
-            /* [annotation][in] */ 
-            _In_  PMPEG2_FILTER pFilter,
-            /* [annotation][in] */ 
-            _In_  HANDLE hDataReadyEvent,
-            /* [annotation][out] */ 
-            _Out_  IMpeg2Stream **ppMpegStream) = 0;
+            /* [in] */ PID pid,
+            /* [in] */ TID tid,
+            /* [in] */ __RPC__in PMPEG2_FILTER pFilter,
+            /* [in] */ __RPC__in HANDLE hDataReadyEvent,
+            /* [out] */ __RPC__deref_out_opt IMpeg2Stream **ppMpegStream) = 0;
         
     };
     
@@ -448,8 +432,7 @@ EXTERN_C const IID IID_IMpeg2Data;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMpeg2Data * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -464,44 +447,29 @@ EXTERN_C const IID IID_IMpeg2Data;
         DECLSPEC_XFGVIRT(IMpeg2Data, GetSection)
         HRESULT ( STDMETHODCALLTYPE *GetSection )( 
             __RPC__in IMpeg2Data * This,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  TID tid,
-            /* [annotation][in] */ 
-            _In_  PMPEG2_FILTER pFilter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  ISectionList **ppSectionList);
+            /* [in] */ PID pid,
+            /* [in] */ TID tid,
+            /* [in] */ __RPC__in PMPEG2_FILTER pFilter,
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ __RPC__deref_out_opt ISectionList **ppSectionList);
         
         DECLSPEC_XFGVIRT(IMpeg2Data, GetTable)
         HRESULT ( STDMETHODCALLTYPE *GetTable )( 
             __RPC__in IMpeg2Data * This,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  TID tid,
-            /* [annotation][in] */ 
-            _In_  PMPEG2_FILTER pFilter,
-            /* [annotation][in] */ 
-            _In_  DWORD dwTimeout,
-            /* [annotation][out] */ 
-            _Out_  ISectionList **ppSectionList);
+            /* [in] */ PID pid,
+            /* [in] */ TID tid,
+            /* [in] */ __RPC__in PMPEG2_FILTER pFilter,
+            /* [in] */ DWORD dwTimeout,
+            /* [out] */ __RPC__deref_out_opt ISectionList **ppSectionList);
         
         DECLSPEC_XFGVIRT(IMpeg2Data, GetStreamOfSections)
         HRESULT ( STDMETHODCALLTYPE *GetStreamOfSections )( 
             __RPC__in IMpeg2Data * This,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  TID tid,
-            /* [annotation][in] */ 
-            _In_  PMPEG2_FILTER pFilter,
-            /* [annotation][in] */ 
-            _In_  HANDLE hDataReadyEvent,
-            /* [annotation][out] */ 
-            _Out_  IMpeg2Stream **ppMpegStream);
+            /* [in] */ PID pid,
+            /* [in] */ TID tid,
+            /* [in] */ __RPC__in PMPEG2_FILTER pFilter,
+            /* [in] */ __RPC__in HANDLE hDataReadyEvent,
+            /* [out] */ __RPC__deref_out_opt IMpeg2Stream **ppMpegStream);
         
         END_INTERFACE
     } IMpeg2DataVtbl;
@@ -562,40 +530,27 @@ EXTERN_C const IID IID_ISectionList;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  MPEG_REQUEST_TYPE requestType,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMpeg2Data,
-            /* [annotation][in] */ 
-            _In_  PMPEG_CONTEXT pContext,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  TID tid,
-            /* [annotation][in] */ 
-            _In_  PMPEG2_FILTER pFilter,
-            /* [annotation][in] */ 
-            _In_  DWORD timeout,
-            /* [annotation][in] */ 
-            _In_  HANDLE hDoneEvent) = 0;
+            /* [in] */ MPEG_REQUEST_TYPE requestType,
+            /* [in] */ __RPC__in_opt IMpeg2Data *pMpeg2Data,
+            /* [in] */ __RPC__in PMPEG_CONTEXT pContext,
+            /* [in] */ PID pid,
+            /* [in] */ TID tid,
+            /* [in] */ __RPC__in PMPEG2_FILTER pFilter,
+            /* [in] */ DWORD timeout,
+            /* [in] */ __RPC__in HANDLE hDoneEvent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE InitializeWithRawSections( 
-            /* [annotation][in] */ 
-            _In_  PMPEG_PACKET_LIST pmplSections) = 0;
+            /* [in] */ __RPC__in PMPEG_PACKET_LIST pmplSections) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE CancelPendingRequest( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetNumberOfSections( 
-            /* [annotation][out] */ 
-            _Out_  WORD *pCount) = 0;
+            /* [out] */ __RPC__out WORD *pCount) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetSectionData( 
-            /* [annotation][in] */ 
-            _In_  WORD sectionNumber,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwRawPacketLength,
-            /* [annotation][out] */ 
-            _Out_  PSECTION *ppSection) = 0;
+            /* [in] */ WORD sectionNumber,
+            /* [out] */ __RPC__out DWORD *pdwRawPacketLength,
+            /* [out] */ __RPC__deref_out_opt PSECTION *ppSection) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetProgramIdentifier( 
             __RPC__in PID *pPid) = 0;
@@ -615,8 +570,7 @@ EXTERN_C const IID IID_ISectionList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISectionList * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -631,28 +585,19 @@ EXTERN_C const IID IID_ISectionList;
         DECLSPEC_XFGVIRT(ISectionList, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ISectionList * This,
-            /* [annotation][in] */ 
-            _In_  MPEG_REQUEST_TYPE requestType,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMpeg2Data,
-            /* [annotation][in] */ 
-            _In_  PMPEG_CONTEXT pContext,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  TID tid,
-            /* [annotation][in] */ 
-            _In_  PMPEG2_FILTER pFilter,
-            /* [annotation][in] */ 
-            _In_  DWORD timeout,
-            /* [annotation][in] */ 
-            _In_  HANDLE hDoneEvent);
+            /* [in] */ MPEG_REQUEST_TYPE requestType,
+            /* [in] */ __RPC__in_opt IMpeg2Data *pMpeg2Data,
+            /* [in] */ __RPC__in PMPEG_CONTEXT pContext,
+            /* [in] */ PID pid,
+            /* [in] */ TID tid,
+            /* [in] */ __RPC__in PMPEG2_FILTER pFilter,
+            /* [in] */ DWORD timeout,
+            /* [in] */ __RPC__in HANDLE hDoneEvent);
         
         DECLSPEC_XFGVIRT(ISectionList, InitializeWithRawSections)
         HRESULT ( STDMETHODCALLTYPE *InitializeWithRawSections )( 
             __RPC__in ISectionList * This,
-            /* [annotation][in] */ 
-            _In_  PMPEG_PACKET_LIST pmplSections);
+            /* [in] */ __RPC__in PMPEG_PACKET_LIST pmplSections);
         
         DECLSPEC_XFGVIRT(ISectionList, CancelPendingRequest)
         HRESULT ( STDMETHODCALLTYPE *CancelPendingRequest )( 
@@ -661,18 +606,14 @@ EXTERN_C const IID IID_ISectionList;
         DECLSPEC_XFGVIRT(ISectionList, GetNumberOfSections)
         HRESULT ( STDMETHODCALLTYPE *GetNumberOfSections )( 
             __RPC__in ISectionList * This,
-            /* [annotation][out] */ 
-            _Out_  WORD *pCount);
+            /* [out] */ __RPC__out WORD *pCount);
         
         DECLSPEC_XFGVIRT(ISectionList, GetSectionData)
         HRESULT ( STDMETHODCALLTYPE *GetSectionData )( 
             __RPC__in ISectionList * This,
-            /* [annotation][in] */ 
-            _In_  WORD sectionNumber,
-            /* [annotation][out] */ 
-            _Out_  DWORD *pdwRawPacketLength,
-            /* [annotation][out] */ 
-            _Out_  PSECTION *ppSection);
+            /* [in] */ WORD sectionNumber,
+            /* [out] */ __RPC__out DWORD *pdwRawPacketLength,
+            /* [out] */ __RPC__deref_out_opt PSECTION *ppSection);
         
         DECLSPEC_XFGVIRT(ISectionList, GetProgramIdentifier)
         HRESULT ( STDMETHODCALLTYPE *GetProgramIdentifier )( 
@@ -755,24 +696,16 @@ EXTERN_C const IID IID_IMpeg2Stream;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Initialize( 
-            /* [annotation][in] */ 
-            _In_  MPEG_REQUEST_TYPE requestType,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMpeg2Data,
-            /* [annotation][in] */ 
-            _In_  PMPEG_CONTEXT pContext,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  TID tid,
-            /* [annotation][in] */ 
-            _In_  PMPEG2_FILTER pFilter,
-            /* [annotation][in] */ 
-            _In_  HANDLE hDataReadyEvent) = 0;
+            /* [in] */ MPEG_REQUEST_TYPE requestType,
+            /* [in] */ __RPC__in_opt IMpeg2Data *pMpeg2Data,
+            /* [in] */ __RPC__in PMPEG_CONTEXT pContext,
+            /* [in] */ PID pid,
+            /* [in] */ TID tid,
+            /* [in] */ __RPC__in PMPEG2_FILTER pFilter,
+            /* [in] */ __RPC__in HANDLE hDataReadyEvent) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SupplyDataBuffer( 
-            /* [annotation][in] */ 
-            _In_  PMPEG_STREAM_BUFFER pStreamBuffer) = 0;
+            /* [in] */ __RPC__in PMPEG_STREAM_BUFFER pStreamBuffer) = 0;
         
     };
     
@@ -786,8 +719,7 @@ EXTERN_C const IID IID_IMpeg2Stream;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMpeg2Stream * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -802,26 +734,18 @@ EXTERN_C const IID IID_IMpeg2Stream;
         DECLSPEC_XFGVIRT(IMpeg2Stream, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IMpeg2Stream * This,
-            /* [annotation][in] */ 
-            _In_  MPEG_REQUEST_TYPE requestType,
-            /* [annotation][in] */ 
-            _In_  IMpeg2Data *pMpeg2Data,
-            /* [annotation][in] */ 
-            _In_  PMPEG_CONTEXT pContext,
-            /* [annotation][in] */ 
-            _In_  PID pid,
-            /* [annotation][in] */ 
-            _In_  TID tid,
-            /* [annotation][in] */ 
-            _In_  PMPEG2_FILTER pFilter,
-            /* [annotation][in] */ 
-            _In_  HANDLE hDataReadyEvent);
+            /* [in] */ MPEG_REQUEST_TYPE requestType,
+            /* [in] */ __RPC__in_opt IMpeg2Data *pMpeg2Data,
+            /* [in] */ __RPC__in PMPEG_CONTEXT pContext,
+            /* [in] */ PID pid,
+            /* [in] */ TID tid,
+            /* [in] */ __RPC__in PMPEG2_FILTER pFilter,
+            /* [in] */ __RPC__in HANDLE hDataReadyEvent);
         
         DECLSPEC_XFGVIRT(IMpeg2Stream, SupplyDataBuffer)
         HRESULT ( STDMETHODCALLTYPE *SupplyDataBuffer )( 
             __RPC__in IMpeg2Stream * This,
-            /* [annotation][in] */ 
-            _In_  PMPEG_STREAM_BUFFER pStreamBuffer);
+            /* [in] */ __RPC__in PMPEG_STREAM_BUFFER pStreamBuffer);
         
         END_INTERFACE
     } IMpeg2StreamVtbl;

@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -113,28 +113,18 @@ EXTERN_C const IID IID_IThumbnailStreamCache;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE GetThumbnailStream( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR path,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG cacheId,
-            /* [annotation][in] */ 
-            _In_  ThumbnailStreamCacheOptions options,
-            /* [annotation][in] */ 
-            _In_  UINT requestedThumbnailSize,
-            /* [annotation][out] */ 
-            _Out_  SIZE *thumbnailSize,
-            /* [annotation][out] */ 
-            _Out_  IStream **thumbnailStream) = 0;
+            /* [in] */ __RPC__in LPCWSTR path,
+            /* [in] */ ULONGLONG cacheId,
+            /* [in] */ ThumbnailStreamCacheOptions options,
+            /* [in] */ UINT requestedThumbnailSize,
+            /* [out] */ __RPC__out SIZE *thumbnailSize,
+            /* [out] */ __RPC__deref_out_opt IStream **thumbnailStream) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE SetThumbnailStream( 
-            /* [annotation][in] */ 
-            _In_  LPCWSTR path,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG cacheId,
-            /* [annotation][in] */ 
-            _In_  SIZE thumbnailSize,
-            /* [annotation][in] */ 
-            _In_  IStream *thumbnailStream) = 0;
+            /* [in] */ __RPC__in LPCWSTR path,
+            /* [in] */ ULONGLONG cacheId,
+            /* [in] */ SIZE thumbnailSize,
+            /* [in] */ __RPC__in_opt IStream *thumbnailStream) = 0;
         
     };
     
@@ -148,8 +138,7 @@ EXTERN_C const IID IID_IThumbnailStreamCache;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IThumbnailStreamCache * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -164,30 +153,20 @@ EXTERN_C const IID IID_IThumbnailStreamCache;
         DECLSPEC_XFGVIRT(IThumbnailStreamCache, GetThumbnailStream)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnailStream )( 
             __RPC__in IThumbnailStreamCache * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR path,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG cacheId,
-            /* [annotation][in] */ 
-            _In_  ThumbnailStreamCacheOptions options,
-            /* [annotation][in] */ 
-            _In_  UINT requestedThumbnailSize,
-            /* [annotation][out] */ 
-            _Out_  SIZE *thumbnailSize,
-            /* [annotation][out] */ 
-            _Out_  IStream **thumbnailStream);
+            /* [in] */ __RPC__in LPCWSTR path,
+            /* [in] */ ULONGLONG cacheId,
+            /* [in] */ ThumbnailStreamCacheOptions options,
+            /* [in] */ UINT requestedThumbnailSize,
+            /* [out] */ __RPC__out SIZE *thumbnailSize,
+            /* [out] */ __RPC__deref_out_opt IStream **thumbnailStream);
         
         DECLSPEC_XFGVIRT(IThumbnailStreamCache, SetThumbnailStream)
         HRESULT ( STDMETHODCALLTYPE *SetThumbnailStream )( 
             __RPC__in IThumbnailStreamCache * This,
-            /* [annotation][in] */ 
-            _In_  LPCWSTR path,
-            /* [annotation][in] */ 
-            _In_  ULONGLONG cacheId,
-            /* [annotation][in] */ 
-            _In_  SIZE thumbnailSize,
-            /* [annotation][in] */ 
-            _In_  IStream *thumbnailStream);
+            /* [in] */ __RPC__in LPCWSTR path,
+            /* [in] */ ULONGLONG cacheId,
+            /* [in] */ SIZE thumbnailSize,
+            /* [in] */ __RPC__in_opt IStream *thumbnailStream);
         
         END_INTERFACE
     } IThumbnailStreamCacheVtbl;

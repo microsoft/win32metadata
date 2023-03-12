@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -34,7 +34,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -465,8 +465,7 @@ EXTERN_C const IID IID_IWebBrowser;
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE GoSearch( void) = 0;
         
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE Navigate( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Flags,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *TargetFrameName,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *PostData,
@@ -480,72 +479,55 @@ EXTERN_C const IID IID_IWebBrowser;
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE Stop( void) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Application( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Parent( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Container( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Document( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_TopLevelContainer( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Type( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Type) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Type) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Left( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl) = 0;
+            /* [retval][out] */ __RPC__out long *pl) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Left( 
-            /* [annotation][in] */ 
-            _In_  long Left) = 0;
+            /* [in] */ long Left) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Top( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl) = 0;
+            /* [retval][out] */ __RPC__out long *pl) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Top( 
-            /* [annotation][in] */ 
-            _In_  long Top) = 0;
+            /* [in] */ long Top) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Width( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl) = 0;
+            /* [retval][out] */ __RPC__out long *pl) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Width( 
-            /* [annotation][in] */ 
-            _In_  long Width) = 0;
+            /* [in] */ long Width) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Height( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl) = 0;
+            /* [retval][out] */ __RPC__out long *pl) = 0;
         
         virtual /* [propput][id] */ HRESULT STDMETHODCALLTYPE put_Height( 
-            /* [annotation][in] */ 
-            _In_  long Height) = 0;
+            /* [in] */ long Height) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_LocationName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *LocationName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *LocationName) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_LocationURL( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *LocationURL) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *LocationURL) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Busy( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool) = 0;
         
     };
     
@@ -559,8 +541,7 @@ EXTERN_C const IID IID_IWebBrowser;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -575,31 +556,23 @@ EXTERN_C const IID IID_IWebBrowser;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -640,8 +613,7 @@ EXTERN_C const IID IID_IWebBrowser;
         DECLSPEC_XFGVIRT(IWebBrowser, Navigate)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Navigate )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Flags,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *TargetFrameName,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *PostData,
@@ -663,104 +635,87 @@ EXTERN_C const IID IID_IWebBrowser;
         DECLSPEC_XFGVIRT(IWebBrowser, get_Application)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Application )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Parent)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Parent )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Container)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Container )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Document)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Document )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_TopLevelContainer)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TopLevelContainer )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Type)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Type);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Type);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Left)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Left )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Left)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Left )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][in] */ 
-            _In_  long Left);
+            /* [in] */ long Left);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Top)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Top )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Top)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Top )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][in] */ 
-            _In_  long Top);
+            /* [in] */ long Top);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Width)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Width )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Width)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Width )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][in] */ 
-            _In_  long Width);
+            /* [in] */ long Width);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Height)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Height )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Height)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Height )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][in] */ 
-            _In_  long Height);
+            /* [in] */ long Height);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_LocationName)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocationName )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *LocationName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *LocationName);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_LocationURL)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocationURL )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *LocationURL);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *LocationURL);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Busy)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Busy )( 
             __RPC__in IWebBrowser * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         END_INTERFACE
     } IWebBrowserVtbl;
@@ -909,8 +864,7 @@ EXTERN_C const IID DIID_DWebBrowserEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DWebBrowserEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -925,31 +879,23 @@ EXTERN_C const IID DIID_DWebBrowserEvents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DWebBrowserEvents * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DWebBrowserEvents * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DWebBrowserEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1033,86 +979,64 @@ EXTERN_C const IID IID_IWebBrowserApp;
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE Quit( void) = 0;
         
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE ClientToWindow( 
-            /* [annotation][out][in] */ 
-            _Inout_  int *pcx,
-            /* [annotation][out][in] */ 
-            _Inout_  int *pcy) = 0;
+            /* [out][in] */ __RPC__inout int *pcx,
+            /* [out][in] */ __RPC__inout int *pcy) = 0;
         
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE PutProperty( 
-            /* [annotation][in] */ 
-            _In_  BSTR Property,
-            /* [annotation][in] */ 
-            _In_  VARIANT vtValue) = 0;
+            /* [in] */ __RPC__in BSTR Property,
+            /* [in] */ VARIANT vtValue) = 0;
         
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE GetProperty( 
-            /* [annotation][in] */ 
-            _In_  BSTR Property,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvtValue) = 0;
+            /* [in] */ __RPC__in BSTR Property,
+            /* [retval][out] */ __RPC__out VARIANT *pvtValue) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_HWND( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SHANDLE_PTR *pHWND) = 0;
+            /* [retval][out] */ __RPC__out SHANDLE_PTR *pHWND) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_FullName( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *FullName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *FullName) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Path( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Path) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Path) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Visible( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Visible( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value) = 0;
+            /* [in] */ VARIANT_BOOL Value) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_StatusBar( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_StatusBar( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value) = 0;
+            /* [in] */ VARIANT_BOOL Value) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_StatusText( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *StatusText) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *StatusText) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_StatusText( 
-            /* [annotation][in] */ 
-            _In_  BSTR StatusText) = 0;
+            /* [in] */ __RPC__in BSTR StatusText) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ToolBar( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *Value) = 0;
+            /* [retval][out] */ __RPC__out int *Value) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ToolBar( 
-            /* [annotation][in] */ 
-            _In_  int Value) = 0;
+            /* [in] */ int Value) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MenuBar( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *Value) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *Value) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_MenuBar( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value) = 0;
+            /* [in] */ VARIANT_BOOL Value) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_FullScreen( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbFullScreen) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbFullScreen) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_FullScreen( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bFullScreen) = 0;
+            /* [in] */ VARIANT_BOOL bFullScreen) = 0;
         
     };
     
@@ -1126,8 +1050,7 @@ EXTERN_C const IID IID_IWebBrowserApp;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1142,31 +1065,23 @@ EXTERN_C const IID IID_IWebBrowserApp;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1207,8 +1122,7 @@ EXTERN_C const IID IID_IWebBrowserApp;
         DECLSPEC_XFGVIRT(IWebBrowser, Navigate)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Navigate )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Flags,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *TargetFrameName,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *PostData,
@@ -1230,104 +1144,87 @@ EXTERN_C const IID IID_IWebBrowserApp;
         DECLSPEC_XFGVIRT(IWebBrowser, get_Application)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Application )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Parent)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Parent )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Container)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Container )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Document)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Document )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_TopLevelContainer)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TopLevelContainer )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Type)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Type);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Type);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Left)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Left )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Left)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Left )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  long Left);
+            /* [in] */ long Left);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Top)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Top )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Top)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Top )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  long Top);
+            /* [in] */ long Top);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Width)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Width )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Width)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Width )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  long Width);
+            /* [in] */ long Width);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Height)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Height )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Height)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Height )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  long Height);
+            /* [in] */ long Height);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_LocationName)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocationName )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *LocationName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *LocationName);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_LocationURL)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocationURL )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *LocationURL);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *LocationURL);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Busy)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Busy )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, Quit)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Quit )( 
@@ -1336,122 +1233,100 @@ EXTERN_C const IID IID_IWebBrowserApp;
         DECLSPEC_XFGVIRT(IWebBrowserApp, ClientToWindow)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClientToWindow )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][out][in] */ 
-            _Inout_  int *pcx,
-            /* [annotation][out][in] */ 
-            _Inout_  int *pcy);
+            /* [out][in] */ __RPC__inout int *pcx,
+            /* [out][in] */ __RPC__inout int *pcy);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, PutProperty)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PutProperty )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Property,
-            /* [annotation][in] */ 
-            _In_  VARIANT vtValue);
+            /* [in] */ __RPC__in BSTR Property,
+            /* [in] */ VARIANT vtValue);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, GetProperty)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Property,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvtValue);
+            /* [in] */ __RPC__in BSTR Property,
+            /* [retval][out] */ __RPC__out VARIANT *pvtValue);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_Name)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_HWND)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_HWND )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SHANDLE_PTR *pHWND);
+            /* [retval][out] */ __RPC__out SHANDLE_PTR *pHWND);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_FullName)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_FullName )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *FullName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *FullName);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_Path)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Path);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Path);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_Visible)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Visible )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_Visible)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Visible )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value);
+            /* [in] */ VARIANT_BOOL Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_StatusBar)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StatusBar )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_StatusBar)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StatusBar )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value);
+            /* [in] */ VARIANT_BOOL Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_StatusText)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StatusText )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *StatusText);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *StatusText);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_StatusText)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StatusText )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  BSTR StatusText);
+            /* [in] */ __RPC__in BSTR StatusText);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_ToolBar)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ToolBar )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *Value);
+            /* [retval][out] */ __RPC__out int *Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_ToolBar)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ToolBar )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  int Value);
+            /* [in] */ int Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_MenuBar)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MenuBar )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *Value);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_MenuBar)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MenuBar )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value);
+            /* [in] */ VARIANT_BOOL Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_FullScreen)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_FullScreen )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbFullScreen);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbFullScreen);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_FullScreen)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_FullScreen )( 
             __RPC__in IWebBrowserApp * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bFullScreen);
+            /* [in] */ VARIANT_BOOL bFullScreen);
         
         END_INTERFACE
     } IWebBrowserAppVtbl;
@@ -1652,92 +1527,71 @@ EXTERN_C const IID IID_IWebBrowser2;
     {
     public:
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE Navigate2( 
-            /* [annotation][in] */ 
-            _In_  VARIANT *URL,
+            /* [in] */ __RPC__in VARIANT *URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Flags,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *TargetFrameName,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *PostData,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Headers) = 0;
         
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryStatusWB( 
-            /* [annotation][in] */ 
-            _In_  OLECMDID cmdID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  OLECMDF *pcmdf) = 0;
+            /* [in] */ OLECMDID cmdID,
+            /* [retval][out] */ __RPC__out OLECMDF *pcmdf) = 0;
         
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE ExecWB( 
-            /* [annotation][in] */ 
-            _In_  OLECMDID cmdID,
-            /* [annotation][in] */ 
-            _In_  OLECMDEXECOPT cmdexecopt,
+            /* [in] */ OLECMDID cmdID,
+            /* [in] */ OLECMDEXECOPT cmdexecopt,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvaIn,
             /* [unique][optional][out][in] */ __RPC__inout_opt VARIANT *pvaOut) = 0;
         
         virtual /* [helpcontext][helpstring][id] */ HRESULT STDMETHODCALLTYPE ShowBrowserBar( 
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvaClsid,
+            /* [in] */ __RPC__in VARIANT *pvaClsid,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarShow,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarSize) = 0;
         
         virtual /* [bindable][propget][id] */ HRESULT STDMETHODCALLTYPE get_ReadyState( 
-            /* [annotation][out][retval] */ 
-            _Out_retval_  READYSTATE *plReadyState) = 0;
+            /* [out][retval] */ __RPC__out READYSTATE *plReadyState) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Offline( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbOffline) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbOffline) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Offline( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bOffline) = 0;
+            /* [in] */ VARIANT_BOOL bOffline) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Silent( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbSilent) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSilent) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Silent( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bSilent) = 0;
+            /* [in] */ VARIANT_BOOL bSilent) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RegisterAsBrowser( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegister) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegister) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RegisterAsBrowser( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bRegister) = 0;
+            /* [in] */ VARIANT_BOOL bRegister) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RegisterAsDropTarget( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegister) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegister) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RegisterAsDropTarget( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bRegister) = 0;
+            /* [in] */ VARIANT_BOOL bRegister) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_TheaterMode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegister) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegister) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_TheaterMode( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bRegister) = 0;
+            /* [in] */ VARIANT_BOOL bRegister) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_AddressBar( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *Value) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *Value) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_AddressBar( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value) = 0;
+            /* [in] */ VARIANT_BOOL Value) = 0;
         
         virtual /* [helpcontext][helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Resizable( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *Value) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *Value) = 0;
         
         virtual /* [helpcontext][helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Resizable( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value) = 0;
+            /* [in] */ VARIANT_BOOL Value) = 0;
         
     };
     
@@ -1751,8 +1605,7 @@ EXTERN_C const IID IID_IWebBrowser2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -1767,31 +1620,23 @@ EXTERN_C const IID IID_IWebBrowser2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -1832,8 +1677,7 @@ EXTERN_C const IID IID_IWebBrowser2;
         DECLSPEC_XFGVIRT(IWebBrowser, Navigate)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Navigate )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Flags,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *TargetFrameName,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *PostData,
@@ -1855,104 +1699,87 @@ EXTERN_C const IID IID_IWebBrowser2;
         DECLSPEC_XFGVIRT(IWebBrowser, get_Application)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Application )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Parent)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Parent )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Container)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Container )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Document)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Document )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppDisp);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDisp);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_TopLevelContainer)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TopLevelContainer )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Type)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Type);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Type);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Left)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Left )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Left)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Left )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  long Left);
+            /* [in] */ long Left);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Top)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Top )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Top)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Top )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  long Top);
+            /* [in] */ long Top);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Width)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Width )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Width)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Width )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  long Width);
+            /* [in] */ long Width);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Height)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Height )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *pl);
+            /* [retval][out] */ __RPC__out long *pl);
         
         DECLSPEC_XFGVIRT(IWebBrowser, put_Height)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Height )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  long Height);
+            /* [in] */ long Height);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_LocationName)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocationName )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *LocationName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *LocationName);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_LocationURL)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_LocationURL )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *LocationURL);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *LocationURL);
         
         DECLSPEC_XFGVIRT(IWebBrowser, get_Busy)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Busy )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, Quit)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Quit )( 
@@ -1961,128 +1788,105 @@ EXTERN_C const IID IID_IWebBrowser2;
         DECLSPEC_XFGVIRT(IWebBrowserApp, ClientToWindow)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClientToWindow )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][out][in] */ 
-            _Inout_  int *pcx,
-            /* [annotation][out][in] */ 
-            _Inout_  int *pcy);
+            /* [out][in] */ __RPC__inout int *pcx,
+            /* [out][in] */ __RPC__inout int *pcy);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, PutProperty)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PutProperty )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Property,
-            /* [annotation][in] */ 
-            _In_  VARIANT vtValue);
+            /* [in] */ __RPC__in BSTR Property,
+            /* [in] */ VARIANT vtValue);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, GetProperty)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR Property,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvtValue);
+            /* [in] */ __RPC__in BSTR Property,
+            /* [retval][out] */ __RPC__out VARIANT *pvtValue);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_Name)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Name);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_HWND)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_HWND )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  SHANDLE_PTR *pHWND);
+            /* [retval][out] */ __RPC__out SHANDLE_PTR *pHWND);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_FullName)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_FullName )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *FullName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *FullName);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_Path)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Path )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *Path);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *Path);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_Visible)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Visible )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_Visible)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Visible )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value);
+            /* [in] */ VARIANT_BOOL Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_StatusBar)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StatusBar )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_StatusBar)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StatusBar )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value);
+            /* [in] */ VARIANT_BOOL Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_StatusText)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_StatusText )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *StatusText);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *StatusText);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_StatusText)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_StatusText )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR StatusText);
+            /* [in] */ __RPC__in BSTR StatusText);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_ToolBar)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ToolBar )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *Value);
+            /* [retval][out] */ __RPC__out int *Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_ToolBar)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ToolBar )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  int Value);
+            /* [in] */ int Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_MenuBar)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MenuBar )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *Value);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_MenuBar)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MenuBar )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value);
+            /* [in] */ VARIANT_BOOL Value);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, get_FullScreen)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_FullScreen )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbFullScreen);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbFullScreen);
         
         DECLSPEC_XFGVIRT(IWebBrowserApp, put_FullScreen)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_FullScreen )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bFullScreen);
+            /* [in] */ VARIANT_BOOL bFullScreen);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, Navigate2)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Navigate2 )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT *URL,
+            /* [in] */ __RPC__in VARIANT *URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Flags,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *TargetFrameName,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *PostData,
@@ -2091,118 +1895,98 @@ EXTERN_C const IID IID_IWebBrowser2;
         DECLSPEC_XFGVIRT(IWebBrowser2, QueryStatusWB)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *QueryStatusWB )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  OLECMDID cmdID,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  OLECMDF *pcmdf);
+            /* [in] */ OLECMDID cmdID,
+            /* [retval][out] */ __RPC__out OLECMDF *pcmdf);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, ExecWB)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExecWB )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  OLECMDID cmdID,
-            /* [annotation][in] */ 
-            _In_  OLECMDEXECOPT cmdexecopt,
+            /* [in] */ OLECMDID cmdID,
+            /* [in] */ OLECMDEXECOPT cmdexecopt,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvaIn,
             /* [unique][optional][out][in] */ __RPC__inout_opt VARIANT *pvaOut);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, ShowBrowserBar)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ShowBrowserBar )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvaClsid,
+            /* [in] */ __RPC__in VARIANT *pvaClsid,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarShow,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarSize);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, get_ReadyState)
         /* [bindable][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ReadyState )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][out][retval] */ 
-            _Out_retval_  READYSTATE *plReadyState);
+            /* [out][retval] */ __RPC__out READYSTATE *plReadyState);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, get_Offline)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Offline )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbOffline);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbOffline);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, put_Offline)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Offline )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bOffline);
+            /* [in] */ VARIANT_BOOL bOffline);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, get_Silent)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Silent )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbSilent);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSilent);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, put_Silent)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Silent )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bSilent);
+            /* [in] */ VARIANT_BOOL bSilent);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, get_RegisterAsBrowser)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RegisterAsBrowser )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegister);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegister);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, put_RegisterAsBrowser)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RegisterAsBrowser )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bRegister);
+            /* [in] */ VARIANT_BOOL bRegister);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, get_RegisterAsDropTarget)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_RegisterAsDropTarget )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegister);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegister);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, put_RegisterAsDropTarget)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_RegisterAsDropTarget )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bRegister);
+            /* [in] */ VARIANT_BOOL bRegister);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, get_TheaterMode)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_TheaterMode )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pbRegister);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRegister);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, put_TheaterMode)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_TheaterMode )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL bRegister);
+            /* [in] */ VARIANT_BOOL bRegister);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, get_AddressBar)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AddressBar )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *Value);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *Value);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, put_AddressBar)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_AddressBar )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value);
+            /* [in] */ VARIANT_BOOL Value);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, get_Resizable)
         /* [helpcontext][helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Resizable )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *Value);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *Value);
         
         DECLSPEC_XFGVIRT(IWebBrowser2, put_Resizable)
         /* [helpcontext][helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Resizable )( 
             __RPC__in IWebBrowser2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL Value);
+            /* [in] */ VARIANT_BOOL Value);
         
         END_INTERFACE
     } IWebBrowser2Vtbl;
@@ -2470,8 +2254,7 @@ EXTERN_C const IID DIID_DWebBrowserEvents2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DWebBrowserEvents2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2486,31 +2269,23 @@ EXTERN_C const IID DIID_DWebBrowserEvents2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DWebBrowserEvents2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DWebBrowserEvents2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DWebBrowserEvents2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2641,8 +2416,7 @@ EXTERN_C const IID DIID_DShellWindowsEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DShellWindowsEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2657,31 +2431,23 @@ EXTERN_C const IID DIID_DShellWindowsEvents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DShellWindowsEvents * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DShellWindowsEvents * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DShellWindowsEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2763,79 +2529,53 @@ EXTERN_C const IID IID_IShellWindows;
     {
     public:
         virtual /* [helpstring][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count) = 0;
+            /* [retval][out] */ __RPC__out long *Count) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Item( 
             /* [optional][in] */ VARIANT index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **Folder) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **Folder) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE _NewEnum( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppunk) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppunk) = 0;
         
         virtual /* [hidden][helpstring] */ HRESULT STDMETHODCALLTYPE Register( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *pid,
-            /* [annotation][in] */ 
-            _In_  long hwnd,
-            /* [annotation][in] */ 
-            _In_  int swClass,
-            /* [annotation][out] */ 
-            _Out_  long *plCookie) = 0;
+            /* [in] */ __RPC__in_opt IDispatch *pid,
+            /* [in] */ long hwnd,
+            /* [in] */ int swClass,
+            /* [out] */ __RPC__out long *plCookie) = 0;
         
         virtual /* [hidden][helpstring] */ HRESULT STDMETHODCALLTYPE RegisterPending( 
-            /* [annotation][in] */ 
-            _In_  long lThreadId,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarloc,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarlocRoot,
-            /* [annotation][in] */ 
-            _In_  int swClass,
-            /* [annotation][out] */ 
-            _Out_  long *plCookie) = 0;
+            /* [in] */ long lThreadId,
+            /* [in] */ __RPC__in VARIANT *pvarloc,
+            /* [in] */ __RPC__in VARIANT *pvarlocRoot,
+            /* [in] */ int swClass,
+            /* [out] */ __RPC__out long *plCookie) = 0;
         
         virtual /* [hidden][helpstring] */ HRESULT STDMETHODCALLTYPE Revoke( 
-            /* [annotation][in] */ 
-            _In_  long lCookie) = 0;
+            /* [in] */ long lCookie) = 0;
         
         virtual /* [hidden][helpstring] */ HRESULT STDMETHODCALLTYPE OnNavigate( 
-            /* [annotation][in] */ 
-            _In_  long lCookie,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarLoc) = 0;
+            /* [in] */ long lCookie,
+            /* [in] */ __RPC__in VARIANT *pvarLoc) = 0;
         
         virtual /* [hidden][helpstring] */ HRESULT STDMETHODCALLTYPE OnActivated( 
-            /* [annotation][in] */ 
-            _In_  long lCookie,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fActive) = 0;
+            /* [in] */ long lCookie,
+            /* [in] */ VARIANT_BOOL fActive) = 0;
         
         virtual /* [hidden][helpstring] */ HRESULT STDMETHODCALLTYPE FindWindowSW( 
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarLoc,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarLocRoot,
-            /* [annotation][in] */ 
-            _In_  int swClass,
-            /* [annotation][out] */ 
-            _Out_  long *phwnd,
-            /* [annotation][in] */ 
-            _In_  int swfwOptions,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppdispOut) = 0;
+            /* [in] */ __RPC__in VARIANT *pvarLoc,
+            /* [in] */ __RPC__in VARIANT *pvarLocRoot,
+            /* [in] */ int swClass,
+            /* [out] */ __RPC__out long *phwnd,
+            /* [in] */ int swfwOptions,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdispOut) = 0;
         
         virtual /* [hidden][helpstring] */ HRESULT STDMETHODCALLTYPE OnCreated( 
-            /* [annotation][in] */ 
-            _In_  long lCookie,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punk) = 0;
+            /* [in] */ long lCookie,
+            /* [in] */ __RPC__in_opt IUnknown *punk) = 0;
         
         virtual /* [hidden][helpstring] */ HRESULT STDMETHODCALLTYPE ProcessAttachDetach( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fAttach) = 0;
+            /* [in] */ VARIANT_BOOL fAttach) = 0;
         
     };
     
@@ -2849,8 +2589,7 @@ EXTERN_C const IID IID_IShellWindows;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -2865,31 +2604,23 @@ EXTERN_C const IID IID_IShellWindows;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -2914,99 +2645,73 @@ EXTERN_C const IID IID_IShellWindows;
         DECLSPEC_XFGVIRT(IShellWindows, get_Count)
         /* [helpstring][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  long *Count);
+            /* [retval][out] */ __RPC__out long *Count);
         
         DECLSPEC_XFGVIRT(IShellWindows, Item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IShellWindows * This,
             /* [optional][in] */ VARIANT index,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **Folder);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **Folder);
         
         DECLSPEC_XFGVIRT(IShellWindows, _NewEnum)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IUnknown **ppunk);
+            /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppunk);
         
         DECLSPEC_XFGVIRT(IShellWindows, Register)
         /* [hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Register )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pid,
-            /* [annotation][in] */ 
-            _In_  long hwnd,
-            /* [annotation][in] */ 
-            _In_  int swClass,
-            /* [annotation][out] */ 
-            _Out_  long *plCookie);
+            /* [in] */ __RPC__in_opt IDispatch *pid,
+            /* [in] */ long hwnd,
+            /* [in] */ int swClass,
+            /* [out] */ __RPC__out long *plCookie);
         
         DECLSPEC_XFGVIRT(IShellWindows, RegisterPending)
         /* [hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterPending )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  long lThreadId,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarloc,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarlocRoot,
-            /* [annotation][in] */ 
-            _In_  int swClass,
-            /* [annotation][out] */ 
-            _Out_  long *plCookie);
+            /* [in] */ long lThreadId,
+            /* [in] */ __RPC__in VARIANT *pvarloc,
+            /* [in] */ __RPC__in VARIANT *pvarlocRoot,
+            /* [in] */ int swClass,
+            /* [out] */ __RPC__out long *plCookie);
         
         DECLSPEC_XFGVIRT(IShellWindows, Revoke)
         /* [hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Revoke )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  long lCookie);
+            /* [in] */ long lCookie);
         
         DECLSPEC_XFGVIRT(IShellWindows, OnNavigate)
         /* [hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnNavigate )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  long lCookie,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarLoc);
+            /* [in] */ long lCookie,
+            /* [in] */ __RPC__in VARIANT *pvarLoc);
         
         DECLSPEC_XFGVIRT(IShellWindows, OnActivated)
         /* [hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnActivated )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  long lCookie,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fActive);
+            /* [in] */ long lCookie,
+            /* [in] */ VARIANT_BOOL fActive);
         
         DECLSPEC_XFGVIRT(IShellWindows, FindWindowSW)
         /* [hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FindWindowSW )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarLoc,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarLocRoot,
-            /* [annotation][in] */ 
-            _In_  int swClass,
-            /* [annotation][out] */ 
-            _Out_  long *phwnd,
-            /* [annotation][in] */ 
-            _In_  int swfwOptions,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppdispOut);
+            /* [in] */ __RPC__in VARIANT *pvarLoc,
+            /* [in] */ __RPC__in VARIANT *pvarLocRoot,
+            /* [in] */ int swClass,
+            /* [out] */ __RPC__out long *phwnd,
+            /* [in] */ int swfwOptions,
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdispOut);
         
         DECLSPEC_XFGVIRT(IShellWindows, OnCreated)
         /* [hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnCreated )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  long lCookie,
-            /* [annotation][in] */ 
-            _In_  IUnknown *punk);
+            /* [in] */ long lCookie,
+            /* [in] */ __RPC__in_opt IUnknown *punk);
         
         DECLSPEC_XFGVIRT(IShellWindows, ProcessAttachDetach)
         /* [hidden][helpstring] */ HRESULT ( STDMETHODCALLTYPE *ProcessAttachDetach )( 
             __RPC__in IShellWindows * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fAttach);
+            /* [in] */ VARIANT_BOOL fAttach);
         
         END_INTERFACE
     } IShellWindowsVtbl;
@@ -3118,64 +2823,48 @@ EXTERN_C const IID IID_IShellUIHelper;
         virtual /* [id][hidden] */ HRESULT STDMETHODCALLTYPE RefreshOfflineDesktop( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddFavorite( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Title) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddChannel( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL) = 0;
+            /* [in] */ __RPC__in BSTR URL) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddDesktopComponent( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Type,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Type,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Left,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Top,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Width,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Height) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsSubscribed( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool) = 0;
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE NavigateAndFind( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR strQuery,
-            /* [annotation][in] */ 
-            _In_  VARIANT *varTargetFrame) = 0;
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR strQuery,
+            /* [in] */ __RPC__in VARIANT *varTargetFrame) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ImportExportFavorites( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fImport,
-            /* [annotation][in] */ 
-            _In_  BSTR strImpExpPath) = 0;
+            /* [in] */ VARIANT_BOOL fImport,
+            /* [in] */ __RPC__in BSTR strImpExpPath) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AutoCompleteSaveForm( 
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Form) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AutoScan( 
-            /* [annotation][in] */ 
-            _In_  BSTR strSearch,
-            /* [annotation][in] */ 
-            _In_  BSTR strFailureUrl,
+            /* [in] */ __RPC__in BSTR strSearch,
+            /* [in] */ __RPC__in BSTR strFailureUrl,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarTargetFrame) = 0;
         
         virtual /* [id][hidden] */ HRESULT STDMETHODCALLTYPE AutoCompleteAttach( 
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Reserved) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ShowBrowserUI( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarIn,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarOut) = 0;
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in VARIANT *pvarIn,
+            /* [retval][out] */ __RPC__out VARIANT *pvarOut) = 0;
         
     };
     
@@ -3189,8 +2878,7 @@ EXTERN_C const IID IID_IShellUIHelper;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3205,31 +2893,23 @@ EXTERN_C const IID IID_IShellUIHelper;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3266,23 +2946,19 @@ EXTERN_C const IID IID_IShellUIHelper;
         DECLSPEC_XFGVIRT(IShellUIHelper, AddFavorite)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddFavorite )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Title);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddChannel)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddChannel )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddDesktopComponent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddDesktopComponent )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Type,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Type,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Left,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Top,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Width,
@@ -3291,28 +2967,21 @@ EXTERN_C const IID IID_IShellUIHelper;
         DECLSPEC_XFGVIRT(IShellUIHelper, IsSubscribed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, NavigateAndFind)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateAndFind )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR strQuery,
-            /* [annotation][in] */ 
-            _In_  VARIANT *varTargetFrame);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR strQuery,
+            /* [in] */ __RPC__in VARIANT *varTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, ImportExportFavorites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ImportExportFavorites )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fImport,
-            /* [annotation][in] */ 
-            _In_  BSTR strImpExpPath);
+            /* [in] */ VARIANT_BOOL fImport,
+            /* [in] */ __RPC__in BSTR strImpExpPath);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteSaveForm)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoCompleteSaveForm )( 
@@ -3322,10 +2991,8 @@ EXTERN_C const IID IID_IShellUIHelper;
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoScan)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoScan )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strSearch,
-            /* [annotation][in] */ 
-            _In_  BSTR strFailureUrl,
+            /* [in] */ __RPC__in BSTR strSearch,
+            /* [in] */ __RPC__in BSTR strFailureUrl,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteAttach)
@@ -3336,12 +3003,9 @@ EXTERN_C const IID IID_IShellUIHelper;
         DECLSPEC_XFGVIRT(IShellUIHelper, ShowBrowserUI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowBrowserUI )( 
             __RPC__in IShellUIHelper * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarIn,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarOut);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in VARIANT *pvarIn,
+            /* [retval][out] */ __RPC__out VARIANT *pvarOut);
         
         END_INTERFACE
     } IShellUIHelperVtbl;
@@ -3445,66 +3109,51 @@ EXTERN_C const IID IID_IShellUIHelper2;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddSearchProvider( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL) = 0;
+            /* [in] */ __RPC__in BSTR URL) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RunOnceShown( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SkipRunOnce( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CustomizeSettings( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSQM,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPhishing,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLocale) = 0;
+            /* [in] */ VARIANT_BOOL fSQM,
+            /* [in] */ VARIANT_BOOL fPhishing,
+            /* [in] */ __RPC__in BSTR bstrLocale) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SqmEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE PhishingEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE BrandImageUri( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUri) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUri) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SkipTabsWelcome( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE DiagnoseConnection( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE CustomizeClearType( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSet) = 0;
+            /* [in] */ VARIANT_BOOL fSet) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsSearchProviderInstalled( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult) = 0;
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsSearchMigrated( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfMigrated) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMigrated) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE DefaultSearchProvider( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RunOnceRequiredSettingsComplete( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fComplete) = 0;
+            /* [in] */ VARIANT_BOOL fComplete) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE RunOnceHasShown( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfShown) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfShown) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SearchGuideUrl( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUrl) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUrl) = 0;
         
     };
     
@@ -3518,8 +3167,7 @@ EXTERN_C const IID IID_IShellUIHelper2;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3534,31 +3182,23 @@ EXTERN_C const IID IID_IShellUIHelper2;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -3595,23 +3235,19 @@ EXTERN_C const IID IID_IShellUIHelper2;
         DECLSPEC_XFGVIRT(IShellUIHelper, AddFavorite)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddFavorite )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Title);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddChannel)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddChannel )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddDesktopComponent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddDesktopComponent )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Type,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Type,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Left,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Top,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Width,
@@ -3620,28 +3256,21 @@ EXTERN_C const IID IID_IShellUIHelper2;
         DECLSPEC_XFGVIRT(IShellUIHelper, IsSubscribed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, NavigateAndFind)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateAndFind )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR strQuery,
-            /* [annotation][in] */ 
-            _In_  VARIANT *varTargetFrame);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR strQuery,
+            /* [in] */ __RPC__in VARIANT *varTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, ImportExportFavorites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ImportExportFavorites )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fImport,
-            /* [annotation][in] */ 
-            _In_  BSTR strImpExpPath);
+            /* [in] */ VARIANT_BOOL fImport,
+            /* [in] */ __RPC__in BSTR strImpExpPath);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteSaveForm)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoCompleteSaveForm )( 
@@ -3651,10 +3280,8 @@ EXTERN_C const IID IID_IShellUIHelper2;
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoScan)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoScan )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strSearch,
-            /* [annotation][in] */ 
-            _In_  BSTR strFailureUrl,
+            /* [in] */ __RPC__in BSTR strSearch,
+            /* [in] */ __RPC__in BSTR strFailureUrl,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteAttach)
@@ -3665,18 +3292,14 @@ EXTERN_C const IID IID_IShellUIHelper2;
         DECLSPEC_XFGVIRT(IShellUIHelper, ShowBrowserUI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowBrowserUI )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarIn,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarOut);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in VARIANT *pvarIn,
+            /* [retval][out] */ __RPC__out VARIANT *pvarOut);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, AddSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddSearchProvider )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceShown )( 
@@ -3689,30 +3312,24 @@ EXTERN_C const IID IID_IShellUIHelper2;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeSettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeSettings )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSQM,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPhishing,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLocale);
+            /* [in] */ VARIANT_BOOL fSQM,
+            /* [in] */ VARIANT_BOOL fPhishing,
+            /* [in] */ __RPC__in BSTR bstrLocale);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SqmEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SqmEnabled )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, PhishingEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PhishingEnabled )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, BrandImageUri)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BrandImageUri )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUri);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUri);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SkipTabsWelcome)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SkipTabsWelcome )( 
@@ -3725,46 +3342,38 @@ EXTERN_C const IID IID_IShellUIHelper2;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeClearType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeClearType )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSet);
+            /* [in] */ VARIANT_BOOL fSet);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchProviderInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchProviderInstalled )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchMigrated)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchMigrated )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfMigrated);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMigrated);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, DefaultSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DefaultSearchProvider )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceRequiredSettingsComplete)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceRequiredSettingsComplete )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fComplete);
+            /* [in] */ VARIANT_BOOL fComplete);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceHasShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceHasShown )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfShown);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfShown);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SearchGuideUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SearchGuideUrl )( 
             __RPC__in IShellUIHelper2 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUrl);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUrl);
         
         END_INTERFACE
     } IShellUIHelper2Vtbl;
@@ -3917,51 +3526,39 @@ EXTERN_C const IID IID_IShellUIHelper3;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddService( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL) = 0;
+            /* [in] */ __RPC__in BSTR URL) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsServiceInstalled( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Verb,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult) = 0;
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Verb,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE InPrivateFilteringEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddToFavoritesBar( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Title,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Title,
             /* [in][optional] */ __RPC__in VARIANT *Type) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE BuildNewTabPage( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetRecentlyClosedVisible( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible) = 0;
+            /* [in] */ VARIANT_BOOL fVisible) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetActivitiesVisible( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible) = 0;
+            /* [in] */ VARIANT_BOOL fVisible) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ContentDiscoveryReset( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsSuggestedSitesEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnableSuggestedSites( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnable) = 0;
+            /* [in] */ VARIANT_BOOL fEnable) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE NavigateToSuggestedSites( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRelativeUrl) = 0;
+            /* [in] */ __RPC__in BSTR bstrRelativeUrl) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ShowTabsHelp( void) = 0;
         
@@ -3979,8 +3576,7 @@ EXTERN_C const IID IID_IShellUIHelper3;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -3995,31 +3591,23 @@ EXTERN_C const IID IID_IShellUIHelper3;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4056,23 +3644,19 @@ EXTERN_C const IID IID_IShellUIHelper3;
         DECLSPEC_XFGVIRT(IShellUIHelper, AddFavorite)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddFavorite )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Title);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddChannel)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddChannel )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddDesktopComponent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddDesktopComponent )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Type,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Type,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Left,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Top,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Width,
@@ -4081,28 +3665,21 @@ EXTERN_C const IID IID_IShellUIHelper3;
         DECLSPEC_XFGVIRT(IShellUIHelper, IsSubscribed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, NavigateAndFind)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateAndFind )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR strQuery,
-            /* [annotation][in] */ 
-            _In_  VARIANT *varTargetFrame);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR strQuery,
+            /* [in] */ __RPC__in VARIANT *varTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, ImportExportFavorites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ImportExportFavorites )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fImport,
-            /* [annotation][in] */ 
-            _In_  BSTR strImpExpPath);
+            /* [in] */ VARIANT_BOOL fImport,
+            /* [in] */ __RPC__in BSTR strImpExpPath);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteSaveForm)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoCompleteSaveForm )( 
@@ -4112,10 +3689,8 @@ EXTERN_C const IID IID_IShellUIHelper3;
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoScan)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoScan )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strSearch,
-            /* [annotation][in] */ 
-            _In_  BSTR strFailureUrl,
+            /* [in] */ __RPC__in BSTR strSearch,
+            /* [in] */ __RPC__in BSTR strFailureUrl,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteAttach)
@@ -4126,18 +3701,14 @@ EXTERN_C const IID IID_IShellUIHelper3;
         DECLSPEC_XFGVIRT(IShellUIHelper, ShowBrowserUI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowBrowserUI )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarIn,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarOut);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in VARIANT *pvarIn,
+            /* [retval][out] */ __RPC__out VARIANT *pvarOut);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, AddSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddSearchProvider )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceShown )( 
@@ -4150,30 +3721,24 @@ EXTERN_C const IID IID_IShellUIHelper3;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeSettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeSettings )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSQM,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPhishing,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLocale);
+            /* [in] */ VARIANT_BOOL fSQM,
+            /* [in] */ VARIANT_BOOL fPhishing,
+            /* [in] */ __RPC__in BSTR bstrLocale);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SqmEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SqmEnabled )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, PhishingEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PhishingEnabled )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, BrandImageUri)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BrandImageUri )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUri);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUri);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SkipTabsWelcome)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SkipTabsWelcome )( 
@@ -4186,76 +3751,61 @@ EXTERN_C const IID IID_IShellUIHelper3;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeClearType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeClearType )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSet);
+            /* [in] */ VARIANT_BOOL fSet);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchProviderInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchProviderInstalled )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchMigrated)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchMigrated )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfMigrated);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMigrated);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, DefaultSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DefaultSearchProvider )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceRequiredSettingsComplete)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceRequiredSettingsComplete )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fComplete);
+            /* [in] */ VARIANT_BOOL fComplete);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceHasShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceHasShown )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfShown);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfShown);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SearchGuideUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SearchGuideUrl )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUrl);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddService)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddService )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsServiceInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsServiceInstalled )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Verb,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Verb,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, InPrivateFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *InPrivateFilteringEnabled )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddToFavoritesBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddToFavoritesBar )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Title,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Title,
             /* [in][optional] */ __RPC__in VARIANT *Type);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, BuildNewTabPage)
@@ -4265,14 +3815,12 @@ EXTERN_C const IID IID_IShellUIHelper3;
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetRecentlyClosedVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetRecentlyClosedVisible )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetActivitiesVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActivitiesVisible )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ContentDiscoveryReset)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ContentDiscoveryReset )( 
@@ -4281,20 +3829,17 @@ EXTERN_C const IID IID_IShellUIHelper3;
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsSuggestedSitesEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSuggestedSitesEnabled )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, EnableSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnableSuggestedSites )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnable);
+            /* [in] */ VARIANT_BOOL fEnable);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, NavigateToSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateToSuggestedSites )( 
             __RPC__in IShellUIHelper3 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRelativeUrl);
+            /* [in] */ __RPC__in BSTR bstrRelativeUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ShowTabsHelp)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowTabsHelp )( 
@@ -4495,30 +4040,22 @@ EXTERN_C const IID IID_IShellUIHelper4;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msIsSiteMode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfSiteMode) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSiteMode) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeShowThumbBar( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeAddThumbBarButton( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconURL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarButtonID) = 0;
+            /* [in] */ __RPC__in BSTR bstrIconURL,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarButtonID) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeUpdateThumbBarButton( 
-            /* [annotation][in] */ 
-            _In_  VARIANT ButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnabled,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible) = 0;
+            /* [in] */ VARIANT ButtonID,
+            /* [in] */ VARIANT_BOOL fEnabled,
+            /* [in] */ VARIANT_BOOL fVisible) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeSetIconOverlay( 
-            /* [annotation][in] */ 
-            _In_  BSTR IconUrl,
+            /* [in] */ __RPC__in BSTR IconUrl,
             /* [in][optional] */ __RPC__in VARIANT *pvarDescription) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeClearIconOverlay( void) = 0;
@@ -4526,16 +4063,12 @@ EXTERN_C const IID IID_IShellUIHelper4;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msAddSiteMode( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeCreateJumpList( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader) = 0;
+            /* [in] */ __RPC__in BSTR bstrHeader) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeAddJumpListItem( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionUri,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUri,
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrActionUri,
+            /* [in] */ __RPC__in BSTR bstrIconUri,
             /* [in][optional] */ __RPC__in VARIANT *pvarWindowType) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeClearJumpList( void) = 0;
@@ -4543,42 +4076,30 @@ EXTERN_C const IID IID_IShellUIHelper4;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeShowJumpList( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeAddButtonStyle( 
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUrl,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarStyleID) = 0;
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ __RPC__in BSTR bstrIconUrl,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarStyleID) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeShowButtonStyle( 
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiStyleID) = 0;
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ VARIANT uiStyleID) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msSiteModeActivate( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msIsSiteModeFirstRun( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPreserveState,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiFirstRun) = 0;
+            /* [in] */ VARIANT_BOOL fPreserveState,
+            /* [retval][out] */ __RPC__out VARIANT *puiFirstRun) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msAddTrackingProtectionList( 
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFilterName) = 0;
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR bstrFilterName) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msTrackingProtectionEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msActiveXFilteringEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled) = 0;
         
     };
     
@@ -4592,8 +4113,7 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -4608,31 +4128,23 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -4669,23 +4181,19 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper, AddFavorite)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddFavorite )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Title);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddChannel)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddChannel )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddDesktopComponent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddDesktopComponent )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Type,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Type,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Left,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Top,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Width,
@@ -4694,28 +4202,21 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper, IsSubscribed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, NavigateAndFind)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateAndFind )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR strQuery,
-            /* [annotation][in] */ 
-            _In_  VARIANT *varTargetFrame);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR strQuery,
+            /* [in] */ __RPC__in VARIANT *varTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, ImportExportFavorites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ImportExportFavorites )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fImport,
-            /* [annotation][in] */ 
-            _In_  BSTR strImpExpPath);
+            /* [in] */ VARIANT_BOOL fImport,
+            /* [in] */ __RPC__in BSTR strImpExpPath);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteSaveForm)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoCompleteSaveForm )( 
@@ -4725,10 +4226,8 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoScan)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoScan )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strSearch,
-            /* [annotation][in] */ 
-            _In_  BSTR strFailureUrl,
+            /* [in] */ __RPC__in BSTR strSearch,
+            /* [in] */ __RPC__in BSTR strFailureUrl,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteAttach)
@@ -4739,18 +4238,14 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper, ShowBrowserUI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowBrowserUI )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarIn,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarOut);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in VARIANT *pvarIn,
+            /* [retval][out] */ __RPC__out VARIANT *pvarOut);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, AddSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddSearchProvider )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceShown )( 
@@ -4763,30 +4258,24 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeSettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeSettings )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSQM,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPhishing,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLocale);
+            /* [in] */ VARIANT_BOOL fSQM,
+            /* [in] */ VARIANT_BOOL fPhishing,
+            /* [in] */ __RPC__in BSTR bstrLocale);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SqmEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SqmEnabled )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, PhishingEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PhishingEnabled )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, BrandImageUri)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BrandImageUri )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUri);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUri);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SkipTabsWelcome)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SkipTabsWelcome )( 
@@ -4799,76 +4288,61 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeClearType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeClearType )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSet);
+            /* [in] */ VARIANT_BOOL fSet);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchProviderInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchProviderInstalled )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchMigrated)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchMigrated )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfMigrated);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMigrated);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, DefaultSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DefaultSearchProvider )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceRequiredSettingsComplete)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceRequiredSettingsComplete )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fComplete);
+            /* [in] */ VARIANT_BOOL fComplete);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceHasShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceHasShown )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfShown);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfShown);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SearchGuideUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SearchGuideUrl )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUrl);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddService)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddService )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsServiceInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsServiceInstalled )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Verb,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Verb,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, InPrivateFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *InPrivateFilteringEnabled )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddToFavoritesBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddToFavoritesBar )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Title,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Title,
             /* [in][optional] */ __RPC__in VARIANT *Type);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, BuildNewTabPage)
@@ -4878,14 +4352,12 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetRecentlyClosedVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetRecentlyClosedVisible )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetActivitiesVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActivitiesVisible )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ContentDiscoveryReset)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ContentDiscoveryReset )( 
@@ -4894,20 +4366,17 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsSuggestedSitesEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSuggestedSitesEnabled )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, EnableSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnableSuggestedSites )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnable);
+            /* [in] */ VARIANT_BOOL fEnable);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, NavigateToSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateToSuggestedSites )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRelativeUrl);
+            /* [in] */ __RPC__in BSTR bstrRelativeUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ShowTabsHelp)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowTabsHelp )( 
@@ -4920,8 +4389,7 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteMode)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteMode )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfSiteMode);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSiteMode);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowThumbBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowThumbBar )( 
@@ -4930,28 +4398,21 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddThumbBarButton )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconURL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarButtonID);
+            /* [in] */ __RPC__in BSTR bstrIconURL,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarButtonID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeUpdateThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeUpdateThumbBarButton )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnabled,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT ButtonID,
+            /* [in] */ VARIANT_BOOL fEnabled,
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeSetIconOverlay)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeSetIconOverlay )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR IconUrl,
+            /* [in] */ __RPC__in BSTR IconUrl,
             /* [in][optional] */ __RPC__in VARIANT *pvarDescription);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearIconOverlay)
@@ -4965,18 +4426,14 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeCreateJumpList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeCreateJumpList )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader);
+            /* [in] */ __RPC__in BSTR bstrHeader);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddJumpListItem)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddJumpListItem )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionUri,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUri,
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrActionUri,
+            /* [in] */ __RPC__in BSTR bstrIconUri,
             /* [in][optional] */ __RPC__in VARIANT *pvarWindowType);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearJumpList)
@@ -4990,22 +4447,16 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddButtonStyle )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUrl,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ __RPC__in BSTR bstrIconUrl,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowButtonStyle )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ VARIANT uiStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeActivate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeActivate )( 
@@ -5014,30 +4465,24 @@ EXTERN_C const IID IID_IShellUIHelper4;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteModeFirstRun)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteModeFirstRun )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPreserveState,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiFirstRun);
+            /* [in] */ VARIANT_BOOL fPreserveState,
+            /* [retval][out] */ __RPC__out VARIANT *puiFirstRun);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msAddTrackingProtectionList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msAddTrackingProtectionList )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFilterName);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR bstrFilterName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msTrackingProtectionEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msTrackingProtectionEnabled )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msActiveXFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msActiveXFilteringEnabled )( 
             __RPC__in IShellUIHelper4 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         END_INTERFACE
     } IShellUIHelper4Vtbl;
@@ -5285,10 +4730,8 @@ EXTERN_C const IID IID_IShellUIHelper5;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msProvisionNetworks( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrProvisioningXml,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiResult) = 0;
+            /* [in] */ __RPC__in BSTR bstrProvisioningXml,
+            /* [retval][out] */ __RPC__out VARIANT *puiResult) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msReportSafeUrl( void) = 0;
         
@@ -5301,8 +4744,7 @@ EXTERN_C const IID IID_IShellUIHelper5;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msLaunchNetworkClientHelp( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msChangeDefaultBrowser( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange) = 0;
+            /* [in] */ VARIANT_BOOL fChange) = 0;
         
     };
     
@@ -5316,8 +4758,7 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -5332,31 +4773,23 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -5393,23 +4826,19 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper, AddFavorite)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddFavorite )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Title);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddChannel)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddChannel )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddDesktopComponent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddDesktopComponent )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Type,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Type,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Left,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Top,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Width,
@@ -5418,28 +4847,21 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper, IsSubscribed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, NavigateAndFind)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateAndFind )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR strQuery,
-            /* [annotation][in] */ 
-            _In_  VARIANT *varTargetFrame);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR strQuery,
+            /* [in] */ __RPC__in VARIANT *varTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, ImportExportFavorites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ImportExportFavorites )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fImport,
-            /* [annotation][in] */ 
-            _In_  BSTR strImpExpPath);
+            /* [in] */ VARIANT_BOOL fImport,
+            /* [in] */ __RPC__in BSTR strImpExpPath);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteSaveForm)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoCompleteSaveForm )( 
@@ -5449,10 +4871,8 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoScan)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoScan )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strSearch,
-            /* [annotation][in] */ 
-            _In_  BSTR strFailureUrl,
+            /* [in] */ __RPC__in BSTR strSearch,
+            /* [in] */ __RPC__in BSTR strFailureUrl,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteAttach)
@@ -5463,18 +4883,14 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper, ShowBrowserUI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowBrowserUI )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarIn,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarOut);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in VARIANT *pvarIn,
+            /* [retval][out] */ __RPC__out VARIANT *pvarOut);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, AddSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddSearchProvider )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceShown )( 
@@ -5487,30 +4903,24 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeSettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeSettings )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSQM,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPhishing,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLocale);
+            /* [in] */ VARIANT_BOOL fSQM,
+            /* [in] */ VARIANT_BOOL fPhishing,
+            /* [in] */ __RPC__in BSTR bstrLocale);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SqmEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SqmEnabled )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, PhishingEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PhishingEnabled )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, BrandImageUri)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BrandImageUri )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUri);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUri);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SkipTabsWelcome)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SkipTabsWelcome )( 
@@ -5523,76 +4933,61 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeClearType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeClearType )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSet);
+            /* [in] */ VARIANT_BOOL fSet);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchProviderInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchProviderInstalled )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchMigrated)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchMigrated )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfMigrated);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMigrated);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, DefaultSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DefaultSearchProvider )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceRequiredSettingsComplete)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceRequiredSettingsComplete )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fComplete);
+            /* [in] */ VARIANT_BOOL fComplete);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceHasShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceHasShown )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfShown);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfShown);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SearchGuideUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SearchGuideUrl )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUrl);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddService)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddService )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsServiceInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsServiceInstalled )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Verb,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Verb,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, InPrivateFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *InPrivateFilteringEnabled )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddToFavoritesBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddToFavoritesBar )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Title,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Title,
             /* [in][optional] */ __RPC__in VARIANT *Type);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, BuildNewTabPage)
@@ -5602,14 +4997,12 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetRecentlyClosedVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetRecentlyClosedVisible )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetActivitiesVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActivitiesVisible )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ContentDiscoveryReset)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ContentDiscoveryReset )( 
@@ -5618,20 +5011,17 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsSuggestedSitesEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSuggestedSitesEnabled )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, EnableSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnableSuggestedSites )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnable);
+            /* [in] */ VARIANT_BOOL fEnable);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, NavigateToSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateToSuggestedSites )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRelativeUrl);
+            /* [in] */ __RPC__in BSTR bstrRelativeUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ShowTabsHelp)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowTabsHelp )( 
@@ -5644,8 +5034,7 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteMode)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteMode )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfSiteMode);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSiteMode);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowThumbBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowThumbBar )( 
@@ -5654,28 +5043,21 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddThumbBarButton )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconURL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarButtonID);
+            /* [in] */ __RPC__in BSTR bstrIconURL,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarButtonID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeUpdateThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeUpdateThumbBarButton )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnabled,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT ButtonID,
+            /* [in] */ VARIANT_BOOL fEnabled,
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeSetIconOverlay)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeSetIconOverlay )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR IconUrl,
+            /* [in] */ __RPC__in BSTR IconUrl,
             /* [in][optional] */ __RPC__in VARIANT *pvarDescription);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearIconOverlay)
@@ -5689,18 +5071,14 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeCreateJumpList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeCreateJumpList )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader);
+            /* [in] */ __RPC__in BSTR bstrHeader);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddJumpListItem)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddJumpListItem )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionUri,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUri,
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrActionUri,
+            /* [in] */ __RPC__in BSTR bstrIconUri,
             /* [in][optional] */ __RPC__in VARIANT *pvarWindowType);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearJumpList)
@@ -5714,22 +5092,16 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddButtonStyle )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUrl,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ __RPC__in BSTR bstrIconUrl,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowButtonStyle )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ VARIANT uiStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeActivate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeActivate )( 
@@ -5738,38 +5110,30 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteModeFirstRun)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteModeFirstRun )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPreserveState,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiFirstRun);
+            /* [in] */ VARIANT_BOOL fPreserveState,
+            /* [retval][out] */ __RPC__out VARIANT *puiFirstRun);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msAddTrackingProtectionList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msAddTrackingProtectionList )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFilterName);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR bstrFilterName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msTrackingProtectionEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msTrackingProtectionEnabled )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msActiveXFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msActiveXFilteringEnabled )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper5, msProvisionNetworks)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msProvisionNetworks )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrProvisioningXml,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiResult);
+            /* [in] */ __RPC__in BSTR bstrProvisioningXml,
+            /* [retval][out] */ __RPC__out VARIANT *puiResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper5, msReportSafeUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msReportSafeUrl )( 
@@ -5794,8 +5158,7 @@ EXTERN_C const IID IID_IShellUIHelper5;
         DECLSPEC_XFGVIRT(IShellUIHelper5, msChangeDefaultBrowser)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msChangeDefaultBrowser )( 
             __RPC__in IShellUIHelper5 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         END_INTERFACE
     } IShellUIHelper5Vtbl;
@@ -6067,56 +5430,44 @@ EXTERN_C const IID IID_IShellUIHelper6;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msStopPeriodicTileUpdate( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msStartPeriodicTileUpdate( 
-            /* [annotation][in] */ 
-            _In_  VARIANT pollingUris,
+            /* [in] */ VARIANT pollingUris,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msStartPeriodicTileUpdateBatch( 
-            /* [annotation][in] */ 
-            _In_  VARIANT pollingUris,
+            /* [in] */ VARIANT pollingUris,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msClearTile( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msEnableTileNotificationQueue( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange) = 0;
+            /* [in] */ VARIANT_BOOL fChange) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msPinnedSiteState( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarSiteState) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvarSiteState) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msEnableTileNotificationQueueForSquare150x150( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange) = 0;
+            /* [in] */ VARIANT_BOOL fChange) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msEnableTileNotificationQueueForWide310x150( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange) = 0;
+            /* [in] */ VARIANT_BOOL fChange) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msEnableTileNotificationQueueForSquare310x310( 
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange) = 0;
+            /* [in] */ VARIANT_BOOL fChange) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msScheduledTileNotification( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationXml,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationTag,
+            /* [in] */ __RPC__in BSTR bstrNotificationXml,
+            /* [in] */ __RPC__in BSTR bstrNotificationId,
+            /* [in] */ __RPC__in BSTR bstrNotificationTag,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT expirationTime) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msRemoveScheduledTileNotification( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationId) = 0;
+            /* [in] */ __RPC__in BSTR bstrNotificationId) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE msStartPeriodicBadgeUpdate( 
-            /* [annotation][in] */ 
-            _In_  BSTR pollingUri,
+            /* [in] */ __RPC__in BSTR pollingUri,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence) = 0;
         
@@ -6136,8 +5487,7 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -6152,31 +5502,23 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -6213,23 +5555,19 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper, AddFavorite)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddFavorite )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Title);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddChannel)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddChannel )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddDesktopComponent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddDesktopComponent )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Type,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Type,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Left,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Top,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Width,
@@ -6238,28 +5576,21 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper, IsSubscribed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, NavigateAndFind)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateAndFind )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR strQuery,
-            /* [annotation][in] */ 
-            _In_  VARIANT *varTargetFrame);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR strQuery,
+            /* [in] */ __RPC__in VARIANT *varTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, ImportExportFavorites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ImportExportFavorites )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fImport,
-            /* [annotation][in] */ 
-            _In_  BSTR strImpExpPath);
+            /* [in] */ VARIANT_BOOL fImport,
+            /* [in] */ __RPC__in BSTR strImpExpPath);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteSaveForm)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoCompleteSaveForm )( 
@@ -6269,10 +5600,8 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoScan)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoScan )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strSearch,
-            /* [annotation][in] */ 
-            _In_  BSTR strFailureUrl,
+            /* [in] */ __RPC__in BSTR strSearch,
+            /* [in] */ __RPC__in BSTR strFailureUrl,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteAttach)
@@ -6283,18 +5612,14 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper, ShowBrowserUI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowBrowserUI )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarIn,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarOut);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in VARIANT *pvarIn,
+            /* [retval][out] */ __RPC__out VARIANT *pvarOut);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, AddSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddSearchProvider )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceShown )( 
@@ -6307,30 +5632,24 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeSettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeSettings )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSQM,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPhishing,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLocale);
+            /* [in] */ VARIANT_BOOL fSQM,
+            /* [in] */ VARIANT_BOOL fPhishing,
+            /* [in] */ __RPC__in BSTR bstrLocale);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SqmEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SqmEnabled )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, PhishingEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PhishingEnabled )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, BrandImageUri)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BrandImageUri )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUri);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUri);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SkipTabsWelcome)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SkipTabsWelcome )( 
@@ -6343,76 +5662,61 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeClearType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeClearType )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSet);
+            /* [in] */ VARIANT_BOOL fSet);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchProviderInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchProviderInstalled )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchMigrated)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchMigrated )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfMigrated);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMigrated);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, DefaultSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DefaultSearchProvider )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceRequiredSettingsComplete)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceRequiredSettingsComplete )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fComplete);
+            /* [in] */ VARIANT_BOOL fComplete);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceHasShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceHasShown )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfShown);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfShown);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SearchGuideUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SearchGuideUrl )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUrl);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddService)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddService )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsServiceInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsServiceInstalled )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Verb,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Verb,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, InPrivateFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *InPrivateFilteringEnabled )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddToFavoritesBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddToFavoritesBar )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Title,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Title,
             /* [in][optional] */ __RPC__in VARIANT *Type);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, BuildNewTabPage)
@@ -6422,14 +5726,12 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetRecentlyClosedVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetRecentlyClosedVisible )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetActivitiesVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActivitiesVisible )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ContentDiscoveryReset)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ContentDiscoveryReset )( 
@@ -6438,20 +5740,17 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsSuggestedSitesEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSuggestedSitesEnabled )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, EnableSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnableSuggestedSites )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnable);
+            /* [in] */ VARIANT_BOOL fEnable);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, NavigateToSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateToSuggestedSites )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRelativeUrl);
+            /* [in] */ __RPC__in BSTR bstrRelativeUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ShowTabsHelp)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowTabsHelp )( 
@@ -6464,8 +5763,7 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteMode)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteMode )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfSiteMode);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSiteMode);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowThumbBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowThumbBar )( 
@@ -6474,28 +5772,21 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddThumbBarButton )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconURL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarButtonID);
+            /* [in] */ __RPC__in BSTR bstrIconURL,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarButtonID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeUpdateThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeUpdateThumbBarButton )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnabled,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT ButtonID,
+            /* [in] */ VARIANT_BOOL fEnabled,
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeSetIconOverlay)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeSetIconOverlay )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR IconUrl,
+            /* [in] */ __RPC__in BSTR IconUrl,
             /* [in][optional] */ __RPC__in VARIANT *pvarDescription);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearIconOverlay)
@@ -6509,18 +5800,14 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeCreateJumpList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeCreateJumpList )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader);
+            /* [in] */ __RPC__in BSTR bstrHeader);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddJumpListItem)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddJumpListItem )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionUri,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUri,
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrActionUri,
+            /* [in] */ __RPC__in BSTR bstrIconUri,
             /* [in][optional] */ __RPC__in VARIANT *pvarWindowType);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearJumpList)
@@ -6534,22 +5821,16 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddButtonStyle )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUrl,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ __RPC__in BSTR bstrIconUrl,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowButtonStyle )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ VARIANT uiStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeActivate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeActivate )( 
@@ -6558,38 +5839,30 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteModeFirstRun)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteModeFirstRun )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPreserveState,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiFirstRun);
+            /* [in] */ VARIANT_BOOL fPreserveState,
+            /* [retval][out] */ __RPC__out VARIANT *puiFirstRun);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msAddTrackingProtectionList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msAddTrackingProtectionList )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFilterName);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR bstrFilterName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msTrackingProtectionEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msTrackingProtectionEnabled )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msActiveXFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msActiveXFilteringEnabled )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper5, msProvisionNetworks)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msProvisionNetworks )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrProvisioningXml,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiResult);
+            /* [in] */ __RPC__in BSTR bstrProvisioningXml,
+            /* [retval][out] */ __RPC__out VARIANT *puiResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper5, msReportSafeUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msReportSafeUrl )( 
@@ -6614,8 +5887,7 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper5, msChangeDefaultBrowser)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msChangeDefaultBrowser )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStopPeriodicTileUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStopPeriodicTileUpdate )( 
@@ -6624,16 +5896,14 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicTileUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicTileUpdate )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT pollingUris,
+            /* [in] */ VARIANT pollingUris,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicTileUpdateBatch)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicTileUpdateBatch )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT pollingUris,
+            /* [in] */ VARIANT pollingUris,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
@@ -6644,56 +5914,46 @@ EXTERN_C const IID IID_IShellUIHelper6;
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueue )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msPinnedSiteState)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msPinnedSiteState )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarSiteState);
+            /* [retval][out] */ __RPC__out VARIANT *pvarSiteState);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForSquare150x150)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForSquare150x150 )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForWide310x150)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForWide310x150 )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForSquare310x310)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForSquare310x310 )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msScheduledTileNotification)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msScheduledTileNotification )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationXml,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationTag,
+            /* [in] */ __RPC__in BSTR bstrNotificationXml,
+            /* [in] */ __RPC__in BSTR bstrNotificationId,
+            /* [in] */ __RPC__in BSTR bstrNotificationTag,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT expirationTime);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msRemoveScheduledTileNotification)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msRemoveScheduledTileNotification )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationId);
+            /* [in] */ __RPC__in BSTR bstrNotificationId);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicBadgeUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicBadgeUpdate )( 
             __RPC__in IShellUIHelper6 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR pollingUri,
+            /* [in] */ __RPC__in BSTR pollingUri,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
@@ -7016,54 +6276,38 @@ EXTERN_C const IID IID_IShellUIHelper7;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetExperimentalFlag( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFlagString,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vfFlag) = 0;
+            /* [in] */ __RPC__in BSTR bstrFlagString,
+            /* [in] */ VARIANT_BOOL vfFlag) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetExperimentalFlag( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFlagString,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *vfFlag) = 0;
+            /* [in] */ __RPC__in BSTR bstrFlagString,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *vfFlag) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetExperimentalValue( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValueString,
-            /* [annotation][in] */ 
-            _In_  DWORD dwValue) = 0;
+            /* [in] */ __RPC__in BSTR bstrValueString,
+            /* [in] */ DWORD dwValue) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetExperimentalValue( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValueString,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwValue) = 0;
+            /* [in] */ __RPC__in BSTR bstrValueString,
+            /* [retval][out] */ __RPC__out DWORD *pdwValue) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ResetAllExperimentalFlagsAndValues( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetNeedIEAutoLaunchFlag( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *flag) = 0;
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *flag) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetNeedIEAutoLaunchFlag( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL flag) = 0;
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [in] */ VARIANT_BOOL flag) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE HasNeedIEAutoLaunchFlag( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *exists) = 0;
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *exists) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LaunchIE( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL automated) = 0;
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [in] */ VARIANT_BOOL automated) = 0;
         
     };
     
@@ -7077,8 +6321,7 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -7093,31 +6336,23 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -7154,23 +6389,19 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper, AddFavorite)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddFavorite )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Title);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddChannel)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddChannel )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddDesktopComponent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddDesktopComponent )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Type,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Type,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Left,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Top,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Width,
@@ -7179,28 +6410,21 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper, IsSubscribed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, NavigateAndFind)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateAndFind )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR strQuery,
-            /* [annotation][in] */ 
-            _In_  VARIANT *varTargetFrame);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR strQuery,
+            /* [in] */ __RPC__in VARIANT *varTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, ImportExportFavorites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ImportExportFavorites )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fImport,
-            /* [annotation][in] */ 
-            _In_  BSTR strImpExpPath);
+            /* [in] */ VARIANT_BOOL fImport,
+            /* [in] */ __RPC__in BSTR strImpExpPath);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteSaveForm)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoCompleteSaveForm )( 
@@ -7210,10 +6434,8 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoScan)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoScan )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strSearch,
-            /* [annotation][in] */ 
-            _In_  BSTR strFailureUrl,
+            /* [in] */ __RPC__in BSTR strSearch,
+            /* [in] */ __RPC__in BSTR strFailureUrl,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteAttach)
@@ -7224,18 +6446,14 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper, ShowBrowserUI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowBrowserUI )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarIn,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarOut);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in VARIANT *pvarIn,
+            /* [retval][out] */ __RPC__out VARIANT *pvarOut);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, AddSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddSearchProvider )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceShown )( 
@@ -7248,30 +6466,24 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeSettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeSettings )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSQM,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPhishing,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLocale);
+            /* [in] */ VARIANT_BOOL fSQM,
+            /* [in] */ VARIANT_BOOL fPhishing,
+            /* [in] */ __RPC__in BSTR bstrLocale);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SqmEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SqmEnabled )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, PhishingEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PhishingEnabled )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, BrandImageUri)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BrandImageUri )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUri);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUri);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SkipTabsWelcome)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SkipTabsWelcome )( 
@@ -7284,76 +6496,61 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeClearType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeClearType )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSet);
+            /* [in] */ VARIANT_BOOL fSet);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchProviderInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchProviderInstalled )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchMigrated)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchMigrated )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfMigrated);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMigrated);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, DefaultSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DefaultSearchProvider )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceRequiredSettingsComplete)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceRequiredSettingsComplete )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fComplete);
+            /* [in] */ VARIANT_BOOL fComplete);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceHasShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceHasShown )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfShown);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfShown);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SearchGuideUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SearchGuideUrl )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUrl);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddService)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddService )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsServiceInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsServiceInstalled )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Verb,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Verb,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, InPrivateFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *InPrivateFilteringEnabled )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddToFavoritesBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddToFavoritesBar )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Title,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Title,
             /* [in][optional] */ __RPC__in VARIANT *Type);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, BuildNewTabPage)
@@ -7363,14 +6560,12 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetRecentlyClosedVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetRecentlyClosedVisible )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetActivitiesVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActivitiesVisible )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ContentDiscoveryReset)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ContentDiscoveryReset )( 
@@ -7379,20 +6574,17 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsSuggestedSitesEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSuggestedSitesEnabled )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, EnableSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnableSuggestedSites )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnable);
+            /* [in] */ VARIANT_BOOL fEnable);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, NavigateToSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateToSuggestedSites )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRelativeUrl);
+            /* [in] */ __RPC__in BSTR bstrRelativeUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ShowTabsHelp)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowTabsHelp )( 
@@ -7405,8 +6597,7 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteMode)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteMode )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfSiteMode);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSiteMode);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowThumbBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowThumbBar )( 
@@ -7415,28 +6606,21 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddThumbBarButton )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconURL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarButtonID);
+            /* [in] */ __RPC__in BSTR bstrIconURL,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarButtonID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeUpdateThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeUpdateThumbBarButton )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnabled,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT ButtonID,
+            /* [in] */ VARIANT_BOOL fEnabled,
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeSetIconOverlay)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeSetIconOverlay )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR IconUrl,
+            /* [in] */ __RPC__in BSTR IconUrl,
             /* [in][optional] */ __RPC__in VARIANT *pvarDescription);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearIconOverlay)
@@ -7450,18 +6634,14 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeCreateJumpList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeCreateJumpList )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader);
+            /* [in] */ __RPC__in BSTR bstrHeader);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddJumpListItem)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddJumpListItem )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionUri,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUri,
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrActionUri,
+            /* [in] */ __RPC__in BSTR bstrIconUri,
             /* [in][optional] */ __RPC__in VARIANT *pvarWindowType);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearJumpList)
@@ -7475,22 +6655,16 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddButtonStyle )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUrl,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ __RPC__in BSTR bstrIconUrl,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowButtonStyle )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ VARIANT uiStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeActivate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeActivate )( 
@@ -7499,38 +6673,30 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteModeFirstRun)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteModeFirstRun )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPreserveState,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiFirstRun);
+            /* [in] */ VARIANT_BOOL fPreserveState,
+            /* [retval][out] */ __RPC__out VARIANT *puiFirstRun);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msAddTrackingProtectionList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msAddTrackingProtectionList )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFilterName);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR bstrFilterName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msTrackingProtectionEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msTrackingProtectionEnabled )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msActiveXFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msActiveXFilteringEnabled )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper5, msProvisionNetworks)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msProvisionNetworks )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrProvisioningXml,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiResult);
+            /* [in] */ __RPC__in BSTR bstrProvisioningXml,
+            /* [retval][out] */ __RPC__out VARIANT *puiResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper5, msReportSafeUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msReportSafeUrl )( 
@@ -7555,8 +6721,7 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper5, msChangeDefaultBrowser)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msChangeDefaultBrowser )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStopPeriodicTileUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStopPeriodicTileUpdate )( 
@@ -7565,16 +6730,14 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicTileUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicTileUpdate )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT pollingUris,
+            /* [in] */ VARIANT pollingUris,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicTileUpdateBatch)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicTileUpdateBatch )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT pollingUris,
+            /* [in] */ VARIANT pollingUris,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
@@ -7585,56 +6748,46 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueue )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msPinnedSiteState)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msPinnedSiteState )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarSiteState);
+            /* [retval][out] */ __RPC__out VARIANT *pvarSiteState);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForSquare150x150)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForSquare150x150 )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForWide310x150)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForWide310x150 )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForSquare310x310)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForSquare310x310 )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msScheduledTileNotification)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msScheduledTileNotification )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationXml,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationTag,
+            /* [in] */ __RPC__in BSTR bstrNotificationXml,
+            /* [in] */ __RPC__in BSTR bstrNotificationId,
+            /* [in] */ __RPC__in BSTR bstrNotificationTag,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT expirationTime);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msRemoveScheduledTileNotification)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msRemoveScheduledTileNotification )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationId);
+            /* [in] */ __RPC__in BSTR bstrNotificationId);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicBadgeUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicBadgeUpdate )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR pollingUri,
+            /* [in] */ __RPC__in BSTR pollingUri,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
@@ -7649,34 +6802,26 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper7, SetExperimentalFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetExperimentalFlag )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFlagString,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vfFlag);
+            /* [in] */ __RPC__in BSTR bstrFlagString,
+            /* [in] */ VARIANT_BOOL vfFlag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, GetExperimentalFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetExperimentalFlag )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFlagString,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *vfFlag);
+            /* [in] */ __RPC__in BSTR bstrFlagString,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *vfFlag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, SetExperimentalValue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetExperimentalValue )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValueString,
-            /* [annotation][in] */ 
-            _In_  DWORD dwValue);
+            /* [in] */ __RPC__in BSTR bstrValueString,
+            /* [in] */ DWORD dwValue);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, GetExperimentalValue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetExperimentalValue )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValueString,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwValue);
+            /* [in] */ __RPC__in BSTR bstrValueString,
+            /* [retval][out] */ __RPC__out DWORD *pdwValue);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, ResetAllExperimentalFlagsAndValues)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ResetAllExperimentalFlagsAndValues )( 
@@ -7685,34 +6830,26 @@ EXTERN_C const IID IID_IShellUIHelper7;
         DECLSPEC_XFGVIRT(IShellUIHelper7, GetNeedIEAutoLaunchFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetNeedIEAutoLaunchFlag )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *flag);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *flag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, SetNeedIEAutoLaunchFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetNeedIEAutoLaunchFlag )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL flag);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [in] */ VARIANT_BOOL flag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, HasNeedIEAutoLaunchFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *HasNeedIEAutoLaunchFlag )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *exists);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *exists);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, LaunchIE)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LaunchIE )( 
             __RPC__in IShellUIHelper7 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL automated);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [in] */ VARIANT_BOOL automated);
         
         END_INTERFACE
     } IShellUIHelper7Vtbl;
@@ -8053,28 +7190,23 @@ EXTERN_C const IID IID_IShellUIHelper8;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCVListData( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCVListLocalData( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetEMIEListData( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetEMIEListLocalData( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE OpenFavoritesPane( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE OpenFavoritesSettings( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LaunchInHVSI( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl) = 0;
+            /* [in] */ __RPC__in BSTR bstrUrl) = 0;
         
     };
     
@@ -8088,8 +7220,7 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -8104,31 +7235,23 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -8165,23 +7288,19 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper, AddFavorite)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddFavorite )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Title);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddChannel)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddChannel )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddDesktopComponent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddDesktopComponent )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Type,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Type,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Left,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Top,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Width,
@@ -8190,28 +7309,21 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper, IsSubscribed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, NavigateAndFind)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateAndFind )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR strQuery,
-            /* [annotation][in] */ 
-            _In_  VARIANT *varTargetFrame);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR strQuery,
+            /* [in] */ __RPC__in VARIANT *varTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, ImportExportFavorites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ImportExportFavorites )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fImport,
-            /* [annotation][in] */ 
-            _In_  BSTR strImpExpPath);
+            /* [in] */ VARIANT_BOOL fImport,
+            /* [in] */ __RPC__in BSTR strImpExpPath);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteSaveForm)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoCompleteSaveForm )( 
@@ -8221,10 +7333,8 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoScan)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoScan )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strSearch,
-            /* [annotation][in] */ 
-            _In_  BSTR strFailureUrl,
+            /* [in] */ __RPC__in BSTR strSearch,
+            /* [in] */ __RPC__in BSTR strFailureUrl,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteAttach)
@@ -8235,18 +7345,14 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper, ShowBrowserUI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowBrowserUI )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarIn,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarOut);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in VARIANT *pvarIn,
+            /* [retval][out] */ __RPC__out VARIANT *pvarOut);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, AddSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddSearchProvider )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceShown )( 
@@ -8259,30 +7365,24 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeSettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeSettings )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSQM,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPhishing,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLocale);
+            /* [in] */ VARIANT_BOOL fSQM,
+            /* [in] */ VARIANT_BOOL fPhishing,
+            /* [in] */ __RPC__in BSTR bstrLocale);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SqmEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SqmEnabled )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, PhishingEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PhishingEnabled )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, BrandImageUri)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BrandImageUri )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUri);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUri);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SkipTabsWelcome)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SkipTabsWelcome )( 
@@ -8295,76 +7395,61 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeClearType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeClearType )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSet);
+            /* [in] */ VARIANT_BOOL fSet);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchProviderInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchProviderInstalled )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchMigrated)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchMigrated )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfMigrated);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMigrated);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, DefaultSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DefaultSearchProvider )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceRequiredSettingsComplete)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceRequiredSettingsComplete )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fComplete);
+            /* [in] */ VARIANT_BOOL fComplete);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceHasShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceHasShown )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfShown);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfShown);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SearchGuideUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SearchGuideUrl )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUrl);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddService)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddService )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsServiceInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsServiceInstalled )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Verb,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Verb,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, InPrivateFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *InPrivateFilteringEnabled )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddToFavoritesBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddToFavoritesBar )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Title,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Title,
             /* [in][optional] */ __RPC__in VARIANT *Type);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, BuildNewTabPage)
@@ -8374,14 +7459,12 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetRecentlyClosedVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetRecentlyClosedVisible )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetActivitiesVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActivitiesVisible )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ContentDiscoveryReset)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ContentDiscoveryReset )( 
@@ -8390,20 +7473,17 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsSuggestedSitesEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSuggestedSitesEnabled )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, EnableSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnableSuggestedSites )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnable);
+            /* [in] */ VARIANT_BOOL fEnable);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, NavigateToSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateToSuggestedSites )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRelativeUrl);
+            /* [in] */ __RPC__in BSTR bstrRelativeUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ShowTabsHelp)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowTabsHelp )( 
@@ -8416,8 +7496,7 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteMode)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteMode )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfSiteMode);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSiteMode);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowThumbBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowThumbBar )( 
@@ -8426,28 +7505,21 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddThumbBarButton )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconURL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarButtonID);
+            /* [in] */ __RPC__in BSTR bstrIconURL,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarButtonID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeUpdateThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeUpdateThumbBarButton )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnabled,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT ButtonID,
+            /* [in] */ VARIANT_BOOL fEnabled,
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeSetIconOverlay)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeSetIconOverlay )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR IconUrl,
+            /* [in] */ __RPC__in BSTR IconUrl,
             /* [in][optional] */ __RPC__in VARIANT *pvarDescription);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearIconOverlay)
@@ -8461,18 +7533,14 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeCreateJumpList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeCreateJumpList )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader);
+            /* [in] */ __RPC__in BSTR bstrHeader);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddJumpListItem)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddJumpListItem )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionUri,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUri,
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrActionUri,
+            /* [in] */ __RPC__in BSTR bstrIconUri,
             /* [in][optional] */ __RPC__in VARIANT *pvarWindowType);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearJumpList)
@@ -8486,22 +7554,16 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddButtonStyle )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUrl,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ __RPC__in BSTR bstrIconUrl,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowButtonStyle )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ VARIANT uiStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeActivate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeActivate )( 
@@ -8510,38 +7572,30 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteModeFirstRun)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteModeFirstRun )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPreserveState,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiFirstRun);
+            /* [in] */ VARIANT_BOOL fPreserveState,
+            /* [retval][out] */ __RPC__out VARIANT *puiFirstRun);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msAddTrackingProtectionList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msAddTrackingProtectionList )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFilterName);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR bstrFilterName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msTrackingProtectionEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msTrackingProtectionEnabled )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msActiveXFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msActiveXFilteringEnabled )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper5, msProvisionNetworks)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msProvisionNetworks )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrProvisioningXml,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiResult);
+            /* [in] */ __RPC__in BSTR bstrProvisioningXml,
+            /* [retval][out] */ __RPC__out VARIANT *puiResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper5, msReportSafeUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msReportSafeUrl )( 
@@ -8566,8 +7620,7 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper5, msChangeDefaultBrowser)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msChangeDefaultBrowser )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStopPeriodicTileUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStopPeriodicTileUpdate )( 
@@ -8576,16 +7629,14 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicTileUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicTileUpdate )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT pollingUris,
+            /* [in] */ VARIANT pollingUris,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicTileUpdateBatch)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicTileUpdateBatch )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT pollingUris,
+            /* [in] */ VARIANT pollingUris,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
@@ -8596,56 +7647,46 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueue )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msPinnedSiteState)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msPinnedSiteState )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarSiteState);
+            /* [retval][out] */ __RPC__out VARIANT *pvarSiteState);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForSquare150x150)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForSquare150x150 )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForWide310x150)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForWide310x150 )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForSquare310x310)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForSquare310x310 )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msScheduledTileNotification)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msScheduledTileNotification )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationXml,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationTag,
+            /* [in] */ __RPC__in BSTR bstrNotificationXml,
+            /* [in] */ __RPC__in BSTR bstrNotificationId,
+            /* [in] */ __RPC__in BSTR bstrNotificationTag,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT expirationTime);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msRemoveScheduledTileNotification)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msRemoveScheduledTileNotification )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationId);
+            /* [in] */ __RPC__in BSTR bstrNotificationId);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicBadgeUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicBadgeUpdate )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR pollingUri,
+            /* [in] */ __RPC__in BSTR pollingUri,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
@@ -8660,34 +7701,26 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper7, SetExperimentalFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetExperimentalFlag )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFlagString,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vfFlag);
+            /* [in] */ __RPC__in BSTR bstrFlagString,
+            /* [in] */ VARIANT_BOOL vfFlag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, GetExperimentalFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetExperimentalFlag )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFlagString,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *vfFlag);
+            /* [in] */ __RPC__in BSTR bstrFlagString,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *vfFlag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, SetExperimentalValue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetExperimentalValue )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValueString,
-            /* [annotation][in] */ 
-            _In_  DWORD dwValue);
+            /* [in] */ __RPC__in BSTR bstrValueString,
+            /* [in] */ DWORD dwValue);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, GetExperimentalValue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetExperimentalValue )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValueString,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwValue);
+            /* [in] */ __RPC__in BSTR bstrValueString,
+            /* [retval][out] */ __RPC__out DWORD *pdwValue);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, ResetAllExperimentalFlagsAndValues)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ResetAllExperimentalFlagsAndValues )( 
@@ -8696,58 +7729,46 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper7, GetNeedIEAutoLaunchFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetNeedIEAutoLaunchFlag )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *flag);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *flag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, SetNeedIEAutoLaunchFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetNeedIEAutoLaunchFlag )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL flag);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [in] */ VARIANT_BOOL flag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, HasNeedIEAutoLaunchFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *HasNeedIEAutoLaunchFlag )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *exists);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *exists);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, LaunchIE)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LaunchIE )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL automated);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [in] */ VARIANT_BOOL automated);
         
         DECLSPEC_XFGVIRT(IShellUIHelper8, GetCVListData)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCVListData )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper8, GetCVListLocalData)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCVListLocalData )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper8, GetEMIEListData)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetEMIEListData )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper8, GetEMIEListLocalData)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetEMIEListLocalData )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper8, OpenFavoritesPane)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *OpenFavoritesPane )( 
@@ -8760,8 +7781,7 @@ EXTERN_C const IID IID_IShellUIHelper8;
         DECLSPEC_XFGVIRT(IShellUIHelper8, LaunchInHVSI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LaunchInHVSI )( 
             __RPC__in IShellUIHelper8 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl);
+            /* [in] */ __RPC__in BSTR bstrUrl);
         
         END_INTERFACE
     } IShellUIHelper8Vtbl;
@@ -9124,8 +8144,7 @@ EXTERN_C const IID IID_IShellUIHelper9;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetOSSku( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwResult) = 0;
         
     };
     
@@ -9139,8 +8158,7 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -9155,31 +8173,23 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -9216,23 +8226,19 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper, AddFavorite)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddFavorite )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
+            /* [in] */ __RPC__in BSTR URL,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Title);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddChannel)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddChannel )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AddDesktopComponent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddDesktopComponent )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Type,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Type,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Left,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Top,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *Width,
@@ -9241,28 +8247,21 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper, IsSubscribed)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, NavigateAndFind)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateAndFind )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR strQuery,
-            /* [annotation][in] */ 
-            _In_  VARIANT *varTargetFrame);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR strQuery,
+            /* [in] */ __RPC__in VARIANT *varTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, ImportExportFavorites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ImportExportFavorites )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fImport,
-            /* [annotation][in] */ 
-            _In_  BSTR strImpExpPath);
+            /* [in] */ VARIANT_BOOL fImport,
+            /* [in] */ __RPC__in BSTR strImpExpPath);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteSaveForm)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoCompleteSaveForm )( 
@@ -9272,10 +8271,8 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoScan)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AutoScan )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strSearch,
-            /* [annotation][in] */ 
-            _In_  BSTR strFailureUrl,
+            /* [in] */ __RPC__in BSTR strSearch,
+            /* [in] */ __RPC__in BSTR strFailureUrl,
             /* [unique][optional][in] */ __RPC__in_opt VARIANT *pvarTargetFrame);
         
         DECLSPEC_XFGVIRT(IShellUIHelper, AutoCompleteAttach)
@@ -9286,18 +8283,14 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper, ShowBrowserUI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowBrowserUI )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  VARIANT *pvarIn,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarOut);
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in VARIANT *pvarIn,
+            /* [retval][out] */ __RPC__out VARIANT *pvarOut);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, AddSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddSearchProvider )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceShown )( 
@@ -9310,30 +8303,24 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeSettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeSettings )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSQM,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPhishing,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrLocale);
+            /* [in] */ VARIANT_BOOL fSQM,
+            /* [in] */ VARIANT_BOOL fPhishing,
+            /* [in] */ __RPC__in BSTR bstrLocale);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SqmEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SqmEnabled )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, PhishingEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PhishingEnabled )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, BrandImageUri)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BrandImageUri )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUri);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUri);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SkipTabsWelcome)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SkipTabsWelcome )( 
@@ -9346,76 +8333,61 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper2, CustomizeClearType)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CustomizeClearType )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fSet);
+            /* [in] */ VARIANT_BOOL fSet);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchProviderInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchProviderInstalled )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, IsSearchMigrated)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSearchMigrated )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfMigrated);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfMigrated);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, DefaultSearchProvider)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DefaultSearchProvider )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrName);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceRequiredSettingsComplete)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceRequiredSettingsComplete )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fComplete);
+            /* [in] */ VARIANT_BOOL fComplete);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, RunOnceHasShown)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RunOnceHasShown )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfShown);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfShown);
         
         DECLSPEC_XFGVIRT(IShellUIHelper2, SearchGuideUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SearchGuideUrl )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrUrl);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddService)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddService )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL);
+            /* [in] */ __RPC__in BSTR URL);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsServiceInstalled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsServiceInstalled )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Verb,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Verb,
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, InPrivateFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *InPrivateFilteringEnabled )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, AddToFavoritesBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddToFavoritesBar )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR Title,
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR Title,
             /* [in][optional] */ __RPC__in VARIANT *Type);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, BuildNewTabPage)
@@ -9425,14 +8397,12 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetRecentlyClosedVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetRecentlyClosedVisible )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, SetActivitiesVisible)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActivitiesVisible )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ContentDiscoveryReset)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ContentDiscoveryReset )( 
@@ -9441,20 +8411,17 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper3, IsSuggestedSitesEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsSuggestedSitesEnabled )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, EnableSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnableSuggestedSites )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnable);
+            /* [in] */ VARIANT_BOOL fEnable);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, NavigateToSuggestedSites)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NavigateToSuggestedSites )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrRelativeUrl);
+            /* [in] */ __RPC__in BSTR bstrRelativeUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper3, ShowTabsHelp)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ShowTabsHelp )( 
@@ -9467,8 +8434,7 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteMode)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteMode )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfSiteMode);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfSiteMode);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowThumbBar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowThumbBar )( 
@@ -9477,28 +8443,21 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddThumbBarButton )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconURL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarButtonID);
+            /* [in] */ __RPC__in BSTR bstrIconURL,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarButtonID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeUpdateThumbBarButton)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeUpdateThumbBarButton )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT ButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fEnabled,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fVisible);
+            /* [in] */ VARIANT ButtonID,
+            /* [in] */ VARIANT_BOOL fEnabled,
+            /* [in] */ VARIANT_BOOL fVisible);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeSetIconOverlay)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeSetIconOverlay )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR IconUrl,
+            /* [in] */ __RPC__in BSTR IconUrl,
             /* [in][optional] */ __RPC__in VARIANT *pvarDescription);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearIconOverlay)
@@ -9512,18 +8471,14 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeCreateJumpList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeCreateJumpList )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrHeader);
+            /* [in] */ __RPC__in BSTR bstrHeader);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddJumpListItem)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddJumpListItem )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrName,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrActionUri,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUri,
+            /* [in] */ __RPC__in BSTR bstrName,
+            /* [in] */ __RPC__in BSTR bstrActionUri,
+            /* [in] */ __RPC__in BSTR bstrIconUri,
             /* [in][optional] */ __RPC__in VARIANT *pvarWindowType);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeClearJumpList)
@@ -9537,22 +8492,16 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeAddButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeAddButtonStyle )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrIconUrl,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrTooltip,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ __RPC__in BSTR bstrIconUrl,
+            /* [in] */ __RPC__in BSTR bstrTooltip,
+            /* [retval][out] */ __RPC__out VARIANT *pvarStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeShowButtonStyle)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeShowButtonStyle )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiButtonID,
-            /* [annotation][in] */ 
-            _In_  VARIANT uiStyleID);
+            /* [in] */ VARIANT uiButtonID,
+            /* [in] */ VARIANT uiStyleID);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msSiteModeActivate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msSiteModeActivate )( 
@@ -9561,38 +8510,30 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper4, msIsSiteModeFirstRun)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msIsSiteModeFirstRun )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fPreserveState,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiFirstRun);
+            /* [in] */ VARIANT_BOOL fPreserveState,
+            /* [retval][out] */ __RPC__out VARIANT *puiFirstRun);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msAddTrackingProtectionList)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msAddTrackingProtectionList )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR URL,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFilterName);
+            /* [in] */ __RPC__in BSTR URL,
+            /* [in] */ __RPC__in BSTR bstrFilterName);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msTrackingProtectionEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msTrackingProtectionEnabled )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper4, msActiveXFilteringEnabled)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msActiveXFilteringEnabled )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pfEnabled);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
         DECLSPEC_XFGVIRT(IShellUIHelper5, msProvisionNetworks)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msProvisionNetworks )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrProvisioningXml,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *puiResult);
+            /* [in] */ __RPC__in BSTR bstrProvisioningXml,
+            /* [retval][out] */ __RPC__out VARIANT *puiResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper5, msReportSafeUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msReportSafeUrl )( 
@@ -9617,8 +8558,7 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper5, msChangeDefaultBrowser)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msChangeDefaultBrowser )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStopPeriodicTileUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStopPeriodicTileUpdate )( 
@@ -9627,16 +8567,14 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicTileUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicTileUpdate )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT pollingUris,
+            /* [in] */ VARIANT pollingUris,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicTileUpdateBatch)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicTileUpdateBatch )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT pollingUris,
+            /* [in] */ VARIANT pollingUris,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
@@ -9647,56 +8585,46 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueue )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msPinnedSiteState)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msPinnedSiteState )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvarSiteState);
+            /* [retval][out] */ __RPC__out VARIANT *pvarSiteState);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForSquare150x150)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForSquare150x150 )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForWide310x150)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForWide310x150 )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msEnableTileNotificationQueueForSquare310x310)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msEnableTileNotificationQueueForSquare310x310 )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL fChange);
+            /* [in] */ VARIANT_BOOL fChange);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msScheduledTileNotification)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msScheduledTileNotification )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationXml,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationId,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationTag,
+            /* [in] */ __RPC__in BSTR bstrNotificationXml,
+            /* [in] */ __RPC__in BSTR bstrNotificationId,
+            /* [in] */ __RPC__in BSTR bstrNotificationTag,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT expirationTime);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msRemoveScheduledTileNotification)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msRemoveScheduledTileNotification )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrNotificationId);
+            /* [in] */ __RPC__in BSTR bstrNotificationId);
         
         DECLSPEC_XFGVIRT(IShellUIHelper6, msStartPeriodicBadgeUpdate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *msStartPeriodicBadgeUpdate )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR pollingUri,
+            /* [in] */ __RPC__in BSTR pollingUri,
             /* [in][optional] */ VARIANT startTime,
             /* [in][optional] */ VARIANT uiUpdateRecurrence);
         
@@ -9711,34 +8639,26 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper7, SetExperimentalFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetExperimentalFlag )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFlagString,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL vfFlag);
+            /* [in] */ __RPC__in BSTR bstrFlagString,
+            /* [in] */ VARIANT_BOOL vfFlag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, GetExperimentalFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetExperimentalFlag )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFlagString,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *vfFlag);
+            /* [in] */ __RPC__in BSTR bstrFlagString,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *vfFlag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, SetExperimentalValue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetExperimentalValue )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValueString,
-            /* [annotation][in] */ 
-            _In_  DWORD dwValue);
+            /* [in] */ __RPC__in BSTR bstrValueString,
+            /* [in] */ DWORD dwValue);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, GetExperimentalValue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetExperimentalValue )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrValueString,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwValue);
+            /* [in] */ __RPC__in BSTR bstrValueString,
+            /* [retval][out] */ __RPC__out DWORD *pdwValue);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, ResetAllExperimentalFlagsAndValues)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ResetAllExperimentalFlagsAndValues )( 
@@ -9747,58 +8667,46 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper7, GetNeedIEAutoLaunchFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetNeedIEAutoLaunchFlag )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *flag);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *flag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, SetNeedIEAutoLaunchFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetNeedIEAutoLaunchFlag )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL flag);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [in] */ VARIANT_BOOL flag);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, HasNeedIEAutoLaunchFlag)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *HasNeedIEAutoLaunchFlag )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *exists);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *exists);
         
         DECLSPEC_XFGVIRT(IShellUIHelper7, LaunchIE)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LaunchIE )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl,
-            /* [annotation][in] */ 
-            _In_  VARIANT_BOOL automated);
+            /* [in] */ __RPC__in BSTR bstrUrl,
+            /* [in] */ VARIANT_BOOL automated);
         
         DECLSPEC_XFGVIRT(IShellUIHelper8, GetCVListData)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCVListData )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper8, GetCVListLocalData)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCVListLocalData )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper8, GetEMIEListData)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetEMIEListData )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper8, GetEMIEListLocalData)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetEMIEListLocalData )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pbstrResult);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrResult);
         
         DECLSPEC_XFGVIRT(IShellUIHelper8, OpenFavoritesPane)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *OpenFavoritesPane )( 
@@ -9811,14 +8719,12 @@ EXTERN_C const IID IID_IShellUIHelper9;
         DECLSPEC_XFGVIRT(IShellUIHelper8, LaunchInHVSI)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LaunchInHVSI )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrUrl);
+            /* [in] */ __RPC__in BSTR bstrUrl);
         
         DECLSPEC_XFGVIRT(IShellUIHelper9, GetOSSku)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetOSSku )( 
             __RPC__in IShellUIHelper9 * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwResult);
+            /* [retval][out] */ __RPC__out DWORD *pdwResult);
         
         END_INTERFACE
     } IShellUIHelper9Vtbl;
@@ -10202,8 +9108,7 @@ EXTERN_C const IID DIID_DShellNameSpaceEvents;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DShellNameSpaceEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10218,31 +9123,23 @@ EXTERN_C const IID DIID_DShellNameSpaceEvents;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DShellNameSpaceEvents * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DShellNameSpaceEvents * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DShellNameSpaceEvents * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10338,26 +9235,21 @@ EXTERN_C const IID IID_IShellFavoritesNameSpace;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Export( void) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InvokeContextMenuCommand( 
-            /* [annotation][in] */ 
-            _In_  BSTR strCommand) = 0;
+            /* [in] */ __RPC__in BSTR strCommand) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE MoveSelectionTo( void) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SubscriptionsEnabled( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateSubscriptionForSelection( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DeleteSubscriptionForSelection( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool) = 0;
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetRoot( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFullPath) = 0;
+            /* [in] */ __RPC__in BSTR bstrFullPath) = 0;
         
     };
     
@@ -10371,8 +9263,7 @@ EXTERN_C const IID IID_IShellFavoritesNameSpace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellFavoritesNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10387,31 +9278,23 @@ EXTERN_C const IID IID_IShellFavoritesNameSpace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellFavoritesNameSpace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellFavoritesNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellFavoritesNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10464,8 +9347,7 @@ EXTERN_C const IID IID_IShellFavoritesNameSpace;
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, InvokeContextMenuCommand)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InvokeContextMenuCommand )( 
             __RPC__in IShellFavoritesNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strCommand);
+            /* [in] */ __RPC__in BSTR strCommand);
         
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, MoveSelectionTo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MoveSelectionTo )( 
@@ -10474,26 +9356,22 @@ EXTERN_C const IID IID_IShellFavoritesNameSpace;
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, get_SubscriptionsEnabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubscriptionsEnabled )( 
             __RPC__in IShellFavoritesNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, CreateSubscriptionForSelection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateSubscriptionForSelection )( 
             __RPC__in IShellFavoritesNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, DeleteSubscriptionForSelection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteSubscriptionForSelection )( 
             __RPC__in IShellFavoritesNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, SetRoot)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetRoot )( 
             __RPC__in IShellFavoritesNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFullPath);
+            /* [in] */ __RPC__in BSTR bstrFullPath);
         
         END_INTERFACE
     } IShellFavoritesNameSpaceVtbl;
@@ -10597,84 +9475,64 @@ EXTERN_C const IID IID_IShellNameSpace;
     {
     public:
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EnumOptions( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pgrfEnumFlags) = 0;
+            /* [retval][out] */ __RPC__out LONG *pgrfEnumFlags) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EnumOptions( 
-            /* [annotation][in] */ 
-            _In_  LONG lVal) = 0;
+            /* [in] */ LONG lVal) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SelectedItem( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **pItem) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **pItem) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_SelectedItem( 
-            /* [annotation][in] */ 
-            _In_  IDispatch *pItem) = 0;
+            /* [in] */ __RPC__in_opt IDispatch *pItem) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Root( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvar) = 0;
+            /* [retval][out] */ __RPC__out VARIANT *pvar) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Root( 
-            /* [annotation][in] */ 
-            _In_  VARIANT var) = 0;
+            /* [in] */ VARIANT var) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Depth( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *piDepth) = 0;
+            /* [retval][out] */ __RPC__out int *piDepth) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Depth( 
-            /* [annotation][in] */ 
-            _In_  int iDepth) = 0;
+            /* [in] */ int iDepth) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Mode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT *puMode) = 0;
+            /* [retval][out] */ __RPC__out UINT *puMode) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Mode( 
-            /* [annotation][in] */ 
-            _In_  UINT uMode) = 0;
+            /* [in] */ UINT uMode) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Flags( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwFlags) = 0;
+            /* [retval][out] */ __RPC__out DWORD *pdwFlags) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Flags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TVFlags( 
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags) = 0;
+            /* [in] */ DWORD dwFlags) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TVFlags( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *dwFlags) = 0;
+            /* [retval][out] */ __RPC__out DWORD *dwFlags) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Columns( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrColumns) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrColumns) = 0;
         
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Columns( 
-            /* [annotation][in] */ 
-            _In_  BSTR bstrColumns) = 0;
+            /* [in] */ __RPC__in BSTR bstrColumns) = 0;
         
         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CountViewTypes( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *piTypes) = 0;
+            /* [retval][out] */ __RPC__out int *piTypes) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetViewType( 
-            /* [annotation][in] */ 
-            _In_  int iType) = 0;
+            /* [in] */ int iType) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SelectedItems( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppid) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppid) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Expand( 
-            /* [annotation][in] */ 
-            _In_  VARIANT var,
+            /* [in] */ VARIANT var,
             int iDepth) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE UnselectAll( void) = 0;
@@ -10691,8 +9549,7 @@ EXTERN_C const IID IID_IShellNameSpace;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -10707,31 +9564,23 @@ EXTERN_C const IID IID_IShellNameSpace;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -10784,8 +9633,7 @@ EXTERN_C const IID IID_IShellNameSpace;
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, InvokeContextMenuCommand)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InvokeContextMenuCommand )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR strCommand);
+            /* [in] */ __RPC__in BSTR strCommand);
         
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, MoveSelectionTo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MoveSelectionTo )( 
@@ -10794,146 +9642,122 @@ EXTERN_C const IID IID_IShellNameSpace;
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, get_SubscriptionsEnabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubscriptionsEnabled )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, CreateSubscriptionForSelection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateSubscriptionForSelection )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, DeleteSubscriptionForSelection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteSubscriptionForSelection )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT_BOOL *pBool);
+            /* [retval][out] */ __RPC__out VARIANT_BOOL *pBool);
         
         DECLSPEC_XFGVIRT(IShellFavoritesNameSpace, SetRoot)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetRoot )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrFullPath);
+            /* [in] */ __RPC__in BSTR bstrFullPath);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, get_EnumOptions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumOptions )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *pgrfEnumFlags);
+            /* [retval][out] */ __RPC__out LONG *pgrfEnumFlags);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, put_EnumOptions)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnumOptions )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  LONG lVal);
+            /* [in] */ LONG lVal);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, get_SelectedItem)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SelectedItem )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **pItem);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **pItem);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, put_SelectedItem)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SelectedItem )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  IDispatch *pItem);
+            /* [in] */ __RPC__in_opt IDispatch *pItem);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, get_Root)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Root )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  VARIANT *pvar);
+            /* [retval][out] */ __RPC__out VARIANT *pvar);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, put_Root)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Root )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT var);
+            /* [in] */ VARIANT var);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, get_Depth)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Depth )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *piDepth);
+            /* [retval][out] */ __RPC__out int *piDepth);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, put_Depth)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Depth )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  int iDepth);
+            /* [in] */ int iDepth);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, get_Mode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Mode )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  UINT *puMode);
+            /* [retval][out] */ __RPC__out UINT *puMode);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, put_Mode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Mode )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  UINT uMode);
+            /* [in] */ UINT uMode);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, get_Flags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Flags )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *pdwFlags);
+            /* [retval][out] */ __RPC__out DWORD *pdwFlags);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, put_Flags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Flags )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, put_TVFlags)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TVFlags )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  DWORD dwFlags);
+            /* [in] */ DWORD dwFlags);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, get_TVFlags)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TVFlags )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  DWORD *dwFlags);
+            /* [retval][out] */ __RPC__out DWORD *dwFlags);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, get_Columns)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Columns )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *bstrColumns);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *bstrColumns);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, put_Columns)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Columns )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  BSTR bstrColumns);
+            /* [in] */ __RPC__in BSTR bstrColumns);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, get_CountViewTypes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountViewTypes )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  int *piTypes);
+            /* [retval][out] */ __RPC__out int *piTypes);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, SetViewType)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetViewType )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  int iType);
+            /* [in] */ int iType);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, SelectedItems)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SelectedItems )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  IDispatch **ppid);
+            /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppid);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, Expand)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Expand )( 
             __RPC__in IShellNameSpace * This,
-            /* [annotation][in] */ 
-            _In_  VARIANT var,
+            /* [in] */ VARIANT var,
             int iDepth);
         
         DECLSPEC_XFGVIRT(IShellNameSpace, UnselectAll)
@@ -11118,47 +9942,37 @@ EXTERN_C const IID IID_IScriptErrorList;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE retreatError( void) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE canAdvanceError( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfCanAdvance) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pfCanAdvance) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE canRetreatError( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfCanRetreat) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pfCanRetreat) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getErrorLine( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plLine) = 0;
+            /* [retval][out] */ __RPC__out LONG *plLine) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getErrorChar( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plChar) = 0;
+            /* [retval][out] */ __RPC__out LONG *plChar) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getErrorCode( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plCode) = 0;
+            /* [retval][out] */ __RPC__out LONG *plCode) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getErrorMsg( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstr) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getErrorUrl( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pstr) = 0;
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstr) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getAlwaysShowLockState( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfAlwaysShowLocked) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pfAlwaysShowLocked) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getDetailsPaneOpen( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfDetailsPaneOpen) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pfDetailsPaneOpen) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE setDetailsPaneOpen( 
             BOOL fDetailsPaneOpen) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getPerErrorDisplay( 
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfPerErrorDisplay) = 0;
+            /* [retval][out] */ __RPC__out BOOL *pfPerErrorDisplay) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE setPerErrorDisplay( 
             BOOL fPerErrorDisplay) = 0;
@@ -11175,8 +9989,7 @@ EXTERN_C const IID IID_IScriptErrorList;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -11191,31 +10004,23 @@ EXTERN_C const IID IID_IScriptErrorList;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -11248,56 +10053,47 @@ EXTERN_C const IID IID_IScriptErrorList;
         DECLSPEC_XFGVIRT(IScriptErrorList, canAdvanceError)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *canAdvanceError )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfCanAdvance);
+            /* [retval][out] */ __RPC__out BOOL *pfCanAdvance);
         
         DECLSPEC_XFGVIRT(IScriptErrorList, canRetreatError)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *canRetreatError )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfCanRetreat);
+            /* [retval][out] */ __RPC__out BOOL *pfCanRetreat);
         
         DECLSPEC_XFGVIRT(IScriptErrorList, getErrorLine)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getErrorLine )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plLine);
+            /* [retval][out] */ __RPC__out LONG *plLine);
         
         DECLSPEC_XFGVIRT(IScriptErrorList, getErrorChar)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getErrorChar )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plChar);
+            /* [retval][out] */ __RPC__out LONG *plChar);
         
         DECLSPEC_XFGVIRT(IScriptErrorList, getErrorCode)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getErrorCode )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  LONG *plCode);
+            /* [retval][out] */ __RPC__out LONG *plCode);
         
         DECLSPEC_XFGVIRT(IScriptErrorList, getErrorMsg)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getErrorMsg )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstr);
         
         DECLSPEC_XFGVIRT(IScriptErrorList, getErrorUrl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getErrorUrl )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BSTR *pstr);
+            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstr);
         
         DECLSPEC_XFGVIRT(IScriptErrorList, getAlwaysShowLockState)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getAlwaysShowLockState )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfAlwaysShowLocked);
+            /* [retval][out] */ __RPC__out BOOL *pfAlwaysShowLocked);
         
         DECLSPEC_XFGVIRT(IScriptErrorList, getDetailsPaneOpen)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getDetailsPaneOpen )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfDetailsPaneOpen);
+            /* [retval][out] */ __RPC__out BOOL *pfDetailsPaneOpen);
         
         DECLSPEC_XFGVIRT(IScriptErrorList, setDetailsPaneOpen)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *setDetailsPaneOpen )( 
@@ -11307,8 +10103,7 @@ EXTERN_C const IID IID_IScriptErrorList;
         DECLSPEC_XFGVIRT(IScriptErrorList, getPerErrorDisplay)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getPerErrorDisplay )( 
             __RPC__in IScriptErrorList * This,
-            /* [annotation][retval][out] */ 
-            _Out_retval_  BOOL *pfPerErrorDisplay);
+            /* [retval][out] */ __RPC__out BOOL *pfPerErrorDisplay);
         
         DECLSPEC_XFGVIRT(IScriptErrorList, setPerErrorDisplay)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *setPerErrorDisplay )( 

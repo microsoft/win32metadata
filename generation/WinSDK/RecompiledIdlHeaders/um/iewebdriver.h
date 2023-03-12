@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -119,22 +119,16 @@ EXTERN_C const IID IID_IIEWebDriverSite;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE WindowOperation( 
-            /* [annotation][in] */ 
-            _In_  DWORD operationCode,
-            /* [annotation][in] */ 
-            _In_  DWORD hWnd) = 0;
+            /* [in] */ DWORD operationCode,
+            /* [in] */ DWORD hWnd) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE DetachWebdriver( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkWD) = 0;
+            /* [in] */ __RPC__in_opt IUnknown *pUnkWD) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCapabilityValue( 
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkWD,
-            /* [annotation][in] */ 
-            _In_  LPWSTR capName,
-            /* [annotation][out] */ 
-            _Out_  VARIANT *capValue) = 0;
+            /* [in] */ __RPC__in_opt IUnknown *pUnkWD,
+            /* [in] */ __RPC__in LPWSTR capName,
+            /* [out] */ __RPC__out VARIANT *capValue) = 0;
         
     };
     
@@ -148,8 +142,7 @@ EXTERN_C const IID IID_IIEWebDriverSite;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIEWebDriverSite * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -164,31 +157,23 @@ EXTERN_C const IID IID_IIEWebDriverSite;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IIEWebDriverSite * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IIEWebDriverSite * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IIEWebDriverSite * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -213,26 +198,20 @@ EXTERN_C const IID IID_IIEWebDriverSite;
         DECLSPEC_XFGVIRT(IIEWebDriverSite, WindowOperation)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *WindowOperation )( 
             __RPC__in IIEWebDriverSite * This,
-            /* [annotation][in] */ 
-            _In_  DWORD operationCode,
-            /* [annotation][in] */ 
-            _In_  DWORD hWnd);
+            /* [in] */ DWORD operationCode,
+            /* [in] */ DWORD hWnd);
         
         DECLSPEC_XFGVIRT(IIEWebDriverSite, DetachWebdriver)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DetachWebdriver )( 
             __RPC__in IIEWebDriverSite * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkWD);
+            /* [in] */ __RPC__in_opt IUnknown *pUnkWD);
         
         DECLSPEC_XFGVIRT(IIEWebDriverSite, GetCapabilityValue)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCapabilityValue )( 
             __RPC__in IIEWebDriverSite * This,
-            /* [annotation][in] */ 
-            _In_  IUnknown *pUnkWD,
-            /* [annotation][in] */ 
-            _In_  LPWSTR capName,
-            /* [annotation][out] */ 
-            _Out_  VARIANT *capValue);
+            /* [in] */ __RPC__in_opt IUnknown *pUnkWD,
+            /* [in] */ __RPC__in LPWSTR capName,
+            /* [out] */ __RPC__out VARIANT *capValue);
         
         END_INTERFACE
     } IIEWebDriverSiteVtbl;
@@ -306,10 +285,8 @@ EXTERN_C const IID IID_IIEWebDriverManager;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE ExecuteCommand( 
-            /* [annotation][in] */ 
-            _In_  LPWSTR command,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *response) = 0;
+            /* [in] */ __RPC__in LPWSTR command,
+            /* [out] */ __RPC__deref_out_opt LPWSTR *response) = 0;
         
     };
     
@@ -323,8 +300,7 @@ EXTERN_C const IID IID_IIEWebDriverManager;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIEWebDriverManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -339,31 +315,23 @@ EXTERN_C const IID IID_IIEWebDriverManager;
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IIEWebDriverManager * This,
-            /* [annotation][out] */ 
-            _Out_  UINT *pctinfo);
+            /* [out] */ __RPC__out UINT *pctinfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IIEWebDriverManager * This,
-            /* [annotation][in] */ 
-            _In_  UINT iTInfo,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  ITypeInfo **ppTInfo);
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
         DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IIEWebDriverManager * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cNames)  LPOLESTR *rgszNames,
+            /* [in] */ __RPC__in REFIID riid,
+            /* [size_is][in] */ __RPC__in_ecount_full(cNames) LPOLESTR *rgszNames,
             /* [range][in] */ __RPC__in_range(0,16384) UINT cNames,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][size_is][out] */ 
-            _Out_writes_(cNames)  DISPID *rgDispId);
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
         DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
@@ -388,10 +356,8 @@ EXTERN_C const IID IID_IIEWebDriverManager;
         DECLSPEC_XFGVIRT(IIEWebDriverManager, ExecuteCommand)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ExecuteCommand )( 
             __RPC__in IIEWebDriverManager * This,
-            /* [annotation][in] */ 
-            _In_  LPWSTR command,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *response);
+            /* [in] */ __RPC__in LPWSTR command,
+            /* [out] */ __RPC__deref_out_opt LPWSTR *response);
         
         END_INTERFACE
     } IIEWebDriverManagerVtbl;

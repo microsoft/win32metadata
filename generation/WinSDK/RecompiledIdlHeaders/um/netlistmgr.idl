@@ -21,10 +21,12 @@ import "ocidl.idl";
 // DCB00001-570F-4A9B-8D69-199FDBA5723B  INetworkListManagerEvents
 //
 // DCB00002-570F-4A9B-8D69-199FDBA5723B  INetwork
+// B5550ABB-3391-4310-804F-25DCC325ED81  INetwork2
 // DCB00003-570F-4A9B-8D69-199FDBA5723B  IEnumNetworks
 // DCB00004-570F-4A9B-8D69-199FDBA5723B  INetworkEvents
 //
 // DCB00005-570F-4A9B-8D69-199FDBA5723B  INetworkConnection
+// 00E676ED-5A35-4738-92EB-8581738D0F0A  INetworkConnection2
 // DCB00006-570F-4A9B-8D69-199FDBA5723B  IEnumNetworkConnections
 // DCB00007-570F-4A9B-8D69-199FDBA5723B  INetworkConnectionEvents
 //
@@ -45,10 +47,12 @@ interface INetworkListManager;
 interface INetworkListManagerEvents;
 
 interface INetwork;
+interface INetwork2;
 interface IEnumNetworks;
 interface INetworkEvents;
 
 interface INetworkConnection;
+interface INetworkConnection2;
 interface IEnumNetworkConnections;
 interface INetworkConnectionEvents;
 
@@ -197,6 +201,13 @@ typedef enum NLM_DOMAIN_TYPE
     NLM_DOMAIN_TYPE_DOMAIN_AUTHENTICATED = 0x02,
 } NLM_DOMAIN_TYPE;
 
+typedef enum NLM_DOMAIN_AUTHENTICATION_KIND
+{
+    NLM_DOMAIN_AUTHENTICATION_KIND_NONE = 0x0,
+    NLM_DOMAIN_AUTHENTICATION_KIND_LDAP = 0x01,
+    NLM_DOMAIN_AUTHENTICATION_KIND_TLS = 0x02,
+} NLM_DOMAIN_AUTHENTICATION_KIND;
+
 //
 //---------------------------------------------------
 //
@@ -324,6 +335,20 @@ interface INetwork : IDispatch
     HRESULT SetCategory ([in] NLM_NETWORK_CATEGORY NewCategory);
 }
 
+[
+    uuid(B5550ABB-3391-4310-804F-25DCC325ED81),
+    helpstring("Network2"),
+    object,
+    oleautomation,
+    pointer_default(unique),
+    dual
+]
+interface INetwork2 : INetwork
+{
+    [id(14), helpstring("Returns a boolean value indicating whether the network is domain authenticated by the particular kind.")]
+    HRESULT IsDomainAuthenticatedBy([in] NLM_DOMAIN_AUTHENTICATION_KIND domainAuthenticationKind, [out, retval] BOOL* pValue);
+}
+
 //
 //---------------------------------------------------
 //
@@ -417,6 +442,20 @@ interface INetworkConnection : IDispatch
 
     [id(7), helpstring("Returns the domain type of this network connection.")]
     HRESULT GetDomainType ([out, retval] NLM_DOMAIN_TYPE *pDomainType);
+}
+
+[
+    uuid(00E676ED-5A35-4738-92EB-8581738D0F0A),
+    helpstring("Network Connection2"),
+    object,
+    oleautomation,
+    pointer_default(unique),
+    dual
+]
+interface INetworkConnection2 : INetworkConnection
+{
+    [id(8), helpstring("Returns a boolean value indicating whether the network connection is domain authenticated by the particular kind.")]
+    HRESULT IsDomainAuthenticatedBy([in] NLM_DOMAIN_AUTHENTICATION_KIND domainAuthenticationKind, [ out, retval ] BOOL * pValue);
 }
 
 //

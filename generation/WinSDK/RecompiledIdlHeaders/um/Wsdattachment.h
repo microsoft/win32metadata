@@ -3,14 +3,14 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
 
 /* verify that the <rpcndr.h> version is high enough to compile this file*/
 #ifndef __REQUIRED_RPCNDR_H_VERSION__
-#define __REQUIRED_RPCNDR_H_VERSION__ 500
+#define __REQUIRED_RPCNDR_H_VERSION__ 501
 #endif
 
 /* verify that the <rpcsal.h> version is high enough to compile this file*/
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -120,8 +120,7 @@ EXTERN_C const IID IID_IWSDAttachment;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWSDAttachment * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -185,8 +184,7 @@ EXTERN_C const IID IID_IWSDOutboundAttachment;
         virtual HRESULT STDMETHODCALLTYPE Write( 
             /* [annotation][size_is][in] */ 
             _In_reads_(dwBytesToWrite)  const BYTE *pBuffer,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBytesToWrite,
+            /* [in] */ DWORD dwBytesToWrite,
             /* [annotation][out] */ 
             _Out_  LPDWORD pdwNumberOfBytesWritten) = 0;
         
@@ -206,8 +204,7 @@ EXTERN_C const IID IID_IWSDOutboundAttachment;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDOutboundAttachment * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -224,8 +221,7 @@ EXTERN_C const IID IID_IWSDOutboundAttachment;
             IWSDOutboundAttachment * This,
             /* [annotation][size_is][in] */ 
             _In_reads_(dwBytesToWrite)  const BYTE *pBuffer,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBytesToWrite,
+            /* [in] */ DWORD dwBytesToWrite,
             /* [annotation][out] */ 
             _Out_  LPDWORD pdwNumberOfBytesWritten);
         
@@ -299,8 +295,7 @@ EXTERN_C const IID IID_IWSDInboundAttachment;
         virtual HRESULT STDMETHODCALLTYPE Read( 
             /* [annotation][length_is][size_is][out] */ 
             _Out_writes_to_(dwBytesToRead, *pdwNumberOfBytesRead)  BYTE *pBuffer,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBytesToRead,
+            /* [in] */ DWORD dwBytesToRead,
             /* [annotation][out] */ 
             _Out_  LPDWORD pdwNumberOfBytesRead) = 0;
         
@@ -318,8 +313,7 @@ EXTERN_C const IID IID_IWSDInboundAttachment;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDInboundAttachment * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -336,8 +330,7 @@ EXTERN_C const IID IID_IWSDInboundAttachment;
             IWSDInboundAttachment * This,
             /* [annotation][length_is][size_is][out] */ 
             _Out_writes_to_(dwBytesToRead, *pdwNumberOfBytesRead)  BYTE *pBuffer,
-            /* [annotation][in] */ 
-            _In_  DWORD dwBytesToRead,
+            /* [in] */ DWORD dwBytesToRead,
             /* [annotation][out] */ 
             _Out_  LPDWORD pdwNumberOfBytesRead);
         

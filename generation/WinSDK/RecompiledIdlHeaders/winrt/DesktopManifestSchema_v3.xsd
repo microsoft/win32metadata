@@ -9,6 +9,7 @@
            xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
            xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
+           xmlns:cloudfiles2="http://schemas.microsoft.com/appx/manifest/cloudfiles/windows10/2"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
@@ -16,6 +17,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/cloudfiles/windows10/2"/>
 
   <xs:element name="Extension" substitutionGroup="f:ApplicationExtensionChoice">
     <xs:complexType>
@@ -39,6 +41,7 @@
       <xs:element ref="desktop4:ContentUriSource" minOccurs="0"/>
       <xs:element name="CloudFilesContextMenus" type="CT_CloudFilesContextMenus" />
       <xs:element ref="desktop4:DesktopIconOverlayHandlers" minOccurs="0"/>
+      <xs:element ref="cloudfiles2:StorageProviderStatusUISourceFactory" minOccurs="0"/>
     </xs:all>
     <xs:attribute name="IconResource" type="t:ST_ImageFile"/>
   </xs:complexType>

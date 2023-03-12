@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0626 */
+ /* File created by MIDL compiler version 8.01.0628 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef DECLSPEC_XFGVIRT
-#if _CONTROL_FLOW_GUARD_XFG
+#if defined(_CONTROL_FLOW_GUARD_XFG)
 #define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
 #else
 #define DECLSPEC_XFGVIRT(base, func)
@@ -189,22 +189,19 @@ EXTERN_C const IID IID_IEnumGUID;
     {
     public:
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation][length_is][size_is][out] */ 
             _Out_writes_to_(celt,*pceltFetched)  GUID *rgelt,
             /* [annotation][out] */ 
             _Out_opt_  ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumGUID **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumGUID **ppenum) = 0;
         
     };
     
@@ -218,8 +215,7 @@ EXTERN_C const IID IID_IEnumGUID;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumGUID * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -234,8 +230,7 @@ EXTERN_C const IID IID_IEnumGUID;
         DECLSPEC_XFGVIRT(IEnumGUID, Next)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumGUID * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
+            /* [in] */ ULONG celt,
             /* [annotation][length_is][size_is][out] */ 
             _Out_writes_to_(celt,*pceltFetched)  GUID *rgelt,
             /* [annotation][out] */ 
@@ -244,8 +239,7 @@ EXTERN_C const IID IID_IEnumGUID;
         DECLSPEC_XFGVIRT(IEnumGUID, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumGUID * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumGUID, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -254,8 +248,7 @@ EXTERN_C const IID IID_IEnumGUID;
         DECLSPEC_XFGVIRT(IEnumGUID, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumGUID * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumGUID **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumGUID **ppenum);
         
         END_INTERFACE
     } IEnumGUIDVtbl;
@@ -301,12 +294,9 @@ EXTERN_C const IID IID_IEnumGUID;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumGUID_RemoteNext_Proxy( 
     __RPC__in IEnumGUID * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  GUID *rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) GUID *rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 
 void __RPC_STUB IEnumGUID_RemoteNext_Stub(
@@ -362,22 +352,17 @@ EXTERN_C const IID IID_IEnumCATEGORYINFO;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE Next( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  CATEGORYINFO *rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched) = 0;
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) CATEGORYINFO *rgelt,
+            /* [out] */ __RPC__out ULONG *pceltFetched) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Skip( 
-            /* [annotation][in] */ 
-            _In_  ULONG celt) = 0;
+            /* [in] */ ULONG celt) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE Clone( 
-            /* [annotation][out] */ 
-            _Out_  IEnumCATEGORYINFO **ppenum) = 0;
+            /* [out] */ __RPC__deref_out_opt IEnumCATEGORYINFO **ppenum) = 0;
         
     };
     
@@ -391,8 +376,7 @@ EXTERN_C const IID IID_IEnumCATEGORYINFO;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumCATEGORYINFO * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -407,18 +391,14 @@ EXTERN_C const IID IID_IEnumCATEGORYINFO;
         DECLSPEC_XFGVIRT(IEnumCATEGORYINFO, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumCATEGORYINFO * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt,
-            /* [annotation][length_is][size_is][out] */ 
-            _Out_writes_to_(celt,*pceltFetched)  CATEGORYINFO *rgelt,
-            /* [annotation][out] */ 
-            _Out_  ULONG *pceltFetched);
+            /* [in] */ ULONG celt,
+            /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) CATEGORYINFO *rgelt,
+            /* [out] */ __RPC__out ULONG *pceltFetched);
         
         DECLSPEC_XFGVIRT(IEnumCATEGORYINFO, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumCATEGORYINFO * This,
-            /* [annotation][in] */ 
-            _In_  ULONG celt);
+            /* [in] */ ULONG celt);
         
         DECLSPEC_XFGVIRT(IEnumCATEGORYINFO, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
@@ -427,8 +407,7 @@ EXTERN_C const IID IID_IEnumCATEGORYINFO;
         DECLSPEC_XFGVIRT(IEnumCATEGORYINFO, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumCATEGORYINFO * This,
-            /* [annotation][out] */ 
-            _Out_  IEnumCATEGORYINFO **ppenum);
+            /* [out] */ __RPC__deref_out_opt IEnumCATEGORYINFO **ppenum);
         
         END_INTERFACE
     } IEnumCATEGORYINFOVtbl;
@@ -505,48 +484,32 @@ EXTERN_C const IID IID_ICatRegister;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE RegisterCategories( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATEGORYINFO rgCategoryInfo[  ]) = 0;
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATEGORYINFO rgCategoryInfo[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnRegisterCategories( 
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATID rgcatid[  ]) = 0;
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATID rgcatid[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterClassImplCategories( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATID rgcatid[  ]) = 0;
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATID rgcatid[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnRegisterClassImplCategories( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATID rgcatid[  ]) = 0;
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATID rgcatid[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE RegisterClassReqCategories( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATID rgcatid[  ]) = 0;
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATID rgcatid[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE UnRegisterClassReqCategories( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATID rgcatid[  ]) = 0;
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATID rgcatid[  ]) = 0;
         
     };
     
@@ -560,8 +523,7 @@ EXTERN_C const IID IID_ICatRegister;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICatRegister * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -576,58 +538,42 @@ EXTERN_C const IID IID_ICatRegister;
         DECLSPEC_XFGVIRT(ICatRegister, RegisterCategories)
         HRESULT ( STDMETHODCALLTYPE *RegisterCategories )( 
             __RPC__in ICatRegister * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATEGORYINFO rgCategoryInfo[  ]);
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATEGORYINFO rgCategoryInfo[  ]);
         
         DECLSPEC_XFGVIRT(ICatRegister, UnRegisterCategories)
         HRESULT ( STDMETHODCALLTYPE *UnRegisterCategories )( 
             __RPC__in ICatRegister * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATID rgcatid[  ]);
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATID rgcatid[  ]);
         
         DECLSPEC_XFGVIRT(ICatRegister, RegisterClassImplCategories)
         HRESULT ( STDMETHODCALLTYPE *RegisterClassImplCategories )( 
             __RPC__in ICatRegister * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATID rgcatid[  ]);
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATID rgcatid[  ]);
         
         DECLSPEC_XFGVIRT(ICatRegister, UnRegisterClassImplCategories)
         HRESULT ( STDMETHODCALLTYPE *UnRegisterClassImplCategories )( 
             __RPC__in ICatRegister * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATID rgcatid[  ]);
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATID rgcatid[  ]);
         
         DECLSPEC_XFGVIRT(ICatRegister, RegisterClassReqCategories)
         HRESULT ( STDMETHODCALLTYPE *RegisterClassReqCategories )( 
             __RPC__in ICatRegister * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATID rgcatid[  ]);
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATID rgcatid[  ]);
         
         DECLSPEC_XFGVIRT(ICatRegister, UnRegisterClassReqCategories)
         HRESULT ( STDMETHODCALLTYPE *UnRegisterClassReqCategories )( 
             __RPC__in ICatRegister * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  ULONG cCategories,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cCategories)  CATID rgcatid[  ]);
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [in] */ ULONG cCategories,
+            /* [size_is][in] */ __RPC__in_ecount_full(cCategories) CATID rgcatid[  ]);
         
         END_INTERFACE
     } ICatRegisterVtbl;
@@ -710,54 +656,35 @@ EXTERN_C const IID IID_ICatInformation;
     {
     public:
         virtual HRESULT STDMETHODCALLTYPE EnumCategories( 
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  IEnumCATEGORYINFO **ppenumCategoryInfo) = 0;
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt IEnumCATEGORYINFO **ppenumCategoryInfo) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE GetCategoryDesc( 
-            /* [annotation][in] */ 
-            _In_  REFCATID rcatid,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *pszDesc) = 0;
+            /* [in] */ __RPC__in REFCATID rcatid,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt LPWSTR *pszDesc) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE EnumClassesOfCategories( 
-            /* [annotation][in] */ 
-            _In_  ULONG cImplemented,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cImplemented)  const CATID rgcatidImpl[  ],
-            /* [annotation][in] */ 
-            _In_  ULONG cRequired,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cRequired)  const CATID rgcatidReq[  ],
-            /* [annotation][out] */ 
-            _Out_  IEnumGUID **ppenumClsid) = 0;
+            /* [in] */ ULONG cImplemented,
+            /* [size_is][in] */ const CATID rgcatidImpl[  ],
+            /* [in] */ ULONG cRequired,
+            /* [size_is][in] */ const CATID rgcatidReq[  ],
+            /* [out] */ IEnumGUID **ppenumClsid) = 0;
         
         virtual /* [local] */ HRESULT STDMETHODCALLTYPE IsClassOfCategories( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  ULONG cImplemented,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cImplemented)  const CATID rgcatidImpl[  ],
-            /* [annotation][in] */ 
-            _In_  ULONG cRequired,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cRequired)  const CATID rgcatidReq[  ]) = 0;
+            /* [in] */ REFCLSID rclsid,
+            /* [in] */ ULONG cImplemented,
+            /* [size_is][in] */ const CATID rgcatidImpl[  ],
+            /* [in] */ ULONG cRequired,
+            /* [size_is][in] */ const CATID rgcatidReq[  ]) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumImplCategoriesOfClass( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][out] */ 
-            _Out_  IEnumGUID **ppenumCatid) = 0;
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [out] */ __RPC__deref_out_opt IEnumGUID **ppenumCatid) = 0;
         
         virtual HRESULT STDMETHODCALLTYPE EnumReqCategoriesOfClass( 
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][out] */ 
-            _Out_  IEnumGUID **ppenumCatid) = 0;
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [out] */ __RPC__deref_out_opt IEnumGUID **ppenumCatid) = 0;
         
     };
     
@@ -771,8 +698,7 @@ EXTERN_C const IID IID_ICatInformation;
         DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICatInformation * This,
-            /* [annotation][in] */ 
-            _In_  REFIID riid,
+            /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
@@ -787,64 +713,45 @@ EXTERN_C const IID IID_ICatInformation;
         DECLSPEC_XFGVIRT(ICatInformation, EnumCategories)
         HRESULT ( STDMETHODCALLTYPE *EnumCategories )( 
             __RPC__in ICatInformation * This,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  IEnumCATEGORYINFO **ppenumCategoryInfo);
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt IEnumCATEGORYINFO **ppenumCategoryInfo);
         
         DECLSPEC_XFGVIRT(ICatInformation, GetCategoryDesc)
         HRESULT ( STDMETHODCALLTYPE *GetCategoryDesc )( 
             __RPC__in ICatInformation * This,
-            /* [annotation][in] */ 
-            _In_  REFCATID rcatid,
-            /* [annotation][in] */ 
-            _In_  LCID lcid,
-            /* [annotation][out] */ 
-            _Out_  LPWSTR *pszDesc);
+            /* [in] */ __RPC__in REFCATID rcatid,
+            /* [in] */ LCID lcid,
+            /* [out] */ __RPC__deref_out_opt LPWSTR *pszDesc);
         
         DECLSPEC_XFGVIRT(ICatInformation, EnumClassesOfCategories)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *EnumClassesOfCategories )( 
             ICatInformation * This,
-            /* [annotation][in] */ 
-            _In_  ULONG cImplemented,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cImplemented)  const CATID rgcatidImpl[  ],
-            /* [annotation][in] */ 
-            _In_  ULONG cRequired,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cRequired)  const CATID rgcatidReq[  ],
-            /* [annotation][out] */ 
-            _Out_  IEnumGUID **ppenumClsid);
+            /* [in] */ ULONG cImplemented,
+            /* [size_is][in] */ const CATID rgcatidImpl[  ],
+            /* [in] */ ULONG cRequired,
+            /* [size_is][in] */ const CATID rgcatidReq[  ],
+            /* [out] */ IEnumGUID **ppenumClsid);
         
         DECLSPEC_XFGVIRT(ICatInformation, IsClassOfCategories)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *IsClassOfCategories )( 
             ICatInformation * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][in] */ 
-            _In_  ULONG cImplemented,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cImplemented)  const CATID rgcatidImpl[  ],
-            /* [annotation][in] */ 
-            _In_  ULONG cRequired,
-            /* [annotation][size_is][in] */ 
-            _In_reads_(cRequired)  const CATID rgcatidReq[  ]);
+            /* [in] */ REFCLSID rclsid,
+            /* [in] */ ULONG cImplemented,
+            /* [size_is][in] */ const CATID rgcatidImpl[  ],
+            /* [in] */ ULONG cRequired,
+            /* [size_is][in] */ const CATID rgcatidReq[  ]);
         
         DECLSPEC_XFGVIRT(ICatInformation, EnumImplCategoriesOfClass)
         HRESULT ( STDMETHODCALLTYPE *EnumImplCategoriesOfClass )( 
             __RPC__in ICatInformation * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][out] */ 
-            _Out_  IEnumGUID **ppenumCatid);
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [out] */ __RPC__deref_out_opt IEnumGUID **ppenumCatid);
         
         DECLSPEC_XFGVIRT(ICatInformation, EnumReqCategoriesOfClass)
         HRESULT ( STDMETHODCALLTYPE *EnumReqCategoriesOfClass )( 
             __RPC__in ICatInformation * This,
-            /* [annotation][in] */ 
-            _In_  REFCLSID rclsid,
-            /* [annotation][out] */ 
-            _Out_  IEnumGUID **ppenumCatid);
+            /* [in] */ __RPC__in REFCLSID rclsid,
+            /* [out] */ __RPC__deref_out_opt IEnumGUID **ppenumCatid);
         
         END_INTERFACE
     } ICatInformationVtbl;
@@ -896,16 +803,11 @@ EXTERN_C const IID IID_ICatInformation;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ICatInformation_RemoteEnumClassesOfCategories_Proxy( 
     __RPC__in ICatInformation * This,
-    /* [annotation][in] */ 
-    _In_  ULONG cImplemented,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cImplemented)  const CATID rgcatidImpl[  ],
-    /* [annotation][in] */ 
-    _In_  ULONG cRequired,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cRequired)  const CATID rgcatidReq[  ],
-    /* [annotation][out] */ 
-    _Out_  IEnumGUID **ppenumClsid);
+    /* [in] */ ULONG cImplemented,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cImplemented) const CATID rgcatidImpl[  ],
+    /* [in] */ ULONG cRequired,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cRequired) const CATID rgcatidReq[  ],
+    /* [out] */ __RPC__deref_out_opt IEnumGUID **ppenumClsid);
 
 
 void __RPC_STUB ICatInformation_RemoteEnumClassesOfCategories_Stub(
@@ -917,16 +819,11 @@ void __RPC_STUB ICatInformation_RemoteEnumClassesOfCategories_Stub(
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ICatInformation_RemoteIsClassOfCategories_Proxy( 
     __RPC__in ICatInformation * This,
-    /* [annotation][in] */ 
-    _In_  REFCLSID rclsid,
-    /* [annotation][in] */ 
-    _In_  ULONG cImplemented,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cImplemented)  const CATID rgcatidImpl[  ],
-    /* [annotation][in] */ 
-    _In_  ULONG cRequired,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cRequired)  const CATID rgcatidReq[  ]);
+    /* [in] */ __RPC__in REFCLSID rclsid,
+    /* [in] */ ULONG cImplemented,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cImplemented) const CATID rgcatidImpl[  ],
+    /* [in] */ ULONG cRequired,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cRequired) const CATID rgcatidReq[  ]);
 
 
 void __RPC_STUB ICatInformation_RemoteIsClassOfCategories_Stub(
@@ -955,8 +852,7 @@ extern RPC_IF_HANDLE __MIDL_itf_comcat_0000_0004_v0_0_s_ifspec;
 
 /* [local] */ HRESULT STDMETHODCALLTYPE IEnumGUID_Next_Proxy( 
     IEnumGUID * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
+    /* [in] */ ULONG celt,
     /* [annotation][length_is][size_is][out] */ 
     _Out_writes_to_(celt,*pceltFetched)  GUID *rgelt,
     /* [annotation][out] */ 
@@ -965,66 +861,43 @@ extern RPC_IF_HANDLE __MIDL_itf_comcat_0000_0004_v0_0_s_ifspec;
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE IEnumGUID_Next_Stub( 
     __RPC__in IEnumGUID * This,
-    /* [annotation][in] */ 
-    _In_  ULONG celt,
-    /* [annotation][length_is][size_is][out] */ 
-    _Out_writes_to_(celt,*pceltFetched)  GUID *rgelt,
-    /* [annotation][out] */ 
-    _Out_  ULONG *pceltFetched);
+    /* [in] */ ULONG celt,
+    /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pceltFetched) GUID *rgelt,
+    /* [out] */ __RPC__out ULONG *pceltFetched);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ICatInformation_EnumClassesOfCategories_Proxy( 
     ICatInformation * This,
-    /* [annotation][in] */ 
-    _In_  ULONG cImplemented,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cImplemented)  const CATID rgcatidImpl[  ],
-    /* [annotation][in] */ 
-    _In_  ULONG cRequired,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cRequired)  const CATID rgcatidReq[  ],
-    /* [annotation][out] */ 
-    _Out_  IEnumGUID **ppenumClsid);
+    /* [in] */ ULONG cImplemented,
+    /* [size_is][in] */ const CATID rgcatidImpl[  ],
+    /* [in] */ ULONG cRequired,
+    /* [size_is][in] */ const CATID rgcatidReq[  ],
+    /* [out] */ IEnumGUID **ppenumClsid);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ICatInformation_EnumClassesOfCategories_Stub( 
     __RPC__in ICatInformation * This,
-    /* [annotation][in] */ 
-    _In_  ULONG cImplemented,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cImplemented)  const CATID rgcatidImpl[  ],
-    /* [annotation][in] */ 
-    _In_  ULONG cRequired,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cRequired)  const CATID rgcatidReq[  ],
-    /* [annotation][out] */ 
-    _Out_  IEnumGUID **ppenumClsid);
+    /* [in] */ ULONG cImplemented,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cImplemented) const CATID rgcatidImpl[  ],
+    /* [in] */ ULONG cRequired,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cRequired) const CATID rgcatidReq[  ],
+    /* [out] */ __RPC__deref_out_opt IEnumGUID **ppenumClsid);
 
 /* [local] */ HRESULT STDMETHODCALLTYPE ICatInformation_IsClassOfCategories_Proxy( 
     ICatInformation * This,
-    /* [annotation][in] */ 
-    _In_  REFCLSID rclsid,
-    /* [annotation][in] */ 
-    _In_  ULONG cImplemented,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cImplemented)  const CATID rgcatidImpl[  ],
-    /* [annotation][in] */ 
-    _In_  ULONG cRequired,
-    /* [annotation][size_is][in] */ 
-    _In_reads_(cRequired)  const CATID rgcatidReq[  ]);
+    /* [in] */ REFCLSID rclsid,
+    /* [in] */ ULONG cImplemented,
+    /* [size_is][in] */ const CATID rgcatidImpl[  ],
+    /* [in] */ ULONG cRequired,
+    /* [size_is][in] */ const CATID rgcatidReq[  ]);
 
 
 /* [call_as] */ HRESULT STDMETHODCALLTYPE ICatInformation_IsClassOfCategories_Stub( 
     __RPC__in ICatInformation * This,
-    /* [annotation][in] */ 
-    _In_  REFCLSID rclsid,
-    /* [annotation][in] */ 
-    _In_  ULONG cImplemented,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cImplemented)  const CATID rgcatidImpl[  ],
-    /* [annotation][in] */ 
-    _In_  ULONG cRequired,
-    /* [annotation][size_is][unique][in] */ 
-    _In_reads_(cRequired)  const CATID rgcatidReq[  ]);
+    /* [in] */ __RPC__in REFCLSID rclsid,
+    /* [in] */ ULONG cImplemented,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cImplemented) const CATID rgcatidImpl[  ],
+    /* [in] */ ULONG cRequired,
+    /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(cRequired) const CATID rgcatidReq[  ]);
 
 
 
