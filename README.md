@@ -118,6 +118,15 @@ The emitter also looks at SAL attributes that ClangSharp outputs for parameters 
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
+# Licensing
+
+## MIT
+* All metadata assemblies (e.g. `Windows.Win32.winmd`)
+* All tooling in this repository and in the [Microsoft.Windows.SDK.Win32Metadata NuGet package]([url](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata/))
+
+## Windows SDK
+* All Windows headers (e.g. RecompiledIdlHeaders) and Interface Definition Language (IDL) files in this repository/in the aforementioned NuGet package.
+
 # Trademarks
 
 This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft trademarks or logos is subject to and must follow Microsoft's Trademark & Brand Guidelines. Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship. Any use of third-party trademarks or logos are subject to those third-party's policies.
