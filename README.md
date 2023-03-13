@@ -125,7 +125,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 * All tooling in this repository and in the [Microsoft.Windows.SDK.Win32Metadata NuGet package]([url](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata/))
 
 ## Windows SDK
-* All Windows headers (e.g. RecompiledIdlHeaders) and Interface Definition Language (IDL) files in this repository/in the aforementioned NuGet package.
+* All Windows headers (e.g. RecompiledIdlHeaders) and Interface Definition Language (IDL) files in this repository and in the aforementioned NuGet package.
 
 # Trademarks
 
