@@ -14796,3 +14796,5 @@ Windows.Win32.Web.MsHtml.BoolValue removed
 Windows.Win32.Web.MsHtml.BoolValue.BoolValue_Max removed
 Windows.Win32.Web.MsHtml.BoolValue.False removed
 Windows.Win32.Web.MsHtml.BoolValue.True removed
+# Fixed #869.
+Windows.Win32.UI.Shell.Apis.FileIconInit added
