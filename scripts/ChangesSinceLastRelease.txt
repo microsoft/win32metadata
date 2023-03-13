@@ -14772,3 +14772,22 @@ Windows.Win32.System.ProcessStatus.Apis.QueryWorkingSet added
 Windows.Win32.System.ProcessStatus.Apis.QueryWorkingSetEx added
 # Removed duplicate IXMLHttpRequest for #1487.
 Windows.Win32.Data.Xml.MsXml.IXMLHttpRequest removed
+# Removed duplicate MEDIASUBTYPE constants for #1487.
+Windows.Win32.Media.DirectShow.Apis.FORMAT_VIDEOINFO2 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_dvsd removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_h264 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_m4s2 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_mp42 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_mp43 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_mp4s removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_mpg4 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wmv1 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wmv2 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wmv3 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wmva removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wmvb removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wmvp removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wmvr removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wvc1 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wvp2 removed
+Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_x264 removed
