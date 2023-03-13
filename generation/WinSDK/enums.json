@@ -29512,7 +29512,7 @@
     ],
     "uses": [
       {
-        "method": "K32EnumProcessModulesEx",
+        "method": "EnumProcessModulesEx",
         "parameter": "dwFilterFlag"
       }
     ]
