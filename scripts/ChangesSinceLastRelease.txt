@@ -14770,3 +14770,5 @@ Windows.Win32.System.ProcessStatus.Apis.K32QueryWorkingSet removed
 Windows.Win32.System.ProcessStatus.Apis.K32QueryWorkingSetEx removed
 Windows.Win32.System.ProcessStatus.Apis.QueryWorkingSet added
 Windows.Win32.System.ProcessStatus.Apis.QueryWorkingSetEx added
+# Removed duplicate IXMLHttpRequest for #1487.
+Windows.Win32.Data.Xml.MsXml.IXMLHttpRequest removed
