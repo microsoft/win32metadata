@@ -61,9 +61,10 @@ namespace WinmdUtilsProgram
             var showDuplicateConstants = new Command("showDuplicateConstants", "Show duplicate constants in a single winmd files.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
-            showDuplicateConstants.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateConstants);
+            showDuplicateConstants.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowDuplicateConstants);
 
             var showEmptyDelegates = new Command("showEmptyDelegates", "Show delegates that have no parameters.")
             {
@@ -498,9 +499,10 @@ namespace WinmdUtilsProgram
             return suggestedRemappingsFound ? -1 : 0;
         }
 
-        public static int ShowDuplicateConstants(FileInfo winmd, IConsole console)
+        public static int ShowDuplicateConstants(FileInfo winmd, string[] allowItem, IConsole console)
         {
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
+            HashSet<string> allowTable = new HashSet<string>(allowItem);
             Dictionary<string, List<string>> nameToOwner = new Dictionary<string, List<string>>();
 
             foreach (var type in winmd1.GetTopLevelTypeDefinitions())
@@ -531,10 +533,10 @@ namespace WinmdUtilsProgram
                     type.GetAttributes().Any(a => a.AttributeType.Name == "GuidAttribute") &&
                     !type.GetFields().Any())
                 {
-                    if (!nameToOwner.TryGetValue(type.Name, out var owners))
+                    if (!nameToOwner.TryGetValue(type.Name.ToUpper(), out var owners))
                     {
                         owners = new List<string>();
-                        nameToOwner[type.Name] = owners;
+                        nameToOwner[type.Name.ToUpper()] = owners;
                     }
 
                     owners.Add(type.FullName);
@@ -549,10 +551,10 @@ namespace WinmdUtilsProgram
                             continue;
                         }
 
-                        if (!nameToOwner.TryGetValue(field.Name, out var owners))
+                        if (!nameToOwner.TryGetValue(field.Name.ToUpper(), out var owners))
                         {
                             owners = new List<string>();
-                            nameToOwner[field.Name] = owners;
+                            nameToOwner[field.Name.ToUpper()] = owners;
                         }
 
                         owners.Add(type.FullName);
@@ -563,6 +565,11 @@ namespace WinmdUtilsProgram
             bool dupsFound = false;
             foreach (var pair in nameToOwner)
             {
+                if (allowTable.Contains(pair.Key))
+                {
+                    continue;
+                }
+
                 if (pair.Value.Count > 1)
                 {
                     if (dupsFound == false)
@@ -645,10 +652,10 @@ namespace WinmdUtilsProgram
                     typeName += $"({archInfo})";
                 }
 
-                if (!nameToNamespaces.TryGetValue(typeName, out var namespaces))
+                if (!nameToNamespaces.TryGetValue(typeName.ToUpper(), out var namespaces))
                 {
                     namespaces = new List<string>();
-                    nameToNamespaces[typeName] = namespaces;
+                    nameToNamespaces[typeName.ToUpper()] = namespaces;
                 }
 
                 namespaces.Add(type1.Namespace);
@@ -1054,10 +1061,10 @@ namespace WinmdUtilsProgram
                             fullImport += $"({archInfo})";
                         }
 
-                        if (!dllImportsToClassNames.TryGetValue(fullImport, out var classNames))
+                        if (!dllImportsToClassNames.TryGetValue(fullImport.ToUpper(), out var classNames))
                         {
                             classNames = new List<string>();
-                            dllImportsToClassNames[fullImport] = classNames;
+                            dllImportsToClassNames[fullImport.ToUpper()] = classNames;
                         }
 
                         classNames.Add(type1.FullName);

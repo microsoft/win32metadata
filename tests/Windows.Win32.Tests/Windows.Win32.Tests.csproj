@@ -44,6 +44,9 @@
     <None Update="assets\suggestedRemappingsAllowList.rsp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="assets\duplicateConstantsAllowList.rsp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="InterfacesToVerify.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -31,7 +31,8 @@ namespace Windows.Win32.Tests
         [Fact]
         public void NoDuplicateConstants()
         {
-            string args = $"showDuplicateConstants --winmd \"{TestUtils.Win32WinmdPath}\"";
+            string allowedDuplicateConstantsFileName = TestUtils.GetAssetFile("duplicateConstantsAllowList.rsp");
+            string args = $"showDuplicateConstants --winmd \"{TestUtils.Win32WinmdPath}\" \"@{allowedDuplicateConstantsFileName}\"";
             this.ExecWinmdUtils(args);
         }
 

@@ -22,15 +22,15 @@
     },
     "showDuplicateConstants": {
       "commandName": "Project",
-      "commandLineArgs": "showDuplicateConstants --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+      "commandLineArgs": "showDuplicateConstants --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\Windows.Win32.Tests\\assets\\duplicateConstantsAllowList.rsp"
     },
     "showEmptyDelegates": {
       "commandName": "Project",
-      "commandLineArgs": "showEmptyDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\emptyDelegatesAllowList.rsp"
+      "commandLineArgs": "showEmptyDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\Windows.Win32.Tests\\assets\\emptyDelegatesAllowList.rsp"
     },
     "showPointersToDelegates": {
       "commandName": "Project",
-      "commandLineArgs": "showPointersToDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\pointersToDelegatesAllowList.rsp"
+      "commandLineArgs": "showPointersToDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\Windows.Win32.Tests\\assets\\pointersToDelegatesAllowList.rsp"
     },
     "showSuggestedRemappings": {
       "commandName": "Project",
