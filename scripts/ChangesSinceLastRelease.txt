@@ -14791,3 +14791,8 @@ Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wmvr removed
 Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wvc1 removed
 Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_wvp2 removed
 Windows.Win32.Media.MediaFoundation.Apis.MEDIASUBTYPE_x264 removed
+# Removed duplicate BoolValue constants for #1487.
+Windows.Win32.Web.MsHtml.BoolValue removed
+Windows.Win32.Web.MsHtml.BoolValue.BoolValue_Max removed
+Windows.Win32.Web.MsHtml.BoolValue.False removed
+Windows.Win32.Web.MsHtml.BoolValue.True removed
