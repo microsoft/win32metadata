@@ -1403,3 +1403,5 @@ EndUpdateResourceW::hUpdate=UPDATERESOURCE_HANDLE
 GetClipboardData::return=[ReturnsUnownedHandle]
 LoadImageA::return=LOADIMAGE_HANDLE
 LoadImageW::return=LOADIMAGE_HANDLE
+GetCommandLineA::return=[Const]
+GetCommandLineW::return=[Const]

@@ -15791,3 +15791,6 @@ Windows.Win32.Storage.FileSystem.Apis.FindNextVolumeMountPointW : hFindVolumeMou
 Windows.Win32.Storage.FileSystem.Apis.FindVolumeMountPointClose : hFindVolumeMountPoint...FindVolumeMointPointHandle => FindVolumeMountPointHandle
 Windows.Win32.Storage.FileSystem.FindVolumeMointPointHandle removed
 Windows.Win32.Storage.FileSystem.FindVolumeMountPointHandle added
+# Fixed #1454.
+Windows.Win32.System.Environment.Apis.GetCommandLineA : return :  => [Const]
+Windows.Win32.System.Environment.Apis.GetCommandLineW : return :  => [Const]
