@@ -15970,3 +15970,5 @@ Windows.Win32.System.SystemServices.Apis.GENERIC_ALL removed
 Windows.Win32.System.SystemServices.Apis.GENERIC_EXECUTE removed
 Windows.Win32.System.SystemServices.Apis.GENERIC_READ removed
 Windows.Win32.System.SystemServices.Apis.GENERIC_WRITE removed
+# Fixed #1442.
+Windows.Win32.Graphics.Gdi.BITMAPINFOHEADER.biCompression...Windows.Win32.Graphics.Gdi.BI_COMPRESSION => System.UInt32
