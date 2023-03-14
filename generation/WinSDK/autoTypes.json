@@ -1562,5 +1562,10 @@
     "Namespace": "Windows.Win32.Networking.WinSock",
     "Name": "sa_family_t",
     "ValueType": "ushort"
+  },
+  {
+    "Namespace": "Windows.Win32.Devices.Usb",
+    "Name": "USB_CHANGE_REGISTRATION_HANDLE",
+    "ValueType": "DECLARE_HANDLE"
   }
 ]
