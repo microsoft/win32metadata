@@ -15783,3 +15783,11 @@ Windows.Win32.System.Diagnostics.Debug.TARGET_DEBUG_INFO added
 Windows.Win32.System.Diagnostics.Debug.TARGET_DEBUG_INFO_v1 added
 Windows.Win32.System.Diagnostics.Debug.TARGET_DEBUG_INFO_v2 added
 Windows.Win32.System.Diagnostics.Debug.XML_DRIVER_NODE_INFO added
+# Fixed #1490.
+Windows.Win32.Storage.FileSystem.Apis.FindFirstVolumeMountPointA : return...FindVolumeMointPointHandle => FindVolumeMountPointHandle
+Windows.Win32.Storage.FileSystem.Apis.FindFirstVolumeMountPointW : return...FindVolumeMointPointHandle => FindVolumeMountPointHandle
+Windows.Win32.Storage.FileSystem.Apis.FindNextVolumeMountPointA : hFindVolumeMountPoint...FindVolumeMointPointHandle => FindVolumeMountPointHandle
+Windows.Win32.Storage.FileSystem.Apis.FindNextVolumeMountPointW : hFindVolumeMountPoint...FindVolumeMointPointHandle => FindVolumeMountPointHandle
+Windows.Win32.Storage.FileSystem.Apis.FindVolumeMountPointClose : hFindVolumeMountPoint...FindVolumeMointPointHandle => FindVolumeMountPointHandle
+Windows.Win32.Storage.FileSystem.FindVolumeMointPointHandle removed
+Windows.Win32.Storage.FileSystem.FindVolumeMountPointHandle added
