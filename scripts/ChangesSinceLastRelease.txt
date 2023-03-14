@@ -15882,3 +15882,15 @@ Windows.Win32.Devices.Usb.USB_WMI_DEVICE_NODE_TYPE.CompositeDevice added
 Windows.Win32.Devices.Usb.USB_WMI_DEVICE_NODE_TYPE.HubDevice added
 Windows.Win32.Devices.Usb.USB_WMI_DEVICE_NODE_TYPE.UsbController added
 Windows.Win32.Devices.Usb.USB_WMI_DEVICE_NODE_TYPE.UsbDevice added
+# Fixed #561.
+Windows.Win32.System.Memory.Apis.MapViewOfFile : return...Void* => MEMORYMAPPEDVIEW_HANDLE
+Windows.Win32.System.Memory.Apis.MapViewOfFile3 : return...Void* => MEMORYMAPPEDVIEW_HANDLE
+Windows.Win32.System.Memory.Apis.MapViewOfFile3FromApp : return...Void* => MEMORYMAPPEDVIEW_HANDLE
+Windows.Win32.System.Memory.Apis.MapViewOfFileEx : return...Void* => MEMORYMAPPEDVIEW_HANDLE
+Windows.Win32.System.Memory.Apis.MapViewOfFileExNuma : return...Void* => MEMORYMAPPEDVIEW_HANDLE
+Windows.Win32.System.Memory.Apis.MapViewOfFileFromApp : return...Void* => MEMORYMAPPEDVIEW_HANDLE
+Windows.Win32.System.Memory.Apis.MapViewOfFileNuma2 : return...Void* => MEMORYMAPPEDVIEW_HANDLE
+Windows.Win32.System.Memory.Apis.UnmapViewOfFile : lpBaseAddress...Void* => MEMORYMAPPEDVIEW_HANDLE
+Windows.Win32.System.Memory.Apis.UnmapViewOfFile2 : BaseAddress...Void* => MEMORYMAPPEDVIEW_HANDLE
+Windows.Win32.System.Memory.Apis.UnmapViewOfFileEx : BaseAddress...Void* => MEMORYMAPPEDVIEW_HANDLE
+Windows.Win32.System.Memory.MEMORYMAPPEDVIEW_HANDLE added

@@ -1567,5 +1567,11 @@
     "Namespace": "Windows.Win32.Devices.Usb",
     "Name": "USB_CHANGE_REGISTRATION_HANDLE",
     "ValueType": "DECLARE_HANDLE"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Memory",
+    "Name": "MEMORYMAPPEDVIEW_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ -1, 0 ]
   }
 ]
