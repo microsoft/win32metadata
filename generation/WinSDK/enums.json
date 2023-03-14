@@ -1826,7 +1826,7 @@
     "members": [
       {
         "name": "SECTION_ALL_ACCESS",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
       }
     ],
     "uses": []
@@ -36060,19 +36060,19 @@
     "members": [
       {
         "name": "MQSEC_DELETE_QUEUE",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.DELETE)"
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.DELETE)"
       },
       {
         "name": "MQSEC_GET_QUEUE_PERMISSIONS",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.READ_CONTROL)"
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.READ_CONTROL)"
       },
       {
         "name": "MQSEC_CHANGE_QUEUE_PERMISSIONS",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.WRITE_DAC)"
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.WRITE_DAC)"
       },
       {
         "name": "MQSEC_TAKE_QUEUE_OWNERSHIP",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.WRITE_OWNER)"
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.WRITE_OWNER)"
       },
       {
         "name": "MQSEC_RECEIVE_MESSAGE",
@@ -36095,6 +36095,17 @@
         "value": "(MQSEC_RECEIVE_MESSAGE | MQSEC_RECEIVE_JOURNAL_MESSAGE | MQSEC_WRITE_MESSAGE | MQSEC_SET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PROPERTIES | MQSEC_DELETE_QUEUE | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_CHANGE_QUEUE_PERMISSIONS | MQSEC_TAKE_QUEUE_OWNERSHIP)"
       }
     ],
+    "uses": []
+  },
+  {
+    "namespace": "Windows.Win32.Foundation",
+    "name": "GENERIC_ACCESS_RIGHTS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "GENERIC_",
+      "header": "winnt.h"
+    },
+    "members": [],
     "uses": []
   }
 ]

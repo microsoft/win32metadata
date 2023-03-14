@@ -76,7 +76,7 @@ namespace Windows.Win32.Storage.FileSystem
     }
 
     [Flags]
-    public enum FILE_ACCESS_FLAGS : uint
+    public enum FILE_ACCESS_RIGHTS : uint
     {
         FILE_READ_DATA = 0x0001,
         FILE_LIST_DIRECTORY = 0x0001,

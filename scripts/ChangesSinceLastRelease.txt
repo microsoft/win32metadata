@@ -15894,3 +15894,79 @@ Windows.Win32.System.Memory.Apis.UnmapViewOfFile : lpBaseAddress...Void* => MEMO
 Windows.Win32.System.Memory.Apis.UnmapViewOfFile2 : BaseAddress...Void* => MEMORYMAPPEDVIEW_HANDLE
 Windows.Win32.System.Memory.Apis.UnmapViewOfFileEx : BaseAddress...Void* => MEMORYMAPPEDVIEW_HANDLE
 Windows.Win32.System.Memory.MEMORYMAPPEDVIEW_HANDLE added
+# Fixed #1457.
+Windows.Win32.Foundation.GENERIC_ACCESS_RIGHTS added
+Windows.Win32.Foundation.GENERIC_ACCESS_RIGHTS.GENERIC_ALL added
+Windows.Win32.Foundation.GENERIC_ACCESS_RIGHTS.GENERIC_EXECUTE added
+Windows.Win32.Foundation.GENERIC_ACCESS_RIGHTS.GENERIC_READ added
+Windows.Win32.Foundation.GENERIC_ACCESS_RIGHTS.GENERIC_WRITE added
+Windows.Win32.Storage.FileSystem.Apis.CreateFile2 : dwDesiredAccess...FILE_ACCESS_FLAGS => UInt32
+Windows.Win32.Storage.FileSystem.Apis.CreateFileA : dwDesiredAccess...FILE_ACCESS_FLAGS => UInt32
+Windows.Win32.Storage.FileSystem.Apis.CreateFileW : dwDesiredAccess...FILE_ACCESS_FLAGS => UInt32
+Windows.Win32.Storage.FileSystem.Apis.CreateLogFile : fDesiredAccess...FILE_ACCESS_FLAGS => UInt32
+Windows.Win32.Storage.FileSystem.Apis.OpenFileById : dwDesiredAccess...FILE_ACCESS_FLAGS => UInt32
+Windows.Win32.Storage.FileSystem.Apis.ReOpenFile : dwDesiredAccess...FILE_ACCESS_FLAGS => UInt32
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.DELETE removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_ADD_FILE removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_ADD_SUBDIRECTORY removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_ALL_ACCESS removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_APPEND_DATA removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_CREATE_PIPE_INSTANCE removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_DELETE_CHILD removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_EXECUTE removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_GENERIC_EXECUTE removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_GENERIC_READ removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_GENERIC_WRITE removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_LIST_DIRECTORY removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_READ_ATTRIBUTES removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_READ_DATA removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_READ_EA removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_TRAVERSE removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_WRITE_ATTRIBUTES removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_WRITE_DATA removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.FILE_WRITE_EA removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.READ_CONTROL removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.SPECIFIC_RIGHTS_ALL removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_ALL removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_EXECUTE removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_READ removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_REQUIRED removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.STANDARD_RIGHTS_WRITE removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.SYNCHRONIZE removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.WRITE_DAC removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.WRITE_OWNER removed
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.DELETE added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_ADD_FILE added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_ADD_SUBDIRECTORY added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_ALL_ACCESS added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_APPEND_DATA added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_CREATE_PIPE_INSTANCE added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_DELETE_CHILD added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_EXECUTE added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_GENERIC_EXECUTE added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_GENERIC_READ added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_GENERIC_WRITE added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_LIST_DIRECTORY added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_READ_ATTRIBUTES added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_READ_DATA added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_READ_EA added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_TRAVERSE added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_WRITE_ATTRIBUTES added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_WRITE_DATA added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.FILE_WRITE_EA added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.READ_CONTROL added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.SPECIFIC_RIGHTS_ALL added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_ALL added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_EXECUTE added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_READ added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_REQUIRED added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_WRITE added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.SYNCHRONIZE added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.WRITE_DAC added
+Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.WRITE_OWNER added
+Windows.Win32.System.SystemServices.Apis.GENERIC_ALL removed
+Windows.Win32.System.SystemServices.Apis.GENERIC_EXECUTE removed
+Windows.Win32.System.SystemServices.Apis.GENERIC_READ removed
+Windows.Win32.System.SystemServices.Apis.GENERIC_WRITE removed

@@ -221,16 +221,10 @@ FindFirstChangeNotificationw::dwNotifyFilter=FILE_NOTIFY_CHANGE
 GetStdHandle::nStdHandle=STD_HANDLE
 SetStdHandle::nStdHandle=STD_HANDLE
 SetStdHandleEx::nStdHandle=STD_HANDLE
-CreateFileA::dwDesiredAccess=FILE_ACCESS_FLAGS
 CreateFileA::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
-CreateFileW::dwDesiredAccess=FILE_ACCESS_FLAGS
 CreateFileW::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
-CreateFile2::dwDesiredAccess=FILE_ACCESS_FLAGS
-ReOpenFile::dwDesiredAccess=FILE_ACCESS_FLAGS
 ReOpenFile::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
-CreateLogFile::fDesiredAccess=FILE_ACCESS_FLAGS
 CreateLogFile::fFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
-OpenFileById::dwDesiredAccess=FILE_ACCESS_FLAGS
 OpenFileById::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
 IEnumDebugPropertyInfo::Next::pi=[NativeArrayInfo(CountParamIndex = 0)]
 CreatePrivateNamespaceA::return=NamespaceHandle
