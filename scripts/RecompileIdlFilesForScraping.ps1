@@ -22,6 +22,9 @@ copy-item -Path "$sdkIncludeDir\shared" -destination "$recompiledIdlHeadersDir" 
 copy-item -Path "$sdkIncludeDir\winrt" -destination "$recompiledIdlHeadersDir" -recurse
 copy-item -Path "$sdkIncludeDir\ucrt" -destination "$recompiledIdlHeadersDir" -recurse
 
+Write-Host "Copying additional headers from $windowsWin32ProjectRoot\AdditionalHeaders to $recompiledIdlHeadersDir\um"
+copy-item -Path "$windowsWin32ProjectRoot\AdditionalHeaders\*" -destination "$recompiledIdlHeadersDir\um" -recurse
+
 $d3dPkgPath = Get-BuildToolsNugetPropsProperty("PkgMicrosoft_Direct3D_D3D12")
 $d3dIncludeDir = Join-Path $d3dPkgPath "build/native/include/"
 Write-Host "Updating to latest Direct3D headers...$d3dIncludeDir to $recompiledIdlHeadersDir"
