@@ -223,6 +223,7 @@ using Windows.Win32.System.VirtualDosMachines;
 using Windows.Win32.System.WindowsProgramming;
 using Windows.Win32.System.WindowsSync;
 using Windows.Win32.System.WinRT;
+using Windows.Win32.System.WinRT.Metadata;
 using Windows.Win32.System.Wmi;
 using Windows.Win32.UI.Accessibility;
 using Windows.Win32.UI.ColorSystem;

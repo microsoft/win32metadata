@@ -14,9 +14,6 @@ ID2D1Factory
 <IncludeRoot>/um/accountssettingspaneinterop.h
 <IncludeRoot>/um/appserviceinterop.h
 <IncludeRoot>/um/CastingInterop.h
-<IncludeRoot>/um/cor.h
-<IncludeRoot>/um/CorError.h
-<IncludeRoot>/um/CorHdr.h
 <IncludeRoot>/um/dispatcherqueue.h
 <IncludeRoot>/um/dragdropinterop.h
 <IncludeRoot>/um/IMessageDispatcher.h
@@ -38,10 +35,6 @@ ID2D1Factory
 <IncludeRoot>/winrt/roapi.h
 <IncludeRoot>/winrt/robuffer.h
 <IncludeRoot>/winrt/roerrorapi.h
-<IncludeRoot>/winrt/rometadata.h
-<IncludeRoot>/winrt/RoMetadataApi.h
-<IncludeRoot>/winrt/rometadataresolution.h
-<IncludeRoot>/winrt/roparameterizediid.h
 <IncludeRoot>/winrt/roregistrationapi.h
 <IncludeRoot>/winrt/shcore.h
 <IncludeRoot>/winrt/weakreference.h
