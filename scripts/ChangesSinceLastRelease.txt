@@ -1,0 +1,2 @@
+# Fixed #1499.
+Windows.Win32.Graphics.Imaging.IWICImagingFactory.CreateDecoderFromFilename : dwDesiredAccess...UInt32 => GENERIC_ACCESS_RIGHTS

@@ -36102,7 +36102,13 @@
       "header": "winnt.h"
     },
     "members": [],
-    "uses": []
+    "uses": [
+      {
+        "interface": "IWICImagingFactory",
+        "method": "CreateDecoderFromFilename",
+        "parameter": "dwDesiredAccess"
+      }
+    ]
   }
 ]
 }
