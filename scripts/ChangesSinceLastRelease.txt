@@ -1,2 +1,7 @@
 # Fixed #1499.
 Windows.Win32.Graphics.Imaging.IWICImagingFactory.CreateDecoderFromFilename : dwDesiredAccess...UInt32 => GENERIC_ACCESS_RIGHTS
+# Fixed #1497.
+Windows.Win32.UI.Controls.MENU_POPUPSUBMENU_HCHOT removed
+Windows.Win32.UI.Controls.MENU_POPUPSUBMENU_HCHOT.MSMHC_HOT removed
+Windows.Win32.UI.Controls.POPUPSUBMENUHCHOTSTATES added
+Windows.Win32.UI.Controls.POPUPSUBMENUHCHOTSTATES.MSMHC_HOT added
